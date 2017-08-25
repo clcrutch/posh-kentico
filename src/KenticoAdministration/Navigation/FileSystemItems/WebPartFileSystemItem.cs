@@ -1,25 +1,39 @@
 ﻿using CMS.PortalEngine;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KenticoAdministration.Navigation.FileSystemItems
 {
     public class WebPartFileSystemItem : IFileSystemItem
     {
+
+        #region Fields
+
         private WebPartInfo _webPartInfo;
+
+        #endregion
+
+
+        #region Properties
 
         public IEnumerable<IFileSystemItem> Children => null;
         public bool IsContainer => false;
         public object Item => _webPartInfo;
         public string Path => _webPartInfo.WebPartName;
 
+        #endregion
+
+
+        #region Constructors
+
         public WebPartFileSystemItem(WebPartInfo webPartInfo)
         {
             _webPartInfo = webPartInfo;
         }
+
+        #endregion
+
+
+        #region Methods
 
         public bool Exists(string path)
         {
@@ -32,5 +46,8 @@ namespace KenticoAdministration.Navigation.FileSystemItems
             // TODO
             return this;
         }
+
+        #endregion
+
     }
 }

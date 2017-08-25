@@ -1,15 +1,20 @@
 ﻿using CMS.PortalEngine;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KenticoAdministration.Navigation.FileSystemItems
 {
     public class RootFileSystemItem : IFileSystemItem
     {
+
+        #region Fields
+
         private IEnumerable<IFileSystemItem> _children;
+
+        #endregion
+
+
+        #region Properties
 
         public IEnumerable<IFileSystemItem> Children
         {
@@ -25,6 +30,11 @@ namespace KenticoAdministration.Navigation.FileSystemItems
         public bool IsContainer => true;
         public object Item => this;
         public string Path => string.Empty;
+
+        #endregion
+
+
+        #region Methods
 
         public bool Exists(string path)
         {
@@ -51,5 +61,8 @@ namespace KenticoAdministration.Navigation.FileSystemItems
                 })
             };
         }
+
+        #endregion
+
     }
 }

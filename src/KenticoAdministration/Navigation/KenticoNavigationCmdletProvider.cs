@@ -1,20 +1,22 @@
-﻿using CMS.PortalEngine;
-using KenticoAdministration.Navigation.FileSystemItems;
-using System;
-using System.Collections.Generic;
+﻿using KenticoAdministration.Navigation.FileSystemItems;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Provider;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KenticoAdministration.Navigation
 {
     [CmdletProvider("KenticoProvider", ProviderCapabilities.None)]
     public class KenticoNavigationCmdletProvider : NavigationCmdletProvider
     {
+
+        #region Fields
+
         private IFileSystemItem _rootItem = new RootFileSystemItem();
+
+        #endregion
+
+
+        #region Methods
 
         protected override bool IsValidPath(string path)
         {
@@ -63,5 +65,8 @@ namespace KenticoAdministration.Navigation
                 }
             }
         }
+
+        #endregion
+
     }
 }

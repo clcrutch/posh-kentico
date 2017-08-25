@@ -1,24 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KenticoAdministration.Navigation.FileSystemItems
 {
     public class SecondLevelFileSystemItem : IFileSystemItem
     {
-        public IEnumerable<IFileSystemItem> Children { get; private set; }
 
+        #region Properties
+
+        public IEnumerable<IFileSystemItem> Children { get; private set; }
         public bool IsContainer => true;
         public object Item => this;
         public string Path { get; private set; }
+
+        #endregion
+
+
+        #region Constructors
 
         public SecondLevelFileSystemItem(string path, IEnumerable<IFileSystemItem> children)
         {
             Path = path;
             Children = children;
         }
+
+        #endregion
+
+
+        #region Methods
 
         public bool Exists(string path)
         {
@@ -39,5 +49,8 @@ namespace KenticoAdministration.Navigation.FileSystemItems
                 return itemContainingPath?.FindPath(path);
             }
         }
+
+        #endregion
+
     }
 }

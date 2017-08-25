@@ -2,16 +2,21 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace KenticoAdministration.Navigation.FileSystemItems
 {
     public class WebPartCategoryFileSystemItem : IFileSystemItem
     {
+
+        #region Fields
+
         private IEnumerable<IFileSystemItem> _children;
         private WebPartCategoryInfo _webPartCategoryInfo;
+
+        #endregion
+
+
+        #region Properties
 
         public IEnumerable<IFileSystemItem> Children
         {
@@ -38,10 +43,20 @@ namespace KenticoAdministration.Navigation.FileSystemItems
             .Replace("/", "Development\\WebParts\\")
             .Replace("/", "\\");
 
+        #endregion
+
+
+        #region Constructors
+
         public WebPartCategoryFileSystemItem(WebPartCategoryInfo webPartCategoryInfo)
         {
             _webPartCategoryInfo = webPartCategoryInfo;
         }
+
+        #endregion
+
+
+        #region Methods
 
         public bool Exists(string path)
         {
@@ -65,5 +80,8 @@ namespace KenticoAdministration.Navigation.FileSystemItems
             else
                 return null;
         }
+
+        #endregion
+
     }
 }

@@ -11,15 +11,28 @@ namespace KenticoAdministration.Development.WebParts
     [Cmdlet(VerbsCommon.Get, "CmsWebPartCategory", DefaultParameterSetName = NONE)]
     public class GetCmsWebPartCategory : PSCmdlet
     {
+
+        #region Constants
+
         private const string NONE = "None";
         private const string BY_CODE_NAME = "ByCodeName";
         private const string CHILDREN = "Children";
+
+        #endregion
+
+
+        #region Properties
 
         [Parameter(Mandatory = true, ParameterSetName = BY_CODE_NAME)]
         public string CodeName { get; set; }
 
         [Parameter(Mandatory = true, ParameterSetName = CHILDREN, ValueFromPipeline = true)]
         public WebPartCategoryInfo Parent { get; set; }
+
+        #endregion
+
+
+        #region Methods
 
         protected override void ProcessRecord()
         {
@@ -32,5 +45,8 @@ namespace KenticoAdministration.Development.WebParts
                             where c.CategoryParentID == Parent.CategoryID
                             select c, true);
         }
+
+        #endregion
+
     }
 }

@@ -1,20 +1,24 @@
 ﻿using CMS.Base;
 using CMS.DataEngine;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Management.Automation;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KenticoAdministration.General
 {
     [Cmdlet(VerbsCommon.Open, "CMSApplication", DefaultParameterSetName = SERVER_AND_DATABASE)]
     public class OpenCMSApplication : PSCmdlet
     {
+
+        #region Constants
+
         private const string SERVER_AND_DATABASE = "ServerAndDatabase";
         private const string CONNECTION_STRING = "ConnectionString";
+
+        #endregion
+
+
+        #region Properties
 
         [Parameter(Mandatory = true, Position = 0, ParameterSetName = CONNECTION_STRING)]
         public string ConnectionString { get; set; }
@@ -31,6 +35,11 @@ namespace KenticoAdministration.General
         [Parameter(Mandatory = true, Position = 2, ParameterSetName = SERVER_AND_DATABASE)]
         [Parameter(Mandatory = true, Position = 1, ParameterSetName = CONNECTION_STRING)]
         public string WebRoot { get; set; }
+
+        #endregion
+
+
+        #region Methods
 
         protected override void BeginProcessing()
         {
@@ -52,5 +61,8 @@ namespace KenticoAdministration.General
             if (!CMSApplication.Init())
                 throw new Exception("CMS Application initialization failed.");
         }
+
+        #endregion
+
     }
 }

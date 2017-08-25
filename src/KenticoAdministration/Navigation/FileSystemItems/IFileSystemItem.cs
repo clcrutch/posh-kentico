@@ -1,19 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace KenticoAdministration.Navigation.FileSystemItems
 {
     public interface IFileSystemItem
     {
+
+        #region Properties
+
         IEnumerable<IFileSystemItem> Children { get; }
         bool IsContainer { get; }
         object Item { get; }
         string Path { get; }
 
+        #endregion
+
+
+        #region Methods
+
         bool Exists(string path);
         IFileSystemItem FindPath(string path);
+
+        #endregion
+
     }
 }
