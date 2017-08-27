@@ -443,7 +443,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Development\WebParts\GetCmsWebPart.cs" />
     <Compile Include="Development\WebParts\GetCmsWebPartCategory.cs" />
+    <Compile Include="Development\WebParts\RemoveCmsWebPart.cs" />
     <Compile Include="Navigation\FileSystemItems\RootFileSystemItem.cs" />
     <Compile Include="Navigation\FileSystemItems\WebPartCategoryFileSystemItem.cs" />
     <Compile Include="Navigation\FileSystemItems\IFileSystemItem.cs" />

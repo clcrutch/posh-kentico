@@ -43,15 +43,18 @@ namespace KenticoAdministration.General
 
         protected override void BeginProcessing()
         {
-            if (ParameterSetName == SERVER_AND_DATABASE)
+            switch (ParameterSetName)
             {
-                var connectionString = $"Data Source={DatabaseServer};Initial Catalog={Database};Integrated Security=True;Persist Security Info=False;Connect Timeout={Timeout};Encrypt=False;Current Language=English";
-                WriteDebug("Setting connection string to \"{connectionString}\".");
+                case (SERVER_AND_DATABASE):
+                    var connectionString = $"Data Source={DatabaseServer};Initial Catalog={Database};Integrated Security=True;Persist Security Info=False;Connect Timeout={Timeout};Encrypt=False;Current Language=English";
+                    WriteDebug("Setting connection string to \"{connectionString}\".");
 
-                DataConnectionFactory.ConnectionString = connectionString;
+                    DataConnectionFactory.ConnectionString = connectionString;
+                    break;
+                case (CONNECTION_STRING):
+                    DataConnectionFactory.ConnectionString = ConnectionString;
+                    break;
             }
-            else if (ParameterSetName == CONNECTION_STRING)
-                DataConnectionFactory.ConnectionString = ConnectionString;
 
             WriteDebug("Using deprecated .Net functionality.  Need to find a replacement.");
             AppDomain.CurrentDomain.AppendPrivatePath(Path.GetDirectoryName(typeof(OpenCMSApplication).Assembly.Location));

@@ -1,14 +1,10 @@
 ﻿using CMS.PortalEngine;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KenticoAdministration.Development.WebParts
 {
-    [Cmdlet(VerbsCommon.Get, "CmsWebPartCategory", DefaultParameterSetName = NONE)]
+    [Cmdlet(VerbsCommon.Get, "CMSWebPartCategory", DefaultParameterSetName = NONE)]
     public class GetCmsWebPartCategory : PSCmdlet
     {
 
@@ -36,14 +32,21 @@ namespace KenticoAdministration.Development.WebParts
 
         protected override void ProcessRecord()
         {
-            if (ParameterSetName == NONE)
-                WriteObject(WebPartCategoryInfoProvider.GetCategories(), true);
-            else if (ParameterSetName == BY_CODE_NAME)
-                WriteObject(WebPartCategoryInfoProvider.GetWebPartCategoryInfoByCodeName(CodeName));
-            else if (ParameterSetName == CHILDREN)
-                WriteObject(from c in WebPartCategoryInfoProvider.GetCategories()
-                            where c.CategoryParentID == Parent.CategoryID
-                            select c, true);
+            switch (ParameterSetName)
+            {
+                case (NONE):
+                    WriteObject(WebPartCategoryInfoProvider.GetCategories(), true);
+                    break;
+                case (BY_CODE_NAME):
+                    WriteObject(WebPartCategoryInfoProvider.GetWebPartCategoryInfoByCodeName(CodeName));
+                    break;
+                case (CHILDREN):
+                    WriteObject(from c in WebPartCategoryInfoProvider.GetCategories()
+                                where c.CategoryParentID == Parent.CategoryID
+                                select c, true);
+
+                    break;
+            }
         }
 
         #endregion
