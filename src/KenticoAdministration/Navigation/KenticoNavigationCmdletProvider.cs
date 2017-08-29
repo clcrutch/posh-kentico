@@ -1,4 +1,5 @@
-﻿using KenticoAdministration.Navigation.FileSystemItems;
+﻿using KenticoAdministration.Helpers;
+using KenticoAdministration.Navigation.FileSystemItems;
 using System.Collections.ObjectModel;
 using System.Management.Automation;
 using System.Management.Automation.Provider;
@@ -33,6 +34,8 @@ namespace KenticoAdministration.Navigation
 
         protected override bool ItemExists(string path)
         {
+            CmsApplicationHelper.InitializeKentico(WriteDebug, WriteVerbose);
+
             return _rootItem.Exists(path);
         }
 
@@ -43,6 +46,8 @@ namespace KenticoAdministration.Navigation
 
         protected override void GetChildItems(string path, bool recurse)
         {
+            CmsApplicationHelper.InitializeKentico(WriteDebug, WriteVerbose);
+
             IFileSystemItem fileSystemItem = _rootItem.FindPath(path);
 
             if (fileSystemItem == null || fileSystemItem.Children == null) return;

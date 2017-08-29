@@ -1,19 +1,24 @@
 ﻿using CMS.Base;
 using CMS.DataEngine;
+using KenticoAdministration.Helpers;
+using Microsoft.Web.Administration;
 using System;
 using System.IO;
+using System.Linq;
 using System.Management.Automation;
+using System.Xml.Linq;
 
 namespace KenticoAdministration.General
 {
-    [Cmdlet(VerbsCommon.Open, "CMSApplication", DefaultParameterSetName = SERVER_AND_DATABASE)]
+    [Cmdlet(VerbsCommon.Open, "CMSApplication", DefaultParameterSetName = NONE)]
     public class OpenCMSApplication : PSCmdlet
     {
 
         #region Constants
 
-        private const string SERVER_AND_DATABASE = "ServerAndDatabase";
         private const string CONNECTION_STRING = "ConnectionString";
+        private const string NONE = "None";
+        private const string SERVER_AND_DATABASE = "ServerAndDatabase";
 
         #endregion
 
@@ -43,26 +48,27 @@ namespace KenticoAdministration.General
 
         protected override void BeginProcessing()
         {
+            if (CMSApplication.ApplicationInitialized.GetValueOrDefault(false)) return;
+
+            string connectionString = null;
             switch (ParameterSetName)
             {
+                case (CONNECTION_STRING):
+                    connectionString = ConnectionString;
+                    break;
+                case (NONE):
+                    CmsApplicationHelper.InitializeKentico(WriteDebug, WriteVerbose);
+
+                    return;
                 case (SERVER_AND_DATABASE):
-                    var connectionString = $"Data Source={DatabaseServer};Initial Catalog={Database};Integrated Security=True;Persist Security Info=False;Connect Timeout={Timeout};Encrypt=False;Current Language=English";
+                    connectionString = $"Data Source={DatabaseServer};Initial Catalog={Database};Integrated Security=True;Persist Security Info=False;Connect Timeout={Timeout};Encrypt=False;Current Language=English";
                     WriteDebug("Setting connection string to \"{connectionString}\".");
 
                     DataConnectionFactory.ConnectionString = connectionString;
                     break;
-                case (CONNECTION_STRING):
-                    DataConnectionFactory.ConnectionString = ConnectionString;
-                    break;
             }
 
-            WriteDebug("Using deprecated .Net functionality.  Need to find a replacement.");
-            AppDomain.CurrentDomain.AppendPrivatePath(Path.GetDirectoryName(typeof(OpenCMSApplication).Assembly.Location));
-
-            SystemContext.WebApplicationPhysicalPath = WebRoot;
-
-            if (!CMSApplication.Init())
-                throw new Exception("CMS Application initialization failed.");
+            CmsApplicationHelper.InitializeKentico(connectionString, new DirectoryInfo(WebRoot), WriteDebug, WriteVerbose);
         }
 
         #endregion
