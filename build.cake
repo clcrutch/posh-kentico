@@ -11,7 +11,7 @@ var configuration = Argument("configuration", "Release");
 //////////////////////////////////////////////////////////////////////
 
 // Define directories.
-var buildDir = Directory("./src/posh-kentico/bin") + Directory(configuration);
+var buildDir = Directory("./src/build/bin") + Directory(configuration);
 
 //////////////////////////////////////////////////////////////////////
 // TASKS
