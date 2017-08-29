@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Management.Automation;
 
-namespace KenticoAdministration.Development.WebParts
+namespace PoshKentico.Development.WebParts
 {
     [Cmdlet(VerbsCommon.Get, "CMSWebPartCategory", DefaultParameterSetName = NONE)]
     public class GetCmsWebPartCategory : PSCmdlet

@@ -6,7 +6,7 @@ using System.Management.Automation;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KenticoAdministration.Development.WebParts
+namespace PoshKentico.Development.WebParts
 {
     [Cmdlet(VerbsCommon.Get, "CMSWebPart", DefaultParameterSetName = NONE)]
     public class GetCmsWebPart : PSCmdlet

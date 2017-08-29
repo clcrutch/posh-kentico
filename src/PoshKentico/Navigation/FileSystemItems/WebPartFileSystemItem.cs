@@ -1,7 +1,7 @@
 ﻿using CMS.PortalEngine;
 using System.Collections.Generic;
 
-namespace KenticoAdministration.Navigation.FileSystemItems
+namespace PoshKentico.Navigation.FileSystemItems
 {
     public class WebPartFileSystemItem : IFileSystemItem
     {

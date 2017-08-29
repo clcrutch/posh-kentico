@@ -1,6 +1,6 @@
 ﻿using CMS.Base;
 using CMS.DataEngine;
-using KenticoAdministration.Helpers;
+using PoshKentico.Helpers;
 using Microsoft.Web.Administration;
 using System;
 using System.IO;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Management.Automation;
 using System.Xml.Linq;
 
-namespace KenticoAdministration.General
+namespace PoshKentico.General
 {
     [Cmdlet(VerbsCommon.Open, "CMSApplication", DefaultParameterSetName = NONE)]
     public class OpenCMSApplication : PSCmdlet

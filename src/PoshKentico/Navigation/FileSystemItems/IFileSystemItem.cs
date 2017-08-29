@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace KenticoAdministration.Navigation.FileSystemItems
+namespace PoshKentico.Navigation.FileSystemItems
 {
     public interface IFileSystemItem
     {

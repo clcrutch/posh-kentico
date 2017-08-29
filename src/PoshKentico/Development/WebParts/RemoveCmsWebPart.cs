@@ -6,7 +6,7 @@ using System.Management.Automation;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KenticoAdministration.Development.WebParts
+namespace PoshKentico.Development.WebParts
 {
     [Cmdlet(VerbsCommon.Remove, "CmsWebPart", DefaultParameterSetName = NONE)]
     public class RemoveCmsWebPart : PSCmdlet

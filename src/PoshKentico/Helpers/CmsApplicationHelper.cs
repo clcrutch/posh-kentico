@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace KenticoAdministration.Helpers
+namespace PoshKentico.Helpers
 {
     internal class CmsApplicationHelper
     {

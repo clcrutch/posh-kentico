@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace KenticoAdministration.Navigation.FileSystemItems
+namespace PoshKentico.Navigation.FileSystemItems
 {
     public class SecondLevelFileSystemItem : IFileSystemItem
     {

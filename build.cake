@@ -11,7 +11,7 @@ var configuration = Argument("configuration", "Release");
 //////////////////////////////////////////////////////////////////////
 
 // Define directories.
-var buildDir = Directory("./src/KenticoAdministration/bin") + Directory(configuration);
+var buildDir = Directory("./src/posh-kentico/bin") + Directory(configuration);
 
 //////////////////////////////////////////////////////////////////////
 // TASKS
@@ -27,7 +27,7 @@ Task("Restore-NuGet-Packages")
     .IsDependentOn("Clean")
     .Does(() =>
 {
-    NuGetRestore("./src/KenticoAdministration.sln");
+    NuGetRestore("./src/posh-kentico.sln");
 });
 
 Task("Build")
@@ -37,13 +37,13 @@ Task("Build")
     if(IsRunningOnWindows())
     {
       // Use MSBuild
-      MSBuild("./src/KenticoAdministration.sln", settings =>
+      MSBuild("./src/posh-kentico.sln", settings =>
         settings.SetConfiguration(configuration));
     }
     else
     {
       // Use XBuild
-      XBuild("./src/KenticoAdministration.sln", settings =>
+      XBuild("./src/posh-kentico.sln", settings =>
         settings.SetConfiguration(configuration));
     }
 });

@@ -1,10 +1,10 @@
-﻿using KenticoAdministration.Helpers;
-using KenticoAdministration.Navigation.FileSystemItems;
+﻿using PoshKentico.Helpers;
+using PoshKentico.Navigation.FileSystemItems;
 using System.Collections.ObjectModel;
 using System.Management.Automation;
 using System.Management.Automation.Provider;
 
-namespace KenticoAdministration.Navigation
+namespace PoshKentico.Navigation
 {
     [CmdletProvider("KenticoProvider", ProviderCapabilities.None)]
     public class KenticoNavigationCmdletProvider : NavigationCmdletProvider
