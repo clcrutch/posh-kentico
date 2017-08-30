@@ -4,25 +4,34 @@ using System.Linq;
 
 namespace PoshKentico.Navigation.FileSystemItems
 {
-    public class MetaFileSystemItem : IFileSystemItem
+    public class MetaFileSystemItem : AbstractFileSystemItem
     {
+
+        #region Fields
+
+        private IEnumerable<IFileSystemItem> _children;
+        private string _path;
+
+        #endregion
+
 
         #region Properties
 
-        public IEnumerable<IFileSystemItem> Children { get; private set; }
-        public bool IsContainer => true;
-        public object Item => this;
-        public string Path { get; private set; }
+        public override IEnumerable<IFileSystemItem> Children => _children;
+        public override bool IsContainer => true;
+        public override object Item => this;
+        public override string Path => _path;
 
         #endregion
 
 
         #region Constructors
 
-        public MetaFileSystemItem(string path, IEnumerable<IFileSystemItem> children)
+        public MetaFileSystemItem(string path, IFileSystemItem parent, IEnumerable<IFileSystemItem> children)
+            : base(parent)
         {
-            Path = path;
-            Children = children;
+            _path = path;
+            _children = children;
         }
 
         #endregion
@@ -30,7 +39,14 @@ namespace PoshKentico.Navigation.FileSystemItems
 
         #region Methods
 
-        public bool Exists(string path)
+        public override bool Delete(bool recursive)
+        {
+            if (recursive) return DeleteChildren();
+
+            return false;                
+        }
+
+        public override bool Exists(string path)
         {
             var pathParts = path.Split('\\');
 
@@ -38,7 +54,7 @@ namespace PoshKentico.Navigation.FileSystemItems
                 (Children?.Any(c => c.Exists(path))).GetValueOrDefault(false);
         }
 
-        public IFileSystemItem FindPath(string path)
+        public override IFileSystemItem FindPath(string path)
         {
             if (path.Equals(Path, StringComparison.InvariantCultureIgnoreCase))
                 return this;

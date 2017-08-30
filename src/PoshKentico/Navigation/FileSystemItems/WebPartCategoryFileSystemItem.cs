@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace PoshKentico.Navigation.FileSystemItems
 {
-    public class WebPartCategoryFileSystemItem : IFileSystemItem
+    public class WebPartCategoryFileSystemItem : AbstractFileSystemItem
     {
 
         #region Fields
@@ -18,7 +18,7 @@ namespace PoshKentico.Navigation.FileSystemItems
 
         #region Properties
 
-        public IEnumerable<IFileSystemItem> Children
+        public override IEnumerable<IFileSystemItem> Children
         {
             get
             {
@@ -26,9 +26,9 @@ namespace PoshKentico.Navigation.FileSystemItems
                 {
                     IEnumerable<IFileSystemItem> childCategories = (from c in WebPartCategoryInfoProvider.GetCategories()
                                                                     where c.CategoryParentID == _webPartCategoryInfo.CategoryID
-                                                                    select new WebPartCategoryFileSystemItem(c));
+                                                                    select new WebPartCategoryFileSystemItem(c, this));
                     IEnumerable<IFileSystemItem> childWebParts = (from w in WebPartInfoProvider.GetAllWebParts(_webPartCategoryInfo.CategoryID)
-                                                                  select new WebPartFileSystemItem(w));
+                                                                  select new WebPartFileSystemItem(w, this));
 
                     _children = childCategories.Concat(childWebParts).ToArray();
                 }
@@ -37,9 +37,9 @@ namespace PoshKentico.Navigation.FileSystemItems
             }
         }     
                                                 
-        public bool IsContainer => true;
-        public object Item => _webPartCategoryInfo;
-        public string Path => _webPartCategoryInfo.CategoryPath
+        public override bool IsContainer => true;
+        public override object Item => _webPartCategoryInfo;
+        public override string Path => _webPartCategoryInfo.CategoryPath
             .Replace("/", "Development\\WebParts\\")
             .Replace("/", "\\");
 
@@ -48,7 +48,8 @@ namespace PoshKentico.Navigation.FileSystemItems
 
         #region Constructors
 
-        public WebPartCategoryFileSystemItem(WebPartCategoryInfo webPartCategoryInfo)
+        public WebPartCategoryFileSystemItem(WebPartCategoryInfo webPartCategoryInfo, IFileSystemItem parent)
+            : base(parent)
         {
             _webPartCategoryInfo = webPartCategoryInfo;
         }
@@ -58,12 +59,19 @@ namespace PoshKentico.Navigation.FileSystemItems
 
         #region Methods
 
-        public bool Exists(string path)
+        public override bool Delete(bool recursive)
+        {
+            if (recursive && !DeleteChildren()) return false;
+
+            return _webPartCategoryInfo.Delete();
+        }
+
+        public override bool Exists(string path)
         {
             return FindPath(path) != null;
         }
 
-        public IFileSystemItem FindPath(string path)
+        public override IFileSystemItem FindPath(string path)
         {
             var adjustedPath = path.ToLowerInvariant()
                 .Replace("development\\webparts", string.Empty)
@@ -76,7 +84,7 @@ namespace PoshKentico.Navigation.FileSystemItems
                                        select c).FirstOrDefault();
 
             if (webPartCategoryInfo != null)
-                return new WebPartCategoryFileSystemItem(webPartCategoryInfo);
+                return new WebPartCategoryFileSystemItem(webPartCategoryInfo, this);
             else
                 return null;
         }
