@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace PoshKentico.Navigation.FileSystemItems
 {
-    public class SecondLevelFileSystemItem : IFileSystemItem
+    public class MetaFileSystemItem : IFileSystemItem
     {
 
         #region Properties
@@ -19,7 +19,7 @@ namespace PoshKentico.Navigation.FileSystemItems
 
         #region Constructors
 
-        public SecondLevelFileSystemItem(string path, IEnumerable<IFileSystemItem> children)
+        public MetaFileSystemItem(string path, IEnumerable<IFileSystemItem> children)
         {
             Path = path;
             Children = children;

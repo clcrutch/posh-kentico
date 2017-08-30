@@ -455,14 +455,17 @@
     <Compile Include="Navigation\FileSystemItems\WebPartFileSystemItem.cs" />
     <Compile Include="Navigation\KenticoNavigationCmdletProvider.cs" />
     <Compile Include="General\OpenCMSApplication.cs" />
-    <Compile Include="Navigation\FileSystemItems\SecondLevelFileSystemItem.cs" />
+    <Compile Include="Navigation\FileSystemItems\MetaFileSystemItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <Content Include="FormattingFiles\development.format.ps1xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="posh-kentico.psd1">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="TestScript.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

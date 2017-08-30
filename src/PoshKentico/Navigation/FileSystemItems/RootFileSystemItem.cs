@@ -1,4 +1,5 @@
 ﻿using CMS.PortalEngine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -55,7 +56,7 @@ namespace PoshKentico.Navigation.FileSystemItems
         {
             return new IFileSystemItem[]
             {
-                new SecondLevelFileSystemItem("Development", new IFileSystemItem[]
+                new MetaFileSystemItem("Development", new IFileSystemItem[]
                 {
                     new WebPartCategoryFileSystemItem(WebPartCategoryInfoProvider.GetWebPartCategoryInfoByCodeName("/"))
                 })
