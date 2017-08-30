@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace PoshKentico.Navigation.FileSystemItems
 {
@@ -45,6 +46,7 @@ namespace PoshKentico.Navigation.FileSystemItems
 
         public abstract bool Exists(string path);
         public abstract IFileSystemItem FindPath(string path);
+        public abstract void NewItem(string name, string itemTypeName, object newItemValue);
 
         #endregion
 

@@ -1,4 +1,5 @@
 ﻿using PoshKentico.Helpers;
+using PoshKentico.Navigation.DynamicParameters;
 using PoshKentico.Navigation.FileSystemItems;
 using System;
 using System.Collections.ObjectModel;
@@ -79,12 +80,35 @@ namespace PoshKentico.Navigation
             return (_rootItem.FindPath(path)?.Children.Any()).GetValueOrDefault(false);
         }
 
+        protected override void NewItem(string path, string itemTypeName, object newItemValue)
+        {
+            InitKentico();
+
+            int lastSlash = path.LastIndexOf('\\');
+            string directory = path.Substring(0, lastSlash);
+            string name = path.Substring(lastSlash + 1);
+            var item = _rootItem.FindPath(directory);
+
+            _rootItem.FindPath(directory)?.NewItem(name, itemTypeName, newItemValue);
+        }
+
+        protected override object NewItemDynamicParameters(string path, string itemTypeName, object newItemValue)
+        {
+            switch (itemTypeName.ToLowerInvariant())
+            {
+                case "webpartcategory":
+                    return new NewWebPartCategoryDynamicParameter();
+                default:
+                    return null;
+            }
+        }
+
         protected override void RemoveItem(string path, bool recurse)
         {
             InitKentico();
 
             if (!(_rootItem.FindPath(path)?.Delete(recurse)).GetValueOrDefault(false))
-                throw new Exception($"Cannot delete item at \"{path}\"");
+                throw new Exception($"Cannot delete item at \"{path}\".");
         }
 
         private void WriteItemObject(IFileSystemItem item, bool recurse)

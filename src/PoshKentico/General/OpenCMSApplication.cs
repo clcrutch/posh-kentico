@@ -1,12 +1,7 @@
-﻿using CMS.Base;
-using CMS.DataEngine;
+﻿using CMS.DataEngine;
 using PoshKentico.Helpers;
-using Microsoft.Web.Administration;
-using System;
 using System.IO;
-using System.Linq;
 using System.Management.Automation;
-using System.Xml.Linq;
 
 namespace PoshKentico.General
 {

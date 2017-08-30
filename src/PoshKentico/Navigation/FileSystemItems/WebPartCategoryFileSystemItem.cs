@@ -1,4 +1,5 @@
 ﻿using CMS.PortalEngine;
+using PoshKentico.Navigation.DynamicParameters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,9 +60,23 @@ namespace PoshKentico.Navigation.FileSystemItems
 
         #region Methods
 
-        public override bool Delete(bool recursive)
+        public static void Create(string displayName, string name, string imagePath, IFileSystemItem parent)
         {
-            if (recursive && !DeleteChildren()) return false;
+            var parentCategoryItem = parent as WebPartCategoryFileSystemItem;
+            if (parentCategoryItem == null) return;
+
+            var newCategory = new WebPartCategoryInfo();
+            newCategory.CategoryDisplayName = displayName;
+            newCategory.CategoryName = name;
+            newCategory.CategoryImagePath = imagePath;
+            newCategory.CategoryParentID = parentCategoryItem._webPartCategoryInfo.CategoryParentID;
+
+            WebPartCategoryInfoProvider.SetWebPartCategoryInfo(newCategory);
+        }
+
+        public override bool Delete(bool recurse)
+        {
+            if (recurse && !DeleteChildren()) return false;
 
             return _webPartCategoryInfo.Delete();
         }
@@ -87,6 +102,22 @@ namespace PoshKentico.Navigation.FileSystemItems
                 return new WebPartCategoryFileSystemItem(webPartCategoryInfo, this);
             else
                 return null;
+        }
+
+        public override void NewItem(string name, string itemTypeName, object newItemValue)
+        {
+            switch (itemTypeName.ToLowerInvariant())
+            {
+                case "webpartcategory":
+                    var dynamicParameter = newItemValue as NewWebPartCategoryDynamicParameter;
+                    string displayName = dynamicParameter?.DisplayName ?? name;
+                    string imagePath = dynamicParameter?.ImagePath;
+
+                    Create(displayName, name, imagePath, this);
+                    return;
+                default:
+                    throw new NotSupportedException($"Cannot create ItemType \"{itemTypeName}\" at \"{Path}\\{name}\".");
+            }
         }
 
         #endregion

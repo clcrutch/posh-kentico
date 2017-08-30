@@ -48,9 +48,11 @@ namespace PoshKentico.Navigation.FileSystemItems
 
         #region Methods
 
-        public override bool Delete(bool recursive)
+        public override bool Delete(bool recurse)
         {
-            throw new NotImplementedException();
+            if (recurse) return DeleteChildren();
+
+            return false;
         }
 
         public override bool Exists(string path)
@@ -77,6 +79,11 @@ namespace PoshKentico.Navigation.FileSystemItems
                     new WebPartCategoryFileSystemItem(WebPartCategoryInfoProvider.GetWebPartCategoryInfoByCodeName("/"), this)
                 })
             };
+        }
+
+        public override void NewItem(string name, string itemTypeName, object newItemValue)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

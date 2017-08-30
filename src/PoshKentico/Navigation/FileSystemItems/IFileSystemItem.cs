@@ -22,6 +22,7 @@ namespace PoshKentico.Navigation.FileSystemItems
         bool Delete(bool recurse);
         bool Exists(string path);
         IFileSystemItem FindPath(string path);
+        void NewItem(string name, string itemTypeName, object newItemValue);
 
         #endregion
 

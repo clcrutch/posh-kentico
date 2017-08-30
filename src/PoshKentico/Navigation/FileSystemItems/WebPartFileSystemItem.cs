@@ -42,7 +42,7 @@ namespace PoshKentico.Navigation.FileSystemItems
 
         #region Methods
 
-        public override bool Delete(bool recursive)
+        public override bool Delete(bool recurse)
         {
             return _webPartInfo.Delete();
         }
@@ -56,6 +56,11 @@ namespace PoshKentico.Navigation.FileSystemItems
         {
             // TODO
             return this;
+        }
+
+        public override void NewItem(string name, string itemTypeName, object newItemValue)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
