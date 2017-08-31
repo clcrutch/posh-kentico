@@ -13,10 +13,10 @@
           </TableColumnHeader>
           <TableColumnHeader>
             <Width>25</Width>
-            <Label>Name</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Width>25</Width>
+            <Label>Name</Label>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
@@ -24,6 +24,9 @@
             <TableColumnItems>
               <TableColumnItem>
                 <PropertyName>CategoryDisplayName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>CategoryName</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <ScriptBlock>
@@ -34,9 +37,6 @@
                     $_.CategoryName
                   }
                 </ScriptBlock>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>CategoryName</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
@@ -56,10 +56,10 @@
           </TableColumnHeader>
           <TableColumnHeader>
             <Width>25</Width>
-            <Label>Name</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Width>25</Width>
+            <Label>Name</Label>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>

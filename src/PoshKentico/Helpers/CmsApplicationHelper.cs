@@ -1,10 +1,14 @@
-﻿using CMS.Base;
-using CMS.DataEngine;
-using Microsoft.Web.Administration;
+﻿// <copyright file="CmsApplicationHelper.cs" company="Chris Crutchfield">
+// Copyright (c) Chris Crutchfield. All rights reserved.
+// </copyright>
+
 using System;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+using CMS.Base;
+using CMS.DataEngine;
+using Microsoft.Web.Administration;
 
 namespace PoshKentico.Helpers
 {
@@ -19,8 +23,8 @@ namespace PoshKentico.Helpers
             // 4. Continue processing virtual directory if a web.config file exits
             // 5. Parse the document and find an "add" node with name="CMSConnectionString"
             // 6. If the connection string is valid, then stop processing.  This is a Kentico site.
-
             var serverManager = new ServerManager();
+
             // All websites that have a web.config.
             var directoryInfos = serverManager.Sites
                 .SelectMany(s => s.Applications)
@@ -30,8 +34,10 @@ namespace PoshKentico.Helpers
             foreach (var directoryInfo in directoryInfos)
             {
                 writeDebug?.Invoke($"Searching for \"web.config\" in {directoryInfo.FullName}.");
+
                 // The web.config in the folder
                 var webConfigDirectoryInfo = directoryInfo.GetFiles("web.config").SingleOrDefault();
+
                 // If we somehow can't find it, continue.
                 if (webConfigDirectoryInfo == null)
                 {
@@ -43,6 +49,7 @@ namespace PoshKentico.Helpers
                 var webConfigXDocument = XDocument.Load(webConfigDirectoryInfo.FullName);
 
                 writeDebug?.Invoke("Searching for \"CMSConnectionString\" in \"web.config\".");
+
                 // Find the connection string.
                 connectionString = (from d in webConfigXDocument.Descendants("add")
                                     where d.Attribute("name")?.Value == "CMSConnectionString"
@@ -66,9 +73,13 @@ namespace PoshKentico.Helpers
         public static void InitializeKentico(Action<string> writeDebug = null, Action<string> writeVerbose = null)
         {
             // We don't need to do anything if the application is already initialized.
-            if (CMSApplication.ApplicationInitialized.GetValueOrDefault(false)) return;
+            if (CMSApplication.ApplicationInitialized.GetValueOrDefault(false))
+            {
+                return;
+            }
 
             string connectionString = null;
+
             // Search for the Kentico site in IIS.
             DirectoryInfo kenticoSite = FindKenticoSite(out connectionString, writeDebug, writeVerbose);
 
@@ -85,7 +96,9 @@ namespace PoshKentico.Helpers
             SystemContext.WebApplicationPhysicalPath = directoryInfo.FullName;
 
             if (!CMSApplication.Init())
+            {
                 throw new Exception("CMS Application initialization failed.");
+            }
         }
     }
 }
