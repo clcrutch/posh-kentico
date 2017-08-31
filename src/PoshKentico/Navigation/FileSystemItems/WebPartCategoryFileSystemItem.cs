@@ -1,5 +1,18 @@
 ﻿// <copyright file="WebPartCategoryFileSystemItem.cs" company="Chris Crutchfield">
-// Copyright (c) Chris Crutchfield. All rights reserved.
+// Copyright (C) 2017  Chris Crutchfield
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
 using System;
@@ -124,11 +137,48 @@ namespace PoshKentico.Navigation.FileSystemItems
             switch (itemTypeName.ToLowerInvariant())
             {
                 case "webpartcategory":
-                    var dynamicParameter = newItemValue as NewWebPartCategoryDynamicParameter;
-                    string displayName = dynamicParameter?.DisplayName ?? name;
-                    string imagePath = dynamicParameter?.ImagePath;
+                    if (newItemValue is WebPartCategoryInfo)
+                    {
+                        var webPartCategoryInfo = newItemValue as WebPartCategoryInfo;
+                        webPartCategoryInfo.CategoryParentID = this.webPartCategoryInfo.CategoryID;
 
-                    Create(displayName, name, imagePath, this);
+                        WebPartCategoryInfoProvider.SetWebPartCategoryInfo(webPartCategoryInfo);
+                    }
+                    else if (newItemValue is NewWebPartCategoryDynamicParameter)
+                    {
+                        var dynamicParameter = newItemValue as NewWebPartCategoryDynamicParameter;
+                        string displayName = dynamicParameter.DisplayName ?? name;
+                        string imagePath = dynamicParameter.ImagePath;
+
+                        WebPartCategoryFileSystemItem.Create(displayName, name, imagePath, this);
+                    }
+                    else
+                    {
+                        throw new NotSupportedException($"Type \"{newItemValue.GetType().Name}\" cannot be used to create a new WebPartCategory.");
+                    }
+
+                    return;
+                case "webpart":
+                    if (newItemValue is WebPartInfo)
+                    {
+                        var webPartInfo = newItemValue as WebPartInfo;
+                        webPartInfo.WebPartCategoryID = this.webPartCategoryInfo.CategoryID;
+
+                        WebPartInfoProvider.SetWebPartInfo(webPartInfo);
+                    }
+                    else if (newItemValue is NewWebPartDynamicParameter)
+                    {
+                        var dynamicParameter = newItemValue as NewWebPartDynamicParameter;
+                        string displayName = dynamicParameter?.DispalyName ?? name;
+                        string fileName = dynamicParameter?.FileName;
+
+                        WebPartFileSystemItem.Create(displayName, name, fileName, this);
+                    }
+                    else
+                    {
+                        throw new NotSupportedException($"Type \"{newItemValue.GetType().Name}\" cannot be used to create a new WebPart.");
+                    }
+
                     return;
                 default:
                     throw new NotSupportedException($"Cannot create ItemType \"{itemTypeName}\" at \"{this.Path}\\{name}\".");

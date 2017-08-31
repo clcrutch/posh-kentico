@@ -449,6 +449,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helpers\CmsApplicationHelper.cs" />
     <Compile Include="Navigation\DynamicParameters\NewWebPartCategoryDynamicParameter.cs" />
+    <Compile Include="Navigation\DynamicParameters\NewWebPartDynamicParameter.cs" />
     <Compile Include="Navigation\FileSystemItems\AbstractFileSystemItem.cs" />
     <Compile Include="Navigation\FileSystemItems\RootFileSystemItem.cs" />
     <Compile Include="Navigation\FileSystemItems\WebPartCategoryFileSystemItem.cs" />
