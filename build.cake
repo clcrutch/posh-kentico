@@ -52,6 +52,7 @@ Task("Build")
         settings.SetConfiguration(configuration));
     }
 	
+	Console.WriteLine("Setting module version number to " + version);
 	ReplaceRegexInFiles(moduleFile, "1\\.0", version);
 });
 
