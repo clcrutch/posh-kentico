@@ -90,8 +90,10 @@ namespace PoshKentico.Helpers
         {
             DataConnectionFactory.ConnectionString = connectionString;
 
-            writeDebug?.Invoke("Using deprecated .Net functionality.  Need to find a replacement.");
+            // This is how Kentico recommends working with their API.
+#pragma warning disable CS0618 // Type or member is obsolete
             AppDomain.CurrentDomain.AppendPrivatePath(Path.GetDirectoryName(typeof(CmsApplicationHelper).Assembly.Location));
+#pragma warning restore CS0618 // Type or member is obsolete
 
             SystemContext.WebApplicationPhysicalPath = directoryInfo.FullName;
 
