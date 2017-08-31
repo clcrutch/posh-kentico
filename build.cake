@@ -1,17 +1,22 @@
 #tool nuget:?package=NUnit.ConsoleRunner&version=3.4.0
+#addin "Cake.FileHelpers"
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
 //////////////////////////////////////////////////////////////////////
 
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
+var version = Argument("module_version", "1.0");
 
 //////////////////////////////////////////////////////////////////////
 // PREPARATION
 //////////////////////////////////////////////////////////////////////
 
 // Define directories.
-var buildDir = Directory("./src/build/bin") + Directory(configuration);
+var buildDir = Directory("./src/PoshKentico/bin") + Directory(configuration);
+
+// Define Files
+var moduleFile = buildDir + File("posh-kentico.psd1");
 
 //////////////////////////////////////////////////////////////////////
 // TASKS
@@ -46,6 +51,8 @@ Task("Build")
       XBuild("./src/posh-kentico.sln", settings =>
         settings.SetConfiguration(configuration));
     }
+	
+	ReplaceRegexInFiles(moduleFile, "1\\.0", version);
 });
 
 Task("Run-Unit-Tests")

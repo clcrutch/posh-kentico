@@ -29,6 +29,12 @@ namespace PoshKentico.Navigation
     [CmdletProvider("KenticoProvider", ProviderCapabilities.None)]
     public class KenticoNavigationCmdletProvider : NavigationCmdletProvider
     {
+        #region Constants
+
+        private const string DRIVENAME = "Kentico";
+
+        #endregion
+
         #region Fields
 
         private IFileSystemItem rootItem = new RootFileSystemItem();
@@ -44,7 +50,7 @@ namespace PoshKentico.Navigation
 
         protected override Collection<PSDriveInfo> InitializeDefaultDrives()
         {
-            var drive = new PSDriveInfo("Kentico", this.ProviderInfo, string.Empty, string.Empty, null);
+            var drive = new PSDriveInfo(DRIVENAME, this.ProviderInfo, string.Empty, string.Empty, null);
             var drives = new Collection<PSDriveInfo>() { drive };
 
             return drives;

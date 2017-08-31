@@ -2,3 +2,6 @@
 
 # PoSH Kentico
 PoSH Kentico is a PowerShell Module for Kentico CMS administration.  PoSH Kentico requires .Net 4.5 or above.
+
+# Contribute
+Code submitted as a pull request should build with no warnings or errors.
