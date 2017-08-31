@@ -25,7 +25,7 @@ namespace PoshKentico.Helpers
             var directoryInfos = serverManager.Sites
                 .SelectMany(s => s.Applications)
                 .SelectMany(a => a.VirtualDirectories)
-                .Select(v => new DirectoryInfo(v.PhysicalPath));
+                .Select(v => new DirectoryInfo(Environment.ExpandEnvironmentVariables(v.PhysicalPath)));
 
             foreach (var directoryInfo in directoryInfos)
             {
@@ -71,6 +71,9 @@ namespace PoshKentico.Helpers
             string connectionString = null;
             // Search for the Kentico site in IIS.
             DirectoryInfo kenticoSite = FindKenticoSite(out connectionString, writeDebug, writeVerbose);
+
+            if (string.IsNullOrWhiteSpace(connectionString) || kenticoSite == null)
+                throw new Exception("Could not find Kentico site.");
 
             InitializeKentico(connectionString, kenticoSite);
         }
