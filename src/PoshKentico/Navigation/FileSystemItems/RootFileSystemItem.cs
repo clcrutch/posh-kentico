@@ -1,10 +1,11 @@
 ﻿using CMS.PortalEngine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace PoshKentico.Navigation.FileSystemItems
 {
-    public class RootFileSystemItem : IFileSystemItem
+    public class RootFileSystemItem : AbstractFileSystemItem
     {
 
         #region Fields
@@ -16,7 +17,7 @@ namespace PoshKentico.Navigation.FileSystemItems
 
         #region Properties
 
-        public IEnumerable<IFileSystemItem> Children
+        public override IEnumerable<IFileSystemItem> Children
         {
             get
             {
@@ -27,21 +28,39 @@ namespace PoshKentico.Navigation.FileSystemItems
             }
         }
 
-        public bool IsContainer => true;
-        public object Item => this;
-        public string Path => string.Empty;
+        public override bool IsContainer => true;
+        public override object Item => this;
+        public override string Path => string.Empty;
+
+        #endregion
+
+
+        #region Constructors
+
+        public RootFileSystemItem()
+            : base(null)
+        {
+
+        }
 
         #endregion
 
 
         #region Methods
 
-        public bool Exists(string path)
+        public override bool Delete(bool recurse)
+        {
+            if (recurse) return DeleteChildren();
+
+            return false;
+        }
+
+        public override bool Exists(string path)
         {
             return path == string.Empty || Children.Any(c => c.Exists(path));
         }
 
-        public IFileSystemItem FindPath(string path)
+        public override IFileSystemItem FindPath(string path)
         {
             var itemContainingPath = Children.FirstOrDefault(c => c.Exists(path));
 
@@ -55,11 +74,16 @@ namespace PoshKentico.Navigation.FileSystemItems
         {
             return new IFileSystemItem[]
             {
-                new SecondLevelFileSystemItem("Development", new IFileSystemItem[]
+                new MetaFileSystemItem("Development", this, new IFileSystemItem[]
                 {
-                    new WebPartCategoryFileSystemItem(WebPartCategoryInfoProvider.GetWebPartCategoryInfoByCodeName("/"))
+                    new WebPartCategoryFileSystemItem(WebPartCategoryInfoProvider.GetWebPartCategoryInfoByCodeName("/"), this)
                 })
             };
+        }
+
+        public override void NewItem(string name, string itemTypeName, object newItemValue)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

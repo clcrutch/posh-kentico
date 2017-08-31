@@ -445,24 +445,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Development\WebParts\GetCmsWebPart.cs" />
-    <Compile Include="Development\WebParts\GetCmsWebPartCategory.cs" />
-    <Compile Include="Development\WebParts\RemoveCmsWebPart.cs" />
     <Compile Include="Helpers\CmsApplicationHelper.cs" />
+    <Compile Include="Navigation\DynamicParameters\NewWebPartCategoryDynamicParameter.cs" />
+    <Compile Include="Navigation\FileSystemItems\AbstractFileSystemItem.cs" />
     <Compile Include="Navigation\FileSystemItems\RootFileSystemItem.cs" />
     <Compile Include="Navigation\FileSystemItems\WebPartCategoryFileSystemItem.cs" />
     <Compile Include="Navigation\FileSystemItems\IFileSystemItem.cs" />
     <Compile Include="Navigation\FileSystemItems\WebPartFileSystemItem.cs" />
     <Compile Include="Navigation\KenticoNavigationCmdletProvider.cs" />
     <Compile Include="General\OpenCMSApplication.cs" />
-    <Compile Include="Navigation\FileSystemItems\SecondLevelFileSystemItem.cs" />
+    <Compile Include="Navigation\FileSystemItems\MetaFileSystemItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <Content Include="FormattingFiles\development.format.ps1xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="posh-kentico.psd1">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="TestScript.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

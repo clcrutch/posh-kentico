@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace PoshKentico.Navigation.FileSystemItems
 {
@@ -10,6 +11,7 @@ namespace PoshKentico.Navigation.FileSystemItems
         IEnumerable<IFileSystemItem> Children { get; }
         bool IsContainer { get; }
         object Item { get; }
+        IFileSystemItem Parent { get; }
         string Path { get; }
 
         #endregion
@@ -17,8 +19,10 @@ namespace PoshKentico.Navigation.FileSystemItems
 
         #region Methods
 
+        bool Delete(bool recurse);
         bool Exists(string path);
         IFileSystemItem FindPath(string path);
+        void NewItem(string name, string itemTypeName, object newItemValue);
 
         #endregion
 
