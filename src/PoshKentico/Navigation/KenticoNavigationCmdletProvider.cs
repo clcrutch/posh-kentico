@@ -20,12 +20,14 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Provider;
+using CMS.PortalEngine;
 using PoshKentico.Helpers;
 using PoshKentico.Navigation.DynamicParameters;
 using PoshKentico.Navigation.FileSystemItems;
 
 namespace PoshKentico.Navigation
 {
+    [OutputType(typeof(WebPartCategoryInfo), typeof(WebPartInfo), ProviderCmdlet = "Get-Item")]
     [CmdletProvider("KenticoProvider", ProviderCapabilities.None)]
     public class KenticoNavigationCmdletProvider : NavigationCmdletProvider
     {

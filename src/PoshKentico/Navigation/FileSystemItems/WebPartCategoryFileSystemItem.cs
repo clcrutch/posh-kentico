@@ -169,7 +169,7 @@ namespace PoshKentico.Navigation.FileSystemItems
                     else if (newItemValue is NewWebPartDynamicParameter)
                     {
                         var dynamicParameter = newItemValue as NewWebPartDynamicParameter;
-                        string displayName = dynamicParameter?.DispalyName ?? name;
+                        string displayName = dynamicParameter?.DisplayName ?? name;
                         string fileName = dynamicParameter?.FileName;
 
                         WebPartFileSystemItem.Create(displayName, name, fileName, this);

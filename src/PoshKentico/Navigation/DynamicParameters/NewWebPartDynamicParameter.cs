@@ -24,7 +24,7 @@ namespace PoshKentico.Navigation.DynamicParameters
         #region Properties
 
         [Parameter]
-        public string DispalyName { get; set; }
+        public string DisplayName { get; set; }
 
         [Parameter]
         public string FileName { get; set; }
