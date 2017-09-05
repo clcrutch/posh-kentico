@@ -35,7 +35,7 @@ Task("Restore-NuGet-Packages")
     NuGetRestore("./src/posh-kentico.sln");
 });
 
-Task("Build")
+Task("BuildRootModule")
     .IsDependentOn("Restore-NuGet-Packages")
     .Does(() =>
 {
@@ -51,10 +51,19 @@ Task("Build")
       XBuild("./src/posh-kentico.sln", settings =>
         settings.SetConfiguration(configuration));
     }
-	
-	Console.WriteLine("Setting module version number to " + version);
+});
+
+Task("BuildPowerShellModule")
+	.IsDependentOn("BuildRootModule")
+	.Does(() =>
+{
+	Information("Setting module version number to " + version);
+	// Update the Version Number
 	ReplaceRegexInFiles(moduleFile, "1\\.0", version);
 });
+
+Task("Build")
+	.IsDependentOn("BuildPowerShellModule");
 
 Task("Run-Unit-Tests")
     .IsDependentOn("Build")

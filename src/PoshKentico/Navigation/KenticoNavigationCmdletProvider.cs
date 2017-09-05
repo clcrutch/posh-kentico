@@ -27,6 +27,10 @@ using PoshKentico.Navigation.FileSystemItems;
 
 namespace PoshKentico.Navigation
 {
+    /// <summary>
+    /// Kentico CMS file system provider for PowerShell.
+    /// Creates Kentico: by default.
+    /// </summary>
     [OutputType(typeof(WebPartCategoryInfo), typeof(WebPartInfo), ProviderCmdlet = "Get-Item")]
     [CmdletProvider("KenticoProvider", ProviderCapabilities.None)]
     public class KenticoNavigationCmdletProvider : NavigationCmdletProvider
@@ -45,11 +49,21 @@ namespace PoshKentico.Navigation
 
         #region Methods
 
+        /// <summary>
+        /// Indicates if the path specified is valid.
+        /// </summary>
+        /// <param name="path">The file system path to check.</param>
+        /// <returns>True if the path is valid, false otherwise.</returns>
         protected override bool IsValidPath(string path)
         {
             return true;
         }
 
+        /// <summary>
+        /// Creates default drives.
+        /// Creates a Kentico: drive.
+        /// </summary>
+        /// <returns>A collection of the drives created.</returns>
         protected override Collection<PSDriveInfo> InitializeDefaultDrives()
         {
             var drive = new PSDriveInfo(DRIVENAME, this.ProviderInfo, string.Empty, string.Empty, null);
@@ -58,6 +72,11 @@ namespace PoshKentico.Navigation
             return drives;
         }
 
+        /// <summary>
+        /// Checks if an item exists at the specified path.
+        /// </summary>
+        /// <param name="path">The file system path to check.</param>
+        /// <returns>True if the item exists at the specified path, false otherwise.</returns>
         protected override bool ItemExists(string path)
         {
             this.InitKentico();
@@ -65,11 +84,21 @@ namespace PoshKentico.Navigation
             return this.rootItem.Exists(path);
         }
 
+        /// <summary>
+        /// Checks if the item is a container (directory).
+        /// </summary>
+        /// <param name="path">The file system path to check.</param>
+        /// <returns>True if the item at the specified path is a container, false otherwise.</returns>
         protected override bool IsItemContainer(string path)
         {
             return (this.rootItem.FindPath(path)?.IsContainer).GetValueOrDefault(false);
         }
 
+        /// <summary>
+        /// Gets all of the child items at the specified path.
+        /// </summary>
+        /// <param name="path">The file system path to get the child items of.</param>
+        /// <param name="recurse">Indicates if we should iterate through all children recursively.</param>
         protected override void GetChildItems(string path, bool recurse)
         {
             this.InitKentico();
@@ -87,6 +116,10 @@ namespace PoshKentico.Navigation
             }
         }
 
+        /// <summary>
+        /// Gets the item at the specified path.
+        /// </summary>
+        /// <param name="path">The file system path to the item to get.</param>
         protected override void GetItem(string path)
         {
             this.InitKentico();
@@ -94,6 +127,11 @@ namespace PoshKentico.Navigation
             this.WriteItemObject(this.rootItem.FindPath(path), false);
         }
 
+        /// <summary>
+        /// Indicates whether the item at the specified path has any children.
+        /// </summary>
+        /// <param name="path">The file system path to the item to check for children.</param>
+        /// <returns>True if the specified item has any children, false otherwise.</returns>
         protected override bool HasChildItems(string path)
         {
             this.InitKentico();
@@ -101,6 +139,12 @@ namespace PoshKentico.Navigation
             return (this.rootItem.FindPath(path)?.Children.Any()).GetValueOrDefault(false);
         }
 
+        /// <summary>
+        /// Creates a new item at the specified path.
+        /// </summary>
+        /// <param name="path">The file system path to create the new item at.</param>
+        /// <param name="itemTypeName">The value specified to the -ItemType parameter.</param>
+        /// <param name="newItemValue">The value of the item to create at the specified location.</param>
         protected override void NewItem(string path, string itemTypeName, object newItemValue)
         {
             this.InitKentico();
@@ -113,6 +157,13 @@ namespace PoshKentico.Navigation
             this.rootItem.FindPath(directory)?.NewItem(name, itemTypeName, newItemValue ?? this.DynamicParameters);
         }
 
+        /// <summary>
+        /// Creates a new dynamic parameter for New-Item.
+        /// </summary>
+        /// <param name="path">The file system path to create the new item at.</param>
+        /// <param name="itemTypeName">The value specified to the -ItemType parameter.</param>
+        /// <param name="newItemValue">The value of the item to create at the specified location.</param>
+        /// <returns>The new dynamic parameter for the specified item type.</returns>
         protected override object NewItemDynamicParameters(string path, string itemTypeName, object newItemValue)
         {
             switch (itemTypeName.ToLowerInvariant())
@@ -126,6 +177,11 @@ namespace PoshKentico.Navigation
             }
         }
 
+        /// <summary>
+        /// Removes the item at the specified path.
+        /// </summary>
+        /// <param name="path">The file system path to the item to remove.</param>
+        /// <param name="recurse">Indicates if children items should be removed.</param>
         protected override void RemoveItem(string path, bool recurse)
         {
             this.InitKentico();

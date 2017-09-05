@@ -19,10 +19,17 @@ using System.Collections.Generic;
 
 namespace PoshKentico.Navigation.FileSystemItems
 {
+    /// <summary>
+    /// Base class for FileSystemItems.
+    /// </summary>
     public abstract class AbstractFileSystemItem : IFileSystemItem
     {
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AbstractFileSystemItem"/> class.
+        /// </summary>
+        /// <param name="parent">The parent file system item. Null if root.</param>
         public AbstractFileSystemItem(IFileSystemItem parent)
         {
             this.Parent = parent;
@@ -32,22 +39,46 @@ namespace PoshKentico.Navigation.FileSystemItems
 
         #region Properties
 
+        /// <summary>
+        /// Gets the Children of the file system item.
+        /// </summary>
         public abstract IEnumerable<IFileSystemItem> Children { get; }
 
+        /// <summary>
+        /// Gets if the file system item is a container
+        /// </summary>
         public abstract bool IsContainer { get; }
 
+        /// <summary>
+        /// Gets the item that the file system item represents.
+        /// </summary>
         public abstract object Item { get; }
 
+        /// <summary>
+        /// Gets the parent of the file system item.
+        /// </summary>
         public virtual IFileSystemItem Parent { get; protected set; }
 
+        /// <summary>
+        /// Gets the full path of the file system item.
+        /// </summary>
         public abstract string Path { get; }
 
         #endregion
 
         #region Methods
 
+        /// <summary>
+        /// Deletes the file system item.
+        /// </summary>
+        /// <param name="recurse">Indicates if the delete function should delete children.</param>
+        /// <returns>True if successful, false otherwise.</returns>
         public abstract bool Delete(bool recurse);
 
+        /// <summary>
+        /// Deletes all children.
+        /// </summary>
+        /// <returns>True if successful, false otherwise.</returns>
         public virtual bool DeleteChildren()
         {
             if (this.Children == null)
@@ -66,10 +97,26 @@ namespace PoshKentico.Navigation.FileSystemItems
             return true;
         }
 
+        /// <summary>
+        /// Checks if the path specified exists.
+        /// </summary>
+        /// <param name="path">File system path to check.</param>
+        /// <returns>True if exists, false otherwise.</returns>
         public abstract bool Exists(string path);
 
+        /// <summary>
+        /// Finds the file system item representing the path specified.
+        /// </summary>
+        /// <param name="path">File system path to find.</param>
+        /// <returns>The file system item representing the path specified.  Null if not found.</returns>
         public abstract IFileSystemItem FindPath(string path);
 
+        /// <summary>
+        /// Creates a new item under the current path.
+        /// </summary>
+        /// <param name="name">Name of the new item.</param>
+        /// <param name="itemTypeName">Type of the new item.  Specified as the -ItemType parameter.</param>
+        /// <param name="newItemValue">Either the dynamic parameter or the value specified on the -Value parameter.</param>
         public abstract void NewItem(string name, string itemTypeName, object newItemValue);
 
         #endregion

@@ -24,6 +24,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Debug\posh-kentico\posh-kentico.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -456,7 +457,7 @@
     <Compile Include="Navigation\FileSystemItems\IFileSystemItem.cs" />
     <Compile Include="Navigation\FileSystemItems\WebPartFileSystemItem.cs" />
     <Compile Include="Navigation\KenticoNavigationCmdletProvider.cs" />
-    <Compile Include="General\OpenCMSApplication.cs" />
+    <Compile Include="General\InitializeCMSApplication.cs" />
     <Compile Include="Navigation\FileSystemItems\MetaFileSystemItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -485,7 +486,9 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Kentico.Libraries.Dependencies.10.0.33\build\net45\Kentico.Libraries.Dependencies.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Kentico.Libraries.Dependencies.10.0.33\build\net45\Kentico.Libraries.Dependencies.targets'))" />
+    <Error Condition="!Exists('..\packages\XmlDoc2CmdletDoc.0.2.7\build\XmlDoc2CmdletDoc.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\XmlDoc2CmdletDoc.0.2.7\build\XmlDoc2CmdletDoc.targets'))" />
   </Target>
+  <Import Project="..\packages\XmlDoc2CmdletDoc.0.2.7\build\XmlDoc2CmdletDoc.targets" Condition="Exists('..\packages\XmlDoc2CmdletDoc.0.2.7\build\XmlDoc2CmdletDoc.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

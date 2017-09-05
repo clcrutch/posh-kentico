@@ -19,13 +19,22 @@ using System.Management.Automation;
 
 namespace PoshKentico.Navigation.DynamicParameters
 {
+    /// <summary>
+    /// Dynamic parameter used for New-Item -ItemType WebPartCategory
+    /// </summary>
     public class NewWebPartCategoryDynamicParameter
     {
         #region Properties
 
+        /// <summary>
+        /// <para type="description">The display name for the webpart category.</para>
+        /// </summary>
         [Parameter]
         public string DisplayName { get; set; }
 
+        /// <summary>
+        /// <para type="description">The image to display for the webpart category.</para>
+        /// </summary>
         [Parameter]
         public string ImagePath { get; set; }
 

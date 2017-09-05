@@ -1,4 +1,4 @@
-﻿// <copyright file="OpenCMSApplication.cs" company="Chris Crutchfield">
+﻿// <copyright file="InitializeCMSApplication.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -22,8 +22,31 @@ using PoshKentico.Helpers;
 
 namespace PoshKentico.General
 {
-    [Cmdlet(VerbsCommon.Open, "CMSApplication", DefaultParameterSetName = NONE)]
-    public class OpenCMSApplication : PSCmdlet
+    /// <summary>
+    /// <para type="synopsis">Initializes a connection to the Kentico CMS Server.</para>
+    /// <para type="description">The Initialize-CMSApplication cmdlet initializes a connection to the Kentico CMS server.</para>
+    /// <para type="description"></para>
+    /// <para type="description">If this cmdlet is run without parameters, then it requires administrator permissions to find the Kentico site.</para>
+    /// <para type="description">It does so by performing the following steps:</para>
+    /// <para type="description">1. Get a list of all the sites from IIS</para>
+    /// <para type="description">2. Get a list of all applications from the sites</para>
+    /// <para type="description">3. Get a list of all the virtual directories from the applications</para>
+    /// <para type="description">4. Continue processing virtual directory if a web.config file exits</para>
+    /// <para type="description">5. Parse the document and find an "add" node with name="CMSConnectionString"</para>
+    /// <para type="description">6. If the connection string is valid, then stop processing</para>
+    /// <example>
+    ///     <para>Initialize the Kentico CMS Application by searching for the Kentico site.</para>
+    ///     <para>This option requires administrator rights.</para>
+    ///     <code>Initialize-CMSApplication</code>
+    /// </example>
+    /// <example>
+    ///     <para>Initialize the Kentico CMS Application by using the specified connection string.</para>
+    ///     <para>This option does not require administrator rights.</para>
+    ///     <code>Initialize-CMSApplication -DatabaseServer KenticoServer -Database Kentico -WebRoot C:\kentico</code>
+    /// </example>
+    /// </summary>
+    [Cmdlet(VerbsData.Initialize, "CMSApplication", DefaultParameterSetName = NONE)]
+    public class InitializeCMSApplication : PSCmdlet
     {
         #region Constants
 
@@ -35,18 +58,34 @@ namespace PoshKentico.General
 
         #region Properties
 
+        /// <summary>
+        /// <para type="description">The connection string for the database connection.</para>
+        /// </summary>
         [Parameter(Mandatory = true, Position = 0, ParameterSetName = CONNECTIONSTRING)]
         public string ConnectionString { get; set; }
 
+        /// <summary>
+        /// <para type="description">The database server to use for generating the connection string.</para>
+        /// </summary>
         [Parameter(Mandatory = true, Position = 0, ParameterSetName = SERVERANDDATABASE)]
+        [Alias("SQLServer")]
         public string DatabaseServer { get; set; }
 
+        /// <summary>
+        /// <para type="description">The database to use for generating the connection string.</para>
+        /// </summary>
         [Parameter(Mandatory = true, Position = 1, ParameterSetName = SERVERANDDATABASE)]
         public string Database { get; set; }
 
+        /// <summary>
+        /// <para type="description">The timeout to use for generating the connection string.</para>
+        /// </summary>
         [Parameter(ParameterSetName = SERVERANDDATABASE)]
         public int Timeout { get; set; } = 60;
 
+        /// <summary>
+        /// <para type="description">The root directory for the Kentico site.</para>
+        /// </summary>
         [Parameter(Mandatory = true, Position = 2, ParameterSetName = SERVERANDDATABASE)]
         [Parameter(Mandatory = true, Position = 1, ParameterSetName = CONNECTIONSTRING)]
         public string WebRoot { get; set; }
@@ -55,6 +94,9 @@ namespace PoshKentico.General
 
         #region Methods
 
+        /// <summary>
+        /// Begin processing of records.
+        /// </summary>
         protected override void BeginProcessing()
         {
             if (CMSApplication.ApplicationInitialized.GetValueOrDefault(false))

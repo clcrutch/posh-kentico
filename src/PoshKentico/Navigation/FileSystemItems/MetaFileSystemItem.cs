@@ -21,6 +21,9 @@ using System.Linq;
 
 namespace PoshKentico.Navigation.FileSystemItems
 {
+    /// <summary>
+    /// File system item which represents items that are not actually part of Kentico.
+    /// </summary>
     public class MetaFileSystemItem : AbstractFileSystemItem
     {
         #region Fields
@@ -32,6 +35,12 @@ namespace PoshKentico.Navigation.FileSystemItems
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MetaFileSystemItem"/> class.
+        /// </summary>
+        /// <param name="path">The path for the current <see cref="MetaFileSystemItem"/>.</param>
+        /// <param name="parent">The parent <see cref="IFileSystemItem"/>.</param>
+        /// <param name="children">The children <see cref="IFileSystemItem"/>s.</param>
         public MetaFileSystemItem(string path, IFileSystemItem parent, IEnumerable<IFileSystemItem> children)
             : base(parent)
         {
@@ -43,18 +52,35 @@ namespace PoshKentico.Navigation.FileSystemItems
 
         #region Properties
 
+        /// <summary>
+        /// Gets the Children of the file system item.
+        /// </summary>
         public override IEnumerable<IFileSystemItem> Children => this.children;
 
+        /// <summary>
+        /// Gets if the file system item is a container
+        /// </summary>
         public override bool IsContainer => true;
 
+        /// <summary>
+        /// Gets the parent of the file system item.
+        /// </summary>
         public override object Item => this;
 
+        /// <summary>
+        /// Gets the full path of the file system item.
+        /// </summary>
         public override string Path => this.path;
 
         #endregion
 
         #region Methods
 
+        /// <summary>
+        /// Deletes the file system item.
+        /// </summary>
+        /// <param name="recurse">Indicates if the delete function should delete children.</param>
+        /// <returns>True if successful, false otherwise.</returns>
         public override bool Delete(bool recurse)
         {
             if (recurse)
@@ -65,6 +91,11 @@ namespace PoshKentico.Navigation.FileSystemItems
             return false;
         }
 
+        /// <summary>
+        /// Checks if the path specified exists.
+        /// </summary>
+        /// <param name="path">File system path to check.</param>
+        /// <returns>True if exists, false otherwise.</returns>
         public override bool Exists(string path)
         {
             var pathParts = path.Split('\\');
@@ -73,6 +104,11 @@ namespace PoshKentico.Navigation.FileSystemItems
                 (this.Children?.Any(c => c.Exists(path))).GetValueOrDefault(false);
         }
 
+        /// <summary>
+        /// Finds the file system item representing the path specified.
+        /// </summary>
+        /// <param name="path">File system path to find.</param>
+        /// <returns>The file system item representing the path specified.  Null if not found.</returns>
         public override IFileSystemItem FindPath(string path)
         {
             if (path.Equals(this.Path, StringComparison.InvariantCultureIgnoreCase))
@@ -87,6 +123,12 @@ namespace PoshKentico.Navigation.FileSystemItems
             }
         }
 
+        /// <summary>
+        /// This method is not supported.
+        /// </summary>
+        /// <param name="name">Name of the new item.</param>
+        /// <param name="itemTypeName">Type of the new item.  Specified as the -ItemType parameter.</param>
+        /// <param name="newItemValue">Either the dynamic parameter or the value specified on the -Value parameter.</param>
         public override void NewItem(string name, string itemTypeName, object newItemValue)
         {
             throw new NotSupportedException("Cannot create a new item as a child of a meta file system item.");

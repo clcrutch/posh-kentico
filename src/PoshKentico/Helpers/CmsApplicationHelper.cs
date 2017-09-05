@@ -25,17 +25,28 @@ using Microsoft.Web.Administration;
 
 namespace PoshKentico.Helpers
 {
+    /// <summary>
+    /// Used to initialize Kentico CMS applications.
+    /// </summary>
     internal class CmsApplicationHelper
     {
+        /// <summary>
+        /// This method requires administrator access.
+        ///
+        /// Finds a Kentico website by performing the following steps:
+        /// 1. Get a list of all the sites from IIS
+        /// 2. Get a list of all applications from the sites
+        /// 3. Get a list of all the virtual directories from the applications
+        /// 4. Continue processing virtual directory if a web.config file exits
+        /// 5. Parse the document and find an "add" node with name="CMSConnectionString"
+        /// 6. If the connection string is valid, then stop processing.  This is a Kentico site.
+        /// </summary>
+        /// <param name="connectionString">Output parameter containing the connection string of the Kentico site.</param>
+        /// <param name="writeDebug">A delegate for writing to the debug stream.</param>
+        /// <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
+        /// <returns>The directory for the Kentico site.</returns>
         public static DirectoryInfo FindKenticoSite(out string connectionString, Action<string> writeDebug = null, Action<string> writeVerbose = null)
         {
-            // To find a Kentico site, we perform the following steps:
-            // 1. Get a list of all the sites from IIS
-            // 2. Get a list of all applications from the sites
-            // 3. Get a list of all the virtual directories from the applications
-            // 4. Continue processing virtual directory if a web.config file exits
-            // 5. Parse the document and find an "add" node with name="CMSConnectionString"
-            // 6. If the connection string is valid, then stop processing.  This is a Kentico site.
             var serverManager = new ServerManager();
 
             // All websites that have a web.config.
@@ -83,6 +94,11 @@ namespace PoshKentico.Helpers
             return null;
         }
 
+        /// <summary>
+        /// Initialize Kentico CMS Application using FindKenticoSite to locate the site.
+        /// </summary>
+        /// <param name="writeDebug">A delegate for writing to the debug stream.</param>
+        /// <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
         public static void InitializeKentico(Action<string> writeDebug = null, Action<string> writeVerbose = null)
         {
             // We don't need to do anything if the application is already initialized.
@@ -104,6 +120,13 @@ namespace PoshKentico.Helpers
             InitializeKentico(connectionString, kenticoSite);
         }
 
+        /// <summary>
+        /// Initialize Kentico CMS Application using the supplied parameters.
+        /// </summary>
+        /// <param name="connectionString">The connection string to use for initializing the CMS Application.</param>
+        /// <param name="directoryInfo">The directory where the Kentico site resides.</param>
+        /// <param name="writeDebug">A delegate for writing to the debug stream.</param>
+        /// <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
         public static void InitializeKentico(string connectionString, DirectoryInfo directoryInfo, Action<string> writeDebug = null, Action<string> writeVerbose = null)
         {
             DataConnectionFactory.ConnectionString = connectionString;

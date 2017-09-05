@@ -23,6 +23,9 @@ using PoshKentico.Navigation.DynamicParameters;
 
 namespace PoshKentico.Navigation.FileSystemItems
 {
+    /// <summary>
+    /// File system item representing a <see cref="WebPartCategoryInfo"/>.
+    /// </summary>
     public class WebPartCategoryFileSystemItem : AbstractFileSystemItem
     {
         #region Fields
@@ -34,6 +37,11 @@ namespace PoshKentico.Navigation.FileSystemItems
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WebPartCategoryFileSystemItem"/> class.
+        /// </summary>
+        /// <param name="webPartCategoryInfo">The <see cref="WebPartCategoryInfo"/> for the file system to represent.</param>
+        /// <param name="parent">The parent file system item. Null if root.</param>
         public WebPartCategoryFileSystemItem(WebPartCategoryInfo webPartCategoryInfo, IFileSystemItem parent)
             : base(parent)
         {
@@ -44,6 +52,9 @@ namespace PoshKentico.Navigation.FileSystemItems
 
         #region Properties
 
+        /// <summary>
+        /// Gets the Children of the file system item.
+        /// </summary>
         public override IEnumerable<IFileSystemItem> Children
         {
             get
@@ -63,10 +74,19 @@ namespace PoshKentico.Navigation.FileSystemItems
             }
         }
 
+        /// <summary>
+        /// Gets if the file system item is a container
+        /// </summary>
         public override bool IsContainer => true;
 
+        /// <summary>
+        /// Gets the item that the file system item represents.
+        /// </summary>
         public override object Item => this.webPartCategoryInfo;
 
+        /// <summary>
+        /// Gets the full path of the file system item.
+        /// </summary>
         public override string Path => this.webPartCategoryInfo.CategoryPath
             .Replace("/", "Development\\WebParts\\")
             .Replace("/", "\\");
@@ -75,6 +95,13 @@ namespace PoshKentico.Navigation.FileSystemItems
 
         #region Methods
 
+        /// <summary>
+        /// Creates a new <see cref="WebPartCategoryInfo"/> under the specified parent.
+        /// </summary>
+        /// <param name="displayName">Display name for the new <see cref="WebPartCategoryInfo"/>.</param>
+        /// <param name="name">Name for the <see cref="WebPartCategoryInfo"/>.</param>
+        /// <param name="imagePath">Image Path for the <see cref="WebPartCategoryInfo"/></param>
+        /// <param name="parent">The parent of type <see cref="WebPartCategoryFileSystemItem"/>.</param>
         public static void Create(string displayName, string name, string imagePath, IFileSystemItem parent)
         {
             var parentCategoryItem = parent as WebPartCategoryFileSystemItem;
@@ -92,6 +119,11 @@ namespace PoshKentico.Navigation.FileSystemItems
             WebPartCategoryInfoProvider.SetWebPartCategoryInfo(newCategory);
         }
 
+        /// <summary>
+        /// Deletes the file system item.
+        /// </summary>
+        /// <param name="recurse">Indicates if the delete function should delete children.</param>
+        /// <returns>True if successful, false otherwise.</returns>
         public override bool Delete(bool recurse)
         {
             if (recurse && !this.DeleteChildren())
@@ -102,11 +134,21 @@ namespace PoshKentico.Navigation.FileSystemItems
             return this.webPartCategoryInfo.Delete();
         }
 
+        /// <summary>
+        /// Checks if the path specified exists.
+        /// </summary>
+        /// <param name="path">File system path to check.</param>
+        /// <returns>True if exists, false otherwise.</returns>
         public override bool Exists(string path)
         {
             return this.FindPath(path) != null;
         }
 
+        /// <summary>
+        /// Finds the file system item representing the path specified.
+        /// </summary>
+        /// <param name="path">File system path to find.</param>
+        /// <returns>The file system item representing the path specified.  Null if not found.</returns>
         public override IFileSystemItem FindPath(string path)
         {
             var adjustedPath = path.ToLowerInvariant()
@@ -132,6 +174,12 @@ namespace PoshKentico.Navigation.FileSystemItems
             }
         }
 
+        /// <summary>
+        /// Creates a new item under the current path.
+        /// </summary>
+        /// <param name="name">Name of the new item.</param>
+        /// <param name="itemTypeName">Type of the new item.  Specified as the -ItemType parameter.</param>
+        /// <param name="newItemValue">Either the dynamic parameter or the value specified on the -Value parameter.</param>
         public override void NewItem(string name, string itemTypeName, object newItemValue)
         {
             switch (itemTypeName.ToLowerInvariant())
