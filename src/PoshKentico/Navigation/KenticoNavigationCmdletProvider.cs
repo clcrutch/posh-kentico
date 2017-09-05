@@ -178,6 +178,17 @@ namespace PoshKentico.Navigation
         }
 
         /// <summary>
+        /// Normalizes the specified path to an item, returning a path relative to a specified base path.
+        /// </summary>
+        /// <param name="path">A fully-qualified provider specific path to an item.</param>
+        /// <param name="basePath">The path that the return value is relative to.</param>
+        /// <returns>A normalized path that is relative to the specified base path.</returns>
+        protected override string NormalizeRelativePath(string path, string basePath)
+        {
+            return path.Replace('/', '\\');
+        }
+
+        /// <summary>
         /// Removes the item at the specified path.
         /// </summary>
         /// <param name="path">The file system path to the item to remove.</param>
