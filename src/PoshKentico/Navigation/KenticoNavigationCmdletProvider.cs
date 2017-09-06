@@ -20,6 +20,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Provider;
+using System.Text.RegularExpressions;
 using CMS.PortalEngine;
 using PoshKentico.Helpers;
 using PoshKentico.Navigation.DynamicParameters;
@@ -32,7 +33,7 @@ namespace PoshKentico.Navigation
     /// Creates Kentico: by default.
     /// </summary>
     [OutputType(typeof(WebPartCategoryInfo), typeof(WebPartInfo), ProviderCmdlet = "Get-Item")]
-    [CmdletProvider("KenticoProvider", ProviderCapabilities.None)]
+    [CmdletProvider("KenticoProvider", ProviderCapabilities.ExpandWildcards)]
     public class KenticoNavigationCmdletProvider : NavigationCmdletProvider
     {
         #region Constants
@@ -48,6 +49,17 @@ namespace PoshKentico.Navigation
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Expands the path specified.
+        /// </summary>
+        /// <param name="path">The file system path to exand.</param>
+        /// <returns>An array representing the expanded paths.</returns>
+        protected override string[] ExpandPath(string path)
+        {
+            return (from i in this.GetItemsFromPath(path)
+                    select i.Name).ToArray();
+        }
 
         /// <summary>
         /// Indicates if the path specified is valid.
@@ -91,6 +103,8 @@ namespace PoshKentico.Navigation
         /// <returns>True if the item at the specified path is a container, false otherwise.</returns>
         protected override bool IsItemContainer(string path)
         {
+            this.InitKentico();
+
             return (this.rootItem.FindPath(path)?.IsContainer).GetValueOrDefault(false);
         }
 
@@ -201,6 +215,24 @@ namespace PoshKentico.Navigation
             {
                 throw new Exception($"Cannot delete item at \"{path}\".");
             }
+        }
+
+        private IFileSystemItem[] GetItemsFromPath(string path)
+        {
+            if (string.IsNullOrEmpty(path))
+            {
+                return null;
+            }
+
+            int lastSlash = path.LastIndexOf('\\');
+            string directory = lastSlash > -1 ? path.Substring(0, lastSlash) : string.Empty;
+            string name = lastSlash > -1 ? path.Substring(lastSlash + 1) : path;
+            var item = this.rootItem.FindPath(directory);
+
+            var regexString = $"^{Regex.Escape(name).Replace("\\*", ".*")}\\\\*$";
+            var regex = new Regex(regexString, RegexOptions.IgnoreCase | RegexOptions.Compiled);
+
+            return item.GetItemsFromRegex(regex);
         }
 
         private void InitKentico()

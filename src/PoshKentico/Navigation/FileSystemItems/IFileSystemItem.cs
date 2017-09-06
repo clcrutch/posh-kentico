@@ -16,6 +16,7 @@
 // </copyright>
 
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace PoshKentico.Navigation.FileSystemItems
 {
@@ -40,6 +41,11 @@ namespace PoshKentico.Navigation.FileSystemItems
         /// Gets the item that the file system item represents.
         /// </summary>
         object Item { get; }
+
+        /// <summary>
+        /// Gets the name of the file system item.
+        /// </summary>
+        string Name { get; }
 
         /// <summary>
         /// Gets the parent of the file system item.
@@ -72,9 +78,16 @@ namespace PoshKentico.Navigation.FileSystemItems
         /// <summary>
         /// Finds the file system item representing the path specified.
         /// </summary>
-        /// <param name="path">File system path to find.</param>
+        /// <param name="regex">File system path to find.</param>
         /// <returns>The file system item representing the path specified.  Null if not found.</returns>
-        IFileSystemItem FindPath(string path);
+        IFileSystemItem FindPath(string regex);
+
+        /// <summary>
+        /// Gets a list of items under this item that matches the specified regex.
+        /// </summary>
+        /// <param name="regex">Regular expression to match.</param>
+        /// <returns>An array of file system items matching the specified regular expression.</returns>
+        IFileSystemItem[] GetItemsFromRegex(Regex regex);
 
         /// <summary>
         /// Creates a new item under the current path.

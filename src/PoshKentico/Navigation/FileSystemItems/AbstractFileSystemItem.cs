@@ -16,6 +16,8 @@
 // </copyright>
 
 using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace PoshKentico.Navigation.FileSystemItems
 {
@@ -53,6 +55,20 @@ namespace PoshKentico.Navigation.FileSystemItems
         /// Gets the item that the file system item represents.
         /// </summary>
         public abstract object Item { get; }
+
+        /// <summary>
+        /// Gets the name of the file system item.
+        /// </summary>
+        public virtual string Name
+        {
+            get
+            {
+                var modifiedPath = this.Path.TrimEnd('\\');
+                var slashIndex = modifiedPath.LastIndexOf('\\');
+
+                return slashIndex > -1 ? modifiedPath.Substring(slashIndex + 1, modifiedPath.Length - slashIndex - 1) : modifiedPath;
+            }
+        }
 
         /// <summary>
         /// Gets the parent of the file system item.
@@ -110,6 +126,23 @@ namespace PoshKentico.Navigation.FileSystemItems
         /// <param name="path">File system path to find.</param>
         /// <returns>The file system item representing the path specified.  Null if not found.</returns>
         public abstract IFileSystemItem FindPath(string path);
+
+        /// <summary>
+        /// Finds the file system item representing the path specified.
+        /// </summary>
+        /// <param name="regex">File system path to find.</param>
+        /// <returns>The file system item representing the path specified.  Null if not found.</returns>
+        public virtual IFileSystemItem[] GetItemsFromRegex(Regex regex)
+        {
+            if (this.Children == null)
+            {
+                return null;
+            }
+
+            return (from c in this.Children
+                    where regex.IsMatch(c.Name)
+                    select c).ToArray();
+        }
 
         /// <summary>
         /// Creates a new item under the current path.
