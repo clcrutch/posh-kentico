@@ -26,6 +26,8 @@ namespace PoshKentico.Extensions
     /// </summary>
     public static class DictionaryExtensions
     {
+        #region Methods
+
         /// <summary>
         /// Converts a <see cref="Dictionary{TKey, TValue}"/> into a <see cref="PSObject"/>.
         /// </summary>
@@ -49,5 +51,8 @@ namespace PoshKentico.Extensions
 
             return outputObject;
         }
+
+        #endregion
+
     }
 }

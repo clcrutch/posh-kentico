@@ -26,6 +26,8 @@ namespace PoshKentico.Extensions
     /// </summary>
     public static class PSObjectExtensions
     {
+        #region Methods
+
         /// <summary>
         /// Converts a <see cref="PSObject"/> into a <see cref="Dictionary{TKey, TValue}"/>.
         /// </summary>
@@ -35,5 +37,8 @@ namespace PoshKentico.Extensions
         {
             return psObject.Properties.ToDictionary(p => p.Name.ToLowerInvariant(), p => p.Value);
         }
+
+        #endregion
+
     }
 }

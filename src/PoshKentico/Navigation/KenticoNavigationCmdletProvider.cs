@@ -114,7 +114,7 @@ namespace PoshKentico.Navigation
         /// <inheritdoc/>
         public void SetProperty(string path, PSObject propertyValue)
         {
-            this.rootItem.FindPath(path).SetProperty(propertyValue.ToDictionary());
+            this.rootItem.FindPath(path)?.SetProperty(propertyValue.ToDictionary());
         }
 
         /// <inheritdoc/>

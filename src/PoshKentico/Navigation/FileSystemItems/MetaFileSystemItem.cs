@@ -84,7 +84,7 @@ namespace PoshKentico.Navigation.FileSystemItems
         {
             var pathParts = path.Split('\\');
 
-            return (pathParts.Length > 0 && pathParts[0].Equals(this.Path, StringComparison.InvariantCultureIgnoreCase)) ||
+            return (pathParts.Length > 0 && pathParts[0].Equals(this.Path, StringComparison.InvariantCultureIgnoreCase) && pathParts.Length == 1) ||
                 (this.Children?.Any(c => c.Exists(path))).GetValueOrDefault(false);
         }
 
