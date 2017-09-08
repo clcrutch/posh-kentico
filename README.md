@@ -5,7 +5,7 @@ PoSH Kentico is a PowerShell Module for Kentico CMS administration.  PoSH Kentic
 
 # Install
 ```powershell
-Install-Module -Name posh-kentico -Scope CurrentUser
+Install-Module -Name posh-kentico -Scope AllUsers
 ```
 
 # Contribute
