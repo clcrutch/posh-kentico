@@ -22,6 +22,7 @@ using System.Management.Automation;
 using System.Management.Automation.Provider;
 using System.Text.RegularExpressions;
 using CMS.PortalEngine;
+using PoshKentico.Extensions;
 using PoshKentico.Helpers;
 using PoshKentico.Navigation.DynamicParameters;
 using PoshKentico.Navigation.FileSystemItems;
@@ -34,7 +35,7 @@ namespace PoshKentico.Navigation
     /// </summary>
     [OutputType(typeof(WebPartCategoryInfo), typeof(WebPartInfo), ProviderCmdlet = "Get-Item")]
     [CmdletProvider("KenticoProvider", ProviderCapabilities.ExpandWildcards)]
-    public class KenticoNavigationCmdletProvider : NavigationCmdletProvider
+    public class KenticoNavigationCmdletProvider : NavigationCmdletProvider, IPropertyCmdletProvider
     {
         #region Constants
 
@@ -48,34 +49,110 @@ namespace PoshKentico.Navigation
 
         #endregion
 
-        #region Methods
+        #region Statics
 
         /// <summary>
-        /// Expands the path specified.
+        /// Gets the parent directory of the file system path specified.
         /// </summary>
-        /// <param name="path">The file system path to exand.</param>
-        /// <returns>An array representing the expanded paths.</returns>
+        /// <param name="path">The file system path to get the parent directory of.</param>
+        /// <returns>The parent directory file system path.</returns>
+        public static string GetDirectory(string path)
+        {
+            string adjustedPath = path.TrimEnd('\\');
+            int lastSlashIndex = adjustedPath.LastIndexOf('\\');
+
+            return lastSlashIndex > -1 ? adjustedPath.Substring(0, lastSlashIndex) : string.Empty;
+        }
+
+        /// <summary>
+        /// Gets the name of the file system path specified.
+        /// </summary>
+        /// <param name="path">The file system path to get the name of.</param>
+        /// <returns>The name of the file system path specified.</returns>
+        public static string GetName(string path)
+        {
+            string adjustedPath = path.TrimEnd('\\');
+            int lastSlashIndex = adjustedPath.LastIndexOf('\\');
+
+            return lastSlashIndex > -1 ? adjustedPath.Substring(lastSlashIndex + 1, adjustedPath.Length - lastSlashIndex - 1) : adjustedPath;
+        }
+
+        /// <summary>
+        /// Joins two items into a single path using the '\' character.
+        /// </summary>
+        /// <param name="items">Lists of items to join.</param>
+        /// <returns>A single file system path.</returns>
+        public static string JoinPath(params string[] items)
+        {
+#pragma warning disable SA1118 // Parameter must not span multiple lines
+            return string.Join("\\", from i in items
+                                     select i.TrimEnd('\\'));
+#pragma warning restore SA1118 // Parameter must not span multiple lines
+        }
+
+        #endregion
+
+        #region IPropertyCmdletProvider Implementation
+
+        /// <inheritdoc/>
+        public void GetProperty(string path, Collection<string> providerSpecificPickList)
+        {
+            var outputObject = this.rootItem.FindPath(path)?.GetProperty(providerSpecificPickList).ToPSObject();
+
+            if (outputObject != null)
+            {
+                this.WritePropertyObject(outputObject, path);
+            }
+        }
+
+        /// <inheritdoc/>
+        public object GetPropertyDynamicParameters(string path, Collection<string> providerSpecificPickList)
+        {
+            return null;
+        }
+
+        /// <inheritdoc/>
+        public void SetProperty(string path, PSObject propertyValue)
+        {
+            this.rootItem.FindPath(path).SetProperty(propertyValue.ToDictionary());
+        }
+
+        /// <inheritdoc/>
+        public object SetPropertyDynamicParameters(string path, PSObject propertyValue)
+        {
+            return null;
+        }
+
+        /// <inheritdoc/>
+        public void ClearProperty(string path, Collection<string> propertyToClear)
+        {
+            throw new PSNotSupportedException();
+        }
+
+        /// <inheritdoc/>
+        public object ClearPropertyDynamicParameters(string path, Collection<string> propertyToClear)
+        {
+            throw new PSNotSupportedException();
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <inheritdoc/>
         protected override string[] ExpandPath(string path)
         {
             return (from i in this.GetItemsFromPath(path)
                     select i.Name).ToArray();
         }
 
-        /// <summary>
-        /// Indicates if the path specified is valid.
-        /// </summary>
-        /// <param name="path">The file system path to check.</param>
-        /// <returns>True if the path is valid, false otherwise.</returns>
+        /// <inheritdoc/>
         protected override bool IsValidPath(string path)
         {
             return true;
         }
 
-        /// <summary>
-        /// Creates default drives.
-        /// Creates a Kentico: drive.
-        /// </summary>
-        /// <returns>A collection of the drives created.</returns>
+        /// <inheritdoc/>
         protected override Collection<PSDriveInfo> InitializeDefaultDrives()
         {
             var drive = new PSDriveInfo(DRIVENAME, this.ProviderInfo, string.Empty, string.Empty, null);
@@ -84,11 +161,7 @@ namespace PoshKentico.Navigation
             return drives;
         }
 
-        /// <summary>
-        /// Checks if an item exists at the specified path.
-        /// </summary>
-        /// <param name="path">The file system path to check.</param>
-        /// <returns>True if the item exists at the specified path, false otherwise.</returns>
+        /// <inheritdoc/>
         protected override bool ItemExists(string path)
         {
             this.InitKentico();
@@ -96,11 +169,7 @@ namespace PoshKentico.Navigation
             return this.rootItem.Exists(path);
         }
 
-        /// <summary>
-        /// Checks if the item is a container (directory).
-        /// </summary>
-        /// <param name="path">The file system path to check.</param>
-        /// <returns>True if the item at the specified path is a container, false otherwise.</returns>
+        /// <inheritdoc/>
         protected override bool IsItemContainer(string path)
         {
             this.InitKentico();
@@ -108,11 +177,7 @@ namespace PoshKentico.Navigation
             return (this.rootItem.FindPath(path)?.IsContainer).GetValueOrDefault(false);
         }
 
-        /// <summary>
-        /// Gets all of the child items at the specified path.
-        /// </summary>
-        /// <param name="path">The file system path to get the child items of.</param>
-        /// <param name="recurse">Indicates if we should iterate through all children recursively.</param>
+        /// <inheritdoc/>
         protected override void GetChildItems(string path, bool recurse)
         {
             this.InitKentico();
@@ -130,10 +195,7 @@ namespace PoshKentico.Navigation
             }
         }
 
-        /// <summary>
-        /// Gets the item at the specified path.
-        /// </summary>
-        /// <param name="path">The file system path to the item to get.</param>
+        /// <inheritdoc/>
         protected override void GetItem(string path)
         {
             this.InitKentico();
@@ -141,11 +203,7 @@ namespace PoshKentico.Navigation
             this.WriteItemObject(this.rootItem.FindPath(path), false);
         }
 
-        /// <summary>
-        /// Indicates whether the item at the specified path has any children.
-        /// </summary>
-        /// <param name="path">The file system path to the item to check for children.</param>
-        /// <returns>True if the specified item has any children, false otherwise.</returns>
+        /// <inheritdoc/>
         protected override bool HasChildItems(string path)
         {
             this.InitKentico();
@@ -153,31 +211,19 @@ namespace PoshKentico.Navigation
             return (this.rootItem.FindPath(path)?.Children.Any()).GetValueOrDefault(false);
         }
 
-        /// <summary>
-        /// Creates a new item at the specified path.
-        /// </summary>
-        /// <param name="path">The file system path to create the new item at.</param>
-        /// <param name="itemTypeName">The value specified to the -ItemType parameter.</param>
-        /// <param name="newItemValue">The value of the item to create at the specified location.</param>
+        /// <inheritdoc/>
         protected override void NewItem(string path, string itemTypeName, object newItemValue)
         {
             this.InitKentico();
 
-            int lastSlash = path.LastIndexOf('\\');
-            string directory = path.Substring(0, lastSlash);
-            string name = path.Substring(lastSlash + 1);
+            string directory = KenticoNavigationCmdletProvider.GetDirectory(path);
+            string name = KenticoNavigationCmdletProvider.GetName(path);
             var item = this.rootItem.FindPath(directory);
 
             this.rootItem.FindPath(directory)?.NewItem(name, itemTypeName, newItemValue ?? this.DynamicParameters);
         }
 
-        /// <summary>
-        /// Creates a new dynamic parameter for New-Item.
-        /// </summary>
-        /// <param name="path">The file system path to create the new item at.</param>
-        /// <param name="itemTypeName">The value specified to the -ItemType parameter.</param>
-        /// <param name="newItemValue">The value of the item to create at the specified location.</param>
-        /// <returns>The new dynamic parameter for the specified item type.</returns>
+        /// <inheritdoc/>
         protected override object NewItemDynamicParameters(string path, string itemTypeName, object newItemValue)
         {
             switch (itemTypeName.ToLowerInvariant())
@@ -191,22 +237,13 @@ namespace PoshKentico.Navigation
             }
         }
 
-        /// <summary>
-        /// Normalizes the specified path to an item, returning a path relative to a specified base path.
-        /// </summary>
-        /// <param name="path">A fully-qualified provider specific path to an item.</param>
-        /// <param name="basePath">The path that the return value is relative to.</param>
-        /// <returns>A normalized path that is relative to the specified base path.</returns>
+        /// <inheritdoc/>
         protected override string NormalizeRelativePath(string path, string basePath)
         {
             return path.Replace('/', '\\');
         }
 
-        /// <summary>
-        /// Removes the item at the specified path.
-        /// </summary>
-        /// <param name="path">The file system path to the item to remove.</param>
-        /// <param name="recurse">Indicates if children items should be removed.</param>
+        /// <inheritdoc/>
         protected override void RemoveItem(string path, bool recurse)
         {
             this.InitKentico();
@@ -224,9 +261,8 @@ namespace PoshKentico.Navigation
                 return null;
             }
 
-            int lastSlash = path.LastIndexOf('\\');
-            string directory = lastSlash > -1 ? path.Substring(0, lastSlash) : string.Empty;
-            string name = lastSlash > -1 ? path.Substring(lastSlash + 1) : path;
+            string directory = KenticoNavigationCmdletProvider.GetDirectory(path);
+            string name = KenticoNavigationCmdletProvider.GetName(path);
             var item = this.rootItem.FindPath(directory);
 
             var regexString = $"^{Regex.Escape(name).Replace("\\*", ".*")}\\\\*$";

@@ -94,9 +94,7 @@ namespace PoshKentico.General
 
         #region Methods
 
-        /// <summary>
-        /// Begin processing of records.
-        /// </summary>
+        /// <inheritdoc/>
         protected override void BeginProcessing()
         {
             if (CMSApplication.ApplicationInitialized.GetValueOrDefault(false))

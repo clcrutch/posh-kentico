@@ -15,7 +15,9 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -41,55 +43,68 @@ namespace PoshKentico.Navigation.FileSystemItems
 
         #region Properties
 
-        /// <summary>
-        /// Gets the Children of the file system item.
-        /// </summary>
+        /// <inheritdoc/>
         public abstract IEnumerable<IFileSystemItem> Children { get; }
 
-        /// <summary>
-        /// Gets if the file system item is a container
-        /// </summary>
+        /// <inheritdoc/>
         public abstract bool IsContainer { get; }
 
-        /// <summary>
-        /// Gets the item that the file system item represents.
-        /// </summary>
+        /// <inheritdoc/>
         public abstract object Item { get; }
 
-        /// <summary>
-        /// Gets the name of the file system item.
-        /// </summary>
-        public virtual string Name
-        {
-            get
-            {
-                var modifiedPath = this.Path.TrimEnd('\\');
-                var slashIndex = modifiedPath.LastIndexOf('\\');
+        /// <inheritdoc/>
+        public virtual string Name => KenticoNavigationCmdletProvider.GetName(this.Path);
 
-                return slashIndex > -1 ? modifiedPath.Substring(slashIndex + 1, modifiedPath.Length - slashIndex - 1) : modifiedPath;
-            }
-        }
-
-        /// <summary>
-        /// Gets the parent of the file system item.
-        /// </summary>
+        /// <inheritdoc/>
         public virtual IFileSystemItem Parent { get; protected set; }
 
-        /// <summary>
-        /// Gets the full path of the file system item.
-        /// </summary>
+        /// <inheritdoc/>
         public abstract string Path { get; }
 
         #endregion
 
-        #region Methods
+        #region IFileSystemItem Implementation
 
-        /// <summary>
-        /// Deletes the file system item.
-        /// </summary>
-        /// <param name="recurse">Indicates if the delete function should delete children.</param>
-        /// <returns>True if successful, false otherwise.</returns>
+        /// <inheritdoc/>
         public abstract bool Delete(bool recurse);
+
+        /// <inheritdoc/>
+        public abstract bool Exists(string path);
+
+        /// <inheritdoc/>
+        public abstract IFileSystemItem FindPath(string path);
+
+        /// <inheritdoc/>
+        public virtual IFileSystemItem[] GetItemsFromRegex(Regex regex)
+        {
+            if (this.Children == null)
+            {
+                return null;
+            }
+
+            return (from c in this.Children
+                    where regex.IsMatch(c.Name)
+                    select c).ToArray();
+        }
+
+        /// <inheritdoc/>
+        public virtual Dictionary<string, object> GetProperty(Collection<string> providerSpecificPickList)
+        {
+            return null;
+        }
+
+        /// <inheritdoc/>
+        public abstract void NewItem(string name, string itemTypeName, object newItemValue);
+
+        /// <inheritdoc/>
+        public virtual void SetProperty(Dictionary<string, object> propertyValue)
+        {
+            throw new NotSupportedException();
+        }
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// Deletes all children.
@@ -114,43 +129,22 @@ namespace PoshKentico.Navigation.FileSystemItems
         }
 
         /// <summary>
-        /// Checks if the path specified exists.
+        /// Removes properties not specified from the provided dictionary.
         /// </summary>
-        /// <param name="path">File system path to check.</param>
-        /// <returns>True if exists, false otherwise.</returns>
-        public abstract bool Exists(string path);
-
-        /// <summary>
-        /// Finds the file system item representing the path specified.
-        /// </summary>
-        /// <param name="path">File system path to find.</param>
-        /// <returns>The file system item representing the path specified.  Null if not found.</returns>
-        public abstract IFileSystemItem FindPath(string path);
-
-        /// <summary>
-        /// Finds the file system item representing the path specified.
-        /// </summary>
-        /// <param name="regex">File system path to find.</param>
-        /// <returns>The file system item representing the path specified.  Null if not found.</returns>
-        public virtual IFileSystemItem[] GetItemsFromRegex(Regex regex)
+        /// <param name="providerSpecificPickList">List of properties to keep in the dictionary.</param>
+        /// <param name="properties">Dictionary which contains properties and values.</param>
+        protected void PurgeUnwantedProperties(Collection<string> providerSpecificPickList, Dictionary<string, object> properties)
         {
-            if (this.Children == null)
+            if (providerSpecificPickList.Count > 0)
             {
-                return null;
+                var itemsToRemove = properties.Keys.Except(providerSpecificPickList).ToArray();
+
+                foreach (var itemToRemove in itemsToRemove)
+                {
+                    properties.Remove(itemToRemove.ToLowerInvariant());
+                }
             }
-
-            return (from c in this.Children
-                    where regex.IsMatch(c.Name)
-                    select c).ToArray();
         }
-
-        /// <summary>
-        /// Creates a new item under the current path.
-        /// </summary>
-        /// <param name="name">Name of the new item.</param>
-        /// <param name="itemTypeName">Type of the new item.  Specified as the -ItemType parameter.</param>
-        /// <param name="newItemValue">Either the dynamic parameter or the value specified on the -Value parameter.</param>
-        public abstract void NewItem(string name, string itemTypeName, object newItemValue);
 
         #endregion
 

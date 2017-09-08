@@ -23,7 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <DocumentationFile>bin\Debug\posh-kentico\posh-kentico.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -449,6 +449,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\DictionaryExtensions.cs" />
+    <Compile Include="Extensions\PSObjectExtensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helpers\CmsApplicationHelper.cs" />
     <Compile Include="Navigation\DynamicParameters\NewWebPartCategoryDynamicParameter.cs" />

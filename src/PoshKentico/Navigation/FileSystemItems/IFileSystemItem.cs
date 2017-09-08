@@ -16,6 +16,7 @@
 // </copyright>
 
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 
 namespace PoshKentico.Navigation.FileSystemItems
@@ -83,6 +84,13 @@ namespace PoshKentico.Navigation.FileSystemItems
         IFileSystemItem FindPath(string regex);
 
         /// <summary>
+        /// Gets the specified properties from the item.
+        /// </summary>
+        /// <param name="providerSpecificPickList">List of properties to retrieve.</param>
+        /// <returns>A dictionary containing the requested properties.</returns>
+        Dictionary<string, object> GetProperty(Collection<string> providerSpecificPickList);
+
+        /// <summary>
         /// Gets a list of items under this item that matches the specified regex.
         /// </summary>
         /// <param name="regex">Regular expression to match.</param>
@@ -96,6 +104,12 @@ namespace PoshKentico.Navigation.FileSystemItems
         /// <param name="itemTypeName">Type of the new item.  Specified as the -ItemType parameter.</param>
         /// <param name="newItemValue">Either the dynamic parameter or the value specified on the -Value parameter.</param>
         void NewItem(string name, string itemTypeName, object newItemValue);
+
+        /// <summary>
+        /// Sets the specified properties on the item.
+        /// </summary>
+        /// <param name="propertyValue">A dictionary containing the properties and their respective values.</param>
+        void SetProperty(Dictionary<string, object> propertyValue);
 
         #endregion
 

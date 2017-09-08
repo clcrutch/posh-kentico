@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using CMS.PortalEngine;
 
 namespace PoshKentico.Navigation.FileSystemItems
@@ -51,24 +52,16 @@ namespace PoshKentico.Navigation.FileSystemItems
 
         #region Properties
 
-        /// <summary>
-        /// Gets the Children of the file system item.
-        /// </summary>
+        /// <inheritdoc/>
         public override IEnumerable<IFileSystemItem> Children => null;
 
-        /// <summary>
-        /// Gets if the file system item is a container
-        /// </summary>
+        /// <inheritdoc/>
         public override bool IsContainer => false;
 
-        /// <summary>
-        /// Gets the item that the file system item represents.
-        /// </summary>
+        /// <inheritdoc/>
         public override object Item => this.webPartInfo;
 
-        /// <summary>
-        /// Gets the full path of the file system item.
-        /// </summary>
+        /// <inheritdoc/>
         public override string Path => this.path;
 
         #endregion
@@ -95,31 +88,19 @@ namespace PoshKentico.Navigation.FileSystemItems
             WebPartInfoProvider.SetWebPartInfo(webPartInfo);
         }
 
-        /// <summary>
-        /// Deletes the file system item.
-        /// </summary>
-        /// <param name="recurse">Indicates if the delete function should delete children.</param>
-        /// <returns>True if successful, false otherwise.</returns>
+        /// <inheritdoc/>
         public override bool Delete(bool recurse)
         {
             return this.webPartInfo.Delete();
         }
 
-        /// <summary>
-        /// Checks if the path specified exists.
-        /// </summary>
-        /// <param name="path">File system path to check.</param>
-        /// <returns>True if exists, false otherwise.</returns>
+        /// <inheritdoc/>
         public override bool Exists(string path)
         {
             return this.path.Equals(path, StringComparison.InvariantCultureIgnoreCase) && this.webPartInfo != null;
         }
 
-        /// <summary>
-        /// Finds the file system item representing the path specified.
-        /// </summary>
-        /// <param name="path">File system path to find.</param>
-        /// <returns>The file system item representing the path specified.  Null if not found.</returns>
+        /// <inheritdoc/>
         public override IFileSystemItem FindPath(string path)
         {
             if (this.path.Equals(path, StringComparison.InvariantCultureIgnoreCase))
@@ -130,15 +111,45 @@ namespace PoshKentico.Navigation.FileSystemItems
             return null;
         }
 
-        /// <summary>
-        /// This method is not supported.
-        /// </summary>
-        /// <param name="name">Name of the new item.</param>
-        /// <param name="itemTypeName">Type of the new item.  Specified as the -ItemType parameter.</param>
-        /// <param name="newItemValue">Either the dynamic parameter or the value specified on the -Value parameter.</param>
+        /// <inheritdoc/>
+        public override Dictionary<string, object> GetProperty(Collection<string> providerSpecificPickList)
+        {
+            var properties = new Dictionary<string, object>();
+
+            properties.Add("displayname", this.webPartInfo.WebPartDisplayName);
+            properties.Add("filename", this.webPartInfo.WebPartFileName);
+
+            this.PurgeUnwantedProperties(providerSpecificPickList, properties);
+
+            return properties;
+        }
+
+        /// <inheritdoc/>
         public override void NewItem(string name, string itemTypeName, object newItemValue)
         {
             throw new NotSupportedException("Cannot create a new item as a child of a web part file system item.");
+        }
+
+        /// <inheritdoc/>
+        public override void SetProperty(Dictionary<string, object> propertyValue)
+        {
+            bool updatedValue = false;
+            if (propertyValue.ContainsKey("displayname"))
+            {
+                this.webPartInfo.WebPartDisplayName = propertyValue["displayname"] as string;
+                updatedValue = true;
+            }
+
+            if (propertyValue.ContainsKey("filename"))
+            {
+                this.webPartInfo.WebPartFileName = propertyValue["filename"] as string;
+                updatedValue = true;
+            }
+
+            if (updatedValue)
+            {
+                WebPartInfoProvider.SetWebPartInfo(this.webPartInfo);
+            }
         }
 
         #endregion

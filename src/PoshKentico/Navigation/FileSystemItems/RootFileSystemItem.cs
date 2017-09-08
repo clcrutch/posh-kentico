@@ -47,9 +47,7 @@ namespace PoshKentico.Navigation.FileSystemItems
 
         #region Properties
 
-        /// <summary>
-        /// Gets the Children of the file system item.
-        /// </summary>
+        /// <inheritdoc/>
         public override IEnumerable<IFileSystemItem> Children
         {
             get
@@ -63,30 +61,20 @@ namespace PoshKentico.Navigation.FileSystemItems
             }
         }
 
-        /// <summary>
-        /// Gets if the file system item is a container
-        /// </summary>
+        /// <inheritdoc/>
         public override bool IsContainer => true;
 
-        /// <summary>
-        /// Gets the parent of the file system item.
-        /// </summary>
+        /// <inheritdoc/>
         public override object Item => this;
 
-        /// <summary>
-        /// Gets the full path of the file system item.
-        /// </summary>
+        /// <inheritdoc/>
         public override string Path => string.Empty;
 
         #endregion
 
         #region Methods
 
-        /// <summary>
-        /// Deletes the file system item.
-        /// </summary>
-        /// <param name="recurse">Indicates if the delete function should delete children.</param>
-        /// <returns>True if successful, false otherwise.</returns>
+        /// <inheritdoc/>
         public override bool Delete(bool recurse)
         {
             if (recurse)
@@ -97,21 +85,13 @@ namespace PoshKentico.Navigation.FileSystemItems
             return false;
         }
 
-        /// <summary>
-        /// Checks if the path specified exists.
-        /// </summary>
-        /// <param name="path">File system path to check.</param>
-        /// <returns>True if exists, false otherwise.</returns>
+        /// <inheritdoc/>
         public override bool Exists(string path)
         {
             return path == string.Empty || this.Children.Any(c => c.Exists(path));
         }
 
-        /// <summary>
-        /// Finds the file system item representing the path specified.
-        /// </summary>
-        /// <param name="path">File system path to find.</param>
-        /// <returns>The file system item representing the path specified.  Null if not found.</returns>
+        /// <inheritdoc/>
         public override IFileSystemItem FindPath(string path)
         {
             var itemContainingPath = this.Children.FirstOrDefault(c => c.Exists(path));
@@ -126,12 +106,7 @@ namespace PoshKentico.Navigation.FileSystemItems
             }
         }
 
-        /// <summary>
-        /// This method is not supported.
-        /// </summary>
-        /// <param name="name">Name of the new item.</param>
-        /// <param name="itemTypeName">Type of the new item.  Specified as the -ItemType parameter.</param>
-        /// <param name="newItemValue">Either the dynamic parameter or the value specified on the -Value parameter.</param>
+        /// <inheritdoc/>
         public override void NewItem(string name, string itemTypeName, object newItemValue)
         {
             throw new NotSupportedException("Cannot create a new item as a child of the root file system item.");

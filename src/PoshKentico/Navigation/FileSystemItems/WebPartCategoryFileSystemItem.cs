@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using CMS.PortalEngine;
 using PoshKentico.Navigation.DynamicParameters;
@@ -52,9 +53,7 @@ namespace PoshKentico.Navigation.FileSystemItems
 
         #region Properties
 
-        /// <summary>
-        /// Gets the Children of the file system item.
-        /// </summary>
+        /// <inheritdoc/>
         public override IEnumerable<IFileSystemItem> Children
         {
             get
@@ -74,19 +73,13 @@ namespace PoshKentico.Navigation.FileSystemItems
             }
         }
 
-        /// <summary>
-        /// Gets if the file system item is a container
-        /// </summary>
+        /// <inheritdoc/>
         public override bool IsContainer => true;
 
-        /// <summary>
-        /// Gets the item that the file system item represents.
-        /// </summary>
+        /// <inheritdoc/>
         public override object Item => this.webPartCategoryInfo;
 
-        /// <summary>
-        /// Gets the full path of the file system item.
-        /// </summary>
+        /// <inheritdoc/>
         public override string Path => this.webPartCategoryInfo.CategoryPath
             .Replace("/", "Development\\WebParts\\")
             .Replace("/", "\\");
@@ -119,11 +112,7 @@ namespace PoshKentico.Navigation.FileSystemItems
             WebPartCategoryInfoProvider.SetWebPartCategoryInfo(newCategory);
         }
 
-        /// <summary>
-        /// Deletes the file system item.
-        /// </summary>
-        /// <param name="recurse">Indicates if the delete function should delete children.</param>
-        /// <returns>True if successful, false otherwise.</returns>
+        /// <inheritdoc/>
         public override bool Delete(bool recurse)
         {
             if (recurse && !this.DeleteChildren())
@@ -134,34 +123,21 @@ namespace PoshKentico.Navigation.FileSystemItems
             return this.webPartCategoryInfo.Delete();
         }
 
-        /// <summary>
-        /// Checks if the path specified exists.
-        /// </summary>
-        /// <param name="path">File system path to check.</param>
-        /// <returns>True if exists, false otherwise.</returns>
+        /// <inheritdoc/>
         public override bool Exists(string path)
         {
             return this.FindPath(path) != null;
         }
 
-        /// <summary>
-        /// Finds the file system item representing the path specified.
-        /// </summary>
-        /// <param name="path">File system path to find.</param>
-        /// <returns>The file system item representing the path specified.  Null if not found.</returns>
+        /// <inheritdoc/>
         public override IFileSystemItem FindPath(string path)
         {
-            var adjustedPath = path.ToLowerInvariant()
-                .Replace("development\\webparts", string.Empty)
-                .Replace('\\', '/');
+            var kenticoPath = this.ConvertToKenticoPath(path);
 
-            if (string.IsNullOrWhiteSpace(adjustedPath))
-            {
-                adjustedPath = "/";
-            }
+            var categories = WebPartCategoryInfoProvider.GetCategories();
 
-            var webPartCategoryInfo = (from c in WebPartCategoryInfoProvider.GetCategories()
-                                       where c.CategoryPath.Equals(adjustedPath, StringComparison.InvariantCultureIgnoreCase)
+            var webPartCategoryInfo = (from c in categories
+                                       where c.CategoryPath.Equals(kenticoPath, StringComparison.InvariantCultureIgnoreCase)
                                        select c).FirstOrDefault();
 
             if (webPartCategoryInfo != null)
@@ -170,16 +146,46 @@ namespace PoshKentico.Navigation.FileSystemItems
             }
             else
             {
-                return null;
+                var parentDirectory = KenticoNavigationCmdletProvider.GetDirectory(path);
+                kenticoPath = this.ConvertToKenticoPath(parentDirectory);
+
+                var parentWebPartCategoryInfo = (from c in categories
+                                                 where c.CategoryPath.Equals(kenticoPath, StringComparison.InvariantCultureIgnoreCase)
+                                                 select c).FirstOrDefault();
+
+                if (parentWebPartCategoryInfo == null)
+                {
+                    return null;
+                }
+
+                var webPartName = KenticoNavigationCmdletProvider.GetName(path);
+                var webPart = (from w in WebPartInfoProvider.GetAllWebParts(parentWebPartCategoryInfo.CategoryID)
+                               where w.WebPartName.Equals(webPartName, StringComparison.InvariantCultureIgnoreCase)
+                               select w).FirstOrDefault();
+
+                if (webPart == null)
+                {
+                    return null;
+                }
+
+                return new WebPartFileSystemItem(webPart, this);
             }
         }
 
-        /// <summary>
-        /// Creates a new item under the current path.
-        /// </summary>
-        /// <param name="name">Name of the new item.</param>
-        /// <param name="itemTypeName">Type of the new item.  Specified as the -ItemType parameter.</param>
-        /// <param name="newItemValue">Either the dynamic parameter or the value specified on the -Value parameter.</param>
+        /// <inheritdoc/>
+        public override Dictionary<string, object> GetProperty(Collection<string> providerSpecificPickList)
+        {
+            var properties = new Dictionary<string, object>();
+
+            properties.Add("displayname", this.webPartCategoryInfo.CategoryDisplayName);
+            properties.Add("imagepath", this.webPartCategoryInfo.CategoryImagePath);
+
+            this.PurgeUnwantedProperties(providerSpecificPickList, properties);
+
+            return properties;
+        }
+
+        /// <inheritdoc/>
         public override void NewItem(string name, string itemTypeName, object newItemValue)
         {
             switch (itemTypeName.ToLowerInvariant())
@@ -231,6 +237,42 @@ namespace PoshKentico.Navigation.FileSystemItems
                 default:
                     throw new NotSupportedException($"Cannot create ItemType \"{itemTypeName}\" at \"{this.Path}\\{name}\".");
             }
+        }
+
+        /// <inheritdoc/>
+        public override void SetProperty(Dictionary<string, object> propertyValue)
+        {
+            bool updatedValue = false;
+            if (propertyValue.ContainsKey("displayname"))
+            {
+                this.webPartCategoryInfo.CategoryDisplayName = propertyValue["displayname"] as string;
+                updatedValue = true;
+            }
+
+            if (propertyValue.ContainsKey("imagepath"))
+            {
+                this.webPartCategoryInfo.CategoryImagePath = propertyValue["imagepath"] as string;
+                updatedValue = true;
+            }
+
+            if (updatedValue)
+            {
+                WebPartCategoryInfoProvider.SetWebPartCategoryInfo(this.webPartCategoryInfo);
+            }
+        }
+
+        private string ConvertToKenticoPath(string path)
+        {
+            var kenticoPath = path.ToLowerInvariant()
+                .Replace("development\\webparts", string.Empty)
+                .Replace('\\', '/');
+
+            if (string.IsNullOrWhiteSpace(kenticoPath))
+            {
+                kenticoPath = "/";
+            }
+
+            return kenticoPath;
         }
 
         #endregion
