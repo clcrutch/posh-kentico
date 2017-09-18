@@ -473,6 +473,12 @@
     <None Include="DSCResources\xWebPartCategory\xWebPartCategory.schema.mof">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="DSCResources\xWebPart\xWebPart.psm1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="DSCResources\xWebPart\xWebPart.schema.mof">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <Content Include="FormattingFiles\development.format.ps1xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

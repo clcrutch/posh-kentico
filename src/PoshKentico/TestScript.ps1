@@ -1,20 +1,27 @@
-﻿Import-Module ./posh-kentico.psd1
+﻿# Requires -RunAsAdministrator
 
-<#
 Import-Module posh-kentico
 
 Configuration KenticoTest
 {
 	Import-DscResource -Name xWebPartCategory
+	Import-DscResource -Name xWebPart
 
 	Node localhost
 	{
 		xWebPartCategory TestCategory
 		{
-			Name = "Test"
-            #DisplayName = "Test"
+			Name = "TestCategory"
 			Path = "Kentico:\Development\WebParts"
 			Ensure = "Present"
+		}
+
+		xWebPart TestWebPart
+		{
+			Name = "TestWebPart"
+			Path = "Kentico:\Development\WebParts\TestCategory"
+			Ensure = "Absent"
+			FileName = "AbuseReport/AbuseReport.ascx"
 		}
 	}
 }
@@ -22,11 +29,5 @@ Configuration KenticoTest
 KenticoTest -OutputPath .\Temp
 
 Start-DscConfiguration -Wait -Force -Path .\Temp
-
-Test-Path Kentico:\Development\WebParts\Test
-
-
-#Remove-Item Kentico:\Development\WebParts\Test
-#>
 
 cd Kentico:
