@@ -103,11 +103,13 @@ namespace PoshKentico.Navigation.FileSystemItems
                 return;
             }
 
-            var newCategory = new WebPartCategoryInfo();
-            newCategory.CategoryDisplayName = displayName;
-            newCategory.CategoryName = name;
-            newCategory.CategoryImagePath = imagePath;
-            newCategory.CategoryParentID = parentCategoryItem.webPartCategoryInfo.CategoryParentID;
+            var newCategory = new WebPartCategoryInfo
+            {
+                CategoryDisplayName = displayName,
+                CategoryName = name,
+                CategoryImagePath = imagePath,
+                CategoryParentID = parentCategoryItem.webPartCategoryInfo.CategoryParentID
+            };
 
             WebPartCategoryInfoProvider.SetWebPartCategoryInfo(newCategory);
         }
@@ -175,10 +177,11 @@ namespace PoshKentico.Navigation.FileSystemItems
         /// <inheritdoc/>
         public override Dictionary<string, object> GetProperty(Collection<string> providerSpecificPickList)
         {
-            var properties = new Dictionary<string, object>();
-
-            properties.Add("displayname", this.webPartCategoryInfo.CategoryDisplayName);
-            properties.Add("imagepath", this.webPartCategoryInfo.CategoryImagePath);
+            var properties = new Dictionary<string, object>
+            {
+                { "displayname", this.webPartCategoryInfo.CategoryDisplayName },
+                { "imagepath", this.webPartCategoryInfo.CategoryImagePath }
+            };
 
             this.PurgeUnwantedProperties(providerSpecificPickList, properties);
 

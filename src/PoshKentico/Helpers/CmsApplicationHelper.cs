@@ -107,10 +107,8 @@ namespace PoshKentico.Helpers
                 return;
             }
 
-            string connectionString = null;
-
             // Search for the Kentico site in IIS.
-            DirectoryInfo kenticoSite = FindKenticoSite(out connectionString, writeDebug, writeVerbose);
+            DirectoryInfo kenticoSite = FindKenticoSite(out string connectionString, writeDebug, writeVerbose);
 
             if (string.IsNullOrWhiteSpace(connectionString) || kenticoSite == null)
             {

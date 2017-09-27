@@ -77,13 +77,14 @@ namespace PoshKentico.Navigation.FileSystemItems
         /// <param name="parent">The parent of type <see cref="WebPartFileSystemItem"/>.</param>
         public static void Create(string displayName, string name, string fileName, IFileSystemItem parent)
         {
-            var webPartInfo = new WebPartInfo();
-
-            webPartInfo.WebPartDisplayName = displayName;
-            webPartInfo.WebPartName = name;
-            webPartInfo.WebPartFileName = fileName;
-            webPartInfo.WebPartProperties = "<form></form>";
-            webPartInfo.WebPartCategoryID = ((parent.Item as WebPartCategoryInfo)?.CategoryID).GetValueOrDefault(0);
+            var webPartInfo = new WebPartInfo
+            {
+                WebPartDisplayName = displayName,
+                WebPartName = name,
+                WebPartFileName = fileName,
+                WebPartProperties = "<form></form>",
+                WebPartCategoryID = ((parent.Item as WebPartCategoryInfo)?.CategoryID).GetValueOrDefault(0)
+            };
 
             WebPartInfoProvider.SetWebPartInfo(webPartInfo);
         }
@@ -114,10 +115,11 @@ namespace PoshKentico.Navigation.FileSystemItems
         /// <inheritdoc/>
         public override Dictionary<string, object> GetProperty(Collection<string> providerSpecificPickList)
         {
-            var properties = new Dictionary<string, object>();
-
-            properties.Add("displayname", this.webPartInfo.WebPartDisplayName);
-            properties.Add("filename", this.webPartInfo.WebPartFileName);
+            var properties = new Dictionary<string, object>
+            {
+                { "displayname", this.webPartInfo.WebPartDisplayName },
+                { "filename", this.webPartInfo.WebPartFileName }
+            };
 
             this.PurgeUnwantedProperties(providerSpecificPickList, properties);
 
