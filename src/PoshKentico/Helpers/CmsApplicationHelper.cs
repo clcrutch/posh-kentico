@@ -30,6 +30,8 @@ namespace PoshKentico.Helpers
     /// </summary>
     internal class CmsApplicationHelper
     {
+        #region Methods
+
         /// <summary>
         /// This method requires administrator access.
         ///
@@ -141,5 +143,8 @@ namespace PoshKentico.Helpers
                 throw new Exception("CMS Application initialization failed.");
             }
         }
+
+        #endregion
+
     }
 }
