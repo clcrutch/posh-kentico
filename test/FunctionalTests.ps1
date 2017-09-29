@@ -18,17 +18,6 @@ Describe 'Kentico:' {
 
         Pop-Location
     }
-
-    It -Skip 'ls returns 1 item when path = "Kentico:\Development\WebParts"' {
-        Push-Location Kentico:\Development\WebParts
-
-        $result = Get-ChildItem -Path Kentico:
-
-        $result.Count | Should -Be 1
-        $result.Name -eq "Development"
-
-        Pop-Location
-    }
 }
 
 Describe 'WebPart Categories' {
@@ -107,9 +96,9 @@ Describe 'WebPart Categories' {
 
             Node $env:COMPUTERNAME
             {
-                xWebPartCategory Map
+                xWebPartCategory Maps
                 {
-                    Name = "Map"
+                    Name = "Maps"
                     Path = "Kentico:\Development\WebParts"
                     Ensure = "Present"
                 }
@@ -120,19 +109,19 @@ Describe 'WebPart Categories' {
 
         $result = Test-DscConfiguration .\Temp
 
-        $result | Should -Be $true
+        $result.InDesiredState | Should -Be $true
     }
 
-    It -skip 'Test WebPart Category Present with DSC (false)' {
+    It 'Test WebPart Category Present with DSC (false)' {
         Configuration Test
         {
             Import-DscResource -Name xWebPartCategory
 
             Node $env:COMPUTERNAME
             {
-                xWebPartCategory Map
+                xWebPartCategory Maps
                 {
-                    Name = "Map"
+                    Name = "Maps"
                     Path = "Kentico:\Development\WebParts"
                     Ensure = "Absent"
                 }
@@ -166,7 +155,7 @@ Describe 'WebPart Categories' {
 
         $result = Test-DscConfiguration .\Temp
 
-        $result | Should -Be $true
+        $result.InDesiredState | Should -Be $true
     }
 
     It 'Test WebPart Category Absent with DSC (false)' {
@@ -213,10 +202,10 @@ Describe 'WebPart Categories' {
 
         $result = Test-DscConfiguration .\Temp
 
-        $result | Should -Be $true
+        $result.InDesiredState | Should -Be $true
     }
 
-    It -skip 'Test WebPart Category Present with DSC with DisplayName (false)' {
+    It 'Test WebPart Category Present with DSC with DisplayName (false)' {
         Configuration Test
         {
             Import-DscResource -Name xWebPartCategory
@@ -285,12 +274,12 @@ Describe 'WebPart Categories' {
         Start-DscConfiguration .\Temp -Wait -Force
         $result = Test-DscConfiguration .\Temp
 
-        $result | Should -Be $true
+        $result.InDesiredState | Should -Be $true
 
         Remove-Item Kentico:\Development\WebParts\Test
     }
 
-    It -skip 'Remove WebPart Category with DSC' {
+    It 'Remove WebPart Category with DSC' {
         Configuration Test
         {
             Import-DscResource -Name xWebPartCategory
@@ -330,7 +319,7 @@ Describe 'WebPart Categories' {
         Start-DscConfiguration .\Temp -Wait -Force
         $result = Test-DscConfiguration .\Temp
 
-        $result | Should -Be $true
+        $result.InDesiredState | Should -Be $true
     }
 }
 
@@ -357,7 +346,7 @@ Describe 'WebPart' {
         $result | Should -Be $true
     }
 
-    It -skip 'Remove-Item should remove item' {
+    It 'Remove-Item should remove item' {
         Remove-Item Kentico:\Development\WebParts\Test\TestWebPart
 
         $result = Test-Path Kentico:\Development\WebParts\Test\TestWebPart

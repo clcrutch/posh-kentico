@@ -143,7 +143,7 @@ namespace PoshKentico.Navigation
         protected override string[] ExpandPath(string path)
         {
             return (from i in this.GetItemsFromPath(path)
-                    select i.Name).ToArray();
+                    select i.Path).ToArray();
         }
 
         /// <inheritdoc/>
@@ -208,7 +208,7 @@ namespace PoshKentico.Navigation
         {
             this.InitKentico();
 
-            return (this.rootItem.FindPath(path)?.Children.Any()).GetValueOrDefault(false);
+            return (this.rootItem.FindPath(path)?.Children?.Any()).GetValueOrDefault(false);
         }
 
         /// <inheritdoc/>
