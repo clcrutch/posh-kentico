@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Provider;
@@ -26,7 +27,6 @@ using PoshKentico.Extensions;
 using PoshKentico.Helpers;
 using PoshKentico.Navigation.DynamicParameters;
 using PoshKentico.Navigation.FileSystemItems;
-using System.IO;
 
 namespace PoshKentico.Navigation
 {
