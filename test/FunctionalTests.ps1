@@ -77,6 +77,35 @@ Describe 'WebPart Categories' {
         Remove-Item Kentico:\Development\WebParts\Test
     }
 
+    It 'New-Item Can Create Subcategories' {
+        New-Item -ItemType WebPartCategory -Path Kentico:\Development\WebParts -Name Test1
+        New-Item -ItemType WebPartCategory -Path Kentico:\Development\WebParts\Test1 -Name Test2
+
+        $result = Test-Path Kentico:\Development\WebParts\Test1\Test2
+
+        $result | Should -Be $true
+    }
+	
+	It 'Remove-Item Can Remove Subcategories' {
+        Remove-Item Kentico:\Development\WebParts\Test1\Test2
+		
+        $result = Test-Path Kentico:\Development\WebParts\Test1\Test2
+
+        $result | Should -Be $false
+		
+        Remove-Item Kentico:\Development\WebParts\Test1
+	}
+
+    It 'Remove-Item Can Recursively remove Categories and Subcategories' {
+        New-Item -ItemType WebPartCategory -Path Kentico:\Development\WebParts -Name Test1
+        New-Item -ItemType WebPartCategory -Path Kentico:\Development\WebParts\Test1 -Name Test2
+
+        Remove-Item Kentico:\Development\WebParts\Test1 -Recurse
+        
+        Test-Path Kentico:\Development\WebParts\Test1\Test2 | Should -Be $false
+        Test-Path Kentico:\Development\WebParts\Test1 | Should -Be $false
+    }
+
     It 'Get-ItemProperty should return the item properties' {
         New-Item -ItemType WebPartCategory -Path Kentico:\Development\WebParts -Name Test -DisplayName "DisplayName"
 
@@ -87,6 +116,10 @@ Describe 'WebPart Categories' {
         $result.imagepath | Should -Be ""
         
         Remove-Item Kentico:\Development\WebParts\Test
+    }
+
+    It 'New-Item should not create new item' {
+        { New-Item -ItemType WebPartCategory -Path Kentico:\Development\WebParts\DoesNotExist -Name Test } | Should -Throw "not found."
     }
 
     It 'Test WebPart Category Present with DSC (true)' {
@@ -346,12 +379,53 @@ Describe 'WebPart' {
         $result | Should -Be $true
     }
 
+    It 'Get-Item should return the item' {
+        $result = Get-Item 'Kentico:\Development\WebParts\Test\TestWebPart'
+
+        $result.WebPartName | Should -Be 'TestWebPart'
+    }
+
     It 'Remove-Item should remove item' {
         Remove-Item Kentico:\Development\WebParts\Test\TestWebPart
 
         $result = Test-Path Kentico:\Development\WebParts\Test\TestWebPart
         
         $result | Should -Be $false
+    }
+
+    It 'New-Item should set the display name to the name if not specified' {
+        New-Item -ItemType WebPart -Path Kentico:\Development\WebParts\Test -Name TestWebPart -FileName PoshKentico/Test.ascx
+
+        $result = Get-Item Kentico:\Development\WebParts\Test\TestWebPart
+
+        $result.WebPartDisplayName | Should -Be 'TestWebPart'
+
+        Remove-Item Kentico:\Development\WebParts\Test\TestWebPart
+    }
+
+    It 'New-Item should set the display name' {
+        New-Item -ItemType WebPart -Path Kentico:\Development\WebParts\Test -Name TestWebPart -FileName PoshKentico/Test.ascx -DisplayName DisplayName
+
+        $result = Get-Item Kentico:\Development\WebParts\Test\TestWebPart
+
+        $result.WebPartDisplayName | Should -Be 'DisplayName'
+
+        Remove-Item Kentico:\Development\WebParts\Test\TestWebPart
+    }
+
+    It 'Get-ItemProperty should get the properties' {
+        New-Item -ItemType WebPart -Path Kentico:\Development\WebParts\Test -Name TestWebPart -FileName PoshKentico/Test.ascx -DisplayName DisplayName
+
+        $result = Get-ItemProperty Kentico:\Development\WebParts\Test\TestWebPart
+
+        $result.DisplayName | Should -Be DisplayName
+        $result.FileName | Should -Be PoshKentico/Test.ascx
+
+        Remove-Item Kentico:\Development\WebParts\Test\TestWebPart
+    }
+
+    It 'New-Item should not create new item' {
+        { New-Item -ItemType WebPart -Path Kentico:\Development\WebParts\DoesNotExist -Name TestWebPart -FileName PoshKentico/Test.ascx } | Should -Throw "not found."
     }
 
     Remove-Item Kentico:\Development\WebParts\Test -Recurse

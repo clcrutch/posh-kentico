@@ -108,7 +108,7 @@ namespace PoshKentico.Navigation.FileSystemItems
                 CategoryDisplayName = displayName,
                 CategoryName = name,
                 CategoryImagePath = imagePath,
-                CategoryParentID = parentCategoryItem.webPartCategoryInfo.CategoryParentID
+                CategoryParentID = parentCategoryItem.webPartCategoryInfo.CategoryID
             };
 
             WebPartCategoryInfoProvider.SetWebPartCategoryInfo(newCategory);

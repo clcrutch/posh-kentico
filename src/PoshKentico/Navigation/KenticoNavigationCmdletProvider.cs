@@ -26,6 +26,7 @@ using PoshKentico.Extensions;
 using PoshKentico.Helpers;
 using PoshKentico.Navigation.DynamicParameters;
 using PoshKentico.Navigation.FileSystemItems;
+using System.IO;
 
 namespace PoshKentico.Navigation
 {
@@ -142,8 +143,12 @@ namespace PoshKentico.Navigation
         /// <inheritdoc/>
         protected override string[] ExpandPath(string path)
         {
+            this.InitKentico();
+
+            var regex = new Regex($"^{this.PSDriveInfo.CurrentLocation.Replace("\\", "\\\\")}\\\\", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+
             return (from i in this.GetItemsFromPath(path)
-                    select i.Path).ToArray();
+                    select regex.Replace(i.Path, string.Empty)).ToArray();
         }
 
         /// <inheritdoc/>
@@ -220,7 +225,12 @@ namespace PoshKentico.Navigation
             string name = KenticoNavigationCmdletProvider.GetName(path);
             var item = this.rootItem.FindPath(directory);
 
-            this.rootItem.FindPath(directory)?.NewItem(name, itemTypeName, newItemValue ?? this.DynamicParameters);
+            if (item == null)
+            {
+                throw new IOException($"The path \"{directory}\" was not found.");
+            }
+
+            item.NewItem(name, itemTypeName, newItemValue ?? this.DynamicParameters);
         }
 
         /// <inheritdoc/>
@@ -265,7 +275,7 @@ namespace PoshKentico.Navigation
             string name = KenticoNavigationCmdletProvider.GetName(path);
             var item = this.rootItem.FindPath(directory);
 
-            var regexString = $"^{Regex.Escape(name).Replace("\\*", ".*")}\\\\*$";
+            var regexString = $"^{Regex.Escape(name).Replace("\\*", ".*")}$";
             var regex = new Regex(regexString, RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
             return item.GetItemsFromRegex(regex);
