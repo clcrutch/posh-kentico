@@ -63,7 +63,8 @@ namespace PoshKentico.Navigation.FileSystemItems
                     IEnumerable<IFileSystemItem> childCategories = from c in WebPartCategoryInfoProvider.GetCategories()
                                                                    where c.CategoryParentID == this.webPartCategoryInfo.CategoryID
                                                                    select new WebPartCategoryFileSystemItem(c, this);
-                    IEnumerable<IFileSystemItem> childWebParts = from w in WebPartInfoProvider.GetAllWebParts(this.webPartCategoryInfo.CategoryID)
+                    IEnumerable<IFileSystemItem> childWebParts = from w in WebPartInfoProvider.GetWebParts()
+                                                                 where w.WebPartCategoryID == this.webPartCategoryInfo.CategoryID
                                                                  select new WebPartFileSystemItem(w, this);
 
                     this.children = childCategories.Concat(childWebParts).ToArray();
@@ -161,8 +162,9 @@ namespace PoshKentico.Navigation.FileSystemItems
                 }
 
                 var webPartName = KenticoNavigationCmdletProvider.GetName(path);
-                var webPart = (from w in WebPartInfoProvider.GetAllWebParts(parentWebPartCategoryInfo.CategoryID)
-                               where w.WebPartName.Equals(webPartName, StringComparison.InvariantCultureIgnoreCase)
+                var webPart = (from w in WebPartInfoProvider.GetWebParts()
+                               where w.WebPartName.Equals(webPartName, StringComparison.InvariantCultureIgnoreCase) &&
+                                    w.WebPartCategoryID == this.webPartCategoryInfo.CategoryID
                                select w).FirstOrDefault();
 
                 if (webPart == null)
