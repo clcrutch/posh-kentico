@@ -81,9 +81,9 @@ namespace PoshKentico.Navigation.FileSystemItems
         public override object Item => this.webPartCategoryInfo;
 
         /// <inheritdoc/>
-        public override string Path => this.webPartCategoryInfo.CategoryPath
-            .Replace("/", "Development\\WebParts\\")
-            .Replace("/", "\\");
+        public override string Path => string.Format(
+                "Development\\WebParts\\{0}",
+                this.webPartCategoryInfo.CategoryPath.Substring(1).Replace("/", "\\"));
 
         #endregion
 
@@ -164,7 +164,7 @@ namespace PoshKentico.Navigation.FileSystemItems
                 var webPartName = KenticoNavigationCmdletProvider.GetName(path);
                 var webPart = (from w in WebPartInfoProvider.GetWebParts()
                                where w.WebPartName.Equals(webPartName, StringComparison.InvariantCultureIgnoreCase) &&
-                                    w.WebPartCategoryID == this.webPartCategoryInfo.CategoryID
+                                    w.WebPartCategoryID == parentWebPartCategoryInfo.CategoryID
                                select w).FirstOrDefault();
 
                 if (webPart == null)
