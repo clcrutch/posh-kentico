@@ -88,13 +88,14 @@ namespace PoshKentico.General
         /// </summary>
         [Parameter(Mandatory = true, Position = 2, ParameterSetName = SERVERANDDATABASE)]
         [Parameter(Mandatory = true, Position = 1, ParameterSetName = CONNECTIONSTRING)]
+        [Alias("KenticoRoot")]
         public string WebRoot { get; set; }
 
         #endregion
 
         #region Methods
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         protected override void BeginProcessing()
         {
             if (CMSApplication.ApplicationInitialized.GetValueOrDefault(false))

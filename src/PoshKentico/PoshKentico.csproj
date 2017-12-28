@@ -463,10 +463,13 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Development\GetCMSWebPart.cs" />
+    <Compile Include="Development\GetCMSWebPartCategory.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Extensions\PSObjectExtensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helpers\CmsApplicationHelper.cs" />
+    <Compile Include="KenticoCmdlet.cs" />
     <Compile Include="Navigation\DynamicParameters\NewWebPartCategoryDynamicParameter.cs" />
     <Compile Include="Navigation\DynamicParameters\NewWebPartDynamicParameter.cs" />
     <Compile Include="Navigation\FileSystemItems\AbstractFileSystemItem.cs" />
