@@ -1,4 +1,4 @@
-﻿// <copyright file="KenticoCmdlet.cs" company="Chris Crutchfield">
+﻿// <copyright file="MefCmdlet.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -16,19 +16,22 @@
 // </copyright>
 
 using System.ComponentModel.Composition;
-using PoshKentico.Services;
+using System.ComponentModel.Composition.Hosting;
+using System.Management.Automation;
 
 namespace PoshKentico
 {
     /// <summary>
-    /// Base class for all Kentico cmdlets which must initialize the connection to Kentico before running.
+    /// Base class for MEF cmdlets which automatically fullfill their own dependencies.
     /// </summary>
-    public abstract class KenticoCmdlet : MefCmdlet
+    public abstract class MefCmdlet : PSCmdlet
     {
         #region Properties
 
-        [Import]
-        public ICmsApplicationService CmsApplicationService { get; set; }
+        /// <summary>
+        /// The MEF container used for DI.
+        /// </summary>
+        internal static CompositionContainer Container { get; set; }
 
         #endregion
 
@@ -39,7 +42,19 @@ namespace PoshKentico
         {
             base.BeginProcessing();
 
-            this.CmsApplicationService.Initialize(this.WriteDebug, this.WriteVerbose);
+            this.Initialize();
+        }
+
+        private void Initialize()
+        {
+            if (Container == null)
+            {
+                var catalog = new AssemblyCatalog(typeof(MefCmdlet).Assembly);
+
+                Container = new CompositionContainer(catalog);
+            }
+
+            Container.ComposeParts(this);
         }
 
         #endregion
