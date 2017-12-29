@@ -109,7 +109,7 @@ namespace PoshKentico.Navigation.FileSystemItems
                 CategoryDisplayName = displayName,
                 CategoryName = name,
                 CategoryImagePath = imagePath,
-                CategoryParentID = parentCategoryItem.webPartCategoryInfo.CategoryID
+                CategoryParentID = parentCategoryItem.webPartCategoryInfo.CategoryID,
             };
 
             WebPartCategoryInfoProvider.SetWebPartCategoryInfo(newCategory);
@@ -182,7 +182,7 @@ namespace PoshKentico.Navigation.FileSystemItems
             var properties = new Dictionary<string, object>
             {
                 { "displayname", this.webPartCategoryInfo.CategoryDisplayName },
-                { "imagepath", this.webPartCategoryInfo.CategoryImagePath }
+                { "imagepath", this.webPartCategoryInfo.CategoryImagePath },
             };
 
             this.PurgeUnwantedProperties(providerSpecificPickList, properties);

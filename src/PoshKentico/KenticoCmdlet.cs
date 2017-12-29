@@ -27,6 +27,9 @@ namespace PoshKentico
     {
         #region Properties
 
+        /// <summary>
+        /// CMS Application service used for interacting with a CMS Application.
+        /// </summary>
         [Import]
         public ICmsApplicationService CmsApplicationService { get; set; }
 

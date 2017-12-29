@@ -83,7 +83,7 @@ namespace PoshKentico.Navigation.FileSystemItems
                 WebPartName = name,
                 WebPartFileName = fileName,
                 WebPartProperties = "<form></form>",
-                WebPartCategoryID = ((parent.Item as WebPartCategoryInfo)?.CategoryID).GetValueOrDefault(0)
+                WebPartCategoryID = ((parent.Item as WebPartCategoryInfo)?.CategoryID).GetValueOrDefault(0),
             };
 
             WebPartInfoProvider.SetWebPartInfo(webPartInfo);
@@ -118,7 +118,7 @@ namespace PoshKentico.Navigation.FileSystemItems
             var properties = new Dictionary<string, object>
             {
                 { "displayname", this.webPartInfo.WebPartDisplayName },
-                { "filename", this.webPartInfo.WebPartFileName }
+                { "filename", this.webPartInfo.WebPartFileName },
             };
 
             this.PurgeUnwantedProperties(providerSpecificPickList, properties);

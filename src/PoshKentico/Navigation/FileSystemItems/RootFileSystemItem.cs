@@ -119,8 +119,8 @@ namespace PoshKentico.Navigation.FileSystemItems
 #pragma warning disable SA1118 // Parameter must not span multiple lines
                 new MetaFileSystemItem("Development", this, new IFileSystemItem[]
                 {
-                    new WebPartCategoryFileSystemItem(WebPartCategoryInfoProvider.GetWebPartCategoryInfoByCodeName("/"), this)
-                })
+                    new WebPartCategoryFileSystemItem(WebPartCategoryInfoProvider.GetWebPartCategoryInfoByCodeName("/"), this),
+                }),
 #pragma warning restore SA1118 // Parameter must not span multiple lines
             };
         }
