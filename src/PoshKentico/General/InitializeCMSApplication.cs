@@ -18,7 +18,6 @@
 using System.IO;
 using System.Management.Automation;
 using CMS.DataEngine;
-using PoshKentico.Helpers;
 
 namespace PoshKentico.General
 {
@@ -46,7 +45,7 @@ namespace PoshKentico.General
     /// </example>
     /// </summary>
     [Cmdlet(VerbsData.Initialize, "CMSApplication", DefaultParameterSetName = NONE)]
-    public class InitializeCMSApplication : PSCmdlet
+    public class InitializeCMSApplication : KenticoCmdlet
     {
         #region Constants
 
@@ -110,7 +109,7 @@ namespace PoshKentico.General
                     connectionString = this.ConnectionString;
                     break;
                 case NONE:
-                    CmsApplicationHelper.InitializeKentico(this.WriteDebug, this.WriteVerbose);
+                    this.CmsApplicationService.Initialize(this.WriteDebug, this.WriteVerbose);
 
                     return;
                 case SERVERANDDATABASE:
@@ -121,7 +120,7 @@ namespace PoshKentico.General
                     break;
             }
 
-            CmsApplicationHelper.InitializeKentico(connectionString, new DirectoryInfo(this.WebRoot), this.WriteDebug, this.WriteVerbose);
+            this.CmsApplicationService.Initialize(connectionString, new DirectoryInfo(this.WebRoot), this.WriteDebug, this.WriteVerbose);
         }
 
         #endregion

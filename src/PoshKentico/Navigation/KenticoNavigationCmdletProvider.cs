@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel.Composition;
 using System.IO;
 using System.Linq;
 using System.Management.Automation;
@@ -24,9 +25,9 @@ using System.Management.Automation.Provider;
 using System.Text.RegularExpressions;
 using CMS.PortalEngine;
 using PoshKentico.Extensions;
-using PoshKentico.Helpers;
 using PoshKentico.Navigation.DynamicParameters;
 using PoshKentico.Navigation.FileSystemItems;
+using PoshKentico.Services;
 
 namespace PoshKentico.Navigation
 {
@@ -47,6 +48,16 @@ namespace PoshKentico.Navigation
         #region Fields
 
         private IFileSystemItem rootItem = new RootFileSystemItem();
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// CMS Application service used for interacting with a CMS Application.
+        /// </summary>
+        [Import]
+        public ICmsApplicationService CmsApplicationService { get; set; }
 
         #endregion
 
@@ -98,6 +109,8 @@ namespace PoshKentico.Navigation
         /// <inheritdoc/>
         public void GetProperty(string path, Collection<string> providerSpecificPickList)
         {
+            this.Initialize();
+
             var outputObject = this.rootItem.FindPath(path)?.GetProperty(providerSpecificPickList).ToPSObject();
 
             if (outputObject != null)
@@ -143,7 +156,7 @@ namespace PoshKentico.Navigation
         /// <inheritdoc/>
         protected override string[] ExpandPath(string path)
         {
-            this.InitKentico();
+            this.Initialize();
 
             var regex = new Regex($"^{this.PSDriveInfo.CurrentLocation.Replace("\\", "\\\\")}\\\\", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
@@ -169,7 +182,7 @@ namespace PoshKentico.Navigation
         /// <inheritdoc/>
         protected override bool ItemExists(string path)
         {
-            this.InitKentico();
+            this.Initialize();
 
             return this.rootItem.Exists(path);
         }
@@ -177,7 +190,7 @@ namespace PoshKentico.Navigation
         /// <inheritdoc/>
         protected override bool IsItemContainer(string path)
         {
-            this.InitKentico();
+            this.Initialize();
 
             return (this.rootItem.FindPath(path)?.IsContainer).GetValueOrDefault(false);
         }
@@ -185,7 +198,7 @@ namespace PoshKentico.Navigation
         /// <inheritdoc/>
         protected override void GetChildItems(string path, bool recurse)
         {
-            this.InitKentico();
+            this.Initialize();
 
             IFileSystemItem fileSystemItem = this.rootItem.FindPath(path);
 
@@ -203,7 +216,7 @@ namespace PoshKentico.Navigation
         /// <inheritdoc/>
         protected override void GetItem(string path)
         {
-            this.InitKentico();
+            this.Initialize();
 
             this.WriteItemObject(this.rootItem.FindPath(path), false);
         }
@@ -211,7 +224,7 @@ namespace PoshKentico.Navigation
         /// <inheritdoc/>
         protected override bool HasChildItems(string path)
         {
-            this.InitKentico();
+            this.Initialize();
 
             return (this.rootItem.FindPath(path)?.Children?.Any()).GetValueOrDefault(false);
         }
@@ -219,7 +232,7 @@ namespace PoshKentico.Navigation
         /// <inheritdoc/>
         protected override void NewItem(string path, string itemTypeName, object newItemValue)
         {
-            this.InitKentico();
+            this.Initialize();
 
             string directory = KenticoNavigationCmdletProvider.GetDirectory(path);
             string name = KenticoNavigationCmdletProvider.GetName(path);
@@ -256,7 +269,7 @@ namespace PoshKentico.Navigation
         /// <inheritdoc/>
         protected override void RemoveItem(string path, bool recurse)
         {
-            this.InitKentico();
+            this.Initialize();
 
             if (!(this.rootItem.FindPath(path)?.Delete(recurse)).GetValueOrDefault(false))
             {
@@ -281,9 +294,12 @@ namespace PoshKentico.Navigation
             return item.GetItemsFromRegex(regex);
         }
 
-        private void InitKentico()
+        private void Initialize()
         {
-            CmsApplicationHelper.InitializeKentico(this.WriteDebug, this.WriteVerbose);
+            MefHost.Initialize();
+            MefHost.Container.ComposeParts(this);
+
+            this.CmsApplicationService.Initialize(this.WriteDebug, this.WriteVerbose);
         }
 
         private void WriteItemObject(IFileSystemItem item, bool recurse)
