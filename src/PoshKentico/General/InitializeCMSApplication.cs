@@ -17,7 +17,6 @@
 
 using System.IO;
 using System.Management.Automation;
-using CMS.DataEngine;
 
 namespace PoshKentico.General
 {
@@ -97,7 +96,7 @@ namespace PoshKentico.General
         /// <inheritdoc />
         protected override void BeginProcessing()
         {
-            if (CMSApplication.ApplicationInitialized.GetValueOrDefault(false))
+            if (this.CmsApplicationService.InitializationState == Services.InitializationState.Initialized)
             {
                 return;
             }
@@ -115,8 +114,6 @@ namespace PoshKentico.General
                 case SERVERANDDATABASE:
                     connectionString = $"Data Source={this.DatabaseServer};Initial Catalog={this.Database};Integrated Security=True;Persist Security Info=False;Connect Timeout={this.Timeout};Encrypt=False;Current Language=English";
                     this.WriteDebug("Setting connection string to \"{connectionString}\".");
-
-                    DataConnectionFactory.ConnectionString = connectionString;
                     break;
             }
 

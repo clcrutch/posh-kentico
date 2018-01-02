@@ -21,10 +21,40 @@ using System.IO;
 namespace PoshKentico.Services
 {
     /// <summary>
+    /// Represents the initialization state of a CMS application.
+    /// </summary>
+    public enum InitializationState
+    {
+        /// <summary>
+        /// Initialization has not yet occurred.
+        /// </summary>
+        Uninitialized,
+
+        /// <summary>
+        /// An error occurred during initialization.
+        /// </summary>
+        Error,
+
+        /// <summary>
+        /// Initialization was successful.
+        /// </summary>
+        Initialized,
+    }
+
+    /// <summary>
     /// Service for providing access to a CMS application.
     /// </summary>
     public interface ICmsApplicationService
     {
+        #region Properties
+
+        /// <summary>
+        /// Gets the initialization state of the CMS Application.
+        /// </summary>
+        InitializationState InitializationState { get; }
+
+        #endregion
+
         #region Methods
 
         /// <summary>

@@ -32,6 +32,26 @@ namespace PoshKentico.Services
     [Export(typeof(ICmsApplicationService))]
     public class KenticoCmsApplicationService : ICmsApplicationService
     {
+        #region Properties
+
+        /// <summary>
+        /// Implements <see cref="ICmsApplicationService.InitializationState"/>
+        /// </summary>
+        public InitializationState InitializationState
+        {
+            get
+            {
+                if (CMSApplication.ApplicationInitialized.HasValue)
+                {
+                    return CMSApplication.ApplicationInitialized.Value ? InitializationState.Initialized : InitializationState.Error;
+                }
+
+                return InitializationState.Uninitialized;
+            }
+        }
+
+        #endregion
+
         #region Methods
 
         /// <summary>
