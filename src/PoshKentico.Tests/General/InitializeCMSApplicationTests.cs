@@ -15,7 +15,6 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using System.IO;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.General;
