@@ -23,6 +23,7 @@ using System.Xml.Linq;
 using CMS.Base;
 using CMS.DataEngine;
 using Microsoft.Web.Administration;
+using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.Services
 {
@@ -35,7 +36,7 @@ namespace PoshKentico.Services
         #region Properties
 
         /// <summary>
-        /// Implements <see cref="ICmsApplicationService.InitializationState"/>
+        /// Gets the initialization state of the CMS Application.
         /// </summary>
         public InitializationState InitializationState
         {

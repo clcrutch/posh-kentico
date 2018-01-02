@@ -16,7 +16,7 @@
 // </copyright>
 
 using System.ComponentModel.Composition;
-using PoshKentico.Services;
+using PoshKentico.Core.Services.General;
 
 namespace PoshKentico
 {

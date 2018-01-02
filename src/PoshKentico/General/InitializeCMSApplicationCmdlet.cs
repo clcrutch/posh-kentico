@@ -17,6 +17,7 @@
 
 using System.IO;
 using System.Management.Automation;
+using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.General
 {
@@ -96,7 +97,7 @@ namespace PoshKentico.General
         /// <inheritdoc />
         protected override void BeginProcessing()
         {
-            if (this.CmsApplicationService.InitializationState == Services.InitializationState.Initialized)
+            if (this.CmsApplicationService.InitializationState == InitializationState.Initialized)
             {
                 return;
             }

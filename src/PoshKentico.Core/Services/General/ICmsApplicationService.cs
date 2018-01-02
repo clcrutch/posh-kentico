@@ -18,7 +18,7 @@
 using System;
 using System.IO;
 
-namespace PoshKentico.Services
+namespace PoshKentico.Core.Services.General
 {
     /// <summary>
     /// Represents the initialization state of a CMS application.
