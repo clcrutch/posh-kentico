@@ -523,6 +523,12 @@
   <ItemGroup>
     <Folder Include="Navigation\Models\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PoshKentico.Core\PoshKentico.Core.csproj">
+      <Project>{0ca14ee6-88ad-41b9-b1c4-955d77d9b51a}</Project>
+      <Name>PoshKentico.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

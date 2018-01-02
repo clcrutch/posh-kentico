@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoshKentico", "PoshKentico\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoshKentico.Tests", "PoshKentico.Tests\PoshKentico.Tests.csproj", "{963D7419-782B-4B2A-9176-036A8DC70279}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoshKentico.Core", "PoshKentico.Core\PoshKentico.Core.csproj", "{0CA14EE6-88AD-41B9-B1C4-955D77D9B51A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{963D7419-782B-4B2A-9176-036A8DC70279}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{963D7419-782B-4B2A-9176-036A8DC70279}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{963D7419-782B-4B2A-9176-036A8DC70279}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CA14EE6-88AD-41B9-B1C4-955D77D9B51A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CA14EE6-88AD-41B9-B1C4-955D77D9B51A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CA14EE6-88AD-41B9-B1C4-955D77D9B51A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CA14EE6-88AD-41B9-B1C4-955D77D9B51A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

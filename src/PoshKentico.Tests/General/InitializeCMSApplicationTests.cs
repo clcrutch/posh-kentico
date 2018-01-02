@@ -24,24 +24,19 @@ namespace PoshKentico.Tests.General
     [TestFixture]
     public class InitializeCMSApplicationTests
     {
-        private InitializeCMSApplicationCmdlet cmdlet;
-
         [SetUp]
         public void Setup()
         {
-            this.cmdlet = new InitializeCMSApplicationCmdlet();
         }
 
         [TearDown]
         public void TearDown()
         {
-            this.cmdlet = null;
         }
 
         [TestCase]
         public void NoneParameterSet()
         {
-            this.cmdlet.Invoke().Should().HaveCount(0, "because this cmdlet returns nothing.");
         }
     }
 }
