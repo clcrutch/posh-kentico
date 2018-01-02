@@ -522,6 +522,10 @@
     <Folder Include="Navigation\Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PoshKentico.Business\PoshKentico.Business.csproj">
+      <Project>{d065289d-5e97-4ab4-b395-6a9f43cc3e5f}</Project>
+      <Name>PoshKentico.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PoshKentico.Core\PoshKentico.Core.csproj">
       <Project>{0ca14ee6-88ad-41b9-b1c4-955d77d9b51a}</Project>
       <Name>PoshKentico.Core</Name>

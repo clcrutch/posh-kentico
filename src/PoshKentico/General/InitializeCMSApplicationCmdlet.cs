@@ -15,8 +15,10 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System.ComponentModel.Composition;
 using System.IO;
 using System.Management.Automation;
+using PoshKentico.Business.General;
 using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.General
@@ -90,12 +92,15 @@ namespace PoshKentico.General
         [Alias("KenticoRoot")]
         public string WebRoot { get; set; }
 
+        [Import]
+        public InitializeCMSApplicationBusiness BusinessLayer { get; set; }
+
         #endregion
 
         #region Methods
 
         /// <inheritdoc />
-        protected override void BeginProcessing()
+        protected override void ProcessRecord()
         {
             if (this.CmsApplicationService.InitializationState == InitializationState.Initialized)
             {

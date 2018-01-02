@@ -16,6 +16,7 @@
 // </copyright>
 
 using System.ComponentModel.Composition.Hosting;
+using PoshKentico.Business;
 using PoshKentico.Core.Services.General;
 
 namespace PoshKentico
@@ -43,7 +44,9 @@ namespace PoshKentico
         {
             if (Container == null)
             {
-                var catalog = new AssemblyCatalog(typeof(ICmsApplicationService).Assembly);
+                var catalog = new AggregateCatalog(
+                    new AssemblyCatalog(typeof(ICmsApplicationService).Assembly),
+                    new AssemblyCatalog(typeof(CmdletBusinessBase).Assembly));
 
                 Container = new CompositionContainer(catalog);
             }
