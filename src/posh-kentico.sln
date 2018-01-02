@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoshKentico", "PoshKentico\PoshKentico.csproj", "{1D420BED-36C5-4EE1-B5AB-700DE1B216D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoshKentico.Tests", "PoshKentico.Tests\PoshKentico.Tests.csproj", "{963D7419-782B-4B2A-9176-036A8DC70279}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +17,15 @@ Global
 		{1D420BED-36C5-4EE1-B5AB-700DE1B216D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D420BED-36C5-4EE1-B5AB-700DE1B216D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D420BED-36C5-4EE1-B5AB-700DE1B216D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{963D7419-782B-4B2A-9176-036A8DC70279}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{963D7419-782B-4B2A-9176-036A8DC70279}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{963D7419-782B-4B2A-9176-036A8DC70279}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{963D7419-782B-4B2A-9176-036A8DC70279}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E57084A4-6E8C-4B43-AF96-F4FCBFEFBC87}
 	EndGlobalSection
 EndGlobal
