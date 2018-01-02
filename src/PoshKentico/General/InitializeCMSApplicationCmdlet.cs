@@ -16,6 +16,8 @@
 // </copyright>
 
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Management.Automation;
 using PoshKentico.Business.General;
 
@@ -44,6 +46,7 @@ namespace PoshKentico.General
     ///     <code>Initialize-CMSApplication -DatabaseServer KenticoServer -Database Kentico -WebRoot C:\kentico</code>
     /// </example>
     /// </summary>
+    [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsData.Initialize, "CMSApplication", DefaultParameterSetName = NONE)]
     public class InitializeCMSApplicationCmdlet : MefCmdlet
     {
@@ -106,13 +109,13 @@ namespace PoshKentico.General
             switch (this.ParameterSetName)
             {
                 case CONNECTIONSTRING:
-                    this.BusinessLayer.Initialize(this.ConnectionString, this.WebRoot);
+                    this.BusinessLayer.Initialize(this.ConnectionString, new DirectoryInfo(this.WebRoot));
                     return;
                 case NONE:
                     this.BusinessLayer.Initialize();
                     return;
                 case SERVERANDDATABASE:
-                    this.BusinessLayer.Initialize(this.DatabaseServer, this.Database, this.Timeout, this.WebRoot);
+                    this.BusinessLayer.Initialize(this.DatabaseServer, this.Database, this.Timeout, new DirectoryInfo(this.WebRoot));
                     return;
             }
         }

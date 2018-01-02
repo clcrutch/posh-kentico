@@ -15,6 +15,8 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.General;
@@ -22,11 +24,32 @@ using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.Tests.General
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     public class InitializeCMSApplicationTests
     {
         [TestCase]
-        public void InitializeNoParameters()
+        public void Initialize_ConnectionString_WebRoot()
+        {
+            var applicationServiceMock = new Mock<ICmsApplicationService>();
+
+            var businessLayer = new InitializeCMSApplicationBusiness
+            {
+                WriteDebug = Assert.NotNull,
+                WriteVerbose = Assert.NotNull,
+
+                CmsApplicationService = applicationServiceMock.Object,
+            };
+
+            var webRoot = new DirectoryInfo("C:\\Kentico\\WebRoot");
+
+            businessLayer.Initialize("myConnectionString", webRoot);
+
+            applicationServiceMock.Verify(x => x.Initialize("myConnectionString", webRoot, Assert.NotNull, Assert.NotNull));
+        }
+
+        [TestCase]
+        public void Initialize_NoParameters()
         {
             var applicationServiceMock = new Mock<ICmsApplicationService>();
 
@@ -41,6 +64,26 @@ namespace PoshKentico.Tests.General
             businessLayer.Initialize();
 
             applicationServiceMock.Verify(x => x.Initialize(Assert.NotNull, Assert.NotNull));
+        }
+
+        [TestCase]
+        public void Initialize_DatabaseServer_Database_Timeout_WebRoot()
+        {
+            var applicationServiceMock = new Mock<ICmsApplicationService>();
+
+            var businessLayer = new InitializeCMSApplicationBusiness
+            {
+                WriteDebug = Assert.NotNull,
+                WriteVerbose = Assert.NotNull,
+
+                CmsApplicationService = applicationServiceMock.Object,
+            };
+
+            var webRoot = new DirectoryInfo("C:\\Kentico\\WebRoot");
+
+            businessLayer.Initialize("databaseServer", "database", 103, webRoot);
+
+            applicationServiceMock.Verify(x => x.Initialize($"Data Source=databaseServer;Initial Catalog=database;Integrated Security=True;Persist Security Info=False;Connect Timeout=103;Encrypt=False;Current Language=English", webRoot, Assert.NotNull, Assert.NotNull));
         }
     }
 }

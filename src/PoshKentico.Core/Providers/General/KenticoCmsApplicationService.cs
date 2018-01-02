@@ -17,6 +17,7 @@
 
 using System;
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
@@ -30,6 +31,7 @@ namespace PoshKentico.Services
     /// <summary>
     /// Implementation of <see cref="ICmsApplicationService"/> that uses Kentico.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     [Export(typeof(ICmsApplicationService))]
     public class KenticoCmsApplicationService : ICmsApplicationService
     {

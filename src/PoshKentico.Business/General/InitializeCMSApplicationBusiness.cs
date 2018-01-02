@@ -45,7 +45,7 @@ namespace PoshKentico.Business.General
         /// </summary>
         /// <param name="connectionString">The connection string for the database connection.</param>
         /// <param name="webRoot">The root directory for the Kentico site.</param>
-        public void Initialize(string connectionString, string webRoot)
+        public void Initialize(string connectionString, DirectoryInfo webRoot)
         {
             if (this.CmsApplicationService.InitializationState == InitializationState.Initialized)
             {
@@ -54,7 +54,7 @@ namespace PoshKentico.Business.General
                 return;
             }
 
-            this.CmsApplicationService.Initialize(connectionString, new DirectoryInfo(webRoot), this.WriteDebug, this.WriteVerbose);
+            this.CmsApplicationService.Initialize(connectionString, webRoot, this.WriteDebug, this.WriteVerbose);
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace PoshKentico.Business.General
         /// <param name="database">The name of the Kentico database.</param>
         /// <param name="timeout">The timeout for connecting to the Kentico database.</param>
         /// <param name="webRoot">The root directory for the Kentico site.</param>
-        public void Initialize(string databaseServer, string database, int timeout, string webRoot)
+        public void Initialize(string databaseServer, string database, int timeout, DirectoryInfo webRoot)
         {
             var connectionString = $"Data Source={databaseServer};Initial Catalog={database};Integrated Security=True;Persist Security Info=False;Connect Timeout={timeout};Encrypt=False;Current Language=English";
             this.WriteDebug("Setting connection string to \"{connectionString}\".");
