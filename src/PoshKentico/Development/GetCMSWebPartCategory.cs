@@ -45,7 +45,7 @@ namespace PoshKentico.Development
     /// </example>
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CMSWebPartCategory", DefaultParameterSetName = NONE)]
-    public class GetCMSWebPartCategory : KenticoCmdlet
+    public class GetCMSWebPartCategory : MefCmdlet
     {
         #region Constants
 

@@ -15,27 +15,33 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using FluentAssertions;
+using System.IO;
+using Moq;
 using NUnit.Framework;
+using PoshKentico.Business.General;
+using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.Tests.General
 {
     [TestFixture]
     public class InitializeCMSApplicationTests
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-        }
-
         [TestCase]
-        public void NoneParameterSet()
+        public void InitializeNoParameters()
         {
+            var applicationServiceMock = new Mock<ICmsApplicationService>();
+
+            var businessLayer = new InitializeCMSApplicationBusiness
+            {
+                WriteDebug = Assert.NotNull,
+                WriteVerbose = Assert.NotNull,
+
+                CmsApplicationService = applicationServiceMock.Object,
+            };
+
+            businessLayer.Initialize();
+
+            applicationServiceMock.Verify(x => x.Initialize(Assert.NotNull, Assert.NotNull));
         }
     }
 }

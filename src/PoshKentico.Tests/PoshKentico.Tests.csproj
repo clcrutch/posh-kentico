@@ -57,6 +57,9 @@
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.4.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -77,13 +80,17 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.0-beta004\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PoshKentico\PoshKentico.csproj">
-      <Project>{1d420bed-36c5-4ee1-b5ab-700de1b216d7}</Project>
-      <Name>PoshKentico</Name>
-    </ProjectReference>
+    <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <ProjectReference Include="..\PoshKentico.Business\PoshKentico.Business.csproj">
+      <Project>{d065289d-5e97-4ab4-b395-6a9f43cc3e5f}</Project>
+      <Name>PoshKentico.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PoshKentico.Core\PoshKentico.Core.csproj">
+      <Project>{0ca14ee6-88ad-41b9-b1c4-955d77d9b51a}</Project>
+      <Name>PoshKentico.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

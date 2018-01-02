@@ -16,7 +16,11 @@
 // </copyright>
 
 using System.ComponentModel.Composition;
+using System.Linq;
 using System.Management.Automation;
+using System.Reflection;
+using PoshKentico.Business;
+using PoshKentico.Extensions;
 
 namespace PoshKentico
 {
@@ -40,6 +44,17 @@ namespace PoshKentico
             MefHost.Initialize();
 
             MefHost.Container.ComposeParts(this);
+
+            var businessLayerProps = (from p in this.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                                      where p.PropertyType.InheritsFrom(typeof(CmdletBusinessBase))
+                                      select p).ToArray();
+
+            foreach (var prop in businessLayerProps)
+            {
+                var instance = (CmdletBusinessBase)prop.GetValue(this);
+                instance.WriteDebug = this.WriteDebug;
+                instance.WriteVerbose = this.WriteVerbose;
+            }
         }
 
         #endregion

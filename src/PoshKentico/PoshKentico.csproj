@@ -470,12 +470,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="MefCmdlet.cs" />
     <Compile Include="Development\GetCMSWebPartCategory.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Extensions\PSObjectExtensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="KenticoCmdlet.cs" />
     <Compile Include="MefHost.cs" />
     <Compile Include="Navigation\DynamicParameters\NewWebPartCategoryDynamicParameter.cs" />
     <Compile Include="Navigation\DynamicParameters\NewWebPartDynamicParameter.cs" />

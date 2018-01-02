@@ -1,4 +1,4 @@
-﻿// <copyright file="CmdletBusinessBase.cs" company="Chris Crutchfield">
+﻿// <copyright file="TypeExtensions.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -18,28 +18,33 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Management.Automation;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PoshKentico.Business
+namespace PoshKentico.Extensions
 {
     /// <summary>
-    /// Base class for all Cmdlet Business objects.
+    /// Extension Methods for the <see cref="Type"/> class.
     /// </summary>
-    public abstract class CmdletBusinessBase
+    public static class TypeExtensions
     {
-        #region Properties
+        #region Methods
 
         /// <summary>
-        /// Gets or sets a delegate for writing to the debug stream.
+        /// Gets if the Type inherits from the specified base type somewhere in its inheritance chain.
         /// </summary>
-        public Action<string> WriteDebug { get; set; }
+        /// <param name="type">The child type.</param>
+        /// <param name="baseType">The super or base type.</param>
+        /// <returns>Returns true if type inherits from baseType, otherwise false.</returns>
+        public static bool InheritsFrom(this Type type, Type baseType)
+        {
+            if (type.BaseType == null)
+            {
+                return false;
+            }
 
-        /// <summary>
-        /// Gets or sets a delegate for writing to the verbose stream.
-        /// </summary>
-        public Action<string> WriteVerbose { get; set; }
+            return type.BaseType == baseType || type.BaseType.InheritsFrom(baseType);
+        }
 
         #endregion
 

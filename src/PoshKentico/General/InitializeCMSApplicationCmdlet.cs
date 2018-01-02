@@ -16,10 +16,8 @@
 // </copyright>
 
 using System.ComponentModel.Composition;
-using System.IO;
 using System.Management.Automation;
 using PoshKentico.Business.General;
-using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.General
 {
@@ -47,7 +45,7 @@ namespace PoshKentico.General
     /// </example>
     /// </summary>
     [Cmdlet(VerbsData.Initialize, "CMSApplication", DefaultParameterSetName = NONE)]
-    public class InitializeCMSApplicationCmdlet : KenticoCmdlet
+    public class InitializeCMSApplicationCmdlet : MefCmdlet
     {
         #region Constants
 
@@ -92,6 +90,9 @@ namespace PoshKentico.General
         [Alias("KenticoRoot")]
         public string WebRoot { get; set; }
 
+        /// <summary>
+        /// Gets or sets a reference to the business layer for this cmdlet.  Sett by MEF.
+        /// </summary>
         [Import]
         public InitializeCMSApplicationBusiness BusinessLayer { get; set; }
 
@@ -102,28 +103,18 @@ namespace PoshKentico.General
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
-            if (this.CmsApplicationService.InitializationState == InitializationState.Initialized)
-            {
-                return;
-            }
-
-            string connectionString = null;
             switch (this.ParameterSetName)
             {
                 case CONNECTIONSTRING:
-                    connectionString = this.ConnectionString;
-                    break;
+                    this.BusinessLayer.Initialize(this.ConnectionString, this.WebRoot);
+                    return;
                 case NONE:
-                    this.CmsApplicationService.Initialize(this.WriteDebug, this.WriteVerbose);
-
+                    this.BusinessLayer.Initialize();
                     return;
                 case SERVERANDDATABASE:
-                    connectionString = $"Data Source={this.DatabaseServer};Initial Catalog={this.Database};Integrated Security=True;Persist Security Info=False;Connect Timeout={this.Timeout};Encrypt=False;Current Language=English";
-                    this.WriteDebug("Setting connection string to \"{connectionString}\".");
-                    break;
+                    this.BusinessLayer.Initialize(this.DatabaseServer, this.Database, this.Timeout, this.WebRoot);
+                    return;
             }
-
-            this.CmsApplicationService.Initialize(connectionString, new DirectoryInfo(this.WebRoot), this.WriteDebug, this.WriteVerbose);
         }
 
         #endregion
