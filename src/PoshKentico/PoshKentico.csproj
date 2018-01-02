@@ -485,7 +485,7 @@
     <Compile Include="Navigation\FileSystemItems\IFileSystemItem.cs" />
     <Compile Include="Navigation\FileSystemItems\WebPartFileSystemItem.cs" />
     <Compile Include="Navigation\KenticoNavigationCmdletProvider.cs" />
-    <Compile Include="General\InitializeCMSApplication.cs" />
+    <Compile Include="General\InitializeCMSApplicationCmdlet.cs" />
     <Compile Include="Navigation\FileSystemItems\MetaFileSystemItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\KenticoCmsApplicationService.cs" />

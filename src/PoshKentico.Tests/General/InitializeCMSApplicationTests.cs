@@ -1,4 +1,4 @@
-﻿// <copyright file="InitializeCMSApplication.cs" company="Chris Crutchfield">
+﻿// <copyright file="InitializeCMSApplicationTests.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -15,22 +15,33 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using FluentAssertions;
 using NUnit.Framework;
+using PoshKentico.General;
 
 namespace PoshKentico.Tests.General
 {
     [TestFixture]
-    public class InitializeCMSApplication
+    public class InitializeCMSApplicationTests
     {
-        [TestCase]
-        public void AlwaysFails()
+        private InitializeCMSApplicationCmdlet cmdlet;
+
+        [SetUp]
+        public void Setup()
         {
-            Assert.Fail();
+            this.cmdlet = new InitializeCMSApplicationCmdlet();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            this.cmdlet = null;
+        }
+
+        [TestCase]
+        public void NoneParameterSet()
+        {
+            this.cmdlet.Invoke().Should().HaveCount(0, "because this cmdlet returns nothing.");
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿// <copyright file="InitializeCMSApplication.cs" company="Chris Crutchfield">
+﻿// <copyright file="InitializeCMSApplicationCmdlet.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -44,7 +44,7 @@ namespace PoshKentico.General
     /// </example>
     /// </summary>
     [Cmdlet(VerbsData.Initialize, "CMSApplication", DefaultParameterSetName = NONE)]
-    public class InitializeCMSApplication : KenticoCmdlet
+    public class InitializeCMSApplicationCmdlet : KenticoCmdlet
     {
         #region Constants
 
