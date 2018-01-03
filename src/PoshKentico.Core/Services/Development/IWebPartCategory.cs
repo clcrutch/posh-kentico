@@ -1,4 +1,4 @@
-﻿// <copyright file="KenticoWebPartService.cs" company="Chris Crutchfield">
+﻿// <copyright file="IWebPartCategory.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -15,28 +15,29 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Linq;
-using CMS.PortalEngine;
-using ImpromptuInterface;
-using PoshKentico.Core.Services.Development;
-
-namespace PoshKentico.Core.Providers.Development
+namespace PoshKentico.Core.Services.Development
 {
     /// <summary>
-    /// Implementation of <see cref="IWebPartService"/> that uses Kentico.
+    /// Represents a WebPart Category.
     /// </summary>
-    [Export(typeof(IWebPartService))]
-    public class KenticoWebPartService : IWebPartService
+    public interface IWebPartCategory
     {
         #region Properties
 
         /// <summary>
-        /// Gets a list of all of the <see cref="IWebPartCategory"/> provided by Kentico.
+        /// Gets the display name for the WebPart category.
         /// </summary>
-        public IEnumerable<IWebPartCategory> WebPartCategories => (from c in WebPartCategoryInfoProvider.GetCategories()
-                                                                   select Impromptu.ActLike<IWebPartCategory>(c as WebPartCategoryInfo)).ToArray();
+        string CategoryDisplayName { get; }
+
+        /// <summary>
+        /// Gets the name for the WebPart category.
+        /// </summary>
+        string CategoryName { get; }
+
+        /// <summary>
+        /// Gets the path for the WebPart category.
+        /// </summary>
+        string CategoryPath { get; }
 
         #endregion
 

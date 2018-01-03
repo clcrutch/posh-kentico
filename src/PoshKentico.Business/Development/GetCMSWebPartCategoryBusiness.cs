@@ -19,7 +19,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
-using CMS.PortalEngine;
 using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.General;
 
@@ -50,10 +49,10 @@ namespace PoshKentico.Business.Development
         #region Methods
 
         /// <summary>
-        /// Gets a list of all of the <see cref="WebPartCategoryInfo"/>.
+        /// Gets a list of all of the <see cref="IWebPartCategory"/>.
         /// </summary>
-        /// <returns>A list of all of the <see cref="WebPartCategoryInfo"/>.</returns>
-        public IEnumerable<WebPartCategoryInfo> GetWebPartCategories()
+        /// <returns>A list of all of the <see cref="IWebPartCategory"/>.</returns>
+        public IEnumerable<IWebPartCategory> GetWebPartCategories()
         {
             this.CmsApplicationService.Initialize(true, this.WriteVerbose, this.WriteDebug);
 
@@ -61,12 +60,12 @@ namespace PoshKentico.Business.Development
         }
 
         /// <summary>
-        /// Gets a list of all of the <see cref="WebPartCategoryInfo"/> which match the specified criteria.
+        /// Gets a list of all of the <see cref="IWebPartCategory"/> which match the specified criteria.
         /// </summary>
         /// <param name="matchString">The string which to match the webparts to.</param>
         /// <param name="exact">A boolean which indicates if the match should be exact.</param>
-        /// <returns>A list of all of the <see cref="WebPartCategoryInfo"/> which match the specified criteria.</returns>
-        public IEnumerable<WebPartCategoryInfo> GetWebPartCategories(string matchString, bool exact)
+        /// <returns>A list of all of the <see cref="IWebPartCategory"/> which match the specified criteria.</returns>
+        public IEnumerable<IWebPartCategory> GetWebPartCategories(string matchString, bool exact)
         {
             this.CmsApplicationService.Initialize(true, this.WriteVerbose, this.WriteDebug);
 
@@ -88,6 +87,8 @@ namespace PoshKentico.Business.Development
                            c.CategoryPath.ToLowerInvariant().StartsWith(lowerMatchString)
                         select c).ToArray();
             }
+
+            throw new NotImplementedException();
         }
 
         #endregion

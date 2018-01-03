@@ -17,7 +17,6 @@
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using CMS.PortalEngine;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
@@ -60,7 +59,7 @@ namespace PoshKentico.Tests.Development
 
             var webPartServiceMock = new Mock<IWebPartService>();
 
-            var webPartCategories = new List<WebPartCategoryInfo>();
+            var webPartCategories = new List<IWebPartCategory>();
             webPartServiceMock.SetupGet(x => x.WebPartCategories).Returns(webPartCategories);
 
             var businessLayer = new GetCMSWebPartCategoryBusiness()

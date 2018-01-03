@@ -18,8 +18,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Management.Automation;
-using CMS.PortalEngine;
+using ImpromptuInterface;
 using PoshKentico.Business.Development;
+using PoshKentico.Core.Services.Development;
+
+using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Development
 {
@@ -81,7 +84,7 @@ namespace PoshKentico.Development
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
-            IEnumerable<WebPartCategoryInfo> categories = null;
+            IEnumerable<IWebPartCategory> categories = null;
 
             switch (this.ParameterSetName)
             {
@@ -95,7 +98,7 @@ namespace PoshKentico.Development
 
             foreach (var category in categories)
             {
-                this.WriteObject(category);
+                this.WriteObject(category.UndoActLike());
             }
         }
 

@@ -16,7 +16,6 @@
 // </copyright>
 
 using System.Collections.Generic;
-using CMS.PortalEngine;
 
 namespace PoshKentico.Core.Services.Development
 {
@@ -28,9 +27,9 @@ namespace PoshKentico.Core.Services.Development
         #region Properties
 
         /// <summary>
-        /// Gets a list of all of the <see cref="WebPartCategoryInfo"/> provided by the CMS System.
+        /// Gets a list of all of the <see cref="IWebPartCategory"/> provided by the CMS System.
         /// </summary>
-        IEnumerable<WebPartCategoryInfo> WebPartCategories { get; }
+        IEnumerable<IWebPartCategory> WebPartCategories { get; }
 
         #endregion
 

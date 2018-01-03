@@ -267,6 +267,9 @@
     <Reference Include="GlobalLink.Connect, Version=4.18.2.0, Culture=neutral, PublicKeyToken=946d606070618fd4, processorArchitecture=MSIL">
       <HintPath>..\packages\GlobalLink.Connect.4.18.3.1\lib\net46\GlobalLink.Connect.dll</HintPath>
     </Reference>
+    <Reference Include="ImpromptuInterface, Version=6.2.2.0, Culture=neutral, PublicKeyToken=0b1781c923b2975b, processorArchitecture=MSIL">
+      <HintPath>..\packages\ImpromptuInterface.6.2.2\lib\net40\ImpromptuInterface.dll</HintPath>
+    </Reference>
     <Reference Include="LinqToTwitter.net, Version=4.0.0.0, Culture=neutral, PublicKeyToken=957107be965c25d9, processorArchitecture=MSIL">
       <HintPath>..\packages\linqtotwitter.4.0.0\lib\net45\LinqToTwitter.net.dll</HintPath>
     </Reference>
@@ -451,6 +454,7 @@
     <Compile Include="Providers\General\KenticoCmsApplicationService.cs" />
     <Compile Include="Providers\Development\KenticoWebPartService.cs" />
     <Compile Include="Providers\General\KenticoSiteLocationCache.cs" />
+    <Compile Include="Services\Development\IWebPartCategory.cs" />
     <Compile Include="Services\Development\IWebPartService.cs" />
     <Compile Include="Services\General\ICmsApplicationService.cs" />
     <Compile Include="Services\General\InitializationState.cs" />
