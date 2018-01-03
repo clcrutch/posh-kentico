@@ -1,4 +1,4 @@
-﻿// <copyright file="GetCMSWebPartCategory.cs" company="Chris Crutchfield">
+﻿// <copyright file="GetCMSWebPartCategoryCmdlet.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -15,13 +15,11 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
 using System.Management.Automation;
 using CMS.PortalEngine;
-using PoshKentico.Services;
+using PoshKentico.Business.Development;
 
 namespace PoshKentico.Development
 {
@@ -45,7 +43,7 @@ namespace PoshKentico.Development
     /// </example>
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CMSWebPartCategory", DefaultParameterSetName = NONE)]
-    public class GetCMSWebPartCategory : MefCmdlet
+    public class GetCMSWebPartCategoryCmdlet : MefCmdlet
     {
         #region Constants
 
@@ -70,6 +68,9 @@ namespace PoshKentico.Development
         [Parameter(ParameterSetName = CATEGORYNAME)]
         public SwitchParameter Exact { get; set; }
 
+        [Import]
+        public GetCMSWebPartCategoryBusiness BusinessLayer { get; set; }
+
         #endregion
 
         #region Methods
@@ -82,28 +83,10 @@ namespace PoshKentico.Development
             switch (this.ParameterSetName)
             {
                 case CATEGORYNAME:
-                    var lowerCategoryName = this.CategoryName.ToLowerInvariant();
-
-                    if (this.Exact.ToBool())
-                    {
-                        categories = from c in WebPartCategoryInfoProvider.GetCategories()
-                                     where c.CategoryName.ToLowerInvariant().Equals(this.CategoryName, StringComparison.InvariantCultureIgnoreCase) ||
-                                        c.CategoryDisplayName.ToLowerInvariant().Equals(this.CategoryName, StringComparison.InvariantCultureIgnoreCase) ||
-                                        c.CategoryPath.ToLowerInvariant().Equals(this.CategoryName, StringComparison.InvariantCultureIgnoreCase)
-                                     select c;
-                    }
-                    else
-                    {
-                        categories = from c in WebPartCategoryInfoProvider.GetCategories()
-                                     where c.CategoryName.ToLowerInvariant().Contains(lowerCategoryName) ||
-                                        c.CategoryDisplayName.ToLowerInvariant().Contains(lowerCategoryName) ||
-                                        c.CategoryPath.ToLowerInvariant().StartsWith(lowerCategoryName)
-                                     select c;
-                    }
-
+                    categories = this.BusinessLayer.GetWebPartCategories(this.CategoryName, this.Exact.ToBool());
                     break;
                 case NONE:
-                    categories = WebPartCategoryInfoProvider.GetCategories();
+                    categories = this.BusinessLayer.GetWebPartCategories();
                     break;
             }
 

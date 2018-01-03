@@ -60,6 +60,10 @@ namespace PoshKentico.General
 
         #region Properties
 
+        [Parameter(ParameterSetName = NONE)]
+        [Alias("UseCached")]
+        public SwitchParameter Cached { get; set; }
+
         /// <summary>
         /// <para type="description">The connection string for the database connection.</para>
         /// </summary>
@@ -112,7 +116,7 @@ namespace PoshKentico.General
                     this.BusinessLayer.Initialize(this.ConnectionString, new DirectoryInfo(this.WebRoot));
                     return;
                 case NONE:
-                    this.BusinessLayer.Initialize();
+                    this.BusinessLayer.Initialize(this.Cached.ToBool());
                     return;
                 case SERVERANDDATABASE:
                     this.BusinessLayer.Initialize(this.DatabaseServer, this.Database, this.Timeout, new DirectoryInfo(this.WebRoot));

@@ -28,7 +28,6 @@ using PoshKentico.Core.Services.General;
 using PoshKentico.Extensions;
 using PoshKentico.Navigation.DynamicParameters;
 using PoshKentico.Navigation.FileSystemItems;
-using PoshKentico.Services;
 
 namespace PoshKentico.Navigation
 {
@@ -300,7 +299,7 @@ namespace PoshKentico.Navigation
             MefHost.Initialize();
             MefHost.Container.ComposeParts(this);
 
-            this.CmsApplicationService.Initialize(this.WriteDebug, this.WriteVerbose);
+            this.CmsApplicationService.Initialize(true, this.WriteVerbose, this.WriteDebug);
         }
 
         private void WriteItemObject(IFileSystemItem item, bool recurse)

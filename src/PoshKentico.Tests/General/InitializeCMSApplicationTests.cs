@@ -45,11 +45,12 @@ namespace PoshKentico.Tests.General
 
             businessLayer.Initialize("myConnectionString", webRoot);
 
-            applicationServiceMock.Verify(x => x.Initialize("myConnectionString", webRoot, Assert.NotNull, Assert.NotNull));
+            applicationServiceMock.Verify(x => x.Initialize(webRoot, "myConnectionString", Assert.NotNull, Assert.NotNull));
         }
 
-        [TestCase]
-        public void Initialize_NoParameters()
+        [TestCase(false)]
+        [TestCase(true)]
+        public void Initialize_Cached(bool cacheUsed)
         {
             var applicationServiceMock = new Mock<ICmsApplicationService>();
 
@@ -61,9 +62,9 @@ namespace PoshKentico.Tests.General
                 CmsApplicationService = applicationServiceMock.Object,
             };
 
-            businessLayer.Initialize();
+            businessLayer.Initialize(cacheUsed);
 
-            applicationServiceMock.Verify(x => x.Initialize(Assert.NotNull, Assert.NotNull));
+            applicationServiceMock.Verify(x => x.Initialize(cacheUsed, Assert.NotNull, Assert.NotNull));
         }
 
         [TestCase]
@@ -83,7 +84,7 @@ namespace PoshKentico.Tests.General
 
             businessLayer.Initialize("databaseServer", "database", 103, webRoot);
 
-            applicationServiceMock.Verify(x => x.Initialize($"Data Source=databaseServer;Initial Catalog=database;Integrated Security=True;Persist Security Info=False;Connect Timeout=103;Encrypt=False;Current Language=English", webRoot, Assert.NotNull, Assert.NotNull));
+            applicationServiceMock.Verify(x => x.Initialize(webRoot, $"Data Source=databaseServer;Initial Catalog=database;Integrated Security=True;Persist Security Info=False;Connect Timeout=103;Encrypt=False;Current Language=English", Assert.NotNull, Assert.NotNull));
         }
     }
 }

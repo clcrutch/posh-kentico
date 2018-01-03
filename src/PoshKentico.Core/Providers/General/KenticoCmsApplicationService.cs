@@ -20,13 +20,16 @@ using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 using CMS.Base;
 using CMS.DataEngine;
 using Microsoft.Web.Administration;
+using Newtonsoft.Json;
 using PoshKentico.Core.Services.General;
 
-namespace PoshKentico.Services
+namespace PoshKentico.Core.Providers.General
 {
     /// <summary>
     /// Implementation of <see cref="ICmsApplicationService"/> that uses Kentico.
@@ -35,6 +38,7 @@ namespace PoshKentico.Services
     [Export(typeof(ICmsApplicationService))]
     public class KenticoCmsApplicationService : ICmsApplicationService
     {
+
         #region Properties
 
         /// <summary>
@@ -121,38 +125,57 @@ namespace PoshKentico.Services
         }
 
         /// <summary>
-        /// Initialize Kentico CMS Application using FindKenticoSite to locate the site.
+        /// Initialize Kentico CMS Application using FindKenticoSite or a cached version to locate the site.
         /// </summary>
+        /// <param name="useCached">Use the cached location for the Kentico Site.  When true and have already found Kentico in a previous run, this method does not require admin.</param>
         /// <param name="writeDebug">A delegate for writing to the debug stream.</param>
         /// <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
-        public void Initialize(Action<string> writeDebug = null, Action<string> writeVerbose = null)
+        public void Initialize(bool useCached, Action<string> writeDebug = null, Action<string> writeVerbose = null)
         {
             // We don't need to do anything if the application is already initialized.
-            if (CMSApplication.ApplicationInitialized.GetValueOrDefault(false))
+            if (this.InitializationState != InitializationState.Uninitialized)
             {
                 return;
             }
 
-            // Search for the Kentico site in IIS.
-            var (siteLocation, connectionString) = this.FindSite(writeDebug, writeVerbose);
-
-            if (string.IsNullOrWhiteSpace(connectionString) || siteLocation == null)
+            if (useCached && this.HasCachedSiteLocation())
             {
-                throw new Exception("Could not find Kentico site.");
-            }
+                var cache = this.GetCache();
 
-            this.Initialize(connectionString, siteLocation);
+                this.Initialize(new DirectoryInfo(cache.SiteLocation), cache.ConnectionString, writeDebug, writeVerbose);
+            }
+            else
+            {
+                // Search for the Kentico site in IIS.
+                var (siteLocation, connectionString) = this.FindSite(writeDebug, writeVerbose);
+
+                if (string.IsNullOrWhiteSpace(connectionString) || siteLocation == null)
+                {
+                    throw new Exception("Could not find Kentico site.");
+                }
+
+                var cache = this.GetCache();
+                this.CacheSiteLocation(siteLocation, connectionString);
+
+                this.Initialize(siteLocation, connectionString, writeDebug, writeVerbose);
+            }
         }
 
         /// <summary>
         /// Initialize Kentico CMS Application using the supplied parameters.
         /// </summary>
+        /// <param name="siteLocation">The directory where the Kentico site resides.</param>
         /// <param name="connectionString">The connection string to use for initializing the CMS Application.</param>
-        /// <param name="directoryInfo">The directory where the Kentico site resides.</param>
         /// <param name="writeDebug">A delegate for writing to the debug stream.</param>
         /// <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
-        public void Initialize(string connectionString, DirectoryInfo directoryInfo, Action<string> writeDebug = null, Action<string> writeVerbose = null)
+        public void Initialize(DirectoryInfo siteLocation, string connectionString, Action<string> writeDebug = null, Action<string> writeVerbose = null)
         {
+            // We don't need to do anything if the application is already initialized.
+            if (this.InitializationState != InitializationState.Uninitialized)
+            {
+                return;
+            }
+
             DataConnectionFactory.ConnectionString = connectionString;
 
             // This is how Kentico recommends working with their API.
@@ -160,12 +183,64 @@ namespace PoshKentico.Services
             AppDomain.CurrentDomain.AppendPrivatePath(Path.GetDirectoryName(typeof(KenticoCmsApplicationService).Assembly.Location));
 #pragma warning restore CS0618 // Type or member is obsolete
 
-            SystemContext.WebApplicationPhysicalPath = directoryInfo.FullName;
+            SystemContext.WebApplicationPhysicalPath = siteLocation.FullName;
 
             if (!CMSApplication.Init())
             {
                 throw new Exception("CMS Application initialization failed.");
             }
+        }
+
+        private void CacheSiteLocation(DirectoryInfo siteLocation, string connectionString)
+        {
+            var cachePath = this.GetCachePath();
+            var cacheFileInfo = new FileInfo(cachePath);
+
+            KenticoSiteLocationCache cache = this.GetCache();
+            cache.SiteLocation = siteLocation.FullName;
+            cache.ConnectionString = connectionString;
+
+            if (this.HasCachedSiteLocation())
+            {
+                File.Delete(cachePath);
+            }
+
+            if (!cacheFileInfo.Directory.Exists)
+            {
+                cacheFileInfo.Directory.Create();
+            }
+
+            using (var writer = File.CreateText(cachePath))
+            {
+                writer.Write(JsonConvert.SerializeObject(cache));
+            }
+        }
+
+        private KenticoSiteLocationCache GetCache()
+        {
+            var cachePath = this.GetCachePath();
+
+            if (this.HasCachedSiteLocation())
+            {
+                using (var reader = File.OpenText(cachePath))
+                {
+                    return JsonConvert.DeserializeObject<KenticoSiteLocationCache>(reader.ReadToEnd());
+                }
+            }
+            else
+            {
+                return new KenticoSiteLocationCache();
+            }
+        }
+
+        private string GetCachePath()
+        {
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "PoshKentico", "cache.json");
+        }
+
+        private bool HasCachedSiteLocation()
+        {
+            return File.Exists(this.GetCachePath());
         }
 
         #endregion

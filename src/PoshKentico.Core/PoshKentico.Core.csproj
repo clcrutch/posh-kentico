@@ -449,7 +449,11 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\General\KenticoCmsApplicationService.cs" />
+    <Compile Include="Providers\Development\KenticoWebPartService.cs" />
+    <Compile Include="Providers\General\KenticoSiteLocationCache.cs" />
+    <Compile Include="Services\Development\IWebPartService.cs" />
     <Compile Include="Services\General\ICmsApplicationService.cs" />
+    <Compile Include="Services\General\InitializationState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -54,13 +54,13 @@ namespace PoshKentico.Business.General
                 return;
             }
 
-            this.CmsApplicationService.Initialize(connectionString, webRoot, this.WriteDebug, this.WriteVerbose);
+            this.CmsApplicationService.Initialize(webRoot, connectionString, this.WriteDebug, this.WriteVerbose);
         }
 
         /// <summary>
         /// Initializes Kentico by searching for a Kentico site.
         /// </summary>
-        public void Initialize()
+        public void Initialize(bool useCached)
         {
             if (this.CmsApplicationService.InitializationState == InitializationState.Initialized)
             {
@@ -69,7 +69,7 @@ namespace PoshKentico.Business.General
                 return;
             }
 
-            this.CmsApplicationService.Initialize(this.WriteDebug, this.WriteVerbose);
+            this.CmsApplicationService.Initialize(useCached, this.WriteVerbose, this.WriteDebug);
         }
 
         /// <summary>
