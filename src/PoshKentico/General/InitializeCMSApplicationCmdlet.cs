@@ -60,6 +60,10 @@ namespace PoshKentico.General
 
         #region Properties
 
+        /// <summary>
+        /// <para type="description">Use the previous successful site and connection string information found.</para>
+        /// <para type="description">If none, then this is the same as supplying no parameters.</para>
+        /// </summary>
         [Parameter(ParameterSetName = NONE)]
         [Alias("UseCached")]
         public SwitchParameter Cached { get; set; }

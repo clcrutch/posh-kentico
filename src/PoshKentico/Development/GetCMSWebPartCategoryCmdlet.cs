@@ -68,6 +68,9 @@ namespace PoshKentico.Development
         [Parameter(ParameterSetName = CATEGORYNAME)]
         public SwitchParameter Exact { get; set; }
 
+        /// <summary>
+        /// Gets or sets the Business layer for this web part. Populated by MEF.
+        /// </summary>
         [Import]
         public GetCMSWebPartCategoryBusiness BusinessLayer { get; set; }
 

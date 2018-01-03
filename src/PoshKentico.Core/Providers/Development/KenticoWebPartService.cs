@@ -1,20 +1,41 @@
-﻿using CMS.PortalEngine;
-using PoshKentico.Core.Services.Development;
-using System;
+﻿// <copyright file="KenticoWebPartService.cs" company="Chris Crutchfield">
+// Copyright (C) 2017  Chris Crutchfield
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+// </copyright>
+
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CMS.PortalEngine;
+using PoshKentico.Core.Services.Development;
 
 namespace PoshKentico.Core.Providers.Development
 {
+    /// <summary>
+    /// Implementation of <see cref="IWebPartService"/> that uses Kentico.
+    /// </summary>
     [Export(typeof(IWebPartService))]
     public class KenticoWebPartService : IWebPartService
     {
-        public IEnumerable<WebPartCategoryInfo> GetWebPartCategories()
-        {
-            return WebPartCategoryInfoProvider.GetCategories();
-        }
+        #region Properties
+
+        /// <summary>
+        /// Gets a list of all of the <see cref="WebPartCategoryInfo"/> provided by Kentico.
+        /// </summary>
+        public IEnumerable<WebPartCategoryInfo> WebPartCategories => WebPartCategoryInfoProvider.GetCategories();
+
+        #endregion
+
     }
 }

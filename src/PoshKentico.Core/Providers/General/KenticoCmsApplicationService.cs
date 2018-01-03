@@ -38,7 +38,6 @@ namespace PoshKentico.Core.Providers.General
     [Export(typeof(ICmsApplicationService))]
     public class KenticoCmsApplicationService : ICmsApplicationService
     {
-
         #region Properties
 
         /// <summary>

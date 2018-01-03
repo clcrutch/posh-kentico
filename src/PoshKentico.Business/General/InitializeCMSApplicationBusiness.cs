@@ -60,6 +60,7 @@ namespace PoshKentico.Business.General
         /// <summary>
         /// Initializes Kentico by searching for a Kentico site.
         /// </summary>
+        /// <param name="useCached">A boolean which indicates if initialization should use a previously cahced value if available.</param>
         public void Initialize(bool useCached)
         {
             if (this.CmsApplicationService.InitializationState == InitializationState.Initialized)
