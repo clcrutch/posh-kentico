@@ -87,8 +87,6 @@ namespace PoshKentico.Business.Development
                            c.CategoryPath.ToLowerInvariant().StartsWith(lowerMatchString)
                         select c).ToArray();
             }
-
-            throw new NotImplementedException();
         }
 
         #endregion
