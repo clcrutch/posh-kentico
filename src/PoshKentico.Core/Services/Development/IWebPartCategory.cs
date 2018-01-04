@@ -29,10 +29,16 @@ namespace PoshKentico.Core.Services.Development
         /// </summary>
         string CategoryDisplayName { get; }
 
+        int CategoryID { get; }
+
+        string CategoryImagePath { get; }
+
         /// <summary>
         /// Gets the name for the WebPart category.
         /// </summary>
         string CategoryName { get; }
+
+        int CategoryParentID { get; }
 
         /// <summary>
         /// Gets the path for the WebPart category.

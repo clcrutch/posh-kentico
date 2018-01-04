@@ -52,6 +52,7 @@ namespace PoshKentico.Development
 
         private const string NONE = "None";
         private const string CATEGORYNAME = "Category Name";
+        private const string IDSETNAME = "ID";
 
         #endregion
 
@@ -70,6 +71,9 @@ namespace PoshKentico.Development
         /// </summary>
         [Parameter(ParameterSetName = CATEGORYNAME)]
         public SwitchParameter Exact { get; set; }
+
+        [Parameter(Mandatory = true, ParameterSetName = IDSETNAME)]
+        public int[] ID { get; set; }
 
         /// <summary>
         /// Gets or sets the Business layer for this web part. Populated by MEF.
@@ -90,6 +94,9 @@ namespace PoshKentico.Development
             {
                 case CATEGORYNAME:
                     categories = this.BusinessLayer.GetWebPartCategories(this.CategoryName, this.Exact.ToBool());
+                    break;
+                case IDSETNAME:
+                    categories = this.BusinessLayer.GetWebPartCategories(this.ID);
                     break;
                 case NONE:
                     categories = this.BusinessLayer.GetWebPartCategories();

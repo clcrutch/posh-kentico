@@ -474,6 +474,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Development\GetCMSWebPartCategoryCmdlet.cs" />
+    <Compile Include="Development\NewCMSWebPartCategoryCmdlet.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="MefCmdlet.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
@@ -521,9 +522,7 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.0-beta004\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.0-beta004\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Navigation\Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\PoshKentico.Business\PoshKentico.Business.csproj">
       <Project>{d065289d-5e97-4ab4-b395-6a9f43cc3e5f}</Project>

@@ -33,5 +33,13 @@ namespace PoshKentico.Core.Services.Development
 
         #endregion
 
+        #region Methods
+
+        IEnumerable<IWebPartCategory> GetWebPartCategories(params int[] ids);
+
+        IWebPartCategory Save(IWebPartCategory webPartCategory);
+
+        #endregion
+
     }
 }

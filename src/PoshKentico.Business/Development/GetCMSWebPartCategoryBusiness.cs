@@ -89,6 +89,13 @@ namespace PoshKentico.Business.Development
             }
         }
 
+        public IEnumerable<IWebPartCategory> GetWebPartCategories(int[] ids)
+        {
+            this.CmsApplicationService.Initialize(true, this.WriteVerbose, this.WriteDebug);
+
+            return this.WebPartService.GetWebPartCategories(ids);
+        }
+
         #endregion
 
     }

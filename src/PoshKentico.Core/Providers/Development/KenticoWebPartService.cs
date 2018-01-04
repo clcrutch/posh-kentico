@@ -40,5 +40,46 @@ namespace PoshKentico.Core.Providers.Development
 
         #endregion
 
+        #region Methods
+
+        public IEnumerable<IWebPartCategory> GetWebPartCategories(params int[] ids)
+        {
+            var webPartCategories = from id in ids
+                                    select WebPartCategoryInfoProvider.GetWebPartCategoryInfoById(id);
+
+            return (from wpc in webPartCategories
+                    where wpc != null
+                    select Impromptu.ActLike<IWebPartCategory>(wpc as WebPartCategoryInfo)).ToArray();
+        }
+
+        public IWebPartCategory Save(IWebPartCategory webPartCategory)
+        {
+            var category = WebPartCategoryInfoProvider.GetWebPartCategoryInfoById(webPartCategory.CategoryID);
+
+            if (category == null)
+            {
+                category = new WebPartCategoryInfo()
+                {
+                    CategoryDisplayName = webPartCategory.CategoryDisplayName,
+                    CategoryName = webPartCategory.CategoryName,
+                    CategoryImagePath = webPartCategory.CategoryImagePath,
+                    CategoryParentID = webPartCategory.CategoryParentID,
+                };
+            }
+            else
+            {
+                category.CategoryDisplayName = webPartCategory.CategoryDisplayName;
+                category.CategoryName = webPartCategory.CategoryName;
+                category.CategoryImagePath = webPartCategory.CategoryImagePath;
+                category.CategoryParentID = webPartCategory.CategoryParentID;
+            }
+
+            WebPartCategoryInfoProvider.SetWebPartCategoryInfo(category);
+
+            return category.ActLike<IWebPartCategory>();
+        }
+
+        #endregion
+
     }
 }
