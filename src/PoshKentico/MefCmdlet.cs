@@ -54,6 +54,7 @@ namespace PoshKentico
                 var instance = (CmdletBusinessBase)prop.GetValue(this);
                 instance.WriteDebug = this.WriteDebug;
                 instance.WriteVerbose = this.WriteVerbose;
+                instance.ShouldProcess = this.ShouldProcess;
             }
         }
 

@@ -212,6 +212,8 @@ namespace PoshKentico.Tests.Development
 
             public abstract IEnumerable<IWebPartCategory> WebPartCategories { get; }
 
+            public abstract void Delete(IWebPartCategory webPartCategory);
+
             public abstract IEnumerable<IWebPartCategory> GetWebPartCategories(params int[] ids);
 
             public void VerifySave(string displayName, string name, string path, string imagePath, int parentId)

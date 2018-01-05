@@ -473,8 +473,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Development\GetCMSWebPartCategoryCmdlet.cs" />
-    <Compile Include="Development\NewCMSWebPartCategoryCmdlet.cs" />
+    <Compile Include="Cmdlets\Development\GetCMSWebPartCategoryCmdlet.cs" />
+    <Compile Include="Cmdlets\Development\NewCMSWebPartCategoryCmdlet.cs" />
+    <Compile Include="Cmdlets\Development\RemoveCMSWebPartCategoryCmdlet.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="MefCmdlet.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
@@ -489,7 +490,7 @@
     <Compile Include="Navigation\FileSystemItems\IFileSystemItem.cs" />
     <Compile Include="Navigation\FileSystemItems\WebPartFileSystemItem.cs" />
     <Compile Include="Navigation\KenticoNavigationCmdletProvider.cs" />
-    <Compile Include="General\InitializeCMSApplicationCmdlet.cs" />
+    <Compile Include="Cmdlets\General\InitializeCMSApplicationCmdlet.cs" />
     <Compile Include="Navigation\FileSystemItems\MetaFileSystemItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

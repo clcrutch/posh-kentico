@@ -36,6 +36,8 @@ namespace PoshKentico.Business
         /// </summary>
         public Action<string> WriteVerbose { get; set; }
 
+        public Func<string, string, bool> ShouldProcess { get; set; }
+
         #endregion
 
     }

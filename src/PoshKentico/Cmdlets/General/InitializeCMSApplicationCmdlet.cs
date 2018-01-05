@@ -21,7 +21,7 @@ using System.IO;
 using System.Management.Automation;
 using PoshKentico.Business.General;
 
-namespace PoshKentico.General
+namespace PoshKentico.Cmdlets.General
 {
     /// <summary>
     /// <para type="synopsis">Initializes a connection to the Kentico CMS Server.</para>

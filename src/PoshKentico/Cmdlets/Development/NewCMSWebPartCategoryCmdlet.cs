@@ -22,7 +22,7 @@ using PoshKentico.Business.Development;
 
 using AliasAttribute = System.Management.Automation.AliasAttribute;
 
-namespace PoshKentico.Development
+namespace PoshKentico.Cmdlets.Development
 {
     /// <summary>
     /// <para type="synopsis">Creates a new web part category.</para>
@@ -56,7 +56,7 @@ namespace PoshKentico.Development
         public string Path { get; set; }
 
         /// <summary>
-        /// The path for the icon for the newly created web part category.
+        /// <para type="description">The path for the icon for the newly created web part category.</para>
         /// </summary>
         [Parameter]
         [Alias("IconPath")]

@@ -35,6 +35,8 @@ namespace PoshKentico.Core.Services.Development
 
         #region Methods
 
+        void Delete(IWebPartCategory webPartCategory);
+
         /// <summary>
         /// Gets a list of the <see cref="IWebPartCategory"/> which match the supplied IDs.
         /// </summary>

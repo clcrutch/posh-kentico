@@ -1,4 +1,4 @@
-﻿// <copyright file="GetCMSWebPartCategoryCmdlet.cs" company="Chris Crutchfield">
+﻿// <copyright file="RemoveCMSWebPartCategoryCmdlet.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -15,48 +15,25 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Management.Automation;
+using CMS.PortalEngine;
 using ImpromptuInterface;
 using PoshKentico.Business.Development;
 using PoshKentico.Core.Services.Development;
 
 using AliasAttribute = System.Management.Automation.AliasAttribute;
 
-namespace PoshKentico.Development
+namespace PoshKentico.Cmdlets.Development
 {
-    /// <summary>
-    /// <para type="synopsis">Gets the web part categories selected by the provided input.</para>
-    /// <para type="description">Gets the web part categories selected by the provided input.  This command automatically initializes the connection to Kentico if not already initialized.</para>
-    /// <para type="description"></para>
-    /// <para type="description">Without parameters, this command returns all webpart categories.</para>
-    /// <para type="description">With parameters, this command returns the webpart categories that match the criteria.</para>
-    /// <example>
-    ///     <para>Get all the webpart categories.</para>
-    ///     <code>Get-CMSWebPartCategory</code>
-    /// </example>
-    /// <example>
-    ///     <para>Get all webparts with a category name "*bas*", display name "*bas*", or a path "bas*".</para>
-    ///     <code>Get-CMSWebPartCategory bas</code>
-    /// </example>
-    /// <example>
-    ///     <para>Get all webparts with a category name "basic", display name "basic", or path "basic"</para>
-    ///     <code>Get-CMSWebPartCategory basic -Exact</code>
-    /// </example>
-    /// <example>
-    ///     <para>Get all the webparts with the specified IDs.</para>
-    ///     <code>Get-CMSWebPartCategory -ID 5,304,5</code>
-    /// </example>
-    /// </summary>
-    [Cmdlet(VerbsCommon.Get, "CMSWebPartCategory", DefaultParameterSetName = NONE)]
-    public class GetCMSWebPartCategoryCmdlet : MefCmdlet
+    [Cmdlet(VerbsCommon.Remove, "CMSWebPartCategory", SupportsShouldProcess = true, ConfirmImpact = ConfirmImpact.High)]
+    public class RemoveCMSWebPartCategoryCmdlet : MefCmdlet
     {
         #region Constants
 
-        private const string NONE = "None";
         private const string CATEGORYNAME = "Category Name";
         private const string IDSETNAME = "ID";
+        private const string WEBPARTCATEGORY = "Web Part Category";
 
         #endregion
 
@@ -82,11 +59,11 @@ namespace PoshKentico.Development
         [Parameter(Mandatory = true, Position = 0, ParameterSetName = IDSETNAME)]
         public int[] ID { get; set; }
 
-        /// <summary>
-        /// Gets or sets the Business layer for this web part. Populated by MEF.
-        /// </summary>
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = WEBPARTCATEGORY)]
+        public WebPartCategoryInfo WebPartCategory { get; set; }
+
         [Import]
-        public GetCMSWebPartCategoryBusiness BusinessLayer { get; set; }
+        public RemoveCMSWebPartCategoryBusiness BusinessLayer { get; set; }
 
         #endregion
 
@@ -95,24 +72,17 @@ namespace PoshKentico.Development
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
-            IEnumerable<IWebPartCategory> categories = null;
-
             switch (this.ParameterSetName)
             {
                 case CATEGORYNAME:
-                    categories = this.BusinessLayer.GetWebPartCategories(this.CategoryName, this.Exact.ToBool());
+                    this.BusinessLayer.DeleteWebPartCategory(this.CategoryName, this.Exact.ToBool());
                     break;
                 case IDSETNAME:
-                    categories = this.BusinessLayer.GetWebPartCategories(this.ID);
+                    this.BusinessLayer.DeleteWebPartCategory(this.ID);
                     break;
-                case NONE:
-                    categories = this.BusinessLayer.GetWebPartCategories();
+                case WEBPARTCATEGORY:
+                    this.BusinessLayer.DeleteWebPartCategory(this.WebPartCategory.ActLike<IWebPartCategory>());
                     break;
-            }
-
-            foreach (var category in categories)
-            {
-                this.WriteObject(category.UndoActLike());
             }
         }
 

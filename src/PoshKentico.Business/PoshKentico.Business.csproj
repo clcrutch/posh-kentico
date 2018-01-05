@@ -452,6 +452,7 @@
     <Compile Include="CmdletBusinessBase.cs" />
     <Compile Include="Development\GetCMSWebPartCategoryBusiness.cs" />
     <Compile Include="Development\NewCMSWebPartCategoryBusiness.cs" />
+    <Compile Include="Development\RemoveCMSWebPartCategoryBusiness.cs" />
     <Compile Include="General\InitializeCMSApplicationBusiness.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
