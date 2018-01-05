@@ -54,7 +54,7 @@ namespace PoshKentico.Business.Development
         /// <param name="path">The path for the new WebPartCategory.</param>
         /// <param name="displayName">The display name for the WebPartCategory.</param>
         /// <param name="imagePath">The image path for the new WebPartCategory.</param>
-        /// <returns>The newly creatd WebPartCategory.</returns>
+        /// <returns>The newly created WebPartCategory.</returns>
         public IWebPartCategory CreateWebPart(string path, string displayName, string imagePath)
         {
             this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);

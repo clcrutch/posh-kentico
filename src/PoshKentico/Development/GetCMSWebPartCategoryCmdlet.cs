@@ -79,7 +79,7 @@ namespace PoshKentico.Development
         /// <summary>
         /// <para type="description">The IDs of the web part category to retrieve.</para>
         /// </summary>
-        [Parameter(Mandatory = true, ParameterSetName = IDSETNAME)]
+        [Parameter(Mandatory = true, Position = 0, ParameterSetName = IDSETNAME)]
         public int[] ID { get; set; }
 
         /// <summary>
