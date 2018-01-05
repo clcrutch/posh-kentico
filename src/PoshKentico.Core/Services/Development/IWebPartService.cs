@@ -35,8 +35,18 @@ namespace PoshKentico.Core.Services.Development
 
         #region Methods
 
+        /// <summary>
+        /// Gets a list of the <see cref="IWebPartCategory"/> which match the supplied IDs.
+        /// </summary>
+        /// <param name="ids">The IDs of the <see cref="IWebPartCategory"/> to return.</param>
+        /// <returns>A list of the <see cref="IWebPartCategory"/> which match the supplied IDs.</returns>
         IEnumerable<IWebPartCategory> GetWebPartCategories(params int[] ids);
 
+        /// <summary>
+        /// Saves the <see cref="IWebPartCategory"/>.
+        /// </summary>
+        /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> to save.</param>
+        /// <returns>The saved <see cref="IWebPartCategory"/>.</returns>
         IWebPartCategory Save(IWebPartCategory webPartCategory);
 
         #endregion

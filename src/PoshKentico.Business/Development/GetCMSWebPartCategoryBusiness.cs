@@ -89,6 +89,11 @@ namespace PoshKentico.Business.Development
             }
         }
 
+        /// <summary>
+        /// Gets a list of the <see cref="IWebPartCategory"/> which match the supplied IDs.
+        /// </summary>
+        /// <param name="ids">The IDs of the <see cref="IWebPartCategory"/> to return.</param>
+        /// <returns>A list of the <see cref="IWebPartCategory"/> which match the supplied IDs.</returns>
         public IEnumerable<IWebPartCategory> GetWebPartCategories(int[] ids)
         {
             this.CmsApplicationService.Initialize(true, this.WriteVerbose, this.WriteDebug);

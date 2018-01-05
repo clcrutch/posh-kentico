@@ -42,6 +42,11 @@ namespace PoshKentico.Core.Providers.Development
 
         #region Methods
 
+        /// <summary>
+        /// Gets a list of the <see cref="IWebPartCategory"/> which match the supplied IDs.
+        /// </summary>
+        /// <param name="ids">The IDs of the <see cref="IWebPartCategory"/> to return.</param>
+        /// <returns>A list of the <see cref="IWebPartCategory"/> which match the supplied IDs.</returns>
         public IEnumerable<IWebPartCategory> GetWebPartCategories(params int[] ids)
         {
             var webPartCategories = from id in ids
@@ -52,6 +57,11 @@ namespace PoshKentico.Core.Providers.Development
                     select Impromptu.ActLike<IWebPartCategory>(wpc as WebPartCategoryInfo)).ToArray();
         }
 
+        /// <summary>
+        /// Saves the <see cref="IWebPartCategory"/>.
+        /// </summary>
+        /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> to save.</param>
+        /// <returns>The saved <see cref="IWebPartCategory"/>.</returns>
         public IWebPartCategory Save(IWebPartCategory webPartCategory)
         {
             var category = WebPartCategoryInfoProvider.GetWebPartCategoryInfoById(webPartCategory.CategoryID);

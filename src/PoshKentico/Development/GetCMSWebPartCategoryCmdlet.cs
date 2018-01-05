@@ -44,6 +44,10 @@ namespace PoshKentico.Development
     ///     <para>Get all webparts with a category name "basic", display name "basic", or path "basic"</para>
     ///     <code>Get-CMSWebPartCategory basic -Exact</code>
     /// </example>
+    /// <example>
+    ///     <para>Get all the webparts with the specified IDs.</para>
+    ///     <code>Get-CMSWebPartCategory -ID 5,304,5</code>
+    /// </example>
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CMSWebPartCategory", DefaultParameterSetName = NONE)]
     public class GetCMSWebPartCategoryCmdlet : MefCmdlet
@@ -66,12 +70,15 @@ namespace PoshKentico.Development
         public string CategoryName { get; set; }
 
         /// <summary>
-        /// <para type="description">If set, the match is exact,
-        /// else the match performs a contains for display name and category name and starts with for path.</para>
+        /// <para type="description">If set, the match is exact,</para>
+        /// <para type="description">else the match performs a contains for display name and category name and starts with for path.</para>
         /// </summary>
         [Parameter(ParameterSetName = CATEGORYNAME)]
         public SwitchParameter Exact { get; set; }
 
+        /// <summary>
+        /// <para type="description">The IDs of the web part category to retrieve.</para>
+        /// </summary>
         [Parameter(Mandatory = true, ParameterSetName = IDSETNAME)]
         public int[] ID { get; set; }
 

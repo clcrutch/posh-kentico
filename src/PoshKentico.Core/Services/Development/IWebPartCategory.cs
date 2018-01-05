@@ -29,8 +29,14 @@ namespace PoshKentico.Core.Services.Development
         /// </summary>
         string CategoryDisplayName { get; }
 
+        /// <summary>
+        /// Gets the ID for the WebPart category.
+        /// </summary>
         int CategoryID { get; }
 
+        /// <summary>
+        /// Gets the image path for the WebPart category.
+        /// </summary>
         string CategoryImagePath { get; }
 
         /// <summary>
@@ -38,6 +44,9 @@ namespace PoshKentico.Core.Services.Development
         /// </summary>
         string CategoryName { get; }
 
+        /// <summary>
+        /// Gets the parent ID for the WebPart category.
+        /// </summary>
         int CategoryParentID { get; }
 
         /// <summary>
