@@ -42,6 +42,10 @@ namespace PoshKentico.Core.Providers.Development
 
         #region Methods
 
+        /// <summary>
+        /// Deletes the specified <see cref="IWebPartCategory"/>.
+        /// </summary>
+        /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> to delete.</param>
         public void Delete(IWebPartCategory webPartCategory)
         {
             WebPartCategoryInfoProvider.DeleteCategoryInfo(webPartCategory.CategoryID);

@@ -21,9 +21,14 @@ using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.Business.Development
 {
+    /// <summary>
+    /// Business layer for the Remove-CMSWebPartCategory cmdlet.
+    /// </summary>
     [Export(typeof(RemoveCMSWebPartCategoryBusiness))]
     public class RemoveCMSWebPartCategoryBusiness : CmdletBusinessBase
     {
+        #region Properties
+
         /// <summary>
         /// Gets or sets a reference to the CMS Application Service.  Populated by MEF.
         /// </summary>
@@ -36,9 +41,21 @@ namespace PoshKentico.Business.Development
         [Import]
         public IWebPartService WebPartService { get; set; }
 
+        /// <summary>
+        /// Gets or sets a reference to the <see cref="GetCMSWebPartCategoryBusiness"/> used to get the WebPartCategories to delete.  Populated by MEF.
+        /// </summary>
         [Import]
         public GetCMSWebPartCategoryBusiness GetCMSWebPartCategoryBusiness { get; set; }
 
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Deletes all of the <see cref="IWebPartCategory"/> which match the specified criteria.
+        /// </summary>
+        /// <param name="matchString">The string which to match the webparts to.</param>
+        /// <param name="exact">A boolean which indicates if the match should be exact.</param>
         public void DeleteWebPartCategory(string matchString, bool exact)
         {
             this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
@@ -49,6 +66,10 @@ namespace PoshKentico.Business.Development
             }
         }
 
+        /// <summary>
+        /// Deletes all of the <see cref="IWebPartCategory"/> which match the supplied IDs.
+        /// </summary>
+        /// <param name="ids">The IDs of the <see cref="IWebPartCategory"/> to delete.</param>
         public void DeleteWebPartCategory(int[] ids)
         {
             this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
@@ -59,8 +80,13 @@ namespace PoshKentico.Business.Development
             }
         }
 
+        /// <summary>
+        /// Deletes the specified <see cref="IWebPartCategory"/>.
+        /// </summary>
+        /// <param name="webPartCategory">The webpart category to delete.</param>
         public void DeleteWebPartCategory(IWebPartCategory webPartCategory)
         {
+            // Prompt for confirmation.
             if (this.ShouldProcess(webPartCategory.CategoryDisplayName, "delete"))
             {
                 this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
@@ -68,5 +94,8 @@ namespace PoshKentico.Business.Development
                 this.WebPartService.Delete(webPartCategory);
             }
         }
+
+        #endregion
+
     }
 }

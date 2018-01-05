@@ -26,6 +26,28 @@ using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.Development
 {
+    /// <summary>
+    /// <para type="synopsis">Deletes the web part categories selected by the provided input.</para>
+    /// <para type="description">Deletes the web part categories selected by the provided input.  This command automatically initializes the connection to Kentico if not already initialized.</para>
+    /// <para type="description"></para>
+    /// <para type="description">This command deletes the webpart categories that match the criteria.</para>
+    /// <example>
+    ///     <para>Delete all the webpart categories.</para>
+    ///     <code>Get-CMSWebPartCategory | Remove-CMSWebPartCategory</code>
+    /// </example>
+    /// <example>
+    ///     <para>Delete all webparts with a category name "*bas*", display name "*bas*", or a path "bas*".</para>
+    ///     <code>Remove-CMSWebPartCategory bas</code>
+    /// </example>
+    /// <example>
+    ///     <para>Delete all webparts with a category name "basic", display name "basic", or path "basic"</para>
+    ///     <code>Remove-CMSWebPartCategory basic -Exact</code>
+    /// </example>
+    /// <example>
+    ///     <para>Delete all the webparts with the specified IDs.</para>
+    ///     <code>Remove-CMSWebPartCategory -ID 5,304,5</code>
+    /// </example>
+    /// </summary>
     [Cmdlet(VerbsCommon.Remove, "CMSWebPartCategory", SupportsShouldProcess = true, ConfirmImpact = ConfirmImpact.High)]
     public class RemoveCMSWebPartCategoryCmdlet : MefCmdlet
     {
@@ -54,14 +76,20 @@ namespace PoshKentico.Cmdlets.Development
         public SwitchParameter Exact { get; set; }
 
         /// <summary>
-        /// <para type="description">The IDs of the web part category to retrieve.</para>
+        /// <para type="description">The IDs of the web part category to delete.</para>
         /// </summary>
         [Parameter(Mandatory = true, Position = 0, ParameterSetName = IDSETNAME)]
         public int[] ID { get; set; }
 
+        /// <summary>
+        /// <para type="description">A reference to the WebPart category to delete.</para>
+        /// </summary>
         [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = WEBPARTCATEGORY)]
         public WebPartCategoryInfo WebPartCategory { get; set; }
 
+        /// <summary>
+        ///  Gets or sets the Business Layer for this web part.  Populated by MEF.
+        /// </summary>
         [Import]
         public RemoveCMSWebPartCategoryBusiness BusinessLayer { get; set; }
 

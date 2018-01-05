@@ -36,6 +36,9 @@ namespace PoshKentico.Business
         /// </summary>
         public Action<string> WriteVerbose { get; set; }
 
+        /// <summary>
+        /// Gets or sets a delegate for checking if the cmdlet should continue processing.
+        /// </summary>
         public Func<string, string, bool> ShouldProcess { get; set; }
 
         #endregion
