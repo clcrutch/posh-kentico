@@ -56,13 +56,13 @@ namespace PoshKentico.Business.Development
         /// </summary>
         /// <param name="matchString">The string which to match the webparts to.</param>
         /// <param name="exact">A boolean which indicates if the match should be exact.</param>
-        public void DeleteWebPartCategory(string matchString, bool exact)
+        public void RemoveWebPartCategories(string matchString, bool exact)
         {
             this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
 
             foreach (var cat in this.GetCMSWebPartCategoryBusiness.GetWebPartCategories(matchString, exact))
             {
-                this.DeleteWebPartCategory(cat);
+                this.RemoveWebPartCategory(cat);
             }
         }
 
@@ -70,13 +70,13 @@ namespace PoshKentico.Business.Development
         /// Deletes all of the <see cref="IWebPartCategory"/> which match the supplied IDs.
         /// </summary>
         /// <param name="ids">The IDs of the <see cref="IWebPartCategory"/> to delete.</param>
-        public void DeleteWebPartCategory(int[] ids)
+        public void RemoveWebPartCategories(params int[] ids)
         {
             this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
 
             foreach (var cat in this.GetCMSWebPartCategoryBusiness.GetWebPartCategories(ids))
             {
-                this.DeleteWebPartCategory(cat);
+                this.RemoveWebPartCategory(cat);
             }
         }
 
@@ -84,7 +84,7 @@ namespace PoshKentico.Business.Development
         /// Deletes the specified <see cref="IWebPartCategory"/>.
         /// </summary>
         /// <param name="webPartCategory">The webpart category to delete.</param>
-        public void DeleteWebPartCategory(IWebPartCategory webPartCategory)
+        public void RemoveWebPartCategory(IWebPartCategory webPartCategory)
         {
             // Prompt for confirmation.
             if (this.ShouldProcess(webPartCategory.CategoryDisplayName, "delete"))

@@ -94,11 +94,16 @@ namespace PoshKentico.Business.Development
         /// </summary>
         /// <param name="ids">The IDs of the <see cref="IWebPartCategory"/> to return.</param>
         /// <returns>A list of the <see cref="IWebPartCategory"/> which match the supplied IDs.</returns>
-        public IEnumerable<IWebPartCategory> GetWebPartCategories(int[] ids)
+        public IEnumerable<IWebPartCategory> GetWebPartCategories(params int[] ids)
         {
             this.CmsApplicationService.Initialize(true, this.WriteVerbose, this.WriteDebug);
 
-            return this.WebPartService.GetWebPartCategories(ids);
+            var webPartCategories = from id in ids
+                                    select this.WebPartService.GetWebPartCategory(id);
+
+            return (from wpc in webPartCategories
+                    where wpc != null
+                    select wpc).ToArray();
         }
 
         #endregion

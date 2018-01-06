@@ -103,13 +103,13 @@ namespace PoshKentico.Cmdlets.Development
             switch (this.ParameterSetName)
             {
                 case CATEGORYNAME:
-                    this.BusinessLayer.DeleteWebPartCategory(this.CategoryName, this.Exact.ToBool());
+                    this.BusinessLayer.RemoveWebPartCategories(this.CategoryName, this.Exact.ToBool());
                     break;
                 case IDSETNAME:
-                    this.BusinessLayer.DeleteWebPartCategory(this.ID);
+                    this.BusinessLayer.RemoveWebPartCategories(this.ID);
                     break;
                 case WEBPARTCATEGORY:
-                    this.BusinessLayer.DeleteWebPartCategory(this.WebPartCategory.ActLike<IWebPartCategory>());
+                    this.BusinessLayer.RemoveWebPartCategory(this.WebPartCategory.ActLike<IWebPartCategory>());
                     break;
             }
         }

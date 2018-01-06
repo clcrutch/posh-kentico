@@ -52,18 +52,13 @@ namespace PoshKentico.Core.Providers.Development
         }
 
         /// <summary>
-        /// Gets a list of the <see cref="IWebPartCategory"/> which match the supplied IDs.
+        /// Gets the <see cref="IWebPartCategory"/> which matches the supplied ID.
         /// </summary>
-        /// <param name="ids">The IDs of the <see cref="IWebPartCategory"/> to return.</param>
-        /// <returns>A list of the <see cref="IWebPartCategory"/> which match the supplied IDs.</returns>
-        public IEnumerable<IWebPartCategory> GetWebPartCategories(params int[] ids)
+        /// <param name="id">The ID of the <see cref="IWebPartCategory"/> to return.</param>
+        /// <returns>The <see cref="IWebPartCategory"/> which matches the ID, else null.</returns>
+        public IWebPartCategory GetWebPartCategory(int id)
         {
-            var webPartCategories = from id in ids
-                                    select WebPartCategoryInfoProvider.GetWebPartCategoryInfoById(id);
-
-            return (from wpc in webPartCategories
-                    where wpc != null
-                    select Impromptu.ActLike<IWebPartCategory>(wpc as WebPartCategoryInfo)).ToArray();
+            return (WebPartCategoryInfoProvider.GetWebPartCategoryInfoById(id) as WebPartCategoryInfo)?.ActLike<IWebPartCategory>();
         }
 
         /// <summary>

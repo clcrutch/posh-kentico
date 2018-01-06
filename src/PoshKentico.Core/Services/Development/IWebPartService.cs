@@ -42,11 +42,11 @@ namespace PoshKentico.Core.Services.Development
         void Delete(IWebPartCategory webPartCategory);
 
         /// <summary>
-        /// Gets a list of the <see cref="IWebPartCategory"/> which match the supplied IDs.
+        /// Gets the <see cref="IWebPartCategory"/> which matches the supplied ID.
         /// </summary>
-        /// <param name="ids">The IDs of the <see cref="IWebPartCategory"/> to return.</param>
-        /// <returns>A list of the <see cref="IWebPartCategory"/> which match the supplied IDs.</returns>
-        IEnumerable<IWebPartCategory> GetWebPartCategories(params int[] ids);
+        /// <param name="id">The ID of the <see cref="IWebPartCategory"/> to return.</param>
+        /// <returns>The <see cref="IWebPartCategory"/> which matches the ID, else null.</returns>
+        IWebPartCategory GetWebPartCategory(int id);
 
         /// <summary>
         /// Saves the <see cref="IWebPartCategory"/>.
