@@ -38,6 +38,7 @@ namespace PoshKentico.Cmdlets.Development
     /// </example>
     /// </summary>
     [Cmdlet(VerbsCommon.New, "CMSWebPartCategory")]
+    [Alias("nwpc")]
     public class NewCMSWebPartCategoryCmdlet : MefCmdlet
     {
         #region Properties

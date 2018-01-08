@@ -50,6 +50,7 @@ namespace PoshKentico.Cmdlets.Development
     /// </example>
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CMSWebPartCategory", DefaultParameterSetName = NONE)]
+    [Alias("gwpc")]
     public class GetCMSWebPartCategoryCmdlet : MefCmdlet
     {
         #region Constants

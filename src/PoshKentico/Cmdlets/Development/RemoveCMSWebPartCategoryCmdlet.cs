@@ -49,6 +49,7 @@ namespace PoshKentico.Cmdlets.Development
     /// </example>
     /// </summary>
     [Cmdlet(VerbsCommon.Remove, "CMSWebPartCategory", SupportsShouldProcess = true, ConfirmImpact = ConfirmImpact.High)]
+    [Alias("rwpc")]
     public class RemoveCMSWebPartCategoryCmdlet : MefCmdlet
     {
         #region Constants

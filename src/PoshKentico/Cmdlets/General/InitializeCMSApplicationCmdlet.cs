@@ -48,6 +48,7 @@ namespace PoshKentico.Cmdlets.General
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsData.Initialize, "CMSApplication", DefaultParameterSetName = NONE)]
+    [Alias("inapp")]
     public class InitializeCMSApplicationCmdlet : MefCmdlet
     {
         #region Constants
