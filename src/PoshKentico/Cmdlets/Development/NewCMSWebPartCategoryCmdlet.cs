@@ -76,7 +76,7 @@ namespace PoshKentico.Cmdlets.Development
         /// <summary>
         /// <para type="description">Tell the cmdlet to return the newly created web part category.</para>
         /// </summary>
-        [Parameter(Mandatory = true, ParameterSetName = PASSTHRU)]
+        [Parameter(Mandatory = false, ParameterSetName = PASSTHRU)]
         public SwitchParameter PassThru { get; set; }
 
         /// <summary>

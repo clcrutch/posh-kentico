@@ -131,8 +131,7 @@ Describe 'WebPart Categories' {
             {
                 xWebPartCategory Maps
                 {
-                    Name = "Maps"
-                    Path = "Kentico:\Development\WebParts"
+                    Path = "/Maps"
                     Ensure = "Present"
                 }
             }
@@ -154,8 +153,7 @@ Describe 'WebPart Categories' {
             {
                 xWebPartCategory Maps
                 {
-                    Name = "Maps"
-                    Path = "Kentico:\Development\WebParts"
+                    Path = "/Maps"
                     Ensure = "Absent"
                 }
             }
@@ -177,8 +175,7 @@ Describe 'WebPart Categories' {
             {
                 xWebPartCategory DoesNotExist
                 {
-                    Name = "DoesNotExist"
-                    Path = "Kentico:\Development\WebParts"
+                    Path = "/DoesNotExist"
                     Ensure = "Absent"
                 }
             }
@@ -200,8 +197,7 @@ Describe 'WebPart Categories' {
             {
                 xWebPartCategory DoesNotExist
                 {
-                    Name = "DoesNotExist"
-                    Path = "Kentico:\Development\WebParts"
+                    Path = "/DoesNotExist"
                     Ensure = "Present"
                 }
             }
@@ -223,9 +219,8 @@ Describe 'WebPart Categories' {
             {
                 xWebPartCategory AbuseReport
                 {
-                    Name = "AbuseReport"
                     DisplayName = "Abuse report"
-                    Path = "Kentico:\Development\WebParts"
+                    Path = "/AbuseReport"
                     Ensure = "Present"
                 }
             }
@@ -247,9 +242,8 @@ Describe 'WebPart Categories' {
             {
                 xWebPartCategory AbuseReport
                 {
-                    Name = "AbuseReport"
                     DisplayName = "Abuse report"
-                    Path = "Kentico:\Development\WebParts"
+                    Path = "/AbuseReport"
                     Ensure = "Absent"
                 }
             }
@@ -271,9 +265,8 @@ Describe 'WebPart Categories' {
             {
                 xWebPartCategory AbuseReport
                 {
-                    Name = "AbuseReport"
                     DisplayName = "Abuse report2"
-                    Path = "Kentico:\Development\WebParts"
+                    Path = "/AbuseReport"
                     Ensure = "Present"
                 }
             }
@@ -295,8 +288,7 @@ Describe 'WebPart Categories' {
             {
                 xWebPartCategory Test
                 {
-                    Name = "Test"
-                    Path = "Kentico:\Development\WebParts"
+                    Path = "/Test"
                     Ensure = "Present"
                 }
             }
@@ -321,8 +313,7 @@ Describe 'WebPart Categories' {
             {
                 xWebPartCategory Test
                 {
-                    Name = "Test"
-                    Path = "Kentico:\Development\WebParts"
+                    Path = "/Test"
                     Ensure = "Present"
                 }
             }
@@ -340,8 +331,7 @@ Describe 'WebPart Categories' {
             {
                 xWebPartCategory Test
                 {
-                    Name = "Test"
-                    Path = "Kentico:\Development\WebParts"
+                    Path = "/Test"
                     Ensure = "Absent"
                 }
             }

@@ -76,11 +76,16 @@ namespace PoshKentico.Business.Development
                 throw new Exception("Cannot find parent WebPartCategory.");
             }
 
+            if (string.IsNullOrEmpty(displayName))
+            {
+                displayName = name;
+            }
+
             var data = new
             {
                 CategoryName = name,
                 CategoryPath = path,
-                CategoryDisplayName = displayName ?? name,
+                CategoryDisplayName = displayName,
                 CategoryImagePath = imagePath,
                 CategoryParentID = parent.CategoryID,
 

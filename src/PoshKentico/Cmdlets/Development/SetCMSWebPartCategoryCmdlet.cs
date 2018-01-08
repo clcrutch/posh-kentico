@@ -32,11 +32,11 @@ namespace PoshKentico.Cmdlets.Development
     /// <para type="description">Sets a web part category.</para>
     /// <example>
     ///     <para>Sets a web part category.</para>
-    ///     <code>$webPartCategory = Set-CMSWebPartCategory</code>
+    ///     <code>$webPartCategory | Set-CMSWebPartCategory</code>
     /// </example>
     /// <example>
     ///     <para>Sets a web part category and returns the result.</para>
-    ///     <code>$webPartCategory = Set-CMSWebPartCategory -Passthru</code>
+    ///     <code>$webPartCategory | Set-CMSWebPartCategory -Passthru</code>
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
@@ -63,7 +63,7 @@ namespace PoshKentico.Cmdlets.Development
         /// <summary>
         /// <para type="description">Tell the cmdlet to return the newly created web part category.</para>
         /// </summary>
-        [Parameter(Mandatory = true, ParameterSetName = PASSTHRU)]
+        [Parameter(Mandatory = false, ParameterSetName = PASSTHRU)]
         public SwitchParameter PassThru { get; set; }
 
         /// <summary>
