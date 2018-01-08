@@ -469,6 +469,7 @@
     <Compile Include="Development\GetCMSWebPartCategoryTests.cs" />
     <Compile Include="Development\NewCMSWebPartCategoryTests.cs" />
     <Compile Include="Development\RemoveCMSWebPartCategoryTests.cs" />
+    <Compile Include="Development\SetCMSWebPartCategoryTests.cs" />
     <Compile Include="General\InitializeCMSApplicationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

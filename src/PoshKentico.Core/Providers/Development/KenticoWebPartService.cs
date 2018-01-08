@@ -43,6 +43,26 @@ namespace PoshKentico.Core.Providers.Development
         #region Methods
 
         /// <summary>
+        /// Creates the <see cref="IWebPartCategory"/>.
+        /// </summary>
+        /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> to create.</param>
+        /// <returns>The newly created <see cref="IWebPartCategory"/>.</returns>
+        public IWebPartCategory Create(IWebPartCategory webPartCategory)
+        {
+            var category = new WebPartCategoryInfo
+            {
+                CategoryDisplayName = webPartCategory.CategoryDisplayName,
+                CategoryName = webPartCategory.CategoryName,
+                CategoryImagePath = webPartCategory.CategoryImagePath,
+                CategoryParentID = webPartCategory.CategoryParentID,
+            };
+
+            WebPartCategoryInfoProvider.SetWebPartCategoryInfo(category);
+
+            return category.ActLike<IWebPartCategory>();
+        }
+
+        /// <summary>
         /// Deletes the specified <see cref="IWebPartCategory"/>.
         /// </summary>
         /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> to delete.</param>
@@ -62,35 +82,24 @@ namespace PoshKentico.Core.Providers.Development
         }
 
         /// <summary>
-        /// Saves the <see cref="IWebPartCategory"/>.
+        /// Updates the <see cref="IWebPartCategory"/>.
         /// </summary>
-        /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> to save.</param>
-        /// <returns>The saved <see cref="IWebPartCategory"/>.</returns>
-        public IWebPartCategory Save(IWebPartCategory webPartCategory)
+        /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> to update.</param>
+        public void Update(IWebPartCategory webPartCategory)
         {
             var category = WebPartCategoryInfoProvider.GetWebPartCategoryInfoById(webPartCategory.CategoryID);
 
             if (category == null)
             {
-                category = new WebPartCategoryInfo()
-                {
-                    CategoryDisplayName = webPartCategory.CategoryDisplayName,
-                    CategoryName = webPartCategory.CategoryName,
-                    CategoryImagePath = webPartCategory.CategoryImagePath,
-                    CategoryParentID = webPartCategory.CategoryParentID,
-                };
+                return;
             }
-            else
-            {
-                category.CategoryDisplayName = webPartCategory.CategoryDisplayName;
-                category.CategoryName = webPartCategory.CategoryName;
-                category.CategoryImagePath = webPartCategory.CategoryImagePath;
-                category.CategoryParentID = webPartCategory.CategoryParentID;
-            }
+
+            category.CategoryDisplayName = webPartCategory.CategoryDisplayName;
+            category.CategoryName = webPartCategory.CategoryName;
+            category.CategoryImagePath = webPartCategory.CategoryImagePath;
+            category.CategoryParentID = webPartCategory.CategoryParentID;
 
             WebPartCategoryInfoProvider.SetWebPartCategoryInfo(category);
-
-            return category.ActLike<IWebPartCategory>();
         }
 
         #endregion

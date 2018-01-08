@@ -17,7 +17,9 @@
 
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
+using CMS.PortalEngine;
 using ImpromptuInterface;
 using PoshKentico.Business.Development;
 using PoshKentico.Core.Services.Development;
@@ -49,7 +51,9 @@ namespace PoshKentico.Cmdlets.Development
     ///     <code>Get-CMSWebPartCategory -ID 5,304,5</code>
     /// </example>
     /// </summary>
+    [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSWebPartCategory", DefaultParameterSetName = NONE)]
+    [OutputType(typeof(WebPartCategoryInfo))]
     [Alias("gwpc")]
     public class GetCMSWebPartCategoryCmdlet : MefCmdlet
     {

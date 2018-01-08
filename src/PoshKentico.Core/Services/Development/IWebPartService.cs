@@ -36,6 +36,13 @@ namespace PoshKentico.Core.Services.Development
         #region Methods
 
         /// <summary>
+        /// Creates the <see cref="IWebPartCategory"/>.
+        /// </summary>
+        /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> to create.</param>
+        /// <returns>The newly created <see cref="IWebPartCategory"/>.</returns>
+        IWebPartCategory Create(IWebPartCategory webPartCategory);
+
+        /// <summary>
         /// Deletes the specified <see cref="IWebPartCategory"/>.
         /// </summary>
         /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> to delete.</param>
@@ -49,11 +56,10 @@ namespace PoshKentico.Core.Services.Development
         IWebPartCategory GetWebPartCategory(int id);
 
         /// <summary>
-        /// Saves the <see cref="IWebPartCategory"/>.
+        /// Updates the <see cref="IWebPartCategory"/>.
         /// </summary>
-        /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> to save.</param>
-        /// <returns>The saved <see cref="IWebPartCategory"/>.</returns>
-        IWebPartCategory Save(IWebPartCategory webPartCategory);
+        /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> to update.</param>
+        void Update(IWebPartCategory webPartCategory);
 
         #endregion
 

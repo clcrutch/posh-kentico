@@ -476,6 +476,7 @@
     <Compile Include="Cmdlets\Development\GetCMSWebPartCategoryCmdlet.cs" />
     <Compile Include="Cmdlets\Development\NewCMSWebPartCategoryCmdlet.cs" />
     <Compile Include="Cmdlets\Development\RemoveCMSWebPartCategoryCmdlet.cs" />
+    <Compile Include="Cmdlets\Development\SetCMSWebPartCategoryCmdlet.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="MefCmdlet.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />

@@ -70,7 +70,7 @@ namespace PoshKentico.Tests.Development
 
             applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
 
-            webPartServiceMock.Object.VerifySave("Test", "Test", "/Test", "/imagepath", 355);
+            webPartServiceMock.Object.VerifyCreate("Test", "Test", "/Test", "/imagepath", 355);
 
             result.CategoryName.Should().Be("TestCat");
         }
@@ -117,7 +117,7 @@ namespace PoshKentico.Tests.Development
 
             applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
 
-            webPartServiceMock.Object.VerifySave("My Test", "Test", "/Test", "/imagepath", 355);
+            webPartServiceMock.Object.VerifyCreate("My Test", "Test", "/Test", "/imagepath", 355);
 
             result.CategoryName.Should().Be("TestCat");
         }
@@ -159,7 +159,7 @@ namespace PoshKentico.Tests.Development
 
             applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
 
-            webPartServiceMock.Object.VerifySave("Test", "Test", "/My/Test", "/imagepath", 400);
+            webPartServiceMock.Object.VerifyCreate("Test", "Test", "/My/Test", "/imagepath", 400);
 
             result.CategoryName.Should().Be("TestCat");
         }
@@ -201,7 +201,7 @@ namespace PoshKentico.Tests.Development
 
             applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
 
-            webPartServiceMock.Object.VerifySave("My Test", "Test", "/My/Test", "/imagepath", 400);
+            webPartServiceMock.Object.VerifyCreate("My Test", "Test", "/My/Test", "/imagepath", 400);
 
             result.CategoryName.Should().Be("TestCat");
         }
@@ -212,20 +212,7 @@ namespace PoshKentico.Tests.Development
 
             public abstract IEnumerable<IWebPartCategory> WebPartCategories { get; }
 
-            public abstract void Delete(IWebPartCategory webPartCategory);
-
-            public abstract IWebPartCategory GetWebPartCategory(int id);
-
-            public void VerifySave(string displayName, string name, string path, string imagePath, int parentId)
-            {
-                this.webPartCategory.CategoryDisplayName.Should().Be(displayName);
-                this.webPartCategory.CategoryName.Should().Be(name);
-                this.webPartCategory.CategoryPath.Should().Be(path);
-                this.webPartCategory.CategoryImagePath.Should().Be(imagePath);
-                this.webPartCategory.CategoryParentID.Should().Be(parentId);
-            }
-
-            public IWebPartCategory Save(IWebPartCategory webPartCategory)
+            public IWebPartCategory Create(IWebPartCategory webPartCategory)
             {
                 this.webPartCategory = webPartCategory;
 
@@ -236,6 +223,21 @@ namespace PoshKentico.Tests.Development
 
                 return testCat.Object;
             }
+
+            public abstract void Delete(IWebPartCategory webPartCategory);
+
+            public abstract IWebPartCategory GetWebPartCategory(int id);
+
+            public void VerifyCreate(string displayName, string name, string path, string imagePath, int parentId)
+            {
+                this.webPartCategory.CategoryDisplayName.Should().Be(displayName);
+                this.webPartCategory.CategoryName.Should().Be(name);
+                this.webPartCategory.CategoryPath.Should().Be(path);
+                this.webPartCategory.CategoryImagePath.Should().Be(imagePath);
+                this.webPartCategory.CategoryParentID.Should().Be(parentId);
+            }
+
+            public abstract void Update(IWebPartCategory webPartCategory);
         }
     }
 }

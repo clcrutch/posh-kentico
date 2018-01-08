@@ -87,7 +87,7 @@ namespace PoshKentico.Business.Development
                 CategoryID = -1,
             };
 
-            return this.WebPartService.Save(data.ActLike<IWebPartCategory>());
+            return this.WebPartService.Create(data.ActLike<IWebPartCategory>());
         }
 
         #endregion

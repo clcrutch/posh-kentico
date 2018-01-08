@@ -16,6 +16,7 @@
 // </copyright>
 
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 using CMS.PortalEngine;
 using ImpromptuInterface;
@@ -48,6 +49,7 @@ namespace PoshKentico.Cmdlets.Development
     ///     <code>Remove-CMSWebPartCategory -ID 5,304,5</code>
     /// </example>
     /// </summary>
+    [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Remove, "CMSWebPartCategory", SupportsShouldProcess = true, ConfirmImpact = ConfirmImpact.High)]
     [Alias("rwpc")]
     public class RemoveCMSWebPartCategoryCmdlet : MefCmdlet
@@ -85,7 +87,8 @@ namespace PoshKentico.Cmdlets.Development
         /// <summary>
         /// <para type="description">A reference to the WebPart category to delete.</para>
         /// </summary>
-        [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = WEBPARTCATEGORY)]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0, ParameterSetName = WEBPARTCATEGORY)]
+        [Alias("Category")]
         public WebPartCategoryInfo WebPartCategory { get; set; }
 
         /// <summary>
