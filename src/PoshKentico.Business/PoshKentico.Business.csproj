@@ -450,6 +450,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CmdletBusinessBase.cs" />
+    <Compile Include="Configuration\Sites\GetCmsSiteBusiness.cs" />
+    <Compile Include="Configuration\Sites\NewCmsSiteBusiness.cs" />
     <Compile Include="Development\GetCMSWebPartCategoryBusiness.cs" />
     <Compile Include="Development\NewCMSWebPartCategoryBusiness.cs" />
     <Compile Include="Development\RemoveCMSWebPartCategoryBusiness.cs" />
