@@ -1,4 +1,4 @@
-﻿// <copyright file="NewCmsSiteBusiness.cs" company="Chris Crutchfield">
+﻿// <copyright file="RemoveCMSSiteBusiness.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -15,9 +15,7 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using System;
 using System.ComponentModel.Composition;
-using System.Globalization;
 using CMS.SiteProvider;
 using ImpromptuInterface;
 using PoshKentico.Core.Services.Configuration;
@@ -26,10 +24,10 @@ using PoshKentico.Core.Services.General;
 namespace PoshKentico.Business.Configuration.Sites
 {
     /// <summary>
-    /// Business layer for the New-CMSSite cmdlet.
+    /// Business Layer for the Remove-CMSSite cmdlet.
     /// </summary>
-    [Export(typeof(NewCmsSiteBusiness))]
-    public class NewCmsSiteBusiness : CmdletBusinessBase
+    [Export(typeof(RemoveCMSSiteBusiness))]
+    public class RemoveCMSSiteBusiness : CmdletBusinessBase
     {
         #region Properties
 
@@ -44,36 +42,40 @@ namespace PoshKentico.Business.Configuration.Sites
         /// </summary>
         [Import]
         public ISiteService SiteService { get; set; }
+
         #endregion
 
         #region Methods
 
         /// <summary>
-        /// Creates a new <see cref="ISite"/> in the CMS System.
+        /// Deletes the <see cref="ISite"/> in the CMS System.
         /// </summary>
-        /// <param name="displayName">The Display Name for the new Site</param>
-        /// <param name="siteName">The Site Name for the new Site</param>
-        /// <param name="status">The Status for the new Site</param>
-        /// <param name="domainName">The Domain Name for the new Site</param>
-        /// <returns>A list of all of the <see cref="ISite"/>.</returns>
-        public ISite CreateSite(string displayName, string siteName, SiteStatusEnum status, string domainName)
+        /// <param name="site">The <see cref="ISite"/> to set.</param>
+        public void Remove(ISite site)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteVerbose, this.WriteDebug);
+            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
 
-            TextInfo txtInfo = new CultureInfo("en-us", false).TextInfo;
-            var newSiteName = string.IsNullOrEmpty(siteName) ? txtInfo.ToTitleCase(displayName).Replace(" ", string.Empty) : siteName;
+            this.SiteService.Delete(site);
+        }
 
-            var data = new
+        /// <summary>
+        /// Deletes the <see cref="ISite"/> in the CMS System.
+        /// </summary>
+        /// <param name="siteName">the site name to remove</param>
+        public void Remove(string siteName)
+        {
+            if (this.ShouldProcess(siteName, "delete"))
             {
-                DisplayName = displayName,
-                SiteName = newSiteName,
-                Status = status,
-                DomainName = domainName,
-            };
-
-            return this.SiteService.Create(data.ActLike<ISite>());
+                this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
+                SiteInfo deleteSite = SiteInfoProvider.GetSiteInfo(siteName);
+                if (deleteSite != null)
+                {
+                    this.SiteService.Delete(deleteSite.ActLike<ISite>());
+                }
+            }
         }
 
         #endregion
+
     }
 }

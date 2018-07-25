@@ -25,7 +25,7 @@ using PoshKentico.Core.Services.General;
 namespace PoshKentico.Business.Configuration.Sites
 {
     /// <summary>
-    /// Business layer for the Get-CMSSites cmdlet.
+    /// Business layer for the Get-CMSSite cmdlet.
     /// </summary>
     [Export(typeof(GetCmsSiteBusiness))]
     public class GetCmsSiteBusiness : CmdletBusinessBase
@@ -48,7 +48,7 @@ namespace PoshKentico.Business.Configuration.Sites
         #region Methods
 
         /// <summary>
-        /// Gets a list of all of the <see cref="ISite"/>.
+        /// Gets a list of all of the <see cref="ISite"/> in the CMS System.
         /// </summary>
         /// <returns>A list of all of the <see cref="ISite"/>.</returns>
         public IEnumerable<ISite> GetSites()

@@ -34,7 +34,7 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     ///     <code>New-CMSSite -DisplayName "My Test Name" -DomainName "My Domain Name"</code>
     /// </example>
     /// <example>
-    ///     <para>Create a new site specifying the display name.</para>
+    ///     <para>Create a new site specifying the display name, site name, status, and domain name.</para>
     ///     <code>New-CMSSite -DisplayName "My Test Name" -SiteName "My Site Name" -Status "Running or Stopped" -DomainName "My Domain Name"</code>
     /// </example>
     /// </summary>
@@ -60,17 +60,17 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         public string DisplayName { get; set; }
 
         /// <summary>
-        /// <para type="description">The display name for the newly created site.</para>
+        /// <para type="description">The site name for the newly created site.</para>
         /// <para type="description">If null, then the display name is used for the site name.</para>
         /// </summary>
         [Parameter(Mandatory = false, Position = 1)]
         public string SiteName { get; set; }
 
         /// <summary>
-        /// <para type="description">The status for the newly create site. </para>
+        /// <para type="description">The status for the newly created site. </para>
         /// </summary>
         [Parameter(Mandatory = false, Position = 2)]
-        public string Status { get; set; }
+        public SiteStatusEnum Status { get; set; }
 
         /// <summary>
         /// <para type="description">The domain name for the newly created site.</para>
@@ -85,7 +85,7 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         public SwitchParameter PassThru { get; set; }
 
         /// <summary>
-        ///  Gets or sets the Business Layer for this web part.  Populated by MEF.
+        ///  Gets or sets the Business Layer for this site.  Populated by MEF.
         /// </summary>
         [Import]
         public NewCmsSiteBusiness BusinessLayer { get; set; }
@@ -97,7 +97,7 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
-            var newSite = this.BusinessLayer.CreateSite(this.DisplayName, this.SiteName, this.Status, this.DomainName);
+            var newSite = this.BusinessLayer.CreateSite(this.DisplayName, this.SiteName, this.Status = SiteStatusEnum.Running, this.DomainName);
 
             if (this.PassThru.ToBool())
             {

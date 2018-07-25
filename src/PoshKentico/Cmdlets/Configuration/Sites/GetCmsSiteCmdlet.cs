@@ -35,19 +35,19 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// <para type="description">With parameters, this command returns the sites that match the criteria.</para>
     /// <example>
     ///     <para>Get all the sites.</para>
-    ///     <code>Get-CmsSite</code>
+    ///     <code>Get-CMSSite</code>
     /// </example>
     /// <example>
-    ///     <para>Get all sites with a category name "*bas*", display name "*bas*", or a path "bas*".</para>
-    ///     <code>Get-CmsSite bas</code>
+    ///     <para>Get all sites with a display name "*bas*", site name "*bas*", or a domain name "bas*".</para>
+    ///     <code>Get-CMSSite bas</code>
     /// </example>
     /// <example>
-    ///     <para>Get all sites with a category name "basic", display name "basic", or path "basic"</para>
-    ///     <code>Get-CmsSite basic -Exact</code>
+    ///     <para>Get all sites with a display name "basic", site name "basic", or domain name "basic"</para>
+    ///     <code>Get-CMSSite basic -Exact</code>
     /// </example>
     /// <example>
     ///     <para>Get all the sites with the specified IDs.</para>
-    ///     <code>Get-CmsSite -ID 5,304,5</code>
+    ///     <code>Get-CMSSite -ID 5,304,5</code>
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
@@ -66,23 +66,11 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         #region Properties
 
         /// <summary>
-        /// <para type="description">The category name, display name, or path of the webpart category.</para>
+        /// <para type="description">The display name of the site to retrive.</para>
         /// </summary>
         [Parameter(Mandatory = false, Position = 0, ValueFromPipeline = true, ParameterSetName = DISPLAYNAME)]
+        [Alias("SiteName", "DomainName")]
         public string DisplayName { get; set; }
-
-        /// <summary>
-        /// <para type="description">The display name for the newly created site.</para>
-        /// <para type="description">If null, then the display name is used for the site name.</para>
-        /// </summary>
-        [Parameter(Mandatory = false, Position = 1, ValueFromPipeline = true, ParameterSetName = DISPLAYNAME)]
-        public string SiteName { get; set; }
-
-        /// <summary>
-        /// <para type="description">The domain name for the newly created site.</para>
-        /// </summary>
-        [Parameter(Mandatory = true, Position = 2, ValueFromPipeline = true, ParameterSetName = DISPLAYNAME)]
-        public string DomainName { get; set; }
 
         /// <summary>
         /// <para type="description">If set, the match is exact,</para>
@@ -92,13 +80,13 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         public SwitchParameter Exact { get; set; }
 
         /// <summary>
-        /// <para type="description">The IDs of the web part category to retrieve.</para>
+        /// <para type="description">The IDs of the site to retrieve.</para>
         /// </summary>
         [Parameter(Mandatory = false, Position = 0, ParameterSetName = IDSETNAME)]
         public int[] ID { get; set; }
 
         /// <summary>
-        /// Gets or sets the Business layer for this web part. Populated by MEF.
+        /// Gets or sets the Business layer for this site. Populated by MEF.
         /// </summary>
         [Import]
         public GetCmsSiteBusiness BusinessLayer { get; set; }

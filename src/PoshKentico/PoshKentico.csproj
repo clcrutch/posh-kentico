@@ -475,6 +475,8 @@
   <ItemGroup>
     <Compile Include="Cmdlets\Configuration\Sites\GetCmsSiteCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Sites\NewCmsSiteCmdlet.cs" />
+    <Compile Include="Cmdlets\Configuration\Sites\RemoveCmsSiteCmdlet.cs" />
+    <Compile Include="Cmdlets\Configuration\Sites\SetCmsSiteCmdlet.cs" />
     <Compile Include="Cmdlets\Development\GetCMSWebPartCategoryCmdlet.cs" />
     <Compile Include="Cmdlets\Development\NewCMSWebPartCategoryCmdlet.cs" />
     <Compile Include="Cmdlets\Development\RemoveCMSWebPartCategoryCmdlet.cs" />
