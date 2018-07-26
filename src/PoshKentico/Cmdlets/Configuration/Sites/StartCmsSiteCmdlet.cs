@@ -48,7 +48,7 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet("Start", "CMSSite")]
-    [Alias("stasite")]
+    [Alias("startsite")]
     public class StartCmsSiteCmdlet : MefCmdlet
     {
         #region Constants
