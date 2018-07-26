@@ -32,9 +32,7 @@ namespace PoshKentico.Core.Providers.Configuration
     {
         #region Properties
 
-        /// <summary>
-        /// Gets a list of all of the <see cref="ISite"/> provided by Kentico.
-        /// </summary>
+        /// <inheritdoc/>
         public IEnumerable<ISite> Sites => (from c in SiteInfoProvider.GetSites()
                                               select Impromptu.ActLike<ISite>(c as SiteInfo)).ToArray();
 
@@ -42,11 +40,7 @@ namespace PoshKentico.Core.Providers.Configuration
 
         #region Methods
 
-        /// <summary>
-        /// Creates the <see cref="ISite"/>.
-        /// </summary>
-        /// <param name="site">The <see cref="ISite"/> to create.</param>
-        /// <returns>The newly created <see cref="ISite"/>.</returns>
+        /// <inheritdoc/>
         public ISite Create(ISite site)
         {
             var siteInfo = new SiteInfo
@@ -62,29 +56,26 @@ namespace PoshKentico.Core.Providers.Configuration
             return siteInfo.ActLike<ISite>();
         }
 
-        /// <summary>
-        /// Gets the <see cref="ISite"/> which matches the supplied ID.
-        /// </summary>
-        /// <param name="id">The ID of the <see cref="ISite"/> to return.</param>
-        /// <returns>The <see cref="ISite"/> which matches the ID, else null.</returns>
+        /// <inheritdoc/>
         public ISite GetSite(int id)
         {
             return (SiteInfoProvider.GetSiteInfo(id) as SiteInfo)?.ActLike<ISite>();
         }
 
-        /// <summary>
-        /// Deletes the specified <see cref="ISite"/>.
-        /// </summary>
-        /// <param name="site">The <see cref="ISite"/> to delete.</param>
+        /// <inheritdoc/>
         public void Delete(ISite site)
         {
-            SiteInfoProvider.DeleteSiteInfo(site.SiteName);
+            // Gets the site
+            SiteInfo deleteSite = SiteInfoProvider.GetSiteInfo(site.SiteName);
+
+            if (deleteSite != null)
+            {
+                // Deletes the site
+                SiteInfoProvider.DeleteSiteInfo(deleteSite);
+            }
         }
 
-        /// <summary>
-        /// Updates the <see cref="ISite"/>.
-        /// </summary>
-        /// <param name="site">The <see cref="ISite"/> to update.</param>
+        /// <inheritdoc/>
         public void Update(ISite site)
         {
             // Gets the site
@@ -99,6 +90,30 @@ namespace PoshKentico.Core.Providers.Configuration
 
                 // Saves the modified site to the database
                 SiteInfoProvider.SetSiteInfo(updateSite);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void Start(ISite site)
+        {
+            // Gets the site
+            SiteInfo siteToStart = SiteInfoProvider.GetSiteInfo(site.SiteName);
+            if (siteToStart != null)
+            {
+                // Starts the site
+                SiteInfoProvider.RunSite(siteToStart.SiteName);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void Stop(ISite site)
+        {
+            // Gets the site
+            SiteInfo siteToStop = SiteInfoProvider.GetSiteInfo(site.SiteName);
+            if (siteToStop != null)
+            {
+                // Stops the site
+                SiteInfoProvider.StopSite(siteToStop.SiteName);
             }
         }
 

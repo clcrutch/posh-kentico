@@ -1,4 +1,4 @@
-﻿// <copyright file="RemoveCMSSiteBusiness.cs" company="Chris Crutchfield">
+﻿// <copyright file="StopCMSSiteBusiness.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -16,18 +16,16 @@
 // </copyright>
 
 using System.ComponentModel.Composition;
-using CMS.SiteProvider;
-using ImpromptuInterface;
 using PoshKentico.Core.Services.Configuration;
 using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.Business.Configuration.Sites
 {
     /// <summary>
-    /// Business Layer for the Remove-CMSSite cmdlet.
+    /// Business Layer for the Stop-CMSSite cmdlet.
     /// </summary>
-    [Export(typeof(RemoveCMSSiteBusiness))]
-    public class RemoveCMSSiteBusiness : CmdletBusinessBase
+    [Export(typeof(StopCMSSiteBusiness))]
+    public class StopCMSSiteBusiness : CmdletBusinessBase
     {
         #region Properties
 
@@ -44,11 +42,10 @@ namespace PoshKentico.Business.Configuration.Sites
         public ISiteService SiteService { get; set; }
 
         /// <summary>
-        /// Gets or sets a reference to the <see cref="GetCmsSiteBusiness"/> used to get the site to delete.  Populated by MEF.
+        /// Gets or sets a reference to the <see cref="GetCmsSiteBusiness"/> used to get the site to stop.  Populated by MEF.
         /// </summary>
         [Import]
         public GetCmsSiteBusiness GetCmsSiteBusiness { get; set; }
-
         #endregion
 
         #region Methods
@@ -57,24 +54,24 @@ namespace PoshKentico.Business.Configuration.Sites
         /// Deletes the <see cref="ISite"/> in the CMS System.
         /// </summary>
         /// <param name="site">The <see cref="ISite"/> to set.</param>
-        public void Remove(ISite site)
+        public void Stop(ISite site)
         {
             this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
 
-            this.RemoveSite(site);
+            this.StopSite(site);
         }
 
         /// <summary>
         /// Deletes the <see cref="ISite"/> in the CMS System.
         /// </summary>
         /// <param name="ids">The IDs of the <see cref="ISite"/> to delete.</param>
-        public void Remove(params int[] ids)
+        public void Stop(params int[] ids)
         {
             this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
 
             foreach (var site in this.GetCmsSiteBusiness.GetSites(ids))
             {
-                this.RemoveSite(site);
+                this.StopSite(site);
             }
         }
 
@@ -83,29 +80,27 @@ namespace PoshKentico.Business.Configuration.Sites
         /// </summary>
         /// <param name="matchString">the string which to match the site to.</param>
         /// <param name="exact">A boolean which indicates if the match should be exact.</param>
-        public void Remove(string matchString, bool exact)
+        public void Stop(string matchString, bool exact)
         {
             this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
 
             foreach (var site in this.GetCmsSiteBusiness.GetSites(matchString, exact))
             {
-                this.RemoveSite(site);
+                this.StopSite(site);
             }
         }
 
         /// <summary>
-        /// Deletes the specified <see cref="ISite"/> in the CMS System.
+        /// Deletes the <see cref="ISite"/> in the CMS System.
         /// </summary>
         /// <param name="site">The <see cref="ISite"/> to set.</param>
-        public void RemoveSite(ISite site)
+        public void StopSite(ISite site)
         {
-            if (this.ShouldProcess(site.SiteName, "delete"))
-            {
-                this.SiteService.Delete(site);
-            }
+            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
+
+            this.SiteService.Stop(site);
         }
 
         #endregion
-
     }
 }

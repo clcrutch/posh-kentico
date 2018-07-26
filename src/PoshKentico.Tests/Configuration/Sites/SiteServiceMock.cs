@@ -65,5 +65,15 @@ namespace PoshKentico.Business.Configuration.Sites.Tests
         {
             throw new System.NotImplementedException();
         }
+
+        public void Start(ISite site)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Stop(ISite site)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

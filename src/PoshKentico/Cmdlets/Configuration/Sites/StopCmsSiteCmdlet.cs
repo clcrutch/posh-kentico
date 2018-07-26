@@ -1,4 +1,4 @@
-﻿// <copyright file="RemoveCmsSiteCmdlet.cs" company="Chris Crutchfield">
+﻿// <copyright file="StopCmsSiteCmdlet.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -27,34 +27,34 @@ using AliasAttribute = System.Management.Automation.AliasAttribute;
 namespace PoshKentico.Cmdlets.Configuration.Sites
 {
     /// <summary>
-    /// <para type="synopsis">Deletes a site.</para>
-    /// <para type="description">Deletes a site.</para>
+    /// <para type="synopsis">Stops a site.</para>
+    /// <para type="description">Stops a site.</para>
     /// <example>
-    ///     <para>Deletes all sites contains a site name "*bas*", display name "*bas*", or a domain name "*bas*".</para>
-    ///     <code>Remove-CMSSite -SiteName "bas"</code>
+    ///     <para>Stops a site contains a site name "*bas*", display name "*bas*", or a domain name "bas*".</para>
+    ///     <code>Stop-CMSSite -SiteName "bas"</code>
     /// </example>
     /// <example>
-    ///     <para>Deletes all sites with a site name "basic", display name "basic", or a domain name "basic".</para>
-    ///     <code>Remove-CMSSite -SiteName "basic" -Exact</code>
+    ///     <para>Stops a site with a site name "basic", display name "basic", or a domain name "basic".</para>
+    ///     <code>Stop-CMSSite -Site "basic" -EXACT</code>
     /// </example>
     /// <example>
-    ///     <para>Deletes a site.</para>
-    ///     <code>$site | Remove-CMSSite</code>
+    ///     <para>Stops a site.</para>
+    ///     <code>$site| Stop-CMSSite</code>
     /// </example>
     /// <example>
-    ///     <para>Delete all the sites with the specified IDs.</para>
-    ///     <code>Remove-CMSSite -ID 1,2,3</code>
+    ///     <para>Stops all the sites with the specified IDs.</para>
+    ///     <code>Stop-CMSSite -ID 1,2,3</code>
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
-    [Cmdlet(VerbsCommon.Remove, "CMSSite", SupportsShouldProcess = true, ConfirmImpact = ConfirmImpact.High)]
-    [Alias("rsite")]
-    public class RemoveCmsSiteCmdlet : MefCmdlet
+    [Cmdlet("Stop", "CMSSite")]
+    [Alias("stasite")]
+    public class StopCmsSiteCmdlet : MefCmdlet
     {
         #region Constants
 
         private const string OBJECTSET = "Object";
-        private const string SITENAMESET = "Property";
+        private const string PROPERTYSET = "Property";
         private const string IDSETNAME = "ID";
 
         #endregion
@@ -62,28 +62,28 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         #region Properties
 
         /// <summary>
-        /// <para type="description">A reference to the site to remove.</para>
+        /// <para type="description">A reference to the site to stop.</para>
         /// </summary>
         [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0, ParameterSetName = OBJECTSET)]
         [Alias("Site")]
-        public SiteInfo SiteToRemove { get; set; }
+        public SiteInfo SiteToStart { get; set; }
 
         /// <summary>
-        /// <para type="description">The site name for the site to remove.</para>
+        /// <para type="description">The site name for the site to stop.</para>
         /// <para type="description">Site name cannot be blank.</para>
         /// </summary>
-        [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0, ParameterSetName = SITENAMESET)]
+        [Parameter(Mandatory = true, Position = 0, ParameterSetName = PROPERTYSET)]
         public string SiteName { get; set; }
 
         /// <summary>
         /// <para type="description">If set, the match is exact,</para>
         /// <para type="description">else the match performs a contains for site name.</para>
         /// </summary>
-        [Parameter(ParameterSetName = SITENAMESET)]
+        [Parameter(ParameterSetName = PROPERTYSET)]
         public SwitchParameter Exact { get; set; }
 
         /// <summary>
-        /// <para type="description">The IDs of the web part category to delete.</para>
+        /// <para type="description">The IDs of the web part category to stop.</para>
         /// </summary>
         [Parameter(Mandatory = true, Position = 0, ParameterSetName = IDSETNAME)]
         public int[] ID { get; set; }
@@ -92,7 +92,7 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         ///  Gets or sets the Business Layer for this site.  Populated by MEF.
         /// </summary>
         [Import]
-        public RemoveCMSSiteBusiness BusinessLayer { get; set; }
+        public StopCMSSiteBusiness BusinessLayer { get; set; }
 
         #endregion
 
@@ -104,18 +104,17 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
             switch (this.ParameterSetName)
             {
                 case OBJECTSET:
-                    this.BusinessLayer.Remove(this.SiteToRemove.ActLike<ISite>());
+                    this.BusinessLayer.Stop(this.SiteToStart.ActLike<ISite>());
                     break;
-                case SITENAMESET:
-                    this.BusinessLayer.Remove(this.SiteName, this.Exact.ToBool());
+                case PROPERTYSET:
+                    this.BusinessLayer.Stop(this.SiteName, this.Exact);
                     break;
                 case IDSETNAME:
-                    this.BusinessLayer.Remove(this.ID);
+                    this.BusinessLayer.Stop(this.ID);
                     break;
             }
         }
 
         #endregion
-
     }
 }

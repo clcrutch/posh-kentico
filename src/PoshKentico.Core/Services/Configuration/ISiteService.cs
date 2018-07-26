@@ -61,6 +61,18 @@ namespace PoshKentico.Core.Services.Configuration
         /// <param name="site">The <see cref="ISite"/> to update.</param>
         void Update(ISite site);
 
+        /// <summary>
+        /// Starts the specified <see cref="ISite"/>.
+        /// </summary>
+        /// <param name="site">The <see cref="ISite"/> to start.</param>
+        void Start(ISite site);
+
+        /// <summary>
+        /// Stops the specified <see cref="ISite"/>.
+        /// </summary>
+        /// <param name="site">The <see cref="ISite"/> to stop.</param>
+        void Stop(ISite site);
+
         #endregion
     }
 }
