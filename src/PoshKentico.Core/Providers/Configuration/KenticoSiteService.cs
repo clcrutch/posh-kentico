@@ -22,7 +22,6 @@ using CMS.Localization;
 using CMS.SiteProvider;
 using ImpromptuInterface;
 using PoshKentico.Core.Services.Configuration;
-using System.Linq;
 
 namespace PoshKentico.Core.Providers.Configuration
 {
