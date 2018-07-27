@@ -115,6 +115,12 @@ namespace PoshKentico.Core.Services.Configuration
         /// <param name="aliasName">the alias name of domain alias</param>
         void RemoveSiteDomainAlias(ISite site, string aliasName);
 
+        /// <summary>
+        /// Gets all site domain aliases assigned to the selected site.
+        /// </summary>
+        /// <param name="site">the <see cref="ISite"/> to get the aliases from.</param>
+        /// <returns>the list of <see cref="ISiteDomainAlias"/> that the site has.</returns>
+        IEnumerable<ISiteDomainAlias> GetDomainAliases(ISite site);
         #endregion
     }
 }

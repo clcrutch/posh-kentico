@@ -1,4 +1,4 @@
-﻿// <copyright file="GetCmsSiteCulturesCmdlet.cs" company="Chris Crutchfield">
+﻿// <copyright file="GetCmsSiteCultureCmdlet.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -41,9 +41,9 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
-    [Cmdlet(VerbsCommon.Get, "CMSSiteCultures")]
+    [Cmdlet(VerbsCommon.Get, "CMSSiteCulture")]
     [Alias("gscul")]
-    public class GetCmsSiteCulturesCmdlet : MefCmdlet
+    public class GetCmsSiteCultureCmdlet : MefCmdlet
     {
         #region Constants
 

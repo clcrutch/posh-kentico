@@ -476,7 +476,8 @@
     <Compile Include="Cmdlets\Configuration\Sites\AddCmsSiteCultureCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Sites\AddCmsSiteDomainAliasCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Sites\GetCmsSiteCmdlet.cs" />
-    <Compile Include="Cmdlets\Configuration\Sites\GetCmsSiteCulturesCmdlet.cs" />
+    <Compile Include="Cmdlets\Configuration\Sites\GetCmsSiteCultureCmdlet.cs" />
+    <Compile Include="Cmdlets\Configuration\Sites\GetCmsSiteDomainAliasCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Sites\NewCmsSiteCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Sites\RemoveCmsSiteCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Sites\RemoveCmsSiteCultureCmdlet.cs" />

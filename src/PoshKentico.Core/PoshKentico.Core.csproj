@@ -457,6 +457,7 @@
     <Compile Include="Providers\General\KenticoSiteLocationCache.cs" />
     <Compile Include="Services\Configuration\ICulture.cs" />
     <Compile Include="Services\Configuration\ISite.cs" />
+    <Compile Include="Services\Configuration\ISiteDomainAlias.cs" />
     <Compile Include="Services\Configuration\ISiteService.cs" />
     <Compile Include="Services\Development\IWebPartCategory.cs" />
     <Compile Include="Services\Development\IWebPartService.cs" />

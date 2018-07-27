@@ -454,6 +454,7 @@
     <Compile Include="Configuration\Sites\AddCmsSiteDomainAliasBusiness.cs" />
     <Compile Include="Configuration\Sites\GetCmsSiteBusiness.cs" />
     <Compile Include="Configuration\Sites\GetCmsSiteCultureBusiness.cs" />
+    <Compile Include="Configuration\Sites\GetCmsSiteDomainAliasBusiness.cs" />
     <Compile Include="Configuration\Sites\NewCmsSiteBusiness.cs" />
     <Compile Include="Configuration\Sites\RemoveCMSSiteBusiness.cs" />
     <Compile Include="Configuration\Sites\RemoveCmsSiteCultureBusiness.cs" />

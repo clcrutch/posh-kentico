@@ -75,5 +75,40 @@ namespace PoshKentico.Business.Configuration.Sites.Tests
         {
             throw new System.NotImplementedException();
         }
+
+        public ISite GetSite(string siteName)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void AddSiteCulture(ISite site, string cultureCode)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void RemoveSiteCulture(ISite site, string cultureCode)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IEnumerable<ICulture> GetSiteCultures(ISite site)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void AddSiteDomainAlias(ISite site, string aliasName)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void RemoveSiteDomainAlias(ISite site, string aliasName)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IEnumerable<ISiteDomainAlias> GetDomainAliases(ISite site)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

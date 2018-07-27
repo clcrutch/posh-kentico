@@ -206,6 +206,28 @@ namespace PoshKentico.Core.Providers.Configuration
                 SiteDomainAliasInfoProvider.DeleteSiteDomainAliasInfo(deleteAlias);
             }
         }
+
+        /// <inheritdoc/>
+        public IEnumerable<ISiteDomainAlias> GetDomainAliases(ISite site)
+        {
+            List<ISiteDomainAlias> aliases = new List<ISiteDomainAlias>();
+
+            // Gets the site object
+            SiteInfo siteToWork = SiteInfoProvider.GetSiteInfo(site.SiteName);
+
+            if (siteToWork != null)
+            {
+                // Gets all the domain alias for the site
+                var items = SiteDomainAliasInfoProvider.GetDomainAliases(site.SiteName)?.Items;
+
+                foreach (var item in items)
+                {
+                    aliases.Add(item.ActLike<ISiteDomainAlias>());
+                }
+            }
+
+            return aliases;
+        }
         #endregion
     }
 }
