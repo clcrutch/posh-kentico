@@ -22,6 +22,7 @@ using CMS.Localization;
 using CMS.SiteProvider;
 using ImpromptuInterface;
 using PoshKentico.Core.Services.Configuration;
+using System.Linq;
 
 namespace PoshKentico.Core.Providers.Configuration
 {
@@ -61,6 +62,12 @@ namespace PoshKentico.Core.Providers.Configuration
         public ISite GetSite(int id)
         {
             return (SiteInfoProvider.GetSiteInfo(id) as SiteInfo)?.ActLike<ISite>();
+        }
+
+        /// <inheritdoc/>
+        public ISite GetSite(string siteName)
+        {
+            return (SiteInfoProvider.GetSiteInfo(siteName) as SiteInfo)?.ActLike<ISite>();
         }
 
         /// <inheritdoc/>
@@ -119,11 +126,11 @@ namespace PoshKentico.Core.Providers.Configuration
         }
 
         /// <inheritdoc/>
-        public void AddSiteCulture(ISite site, string cultureName)
+        public void AddSiteCulture(ISite site, string cultureCode)
         {
             // Gets the site and culture objects
             SiteInfo siteToWork = SiteInfoProvider.GetSiteInfo(site.SiteName);
-            CultureInfo cultureToWork = CultureInfoProvider.GetCultureInfo(cultureName);
+            CultureInfo cultureToWork = CultureInfoProvider.GetCultureInfo(cultureCode);
 
             if ((siteToWork != null) && (cultureToWork != null))
             {
@@ -133,17 +140,36 @@ namespace PoshKentico.Core.Providers.Configuration
         }
 
         /// <inheritdoc/>
-        public void RemoveSiteCulture(ISite site, string cultureName)
+        public void RemoveSiteCulture(ISite site, string cultureCode)
         {
             // Gets the site and culture objects
             SiteInfo siteToWork = SiteInfoProvider.GetSiteInfo(site.SiteName);
-            CultureInfo cultureToWork = CultureInfoProvider.GetCultureInfo(cultureName);
+            CultureInfo cultureToWork = CultureInfoProvider.GetCultureInfo(cultureCode);
 
             if ((siteToWork != null) && (cultureToWork != null))
             {
                 // Removes the culture from the site
                 CultureSiteInfoProvider.RemoveCultureFromSite(cultureToWork.CultureID, siteToWork.SiteID);
             }
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<ICulture> GetSiteCultures(ISite site)
+        {
+            List<ICulture> cultures = new List<ICulture>();
+            SiteInfo siteToWork = SiteInfoProvider.GetSiteInfo(site.SiteName);
+
+            if (siteToWork != null)
+            {
+                var items = CultureSiteInfoProvider.GetSiteCultures(site.SiteName)?.Items;
+
+                foreach (var item in items)
+                {
+                    cultures.Add(item.ActLike<ICulture>());
+                }
+            }
+
+            return cultures;
         }
 
         #endregion

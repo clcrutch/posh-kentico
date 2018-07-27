@@ -39,7 +39,7 @@ namespace PoshKentico.Business.Configuration.Sites
         /// Gets or sets a reference to the Site Service.  Populated by MEF.
         /// </summary>
         [Import]
-        public ISiteService CultureService { get; set; }
+        public ISiteService SiteService { get; set; }
 
         /// <summary>
         /// Gets or sets a reference to the <see cref="GetCmsSiteBusiness"/> used to get the site to add culture to.  Populated by MEF.
@@ -54,12 +54,12 @@ namespace PoshKentico.Business.Configuration.Sites
         /// Add a culture to a site
         /// </summary>
         /// <param name="site">the site to add culture to</param>
-        /// <param name="cultureName">the culture name for the culture to add to the site</param>
-        public void AddCulture(ISite site, string cultureName)
+        /// <param name="cultureCode">the culture code for the culture to add to the site</param>
+        public void AddCulture(ISite site, string cultureCode)
         {
             this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
 
-            this.AddSiteCulture(site, cultureName);
+            this.AddSiteCulture(site, cultureCode);
         }
 
         /// <summary>
@@ -67,14 +67,14 @@ namespace PoshKentico.Business.Configuration.Sites
         /// </summary>
         /// <param name="matchString">the string which to match the site to.</param>
         /// <param name="exact">A boolean which indicates if the match should be exact.</param>
-        /// <param name="cultureName">the culture name for the culture to add to the site</param>
-        public void AddCulture(string matchString, bool exact, string cultureName)
+        /// <param name="cultureCode">the culture code for the culture to add to the site</param>
+        public void AddCulture(string matchString, bool exact, string cultureCode)
         {
             this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
 
             foreach (var site in this.GetCmsSiteBusiness.GetSites(matchString, exact))
             {
-                this.AddSiteCulture(site, cultureName);
+                this.AddSiteCulture(site, cultureCode);
             }
         }
 
@@ -82,14 +82,14 @@ namespace PoshKentico.Business.Configuration.Sites
         /// Adds the culture to a <see cref="ISite"/> in the CMS System.
         /// </summary>
         /// <param name="ids">The IDs of the <see cref="ISite"/> to add culture to.</param>
-        /// <param name="cultureName">the culture name for the culture to add to the site</param>
-        public void AddCulture(int[] ids, string cultureName)
+        /// <param name="cultureCode">the culture code for the culture to add to the site</param>
+        public void AddCulture(int[] ids, string cultureCode)
         {
             this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
 
             foreach (var site in this.GetCmsSiteBusiness.GetSites(ids))
             {
-                this.AddSiteCulture(site, cultureName);
+                this.AddSiteCulture(site, cultureCode);
             }
         }
 
@@ -97,10 +97,10 @@ namespace PoshKentico.Business.Configuration.Sites
         /// Add a culture to a site
         /// </summary>
         /// <param name="site">the site to add culture to</param>
-        /// <param name="cultureName">the culture name for the culture to add to the site</param>
-        private void AddSiteCulture(ISite site, string cultureName)
+        /// <param name="cultureCode">the culture code for the culture to add to the site</param>
+        private void AddSiteCulture(ISite site, string cultureCode)
         {
-            this.CultureService.AddSiteCulture(site, cultureName);
+            this.SiteService.AddSiteCulture(site, cultureCode);
         }
         #endregion
 

@@ -31,24 +31,24 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// <para type="description">Adds a culture to a specified site based off of the provided input.</para>
     /// <para type="description">This cmdlet returns the newly modified site when the -PassThru switch is used.</para>
     /// <example>
-    ///     <para>Add a culture with culture name "cul" to a specified site specifying the site name "*bas*", display name "*bas*", or a domain name "*bas*".</para>
-    ///     <code>Add-CMSSiteCulture -SiteName "*bas*" -CultureName "cul"</code>
+    ///     <para>Add a culture with culture code "cul" to a specified site specifying the site name "*bas*", display name "*bas*", or a domain name "*bas*".</para>
+    ///     <code>Add-CMSSiteCulture -SiteName "*bas*" -CultureCode "cul"</code>
     /// </example>
     /// <example>
-    ///     <para>Add a culture with culture name "cul" to a specified site specifying the site name "basic", display name "basic", or a domain name "basic".</para>
-    ///     <code>Add-CMSSiteCulture -SiteName "basic" -EXACT -CultureName "cul"</code>
+    ///     <para>Add a culture with culture code "cul" to a specified site specifying the site name "basic", display name "basic", or a domain name "basic".</para>
+    ///     <code>Add-CMSSiteCulture -SiteName "basic" -EXACT -CultureCode "cul"</code>
     /// </example>
     /// <example>
-    ///     <para>Add a culture with culture name "cul" to a site.</para>
-    ///     <code>$site | Add-CMSSiteCulture</code>
+    ///     <para>Add a culture with culture code "cul" to a site.</para>
+    ///     <code>$site | Add-CMSSiteCulture -CultureCode "cul"</code>
     /// </example>
     /// <example>
-    ///     <para>Add a culture with culture name "cul" with the specified IDs.</para>
-    ///     <code>Add-CMSSiteCulture -ID 1,2,3</code>
+    ///     <para>Add a culture with culture code "cul" with the specified site IDs.</para>
+    ///     <code>Add-CMSSiteCulture -ID 1,2,3 -CultureCode "cul"</code>
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
-    [Cmdlet(VerbsCommon.Add, "CMSSite")]
+    [Cmdlet(VerbsCommon.Add, "CMSSiteCulture")]
     [Alias("acsite")]
     public class AddCmsSiteCultureCmdlet : MefCmdlet
     {
@@ -92,7 +92,7 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         /// <para type="description">The IDs of the site.</para>
         /// </summary>
         [Parameter(Mandatory = true, Position = 1)]
-        public string CultureName { get; set; }
+        public string CultureCode { get; set; }
 
         /// <summary>
         ///  Gets or sets the Business Layer for adding culture to this site.  Populated by MEF.
@@ -110,13 +110,13 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
             switch (this.ParameterSetName)
             {
                 case OBJECTSET:
-                    this.BusinessLayer.AddCulture(this.SiteToAdd.ActLike<ISite>(), this.CultureName);
+                    this.BusinessLayer.AddCulture(this.SiteToAdd.ActLike<ISite>(), this.CultureCode);
                     break;
                 case SITENAMESET:
-                    this.BusinessLayer.AddCulture(this.SiteName, this.Exact.ToBool(), this.CultureName);
+                    this.BusinessLayer.AddCulture(this.SiteName, this.Exact.ToBool(), this.CultureCode);
                     break;
                 case IDSETNAME:
-                    this.BusinessLayer.AddCulture(this.ID, this.CultureName);
+                    this.BusinessLayer.AddCulture(this.ID, this.CultureCode);
                     break;
             }
         }

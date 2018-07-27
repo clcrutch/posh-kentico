@@ -31,24 +31,24 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// <para type="description">Removes a culture to a specified site based off of the provided input.</para>
     /// <para type="description">This cmdlet returns the newly modified site when the -PassThru switch is used.</para>
     /// <example>
-    ///     <para>Remove a culture with culture name "cul" from a specified site specifying the site name "*bas*", display name "*bas*", or a domain name "*bas*".</para>
-    ///     <code>Remove-CMSSiteCulture -SiteName "*bas*" -CultureName "cul"</code>
+    ///     <para>Remove a culture with culture code "cul" from a specified site specifying the site name "*bas*", display name "*bas*", or a domain name "*bas*".</para>
+    ///     <code>Remove-CMSSiteCulture -SiteName "*bas*" -CultureCode "cul"</code>
     /// </example>
     /// <example>
-    ///     <para>Remove a culture with culture name "cul" from a specified site specifying the site name "basic", display name "basic", or a domain name "basic".</para>
-    ///     <code>Remove-CMSSiteCulture -SiteName "basic" -EXACT -CultureName "cul"</code>
+    ///     <para>Remove a culture with culture code "cul" from a specified site specifying the site name "basic", display name "basic", or a domain name "basic".</para>
+    ///     <code>Remove-CMSSiteCulture -SiteName "basic" -EXACT -CultureCode "cul"</code>
     /// </example>
     /// <example>
-    ///     <para>Remove a culture with culture name "cul" from a site.</para>
+    ///     <para>Remove a culture with culture code "cul" from a site.</para>
     ///     <code>$site | Remove-CMSSiteCulture</code>
     /// </example>
     /// <example>
-    ///     <para>Remove a culture with culture name "cul" with the specified IDs.</para>
+    ///     <para>Remove a culture with culture code "cul" with the specified IDs.</para>
     ///     <code>Remove-CMSSiteCulture -ID 1,2,3</code>
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
-    [Cmdlet(VerbsCommon.Remove, "CMSSite")]
+    [Cmdlet(VerbsCommon.Remove, "CMSSiteCulture")]
     [Alias("rcsite")]
     public class RemoveCmsSiteCultureCmdlet : MefCmdlet
     {
@@ -92,7 +92,7 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         /// <para type="description">The IDs of the site.</para>
         /// </summary>
         [Parameter(Mandatory = true, Position = 1)]
-        public string CultureName { get; set; }
+        public string CultureCode { get; set; }
 
         /// <summary>
         ///  Gets or sets the Business Layer for adding culture to this site.  Populated by MEF.
@@ -110,13 +110,13 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
             switch (this.ParameterSetName)
             {
                 case OBJECTSET:
-                    this.BusinessLayer.RemoveCulture(this.SiteToRemove.ActLike<ISite>(), this.CultureName);
+                    this.BusinessLayer.RemoveCulture(this.SiteToRemove.ActLike<ISite>(), this.CultureCode);
                     break;
                 case SITENAMESET:
-                    this.BusinessLayer.RemoveCulture(this.SiteName, this.Exact.ToBool(), this.CultureName);
+                    this.BusinessLayer.RemoveCulture(this.SiteName, this.Exact.ToBool(), this.CultureCode);
                     break;
                 case IDSETNAME:
-                    this.BusinessLayer.RemoveCulture(this.ID, this.CultureName);
+                    this.BusinessLayer.RemoveCulture(this.ID, this.CultureCode);
                     break;
             }
         }

@@ -56,6 +56,13 @@ namespace PoshKentico.Core.Services.Configuration
         ISite GetSite(int id);
 
         /// <summary>
+        /// Gets the <see cref="ISite"/> which matches the supplied site name.
+        /// </summary>
+        /// <param name="siteName">The Site Name of the <see cref="ISite"/> to return.</param>
+        /// <returns>The <see cref="ISite"/> which matches the site name, else null.</returns>
+        ISite GetSite(string siteName);
+
+        /// <summary>
         /// Updates the <see cref="ISite"/>.
         /// </summary>
         /// <param name="site">The <see cref="ISite"/> to update.</param>
@@ -74,18 +81,25 @@ namespace PoshKentico.Core.Services.Configuration
         void Stop(ISite site);
 
         /// <summary>
-        /// Assigns the culture to the site
+        /// Assigns the culture to the site.
         /// </summary>
         /// <param name="site">the <see cref="ISite"/> to assign a culture to. </param>
-        /// <param name="cultureName">the culture name </param>
-        void AddSiteCulture(ISite site, string cultureName);
+        /// <param name="cultureCode">the culture code of <see cref="ICulture"/>.</param>
+        void AddSiteCulture(ISite site, string cultureCode);
 
         /// <summary>
         /// Removes the culture from the site
         /// </summary>
         /// <param name="site">the <see cref="ISite"/> to remove a culture from. </param>
-        /// <param name="cultureName">the culture name </param>
-        void RemoveSiteCulture(ISite site, string cultureName);
+        /// <param name="cultureCode">the culture code of <see cref="ICulture"/>. </param>
+        void RemoveSiteCulture(ISite site, string cultureCode);
+
+        /// <summary>
+        /// Get the cultures of the specified site.
+        /// </summary>
+        /// <param name="site">the <see cref="ISite"/> to get a culture from. </param>
+        /// <returns>the list of <see cref="ICulture"/> that the site has.</returns>
+        IEnumerable<ICulture> GetSiteCultures(ISite site);
         #endregion
     }
 }

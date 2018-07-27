@@ -452,6 +452,7 @@
     <Compile Include="CmdletBusinessBase.cs" />
     <Compile Include="Configuration\Sites\AddCmsSiteCultureBusiness.cs" />
     <Compile Include="Configuration\Sites\GetCmsSiteBusiness.cs" />
+    <Compile Include="Configuration\Sites\GetCmsSiteCultureBusiness.cs" />
     <Compile Include="Configuration\Sites\NewCmsSiteBusiness.cs" />
     <Compile Include="Configuration\Sites\RemoveCMSSiteBusiness.cs" />
     <Compile Include="Configuration\Sites\RemoveCmsSiteCultureBusiness.cs" />
