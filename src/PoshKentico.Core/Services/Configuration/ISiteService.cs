@@ -100,6 +100,14 @@ namespace PoshKentico.Core.Services.Configuration
         /// <param name="site">the <see cref="ISite"/> to get a culture from. </param>
         /// <returns>the list of <see cref="ICulture"/> that the site has.</returns>
         IEnumerable<ICulture> GetSiteCultures(ISite site);
+
+        /// <summary>
+        /// Adds the domain alias to the site.
+        /// </summary>
+        /// <param name="site">the <see cref="ISite"/> to assign a alias to.</param>
+        /// <param name="aliasName">the alias name of domain alias</param>
+        void AddSiteDomainAlias(ISite site, string aliasName);
+
         #endregion
     }
 }

@@ -171,6 +171,26 @@ namespace PoshKentico.Core.Providers.Configuration
             return cultures;
         }
 
+        /// <inheritdoc/>
+        public void AddSiteDomainAlias(ISite site, string aliasName)
+        {
+            // Gets the site object
+            SiteInfo siteToWork = SiteInfoProvider.GetSiteInfo(site.SiteName);
+
+            if (siteToWork != null)
+            {
+                // Creates a new site domain alias object
+                SiteDomainAliasInfo newAlias = new SiteDomainAliasInfo();
+                newAlias.SiteDomainAliasName = aliasName;
+
+                // Assigns the domain alias to the site
+                newAlias.SiteID = siteToWork.SiteID;
+
+                // Saves the site domain alias to the database
+                SiteDomainAliasInfoProvider.SetSiteDomainAliasInfo(newAlias);
+            }
+        }
+
         #endregion
     }
 }

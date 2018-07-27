@@ -451,6 +451,7 @@
   <ItemGroup>
     <Compile Include="CmdletBusinessBase.cs" />
     <Compile Include="Configuration\Sites\AddCmsSiteCultureBusiness.cs" />
+    <Compile Include="Configuration\Sites\AddCmsSiteDomainAliasBusiness.cs" />
     <Compile Include="Configuration\Sites\GetCmsSiteBusiness.cs" />
     <Compile Include="Configuration\Sites\GetCmsSiteCultureBusiness.cs" />
     <Compile Include="Configuration\Sites\NewCmsSiteBusiness.cs" />
