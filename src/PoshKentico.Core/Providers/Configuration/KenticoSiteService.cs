@@ -18,6 +18,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using CMS.Localization;
 using CMS.SiteProvider;
 using ImpromptuInterface;
 using PoshKentico.Core.Services.Configuration;
@@ -114,6 +115,34 @@ namespace PoshKentico.Core.Providers.Configuration
             {
                 // Stops the site
                 SiteInfoProvider.StopSite(siteToStop.SiteName);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void AddSiteCulture(ISite site, string cultureName)
+        {
+            // Gets the site and culture objects
+            SiteInfo siteToWork = SiteInfoProvider.GetSiteInfo(site.SiteName);
+            CultureInfo cultureToWork = CultureInfoProvider.GetCultureInfo(cultureName);
+
+            if ((siteToWork != null) && (cultureToWork != null))
+            {
+                // Assigns the culture to the site
+                CultureSiteInfoProvider.AddCultureToSite(cultureToWork.CultureID, siteToWork.SiteID);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void RemoveSiteCulture(ISite site, string cultureName)
+        {
+            // Gets the site and culture objects
+            SiteInfo siteToWork = SiteInfoProvider.GetSiteInfo(site.SiteName);
+            CultureInfo cultureToWork = CultureInfoProvider.GetCultureInfo(cultureName);
+
+            if ((siteToWork != null) && (cultureToWork != null))
+            {
+                // Removes the culture from the site
+                CultureSiteInfoProvider.RemoveCultureFromSite(cultureToWork.CultureID, siteToWork.SiteID);
             }
         }
 

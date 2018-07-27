@@ -73,6 +73,19 @@ namespace PoshKentico.Core.Services.Configuration
         /// <param name="site">The <see cref="ISite"/> to stop.</param>
         void Stop(ISite site);
 
+        /// <summary>
+        /// Assigns the culture to the site
+        /// </summary>
+        /// <param name="site">the <see cref="ISite"/> to assign a culture to. </param>
+        /// <param name="cultureName">the culture name </param>
+        void AddSiteCulture(ISite site, string cultureName);
+
+        /// <summary>
+        /// Removes the culture from the site
+        /// </summary>
+        /// <param name="site">the <see cref="ISite"/> to remove a culture from. </param>
+        /// <param name="cultureName">the culture name </param>
+        void RemoveSiteCulture(ISite site, string cultureName);
         #endregion
     }
 }

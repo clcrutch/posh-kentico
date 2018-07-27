@@ -39,7 +39,7 @@ namespace PoshKentico.Business.Configuration.Sites
         public ICmsApplicationService CmsApplicationService { get; set; }
 
         /// <summary>
-        /// Gets or sets a reference to the WebPart Service.  Populated by MEF.
+        /// Gets or sets a reference to the Site Service.  Populated by MEF.
         /// </summary>
         [Import]
         public ISiteService SiteService { get; set; }

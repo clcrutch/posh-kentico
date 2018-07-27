@@ -450,9 +450,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CmdletBusinessBase.cs" />
+    <Compile Include="Configuration\Sites\AddCmsSiteCultureBusiness.cs" />
     <Compile Include="Configuration\Sites\GetCmsSiteBusiness.cs" />
     <Compile Include="Configuration\Sites\NewCmsSiteBusiness.cs" />
     <Compile Include="Configuration\Sites\RemoveCMSSiteBusiness.cs" />
+    <Compile Include="Configuration\Sites\RemoveCmsSiteCultureBusiness.cs" />
     <Compile Include="Configuration\Sites\SetCMSSiteBusiness.cs" />
     <Compile Include="Configuration\Sites\StartCMSSiteBusiness.cs" />
     <Compile Include="Configuration\Sites\StopCMSSiteBusiness.cs" />
