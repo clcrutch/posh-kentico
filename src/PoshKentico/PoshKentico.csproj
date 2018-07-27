@@ -480,6 +480,7 @@
     <Compile Include="Cmdlets\Configuration\Sites\NewCmsSiteCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Sites\RemoveCmsSiteCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Sites\RemoveCmsSiteCultureCmdlet.cs" />
+    <Compile Include="Cmdlets\Configuration\Sites\RemoveCmsSiteDomainAliasCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Sites\SetCmsSiteCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Sites\StartCmsSiteCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Sites\StopCmsSiteCmdlet.cs" />

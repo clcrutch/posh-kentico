@@ -108,6 +108,13 @@ namespace PoshKentico.Core.Services.Configuration
         /// <param name="aliasName">the alias name of domain alias</param>
         void AddSiteDomainAlias(ISite site, string aliasName);
 
+        /// <summary>
+        /// Deletes the domain alias for the site.
+        /// </summary>
+        /// <param name="site">the <see cref="ISite"/> to delete the alias from.</param>
+        /// <param name="aliasName">the alias name of domain alias</param>
+        void RemoveSiteDomainAlias(ISite site, string aliasName);
+
         #endregion
     }
 }
