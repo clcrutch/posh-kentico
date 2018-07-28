@@ -1,4 +1,4 @@
-﻿// <copyright file="StopCMSSiteBusiness.cs" company="Chris Crutchfield">
+﻿// <copyright file="StopCmsSiteBusiness.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -24,8 +24,8 @@ namespace PoshKentico.Business.Configuration.Sites
     /// <summary>
     /// Business Layer for the Stop-CMSSite cmdlet.
     /// </summary>
-    [Export(typeof(StopCMSSiteBusiness))]
-    public class StopCMSSiteBusiness : CmdletBusinessBase
+    [Export(typeof(StopCmsSiteBusiness))]
+    public class StopCmsSiteBusiness : CmdletBusinessBase
     {
         #region Properties
 

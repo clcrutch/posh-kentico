@@ -102,7 +102,7 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         ///  Gets or sets the Business Layer for this site.  Populated by MEF.
         /// </summary>
         [Import]
-        public SetCMSSiteBusiness BusinessLayer { get; set; }
+        public SetCmsSiteBusiness BusinessLayer { get; set; }
 
         #endregion
 

@@ -468,6 +468,8 @@
   <ItemGroup>
     <Compile Include="Configuration\Sites\GetCmsSiteBusinessTests.cs" />
     <Compile Include="Configuration\Sites\NewCmsSiteBusinessTests.cs" />
+    <Compile Include="Configuration\Sites\RemoveCmsSiteBusinessTests.cs" />
+    <Compile Include="Configuration\Sites\SetCmsSiteBusinessTests.cs" />
     <Compile Include="Configuration\Sites\SiteServiceMock.cs" />
     <Compile Include="Development\GetCMSWebPartCategoryTests.cs" />
     <Compile Include="Development\NewCMSWebPartCategoryTests.cs" />

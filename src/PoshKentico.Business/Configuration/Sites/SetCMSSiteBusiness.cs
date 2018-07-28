@@ -1,4 +1,4 @@
-﻿// <copyright file="SetCMSSiteBusiness.cs" company="Chris Crutchfield">
+﻿// <copyright file="SetCmsSiteBusiness.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -26,8 +26,8 @@ namespace PoshKentico.Business.Configuration.Sites
     /// <summary>
     /// Business Layer for the Set-CMSSite cmdlet.
     /// </summary>
-    [Export(typeof(SetCMSSiteBusiness))]
-    public class SetCMSSiteBusiness : CmdletBusinessBase
+    [Export(typeof(SetCmsSiteBusiness))]
+    public class SetCmsSiteBusiness : CmdletBusinessBase
     {
         #region Properties
 
@@ -74,7 +74,7 @@ namespace PoshKentico.Business.Configuration.Sites
                 DisplayName = displayName,
                 SiteName = siteName,
                 Status = status,
-                DomianName = domainName,
+                DomainName = domainName,
             };
 
             this.SiteService.Update(site.ActLike<ISite>());

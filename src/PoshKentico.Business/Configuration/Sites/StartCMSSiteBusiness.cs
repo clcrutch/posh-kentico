@@ -1,4 +1,4 @@
-﻿// <copyright file="StartCMSSiteBusiness.cs" company="Chris Crutchfield">
+﻿// <copyright file="StartCmsSiteBusiness.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -24,8 +24,8 @@ namespace PoshKentico.Business.Configuration.Sites
     /// <summary>
     /// Business Layer for the Start-CMSSite cmdlet.
     /// </summary>
-    [Export(typeof(StartCMSSiteBusiness))]
-    public class StartCMSSiteBusiness : CmdletBusinessBase
+    [Export(typeof(StartCmsSiteBusiness))]
+    public class StartCmsSiteBusiness : CmdletBusinessBase
     {
         #region Properties
 

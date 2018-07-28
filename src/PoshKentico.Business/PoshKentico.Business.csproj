@@ -456,12 +456,12 @@
     <Compile Include="Configuration\Sites\GetCmsSiteCultureBusiness.cs" />
     <Compile Include="Configuration\Sites\GetCmsSiteDomainAliasBusiness.cs" />
     <Compile Include="Configuration\Sites\NewCmsSiteBusiness.cs" />
-    <Compile Include="Configuration\Sites\RemoveCMSSiteBusiness.cs" />
+    <Compile Include="Configuration\Sites\RemoveCmsSiteBusiness.cs" />
     <Compile Include="Configuration\Sites\RemoveCmsSiteCultureBusiness.cs" />
     <Compile Include="Configuration\Sites\RemoveCmsSiteDomainAliasBusiness.cs" />
-    <Compile Include="Configuration\Sites\SetCMSSiteBusiness.cs" />
-    <Compile Include="Configuration\Sites\StartCMSSiteBusiness.cs" />
-    <Compile Include="Configuration\Sites\StopCMSSiteBusiness.cs" />
+    <Compile Include="Configuration\Sites\SetCmsSiteBusiness.cs" />
+    <Compile Include="Configuration\Sites\StartCmsSiteBusiness.cs" />
+    <Compile Include="Configuration\Sites\StopCmsSiteBusiness.cs" />
     <Compile Include="Development\GetCMSWebPartCategoryBusiness.cs" />
     <Compile Include="Development\NewCMSWebPartCategoryBusiness.cs" />
     <Compile Include="Development\RemoveCMSWebPartCategoryBusiness.cs" />

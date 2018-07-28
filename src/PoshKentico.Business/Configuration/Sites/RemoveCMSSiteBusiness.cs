@@ -1,4 +1,4 @@
-﻿// <copyright file="RemoveCMSSiteBusiness.cs" company="Chris Crutchfield">
+﻿// <copyright file="RemoveCmsSiteBusiness.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -26,8 +26,8 @@ namespace PoshKentico.Business.Configuration.Sites
     /// <summary>
     /// Business Layer for the Remove-CMSSite cmdlet.
     /// </summary>
-    [Export(typeof(RemoveCMSSiteBusiness))]
-    public class RemoveCMSSiteBusiness : CmdletBusinessBase
+    [Export(typeof(RemoveCmsSiteBusiness))]
+    public class RemoveCmsSiteBusiness : CmdletBusinessBase
     {
         #region Properties
 
@@ -97,7 +97,7 @@ namespace PoshKentico.Business.Configuration.Sites
         /// Deletes the specified <see cref="ISite"/> in the CMS System.
         /// </summary>
         /// <param name="site">The <see cref="ISite"/> to set.</param>
-        public void RemoveSite(ISite site)
+        private void RemoveSite(ISite site)
         {
             if (this.ShouldProcess(site.SiteName, "delete"))
             {
