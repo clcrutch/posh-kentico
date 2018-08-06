@@ -43,6 +43,8 @@ namespace PoshKentico
         {
             MefHost.Initialize();
 
+            MefHost.Container.ComposeParts(this);
+
             var businessLayerProps = (from p in this.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public)
                                       where p.PropertyType.InheritsFrom(typeof(CmdletBusinessBase))
                                       select p).ToArray();
@@ -53,9 +55,9 @@ namespace PoshKentico
                 instance.WriteDebug = this.WriteDebug;
                 instance.WriteVerbose = this.WriteVerbose;
                 instance.ShouldProcess = this.ShouldProcess;
-            }
 
-            MefHost.Container.ComposeParts(this);
+                instance.Initialize();
+            }
         }
 
         #endregion
