@@ -15,23 +15,70 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Management.Automation;
-using System.Text;
-using System.Threading.Tasks;
+using ImpromptuInterface;
+using PoshKentico.Business.Development.WebParts;
+using PoshKentico.Core.Services.Development.WebParts;
+
+using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.Development.WebParts
 {
     /// <summary>
     /// <para type="synopsis">Gets the web parts selected by the provided input.</para>
+    /// <para type="description">Gets the web parts selected b y the provided input.  This command automatically initializes the connection to Kentico if not already initialized.</para>
+    /// <para type="description"></para>
+    /// <para type="description">Without parameters, this command returns all webparts.</para>
+    /// <example>
+    ///     <para>Get all the webparts.</para>
+    ///     <code>Get-CMSWebPart</code>
+    /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
-    [Cmdlet(VerbsCommon.Get, "CMSWebPart")]
+    [Cmdlet(VerbsCommon.Get, "CMSWebPart", DefaultParameterSetName = NONE)]
     [Alias("gwp")]
     public class GetCMSWebPartCmdlet : MefCmdlet
     {
+        #region Constants
+
+        private const string NONE = "None";
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the Business layer for this web part. Populated by MEF.
+        /// </summary>
+        [Import]
+        public GetCMSWebPartBusiness BusinessLayer { get; set; }
+
+        #endregion
+
+        #region Methods
+
+        /// <inheritdoc />
+        protected override void ProcessRecord()
+        {
+            IEnumerable<IWebPart> webparts = null;
+
+            switch (this.ParameterSetName)
+            {
+                case NONE:
+                    webparts = this.BusinessLayer.GetWebParts();
+                    break;
+            }
+
+            foreach (var webpart in webparts)
+            {
+                this.WriteObject(webpart.UndoActLike());
+            }
+        }
+
+        #endregion
+
     }
 }

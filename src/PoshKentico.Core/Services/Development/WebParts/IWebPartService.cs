@@ -27,6 +27,11 @@ namespace PoshKentico.Core.Services.Development.WebParts
         #region Properties
 
         /// <summary>
+        /// Gets a list of all of the <see cref="IWebPart"/> provided by the CMS System.
+        /// </summary>
+        IEnumerable<IWebPart> WebParts { get; }
+
+        /// <summary>
         /// Gets a list of all of the <see cref="IWebPartCategory"/> provided by the CMS System.
         /// </summary>
         IEnumerable<IWebPartCategory> WebPartCategories { get; }

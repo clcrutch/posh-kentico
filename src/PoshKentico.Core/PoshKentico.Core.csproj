@@ -454,6 +454,7 @@
     <Compile Include="Providers\General\KenticoCmsApplicationService.cs" />
     <Compile Include="Providers\Development\WebParts\KenticoWebPartService.cs" />
     <Compile Include="Providers\General\KenticoSiteLocationCache.cs" />
+    <Compile Include="Services\Development\WebParts\IWebPart.cs" />
     <Compile Include="Services\Development\WebParts\IWebPartCategory.cs" />
     <Compile Include="Services\Development\WebParts\IWebPartService.cs" />
     <Compile Include="Services\General\ICmsApplicationService.cs" />

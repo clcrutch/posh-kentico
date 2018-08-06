@@ -33,6 +33,12 @@ namespace PoshKentico.Core.Providers.Development.WebParts
         #region Properties
 
         /// <summary>
+        /// Gets a list of all of the <see cref="IWebPart"/> provided by Kentico.
+        /// </summary>
+        public IEnumerable<IWebPart> WebParts => (from wp in WebPartInfoProvider.GetWebParts()
+                                                  select Impromptu.ActLike<IWebPart>(wp as WebPartInfo)).ToArray();
+
+        /// <summary>
         /// Gets a list of all of the <see cref="IWebPartCategory"/> provided by Kentico.
         /// </summary>
         public IEnumerable<IWebPartCategory> WebPartCategories => (from c in WebPartCategoryInfoProvider.GetCategories()

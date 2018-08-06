@@ -210,6 +210,8 @@ namespace PoshKentico.Tests.Development.WebParts
         {
             private IWebPartCategory webPartCategory;
 
+            public abstract IEnumerable<IWebPart> WebParts { get; }
+
             public abstract IEnumerable<IWebPartCategory> WebPartCategories { get; }
 
             public IWebPartCategory Create(IWebPartCategory webPartCategory)

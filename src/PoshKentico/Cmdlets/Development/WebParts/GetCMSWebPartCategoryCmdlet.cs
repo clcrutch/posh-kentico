@@ -22,8 +22,8 @@ using System.Management.Automation;
 using CMS.PortalEngine;
 using ImpromptuInterface;
 using PoshKentico.Business.Development.WebParts;
-using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.Development.WebParts;
+
 using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.Development.WebPart
