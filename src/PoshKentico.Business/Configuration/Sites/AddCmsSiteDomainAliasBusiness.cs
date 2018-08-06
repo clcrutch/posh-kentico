@@ -17,7 +17,6 @@
 
 using System.ComponentModel.Composition;
 using PoshKentico.Core.Services.Configuration;
-using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.Business.Configuration.Sites
 {
@@ -28,12 +27,6 @@ namespace PoshKentico.Business.Configuration.Sites
     public class AddCmsSiteDomainAliasBusiness : CmdletBusinessBase
     {
         #region Properties
-
-        /// <summary>
-        /// Gets or sets a reference to the CMS Application Service.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public ICmsApplicationService CmsApplicationService { get; set; }
 
         /// <summary>
         /// Gets or sets a reference to the Site Service.  Populated by MEF.
@@ -57,8 +50,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <param name="aliasName">the domain alias code for the domain alias to add to the site</param>
         public void AddDomainAlias(ISite site, string aliasName)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             this.AddSiteDomainAlias(site, aliasName);
         }
 
@@ -70,8 +61,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <param name="aliasName">the domain alias code for the domain alias to add to the site</param>
         public void AddDomainAlias(string matchString, bool exact, string aliasName)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             foreach (var site in this.GetCmsSiteBusiness.GetSites(matchString, exact))
             {
                 this.AddSiteDomainAlias(site, aliasName);
@@ -85,8 +74,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <param name="aliasName">the domain alias code for the domain alias to add to the site</param>
         public void AddDomainAlias(int[] ids, string aliasName)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             foreach (var site in this.GetCmsSiteBusiness.GetSites(ids))
             {
                 this.AddSiteDomainAlias(site, aliasName);

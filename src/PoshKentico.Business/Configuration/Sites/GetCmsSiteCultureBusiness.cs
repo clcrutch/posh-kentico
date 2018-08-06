@@ -31,12 +31,6 @@ namespace PoshKentico.Business.Configuration.Sites
         #region Properties
 
         /// <summary>
-        /// Gets or sets a reference to the CMS Application Service.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public ICmsApplicationService CmsApplicationService { get; set; }
-
-        /// <summary>
         /// Gets or sets a reference to the Site Service.  Populated by MEF.
         /// </summary>
         [Import]
@@ -56,12 +50,7 @@ namespace PoshKentico.Business.Configuration.Sites
         /// </summary>
         /// <param name="site">the site to get culture from.</param>
         /// <returns>Returns the list containing the cultures of the specified site.</returns>
-        public IEnumerable<ICulture> GetCultures(ISite site)
-        {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
-            return this.GetSiteCultures(site);
-        }
+        public IEnumerable<ICulture> GetCultures(ISite site) => this.GetSiteCultures(site);
 
         /// <summary>
         /// Gets the cultures of the specified site.
@@ -70,8 +59,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <returns>Returns the list containing the cultures of the specified site.</returns>
         public IEnumerable<ICulture> GetCultures(string siteName)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             var site = this.SiteService.GetSite(siteName);
 
             return this.GetSiteCultures(site);

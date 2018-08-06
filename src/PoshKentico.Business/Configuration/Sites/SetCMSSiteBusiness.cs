@@ -19,7 +19,6 @@ using System.ComponentModel.Composition;
 using CMS.SiteProvider;
 using ImpromptuInterface;
 using PoshKentico.Core.Services.Configuration;
-using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.Business.Configuration.Sites
 {
@@ -30,12 +29,6 @@ namespace PoshKentico.Business.Configuration.Sites
     public class SetCmsSiteBusiness : CmdletBusinessBase
     {
         #region Properties
-
-        /// <summary>
-        /// Gets or sets a reference to the CMS Application Service.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public ICmsApplicationService CmsApplicationService { get; set; }
 
         /// <summary>
         /// Gets or sets a reference to the Site Service.  Populated by MEF.
@@ -53,8 +46,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <param name="site">The <see cref="ISite"/> to set.</param>
         public void Set(ISite site)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             this.SiteService.Update(site);
         }
 
@@ -67,8 +58,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <param name="domainName">The Domain Name for site to update</param>
         public void Set(string displayName, string siteName, SiteStatusEnum status, string domainName)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             var site = new
             {
                 DisplayName = displayName,

@@ -32,12 +32,6 @@ namespace PoshKentico.Business.Configuration.Sites
         #region Properties
 
         /// <summary>
-        /// Gets or sets a reference to the CMS Application Service.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public ICmsApplicationService CmsApplicationService { get; set; }
-
-        /// <summary>
         /// Gets or sets a reference to the Site Service.  Populated by MEF.
         /// </summary>
         [Import]

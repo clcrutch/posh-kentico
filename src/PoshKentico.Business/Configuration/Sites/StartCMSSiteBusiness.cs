@@ -17,7 +17,6 @@
 
 using System.ComponentModel.Composition;
 using PoshKentico.Core.Services.Configuration;
-using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.Business.Configuration.Sites
 {
@@ -28,12 +27,6 @@ namespace PoshKentico.Business.Configuration.Sites
     public class StartCmsSiteBusiness : CmdletBusinessBase
     {
         #region Properties
-
-        /// <summary>
-        /// Gets or sets a reference to the CMS Application Service.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public ICmsApplicationService CmsApplicationService { get; set; }
 
         /// <summary>
         /// Gets or sets a reference to the Site Service.  Populated by MEF.
@@ -56,8 +49,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <param name="site">The <see cref="ISite"/> to set.</param>
         public void Start(ISite site)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             this.StartSite(site);
         }
 
@@ -67,8 +58,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <param name="ids">The IDs of the <see cref="ISite"/> to delete.</param>
         public void Start(params int[] ids)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             foreach (var site in this.GetCmsSiteBusiness.GetSites(ids))
             {
                 this.StartSite(site);
@@ -82,8 +71,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <param name="exact">A boolean which indicates if the match should be exact.</param>
         public void Start(string matchString, bool exact)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             foreach (var site in this.GetCmsSiteBusiness.GetSites(matchString, exact))
             {
                 this.StartSite(site);
@@ -96,8 +83,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <param name="site">The <see cref="ISite"/> to set.</param>
         public void StartSite(ISite site)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             this.SiteService.Start(site);
         }
 

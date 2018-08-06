@@ -20,7 +20,6 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using PoshKentico.Core.Services.Configuration;
-using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.Business.Configuration.Sites
 {
@@ -31,12 +30,6 @@ namespace PoshKentico.Business.Configuration.Sites
     public class GetCmsSiteBusiness : CmdletBusinessBase
     {
         #region Properties
-
-        /// <summary>
-        /// Gets or sets a reference to the CMS Application Service.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public ICmsApplicationService CmsApplicationService { get; set; }
 
         /// <summary>
         /// Gets or sets a reference to the Site Service.  Populated by MEF.
@@ -53,8 +46,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <returns>A list of all of the <see cref="ISite"/>.</returns>
         public IEnumerable<ISite> GetSites()
         {
-            this.CmsApplicationService.Initialize(true, this.WriteVerbose, this.WriteDebug);
-
             return this.SiteService.Sites;
         }
 
@@ -66,8 +57,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <returns>A list of all of the <see cref="ISite"/> which match the specified criteria.</returns>
         public IEnumerable<ISite> GetSites(string matchString, bool exact)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteVerbose, this.WriteDebug);
-
             if (exact)
             {
                 return (from c in this.SiteService.Sites
@@ -95,8 +84,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <returns>A list of the <see cref="ISite"/> which match the supplied IDs.</returns>
         public IEnumerable<ISite> GetSites(params int[] ids)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteVerbose, this.WriteDebug);
-
             var sites = from id in ids select this.SiteService.GetSite(id);
 
             return (from site in sites

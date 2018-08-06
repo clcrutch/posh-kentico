@@ -15,13 +15,11 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using System;
 using System.ComponentModel.Composition;
 using System.Globalization;
 using CMS.SiteProvider;
 using ImpromptuInterface;
 using PoshKentico.Core.Services.Configuration;
-using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.Business.Configuration.Sites
 {
@@ -32,12 +30,6 @@ namespace PoshKentico.Business.Configuration.Sites
     public class NewCmsSiteBusiness : CmdletBusinessBase
     {
         #region Properties
-
-        /// <summary>
-        /// Gets or sets a reference to the CMS Application Service.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public ICmsApplicationService CmsApplicationService { get; set; }
 
         /// <summary>
         /// Gets or sets a reference to the Site Service.  Populated by MEF.
@@ -58,8 +50,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <returns>A list of all of the <see cref="ISite"/>.</returns>
         public ISite CreateSite(string displayName, string siteName, SiteStatusEnum status, string domainName)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteVerbose, this.WriteDebug);
-
             TextInfo txtInfo = new CultureInfo("en-us", false).TextInfo;
             var newSiteName = string.IsNullOrEmpty(siteName) ? txtInfo.ToTitleCase(displayName).Replace(" ", string.Empty) : siteName;
 

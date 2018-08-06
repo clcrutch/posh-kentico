@@ -30,12 +30,6 @@ namespace PoshKentico.Business.Configuration.Sites
         #region Properties
 
         /// <summary>
-        /// Gets or sets a reference to the CMS Application Service.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public ICmsApplicationService CmsApplicationService { get; set; }
-
-        /// <summary>
         /// Gets or sets a reference to the Site Service.  Populated by MEF.
         /// </summary>
         [Import]
@@ -57,8 +51,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <param name="cultureCode">the culture code for the culture to remove to the site</param>
         public void RemoveCulture(ISite site, string cultureCode)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             this.RemoveSiteCulture(site, cultureCode);
         }
 
@@ -70,8 +62,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <param name="cultureCode">the culture code for the culture to remove to the site</param>
         public void RemoveCulture(string matchString, bool exact, string cultureCode)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             foreach (var site in this.GetCmsSiteBusiness.GetSites(matchString, exact))
             {
                 this.RemoveSiteCulture(site, cultureCode);
@@ -85,8 +75,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <param name="cultureCode">the culture code for the culture to remove from the site</param>
         public void RemoveCulture(int[] ids, string cultureCode)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             foreach (var site in this.GetCmsSiteBusiness.GetSites(ids))
             {
                 this.RemoveSiteCulture(site, cultureCode);

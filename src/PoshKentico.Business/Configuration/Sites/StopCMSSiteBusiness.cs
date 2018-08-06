@@ -30,12 +30,6 @@ namespace PoshKentico.Business.Configuration.Sites
         #region Properties
 
         /// <summary>
-        /// Gets or sets a reference to the CMS Application Service.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public ICmsApplicationService CmsApplicationService { get; set; }
-
-        /// <summary>
         /// Gets or sets a reference to the Site Service.  Populated by MEF.
         /// </summary>
         [Import]
@@ -56,8 +50,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <param name="site">The <see cref="ISite"/> to set.</param>
         public void Stop(ISite site)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             this.StopSite(site);
         }
 
@@ -67,8 +59,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <param name="ids">The IDs of the <see cref="ISite"/> to delete.</param>
         public void Stop(params int[] ids)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             foreach (var site in this.GetCmsSiteBusiness.GetSites(ids))
             {
                 this.StopSite(site);
@@ -82,8 +72,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <param name="exact">A boolean which indicates if the match should be exact.</param>
         public void Stop(string matchString, bool exact)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             foreach (var site in this.GetCmsSiteBusiness.GetSites(matchString, exact))
             {
                 this.StopSite(site);
@@ -96,8 +84,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <param name="site">The <see cref="ISite"/> to set.</param>
         public void StopSite(ISite site)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             this.SiteService.Stop(site);
         }
 

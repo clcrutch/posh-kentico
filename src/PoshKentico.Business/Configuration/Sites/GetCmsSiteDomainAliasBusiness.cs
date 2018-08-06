@@ -31,12 +31,6 @@ namespace PoshKentico.Business.Configuration.Sites
         #region Properties
 
         /// <summary>
-        /// Gets or sets a reference to the CMS Application Service.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public ICmsApplicationService CmsApplicationService { get; set; }
-
-        /// <summary>
         /// Gets or sets a reference to the Site Service.  Populated by MEF.
         /// </summary>
         [Import]
@@ -56,12 +50,7 @@ namespace PoshKentico.Business.Configuration.Sites
         /// </summary>
         /// <param name="site">the site to get DomainAlias from.</param>
         /// <returns>Returns the list containing the Domain Aliases of the specified site.</returns>
-        public IEnumerable<ISiteDomainAlias> GetDomainAliases(ISite site)
-        {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
-            return this.GetSiteDomainAliases(site);
-        }
+        public IEnumerable<ISiteDomainAlias> GetDomainAliases(ISite site) => this.GetSiteDomainAliases(site);
 
         /// <summary>
         /// Gets the Domain Aliases of the specified site.
@@ -70,8 +59,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <returns>Returns the list containing the Domain Aliases of the specified site.</returns>
         public IEnumerable<ISiteDomainAlias> GetDomainAliases(string siteName)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             var site = this.SiteService.GetSite(siteName);
 
             return this.GetSiteDomainAliases(site);

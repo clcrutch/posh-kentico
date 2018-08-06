@@ -17,7 +17,6 @@
 
 using System.ComponentModel.Composition;
 using PoshKentico.Core.Services.Configuration;
-using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.Business.Configuration.Sites
 {
@@ -28,12 +27,6 @@ namespace PoshKentico.Business.Configuration.Sites
     public class AddCmsSiteCultureBusiness : CmdletBusinessBase
     {
         #region Properties
-
-        /// <summary>
-        /// Gets or sets a reference to the CMS Application Service.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public ICmsApplicationService CmsApplicationService { get; set; }
 
         /// <summary>
         /// Gets or sets a reference to the Site Service.  Populated by MEF.
@@ -57,8 +50,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <param name="cultureCode">the culture code for the culture to add to the site</param>
         public void AddCulture(ISite site, string cultureCode)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             this.AddSiteCulture(site, cultureCode);
         }
 
@@ -70,8 +61,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <param name="cultureCode">the culture code for the culture to add to the site</param>
         public void AddCulture(string matchString, bool exact, string cultureCode)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             foreach (var site in this.GetCmsSiteBusiness.GetSites(matchString, exact))
             {
                 this.AddSiteCulture(site, cultureCode);
@@ -85,8 +74,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <param name="cultureCode">the culture code for the culture to add to the site</param>
         public void AddCulture(int[] ids, string cultureCode)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             foreach (var site in this.GetCmsSiteBusiness.GetSites(ids))
             {
                 this.AddSiteCulture(site, cultureCode);

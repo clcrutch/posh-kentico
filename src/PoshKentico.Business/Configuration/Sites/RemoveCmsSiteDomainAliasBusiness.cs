@@ -30,12 +30,6 @@ namespace PoshKentico.Business.Configuration.Sites
         #region Properties
 
         /// <summary>
-        /// Gets or sets a reference to the CMS Application Service.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public ICmsApplicationService CmsApplicationService { get; set; }
-
-        /// <summary>
         /// Gets or sets a reference to the Site Service.  Populated by MEF.
         /// </summary>
         [Import]
@@ -57,8 +51,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <param name="aliasName">the domain alias code for the domain alias to add to the site</param>
         public void RemoveDomainAlias(ISite site, string aliasName)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             this.RemoveSiteDomainAlias(site, aliasName);
         }
 
@@ -70,8 +62,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <param name="aliasName">the domain alias code for the domain alias to add to the site</param>
         public void RemoveDomainAlias(string matchString, bool exact, string aliasName)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             foreach (var site in this.GetCmsSiteBusiness.GetSites(matchString, exact))
             {
                 this.RemoveSiteDomainAlias(site, aliasName);
@@ -85,8 +75,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <param name="aliasName">the domain alias code for the domain alias to add to the site</param>
         public void RemoveDomainAlias(int[] ids, string aliasName)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             foreach (var site in this.GetCmsSiteBusiness.GetSites(ids))
             {
                 this.RemoveSiteDomainAlias(site, aliasName);
