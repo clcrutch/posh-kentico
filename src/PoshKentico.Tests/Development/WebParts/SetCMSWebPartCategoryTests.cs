@@ -17,11 +17,11 @@
 
 using Moq;
 using NUnit.Framework;
-using PoshKentico.Business.Development;
-using PoshKentico.Core.Services.Development;
+using PoshKentico.Business.Development.WebParts;
+using PoshKentico.Core.Services.Development.WebParts;
 using PoshKentico.Core.Services.General;
 
-namespace PoshKentico.Tests.Development
+namespace PoshKentico.Tests.Development.WebParts
 {
     [TestFixture]
     public class SetCMSWebPartCategoryTests

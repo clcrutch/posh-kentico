@@ -1,4 +1,4 @@
-﻿// <copyright file="RemoveCMSWebPartCategoryTests.cs" company="Chris Crutchfield">
+﻿// <copyright file="GetCMSWebPartCategoryTests.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -16,20 +16,43 @@
 // </copyright>
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using PoshKentico.Business.Development;
-using PoshKentico.Core.Services.Development;
+using PoshKentico.Business.Development.WebParts;
+using PoshKentico.Core.Services.Development.WebParts;
 using PoshKentico.Core.Services.General;
 
-namespace PoshKentico.Tests.Development
+namespace PoshKentico.Tests.Development.WebParts
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
-    public class RemoveCMSWebPartCategoryTests
+    public class GetCMSWebPartCategoryTests
     {
         [TestCase]
-        public void RemoveWebPartCategories_MatchString_ExactFalse()
+        public void GetWebPartCategories_NoParameters()
+        {
+            var applicationServiceMock = new Mock<ICmsApplicationService>();
+            var webPartServiceMock = new Mock<IWebPartService>();
+
+            var businessLayer = new GetCMSWebPartCategoryBusiness()
+            {
+                WriteDebug = Assert.NotNull,
+                WriteVerbose = Assert.NotNull,
+
+                CmsApplicationService = applicationServiceMock.Object,
+                WebPartService = webPartServiceMock.Object,
+            };
+
+            businessLayer.GetWebPartCategories();
+
+            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
+            webPartServiceMock.VerifyGet(x => x.WebPartCategories);
+        }
+
+        [TestCase]
+        public void GetWebPartCategories_MatchString_ExactFalse()
         {
             var applicationServiceMock = new Mock<ICmsApplicationService>();
 
@@ -51,7 +74,7 @@ namespace PoshKentico.Tests.Development
 
             webPartServiceMock.SetupGet(x => x.WebPartCategories).Returns(webPartCategories);
 
-            var getBusinessLayer = new GetCMSWebPartCategoryBusiness()
+            var businessLayer = new GetCMSWebPartCategoryBusiness()
             {
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
@@ -60,47 +83,32 @@ namespace PoshKentico.Tests.Development
                 WebPartService = webPartServiceMock.Object,
             };
 
-            var removeBusinessLayer = new RemoveCMSWebPartCategoryBusiness()
-            {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-                ShouldProcess = (x, y) => true,
-
-                CmsApplicationService = applicationServiceMock.Object,
-                WebPartService = webPartServiceMock.Object,
-
-                GetCMSWebPartCategoryBusiness = getBusinessLayer,
-            };
-
-            removeBusinessLayer.RemoveWebPartCategories("my", false);
+            businessLayer.GetWebPartCategories("my", false).Should().NotBeNullOrEmpty().And.HaveCount(1);
 
             applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
-            webPartServiceMock.Verify(x => x.Delete(catMock1.Object));
-            webPartServiceMock.Verify(x => x.Delete(catMock2.Object), Times.Never);
+            webPartServiceMock.VerifyGet(x => x.WebPartCategories);
 
             // Reset to go again.
             applicationServiceMock.ResetCalls();
             webPartServiceMock.ResetCalls();
 
-            removeBusinessLayer.RemoveWebPartCategories("/my", false);
+            businessLayer.GetWebPartCategories("/my", false).Should().NotBeNullOrEmpty().And.HaveCount(2);
 
             applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
-            webPartServiceMock.Verify(x => x.Delete(catMock1.Object));
-            webPartServiceMock.Verify(x => x.Delete(catMock2.Object));
+            webPartServiceMock.VerifyGet(x => x.WebPartCategories);
 
             // Reset to go again.
             applicationServiceMock.ResetCalls();
             webPartServiceMock.ResetCalls();
 
-            removeBusinessLayer.RemoveWebPartCategories("/ny", false);
+            businessLayer.GetWebPartCategories("/ny", false).Should().NotBeNull().And.BeEmpty();
 
             applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
-            webPartServiceMock.Verify(x => x.Delete(catMock1.Object), Times.Never);
-            webPartServiceMock.Verify(x => x.Delete(catMock2.Object), Times.Never);
+            webPartServiceMock.VerifyGet(x => x.WebPartCategories);
         }
 
         [TestCase]
-        public void RemoveWebPartCategories_MatchString_ExactTrue()
+        public void GetWebPartCategories_MatchString_ExactTrue()
         {
             var applicationServiceMock = new Mock<ICmsApplicationService>();
 
@@ -122,7 +130,7 @@ namespace PoshKentico.Tests.Development
 
             webPartServiceMock.SetupGet(x => x.WebPartCategories).Returns(webPartCategories);
 
-            var getBusinessLayer = new GetCMSWebPartCategoryBusiness()
+            var businessLayer = new GetCMSWebPartCategoryBusiness()
             {
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
@@ -131,57 +139,41 @@ namespace PoshKentico.Tests.Development
                 WebPartService = webPartServiceMock.Object,
             };
 
-            var removeBusinessLayer = new RemoveCMSWebPartCategoryBusiness()
-            {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-                ShouldProcess = (x, y) => true,
-
-                CmsApplicationService = applicationServiceMock.Object,
-                WebPartService = webPartServiceMock.Object,
-
-                GetCMSWebPartCategoryBusiness = getBusinessLayer,
-            };
-
-            removeBusinessLayer.RemoveWebPartCategories("my", true);
+            businessLayer.GetWebPartCategories("my", true).Should().NotBeNull().And.BeEmpty();
 
             applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
-            webPartServiceMock.Verify(x => x.Delete(catMock1.Object), Times.Never);
-            webPartServiceMock.Verify(x => x.Delete(catMock2.Object), Times.Never);
+            webPartServiceMock.VerifyGet(x => x.WebPartCategories);
 
             // Reset to go again.
             applicationServiceMock.ResetCalls();
             webPartServiceMock.ResetCalls();
 
-            removeBusinessLayer.RemoveWebPartCategories("/my", true);
+            businessLayer.GetWebPartCategories("/my", true).Should().NotBeNull().And.BeEmpty();
 
             applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
-            webPartServiceMock.Verify(x => x.Delete(catMock1.Object), Times.Never);
-            webPartServiceMock.Verify(x => x.Delete(catMock2.Object), Times.Never);
+            webPartServiceMock.VerifyGet(x => x.WebPartCategories);
 
             // Reset to go again.
             applicationServiceMock.ResetCalls();
             webPartServiceMock.ResetCalls();
 
-            removeBusinessLayer.RemoveWebPartCategories("my Category", true);
+            businessLayer.GetWebPartCategories("my Category", true).Should().NotBeNullOrEmpty().And.HaveCount(1);
 
             applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
-            webPartServiceMock.Verify(x => x.Delete(catMock1.Object));
-            webPartServiceMock.Verify(x => x.Delete(catMock2.Object), Times.Never);
+            webPartServiceMock.VerifyGet(x => x.WebPartCategories);
 
             // Reset to go again.
             applicationServiceMock.ResetCalls();
             webPartServiceMock.ResetCalls();
 
-            removeBusinessLayer.RemoveWebPartCategories("NyCategory", true);
+            businessLayer.GetWebPartCategories("NyCategory", true).Should().NotBeNullOrEmpty().And.HaveCount(1);
 
             applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
-            webPartServiceMock.Verify(x => x.Delete(catMock1.Object), Times.Never);
-            webPartServiceMock.Verify(x => x.Delete(catMock2.Object));
+            webPartServiceMock.VerifyGet(x => x.WebPartCategories);
         }
 
         [TestCase]
-        public void RemoveWebPartCategories_IDs()
+        public void GetWebPartCategories_IDs()
         {
             var applicationServiceMock = new Mock<ICmsApplicationService>();
 
@@ -202,7 +194,7 @@ namespace PoshKentico.Tests.Development
             webPartServiceMock.Setup(x => x.GetWebPartCategory(255)).Returns(catMock1.Object);
             webPartServiceMock.Setup(x => x.GetWebPartCategory(101)).Returns(catMock2.Object);
 
-            var getBusinessLayer = new GetCMSWebPartCategoryBusiness()
+            var businessLayer = new GetCMSWebPartCategoryBusiness()
             {
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
@@ -211,63 +203,12 @@ namespace PoshKentico.Tests.Development
                 WebPartService = webPartServiceMock.Object,
             };
 
-            var removeBusinessLayer = new RemoveCMSWebPartCategoryBusiness()
-            {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-                ShouldProcess = (x, y) => true,
-
-                CmsApplicationService = applicationServiceMock.Object,
-                WebPartService = webPartServiceMock.Object,
-
-                GetCMSWebPartCategoryBusiness = getBusinessLayer,
-            };
-
-            removeBusinessLayer.RemoveWebPartCategories(255, 101, 5);
+            businessLayer.GetWebPartCategories(255, 101, 5).Should().NotBeNull().And.HaveCount(2);
 
             applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
-            webPartServiceMock.Verify(x => x.Delete(catMock1.Object));
-            webPartServiceMock.Verify(x => x.Delete(catMock2.Object));
-        }
-
-        [TestCase]
-        public void RemoveWebPartCategories_ByWebPartCategory()
-        {
-            var applicationServiceMock = new Mock<ICmsApplicationService>();
-
-            var webPartServiceMock = new Mock<IWebPartService>();
-
-            var catMock1 = new Mock<IWebPartCategory>();
-            catMock1.SetupGet(x => x.CategoryDisplayName).Returns("My Category");
-            catMock1.SetupGet(x => x.CategoryName).Returns("MyCategory");
-            catMock1.SetupGet(x => x.CategoryPath).Returns("/my/category");
-            catMock1.SetupGet(x => x.CategoryID).Returns(255);
-
-            var getBusinessLayer = new GetCMSWebPartCategoryBusiness()
-            {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-
-                CmsApplicationService = applicationServiceMock.Object,
-                WebPartService = webPartServiceMock.Object,
-            };
-
-            var removeBusinessLayer = new RemoveCMSWebPartCategoryBusiness()
-            {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-                ShouldProcess = (x, y) => true,
-
-                CmsApplicationService = applicationServiceMock.Object,
-                WebPartService = webPartServiceMock.Object,
-
-                GetCMSWebPartCategoryBusiness = getBusinessLayer,
-            };
-
-            removeBusinessLayer.RemoveWebPartCategory(catMock1.Object);
-
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
-            webPartServiceMock.Verify(x => x.Delete(catMock1.Object));
+            webPartServiceMock.Verify(x => x.GetWebPartCategory(255));
+            webPartServiceMock.Verify(x => x.GetWebPartCategory(101));
+            webPartServiceMock.Verify(x => x.GetWebPartCategory(5));
         }
     }
 }
