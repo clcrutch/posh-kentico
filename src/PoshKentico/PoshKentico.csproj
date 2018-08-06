@@ -483,16 +483,7 @@
     <Compile Include="Extensions\PSObjectExtensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="MefHost.cs" />
-    <Compile Include="Navigation\DynamicParameters\NewWebPartCategoryDynamicParameter.cs" />
-    <Compile Include="Navigation\DynamicParameters\NewWebPartDynamicParameter.cs" />
-    <Compile Include="Navigation\FileSystemItems\AbstractFileSystemItem.cs" />
-    <Compile Include="Navigation\FileSystemItems\RootFileSystemItem.cs" />
-    <Compile Include="Navigation\FileSystemItems\WebPartCategoryFileSystemItem.cs" />
-    <Compile Include="Navigation\FileSystemItems\IFileSystemItem.cs" />
-    <Compile Include="Navigation\FileSystemItems\WebPartFileSystemItem.cs" />
-    <Compile Include="Navigation\KenticoNavigationCmdletProvider.cs" />
     <Compile Include="Cmdlets\General\InitializeCMSApplicationCmdlet.cs" />
-    <Compile Include="Navigation\FileSystemItems\MetaFileSystemItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -517,7 +508,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <AdditionalFiles Include="stylecop.json" />
-    <None Include="TestScript.ps1" />
+    <None Include="TestScript.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\AWSSDK.S3.3.1.9.0\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />

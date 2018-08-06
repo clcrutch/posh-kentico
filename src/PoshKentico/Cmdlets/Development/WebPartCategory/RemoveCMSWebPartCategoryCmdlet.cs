@@ -25,7 +25,7 @@ using PoshKentico.Core.Services.Development;
 
 using AliasAttribute = System.Management.Automation.AliasAttribute;
 
-namespace PoshKentico.Cmdlets.Development
+namespace PoshKentico.Cmdlets.Development.WebPartCategory
 {
     /// <summary>
     /// <para type="synopsis">Deletes the web part categories selected by the provided input.</para>
