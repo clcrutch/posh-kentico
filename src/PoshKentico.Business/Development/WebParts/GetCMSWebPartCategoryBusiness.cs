@@ -19,10 +19,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
-using PoshKentico.Core.Services.Development;
+using PoshKentico.Core.Services.Development.WebParts;
 using PoshKentico.Core.Services.General;
 
-namespace PoshKentico.Business.Development
+namespace PoshKentico.Business.Development.WebParts
 {
     /// <summary>
     /// Business layer for the Get-CMSWebPartCategory cmdlet.

@@ -473,10 +473,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cmdlets\Development\GetCMSWebPartCategoryCmdlet.cs" />
-    <Compile Include="Cmdlets\Development\NewCMSWebPartCategoryCmdlet.cs" />
-    <Compile Include="Cmdlets\Development\RemoveCMSWebPartCategoryCmdlet.cs" />
-    <Compile Include="Cmdlets\Development\SetCMSWebPartCategoryCmdlet.cs" />
+    <Compile Include="Cmdlets\Development\WebParts\GetCMSWebPartCmdlet.cs" />
+    <Compile Include="Cmdlets\Development\WebParts\GetCMSWebPartCategoryCmdlet.cs" />
+    <Compile Include="Cmdlets\Development\WebParts\NewCMSWebPartCategoryCmdlet.cs" />
+    <Compile Include="Cmdlets\Development\WebParts\RemoveCMSWebPartCategoryCmdlet.cs" />
+    <Compile Include="Cmdlets\Development\WebParts\SetCMSWebPartCategoryCmdlet.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="MefCmdlet.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />

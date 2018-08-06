@@ -15,7 +15,7 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-namespace PoshKentico.Core.Services.Development
+namespace PoshKentico.Core.Services.Development.WebParts
 {
     /// <summary>
     /// Represents a WebPart Category.

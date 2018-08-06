@@ -17,7 +17,7 @@
 
 using System.Collections.Generic;
 
-namespace PoshKentico.Core.Services.Development
+namespace PoshKentico.Core.Services.Development.WebParts
 {
     /// <summary>
     /// Service for providing access to a CMS webparts.

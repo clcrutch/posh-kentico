@@ -450,10 +450,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CmdletBusinessBase.cs" />
-    <Compile Include="Development\GetCMSWebPartCategoryBusiness.cs" />
-    <Compile Include="Development\NewCMSWebPartCategoryBusiness.cs" />
-    <Compile Include="Development\RemoveCMSWebPartCategoryBusiness.cs" />
-    <Compile Include="Development\SetCMSWebPartCategoryBusiness.cs" />
+    <Compile Include="Development\WebParts\GetCMSWebPartCategoryBusiness.cs" />
+    <Compile Include="Development\WebParts\NewCMSWebPartCategoryBusiness.cs" />
+    <Compile Include="Development\WebParts\RemoveCMSWebPartCategoryBusiness.cs" />
+    <Compile Include="Development\WebParts\SetCMSWebPartCategoryBusiness.cs" />
     <Compile Include="General\InitializeCMSApplicationBusiness.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

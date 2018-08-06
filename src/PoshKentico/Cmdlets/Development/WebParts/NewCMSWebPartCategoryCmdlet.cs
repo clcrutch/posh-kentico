@@ -1,4 +1,4 @@
-﻿// <copyright file="SetCMSWebPartCategoryCmdlet.cs" company="Chris Crutchfield">
+﻿// <copyright file="NewCMSWebPartCategoryCmdlet.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -20,30 +20,30 @@ using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 using CMS.PortalEngine;
 using ImpromptuInterface;
-using PoshKentico.Business.Development;
-using PoshKentico.Core.Services.Development;
+using PoshKentico.Business.Development.WebParts;
 
 using AliasAttribute = System.Management.Automation.AliasAttribute;
 
-namespace PoshKentico.Cmdlets.Development.WebPartCategory
+namespace PoshKentico.Cmdlets.Development.WebPart
 {
     /// <summary>
-    /// <para type="synopsis">Sets a web part category.</para>
-    /// <para type="description">Sets a web part category.</para>
+    /// <para type="synopsis">Creates a new web part category.</para>
+    /// <para type="description">Creates a new web part category based off of the provided input.</para>
+    /// <para type="description">This cmdlet returns the newly created web part category when the -PassThru switch is used.</para>
     /// <example>
-    ///     <para>Sets a web part category.</para>
-    ///     <code>$webPartCategory | Set-CMSWebPartCategory</code>
+    ///     <para>Create a new web part category implying the display name.</para>
+    ///     <code>New-CMSWebPartCategory -Path /Test/Test1</code>
     /// </example>
     /// <example>
-    ///     <para>Sets a web part category and returns the result.</para>
-    ///     <code>$webPartCategory | Set-CMSWebPartCategory -Passthru</code>
+    ///     <para>Create a new web part category specifying the display name.</para>
+    ///     <code>New-CMSWebPartCategory -Path /Test/Test1 -DisplayName "My Test Category"</code>
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
-    [Cmdlet(VerbsCommon.Set, "CMSWebPartCategory")]
+    [Cmdlet(VerbsCommon.New, "CMSWebPartCategory")]
     [OutputType(typeof(WebPartCategoryInfo), ParameterSetName = new string[] { PASSTHRU })]
-    [Alias("swpc")]
-    public class SetCMSWebPartCategoryCmdlet : MefCmdlet
+    [Alias("nwpc")]
+    public class NewCMSWebPartCategoryCmdlet : MefCmdlet
     {
         #region Constants
 
@@ -54,11 +54,24 @@ namespace PoshKentico.Cmdlets.Development.WebPartCategory
         #region Properties
 
         /// <summary>
-        /// <para type="description">A reference to the WebPart category to update.</para>
+        /// <para type="description">The display name for the newly created web part category.</para>
+        /// <para type="description">If null, then the name portion of the path is used for the display name.</para>
         /// </summary>
-        [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0)]
-        [Alias("Category")]
-        public WebPartCategoryInfo WebPartCategory { get; set; }
+        [Parameter(Mandatory = false, Position = 1)]
+        public string DisplayName { get; set; }
+
+        /// <summary>
+        /// <para type="description">The path to create the new web part category at.</para>
+        /// </summary>
+        [Parameter(Mandatory = true, Position = 0)]
+        public string Path { get; set; }
+
+        /// <summary>
+        /// <para type="description">The path for the icon for the newly created web part category.</para>
+        /// </summary>
+        [Parameter]
+        [Alias("IconPath")]
+        public string ImagePath { get; set; }
 
         /// <summary>
         /// <para type="description">Tell the cmdlet to return the newly created web part category.</para>
@@ -70,7 +83,7 @@ namespace PoshKentico.Cmdlets.Development.WebPartCategory
         ///  Gets or sets the Business Layer for this web part.  Populated by MEF.
         /// </summary>
         [Import]
-        public SetCMSWebPartCategoryBusiness BusinessLayer { get; set; }
+        public NewCMSWebPartCategoryBusiness BusinessLayer { get; set; }
 
         #endregion
 
@@ -79,11 +92,11 @@ namespace PoshKentico.Cmdlets.Development.WebPartCategory
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
-            this.BusinessLayer.Set(this.WebPartCategory.ActLike<IWebPartCategory>());
+            var newCategory = this.BusinessLayer.CreateWebPart(this.Path, this.DisplayName, this.ImagePath);
 
             if (this.PassThru.ToBool())
             {
-                this.WriteObject(this.WebPartCategory);
+                this.WriteObject(newCategory.UndoActLike());
             }
         }
 

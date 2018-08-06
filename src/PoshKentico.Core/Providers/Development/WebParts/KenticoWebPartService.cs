@@ -20,9 +20,9 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using CMS.PortalEngine;
 using ImpromptuInterface;
-using PoshKentico.Core.Services.Development;
+using PoshKentico.Core.Services.Development.WebParts;
 
-namespace PoshKentico.Core.Providers.Development
+namespace PoshKentico.Core.Providers.Development.WebParts
 {
     /// <summary>
     /// Implementation of <see cref="IWebPartService"/> that uses Kentico.
