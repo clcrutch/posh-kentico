@@ -44,11 +44,16 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     {
         #region Constants
 
+        private const string CATEGORY = "Category";
         private const string NONE = "None";
 
         #endregion
 
         #region Properties
+
+        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true, ParameterSetName = CATEGORY)]
+        [Alias("Category")]
+        public IWebPartCategory WebPartCategory { get; set; }
 
         /// <summary>
         /// Gets or sets the Business layer for this web part. Populated by MEF.
@@ -67,6 +72,9 @@ namespace PoshKentico.Cmdlets.Development.WebParts
 
             switch (this.ParameterSetName)
             {
+                case CATEGORY:
+                    webparts = this.BusinessLayer.GetWebParts(this.WebPartCategory);
+                    break;
                 case NONE:
                     webparts = this.BusinessLayer.GetWebParts();
                     break;

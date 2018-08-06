@@ -22,5 +22,6 @@ namespace PoshKentico.Core.Services.Development.WebParts
     /// </summary>
     public interface IWebPart
     {
+        int WebPartCategoryID { get; }
     }
 }

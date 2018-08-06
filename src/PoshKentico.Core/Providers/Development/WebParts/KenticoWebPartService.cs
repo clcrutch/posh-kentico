@@ -15,6 +15,7 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -72,20 +73,21 @@ namespace PoshKentico.Core.Providers.Development.WebParts
         /// Deletes the specified <see cref="IWebPartCategory"/>.
         /// </summary>
         /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> to delete.</param>
-        public void Delete(IWebPartCategory webPartCategory)
-        {
+        public void Delete(IWebPartCategory webPartCategory) =>
             WebPartCategoryInfoProvider.DeleteCategoryInfo(webPartCategory.CategoryID);
-        }
 
         /// <summary>
         /// Gets the <see cref="IWebPartCategory"/> which matches the supplied ID.
         /// </summary>
         /// <param name="id">The ID of the <see cref="IWebPartCategory"/> to return.</param>
         /// <returns>The <see cref="IWebPartCategory"/> which matches the ID, else null.</returns>
-        public IWebPartCategory GetWebPartCategory(int id)
-        {
-            return (WebPartCategoryInfoProvider.GetWebPartCategoryInfoById(id) as WebPartCategoryInfo)?.ActLike<IWebPartCategory>();
-        }
+        public IWebPartCategory GetWebPartCategory(int id) =>
+            (WebPartCategoryInfoProvider.GetWebPartCategoryInfoById(id) as WebPartCategoryInfo)?.ActLike<IWebPartCategory>();
+
+        public IEnumerable<IWebPart> GetWebParts(IWebPartCategory webPartCategory) =>
+            (from wp in this.WebParts
+             where wp.WebPartCategoryID == webPartCategory.CategoryID
+             select wp).ToArray();
 
         /// <summary>
         /// Updates the <see cref="IWebPartCategory"/>.

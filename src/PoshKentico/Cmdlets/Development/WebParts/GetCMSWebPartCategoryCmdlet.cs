@@ -62,6 +62,7 @@ namespace PoshKentico.Cmdlets.Development.WebPart
         private const string NONE = "None";
         private const string CATEGORYNAME = "Category Name";
         private const string IDSETNAME = "ID";
+        private const string PARENTCATEGORY = "Parent Category";
 
         #endregion
 
@@ -86,6 +87,10 @@ namespace PoshKentico.Cmdlets.Development.WebPart
         /// </summary>
         [Parameter(Mandatory = true, Position = 0, ParameterSetName = IDSETNAME)]
         public int[] ID { get; set; }
+
+        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true, ParameterSetName = PARENTCATEGORY)]
+        [Alias("Parent", "ParentCategory")]
+        public IWebPartCategory ParentWebPartCategory { get; set; }
 
         /// <summary>
         /// Gets or sets the Business layer for this web part. Populated by MEF.
@@ -113,11 +118,14 @@ namespace PoshKentico.Cmdlets.Development.WebPart
                 case NONE:
                     categories = this.BusinessLayer.GetWebPartCategories();
                     break;
+                case PARENTCATEGORY:
+                    throw new PSNotImplementedException();
+                    break;
             }
 
             foreach (var category in categories)
             {
-                this.WriteObject(category.UndoActLike());
+                this.WriteObject(category);
             }
         }
 
