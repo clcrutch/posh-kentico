@@ -16,6 +16,8 @@
 // </copyright>
 
 using System;
+using System.ComponentModel.Composition;
+using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.Business
 {
@@ -24,7 +26,46 @@ namespace PoshKentico.Business
     /// </summary>
     public abstract class CmdletBusinessBase
     {
+        #region Variables
+
+        private readonly bool initCmsApplication;
+
+        private ICmsApplicationService cmsApplicationService;
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CmdletBusinessBase"/> class.
+        /// </summary>
+        /// <param name="initCmsApplication">Indicates if the CMS application should be initialized.</param>
+        public CmdletBusinessBase(bool initCmsApplication = true)
+        {
+            this.initCmsApplication = initCmsApplication;
+        }
+
+        #endregion
+
         #region Properties
+
+        /// <summary>
+        /// Gets or sets a reference to the CMS Application Service.  Populated by MEF.
+        /// </summary>
+        [Import]
+        public ICmsApplicationService CmsApplicationService
+        {
+            get => this.cmsApplicationService;
+            set
+            {
+                if (this.initCmsApplication)
+                {
+                    value.Initialize(true, this.WriteDebug, this.WriteVerbose);
+                }
+
+                this.cmsApplicationService = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets a delegate for writing to the debug stream.

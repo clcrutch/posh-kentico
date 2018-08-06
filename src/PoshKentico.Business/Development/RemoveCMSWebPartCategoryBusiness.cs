@@ -17,7 +17,6 @@
 
 using System.ComponentModel.Composition;
 using PoshKentico.Core.Services.Development;
-using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.Business.Development
 {
@@ -28,12 +27,6 @@ namespace PoshKentico.Business.Development
     public class RemoveCMSWebPartCategoryBusiness : CmdletBusinessBase
     {
         #region Properties
-
-        /// <summary>
-        /// Gets or sets a reference to the CMS Application Service.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public ICmsApplicationService CmsApplicationService { get; set; }
 
         /// <summary>
         /// Gets or sets a reference to the WebPart Service.  Populated by MEF.
@@ -58,8 +51,6 @@ namespace PoshKentico.Business.Development
         /// <param name="exact">A boolean which indicates if the match should be exact.</param>
         public void RemoveWebPartCategories(string matchString, bool exact)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             foreach (var cat in this.GetCMSWebPartCategoryBusiness.GetWebPartCategories(matchString, exact))
             {
                 this.RemoveWebPartCategory(cat);
@@ -72,8 +63,6 @@ namespace PoshKentico.Business.Development
         /// <param name="ids">The IDs of the <see cref="IWebPartCategory"/> to delete.</param>
         public void RemoveWebPartCategories(params int[] ids)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             foreach (var cat in this.GetCMSWebPartCategoryBusiness.GetWebPartCategories(ids))
             {
                 this.RemoveWebPartCategory(cat);
@@ -89,8 +78,6 @@ namespace PoshKentico.Business.Development
             // Prompt for confirmation.
             if (this.ShouldProcess(webPartCategory.CategoryDisplayName, "delete"))
             {
-                this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
                 this.WebPartService.Delete(webPartCategory);
             }
         }

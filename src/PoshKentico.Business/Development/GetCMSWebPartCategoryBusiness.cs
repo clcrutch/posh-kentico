@@ -20,7 +20,6 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using PoshKentico.Core.Services.Development;
-using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.Business.Development
 {
@@ -31,12 +30,6 @@ namespace PoshKentico.Business.Development
     public class GetCMSWebPartCategoryBusiness : CmdletBusinessBase
     {
         #region Properties
-
-        /// <summary>
-        /// Gets or sets a reference to the CMS Application Service.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public ICmsApplicationService CmsApplicationService { get; set; }
 
         /// <summary>
         /// Gets or sets a reference to the WebPart Service.  Populated by MEF.
@@ -52,12 +45,7 @@ namespace PoshKentico.Business.Development
         /// Gets a list of all of the <see cref="IWebPartCategory"/>.
         /// </summary>
         /// <returns>A list of all of the <see cref="IWebPartCategory"/>.</returns>
-        public IEnumerable<IWebPartCategory> GetWebPartCategories()
-        {
-            this.CmsApplicationService.Initialize(true, this.WriteVerbose, this.WriteDebug);
-
-            return this.WebPartService.WebPartCategories;
-        }
+        public IEnumerable<IWebPartCategory> GetWebPartCategories() => this.WebPartService.WebPartCategories;
 
         /// <summary>
         /// Gets a list of all of the <see cref="IWebPartCategory"/> which match the specified criteria.
@@ -67,8 +55,6 @@ namespace PoshKentico.Business.Development
         /// <returns>A list of all of the <see cref="IWebPartCategory"/> which match the specified criteria.</returns>
         public IEnumerable<IWebPartCategory> GetWebPartCategories(string matchString, bool exact)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteVerbose, this.WriteDebug);
-
             if (exact)
             {
                 return (from c in this.WebPartService.WebPartCategories
@@ -96,8 +82,6 @@ namespace PoshKentico.Business.Development
         /// <returns>A list of the <see cref="IWebPartCategory"/> which match the supplied IDs.</returns>
         public IEnumerable<IWebPartCategory> GetWebPartCategories(params int[] ids)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteVerbose, this.WriteDebug);
-
             var webPartCategories = from id in ids
                                     select this.WebPartService.GetWebPartCategory(id);
 
