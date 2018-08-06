@@ -115,11 +115,11 @@ namespace PoshKentico.Cmdlets.Development.WebPart
                 case IDSETNAME:
                     categories = this.BusinessLayer.GetWebPartCategories(this.ID);
                     break;
+                case PARENTCATEGORY:
+                    categories = this.BusinessLayer.GetWebPartCategories(this.ParentWebPartCategory);
+                    break;
                 case NONE:
                     categories = this.BusinessLayer.GetWebPartCategories();
-                    break;
-                case PARENTCATEGORY:
-                    throw new PSNotImplementedException();
                     break;
             }
 

@@ -31,12 +31,6 @@ namespace PoshKentico.Business.Development.WebParts
         #region Properties
 
         /// <summary>
-        /// Gets or sets a reference to the CMS Application Service.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public ICmsApplicationService CmsApplicationService { get; set; }
-
-        /// <summary>
         /// Gets or sets a reference to the WebPart Service.  Populated by MEF.
         /// </summary>
         [Import]
@@ -50,19 +44,9 @@ namespace PoshKentico.Business.Development.WebParts
         /// Gets a list of all of the <see cref="IWebPart"/>.
         /// </summary>
         /// <returns>A list of all of the <see cref="IWebPart"/>.</returns>
-        public IEnumerable<IWebPart> GetWebParts()
-        {
-            this.CmsApplicationService.Initialize(true, this.WriteVerbose, this.WriteDebug);
+        public IEnumerable<IWebPart> GetWebParts() => this.WebPartService.WebParts;
 
-            return this.WebPartService.WebParts;
-        }
-
-        public IEnumerable<IWebPart> GetWebParts(IWebPartCategory webPartCategory)
-        {
-            this.CmsApplicationService.Initialize(true, this.WriteVerbose, this.WriteDebug);
-
-            return this.WebPartService.GetWebParts(webPartCategory);
-        }
+        public IEnumerable<IWebPart> GetWebParts(IWebPartCategory webPartCategory) => this.WebPartService.GetWebParts(webPartCategory);
 
         #endregion
 

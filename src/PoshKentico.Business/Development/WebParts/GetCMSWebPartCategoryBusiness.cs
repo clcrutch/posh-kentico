@@ -90,6 +90,8 @@ namespace PoshKentico.Business.Development.WebParts
                     select wpc).ToArray();
         }
 
+        public IEnumerable<IWebPartCategory> GetWebPartCategories(IWebPartCategory parentWebPartCategory) => this.WebPartService.GetWebPartCategories(parentWebPartCategory);
+
         #endregion
 
     }

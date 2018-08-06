@@ -76,6 +76,11 @@ namespace PoshKentico.Core.Providers.Development.WebParts
         public void Delete(IWebPartCategory webPartCategory) =>
             WebPartCategoryInfoProvider.DeleteCategoryInfo(webPartCategory.CategoryID);
 
+        public IEnumerable<IWebPartCategory> GetWebPartCategories(IWebPartCategory parentWebPartCategory) =>
+            (from c in this.WebPartCategories
+             where c.CategoryParentID == parentWebPartCategory.CategoryID
+             select c).ToArray();
+
         /// <summary>
         /// Gets the <see cref="IWebPartCategory"/> which matches the supplied ID.
         /// </summary>
