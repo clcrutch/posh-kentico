@@ -509,6 +509,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="DSCResources\xSite\xSite.psm1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="DSCResources\xSite\xSite.schema.mof">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="DSCResources\xWebPartCategory\xWebPartCategory.psm1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

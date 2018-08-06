@@ -1,21 +1,16 @@
 ﻿# Requires -RunAsAdministrator
 
 Import-Module posh-kentico
+Disable-DscDebug
 
 Configuration KenticoTest
 {
 	Import-DscResource -Name xWebPartCategory
 	Import-DscResource -Name xWebPart
+	Import-DscResource -Name xSite
 
 	Node localhost
 	{
-		xWebPartCategory TestCategory
-		{
-			Name = "TestCategory"
-			Path = "Kentico:\Development\WebParts"
-			Ensure = "Present"
-		}
-
 		xWebPart TestWebPart
 		{
 			Name = "TestWebPart"
@@ -23,6 +18,15 @@ Configuration KenticoTest
 			Ensure = "Absent"
 			FileName = "AbuseReport/AbuseReport.ascx"
 		}
+		xSite TestSite
+		{
+			SiteName = "LightStream"
+			DomainName = "localhost"
+			DisplayName = "LightStream.com"
+			Status = "Running"
+			Ensure = "Present"
+		}
+
 	}
 }
 

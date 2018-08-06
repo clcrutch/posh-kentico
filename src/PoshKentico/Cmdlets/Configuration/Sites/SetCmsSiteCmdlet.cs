@@ -83,7 +83,7 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         /// <summary>
         /// <para type="description">The status for the site to update. </para>
         /// </summary>
-        [Parameter(Mandatory = false, Position = 2, ParameterSetName = PROPERTYSET)]
+        [Parameter(Mandatory = true, Position = 2, ParameterSetName = PROPERTYSET)]
         public SiteStatusEnum Status { get; set; }
 
         /// <summary>
