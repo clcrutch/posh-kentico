@@ -55,6 +55,8 @@ namespace PoshKentico
                 instance.WriteDebug = this.WriteDebug;
                 instance.WriteVerbose = this.WriteVerbose;
                 instance.ShouldProcess = this.ShouldProcess;
+
+                instance.Initialize();
             }
         }
 

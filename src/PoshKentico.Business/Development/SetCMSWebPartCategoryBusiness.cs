@@ -30,12 +30,6 @@ namespace PoshKentico.Business.Development
         #region Properties
 
         /// <summary>
-        /// Gets or sets a reference to the CMS Application Service.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public ICmsApplicationService CmsApplicationService { get; set; }
-
-        /// <summary>
         /// Gets or sets a reference to the WebPart Service.  Populated by MEF.
         /// </summary>
         [Import]
@@ -51,8 +45,6 @@ namespace PoshKentico.Business.Development
         /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> to set.</param>
         public void Set(IWebPartCategory webPartCategory)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             this.WebPartService.Update(webPartCategory);
         }
 

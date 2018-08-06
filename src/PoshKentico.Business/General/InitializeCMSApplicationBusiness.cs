@@ -27,13 +27,15 @@ namespace PoshKentico.Business.General
     [Export(typeof(InitializeCMSApplicationBusiness))]
     public class InitializeCMSApplicationBusiness : CmdletBusinessBase
     {
-        #region Properties
+        #region Constructors
 
         /// <summary>
-        /// Gets or sets a reference to the CMS Application Service.  Populated by MEF.
+        /// Initializes a new instance of the <see cref="InitializeCMSApplicationBusiness"/> class.
         /// </summary>
-        [Import]
-        public ICmsApplicationService CmsApplicationService { get; set; }
+        public InitializeCMSApplicationBusiness()
+            : base(false)
+        {
+        }
 
         #endregion
 
