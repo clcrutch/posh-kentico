@@ -30,8 +30,6 @@ namespace PoshKentico.Business
 
         private readonly bool initCmsApplication;
 
-        private ICmsApplicationService cmsApplicationService;
-
         #endregion
 
         #region Constructors
@@ -53,19 +51,7 @@ namespace PoshKentico.Business
         /// Gets or sets a reference to the CMS Application Service.  Populated by MEF.
         /// </summary>
         [Import]
-        public ICmsApplicationService CmsApplicationService
-        {
-            get => this.cmsApplicationService;
-            set
-            {
-                if (this.initCmsApplication)
-                {
-                    value.Initialize(true, this.WriteDebug, this.WriteVerbose);
-                }
-
-                this.cmsApplicationService = value;
-            }
-        }
+        public ICmsApplicationService CmsApplicationService { get; set; }
 
         /// <summary>
         /// Gets or sets a delegate for writing to the debug stream.
@@ -81,6 +67,21 @@ namespace PoshKentico.Business
         /// Gets or sets a delegate for checking if the cmdlet should continue processing.
         /// </summary>
         public Func<string, string, bool> ShouldProcess { get; set; }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Initializes the current business layer.
+        /// </summary>
+        public virtual void Initialize()
+        {
+            if (this.initCmsApplication)
+            {
+                this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
+            }
+        }
 
         #endregion
 
