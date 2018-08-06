@@ -20,7 +20,6 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using ImpromptuInterface;
 using PoshKentico.Core.Services.Development.WebParts;
-using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.Business.Development.WebParts
 {
@@ -31,12 +30,6 @@ namespace PoshKentico.Business.Development.WebParts
     public class NewCMSWebPartCategoryBusiness : CmdletBusinessBase
     {
         #region Properties
-
-        /// <summary>
-        /// Gets or sets a reference to the CMS Application Service.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public ICmsApplicationService CmsApplicationService { get; set; }
 
         /// <summary>
         /// Gets or sets a reference to the WebPart Service.  Populated by MEF.
@@ -57,8 +50,6 @@ namespace PoshKentico.Business.Development.WebParts
         /// <returns>The newly created WebPartCategory.</returns>
         public IWebPartCategory CreateWebPart(string path, string displayName, string imagePath)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             var name = path.Substring(path.LastIndexOf('/') + 1);
             var basePath = path.Substring(0, path.LastIndexOf('/'));
 
