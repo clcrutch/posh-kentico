@@ -19,7 +19,6 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
-using ImpromptuInterface;
 using PoshKentico.Business.Development.WebParts;
 using PoshKentico.Core.Services.Development.WebParts;
 
@@ -45,14 +44,22 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         #region Constants
 
         private const string CATEGORY = "Category";
+        private const string CATEGORYNAME = "Category Name";
         private const string NONE = "None";
 
         #endregion
 
         #region Properties
 
-        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true, ParameterSetName = CATEGORY)]
+        [Parameter(Mandatory = true, ParameterSetName = CATEGORYNAME)]
         [Alias("Category")]
+        public string CategoryName { get; set; }
+
+        [Parameter(ParameterSetName = CATEGORYNAME)]
+        [Alias("Regex")]
+        public SwitchParameter RegularExpression { get; set; }
+
+        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true, ParameterSetName = CATEGORY)]
         public IWebPartCategory WebPartCategory { get; set; }
 
         /// <summary>
@@ -73,7 +80,10 @@ namespace PoshKentico.Cmdlets.Development.WebParts
             switch (this.ParameterSetName)
             {
                 case CATEGORY:
-                    webparts = this.BusinessLayer.GetWebParts(this.WebPartCategory);
+                    webparts = this.BusinessLayer.GetWebPartsByCategory(this.WebPartCategory);
+                    break;
+                case CATEGORYNAME:
+                    webparts = this.BusinessLayer.GetWebPartsByCategory(this.CategoryName, this.RegularExpression.ToBool());
                     break;
                 case NONE:
                     webparts = this.BusinessLayer.GetWebParts();
@@ -82,7 +92,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
 
             foreach (var webpart in webparts)
             {
-                this.WriteObject(webpart.UndoActLike());
+                this.WriteObject(webpart);
             }
         }
 

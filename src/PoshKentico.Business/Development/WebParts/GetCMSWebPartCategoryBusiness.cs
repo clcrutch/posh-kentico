@@ -15,10 +15,10 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Text.RegularExpressions;
 using PoshKentico.Core.Services.Development.WebParts;
 
 namespace PoshKentico.Business.Development.WebParts
@@ -51,27 +51,32 @@ namespace PoshKentico.Business.Development.WebParts
         /// Gets a list of all of the <see cref="IWebPartCategory"/> which match the specified criteria.
         /// </summary>
         /// <param name="matchString">The string which to match the webparts to.</param>
-        /// <param name="exact">A boolean which indicates if the match should be exact.</param>
         /// <returns>A list of all of the <see cref="IWebPartCategory"/> which match the specified criteria.</returns>
-        public IEnumerable<IWebPartCategory> GetWebPartCategories(string matchString, bool exact)
+        public IEnumerable<IWebPartCategory> GetWebPartCategories(string matchString, bool isRegex, bool recurse)
         {
-            if (exact)
+            Regex regex = null;
+
+            if (isRegex)
             {
-                return (from c in this.WebPartService.WebPartCategories
-                        where c.CategoryName.ToLowerInvariant().Equals(matchString, StringComparison.InvariantCultureIgnoreCase) ||
-                            c.CategoryDisplayName.ToLowerInvariant().Equals(matchString, StringComparison.InvariantCultureIgnoreCase) ||
-                            c.CategoryPath.ToLowerInvariant().Equals(matchString, StringComparison.InvariantCultureIgnoreCase)
-                        select c).ToArray();
+                regex = new Regex(matchString, RegexOptions.Compiled | RegexOptions.IgnoreCase);
             }
             else
             {
-                var lowerMatchString = matchString.ToLowerInvariant();
+                regex = new Regex($"^{matchString.Replace("*", ".*")}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            }
 
-                return (from c in this.WebPartService.WebPartCategories
-                        where c.CategoryName.ToLowerInvariant().Contains(lowerMatchString) ||
-                           c.CategoryDisplayName.ToLowerInvariant().Contains(lowerMatchString) ||
-                           c.CategoryPath.ToLowerInvariant().StartsWith(lowerMatchString)
-                        select c).ToArray();
+            var matched = from c in this.WebPartService.WebPartCategories
+                          where regex.IsMatch(c.CategoryName) ||
+                              regex.IsMatch(c.CategoryDisplayName)
+                          select c;
+
+            if (recurse)
+            {
+                return this.GetRecurseWebPartCategories(matched);
+            }
+            else
+            {
+                return matched.ToArray();
             }
         }
 
@@ -80,17 +85,47 @@ namespace PoshKentico.Business.Development.WebParts
         /// </summary>
         /// <param name="ids">The IDs of the <see cref="IWebPartCategory"/> to return.</param>
         /// <returns>A list of the <see cref="IWebPartCategory"/> which match the supplied IDs.</returns>
-        public IEnumerable<IWebPartCategory> GetWebPartCategories(params int[] ids)
+        public IEnumerable<IWebPartCategory> GetWebPartCategories(int[] ids, bool recurse)
         {
             var webPartCategories = from id in ids
                                     select this.WebPartService.GetWebPartCategory(id);
 
-            return (from wpc in webPartCategories
-                    where wpc != null
-                    select wpc).ToArray();
+            var nonNullCategories = from wpc in webPartCategories
+                                    where wpc != null
+                                    select wpc;
+
+            if (recurse)
+            {
+                return this.GetRecurseWebPartCategories(nonNullCategories);
+            }
+            else
+            {
+                return nonNullCategories.ToArray();
+            }
         }
 
-        public IEnumerable<IWebPartCategory> GetWebPartCategories(IWebPartCategory parentWebPartCategory) => this.WebPartService.GetWebPartCategories(parentWebPartCategory);
+        public IEnumerable<IWebPartCategory> GetWebPartCategories(IWebPartCategory parentWebPartCategory, bool recurse)
+        {
+            var categories = this.WebPartService.GetWebPartCategories(parentWebPartCategory);
+
+            if (recurse)
+            {
+                return this.GetRecurseWebPartCategories(categories);
+            }
+            else
+            {
+                return categories;
+            }
+        }
+
+        private IEnumerable<IWebPartCategory> GetRecurseWebPartCategories(IEnumerable<IWebPartCategory> webPartCategories)
+        {
+            return webPartCategories
+                .Select(wp => this.GetWebPartCategories(wp, true))
+                .SelectMany(c => c)
+                .Concat(webPartCategories)
+                .ToArray();
+        }
 
         #endregion
 

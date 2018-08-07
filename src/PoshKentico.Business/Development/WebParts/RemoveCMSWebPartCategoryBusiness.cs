@@ -48,10 +48,9 @@ namespace PoshKentico.Business.Development.WebParts
         /// Deletes all of the <see cref="IWebPartCategory"/> which match the specified criteria.
         /// </summary>
         /// <param name="matchString">The string which to match the webparts to.</param>
-        /// <param name="exact">A boolean which indicates if the match should be exact.</param>
-        public void RemoveWebPartCategories(string matchString, bool exact)
+        public void RemoveWebPartCategories(string matchString, bool isRegex)
         {
-            foreach (var cat in this.GetCMSWebPartCategoryBusiness.GetWebPartCategories(matchString, exact))
+            foreach (var cat in this.GetCMSWebPartCategoryBusiness.GetWebPartCategories(matchString, isRegex, false))
             {
                 this.RemoveWebPartCategory(cat);
             }
@@ -61,9 +60,9 @@ namespace PoshKentico.Business.Development.WebParts
         /// Deletes all of the <see cref="IWebPartCategory"/> which match the supplied IDs.
         /// </summary>
         /// <param name="ids">The IDs of the <see cref="IWebPartCategory"/> to delete.</param>
-        public void RemoveWebPartCategories(params int[] ids)
+        public void RemoveWebPartCategories(int[] ids)
         {
-            foreach (var cat in this.GetCMSWebPartCategoryBusiness.GetWebPartCategories(ids))
+            foreach (var cat in this.GetCMSWebPartCategoryBusiness.GetWebPartCategories(ids, false))
             {
                 this.RemoveWebPartCategory(cat);
             }

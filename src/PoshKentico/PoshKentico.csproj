@@ -480,8 +480,6 @@
     <Compile Include="Cmdlets\Development\WebParts\SetCMSWebPartCategoryCmdlet.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="MefCmdlet.cs" />
-    <Compile Include="Extensions\DictionaryExtensions.cs" />
-    <Compile Include="Extensions\PSObjectExtensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="MefHost.cs" />
     <Compile Include="Cmdlets\General\InitializeCMSApplicationCmdlet.cs" />

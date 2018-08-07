@@ -18,11 +18,9 @@
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
-using CMS.PortalEngine;
-using ImpromptuInterface;
 using PoshKentico.Business.Development.WebParts;
-using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.Development.WebParts;
+
 using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.Development.WebPart
@@ -41,7 +39,7 @@ namespace PoshKentico.Cmdlets.Development.WebPart
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Set, "CMSWebPartCategory")]
-    [OutputType(typeof(WebPartCategoryInfo), ParameterSetName = new string[] { PASSTHRU })]
+    [OutputType(typeof(IWebPartCategory), ParameterSetName = new string[] { PASSTHRU })]
     [Alias("swpc")]
     public class SetCMSWebPartCategoryCmdlet : MefCmdlet
     {
@@ -58,7 +56,7 @@ namespace PoshKentico.Cmdlets.Development.WebPart
         /// </summary>
         [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0)]
         [Alias("Category")]
-        public WebPartCategoryInfo WebPartCategory { get; set; }
+        public IWebPartCategory WebPartCategory { get; set; }
 
         /// <summary>
         /// <para type="description">Tell the cmdlet to return the newly created web part category.</para>
@@ -79,7 +77,7 @@ namespace PoshKentico.Cmdlets.Development.WebPart
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
-            this.BusinessLayer.Set(this.WebPartCategory.ActLike<IWebPartCategory>());
+            this.BusinessLayer.Set(this.WebPartCategory);
 
             if (this.PassThru.ToBool())
             {

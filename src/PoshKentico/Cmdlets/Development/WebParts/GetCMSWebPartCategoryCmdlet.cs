@@ -20,7 +20,6 @@ using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 using CMS.PortalEngine;
-using ImpromptuInterface;
 using PoshKentico.Business.Development.WebParts;
 using PoshKentico.Core.Services.Development.WebParts;
 
@@ -75,12 +74,9 @@ namespace PoshKentico.Cmdlets.Development.WebPart
         [Alias("DisplayName", "Name", "Path")]
         public string CategoryName { get; set; }
 
-        /// <summary>
-        /// <para type="description">If set, the match is exact,</para>
-        /// <para type="description">else the match performs a contains for display name and category name and starts with for path.</para>
-        /// </summary>
         [Parameter(ParameterSetName = CATEGORYNAME)]
-        public SwitchParameter Exact { get; set; }
+        [Alias("Regex")]
+        public SwitchParameter RegularExpression { get; set; }
 
         /// <summary>
         /// <para type="description">The IDs of the web part category to retrieve.</para>
@@ -91,6 +87,9 @@ namespace PoshKentico.Cmdlets.Development.WebPart
         [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true, ParameterSetName = PARENTCATEGORY)]
         [Alias("Parent", "ParentCategory")]
         public IWebPartCategory ParentWebPartCategory { get; set; }
+
+        [Parameter]
+        public SwitchParameter Recurse { get; set; }
 
         /// <summary>
         /// Gets or sets the Business layer for this web part. Populated by MEF.
@@ -110,13 +109,13 @@ namespace PoshKentico.Cmdlets.Development.WebPart
             switch (this.ParameterSetName)
             {
                 case CATEGORYNAME:
-                    categories = this.BusinessLayer.GetWebPartCategories(this.CategoryName, this.Exact.ToBool());
+                    categories = this.BusinessLayer.GetWebPartCategories(this.CategoryName, this.RegularExpression.ToBool(), this.Recurse.ToBool());
                     break;
                 case IDSETNAME:
-                    categories = this.BusinessLayer.GetWebPartCategories(this.ID);
+                    categories = this.BusinessLayer.GetWebPartCategories(this.ID, this.Recurse.ToBool());
                     break;
                 case PARENTCATEGORY:
-                    categories = this.BusinessLayer.GetWebPartCategories(this.ParentWebPartCategory);
+                    categories = this.BusinessLayer.GetWebPartCategories(this.ParentWebPartCategory, this.Recurse.ToBool());
                     break;
                 case NONE:
                     categories = this.BusinessLayer.GetWebPartCategories();

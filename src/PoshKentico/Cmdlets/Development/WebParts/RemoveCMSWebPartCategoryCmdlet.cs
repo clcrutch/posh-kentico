@@ -21,8 +21,8 @@ using System.Management.Automation;
 using CMS.PortalEngine;
 using ImpromptuInterface;
 using PoshKentico.Business.Development.WebParts;
-using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.Development.WebParts;
+
 using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.Development.WebPart
@@ -71,12 +71,9 @@ namespace PoshKentico.Cmdlets.Development.WebPart
         [Alias("DisplayName", "Name", "Path")]
         public string CategoryName { get; set; }
 
-        /// <summary>
-        /// <para type="description">If set, the match is exact,</para>
-        /// <para type="description">else the match performs a contains for display name and category name and starts with for path.</para>
-        /// </summary>
         [Parameter(ParameterSetName = CATEGORYNAME)]
-        public SwitchParameter Exact { get; set; }
+        [Alias("Regex")]
+        public SwitchParameter RegularExpression { get; set; }
 
         /// <summary>
         /// <para type="description">The IDs of the web part category to delete.</para>
@@ -107,7 +104,7 @@ namespace PoshKentico.Cmdlets.Development.WebPart
             switch (this.ParameterSetName)
             {
                 case CATEGORYNAME:
-                    this.BusinessLayer.RemoveWebPartCategories(this.CategoryName, this.Exact.ToBool());
+                    this.BusinessLayer.RemoveWebPartCategories(this.CategoryName, this.RegularExpression.ToBool());
                     break;
                 case IDSETNAME:
                     this.BusinessLayer.RemoveWebPartCategories(this.ID);

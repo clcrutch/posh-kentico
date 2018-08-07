@@ -17,6 +17,7 @@
 
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Linq;
 using PoshKentico.Core.Services.Development.WebParts;
 using PoshKentico.Core.Services.General;
 
@@ -29,6 +30,9 @@ namespace PoshKentico.Business.Development.WebParts
     public class GetCMSWebPartBusiness : CmdletBusinessBase
     {
         #region Properties
+
+        [Import]
+        public GetCMSWebPartCategoryBusiness GetCMSWebPartCategoryBusiness { get; set; }
 
         /// <summary>
         /// Gets or sets a reference to the WebPart Service.  Populated by MEF.
@@ -46,7 +50,19 @@ namespace PoshKentico.Business.Development.WebParts
         /// <returns>A list of all of the <see cref="IWebPart"/>.</returns>
         public IEnumerable<IWebPart> GetWebParts() => this.WebPartService.WebParts;
 
-        public IEnumerable<IWebPart> GetWebParts(IWebPartCategory webPartCategory) => this.WebPartService.GetWebParts(webPartCategory);
+        public IEnumerable<IWebPart> GetWebPartsByCategory(IWebPartCategory webPartCategory) => this.WebPartService.GetWebParts(webPartCategory);
+
+        public IEnumerable<IWebPart> GetWebPartsByCategory(string matchString, bool isRegex)
+        {
+            var categories = this.GetCMSWebPartCategoryBusiness.GetWebPartCategories(matchString, isRegex, false);
+
+            var ids = new HashSet<int>(from c in categories
+                                       select c.CategoryID);
+
+            return (from wp in this.WebPartService.WebParts
+                    where ids.Contains(wp.WebPartCategoryID)
+                    select wp).ToArray();
+        }
 
         #endregion
 
