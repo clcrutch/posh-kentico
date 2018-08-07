@@ -19,12 +19,6 @@ Configuration KenticoTest
 			Ensure = "Absent"
 			FileName = "AbuseReport/AbuseReport.ascx"
 		}
-		xWebPartCategory TestCategory
-		{
-			Name = "TestCategory"
-			Path = "Kentico:\Development\WebParts"
-			Ensure = "Present"
-		}
 		
 		xSite TestSite
 		{

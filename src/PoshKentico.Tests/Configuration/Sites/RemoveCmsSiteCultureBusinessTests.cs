@@ -20,7 +20,6 @@ using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Configuration.Sites;
 using PoshKentico.Core.Services.Configuration;
-using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.Tests.Configuration.Sites
 {
@@ -30,7 +29,6 @@ namespace PoshKentico.Tests.Configuration.Sites
         [TestCase]
         public void RemoveSiteCultureTest_Object()
         {
-            var applicationServiceMock = new Mock<ICmsApplicationService>();
             var siteServiceMock = new Mock<ISiteService>();
             string cultureCode = "ar-sa";
 
@@ -54,7 +52,6 @@ namespace PoshKentico.Tests.Configuration.Sites
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 SiteService = siteServiceMock.Object,
             };
 
@@ -63,21 +60,18 @@ namespace PoshKentico.Tests.Configuration.Sites
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 SiteService = siteServiceMock.Object,
                 GetCmsSiteBusiness = getBusinessLayer,
             };
 
             businessLayer.RemoveCulture(siteMock1.Object, cultureCode);
 
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
             siteServiceMock.Verify(x => x.RemoveSiteCulture(siteMock1.Object, cultureCode));
         }
 
         [TestCase]
         public void RemoveSiteCultureTest_MatchString_ExactFalse()
         {
-            var applicationServiceMock = new Mock<ICmsApplicationService>();
             var siteServiceMock = new Mock<ISiteService>();
             string cultureCode = "ar-sa";
 
@@ -101,7 +95,6 @@ namespace PoshKentico.Tests.Configuration.Sites
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 SiteService = siteServiceMock.Object,
             };
 
@@ -110,14 +103,12 @@ namespace PoshKentico.Tests.Configuration.Sites
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 SiteService = siteServiceMock.Object,
                 GetCmsSiteBusiness = getBusinessLayer,
             };
 
             businessLayer.RemoveCulture("site", false, cultureCode);
 
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
             siteServiceMock.Verify(x => x.RemoveSiteCulture(siteMock1.Object, cultureCode));
             siteServiceMock.Verify(x => x.RemoveSiteCulture(siteMock2.Object, cultureCode));
         }
@@ -125,7 +116,6 @@ namespace PoshKentico.Tests.Configuration.Sites
         [TestCase]
         public void RemoveSiteCultureTest_MatchString_ExactTrue()
         {
-            var applicationServiceMock = new Mock<ICmsApplicationService>();
             var siteServiceMock = new Mock<ISiteService>();
             string cultureCode = "ar-sa";
 
@@ -149,7 +139,6 @@ namespace PoshKentico.Tests.Configuration.Sites
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 SiteService = siteServiceMock.Object,
             };
 
@@ -158,21 +147,18 @@ namespace PoshKentico.Tests.Configuration.Sites
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 SiteService = siteServiceMock.Object,
                 GetCmsSiteBusiness = getBusinessLayer,
             };
 
             businessLayer.RemoveCulture("yoursite2", true, cultureCode);
 
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
             siteServiceMock.Verify(x => x.RemoveSiteCulture(siteMock2.Object, cultureCode));
         }
 
         [TestCase]
         public void RemoveSiteCultureTest_Ids()
         {
-            var applicationServiceMock = new Mock<ICmsApplicationService>();
             var siteServiceMock = new Mock<ISiteService>();
             string cultureCode = "ar-sa";
 
@@ -199,7 +185,6 @@ namespace PoshKentico.Tests.Configuration.Sites
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 SiteService = siteServiceMock.Object,
             };
 
@@ -208,7 +193,6 @@ namespace PoshKentico.Tests.Configuration.Sites
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 SiteService = siteServiceMock.Object,
                 GetCmsSiteBusiness = getBusinessLayer,
             };
@@ -217,7 +201,6 @@ namespace PoshKentico.Tests.Configuration.Sites
 
             businessLayer.RemoveCulture(ids, cultureCode);
 
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
             siteServiceMock.Verify(x => x.RemoveSiteCulture(siteMock2.Object, cultureCode));
         }
     }

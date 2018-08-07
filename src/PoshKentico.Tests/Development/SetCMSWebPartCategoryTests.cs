@@ -19,7 +19,6 @@ using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Development;
 using PoshKentico.Core.Services.Development;
-using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.Tests.Development
 {
@@ -29,7 +28,6 @@ namespace PoshKentico.Tests.Development
         [TestCase]
         public void Set()
         {
-            var applicationServiceMock = new Mock<ICmsApplicationService>();
             var webPartServiceMock = new Mock<IWebPartService>();
 
             var businessLayer = new SetCMSWebPartCategoryBusiness()
@@ -37,7 +35,6 @@ namespace PoshKentico.Tests.Development
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 WebPartService = webPartServiceMock.Object,
             };
 
@@ -48,7 +45,6 @@ namespace PoshKentico.Tests.Development
 
             businessLayer.Set(catMock1.Object);
 
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
             webPartServiceMock.Verify(x => x.Update(catMock1.Object));
         }
     }

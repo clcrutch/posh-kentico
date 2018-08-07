@@ -19,7 +19,6 @@ using CMS.SiteProvider;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.Business.Configuration.Sites.Tests
 {
@@ -29,7 +28,6 @@ namespace PoshKentico.Business.Configuration.Sites.Tests
         [TestCase]
         public void CreateSiteTest_WithoutSiteName()
         {
-            var applicationServiceMock = new Mock<ICmsApplicationService>();
             var siteServiceMock = new Mock<SiteServiceMock>();
 
             var businessLayer = new NewCmsSiteBusiness()
@@ -37,13 +35,10 @@ namespace PoshKentico.Business.Configuration.Sites.Tests
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 SiteService = siteServiceMock.Object,
             };
 
             var result = businessLayer.CreateSite("My Site1", null, SiteStatusEnum.Stopped, "localhost1");
-
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
 
             siteServiceMock.Object.VerifyCreate(result);
 
@@ -53,7 +48,6 @@ namespace PoshKentico.Business.Configuration.Sites.Tests
         [TestCase]
         public void CreateSiteTest_WithSiteName()
         {
-            var applicationServiceMock = new Mock<ICmsApplicationService>();
             var siteServiceMock = new Mock<SiteServiceMock>();
 
             var businessLayer = new NewCmsSiteBusiness()
@@ -61,13 +55,10 @@ namespace PoshKentico.Business.Configuration.Sites.Tests
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 SiteService = siteServiceMock.Object,
             };
 
             var result = businessLayer.CreateSite("My Site1", "mySite", SiteStatusEnum.Stopped, "localhost1");
-
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
 
             siteServiceMock.Object.VerifyCreate(result);
 

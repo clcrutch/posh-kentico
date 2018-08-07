@@ -19,7 +19,6 @@ using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Configuration.Sites;
 using PoshKentico.Core.Services.Configuration;
-using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.Tests.Configuration.Sites
 {
@@ -28,7 +27,6 @@ namespace PoshKentico.Tests.Configuration.Sites
         [TestCase]
         public void GetSiteCultureTest_Object()
         {
-            var applicationServiceMock = new Mock<ICmsApplicationService>();
             var siteServiceMock = new Mock<ISiteService>();
 
             var siteMock1 = new Mock<ISite>();
@@ -41,7 +39,6 @@ namespace PoshKentico.Tests.Configuration.Sites
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 SiteService = siteServiceMock.Object,
             };
 
@@ -50,21 +47,18 @@ namespace PoshKentico.Tests.Configuration.Sites
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 SiteService = siteServiceMock.Object,
                 GetCmsSiteBusiness = getBusinessLayer,
             };
 
             businessLayer.GetCultures(siteMock1.Object);
 
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
             siteServiceMock.Verify(x => x.GetSiteCultures(siteMock1.Object));
         }
 
         [TestCase]
         public void GetSiteCultureTest_SiteName()
         {
-            var applicationServiceMock = new Mock<ICmsApplicationService>();
             var siteServiceMock = new Mock<ISiteService>();
 
             var siteMock1 = new Mock<ISite>();
@@ -79,7 +73,6 @@ namespace PoshKentico.Tests.Configuration.Sites
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 SiteService = siteServiceMock.Object,
             };
 
@@ -88,14 +81,12 @@ namespace PoshKentico.Tests.Configuration.Sites
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 SiteService = siteServiceMock.Object,
                 GetCmsSiteBusiness = getBusinessLayer,
             };
 
             businessLayer.GetCultures(siteMock1.Object.SiteName);
 
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
             siteServiceMock.Verify(x => x.GetSiteCultures(siteMock1.Object));
         }
     }

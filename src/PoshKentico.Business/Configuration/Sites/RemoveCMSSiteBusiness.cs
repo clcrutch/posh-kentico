@@ -53,8 +53,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <param name="site">The <see cref="ISite"/> to set.</param>
         public void Remove(ISite site)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             this.RemoveSite(site);
         }
 
@@ -64,8 +62,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <param name="ids">The IDs of the <see cref="ISite"/> to delete.</param>
         public void Remove(params int[] ids)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             foreach (var site in this.GetCmsSiteBusiness.GetSites(ids))
             {
                 this.RemoveSite(site);
@@ -79,8 +75,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <param name="exact">A boolean which indicates if the match should be exact.</param>
         public void Remove(string matchString, bool exact)
         {
-            this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
-
             foreach (var site in this.GetCmsSiteBusiness.GetSites(matchString, exact))
             {
                 this.RemoveSite(site);

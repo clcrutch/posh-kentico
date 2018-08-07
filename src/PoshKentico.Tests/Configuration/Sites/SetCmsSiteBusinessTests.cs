@@ -31,7 +31,6 @@ namespace PoshKentico.Tests.Configuration.Sites
         [TestCase]
         public void SetSiteTest_SpecifiedObject()
         {
-            var applicationServiceMock = new Mock<ICmsApplicationService>();
             var siteServiceMock = new Mock<ISiteService>();
 
             var businessLayer = new SetCmsSiteBusiness
@@ -39,7 +38,6 @@ namespace PoshKentico.Tests.Configuration.Sites
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 SiteService = siteServiceMock.Object,
             };
 
@@ -51,14 +49,12 @@ namespace PoshKentico.Tests.Configuration.Sites
 
             businessLayer.Set(siteMock1.Object);
 
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
             siteServiceMock.Verify(x => x.Update(siteMock1.Object));
         }
 
         [TestCase]
         public void SetSiteTest_SpecifiedProperties()
         {
-            var applicationServiceMock = new Mock<ICmsApplicationService>();
             var siteServiceMock = new Mock<ISiteService>();
 
             var sites = new List<ISite>();
@@ -81,13 +77,10 @@ namespace PoshKentico.Tests.Configuration.Sites
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 SiteService = siteServiceMock.Object,
             };
 
             businessLayer.Set("My Site3", "MySite1", SiteStatusEnum.Running, "localhost");
-
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
 
             siteServiceMock.Verify(x => x.Update(
                 It.Is<ISite>(i => i.DisplayName == "My Site3" && i.SiteName == "MySite1"

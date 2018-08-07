@@ -20,7 +20,6 @@ using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Core.Services.Configuration;
-using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.Business.Configuration.Sites.Tests
 {
@@ -30,7 +29,6 @@ namespace PoshKentico.Business.Configuration.Sites.Tests
         [TestCase]
         public void GetSiteTest_NoParameters_None()
         {
-            var applicationServiceMock = new Mock<ICmsApplicationService>();
             var siteServiceMock = new Mock<ISiteService>();
 
             var businessLayer = new GetCmsSiteBusiness()
@@ -38,13 +36,10 @@ namespace PoshKentico.Business.Configuration.Sites.Tests
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 SiteService = siteServiceMock.Object,
             };
 
             businessLayer.GetSites().Should().BeEmpty();
-
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
 
             siteServiceMock.VerifyGet(x => x.Sites);
         }
@@ -52,7 +47,6 @@ namespace PoshKentico.Business.Configuration.Sites.Tests
         [TestCase]
         public void GetSiteTest_NoParameters_All()
         {
-            var applicationServiceMock = new Mock<ICmsApplicationService>();
             var siteServiceMock = new Mock<ISiteService>();
 
             var sites = new List<ISite>();
@@ -73,13 +67,10 @@ namespace PoshKentico.Business.Configuration.Sites.Tests
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 SiteService = siteServiceMock.Object,
             };
 
             businessLayer.GetSites().Should().NotBeNullOrEmpty().And.HaveCount(2);
-
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
 
             siteServiceMock.VerifyGet(x => x.Sites);
         }
@@ -87,7 +78,6 @@ namespace PoshKentico.Business.Configuration.Sites.Tests
         [TestCase]
         public void GetSiteTest_MatchString_ExactFalse()
         {
-            var applicationServiceMock = new Mock<ICmsApplicationService>();
             var siteServiceMock = new Mock<ISiteService>();
 
             var sites = new List<ISite>();
@@ -110,7 +100,6 @@ namespace PoshKentico.Business.Configuration.Sites.Tests
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 SiteService = siteServiceMock.Object,
             };
 
@@ -120,15 +109,12 @@ namespace PoshKentico.Business.Configuration.Sites.Tests
 
             businessLayer.GetSites("your", false).Should().NotBeNullOrEmpty().And.HaveCount(1);
 
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
-
             siteServiceMock.VerifyGet(x => x.Sites);
         }
 
         [TestCase]
         public void GetSiteTest_MatchString_ExactTrue()
         {
-            var applicationServiceMock = new Mock<ICmsApplicationService>();
             var siteServiceMock = new Mock<ISiteService>();
 
             var sites = new List<ISite>();
@@ -151,7 +137,6 @@ namespace PoshKentico.Business.Configuration.Sites.Tests
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 SiteService = siteServiceMock.Object,
             };
 
@@ -159,15 +144,12 @@ namespace PoshKentico.Business.Configuration.Sites.Tests
 
             businessLayer.GetSites("your site2", true).Should().NotBeNullOrEmpty().And.HaveCount(1);
 
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
-
             siteServiceMock.VerifyGet(x => x.Sites);
         }
 
         [TestCase]
         public void GetSiteTest_IDs()
         {
-            var applicationServiceMock = new Mock<ICmsApplicationService>();
             var siteServiceMock = new Mock<ISiteService>();
 
             var sites = new List<ISite>();
@@ -191,7 +173,6 @@ namespace PoshKentico.Business.Configuration.Sites.Tests
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 SiteService = siteServiceMock.Object,
             };
 
@@ -200,8 +181,6 @@ namespace PoshKentico.Business.Configuration.Sites.Tests
             businessLayer.GetSites(2).Should().NotBeNullOrEmpty().And.HaveCount(1);
 
             businessLayer.GetSites(1, 2, 3).Should().NotBeNullOrEmpty().And.HaveCount(2);
-
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
 
             siteServiceMock.Verify(x => x.GetSite(1));
             siteServiceMock.Verify(x => x.GetSite(2));

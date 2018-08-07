@@ -30,7 +30,6 @@ namespace PoshKentico.Tests.Configuration.Sites
         [TestCase]
         public void AddSiteDomainAliasTest_Object()
         {
-            var applicationServiceMock = new Mock<ICmsApplicationService>();
             var siteServiceMock = new Mock<ISiteService>();
             string aliasName = "172.0.0.1";
 
@@ -54,7 +53,6 @@ namespace PoshKentico.Tests.Configuration.Sites
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 SiteService = siteServiceMock.Object,
             };
 
@@ -64,21 +62,18 @@ namespace PoshKentico.Tests.Configuration.Sites
                 WriteVerbose = Assert.NotNull,
                 ShouldProcess = (x, y) => true,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 SiteService = siteServiceMock.Object,
                 GetCmsSiteBusiness = getBusinessLayer,
             };
 
             businessLayer.AddDomainAlias(siteMock1.Object, aliasName);
 
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
             siteServiceMock.Verify(x => x.AddSiteDomainAlias(siteMock1.Object, aliasName));
         }
 
         [TestCase]
         public void AddSiteDomainAliasTest_MatchString_ExactFalse()
         {
-            var applicationServiceMock = new Mock<ICmsApplicationService>();
             var siteServiceMock = new Mock<ISiteService>();
             string aliasName = "172.0.0.1";
 
@@ -102,7 +97,6 @@ namespace PoshKentico.Tests.Configuration.Sites
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 SiteService = siteServiceMock.Object,
             };
 
@@ -111,14 +105,12 @@ namespace PoshKentico.Tests.Configuration.Sites
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 SiteService = siteServiceMock.Object,
                 GetCmsSiteBusiness = getBusinessLayer,
             };
 
             businessLayer.AddDomainAlias("site", false, aliasName);
 
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
             siteServiceMock.Verify(x => x.AddSiteDomainAlias(siteMock1.Object, aliasName));
             siteServiceMock.Verify(x => x.AddSiteDomainAlias(siteMock2.Object, aliasName));
         }
@@ -126,7 +118,6 @@ namespace PoshKentico.Tests.Configuration.Sites
         [TestCase]
         public void AddSiteDomainAliasTest_MatchString_ExactTrue()
         {
-            var applicationServiceMock = new Mock<ICmsApplicationService>();
             var siteServiceMock = new Mock<ISiteService>();
             string aliasName = "172.0.0.1";
 
@@ -150,7 +141,6 @@ namespace PoshKentico.Tests.Configuration.Sites
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 SiteService = siteServiceMock.Object,
             };
 
@@ -160,21 +150,18 @@ namespace PoshKentico.Tests.Configuration.Sites
                 WriteVerbose = Assert.NotNull,
                 ShouldProcess = (x, y) => true,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 SiteService = siteServiceMock.Object,
                 GetCmsSiteBusiness = getBusinessLayer,
             };
 
             businessLayer.AddDomainAlias("yoursite2", true, aliasName);
 
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
             siteServiceMock.Verify(x => x.AddSiteDomainAlias(siteMock2.Object, aliasName));
         }
 
         [TestCase]
         public void AddSiteDomainAliasTest_Ids()
         {
-            var applicationServiceMock = new Mock<ICmsApplicationService>();
             var siteServiceMock = new Mock<ISiteService>();
             string aliasName = "172.0.0.1";
 
@@ -201,7 +188,6 @@ namespace PoshKentico.Tests.Configuration.Sites
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 SiteService = siteServiceMock.Object,
             };
 
@@ -211,7 +197,6 @@ namespace PoshKentico.Tests.Configuration.Sites
                 WriteVerbose = Assert.NotNull,
                 ShouldProcess = (x, y) => true,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 SiteService = siteServiceMock.Object,
                 GetCmsSiteBusiness = getBusinessLayer,
             };
@@ -220,7 +205,6 @@ namespace PoshKentico.Tests.Configuration.Sites
 
             businessLayer.AddDomainAlias(ids, aliasName);
 
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
             siteServiceMock.Verify(x => x.AddSiteDomainAlias(siteMock2.Object, aliasName));
         }
     }
