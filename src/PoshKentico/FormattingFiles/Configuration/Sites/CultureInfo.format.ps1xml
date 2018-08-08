@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+  <ViewDefinitions> 
+    <View>
+      <Name>Culture</Name>
+      <ViewSelectedBy>
+        <TypeName>CMS.Localization.CultureInfo</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Width>15</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>25</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>15</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>25</Width>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>CultureID</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>CultureName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>CultureCode</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>CultureShortName</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+ </ViewDefinitions>
+</Configuration>

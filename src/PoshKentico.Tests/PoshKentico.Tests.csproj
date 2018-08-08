@@ -470,6 +470,19 @@
     <Compile Include="Development\WebParts\NewCMSWebPartCategoryTests.cs" />
     <Compile Include="Development\WebParts\RemoveCMSWebPartCategoryTests.cs" />
     <Compile Include="Development\WebParts\SetCMSWebPartCategoryTests.cs" />
+    <Compile Include="Configuration\Sites\AddCmsSiteCultureBusinessTests.cs" />
+    <Compile Include="Configuration\Sites\GetCmsSiteDomainAliasBusinessTests.cs" />
+    <Compile Include="Configuration\Sites\AddCmsSiteDomainAliasBusinessTests.cs" />
+    <Compile Include="Configuration\Sites\GetCmsSiteBusinessTests.cs" />
+    <Compile Include="Configuration\Sites\GetCmsSiteCultureBusinessTests.cs" />
+    <Compile Include="Configuration\Sites\NewCmsSiteBusinessTests.cs" />
+    <Compile Include="Configuration\Sites\RemoveCmsSiteBusinessTests.cs" />
+    <Compile Include="Configuration\Sites\RemoveCmsSiteCultureBusinessTests.cs" />
+    <Compile Include="Configuration\Sites\RemoveCmsSiteDomainAlisaBusinessTests.cs" />
+    <Compile Include="Configuration\Sites\SetCmsSiteBusinessTests.cs" />
+    <Compile Include="Configuration\Sites\SiteServiceMock.cs" />
+    <Compile Include="Configuration\Sites\StopCmsSiteBusinessTests.cs" />
+    <Compile Include="Configuration\Sites\StartCmsSiteBusinessTests.cs" />
     <Compile Include="General\InitializeCMSApplicationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

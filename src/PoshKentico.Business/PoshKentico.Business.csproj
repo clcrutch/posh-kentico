@@ -450,6 +450,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CmdletBusinessBase.cs" />
+    <Compile Include="Configuration\Sites\AddCmsSiteCultureBusiness.cs" />
+    <Compile Include="Configuration\Sites\AddCmsSiteDomainAliasBusiness.cs" />
+    <Compile Include="Configuration\Sites\GetCmsSiteBusiness.cs" />
+    <Compile Include="Configuration\Sites\GetCmsSiteCultureBusiness.cs" />
+    <Compile Include="Configuration\Sites\GetCmsSiteDomainAliasBusiness.cs" />
+    <Compile Include="Configuration\Sites\NewCmsSiteBusiness.cs" />
+    <Compile Include="Configuration\Sites\RemoveCmsSiteBusiness.cs" />
+    <Compile Include="Configuration\Sites\RemoveCmsSiteCultureBusiness.cs" />
+    <Compile Include="Configuration\Sites\RemoveCmsSiteDomainAliasBusiness.cs" />
+    <Compile Include="Configuration\Sites\SetCmsSiteBusiness.cs" />
+    <Compile Include="Configuration\Sites\StartCmsSiteBusiness.cs" />
+    <Compile Include="Configuration\Sites\StopCmsSiteBusiness.cs" />
     <Compile Include="Development\WebParts\GetCMSWebPartBusiness.cs" />
     <Compile Include="Development\WebParts\GetCMSWebPartCategoryBusiness.cs" />
     <Compile Include="Development\WebParts\NewCMSWebPartCategoryBusiness.cs" />

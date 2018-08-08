@@ -31,7 +31,6 @@ namespace PoshKentico.Tests.Development.WebParts
         [TestCase]
         public void CreateWebPart_ParentIsRoot_DisplayNameNull()
         {
-            var applicationServiceMock = new Mock<ICmsApplicationService>();
             var webPartServiceMock = new Mock<WebPartServiceMock>();
 
             var webPartCategories = new List<IWebPartCategory>();
@@ -62,13 +61,10 @@ namespace PoshKentico.Tests.Development.WebParts
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 WebPartService = webPartServiceMock.Object,
             };
 
             var result = businessLayer.CreateWebPart("/Test", null, "/imagepath");
-
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
 
             webPartServiceMock.Object.VerifyCreate("Test", "Test", "/Test", "/imagepath", 355);
 
@@ -78,7 +74,6 @@ namespace PoshKentico.Tests.Development.WebParts
         [TestCase]
         public void CreateWebPart_ParentIsRoot_DisplayNameNotNull()
         {
-            var applicationServiceMock = new Mock<ICmsApplicationService>();
             var webPartServiceMock = new Mock<WebPartServiceMock>();
 
             var webPartCategories = new List<IWebPartCategory>();
@@ -109,13 +104,10 @@ namespace PoshKentico.Tests.Development.WebParts
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 WebPartService = webPartServiceMock.Object,
             };
 
             var result = businessLayer.CreateWebPart("/Test", "My Test", "/imagepath");
-
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
 
             webPartServiceMock.Object.VerifyCreate("My Test", "Test", "/Test", "/imagepath", 355);
 
@@ -125,7 +117,6 @@ namespace PoshKentico.Tests.Development.WebParts
         [TestCase]
         public void CreateWebPart_ParentIsNotRoot_DisplayNameNull()
         {
-            var applicationServiceMock = new Mock<ICmsApplicationService>();
             var webPartServiceMock = new Mock<WebPartServiceMock>();
 
             var webPartCategories = new List<IWebPartCategory>();
@@ -151,13 +142,10 @@ namespace PoshKentico.Tests.Development.WebParts
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 WebPartService = webPartServiceMock.Object,
             };
 
             var result = businessLayer.CreateWebPart("/My/Test", null, "/imagepath");
-
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
 
             webPartServiceMock.Object.VerifyCreate("Test", "Test", "/My/Test", "/imagepath", 400);
 
@@ -167,7 +155,6 @@ namespace PoshKentico.Tests.Development.WebParts
         [TestCase]
         public void CreateWebPart_ParentIsNotRoot_DisplayNameNotNull()
         {
-            var applicationServiceMock = new Mock<ICmsApplicationService>();
             var webPartServiceMock = new Mock<WebPartServiceMock>();
 
             var webPartCategories = new List<IWebPartCategory>();
@@ -193,13 +180,10 @@ namespace PoshKentico.Tests.Development.WebParts
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 WebPartService = webPartServiceMock.Object,
             };
 
             var result = businessLayer.CreateWebPart("/My/Test", "My Test", "/imagepath");
-
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
 
             webPartServiceMock.Object.VerifyCreate("My Test", "Test", "/My/Test", "/imagepath", 400);
 

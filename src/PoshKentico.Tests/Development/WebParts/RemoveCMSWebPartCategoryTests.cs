@@ -30,8 +30,6 @@ namespace PoshKentico.Tests.Development.WebParts
         [TestCase]
         public void RemoveWebPartCategories_MatchString_ExactFalse()
         {
-            var applicationServiceMock = new Mock<ICmsApplicationService>();
-
             var webPartServiceMock = new Mock<IWebPartService>();
 
             var webPartCategories = new List<IWebPartCategory>();
@@ -55,7 +53,6 @@ namespace PoshKentico.Tests.Development.WebParts
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 WebPartService = webPartServiceMock.Object,
             };
 
@@ -65,7 +62,6 @@ namespace PoshKentico.Tests.Development.WebParts
                 WriteVerbose = Assert.NotNull,
                 ShouldProcess = (x, y) => true,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 WebPartService = webPartServiceMock.Object,
 
                 GetCMSWebPartCategoryBusiness = getBusinessLayer,
@@ -73,27 +69,22 @@ namespace PoshKentico.Tests.Development.WebParts
 
             removeBusinessLayer.RemoveWebPartCategories("my", false);
 
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
             webPartServiceMock.Verify(x => x.Delete(catMock1.Object));
             webPartServiceMock.Verify(x => x.Delete(catMock2.Object), Times.Never);
 
             // Reset to go again.
-            applicationServiceMock.ResetCalls();
             webPartServiceMock.ResetCalls();
 
             removeBusinessLayer.RemoveWebPartCategories("/my", false);
 
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
             webPartServiceMock.Verify(x => x.Delete(catMock1.Object));
             webPartServiceMock.Verify(x => x.Delete(catMock2.Object));
 
             // Reset to go again.
-            applicationServiceMock.ResetCalls();
             webPartServiceMock.ResetCalls();
 
             removeBusinessLayer.RemoveWebPartCategories("/ny", false);
 
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
             webPartServiceMock.Verify(x => x.Delete(catMock1.Object), Times.Never);
             webPartServiceMock.Verify(x => x.Delete(catMock2.Object), Times.Never);
         }
@@ -101,8 +92,6 @@ namespace PoshKentico.Tests.Development.WebParts
         [TestCase]
         public void RemoveWebPartCategories_MatchString_ExactTrue()
         {
-            var applicationServiceMock = new Mock<ICmsApplicationService>();
-
             var webPartServiceMock = new Mock<IWebPartService>();
 
             var webPartCategories = new List<IWebPartCategory>();
@@ -126,7 +115,6 @@ namespace PoshKentico.Tests.Development.WebParts
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 WebPartService = webPartServiceMock.Object,
             };
 
@@ -136,7 +124,6 @@ namespace PoshKentico.Tests.Development.WebParts
                 WriteVerbose = Assert.NotNull,
                 ShouldProcess = (x, y) => true,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 WebPartService = webPartServiceMock.Object,
 
                 GetCMSWebPartCategoryBusiness = getBusinessLayer,
@@ -144,37 +131,30 @@ namespace PoshKentico.Tests.Development.WebParts
 
             removeBusinessLayer.RemoveWebPartCategories("my", true);
 
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
             webPartServiceMock.Verify(x => x.Delete(catMock1.Object), Times.Never);
             webPartServiceMock.Verify(x => x.Delete(catMock2.Object), Times.Never);
 
             // Reset to go again.
-            applicationServiceMock.ResetCalls();
             webPartServiceMock.ResetCalls();
 
             removeBusinessLayer.RemoveWebPartCategories("/my", true);
 
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
             webPartServiceMock.Verify(x => x.Delete(catMock1.Object), Times.Never);
             webPartServiceMock.Verify(x => x.Delete(catMock2.Object), Times.Never);
 
             // Reset to go again.
-            applicationServiceMock.ResetCalls();
             webPartServiceMock.ResetCalls();
 
             removeBusinessLayer.RemoveWebPartCategories("my Category", true);
 
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
             webPartServiceMock.Verify(x => x.Delete(catMock1.Object));
             webPartServiceMock.Verify(x => x.Delete(catMock2.Object), Times.Never);
 
             // Reset to go again.
-            applicationServiceMock.ResetCalls();
             webPartServiceMock.ResetCalls();
 
             removeBusinessLayer.RemoveWebPartCategories("NyCategory", true);
 
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
             webPartServiceMock.Verify(x => x.Delete(catMock1.Object), Times.Never);
             webPartServiceMock.Verify(x => x.Delete(catMock2.Object));
         }
@@ -182,8 +162,6 @@ namespace PoshKentico.Tests.Development.WebParts
         [TestCase]
         public void RemoveWebPartCategories_IDs()
         {
-            var applicationServiceMock = new Mock<ICmsApplicationService>();
-
             var webPartServiceMock = new Mock<IWebPartService>();
 
             var catMock1 = new Mock<IWebPartCategory>();
@@ -206,7 +184,6 @@ namespace PoshKentico.Tests.Development.WebParts
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 WebPartService = webPartServiceMock.Object,
             };
 
@@ -216,7 +193,6 @@ namespace PoshKentico.Tests.Development.WebParts
                 WriteVerbose = Assert.NotNull,
                 ShouldProcess = (x, y) => true,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 WebPartService = webPartServiceMock.Object,
 
                 GetCMSWebPartCategoryBusiness = getBusinessLayer,
@@ -224,7 +200,6 @@ namespace PoshKentico.Tests.Development.WebParts
 
             removeBusinessLayer.RemoveWebPartCategories(255, 101, 5);
 
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
             webPartServiceMock.Verify(x => x.Delete(catMock1.Object));
             webPartServiceMock.Verify(x => x.Delete(catMock2.Object));
         }
@@ -232,8 +207,6 @@ namespace PoshKentico.Tests.Development.WebParts
         [TestCase]
         public void RemoveWebPartCategories_ByWebPartCategory()
         {
-            var applicationServiceMock = new Mock<ICmsApplicationService>();
-
             var webPartServiceMock = new Mock<IWebPartService>();
 
             var catMock1 = new Mock<IWebPartCategory>();
@@ -247,7 +220,6 @@ namespace PoshKentico.Tests.Development.WebParts
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 WebPartService = webPartServiceMock.Object,
             };
 
@@ -257,7 +229,6 @@ namespace PoshKentico.Tests.Development.WebParts
                 WriteVerbose = Assert.NotNull,
                 ShouldProcess = (x, y) => true,
 
-                CmsApplicationService = applicationServiceMock.Object,
                 WebPartService = webPartServiceMock.Object,
 
                 GetCMSWebPartCategoryBusiness = getBusinessLayer,
@@ -265,7 +236,6 @@ namespace PoshKentico.Tests.Development.WebParts
 
             removeBusinessLayer.RemoveWebPartCategory(catMock1.Object);
 
-            applicationServiceMock.Verify(x => x.Initialize(true, Assert.NotNull, Assert.NotNull));
             webPartServiceMock.Verify(x => x.Delete(catMock1.Object));
         }
     }
