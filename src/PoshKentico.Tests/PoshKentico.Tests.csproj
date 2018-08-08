@@ -466,6 +466,19 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\Sites\AddCmsSiteCultureBusinessTests.cs" />
+    <Compile Include="Configuration\Sites\GetCmsSiteDomainAliasBusinessTests.cs" />
+    <Compile Include="Configuration\Sites\AddCmsSiteDomainAliasBusinessTests.cs" />
+    <Compile Include="Configuration\Sites\GetCmsSiteBusinessTests.cs" />
+    <Compile Include="Configuration\Sites\GetCmsSiteCultureBusinessTests.cs" />
+    <Compile Include="Configuration\Sites\NewCmsSiteBusinessTests.cs" />
+    <Compile Include="Configuration\Sites\RemoveCmsSiteBusinessTests.cs" />
+    <Compile Include="Configuration\Sites\RemoveCmsSiteCultureBusinessTests.cs" />
+    <Compile Include="Configuration\Sites\RemoveCmsSiteDomainAlisaBusinessTests.cs" />
+    <Compile Include="Configuration\Sites\SetCmsSiteBusinessTests.cs" />
+    <Compile Include="Configuration\Sites\SiteServiceMock.cs" />
+    <Compile Include="Configuration\Sites\StopCmsSiteBusinessTests.cs" />
+    <Compile Include="Configuration\Sites\StartCmsSiteBusinessTests.cs" />
     <Compile Include="Development\GetCMSWebPartCategoryTests.cs" />
     <Compile Include="Development\NewCMSWebPartCategoryTests.cs" />
     <Compile Include="Development\RemoveCMSWebPartCategoryTests.cs" />

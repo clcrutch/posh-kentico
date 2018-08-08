@@ -473,6 +473,18 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cmdlets\Configuration\Sites\AddCmsSiteCultureCmdlet.cs" />
+    <Compile Include="Cmdlets\Configuration\Sites\AddCmsSiteDomainAliasCmdlet.cs" />
+    <Compile Include="Cmdlets\Configuration\Sites\GetCmsSiteCmdlet.cs" />
+    <Compile Include="Cmdlets\Configuration\Sites\GetCmsSiteCultureCmdlet.cs" />
+    <Compile Include="Cmdlets\Configuration\Sites\GetCmsSiteDomainAliasCmdlet.cs" />
+    <Compile Include="Cmdlets\Configuration\Sites\NewCmsSiteCmdlet.cs" />
+    <Compile Include="Cmdlets\Configuration\Sites\RemoveCmsSiteCmdlet.cs" />
+    <Compile Include="Cmdlets\Configuration\Sites\RemoveCmsSiteCultureCmdlet.cs" />
+    <Compile Include="Cmdlets\Configuration\Sites\RemoveCmsSiteDomainAliasCmdlet.cs" />
+    <Compile Include="Cmdlets\Configuration\Sites\SetCmsSiteCmdlet.cs" />
+    <Compile Include="Cmdlets\Configuration\Sites\StartCmsSiteCmdlet.cs" />
+    <Compile Include="Cmdlets\Configuration\Sites\StopCmsSiteCmdlet.cs" />
     <Compile Include="Cmdlets\Development\GetCMSWebPartCategoryCmdlet.cs" />
     <Compile Include="Cmdlets\Development\NewCMSWebPartCategoryCmdlet.cs" />
     <Compile Include="Cmdlets\Development\RemoveCMSWebPartCategoryCmdlet.cs" />
@@ -497,6 +509,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="DSCResources\xSite\xSite.psm1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="DSCResources\xSite\xSite.schema.mof">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="DSCResources\xWebPartCategory\xWebPartCategory.psm1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -509,6 +527,15 @@
     <None Include="DSCResources\xWebPart\xWebPart.schema.mof">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="FormattingFiles\Configuration\Sites\SiteDomainAliasInfo.format.ps1xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FormattingFiles\Configuration\Sites\SiteInfo.format.ps1xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FormattingFiles\Configuration\Sites\CultureInfo.format.ps1xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <Content Include="FormattingFiles\development.format.ps1xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
