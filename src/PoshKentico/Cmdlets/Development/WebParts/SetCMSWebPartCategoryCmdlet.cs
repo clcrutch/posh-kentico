@@ -18,6 +18,8 @@
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
+using CMS.PortalEngine;
+using ImpromptuInterface;
 using PoshKentico.Business.Development.WebParts;
 using PoshKentico.Core.Services.Development.WebParts;
 
@@ -39,7 +41,7 @@ namespace PoshKentico.Cmdlets.Development.WebPart
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Set, "CMSWebPartCategory")]
-    [OutputType(typeof(IWebPartCategory), ParameterSetName = new string[] { PASSTHRU })]
+    [OutputType(typeof(WebPartCategoryInfo), ParameterSetName = new string[] { PASSTHRU })]
     [Alias("swpc")]
     public class SetCMSWebPartCategoryCmdlet : MefCmdlet
     {
@@ -81,7 +83,7 @@ namespace PoshKentico.Cmdlets.Development.WebPart
 
             if (this.PassThru.ToBool())
             {
-                this.WriteObject(this.WebPartCategory);
+                this.WriteObject(this.WebPartCategory.UndoActLike());
             }
         }
 

@@ -19,6 +19,8 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
+using CMS.PortalEngine;
+using ImpromptuInterface;
 using PoshKentico.Business.Development.WebParts;
 using PoshKentico.Core.Services.Development.WebParts;
 
@@ -38,6 +40,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSWebPart", DefaultParameterSetName = NONE)]
+    [OutputType(typeof(WebPartCategoryInfo))]
     [Alias("gwp")]
     public class GetCMSWebPartCmdlet : MefCmdlet
     {
@@ -60,7 +63,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         public SwitchParameter RegularExpression { get; set; }
 
         [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true, ParameterSetName = CATEGORY)]
-        public IWebPartCategory WebPartCategory { get; set; }
+        public WebPartCategoryInfo WebPartCategory { get; set; }
 
         /// <summary>
         /// Gets or sets the Business layer for this web part. Populated by MEF.
@@ -80,7 +83,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
             switch (this.ParameterSetName)
             {
                 case CATEGORY:
-                    webparts = this.BusinessLayer.GetWebPartsByCategory(this.WebPartCategory);
+                    webparts = this.BusinessLayer.GetWebPartsByCategory(this.WebPartCategory.ActLike<IWebPartCategory>());
                     break;
                 case CATEGORYNAME:
                     webparts = this.BusinessLayer.GetWebPartsByCategory(this.CategoryName, this.RegularExpression.ToBool());
@@ -92,7 +95,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
 
             foreach (var webpart in webparts)
             {
-                this.WriteObject(webpart);
+                this.WriteObject(webpart.UndoActLike());
             }
         }
 

@@ -96,7 +96,7 @@ namespace PoshKentico.Cmdlets.Development.WebPart
 
             if (this.PassThru.ToBool())
             {
-                this.WriteObject(newCategory);
+                this.WriteObject(newCategory.UndoActLike());
             }
         }
 

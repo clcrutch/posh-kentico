@@ -20,6 +20,7 @@ using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 using CMS.PortalEngine;
+using ImpromptuInterface;
 using PoshKentico.Business.Development.WebParts;
 using PoshKentico.Core.Services.Development.WebParts;
 
@@ -124,7 +125,7 @@ namespace PoshKentico.Cmdlets.Development.WebPart
 
             foreach (var category in categories)
             {
-                this.WriteObject(category);
+                this.WriteObject(category.UndoActLike());
             }
         }
 
