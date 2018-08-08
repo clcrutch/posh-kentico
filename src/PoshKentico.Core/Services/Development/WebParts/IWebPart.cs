@@ -22,6 +22,15 @@ namespace PoshKentico.Core.Services.Development.WebParts
     /// </summary>
     public interface IWebPart
     {
+        #region Properties
+
         int WebPartCategoryID { get; }
+
+        string WebPartDisplayName { get; }
+
+        string WebPartName { get; }
+
+        #endregion
+
     }
 }

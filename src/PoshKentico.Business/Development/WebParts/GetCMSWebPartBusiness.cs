@@ -18,6 +18,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Text.RegularExpressions;
 using PoshKentico.Core.Services.Development.WebParts;
 using PoshKentico.Core.Services.General;
 
@@ -49,6 +50,25 @@ namespace PoshKentico.Business.Development.WebParts
         /// </summary>
         /// <returns>A list of all of the <see cref="IWebPart"/>.</returns>
         public IEnumerable<IWebPart> GetWebParts() => this.WebPartService.WebParts;
+
+        public IEnumerable<IWebPart> GetWebParts(string matchString, bool isRegex)
+        {
+            Regex regex = null;
+
+            if (isRegex)
+            {
+                regex = new Regex(matchString, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            }
+            else
+            {
+                regex = new Regex($"^{matchString.Replace("*", ".*")}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            }
+
+            return (from wp in this.WebPartService.WebParts
+                    where regex.IsMatch(wp.WebPartDisplayName) ||
+                        regex.IsMatch(wp.WebPartName)
+                    select wp).ToArray();
+        }
 
         public IEnumerable<IWebPart> GetWebPartsByCategory(IWebPartCategory webPartCategory) => this.WebPartService.GetWebParts(webPartCategory);
 
