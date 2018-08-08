@@ -13,7 +13,7 @@ var version = Argument("module_version", "1.0");
 //////////////////////////////////////////////////////////////////////
 
 // Define directories.
-var buildDir = Directory("./src/PoshKentico/bin") + Directory(configuration) + Directory("posh-kentico");
+var buildDir = Directory("./build") + Directory("posh-kentico");
 
 // Define Files
 var moduleFile = buildDir + File("posh-kentico.psd1");
