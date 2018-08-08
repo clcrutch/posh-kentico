@@ -1,4 +1,4 @@
-﻿$buildPath = Join-Path $PSScriptRoot "..\build"
+﻿$buildPath = Join-Path $PSScriptRoot "..\build\posh-kentico"
 $modulePath = Join-Path "C:\Program Files\WindowsPowerShell\Modules" posh-kentico
 
 if (-not (Test-Path $buildPath))
