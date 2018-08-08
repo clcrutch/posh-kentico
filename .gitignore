@@ -258,5 +258,6 @@ paket-files/
 # Cake
 /tools/
 /src/build/
+/build
 
 Temp/
