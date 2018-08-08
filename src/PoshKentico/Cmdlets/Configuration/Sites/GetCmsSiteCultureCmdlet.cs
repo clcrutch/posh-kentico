@@ -22,7 +22,8 @@ using System.Management.Automation;
 using CMS.SiteProvider;
 using ImpromptuInterface;
 using PoshKentico.Business.Configuration.Sites;
-using PoshKentico.Core.Services.Configuration;
+using PoshKentico.Core.Services.Configuration.Localization;
+using PoshKentico.Core.Services.Configuration.Sites;
 using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.Configuration.Sites

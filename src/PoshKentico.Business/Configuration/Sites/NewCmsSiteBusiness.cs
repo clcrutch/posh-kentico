@@ -19,7 +19,7 @@ using System.ComponentModel.Composition;
 using System.Globalization;
 using CMS.SiteProvider;
 using ImpromptuInterface;
-using PoshKentico.Core.Services.Configuration;
+using PoshKentico.Core.Services.Configuration.Sites;
 
 namespace PoshKentico.Business.Configuration.Sites
 {

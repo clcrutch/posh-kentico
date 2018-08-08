@@ -1,4 +1,4 @@
-﻿// <copyright file="ISite.cs" company="Chris Crutchfield">
+﻿// <copyright file="ISiteDomainAlias.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -15,38 +15,26 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using CMS.SiteProvider;
-
-namespace PoshKentico.Core.Services.Configuration
+namespace PoshKentico.Core.Services.Configuration.Sites
 {
     /// <summary>
-    /// Represents a Site Object.
+    /// Represents a Site Domain Alias Object.
     /// </summary>
-    public interface ISite
+    public interface ISiteDomainAlias
     {
-        #region Properties
+        /// <summary>
+        /// Gets the site domain alias id.
+        /// </summary>
+        int SiteDomainAliasID { get; }
 
         /// <summary>
-        /// Gets the display name for the site.
+        ///  Gets the site domain alias name.
         /// </summary>
-        string DisplayName { get; }
+        string SiteDomainAliasName { get; }
 
         /// <summary>
-        /// Gets the site name.
+        ///  Gets the site id.
         /// </summary>
-        string SiteName { get; }
-
-        /// <summary>
-        /// Gets the site status.
-        /// </summary>
-        SiteStatusEnum Status { get; }
-
-        /// <summary>
-        /// Gets the domain name for the site.
-        /// </summary>
-        string DomainName { get; }
-
-        #endregion
-
+        int SiteID { get; }
     }
 }

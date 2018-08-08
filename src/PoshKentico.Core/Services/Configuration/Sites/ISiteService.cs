@@ -16,8 +16,9 @@
 // </copyright>
 
 using System.Collections.Generic;
+using PoshKentico.Core.Services.Configuration.Localization;
 
-namespace PoshKentico.Core.Services.Configuration
+namespace PoshKentico.Core.Services.Configuration.Sites
 {
     /// <summary>
     /// Service for providing access to a CMS sites.

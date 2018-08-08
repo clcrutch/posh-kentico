@@ -18,7 +18,8 @@
 using System.Collections.Generic;
 using FluentAssertions;
 using Moq;
-using PoshKentico.Core.Services.Configuration;
+using PoshKentico.Core.Services.Configuration.Localization;
+using PoshKentico.Core.Services.Configuration.Sites;
 
 namespace PoshKentico.Business.Configuration.Sites.Tests
 {

@@ -1,4 +1,4 @@
-﻿// <copyright file="ICulture.cs" company="Chris Crutchfield">
+﻿// <copyright file="ISite.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -15,26 +15,38 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-namespace PoshKentico.Core.Services.Configuration
+using CMS.SiteProvider;
+
+namespace PoshKentico.Core.Services.Configuration.Sites
 {
     /// <summary>
-    /// Represents a Culture Object.
+    /// Represents a Site Object.
     /// </summary>
-    public interface ICulture
+    public interface ISite
     {
-        /// <summary>
-        /// Gets culture ID.
-        /// </summary>
-        int CultureID { get; }
+        #region Properties
 
         /// <summary>
-        /// Gets culture name.
+        /// Gets the display name for the site.
         /// </summary>
-        string CultureName { get; }
+        string DisplayName { get; }
 
         /// <summary>
-        /// Gets culture code.
+        /// Gets the site name.
         /// </summary>
-        string CultureCode { get; }
+        string SiteName { get; }
+
+        /// <summary>
+        /// Gets the site status.
+        /// </summary>
+        SiteStatusEnum Status { get; }
+
+        /// <summary>
+        /// Gets the domain name for the site.
+        /// </summary>
+        string DomainName { get; }
+
+        #endregion
+
     }
 }

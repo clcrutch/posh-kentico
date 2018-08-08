@@ -21,9 +21,10 @@ using System.Linq;
 using CMS.Localization;
 using CMS.SiteProvider;
 using ImpromptuInterface;
-using PoshKentico.Core.Services.Configuration;
+using PoshKentico.Core.Services.Configuration.Localization;
+using PoshKentico.Core.Services.Configuration.Sites;
 
-namespace PoshKentico.Core.Providers.Configuration
+namespace PoshKentico.Core.Providers.Configuration.Sites
 {
     /// <summary>
     /// Implementation of <see cref="ISiteService"/> that uses Kentico.

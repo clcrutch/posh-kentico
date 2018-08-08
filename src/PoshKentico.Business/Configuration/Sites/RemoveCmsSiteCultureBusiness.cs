@@ -17,6 +17,7 @@
 
 using System.ComponentModel.Composition;
 using PoshKentico.Core.Services.Configuration;
+using PoshKentico.Core.Services.Configuration.Sites;
 using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.Business.Configuration.Sites

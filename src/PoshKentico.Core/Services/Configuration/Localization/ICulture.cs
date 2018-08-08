@@ -1,4 +1,4 @@
-﻿// <copyright file="ISiteDomainAlias.cs" company="Chris Crutchfield">
+﻿// <copyright file="ICulture.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -15,26 +15,26 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-namespace PoshKentico.Core.Services.Configuration
+namespace PoshKentico.Core.Services.Configuration.Localization
 {
     /// <summary>
-    /// Represents a Site Domain Alias Object.
+    /// Represents a Culture Object.
     /// </summary>
-    public interface ISiteDomainAlias
+    public interface ICulture
     {
         /// <summary>
-        /// Gets the site domain alias id.
+        /// Gets culture ID.
         /// </summary>
-        int SiteDomainAliasID { get; }
+        int CultureID { get; }
 
         /// <summary>
-        ///  Gets the site domain alias name.
+        /// Gets culture name.
         /// </summary>
-        string SiteDomainAliasName { get; }
+        string CultureName { get; }
 
         /// <summary>
-        ///  Gets the site id.
+        /// Gets culture code.
         /// </summary>
-        int SiteID { get; }
+        string CultureCode { get; }
     }
 }

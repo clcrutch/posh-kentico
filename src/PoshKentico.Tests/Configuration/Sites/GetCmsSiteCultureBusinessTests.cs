@@ -18,7 +18,7 @@
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Configuration.Sites;
-using PoshKentico.Core.Services.Configuration;
+using PoshKentico.Core.Services.Configuration.Sites;
 
 namespace PoshKentico.Tests.Configuration.Sites
 {

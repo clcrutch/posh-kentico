@@ -16,10 +16,7 @@
 // </copyright>
 
 using System.ComponentModel.Composition;
-using CMS.SiteProvider;
-using ImpromptuInterface;
-using PoshKentico.Core.Services.Configuration;
-using PoshKentico.Core.Services.General;
+using PoshKentico.Core.Services.Configuration.Sites;
 
 namespace PoshKentico.Business.Configuration.Sites
 {
