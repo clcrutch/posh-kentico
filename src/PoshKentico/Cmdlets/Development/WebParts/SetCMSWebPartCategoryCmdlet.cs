@@ -58,7 +58,7 @@ namespace PoshKentico.Cmdlets.Development.WebPart
         /// </summary>
         [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0)]
         [Alias("Category")]
-        public IWebPartCategory WebPartCategory { get; set; }
+        public WebPartCategoryInfo WebPartCategory { get; set; }
 
         /// <summary>
         /// <para type="description">Tell the cmdlet to return the newly created web part category.</para>
@@ -79,7 +79,7 @@ namespace PoshKentico.Cmdlets.Development.WebPart
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
-            this.BusinessLayer.Set(this.WebPartCategory);
+            this.BusinessLayer.Set(this.WebPartCategory.ActLike<IWebPartCategory>());
 
             if (this.PassThru.ToBool())
             {

@@ -14,7 +14,8 @@ Deletes the web part categories selected by the provided input.
 
 ### Category Name
 ```
-Remove-CMSWebPartCategory [-CategoryName] <String> [-Exact] [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-CMSWebPartCategory [-CategoryName] <String> [-RegularExpression] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ### ID
@@ -72,15 +73,13 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Exact
-If set, the match is exact,
-
-else the match performs a contains for display name and category name and starts with for path.
+### -RegularExpression
+Indicates if the CategoryName supplied is a regular expression.
 
 ```yaml
 Type: SwitchParameter
 Parameter Sets: Category Name
-Aliases:
+Aliases: Regex
 
 Required: False
 Position: Named

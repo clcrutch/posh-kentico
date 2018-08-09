@@ -14,17 +14,22 @@ Gets the web part categories selected by the provided input.
 
 ### None (Default)
 ```
-Get-CMSWebPartCategory [<CommonParameters>]
+Get-CMSWebPartCategory [-Recurse] [<CommonParameters>]
 ```
 
 ### Category Name
 ```
-Get-CMSWebPartCategory [-CategoryName] <String> [-Exact] [<CommonParameters>]
+Get-CMSWebPartCategory [-CategoryName] <String> [-RegularExpression] [-Recurse] [<CommonParameters>]
 ```
 
 ### ID
 ```
-Get-CMSWebPartCategory [-ID] <Int32[]> [<CommonParameters>]
+Get-CMSWebPartCategory [-ID] <Int32[]> [-Recurse] [<CommonParameters>]
+```
+
+### Parent Category
+```
+Get-CMSWebPartCategory [-ParentWebPartCategory] <IWebPartCategory> [-Recurse] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -44,12 +49,12 @@ Get-CMSWebPartCategory
 
 ### EXAMPLE 2
 ```
-Get-CMSWebPartCategory bas
+Get-CMSWebPartCategory *bas*
 ```
 
 ### EXAMPLE 3
 ```
-Get-CMSWebPartCategory basic -Exact
+Get-CMSWebPartCategory basic
 ```
 
 ### EXAMPLE 4
@@ -60,7 +65,7 @@ Get-CMSWebPartCategory -ID 5,304,5
 ## PARAMETERS
 
 ### -CategoryName
-The category name, display name, or path of the webpart category.
+The category name or display name the webpart category.
 
 ```yaml
 Type: String
@@ -74,15 +79,13 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Exact
-If set, the match is exact,
-
-else the match performs a contains for display name and category name and starts with for path.
+### -RegularExpression
+Indicates if the CategoryName supplied is a regular expression.
 
 ```yaml
 Type: SwitchParameter
 Parameter Sets: Category Name
-Aliases:
+Aliases: Regex
 
 Required: False
 Position: Named
@@ -106,6 +109,36 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ParentWebPartCategory
+The webpart category that contains the webpart categories.
+
+```yaml
+Type: IWebPartCategory
+Parameter Sets: Parent Category
+Aliases: Parent, ParentCategory
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -Recurse
+Indiciates if the cmdlet should look recursively for web part categories.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
 For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -113,7 +146,10 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## INPUTS
 
 ### System.String
-The category name, display name, or path of the webpart category.
+The category name or display name the webpart category.
+
+### PoshKentico.Core.Services.Development.WebParts.IWebPartCategory
+The webpart category that contains the webpart categories.
 
 ## OUTPUTS
 
