@@ -40,13 +40,13 @@ namespace PoshKentico.Core.Providers.Configuration
         {
             var newServer = new ServerInfo
             {
-                ServerDisplayName = server.DisplayName,
+                ServerDisplayName = server.ServerDisplayName,
                 ServerName = server.ServerName,
                 ServerEnabled = server.ServerEnabled,
                 ServerURL = server.ServerURL,
                 ServerAuthentication = server.ServerAuthentication,
-                ServerUsername = server.UserName,
-                ServerPassword = server.Password,
+                ServerUsername = server.ServerUsername,
+                ServerPassword = server.ServerPassword,
                 ServerSiteID = server.ServerSiteID,
             };
 
@@ -89,13 +89,13 @@ namespace PoshKentico.Core.Providers.Configuration
             if (updateServer != null)
             {
                 // Updates the server properties
-                updateServer.ServerDisplayName = server.DisplayName;
+                updateServer.ServerDisplayName = server.ServerDisplayName;
                 updateServer.ServerName = server.ServerName;
                 updateServer.ServerURL = server.ServerURL;
                 updateServer.ServerEnabled = server.ServerEnabled;
                 updateServer.ServerAuthentication = server.ServerAuthentication;
-                updateServer.ServerUsername = server.UserName;
-                updateServer.ServerPassword = server.Password;
+                updateServer.ServerUsername = server.ServerUsername;
+                updateServer.ServerPassword = server.ServerPassword;
 
                 // Saves the updated server to the database
                 ServerInfoProvider.SetServerInfo(updateServer);

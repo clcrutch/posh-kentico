@@ -29,7 +29,7 @@ namespace PoshKentico.Core.Services.Configuration.Staging
         /// <summary>
         /// Gets the display name for the server.
         /// </summary>
-        string DisplayName { get; }
+        string ServerDisplayName { get; }
 
         /// <summary>
         /// Gets the server name.
@@ -64,12 +64,12 @@ namespace PoshKentico.Core.Services.Configuration.Staging
         /// <summary>
         /// Gets the Server user name.
         /// </summary>
-        string UserName { get; }
+        string ServerUsername { get; }
 
         /// <summary>
         /// Gets the Server password.
         /// </summary>
-        string Password { get; }
+        string ServerPassword { get; }
 
             #endregion
 
