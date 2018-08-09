@@ -32,7 +32,7 @@ namespace PoshKentico.Business.Development.WebParts
         #region Properties
 
         /// <summary>
-        /// Gets or sets a reference to the WebPart Service.  Populated by MEF.
+        /// Gets or sets a reference to the <see cref="IWebPartService"/>.  Populated by MEF.
         /// </summary>
         [Import]
         public IWebPartService WebPartService { get; set; }

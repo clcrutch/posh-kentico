@@ -224,6 +224,16 @@ namespace PoshKentico.Tests.Development.WebParts
             }
 
             public abstract void Update(IWebPartCategory webPartCategory);
+
+            public IEnumerable<IWebPartCategory> GetWebPartCategories(IWebPartCategory parentWebPartCategory)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public IEnumerable<IWebPart> GetWebParts(IWebPartCategory webPartCategory)
+            {
+                throw new System.NotImplementedException();
+            }
         }
     }
 }

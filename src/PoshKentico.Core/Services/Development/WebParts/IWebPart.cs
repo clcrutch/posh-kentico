@@ -24,10 +24,19 @@ namespace PoshKentico.Core.Services.Development.WebParts
     {
         #region Properties
 
+        /// <summary>
+        /// Gets the ID for the web part category this web part belongs to.
+        /// </summary>
         int WebPartCategoryID { get; }
 
+        /// <summary>
+        /// Gets the display name for the current web part.
+        /// </summary>
         string WebPartDisplayName { get; }
 
+        /// <summary>
+        /// Gets the code name for the current web part.
+        /// </summary>
         string WebPartName { get; }
 
         #endregion

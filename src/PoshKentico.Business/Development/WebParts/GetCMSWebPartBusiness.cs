@@ -20,7 +20,6 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text.RegularExpressions;
 using PoshKentico.Core.Services.Development.WebParts;
-using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.Business.Development.WebParts
 {
@@ -32,11 +31,14 @@ namespace PoshKentico.Business.Development.WebParts
     {
         #region Properties
 
+        /// <summary>
+        /// Gets or sets a reference to <see cref="GetCMSWebPartCategoryBusiness"/>. Populated by MEF.
+        /// </summary>
         [Import]
         public GetCMSWebPartCategoryBusiness GetCMSWebPartCategoryBusiness { get; set; }
 
         /// <summary>
-        /// Gets or sets a reference to the WebPart Service.  Populated by MEF.
+        /// Gets or sets a reference to the <see cref="IWebPartService"/>.  Populated by MEF.
         /// </summary>
         [Import]
         public IWebPartService WebPartService { get; set; }
@@ -51,6 +53,12 @@ namespace PoshKentico.Business.Development.WebParts
         /// <returns>A list of all of the <see cref="IWebPart"/>.</returns>
         public IEnumerable<IWebPart> GetWebParts() => this.WebPartService.WebParts;
 
+        /// <summary>
+        /// Gets the <see cref="IWebPart"/> that match the provided <paramref name="matchString"/>.
+        /// </summary>
+        /// <param name="matchString">The string which to match the webparts to.</param>
+        /// <param name="isRegex">Indicates whether <paramref name="matchString"/> is a regular expression.</param>
+        /// <returns>A list of <see cref="IWebPart"/> matching the <paramref name="matchString"/>.</returns>
         public IEnumerable<IWebPart> GetWebParts(string matchString, bool isRegex)
         {
             Regex regex = null;
@@ -70,8 +78,17 @@ namespace PoshKentico.Business.Development.WebParts
                     select wp).ToArray();
         }
 
+        /// <summary>
+        /// Gets a list of <see cref="IWebPart"/> that are within the <paramref name="webPartCategory"/>.
+        /// </summary>
+        /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> that contains the desired <see cref="IWebPart"/>.</param>
+        /// <returns>A list of <see cref="IWebPart"/> that are within the <paramref name="webPartCategory"/>.</returns>
         public IEnumerable<IWebPart> GetWebPartsByCategory(IWebPartCategory webPartCategory) => this.WebPartService.GetWebParts(webPartCategory);
 
+        /// <summary>Gets a list of <see cref="IWebPart"/> that are within the <see cref="IWebPartCategory"/> matching the <paramref name="matchString"/>.</summary>
+        /// <param name="matchString">The string which to match the webpart categories to.</param>
+        /// <param name="isRegex">Indicates whether <paramref name="matchString"/> is a regular expression.</param>
+        /// <returns>A list of <see cref="IWebPart"/> which are contained by the <see cref="IWebPartCategory"/> matching the <paramref name="matchString"/>.</returns>
         public IEnumerable<IWebPart> GetWebPartsByCategory(string matchString, bool isRegex)
         {
             var categories = this.GetCMSWebPartCategoryBusiness.GetWebPartCategories(matchString, isRegex, false);

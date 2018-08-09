@@ -33,15 +33,11 @@ namespace PoshKentico.Core.Providers.Development.WebParts
     {
         #region Properties
 
-        /// <summary>
-        /// Gets a list of all of the <see cref="IWebPart"/> provided by Kentico.
-        /// </summary>
+        /// <inheritdoc />
         public IEnumerable<IWebPart> WebParts => (from wp in WebPartInfoProvider.GetWebParts()
                                                   select Impromptu.ActLike<IWebPart>(wp as WebPartInfo)).ToArray();
 
-        /// <summary>
-        /// Gets a list of all of the <see cref="IWebPartCategory"/> provided by Kentico.
-        /// </summary>
+        /// <inheritdoc />
         public IEnumerable<IWebPartCategory> WebPartCategories => (from c in WebPartCategoryInfoProvider.GetCategories()
                                                                    select Impromptu.ActLike<IWebPartCategory>(c as WebPartCategoryInfo)).ToArray();
 
@@ -49,11 +45,7 @@ namespace PoshKentico.Core.Providers.Development.WebParts
 
         #region Methods
 
-        /// <summary>
-        /// Creates the <see cref="IWebPartCategory"/>.
-        /// </summary>
-        /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> to create.</param>
-        /// <returns>The newly created <see cref="IWebPartCategory"/>.</returns>
+        /// <inheritdoc />
         public IWebPartCategory Create(IWebPartCategory webPartCategory)
         {
             var category = new WebPartCategoryInfo
@@ -69,35 +61,27 @@ namespace PoshKentico.Core.Providers.Development.WebParts
             return category.ActLike<IWebPartCategory>();
         }
 
-        /// <summary>
-        /// Deletes the specified <see cref="IWebPartCategory"/>.
-        /// </summary>
-        /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> to delete.</param>
+        /// <inheritdoc />
         public void Delete(IWebPartCategory webPartCategory) =>
             WebPartCategoryInfoProvider.DeleteCategoryInfo(webPartCategory.CategoryID);
 
+        /// <inheritdoc />
         public IEnumerable<IWebPartCategory> GetWebPartCategories(IWebPartCategory parentWebPartCategory) =>
             (from c in this.WebPartCategories
              where c.CategoryParentID == parentWebPartCategory.CategoryID
              select c).ToArray();
 
-        /// <summary>
-        /// Gets the <see cref="IWebPartCategory"/> which matches the supplied ID.
-        /// </summary>
-        /// <param name="id">The ID of the <see cref="IWebPartCategory"/> to return.</param>
-        /// <returns>The <see cref="IWebPartCategory"/> which matches the ID, else null.</returns>
+        /// <inheritdoc />
         public IWebPartCategory GetWebPartCategory(int id) =>
             (WebPartCategoryInfoProvider.GetWebPartCategoryInfoById(id) as WebPartCategoryInfo)?.ActLike<IWebPartCategory>();
 
+        /// <inheritdoc />
         public IEnumerable<IWebPart> GetWebParts(IWebPartCategory webPartCategory) =>
             (from wp in this.WebParts
              where wp.WebPartCategoryID == webPartCategory.CategoryID
              select wp).ToArray();
 
-        /// <summary>
-        /// Updates the <see cref="IWebPartCategory"/>.
-        /// </summary>
-        /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> to update.</param>
+        /// <inheritdoc />
         public void Update(IWebPartCategory webPartCategory)
         {
             var category = WebPartCategoryInfoProvider.GetWebPartCategoryInfoById(webPartCategory.CategoryID);

@@ -39,12 +39,12 @@ namespace PoshKentico.Cmdlets.Development.WebPart
     ///     <code>Get-CMSWebPartCategory</code>
     /// </example>
     /// <example>
-    ///     <para>Get all webparts with a category name "*bas*", display name "*bas*", or a path "bas*".</para>
-    ///     <code>Get-CMSWebPartCategory bas</code>
+    ///     <para>Get all webparts with a category name "*bas*", display name "*bas*".</para>
+    ///     <code>Get-CMSWebPartCategory *bas*</code>
     /// </example>
     /// <example>
-    ///     <para>Get all webparts with a category name "basic", display name "basic", or path "basic"</para>
-    ///     <code>Get-CMSWebPartCategory basic -Exact</code>
+    ///     <para>Get all webparts with a category name "basic", display name "basic"</para>
+    ///     <code>Get-CMSWebPartCategory basic</code>
     /// </example>
     /// <example>
     ///     <para>Get all the webparts with the specified IDs.</para>

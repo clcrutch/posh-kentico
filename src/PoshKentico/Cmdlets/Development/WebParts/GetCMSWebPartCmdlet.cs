@@ -38,6 +38,18 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     ///     <para>Get all the webparts.</para>
     ///     <code>Get-CMSWebPart</code>
     /// </example>
+    /// <example>
+    ///     <para>Get web parts by category.</para>
+    ///     <code>Get-CMSWebPartCategory | Get-CMSWebPart</code>
+    /// </example>
+    /// <example>
+    ///     <para>Get web parts by category name.</para>
+    ///     <code>Get-CMSWebPart -Category *test*</code>
+    /// </example>
+    /// <example>
+    ///     <para>Get web parts by name.</para>
+    ///     <code>Get-CMSWebPart -WebPartName *webpartname*</code>
+    /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSWebPart", DefaultParameterSetName = NONE)]

@@ -53,6 +53,11 @@ namespace PoshKentico.Core.Services.Development.WebParts
         /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> to delete.</param>
         void Delete(IWebPartCategory webPartCategory);
 
+        /// <summary>
+        /// Gets a list of <see cref="IWebPartCategory"/> that have <paramref name="parentWebPartCategory"/> as the parent.
+        /// </summary>
+        /// <param name="parentWebPartCategory">The parent <see cref="IWebPartCategory"/> to the desired web part categories.</param>
+        /// <returns>A list of <see cref="IWebPartCategory"/> that have <paramref name="parentWebPartCategory"/> as the parent.</returns>
         IEnumerable<IWebPartCategory> GetWebPartCategories(IWebPartCategory parentWebPartCategory);
 
         /// <summary>
@@ -62,6 +67,11 @@ namespace PoshKentico.Core.Services.Development.WebParts
         /// <returns>The <see cref="IWebPartCategory"/> which matches the ID, else null.</returns>
         IWebPartCategory GetWebPartCategory(int id);
 
+        /// <summary>
+        /// Gets a list of <see cref="IWebPart"/> which have <paramref name="webPartCategory"/> as their parent category.
+        /// </summary>
+        /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> which is the category for the desired list of <see cref="IWebPartCategory"/>.</param>
+        /// <returns>A list of <see cref="IWebPart"/> which are related to <paramref name="webPartCategory"/>.</returns>
         IEnumerable<IWebPart> GetWebParts(IWebPartCategory webPartCategory);
 
         /// <summary>

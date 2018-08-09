@@ -32,7 +32,7 @@ namespace PoshKentico.Business.Development.WebParts
         #region Properties
 
         /// <summary>
-        /// Gets or sets a reference to the WebPart Service.  Populated by MEF.
+        /// Gets or sets a reference to the <see cref="IWebPartService"/>.  Populated by MEF.
         /// </summary>
         [Import]
         public IWebPartService WebPartService { get; set; }
@@ -50,7 +50,9 @@ namespace PoshKentico.Business.Development.WebParts
         /// <summary>
         /// Gets a list of all of the <see cref="IWebPartCategory"/> which match the specified criteria.
         /// </summary>
-        /// <param name="matchString">The string which to match the webparts to.</param>
+        /// <param name="matchString">The string which to match the webpart categories to.</param>
+        /// <param name="isRegex">Indicates whether <paramref name="matchString"/> is a regular expression.</param>
+        /// <param name="recurse">Indicates whether webpart categories should be returned recursively.</param>
         /// <returns>A list of all of the <see cref="IWebPartCategory"/> which match the specified criteria.</returns>
         public IEnumerable<IWebPartCategory> GetWebPartCategories(string matchString, bool isRegex, bool recurse)
         {
@@ -84,6 +86,7 @@ namespace PoshKentico.Business.Development.WebParts
         /// Gets a list of the <see cref="IWebPartCategory"/> which match the supplied IDs.
         /// </summary>
         /// <param name="ids">The IDs of the <see cref="IWebPartCategory"/> to return.</param>
+        /// <param name="recurse">Indicates whether webpart categories should be returned recursively.</param>
         /// <returns>A list of the <see cref="IWebPartCategory"/> which match the supplied IDs.</returns>
         public IEnumerable<IWebPartCategory> GetWebPartCategories(int[] ids, bool recurse)
         {
@@ -104,6 +107,12 @@ namespace PoshKentico.Business.Development.WebParts
             }
         }
 
+        /// <summary>
+        /// Gets a list of the <see cref="IWebPartCategory"/> which are children of the <paramref name="parentWebPartCategory"/>.
+        /// </summary>
+        /// <param name="parentWebPartCategory">The <see cref="IWebPartCategory"/> which is parent to the categories to find.</param>
+        /// <param name="recurse">Indicates whether webpart categories should be returned recursively.</param>
+        /// <returns>A list of the <see cref="IWebPartCategory"/> which are children to the supplied <paramref name="parentWebPartCategory"/>.</returns>
         public IEnumerable<IWebPartCategory> GetWebPartCategories(IWebPartCategory parentWebPartCategory, bool recurse)
         {
             var categories = this.WebPartService.GetWebPartCategories(parentWebPartCategory);

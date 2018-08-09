@@ -71,6 +71,9 @@ namespace PoshKentico.Cmdlets.Development.WebPart
         [Alias("DisplayName", "Name", "Path")]
         public string CategoryName { get; set; }
 
+        /// <summary>
+        /// <para type="description">Indicates if the CategoryName supplied is a regular expression.</para>
+        /// </summary>
         [Parameter(ParameterSetName = CATEGORYNAME)]
         [Alias("Regex")]
         public SwitchParameter RegularExpression { get; set; }
