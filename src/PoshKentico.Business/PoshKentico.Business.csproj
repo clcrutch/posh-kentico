@@ -462,6 +462,7 @@
     <Compile Include="Configuration\Sites\SetCmsSiteBusiness.cs" />
     <Compile Include="Configuration\Sites\StartCmsSiteBusiness.cs" />
     <Compile Include="Configuration\Sites\StopCmsSiteBusiness.cs" />
+    <Compile Include="Configuration\Staging\NewCmsServerBusiness.cs" />
     <Compile Include="Development\GetCMSWebPartCategoryBusiness.cs" />
     <Compile Include="Development\NewCMSWebPartCategoryBusiness.cs" />
     <Compile Include="Development\RemoveCMSWebPartCategoryBusiness.cs" />

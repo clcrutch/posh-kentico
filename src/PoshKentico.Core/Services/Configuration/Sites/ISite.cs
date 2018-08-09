@@ -46,6 +46,10 @@ namespace PoshKentico.Core.Services.Configuration.Sites
         /// </summary>
         string DomainName { get; }
 
+        /// <summary>
+        /// Gets the id for the site.
+        /// </summary>
+        int SiteID { get; }
         #endregion
 
     }
