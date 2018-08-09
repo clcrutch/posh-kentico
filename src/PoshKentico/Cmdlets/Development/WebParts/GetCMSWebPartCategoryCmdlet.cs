@@ -69,12 +69,15 @@ namespace PoshKentico.Cmdlets.Development.WebPart
         #region Properties
 
         /// <summary>
-        /// <para type="description">The category name, display name, or path of the webpart category.</para>
+        /// <para type="description">The category name or display name the webpart category.</para>
         /// </summary>
         [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true, ParameterSetName = CATEGORYNAME)]
         [Alias("DisplayName", "Name", "Path")]
         public string CategoryName { get; set; }
 
+        /// <summary>
+        /// <para type="description">Indicates if the CategoryName supplied is a regular expression.</para>
+        /// </summary>
         [Parameter(ParameterSetName = CATEGORYNAME)]
         [Alias("Regex")]
         public SwitchParameter RegularExpression { get; set; }
@@ -85,10 +88,16 @@ namespace PoshKentico.Cmdlets.Development.WebPart
         [Parameter(Mandatory = true, Position = 0, ParameterSetName = IDSETNAME)]
         public int[] ID { get; set; }
 
+        /// <summary>
+        /// <para type="description">The webpart category that contains the webpart categories.</para>
+        /// </summary>
         [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true, ParameterSetName = PARENTCATEGORY)]
         [Alias("Parent", "ParentCategory")]
         public IWebPartCategory ParentWebPartCategory { get; set; }
 
+        /// <summary>
+        /// <para type="description">Indiciates if the cmdlet should look recursively for web part categories.</para>
+        /// </summary>
         [Parameter]
         public SwitchParameter Recurse { get; set; }
 

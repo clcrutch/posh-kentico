@@ -33,6 +33,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     /// <para type="description">Gets the web parts selected b y the provided input.  This command automatically initializes the connection to Kentico if not already initialized.</para>
     /// <para type="description"></para>
     /// <para type="description">Without parameters, this command returns all webparts.</para>
+    /// <para type="description">With parameters, this command returns the webparts that match the criteria.</para>
     /// <example>
     ///     <para>Get all the webparts.</para>
     ///     <code>Get-CMSWebPart</code>
@@ -55,18 +56,31 @@ namespace PoshKentico.Cmdlets.Development.WebParts
 
         #region Properties
 
+        /// <summary>
+        /// <para type="description">The category name or display name of the webpart category that contains the webparts.</para>
+        /// </summary>
         [Parameter(Mandatory = true, ParameterSetName = CATEGORYNAME)]
         [Alias("Category")]
         public string CategoryName { get; set; }
 
+        /// <summary>
+        /// <para type="description">Indicates if the CategoryName or Name supplied is a regular expression.</para>
+        /// </summary>
         [Parameter(ParameterSetName = CATEGORYNAME)]
         [Parameter(ParameterSetName = NAME)]
         [Alias("Regex")]
         public SwitchParameter RegularExpression { get; set; }
 
+        /// <summary>
+        /// <para type="description">The name or display name of the webpart.</para>
+        /// </summary>
         [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true, ParameterSetName = NAME)]
-        public string Name { get; set; }
+        [Alias("Name")]
+        public string WebPartName { get; set; }
 
+        /// <summary>
+        /// <para type="description">An object that represents the webpart category that contains the webparts.</para>
+        /// </summary>
         [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true, ParameterSetName = CATEGORY)]
         public WebPartCategoryInfo WebPartCategory { get; set; }
 
@@ -94,7 +108,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
                     webparts = this.BusinessLayer.GetWebPartsByCategory(this.CategoryName, this.RegularExpression.ToBool());
                     break;
                 case NAME:
-                    webparts = this.BusinessLayer.GetWebParts(this.Name, this.RegularExpression.ToBool());
+                    webparts = this.BusinessLayer.GetWebParts(this.WebPartName, this.RegularExpression.ToBool());
                     break;
                 case NONE:
                     webparts = this.BusinessLayer.GetWebParts();
