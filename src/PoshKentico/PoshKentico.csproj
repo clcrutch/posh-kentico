@@ -487,6 +487,7 @@
     <Compile Include="Cmdlets\Configuration\Sites\StopCmsSiteCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Staging\GetCmsServerCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Staging\NewCmsServerCmdlet.cs" />
+    <Compile Include="Cmdlets\Configuration\Staging\RemoveCmsServerCmslet.cs" />
     <Compile Include="Cmdlets\Configuration\Staging\SetCmsServerCmdlet.cs" />
     <Compile Include="Cmdlets\Development\GetCMSWebPartCategoryCmdlet.cs" />
     <Compile Include="Cmdlets\Development\NewCMSWebPartCategoryCmdlet.cs" />
