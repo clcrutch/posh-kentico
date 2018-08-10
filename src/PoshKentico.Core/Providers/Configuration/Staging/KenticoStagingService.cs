@@ -42,7 +42,7 @@ namespace PoshKentico.Core.Providers.Configuration
             {
                 ServerDisplayName = server.ServerDisplayName,
                 ServerName = server.ServerName,
-                ServerEnabled = server.ServerEnabled,
+                ServerEnabled = (bool)server.ServerEnabled,
                 ServerURL = server.ServerURL,
                 ServerAuthentication = server.ServerAuthentication,
                 ServerUsername = server.ServerUsername,
@@ -60,7 +60,7 @@ namespace PoshKentico.Core.Providers.Configuration
         public void Delete(IServer server)
         {
             // Gets the staging server
-            ServerInfo deleteServer = ServerInfoProvider.GetServerInfo(server.ServerName, SiteContext.CurrentSiteID);
+            ServerInfo deleteServer = ServerInfoProvider.GetServerInfo(server.ServerName, server.ServerSiteID);
 
             if (deleteServer != null)
             {
@@ -76,26 +76,25 @@ namespace PoshKentico.Core.Providers.Configuration
         }
 
         /// <inheritdoc/>
-        public IServer GetServer(string serverName)
+        public IServer GetServer(string serverName, int serverSiteId)
         {
-            return (ServerInfoProvider.GetServerInfo(serverName, SiteContext.CurrentSiteID) as ServerInfo)?.ActLike<IServer>();
+            return (ServerInfoProvider.GetServerInfo(serverName, serverSiteId) as ServerInfo)?.ActLike<IServer>();
         }
 
         /// <inheritdoc/>
         public void Update(IServer server)
         {
             // Gets the staging server
-            ServerInfo updateServer = ServerInfoProvider.GetServerInfo(server.ServerName, SiteContext.CurrentSiteID);
+            ServerInfo updateServer = ServerInfoProvider.GetServerInfo(server.ServerName, server.ServerSiteID);
             if (updateServer != null)
             {
                 // Updates the server properties
-                updateServer.ServerDisplayName = server.ServerDisplayName;
-                updateServer.ServerName = server.ServerName;
-                updateServer.ServerURL = server.ServerURL;
-                updateServer.ServerEnabled = server.ServerEnabled;
+                updateServer.ServerDisplayName = server.ServerDisplayName == null ? updateServer.ServerDisplayName : server.ServerDisplayName;
+                updateServer.ServerURL = server.ServerURL == null ? updateServer.ServerURL : server.ServerURL;
+                updateServer.ServerEnabled = server.ServerEnabled == null ? updateServer.ServerEnabled : (bool)server.ServerEnabled;
                 updateServer.ServerAuthentication = server.ServerAuthentication;
-                updateServer.ServerUsername = server.ServerUsername;
-                updateServer.ServerPassword = server.ServerPassword;
+                updateServer.ServerUsername = server.ServerUsername == null ? updateServer.ServerUsername : server.ServerUsername;
+                updateServer.ServerPassword = server.ServerPassword == null ? updateServer.ServerPassword : server.ServerPassword;
 
                 // Saves the updated server to the database
                 ServerInfoProvider.SetServerInfo(updateServer);

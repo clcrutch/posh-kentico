@@ -32,7 +32,7 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// <para type="description">This cmdlet returns the site to update when the -PassThru switch is used.</para>
     /// <example>
     ///     <para>Set site specifying an existing site.</para>
-    ///     <code>Set-CMSSite -Site "My Desired Site"</code>
+    ///     <code>Set-CMSSite -Site $site</code>
     /// </example>
     /// <example>
     ///     <para>Set site specifying an existing site.</para>

@@ -44,7 +44,7 @@ namespace PoshKentico.Core.Services.Configuration.Staging
         /// <summary>
         /// Gets a value indicating whether the server is in enabled status.
         /// </summary>
-        bool ServerEnabled { get; }
+        bool? ServerEnabled { get; }
 
         /// <summary>
         /// Gets server authentication Enum.

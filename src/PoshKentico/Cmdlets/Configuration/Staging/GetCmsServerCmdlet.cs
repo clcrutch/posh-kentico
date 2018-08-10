@@ -19,9 +19,11 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
+using CMS.SiteProvider;
 using CMS.Synchronization;
 using ImpromptuInterface;
 using PoshKentico.Business.Configuration.Staging;
+using PoshKentico.Core.Services.Configuration.Sites;
 using PoshKentico.Core.Services.Configuration.Staging;
 using AliasAttribute = System.Management.Automation.AliasAttribute;
 
@@ -42,8 +44,24 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
     ///     <code>Get-CMSServer bas</code>
     /// </example>
     /// <example>
+    ///     <para>Get all servers with a site id 5,  and a display name "*bas*" or server name "*bas*".</para>
+    ///     <code>Get-CMSServer -SiteID 5 -ServerName "bas"</code>
+    /// </example>
+    /// <example>
+    ///     <para>Get all servers associalted with site $site with a display name "*bas*", or server name "*bas*"</para>
+    ///     <code>$site | Get-CMSServer bas</code>
+    /// </example>
+    /// <example>
     ///     <para>Get all servers with a display name "basic", or server name "basic"</para>
     ///     <code>Get-CMSServer basic -Exact</code>
+    /// </example>
+    /// <example>
+    ///     <para>Get all servers with a site id 5, and a display name "basic" or server name "basic"</para>
+    ///     <code>Get-CMSServer 5 basic -Exact</code>
+    /// </example>
+    /// <example>
+    ///     <para>Get all servers associalted with site $site with a display name "basic", or server name "basic"</para>
+    ///     <code>$site | Get-CMSServer basic -Exact</code>
     /// </example>
     /// <example>
     ///     <para>Get all the servers with the specified IDs.</para>
@@ -59,6 +77,7 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
         #region Constants
 
         private const string NONE = "None";
+        private const string OBJECTSET = "Object";
         private const string DISPLAYNAME = "Dislpay Name";
         private const string IDSETNAME = "ID";
 
@@ -66,9 +85,16 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
         #region Properties
 
         /// <summary>
+        /// <para type="description">The server site id for the server to update.</para>
+        /// </summary>
+        [Parameter(Mandatory = false, Position = 0, ParameterSetName = DISPLAYNAME)]
+        public int SiteID { get; set; }
+
+        /// <summary>
         /// <para type="description">The display name of the server to retrive.</para>
         /// </summary>
-        [Parameter(Mandatory = false, Position = 0, ValueFromPipeline = true, ParameterSetName = DISPLAYNAME)]
+        [Parameter(Mandatory = false, Position = 1, ParameterSetName = DISPLAYNAME)]
+        [Parameter(Mandatory = false, Position = 1, ParameterSetName = OBJECTSET)]
         [Alias("ServerName")]
         public string DisplayName { get; set; }
 
@@ -77,7 +103,14 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
         /// <para type="description">else the match performs a contains for display name and category name and starts with for path.</para>
         /// </summary>
         [Parameter(ParameterSetName = DISPLAYNAME)]
+        [Parameter(ParameterSetName = OBJECTSET)]
         public SwitchParameter Exact { get; set; }
+
+        /// <summary>
+        /// <para type="description">The associalted site for the server to retrieve.</para>
+        /// </summary>
+        [Parameter(Mandatory = false, ValueFromPipeline = true, Position = 0, ParameterSetName = OBJECTSET)]
+        public SiteInfo Site { get; set; }
 
         /// <summary>
         /// <para type="description">The IDs of the server to retrieve.</para>
@@ -103,7 +136,10 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
             switch (this.ParameterSetName)
             {
                 case DISPLAYNAME:
-                    servers = this.BusinessLayer.GetServers(this.DisplayName, this.Exact.ToBool());
+                    servers = this.BusinessLayer.GetServers(this.SiteID, this.DisplayName, this.Exact.ToBool());
+                    break;
+                case OBJECTSET:
+                    servers = this.BusinessLayer.GetServers(this.Site.ActLike<ISite>(), this.DisplayName, this.Exact.ToBool());
                     break;
                 case IDSETNAME:
                     servers = this.BusinessLayer.GetServers(this.ID);

@@ -52,7 +52,7 @@ namespace PoshKentico.Business.Configuration.Staging
         /// <param name="enabled">The enabled status for the new Server</param>
         /// <param name="userName">The user name for the new Server</param>
         /// <param name="password">The password for the new Server</param>
-        /// <param name="site">The site associated with the new Server</param>
+        /// <param name="siteID">The site id associated with the new Server</param>
         /// <returns>The newly created <see cref="IServer"/>.</returns>
         public IServer CreateServer(
                                     string displayName,
@@ -62,21 +62,21 @@ namespace PoshKentico.Business.Configuration.Staging
                                     bool enabled,
                                     string userName,
                                     string password,
-                                    ISite site)
+                                    int siteID)
         {
             TextInfo txtInfo = new CultureInfo("en-us", false).TextInfo;
             var newServerName = string.IsNullOrEmpty(serverName) ? txtInfo.ToTitleCase(displayName).Replace(" ", string.Empty) : serverName;
 
             var data = new
             {
-                DisplayName = displayName,
+                ServerDisplayName = displayName,
                 ServerName = newServerName,
                 ServerURL = serverUrl,
                 ServerAuthentication = authentication,
                 ServerEnabled = enabled,
-                UserName = userName,
-                Password = password,
-                ServerSiteID = site.SiteID,
+                ServerUsername = userName,
+                ServerPassword = password,
+                ServerSiteID = siteID,
             };
 
             return this.StagingService.Create(data.ActLike<IServer>());

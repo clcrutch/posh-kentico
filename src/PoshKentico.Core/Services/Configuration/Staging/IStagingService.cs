@@ -53,8 +53,9 @@ namespace PoshKentico.Core.Services.Configuration.Staging
         /// Gets the <see cref="IServer"/> which matches the supplied server name.
         /// </summary>
         /// <param name="serverName">The Server Name of the <see cref="IServer"/> to return.</param>
+        /// <param name="serverSiteId">The Server site id of the <see cref="IServer"/>to return.</param>
         /// <returns>The <see cref="IServer"/> which matches the server name, else null.</returns>
-        IServer GetServer(string serverName);
+        IServer GetServer(string serverName, int serverSiteId);
 
         /// <summary>
         /// Updates the <see cref="IServer"/>.
