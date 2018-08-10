@@ -40,7 +40,7 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.New, "CMSSite")]
-    [OutputType(typeof(SiteInfo), ParameterSetName = new string[] { PASSTHRU })]
+    [OutputType(typeof(SiteInfo[]), ParameterSetName = new string[] { PASSTHRU })]
     [Alias("nsite")]
     public class NewCmsSiteCmdlet : MefCmdlet
     {

@@ -47,6 +47,8 @@ namespace PoshKentico.Core.Services.Development.WebParts
         /// <returns>The newly created <see cref="IWebPartCategory"/>.</returns>
         IWebPartCategory Create(IWebPartCategory webPartCategory);
 
+        IWebPart Create(IWebPart webPart);
+
         /// <summary>
         /// Deletes the specified <see cref="IWebPartCategory"/>.
         /// </summary>

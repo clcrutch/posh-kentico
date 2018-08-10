@@ -41,7 +41,7 @@ namespace PoshKentico.Cmdlets.Development.WebPart
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.New, "CMSWebPartCategory")]
-    [OutputType(typeof(WebPartCategoryInfo), ParameterSetName = new string[] { PASSTHRU })]
+    [OutputType(typeof(WebPartCategoryInfo[]), ParameterSetName = new string[] { PASSTHRU })]
     [Alias("nwpc")]
     public class NewCMSWebPartCategoryCmdlet : MefCmdlet
     {

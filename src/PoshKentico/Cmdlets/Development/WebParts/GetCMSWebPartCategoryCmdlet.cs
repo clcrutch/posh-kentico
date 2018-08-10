@@ -53,7 +53,7 @@ namespace PoshKentico.Cmdlets.Development.WebPart
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSWebPartCategory", DefaultParameterSetName = NONE)]
-    [OutputType(typeof(WebPartCategoryInfo))]
+    [OutputType(typeof(WebPartCategoryInfo[]))]
     [Alias("gwpc")]
     public class GetCMSWebPartCategoryCmdlet : MefCmdlet
     {
@@ -63,6 +63,7 @@ namespace PoshKentico.Cmdlets.Development.WebPart
         private const string CATEGORYNAME = "Category Name";
         private const string IDSETNAME = "ID";
         private const string PARENTCATEGORY = "Parent Category";
+        private const string PATH = "Path";
 
         #endregion
 
@@ -71,16 +72,13 @@ namespace PoshKentico.Cmdlets.Development.WebPart
         /// <summary>
         /// <para type="description">The category name or display name the webpart category.</para>
         /// </summary>
-        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true, ParameterSetName = CATEGORYNAME)]
-        [Alias("DisplayName", "Name", "Path")]
+        [Parameter(Mandatory = true, Position = 0, ParameterSetName = CATEGORYNAME)]
+        [Alias("DisplayName", "Name")]
         public string CategoryName { get; set; }
 
-        /// <summary>
-        /// <para type="description">Indicates if the CategoryName supplied is a regular expression.</para>
-        /// </summary>
-        [Parameter(ParameterSetName = CATEGORYNAME)]
-        [Alias("Regex")]
-        public SwitchParameter RegularExpression { get; set; }
+        [Parameter(Mandatory = true, ParameterSetName = PATH)]
+        [Alias("Path")]
+        public string CategoryPath { get; set; }
 
         /// <summary>
         /// <para type="description">The IDs of the web part category to retrieve.</para>
@@ -100,6 +98,13 @@ namespace PoshKentico.Cmdlets.Development.WebPart
         /// </summary>
         [Parameter]
         public SwitchParameter Recurse { get; set; }
+
+        /// <summary>
+        /// <para type="description">Indicates if the CategoryName supplied is a regular expression.</para>
+        /// </summary>
+        [Parameter(ParameterSetName = CATEGORYNAME)]
+        [Alias("Regex")]
+        public SwitchParameter RegularExpression { get; set; }
 
         /// <summary>
         /// Gets or sets the Business layer for this web part. Populated by MEF.
@@ -126,6 +131,9 @@ namespace PoshKentico.Cmdlets.Development.WebPart
                     break;
                 case PARENTCATEGORY:
                     categories = this.BusinessLayer.GetWebPartCategories(this.ParentWebPartCategory, this.Recurse.ToBool());
+                    break;
+                case PATH:
+                    categories = this.BusinessLayer.GetWebPartCategories(this.CategoryPath, this.Recurse.ToBool());
                     break;
                 case NONE:
                     categories = this.BusinessLayer.GetWebPartCategories();

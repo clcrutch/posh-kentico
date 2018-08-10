@@ -34,6 +34,8 @@ namespace PoshKentico.Core.Services.Development.WebParts
         /// </summary>
         string WebPartDisplayName { get; }
 
+        string WebPartFileName { get; }
+
         /// <summary>
         /// Gets the code name for the current web part.
         /// </summary>

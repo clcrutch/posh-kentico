@@ -45,7 +45,7 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Set, "CMSSite")]
-    [OutputType(typeof(SiteInfo), ParameterSetName = new string[] { PASSTHRU })]
+    [OutputType(typeof(SiteInfo[]), ParameterSetName = new string[] { PASSTHRU })]
     [Alias("ssite")]
     public class SetCmsSiteCmdlet : MefCmdlet
     {
@@ -117,11 +117,13 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
                     this.BusinessLayer.Set(this.SiteToSet.ActLike<ISite>());
                     break;
                 case PROPERTYSET:
-                    this.SiteToSet = new SiteInfo();
-                    this.SiteToSet.DisplayName = this.DisplayName;
-                    this.SiteToSet.SiteName = this.SiteName;
-                    this.SiteToSet.Status = this.Status;
-                    this.SiteToSet.DomainName = this.DomainName;
+                    this.SiteToSet = new SiteInfo
+                    {
+                        DisplayName = this.DisplayName,
+                        SiteName = this.SiteName,
+                        Status = this.Status,
+                        DomainName = this.DomainName,
+                    };
                     this.BusinessLayer.Set(this.SiteToSet.ActLike<ISite>());
                     break;
             }

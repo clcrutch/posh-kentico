@@ -16,7 +16,6 @@
           </TableColumnHeader>
           <TableColumnHeader>
             <Width>25</Width>
-            <Label>Name</Label>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
@@ -29,14 +28,7 @@
                 <PropertyName>CategoryName</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <ScriptBlock>
-                  if ($_.CategoryName -eq "/") {
-                    "WebParts"
-                  }
-                  else {
-                    $_.CategoryName
-                  }
-                </ScriptBlock>
+                <PropertyName>CategoryPath</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>

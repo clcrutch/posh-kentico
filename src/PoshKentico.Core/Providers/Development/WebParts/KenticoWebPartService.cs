@@ -15,7 +15,6 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -59,6 +58,21 @@ namespace PoshKentico.Core.Providers.Development.WebParts
             WebPartCategoryInfoProvider.SetWebPartCategoryInfo(category);
 
             return category.ActLike<IWebPartCategory>();
+        }
+
+        public IWebPart Create(IWebPart webPart)
+        {
+            var webPartInfo = new WebPartInfo
+            {
+                WebPartCategoryID = webPart.WebPartCategoryID,
+                WebPartFileName = webPart.WebPartFileName,
+                WebPartDisplayName = webPart.WebPartDisplayName,
+                WebPartName = webPart.WebPartName,
+            };
+
+            WebPartInfoProvider.SetWebPartInfo(webPartInfo);
+
+            return webPartInfo.ActLike<IWebPart>();
         }
 
         /// <inheritdoc />

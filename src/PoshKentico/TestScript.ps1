@@ -12,14 +12,14 @@ Configuration KenticoTest
 
 	Node localhost
 	{
-		xSite TestSite
-		{
-			SiteName = "LightStream"
-			DomainName = "localhost"
-			DisplayName = "LightStream.com"
-			Status = "Running"
-			Ensure = "Present"
-		}
+		#xSite TestSite
+		#{
+		#	SiteName = "TestSite"
+		#	DomainName = "localhost"
+		#	DisplayName = "TestSite"
+		#	Status = "Running"
+		#	Ensure = "Present"
+		#}
 
 	}
 }
@@ -27,5 +27,3 @@ Configuration KenticoTest
 KenticoTest -OutputPath .\Temp
 
 Start-DscConfiguration -Wait -Force -Path .\Temp
-
-cd Kentico:

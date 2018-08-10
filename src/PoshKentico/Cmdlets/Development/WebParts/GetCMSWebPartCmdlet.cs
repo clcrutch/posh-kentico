@@ -53,7 +53,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSWebPart", DefaultParameterSetName = NONE)]
-    [OutputType(typeof(WebPartCategoryInfo))]
+    [OutputType(typeof(WebPartCategoryInfo[]))]
     [Alias("gwp")]
     public class GetCMSWebPartCmdlet : MefCmdlet
     {

@@ -15,6 +15,7 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -124,6 +125,22 @@ namespace PoshKentico.Business.Development.WebParts
             else
             {
                 return categories;
+            }
+        }
+
+        public IEnumerable<IWebPartCategory> GetWebPartCategories(string path, bool recurse)
+        {
+            var categories = from c in this.WebPartService.WebPartCategories
+                             where c.CategoryPath.Equals(path, StringComparison.InvariantCultureIgnoreCase)
+                             select c;
+
+            if (recurse)
+            {
+                return this.GetRecurseWebPartCategories(categories);
+            }
+            else
+            {
+                return categories.ToArray();
             }
         }
 
