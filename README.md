@@ -9,4 +9,7 @@ Install-Module -Name posh-kentico -Scope AllUsers
 ```
 
 # Contribute
-Code submitted as a pull request should build with no warnings or errors.
+See our [contributing guidelines](CONTRIBUTING.md).
+
+# License
+PoSH Kentico uses the [LGPL 3.0](LICENSE.txt) license.
