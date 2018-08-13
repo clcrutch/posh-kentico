@@ -27,7 +27,7 @@ namespace PoshKentico.Business.Development.WebParts
     /// Business layer fo the Get-CMSWebPart cmdlet.
     /// </summary>
     [Export(typeof(GetCMSWebPartBusiness))]
-    public class GetCMSWebPartBusiness : CmdletBusinessBase
+    public class GetCMSWebPartBusiness : WebPartBusinessBase
     {
         #region Properties
 
@@ -37,15 +37,26 @@ namespace PoshKentico.Business.Development.WebParts
         [Import]
         public GetCMSWebPartCategoryBusiness GetCMSWebPartCategoryBusiness { get; set; }
 
-        /// <summary>
-        /// Gets or sets a reference to the <see cref="IWebPartService"/>.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public IWebPartService WebPartService { get; set; }
-
         #endregion
 
         #region Methods
+
+        public IWebPart GetWebPart(string path)
+        {
+            var name = path.Substring(path.LastIndexOf('/') + 1);
+            var basePath = path.Substring(0, path.LastIndexOf('/'));
+
+            if (string.IsNullOrWhiteSpace(basePath))
+            {
+                basePath = "/";
+            }
+
+            var parent = this.GetCategoryFromPath(basePath);
+
+            return (from wp in this.GetWebPartsByCategory(parent)
+                    where wp.WebPartName == name
+                    select wp).SingleOrDefault();
+        }
 
         /// <summary>
         /// Gets a list of all of the <see cref="IWebPart"/>.

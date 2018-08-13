@@ -464,9 +464,11 @@
     <Compile Include="Configuration\Sites\StopCmsSiteBusiness.cs" />
     <Compile Include="Development\WebParts\GetCMSWebPartBusiness.cs" />
     <Compile Include="Development\WebParts\GetCMSWebPartCategoryBusiness.cs" />
+    <Compile Include="Development\WebParts\NewCMSWebPartBusiness.cs" />
     <Compile Include="Development\WebParts\NewCMSWebPartCategoryBusiness.cs" />
     <Compile Include="Development\WebParts\RemoveCMSWebPartCategoryBusiness.cs" />
     <Compile Include="Development\WebParts\SetCMSWebPartCategoryBusiness.cs" />
+    <Compile Include="Development\WebParts\WebPartBusinessBase.cs" />
     <Compile Include="General\InitializeCMSApplicationBusiness.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

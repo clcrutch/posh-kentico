@@ -15,8 +15,11 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using CMS.PortalEngine;
+using PoshKentico.Business.Development.WebParts;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Management.Automation;
@@ -27,8 +30,26 @@ namespace PoshKentico.Cmdlets.Development.WebParts
 {
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.New, "CMSWebPart")]
+    [OutputType(typeof(WebPartInfo[]))]
     [Alias("nwp")]
     public class NewCMSWebPartCmdlet : MefCmdlet
     {
+        [Parameter(Position = 2)]
+        public string DisplayName { get; set; }
+
+        [Parameter(Mandatory = true, Position = 1)]
+        public string FileName { get; set; }
+
+        [Parameter(Mandatory = true, Position = 0)]
+        public string Path { get; set; }
+
+        [Import]
+        public NewCMSWebPartBusiness BusinessLayer { get; set; }
+
+        /// <inheritdoc />
+        protected override void ProcessRecord()
+        {
+            var webPart = this.BusinessLayer.CreateWebPart(this.Path, this.FileName, this.DisplayName);
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿// <copyright file="SetCMSWebPartCategoryBusiness.cs" company="Chris Crutchfield">
+﻿// <copyright file="WebPartBusinessBase.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -15,30 +15,33 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System;
 using System.ComponentModel.Composition;
+using System.Linq;
 using PoshKentico.Core.Services.Development.WebParts;
-using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.Business.Development.WebParts
 {
-    /// <summary>
-    /// Business layer for the Set-CMSWebPartCategory cmdlet.
-    /// </summary>
-    [Export(typeof(SetCMSWebPartCategoryBusiness))]
-    public class SetCMSWebPartCategoryBusiness : WebPartBusinessBase
+    public abstract class WebPartBusinessBase : CmdletBusinessBase
     {
-        #region Methods
+        #region Properties
 
         /// <summary>
-        /// Sets the <see cref="IWebPartCategory"/> within Kentico.
+        /// Gets or sets a reference to the <see cref="IWebPartService"/>.  Populated by MEF.
         /// </summary>
-        /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> to set.</param>
-        public void Set(IWebPartCategory webPartCategory)
-        {
-            this.WebPartService.Update(webPartCategory);
-        }
+        [Import]
+        public IWebPartService WebPartService { get; set; }
 
         #endregion
 
+        public WebPartBusinessBase(bool initCmsApplication = true)
+            : base(initCmsApplication)
+        {
+        }
+
+        protected IWebPartCategory GetCategoryFromPath(string path) =>
+            (from c in this.WebPartService.WebPartCategories
+             where c.CategoryPath.Equals(path, StringComparison.InvariantCultureIgnoreCase)
+             select c).Single();
     }
 }

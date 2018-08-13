@@ -92,7 +92,7 @@ namespace PoshKentico.Cmdlets.Development.WebPart
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
-            var newCategory = this.BusinessLayer.CreateWebPart(this.Path, this.DisplayName, this.ImagePath);
+            var newCategory = this.BusinessLayer.CreateWebPartCategory(this.Path, this.DisplayName, this.ImagePath);
 
             if (this.PassThru.ToBool())
             {

@@ -24,15 +24,9 @@ namespace PoshKentico.Business.Development.WebParts
     /// Business layer for the Remove-CMSWebPartCategory cmdlet.
     /// </summary>
     [Export(typeof(RemoveCMSWebPartCategoryBusiness))]
-    public class RemoveCMSWebPartCategoryBusiness : CmdletBusinessBase
+    public class RemoveCMSWebPartCategoryBusiness : WebPartBusinessBase
     {
         #region Properties
-
-        /// <summary>
-        /// Gets or sets a reference to the <see cref="IWebPartService"/>.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public IWebPartService WebPartService { get; set; }
 
         /// <summary>
         /// Gets or sets a reference to the <see cref="GetCMSWebPartCategoryBusiness"/> used to get the WebPartCategories to delete.  Populated by MEF.

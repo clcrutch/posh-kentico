@@ -62,6 +62,8 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         private const string CATEGORY = "Category";
         private const string CATEGORYNAME = "Category Name";
         private const string NAME = "Name";
+        private const string PATH = "Path";
+
         private const string NONE = "None";
 
         #endregion
@@ -89,6 +91,9 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true, ParameterSetName = NAME)]
         [Alias("Name")]
         public string WebPartName { get; set; }
+
+        [Parameter(Mandatory = true, ParameterSetName = PATH)]
+        public string WebPartPath { get; set; }
 
         /// <summary>
         /// <para type="description">An object that represents the webpart category that contains the webparts.</para>
@@ -122,6 +127,11 @@ namespace PoshKentico.Cmdlets.Development.WebParts
                 case NAME:
                     webparts = this.BusinessLayer.GetWebParts(this.WebPartName, this.RegularExpression.ToBool());
                     break;
+                case PATH:
+                    this.WriteObject(this.BusinessLayer.GetWebPart(this.WebPartPath)?.UndoActLike());
+
+                    return;
+
                 case NONE:
                     webparts = this.BusinessLayer.GetWebParts();
                     break;

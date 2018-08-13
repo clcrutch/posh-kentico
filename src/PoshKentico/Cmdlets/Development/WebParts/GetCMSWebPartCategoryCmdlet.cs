@@ -59,11 +59,13 @@ namespace PoshKentico.Cmdlets.Development.WebPart
     {
         #region Constants
 
-        private const string NONE = "None";
         private const string CATEGORYNAME = "Category Name";
         private const string IDSETNAME = "ID";
         private const string PARENTCATEGORY = "Parent Category";
         private const string PATH = "Path";
+        private const string WEBPART = "Web Part";
+
+        private const string NONE = "None";
 
         #endregion
 
@@ -96,7 +98,10 @@ namespace PoshKentico.Cmdlets.Development.WebPart
         /// <summary>
         /// <para type="description">Indiciates if the cmdlet should look recursively for web part categories.</para>
         /// </summary>
-        [Parameter]
+        [Parameter(ParameterSetName = CATEGORYNAME)]
+        [Parameter(ParameterSetName = IDSETNAME)]
+        [Parameter(ParameterSetName = PARENTCATEGORY)]
+        [Parameter(ParameterSetName = PATH)]
         public SwitchParameter Recurse { get; set; }
 
         /// <summary>
@@ -105,6 +110,9 @@ namespace PoshKentico.Cmdlets.Development.WebPart
         [Parameter(ParameterSetName = CATEGORYNAME)]
         [Alias("Regex")]
         public SwitchParameter RegularExpression { get; set; }
+
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = WEBPART)]
+        public WebPartInfo WebPart { get; set; }
 
         /// <summary>
         /// Gets or sets the Business layer for this web part. Populated by MEF.
@@ -135,6 +143,11 @@ namespace PoshKentico.Cmdlets.Development.WebPart
                 case PATH:
                     categories = this.BusinessLayer.GetWebPartCategories(this.CategoryPath, this.Recurse.ToBool());
                     break;
+                case WEBPART:
+                    this.WriteObject(this.BusinessLayer.GetWebPartCategory(this.WebPart.ActLike<IWebPart>())?.UndoActLike());
+
+                    return;
+
                 case NONE:
                     categories = this.BusinessLayer.GetWebPartCategories();
                     break;

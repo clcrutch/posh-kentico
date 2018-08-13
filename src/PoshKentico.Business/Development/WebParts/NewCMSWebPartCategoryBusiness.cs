@@ -27,18 +27,8 @@ namespace PoshKentico.Business.Development.WebParts
     /// Business layer for the New-CMSWebPartCategory cmdlet.
     /// </summary>
     [Export(typeof(NewCMSWebPartCategoryBusiness))]
-    public class NewCMSWebPartCategoryBusiness : CmdletBusinessBase
+    public class NewCMSWebPartCategoryBusiness : WebPartBusinessBase
     {
-        #region Properties
-
-        /// <summary>
-        /// Gets or sets a reference to the <see cref="IWebPartService"/>.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public IWebPartService WebPartService { get; set; }
-
-        #endregion
-
         #region Methods
 
         /// <summary>
@@ -48,7 +38,7 @@ namespace PoshKentico.Business.Development.WebParts
         /// <param name="displayName">The display name for the WebPartCategory.</param>
         /// <param name="imagePath">The image path for the new WebPartCategory.</param>
         /// <returns>The newly created WebPartCategory.</returns>
-        public IWebPartCategory CreateWebPart(string path, string displayName, string imagePath)
+        public IWebPartCategory CreateWebPartCategory(string path, string displayName, string imagePath)
         {
             var name = path.Substring(path.LastIndexOf('/') + 1);
             var basePath = path.Substring(0, path.LastIndexOf('/'));
@@ -58,14 +48,7 @@ namespace PoshKentico.Business.Development.WebParts
                 basePath = "/";
             }
 
-            var parent = (from c in this.WebPartService.WebPartCategories
-                          where c.CategoryPath.Equals(basePath, StringComparison.InvariantCultureIgnoreCase)
-                          select c).SingleOrDefault();
-
-            if (parent == null)
-            {
-                throw new Exception("Cannot find parent WebPartCategory.");
-            }
+            var parent = this.GetCategoryFromPath(basePath);
 
             if (string.IsNullOrEmpty(displayName))
             {

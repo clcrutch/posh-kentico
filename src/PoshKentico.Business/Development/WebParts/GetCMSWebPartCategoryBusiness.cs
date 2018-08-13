@@ -28,18 +28,8 @@ namespace PoshKentico.Business.Development.WebParts
     /// Business layer for the Get-CMSWebPartCategory cmdlet.
     /// </summary>
     [Export(typeof(GetCMSWebPartCategoryBusiness))]
-    public class GetCMSWebPartCategoryBusiness : CmdletBusinessBase
+    public class GetCMSWebPartCategoryBusiness : WebPartBusinessBase
     {
-        #region Properties
-
-        /// <summary>
-        /// Gets or sets a reference to the <see cref="IWebPartService"/>.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public IWebPartService WebPartService { get; set; }
-
-        #endregion
-
         #region Methods
 
         /// <summary>
@@ -143,6 +133,11 @@ namespace PoshKentico.Business.Development.WebParts
                 return categories.ToArray();
             }
         }
+
+        public IWebPartCategory GetWebPartCategory(IWebPart webpart) =>
+            (from c in this.WebPartService.WebPartCategories
+             where c.CategoryID == webpart.WebPartCategoryID
+             select c).SingleOrDefault();
 
         private IEnumerable<IWebPartCategory> GetRecurseWebPartCategories(IEnumerable<IWebPartCategory> webPartCategories)
         {
