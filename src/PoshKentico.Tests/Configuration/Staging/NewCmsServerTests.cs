@@ -24,7 +24,7 @@ using PoshKentico.Tests.Configuration.Staging;
 namespace PoshKentico.Business.Configuration.Staging
 {
     [TestFixture]
-    public class NewCmsStagingTests
+    public class NewCmsServerTests
     {
         [TestCase]
         public void CreateServerTest_WithoutServerName()

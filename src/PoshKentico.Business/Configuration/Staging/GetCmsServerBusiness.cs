@@ -126,7 +126,6 @@ namespace PoshKentico.Business.Configuration.Staging
                 }
                 else
                 {
-                    var lowerMatchString = matchString.ToLowerInvariant();
                     return this.GetServerContains(siteId, matchString);
                 }
             }

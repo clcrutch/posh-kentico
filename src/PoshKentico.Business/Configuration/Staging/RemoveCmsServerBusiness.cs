@@ -32,7 +32,7 @@ namespace PoshKentico.Business.Configuration.Staging
         /// Gets or sets a reference to the Server Service.  Populated by MEF.
         /// </summary>
         [Import]
-        public IStagingService ServerService { get; set; }
+        public IStagingService StagingService { get; set; }
 
         /// <summary>
         /// Gets or sets a reference to the <see cref="GetCmsServerBusiness"/> used to get the server to delete.  Populated by MEF.
@@ -87,7 +87,7 @@ namespace PoshKentico.Business.Configuration.Staging
         {
             if (this.ShouldProcess(server.ServerName, "delete"))
             {
-                this.ServerService.Delete(server);
+                this.StagingService.Delete(server);
             }
         }
 

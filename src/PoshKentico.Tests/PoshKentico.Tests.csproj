@@ -479,7 +479,10 @@
     <Compile Include="Configuration\Sites\SiteServiceMock.cs" />
     <Compile Include="Configuration\Sites\StopCmsSiteBusinessTests.cs" />
     <Compile Include="Configuration\Sites\StartCmsSiteBusinessTests.cs" />
-    <Compile Include="Configuration\Staging\NewCmsStagingTests.cs" />
+    <Compile Include="Configuration\Staging\GetCmsServerTests.cs" />
+    <Compile Include="Configuration\Staging\NewCmsServerTests.cs" />
+    <Compile Include="Configuration\Staging\RemoveCmsServerTests.cs" />
+    <Compile Include="Configuration\Staging\SetCmsServerTests.cs" />
     <Compile Include="Configuration\Staging\StagingServiceMock.cs" />
     <Compile Include="Development\GetCMSWebPartCategoryTests.cs" />
     <Compile Include="Development\NewCMSWebPartCategoryTests.cs" />

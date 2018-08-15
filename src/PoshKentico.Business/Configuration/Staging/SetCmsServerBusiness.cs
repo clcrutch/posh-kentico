@@ -34,7 +34,7 @@ namespace PoshKentico.Business.Configuration.Staging
         /// Gets or sets a reference to the Site Service.  Populated by MEF.
         /// </summary>
         [Import]
-        public IStagingService ServerService { get; set; }
+        public IStagingService StagingService { get; set; }
         #endregion
 
         #region Methods
@@ -45,7 +45,7 @@ namespace PoshKentico.Business.Configuration.Staging
         /// <param name="server">The <see cref="IServer"/> to set.</param>
         public void Set(IServer server)
         {
-            this.ServerService.Update(server);
+            this.StagingService.Update(server);
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace PoshKentico.Business.Configuration.Staging
                 ServerPassword = password,
             };
 
-            this.ServerService.Update(data.ActLike<IServer>());
+            this.StagingService.Update(data.ActLike<IServer>());
         }
 
         #endregion
