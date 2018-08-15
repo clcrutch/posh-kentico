@@ -1,4 +1,4 @@
-﻿// <copyright file="NewCmsSiteBusinessTests.cs" company="Chris Crutchfield">
+﻿// <copyright file="NewCmsStagingBusinessTests.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -15,54 +15,55 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using CMS.SiteProvider;
+using CMS.Synchronization;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
+using PoshKentico.Tests.Configuration.Staging;
 
-namespace PoshKentico.Business.Configuration.Sites
+namespace PoshKentico.Business.Configuration.Staging
 {
     [TestFixture]
-    public class NewCmsSiteBusinessTests
+    public class NewCmsStagingBusinessTests
     {
         [TestCase]
-        public void CreateSiteTest_WithoutSiteName()
+        public void CreateSiteTest_WithoutServerName()
         {
-            var siteServiceMock = new Mock<SiteServiceMock>();
+            var siteServiceMock = new Mock<StagingServiceMock>();
 
-            var businessLayer = new NewCmsSiteBusiness()
+            var businessLayer = new NewCmsServerBusiness()
             {
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                SiteService = siteServiceMock.Object,
+                StagingService = siteServiceMock.Object,
             };
 
-            var result = businessLayer.CreateSite("My Site1", null, SiteStatusEnum.Stopped, "localhost1");
+            var result = businessLayer.CreateServer("My Server 1", string.Empty, "localhost", ServerAuthenticationEnum.UserName, true, null, null, 12);
 
             siteServiceMock.Object.VerifyCreate(result);
 
-            result.SiteName.Should().Be("MySite1");
+            result.ServerName.Should().Be("MyServer1");
         }
 
         [TestCase]
-        public void CreateSiteTest_WithSiteName()
+        public void CreateSiteTest_WithServerName()
         {
-            var siteServiceMock = new Mock<SiteServiceMock>();
+            var siteServiceMock = new Mock<StagingServiceMock>();
 
-            var businessLayer = new NewCmsSiteBusiness()
+            var businessLayer = new NewCmsServerBusiness()
             {
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                SiteService = siteServiceMock.Object,
+                StagingService = siteServiceMock.Object,
             };
 
-            var result = businessLayer.CreateSite("My Site1", "mySite", SiteStatusEnum.Stopped, "localhost1");
+            var result = businessLayer.CreateServer("My Server 2", "server2", "localhost", ServerAuthenticationEnum.UserName, true, null, null, 12);
 
             siteServiceMock.Object.VerifyCreate(result);
 
-            result.SiteName.Should().Be("mySite");
+            result.ServerName.Should().Be("server2");
         }
     }
 }

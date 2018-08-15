@@ -479,6 +479,8 @@
     <Compile Include="Configuration\Sites\SiteServiceMock.cs" />
     <Compile Include="Configuration\Sites\StopCmsSiteBusinessTests.cs" />
     <Compile Include="Configuration\Sites\StartCmsSiteBusinessTests.cs" />
+    <Compile Include="Configuration\Staging\NewCmsStagingBusinessTests.cs" />
+    <Compile Include="Configuration\Staging\StagingServiceMock.cs" />
     <Compile Include="Development\GetCMSWebPartCategoryTests.cs" />
     <Compile Include="Development\NewCMSWebPartCategoryTests.cs" />
     <Compile Include="Development\RemoveCMSWebPartCategoryTests.cs" />

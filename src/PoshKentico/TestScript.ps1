@@ -22,9 +22,9 @@ Configuration KenticoTest
 		
 		xSite TestSite
 		{
-			SiteName = "LightStream"
-			DomainName = "localhost"
-			DisplayName = "LightStream.com"
+			SiteName = "Kenticotest"
+			DomainName = "localhost:743"
+			DisplayName = "KenticoTest"
 			Status = "Running"
 			Ensure = "Present"
 		}

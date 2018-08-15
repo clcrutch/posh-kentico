@@ -148,16 +148,6 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
-            // default authentication is UserName
-            this.Authentication = this.Authentication == ServerAuthenticationEnum.X509 ? this.Authentication : ServerAuthenticationEnum.UserName;
-
-            // default is Enabled
-            this.Enabled = this.Enabled == false ? false : true;
-
-            // default user name and password value cannot be null
-            this.UserName = string.IsNullOrEmpty(this.UserName) ? string.Empty : this.UserName;
-            this.Password = string.IsNullOrEmpty(this.Password) ? string.Empty : this.Password;
-
             int siteID = this.ParameterSetName == PROPERTYSET ? this.SiteID : this.Site.SiteID;
 
             var newServer = this.BusinessLayer.CreateServer(
@@ -165,7 +155,7 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
                                         this.ServerName,
                                         this.URL,
                                         this.Authentication,
-                                        (bool)this.Enabled,
+                                        this.Enabled,
                                         this.UserName,
                                         this.Password,
                                         siteID);

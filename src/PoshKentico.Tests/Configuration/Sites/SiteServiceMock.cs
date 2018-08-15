@@ -21,7 +21,7 @@ using Moq;
 using PoshKentico.Core.Services.Configuration.Localization;
 using PoshKentico.Core.Services.Configuration.Sites;
 
-namespace PoshKentico.Business.Configuration.Sites.Tests
+namespace PoshKentico.Business.Configuration.Sites
 {
     public class SiteServiceMock : ISiteService
     {

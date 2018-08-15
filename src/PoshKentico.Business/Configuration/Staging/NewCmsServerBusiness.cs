@@ -59,11 +59,22 @@ namespace PoshKentico.Business.Configuration.Staging
                                     string serverName,
                                     string serverUrl,
                                     ServerAuthenticationEnum authentication,
-                                    bool enabled,
+                                    bool? enabled,
                                     string userName,
                                     string password,
                                     int siteID)
         {
+            // default authentication is UserName
+            authentication = authentication == ServerAuthenticationEnum.X509 ? authentication : ServerAuthenticationEnum.UserName;
+
+            // default is Enabled
+            enabled = enabled == false ? false : true;
+
+            // default user name and password value cannot be null
+            userName = string.IsNullOrEmpty(userName) ? string.Empty : userName;
+            password = string.IsNullOrEmpty(password) ? string.Empty : password;
+
+            // default server name
             TextInfo txtInfo = new CultureInfo("en-us", false).TextInfo;
             var newServerName = string.IsNullOrEmpty(serverName) ? txtInfo.ToTitleCase(displayName).Replace(" ", string.Empty) : serverName;
 
