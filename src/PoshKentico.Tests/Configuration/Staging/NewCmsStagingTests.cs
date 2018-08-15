@@ -24,44 +24,44 @@ using PoshKentico.Tests.Configuration.Staging;
 namespace PoshKentico.Business.Configuration.Staging
 {
     [TestFixture]
-    public class NewCmsStagingBusinessTests
+    public class NewCmsStagingTests
     {
         [TestCase]
-        public void CreateSiteTest_WithoutServerName()
+        public void CreateServerTest_WithoutServerName()
         {
-            var siteServiceMock = new Mock<StagingServiceMock>();
+            var serviceServiceMock = new Mock<StagingServiceMock>();
 
             var businessLayer = new NewCmsServerBusiness()
             {
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                StagingService = siteServiceMock.Object,
+                StagingService = serviceServiceMock.Object,
             };
 
             var result = businessLayer.CreateServer("My Server 1", string.Empty, "localhost", ServerAuthenticationEnum.UserName, true, null, null, 12);
 
-            siteServiceMock.Object.VerifyCreate(result);
+            serviceServiceMock.Object.VerifyCreate(result);
 
             result.ServerName.Should().Be("MyServer1");
         }
 
         [TestCase]
-        public void CreateSiteTest_WithServerName()
+        public void CreateServerTest_WithServerName()
         {
-            var siteServiceMock = new Mock<StagingServiceMock>();
+            var serviceServiceMock = new Mock<StagingServiceMock>();
 
             var businessLayer = new NewCmsServerBusiness()
             {
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
 
-                StagingService = siteServiceMock.Object,
+                StagingService = serviceServiceMock.Object,
             };
 
             var result = businessLayer.CreateServer("My Server 2", "server2", "localhost", ServerAuthenticationEnum.UserName, true, null, null, 12);
 
-            siteServiceMock.Object.VerifyCreate(result);
+            serviceServiceMock.Object.VerifyCreate(result);
 
             result.ServerName.Should().Be("server2");
         }
