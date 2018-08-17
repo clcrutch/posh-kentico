@@ -1,4 +1,4 @@
-﻿// <copyright file="SetCmsSiteCmdlet.cs" company="Chris Crutchfield">
+﻿// <copyright file="SetCmsRoleLogCmdlet.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -18,36 +18,32 @@
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
-using CMS.SiteProvider;
+using CMS.Membership;
 using ImpromptuInterface;
-using PoshKentico.Business.Configuration.Sites;
-using PoshKentico.Core.Services.Configuration.Sites;
-using AliasAttribute = System.Management.Automation.AliasAttribute;
+using PoshKentico.Business.Configuration.Staging;
+using PoshKentico.Core.Services.Configuration.Roles;
 
-namespace PoshKentico.Cmdlets.Configuration.Sites
+namespace PoshKentico.Cmdlets.Configuration.Staging
 {
     /// <summary>
-    /// <para type="synopsis">Sets a site.</para>
-    /// <para type="description">Sets a new site based off of the provided input.</para>
-    /// <para type="description">This cmdlet returns the site to update when the -PassThru switch is used.</para>
+    /// <para type="synopsis">Sets a new role without logging any staging tasks.</para>
     /// <example>
-    ///     <para>Set site specifying an existing site.</para>
-    ///     <code>Set-CMSSite -Site $site</code>
+    ///     <para>Sets a new role without logging any staging tasks.</para>
+    ///     <code>Set-CMSRoleLog -Role $role -TaskGroupName "Group_Name"</code>
     /// </example>
     /// <example>
-    ///     <para>Set site specifying an existing site.</para>
-    ///     <code>$site | Set-CMSSite</code>
+    ///     <para>Set a new role without logging any staging tasks.</para>
+    ///     <code>$role | Set-CMSRoleLog -TaskGroupName "Group_Name"</code>
     /// </example>
     /// <example>
-    ///     <para>Set site specifying the display name, site name, status, and domain name.</para>
-    ///     <code>Set-CMSSite -DisplayName "My Test Name" -SiteName "My Site Name" -Status "Running or Stopped" -DomainName "My Domain Name"</code>
+    ///     <para>Set a new role without logging any staging tasks..</para>
+    ///     <code>Set-CMSRoleLog -RoleDisplayName "Role Display Name" -RoleName "Role Name" -SiteID "Site Id" -TaskGroupName "Group_Name"</code>
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
-    [Cmdlet(VerbsCommon.Set, "CMSSite")]
-    [OutputType(typeof(SiteInfo), ParameterSetName = new string[] { PASSTHRU })]
-    [Alias("ssite")]
-    public class SetCmsSiteCmdlet : MefCmdlet
+    [Cmdlet("Set", "CMSRoleLog")]
+    [OutputType(typeof(RoleInfo), ParameterSetName = new string[] { PASSTHRU })]
+    public class SetCmsRoleLogCmdlet : MefCmdlet
     {
         #region Constants
 
@@ -60,49 +56,47 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         #region Properties
 
         /// <summary>
-        /// <para type="description">A reference to the site to update.</para>
+        /// <para type="description">A reference to the role to set.</para>
         /// </summary>
         [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0, ParameterSetName = OBJECTSET)]
-        [Alias("Site")]
-        public SiteInfo SiteToSet { get; set; }
+        public RoleInfo RoleToSet { get; set; }
 
         /// <summary>
-        /// <para type="description">The display name for the site to update.</para>
-        /// <para type="description">Site display name cannot be blank.</para>
+        /// <para type="description">The role name for the role to set.</para>
         /// </summary>
         [Parameter(Mandatory = true, Position = 0, ParameterSetName = PROPERTYSET)]
+        public string RoleName { get; set; }
+
+        /// <summary>
+        /// <para type="description">The role site id for the role to set.</para>
+        /// </summary>
+        [Parameter(Mandatory = true, Position = 1, ParameterSetName = PROPERTYSET)]
+        public int SiteID { get; set; }
+
+        /// <summary>
+        /// <para type="description">The display name for the role to set.</para>
+        /// </summary>
+        [Parameter(Mandatory = true, Position = 2, ParameterSetName = PROPERTYSET)]
         public string DisplayName { get; set; }
 
         /// <summary>
-        /// <para type="description">The site name for the site to update.</para>
-        /// <para type="description">Site name cannot be blank.</para>
-        /// </summary>
-        [Parameter(Mandatory = true, Position = 1, ParameterSetName = PROPERTYSET)]
-        public string SiteName { get; set; }
-
-        /// <summary>
-        /// <para type="description">The status for the site to update. </para>
-        /// </summary>
-        [Parameter(Mandatory = true, Position = 2, ParameterSetName = PROPERTYSET)]
-        public SiteStatusEnum Status { get; set; }
-
-        /// <summary>
-        /// <para type="description">The domain name for the site to update.</para>
+        /// <para type="description">The task group name.</para>
         /// </summary>
         [Parameter(Mandatory = true, Position = 3, ParameterSetName = PROPERTYSET)]
-        public string DomainName { get; set; }
+        [Parameter(Mandatory = true, Position = 1, ParameterSetName = OBJECTSET)]
+        public string TaskGroupName { get; set; }
 
         /// <summary>
-        /// <para type="description">Tell the cmdlet to return the site to update.</para>
+        /// <para type="description">Tell the cmdlet to return the role to set.</para>
         /// </summary>
         [Parameter(Mandatory = false, ParameterSetName = PASSTHRU)]
         public SwitchParameter PassThru { get; set; }
 
         /// <summary>
-        ///  Gets or sets the Business Layer for this site.  Populated by MEF.
+        ///  Gets or sets the Business Layer for this role.  Populated by MEF.
         /// </summary>
         [Import]
-        public SetCmsSiteBusiness BusinessLayer { get; set; }
+        public SetCmsRoleLogBusiness BusinessLayer { get; set; }
 
         #endregion
 
@@ -114,16 +108,16 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
             switch (this.ParameterSetName)
             {
                 case OBJECTSET:
-                    this.BusinessLayer.Set(this.SiteToSet.ActLike<ISite>());
+                    this.BusinessLayer.SetLogRole(this.RoleToSet.ActLike<IRole>(), this.TaskGroupName);
                     break;
                 case PROPERTYSET:
-                    this.BusinessLayer.Set(this.DisplayName, this.SiteName, this.Status, this.DomainName);
+                    this.BusinessLayer.SetLogRole(this.DisplayName, this.RoleName, this.SiteID, this.TaskGroupName);
                     break;
             }
 
             if (this.PassThru.ToBool())
             {
-                this.WriteObject(this.SiteToSet);
+                this.WriteObject(this.RoleToSet);
             }
         }
 

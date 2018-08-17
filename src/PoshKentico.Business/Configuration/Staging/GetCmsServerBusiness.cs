@@ -33,7 +33,7 @@ namespace PoshKentico.Business.Configuration.Staging
         #region Properties
 
         /// <summary>
-        /// Gets or sets a reference to the Server Service.  Populated by MEF.
+        /// Gets or sets a reference to the Staging Service.  Populated by MEF.
         /// </summary>
         [Import]
         public IStagingService StagingService { get; set; }

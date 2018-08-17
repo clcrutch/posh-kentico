@@ -181,11 +181,13 @@ namespace PoshKentico.Core.Providers.Configuration.Sites
             if (siteToWork != null)
             {
                 // Creates a new site domain alias object
-                SiteDomainAliasInfo newAlias = new SiteDomainAliasInfo();
-                newAlias.SiteDomainAliasName = aliasName;
+                SiteDomainAliasInfo newAlias = new SiteDomainAliasInfo
+                {
+                    SiteDomainAliasName = aliasName,
 
-                // Assigns the domain alias to the site
-                newAlias.SiteID = siteToWork.SiteID;
+                    // Assigns the domain alias to the site
+                    SiteID = siteToWork.SiteID,
+                };
 
                 // Saves the site domain alias to the database
                 SiteDomainAliasInfoProvider.SetSiteDomainAliasInfo(newAlias);

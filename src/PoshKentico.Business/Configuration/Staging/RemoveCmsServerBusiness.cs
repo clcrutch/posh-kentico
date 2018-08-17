@@ -29,7 +29,7 @@ namespace PoshKentico.Business.Configuration.Staging
         #region Properties
 
         /// <summary>
-        /// Gets or sets a reference to the Server Service.  Populated by MEF.
+        /// Gets or sets a reference to the Staging Service.  Populated by MEF.
         /// </summary>
         [Import]
         public IStagingService StagingService { get; set; }
@@ -47,7 +47,7 @@ namespace PoshKentico.Business.Configuration.Staging
         /// <summary>
         /// Deletes the <see cref="IServer"/> in the CMS System.
         /// </summary>
-        /// <param name="server">The <see cref="IServer"/> to set.</param>
+        /// <param name="server">The <see cref="IServer"/> to delete.</param>
         public void Remove(IServer server)
         {
             this.RemoveServer(server);
@@ -82,7 +82,7 @@ namespace PoshKentico.Business.Configuration.Staging
         /// <summary>
         /// Deletes the specified <see cref="IServer"/> in the CMS System.
         /// </summary>
-        /// <param name="server">The <see cref="IServer"/> to set.</param>
+        /// <param name="server">The <see cref="IServer"/> to delete.</param>
         private void RemoveServer(IServer server)
         {
             if (this.ShouldProcess(server.ServerName, "delete"))

@@ -16,6 +16,7 @@
 // </copyright>
 
 using System.Collections.Generic;
+using PoshKentico.Core.Services.Configuration.Roles;
 
 namespace PoshKentico.Core.Services.Configuration.Staging
 {
@@ -68,6 +69,33 @@ namespace PoshKentico.Core.Services.Configuration.Staging
         /// </summary>
         /// <param name="server">The <see cref="IServer"/> to delete.</param>
         void Delete(IServer server);
+
+        /// <summary>
+        /// Synchronize staging tasks at specified <see cref="IServer"/>
+        /// </summary>
+        /// <param name="server">The <see cref="IServer"/> to synchronize the tasks.</param>
+        /// <returns>the error message</returns>
+        string SynchronizeStagingTask(IServer server);
+
+        /// <summary>
+        /// Delete staging tasks at specified <see cref="IServer"/>
+        /// </summary>
+        /// <param name="server">The <see cref="IServer"/> to delete the tasks.</param>
+        void DeleteStagingTask(IServer server);
+
+        /// <summary>
+        /// Set a new role for logging staging tasks under specific task groups
+        /// </summary>
+        /// <param name="role">The <see cref="IRole"/>.</param>
+        /// <param name="taskGroupName">the task group code name</param>
+        void SetLoggingRole(IRole role, string taskGroupName);
+
+        /// <summary>
+        /// Set a new role for running code without logging of staging tasks
+        /// </summary>
+        /// <param name="role">The <see cref="IRole"/>.</param>
+        void SetNoLoggingRole(IRole role);
+
         #endregion
 
     }
