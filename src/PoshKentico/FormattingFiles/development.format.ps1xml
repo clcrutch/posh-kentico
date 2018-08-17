@@ -64,7 +64,7 @@
                 <PropertyName>WebPartName</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>WebPartName</PropertyName>
+                <PropertyName>Path</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>

@@ -544,7 +544,9 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.0-beta004\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.0-beta004\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="FormattingFiles\Development\WebParts\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PoshKentico.Business\PoshKentico.Business.csproj">
       <Project>{d065289d-5e97-4ab4-b395-6a9f43cc3e5f}</Project>

@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
+using Castle.DynamicProxy;
 using CMS.PortalEngine;
 using ImpromptuInterface;
 using PoshKentico.Business.Development.WebParts;
@@ -93,6 +94,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         public string WebPartName { get; set; }
 
         [Parameter(Mandatory = true, ParameterSetName = PATH)]
+        [Alias("Path")]
         public string WebPartPath { get; set; }
 
         /// <summary>
@@ -129,7 +131,6 @@ namespace PoshKentico.Cmdlets.Development.WebParts
                     break;
                 case PATH:
                     this.WriteObject(this.BusinessLayer.GetWebPart(this.WebPartPath)?.UndoActLike());
-
                     return;
 
                 case NONE:
