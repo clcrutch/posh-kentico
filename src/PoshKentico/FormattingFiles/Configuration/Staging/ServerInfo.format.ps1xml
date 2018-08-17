@@ -2,7 +2,7 @@
 <Configuration>
   <ViewDefinitions>
     <View>
-      <Name>Site</Name>
+      <Name>Server</Name>
       <ViewSelectedBy>
         <TypeName>CMS.Synchronization.ServerInfo</TypeName>
       </ViewSelectedBy>
