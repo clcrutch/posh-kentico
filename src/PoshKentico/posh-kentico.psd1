@@ -64,7 +64,8 @@ FormatsToProcess = @( `
     "./FormattingFiles/development.format.ps1xml", `
     "./FormattingFiles/Configuration/Sites/CultureInfo.format.ps1xml", `
     "./FormattingFiles/Configuration/Sites/SiteDomainAliasInfo.format.ps1xml", `
-    "./FormattingFiles/Configuration/Sites/SiteInfo.format.ps1xml" `
+    "./FormattingFiles/Configuration/Sites/SiteInfo.format.ps1xml", `
+	"./FormattingFiles/Configuration/Staging/ServerInfo.format.ps1xml" `
 )
 
 # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess

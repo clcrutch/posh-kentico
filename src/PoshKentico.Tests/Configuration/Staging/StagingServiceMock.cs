@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using FluentAssertions;
 using Moq;
+using PoshKentico.Core.Services.Configuration.Roles;
 using PoshKentico.Core.Services.Configuration.Staging;
 
 namespace PoshKentico.Tests.Configuration.Staging
@@ -74,6 +75,26 @@ namespace PoshKentico.Tests.Configuration.Staging
         }
 
         void IStagingService.Update(IServer server)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string SynchronizeStagingTask(IServer server)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteStagingTask(IServer server)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetLoggingRole(IRole role, string taskGroupName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetNoLoggingRole(IRole role)
         {
             throw new NotImplementedException();
         }
