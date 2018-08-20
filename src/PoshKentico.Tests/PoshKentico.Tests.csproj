@@ -482,8 +482,10 @@
     <Compile Include="Configuration\Staging\GetCmsServerTests.cs" />
     <Compile Include="Configuration\Staging\NewCmsServerTests.cs" />
     <Compile Include="Configuration\Staging\RemoveCmsServerTests.cs" />
+    <Compile Include="Configuration\Staging\RemoveCmsStagingTaskTests.cs" />
     <Compile Include="Configuration\Staging\SetCmsServerTests.cs" />
     <Compile Include="Configuration\Staging\StagingServiceMock.cs" />
+    <Compile Include="Configuration\Staging\SyncCmsStagingTaskTests.cs" />
     <Compile Include="Development\GetCMSWebPartCategoryTests.cs" />
     <Compile Include="Development\NewCMSWebPartCategoryTests.cs" />
     <Compile Include="Development\RemoveCMSWebPartCategoryTests.cs" />

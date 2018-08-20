@@ -109,7 +109,7 @@ namespace PoshKentico.Core.Providers.Configuration.Staging
             string res = string.Empty;
 
             // Gets a staging server
-            ServerInfo stagingServer = ServerInfoProvider.GetServerInfo(server.ServerName, server.ServerSiteID);
+            ServerInfo stagingServer = this.GetServer(server.ServerName, server.ServerSiteID).UndoActLike();
 
             if (stagingServer != null)
             {
@@ -143,7 +143,7 @@ namespace PoshKentico.Core.Providers.Configuration.Staging
         public void DeleteStagingTask(IServer server)
         {
             // Gets the staging server
-            ServerInfo stagingServer = ServerInfoProvider.GetServerInfo(server.ServerName, server.ServerSiteID);
+            ServerInfo stagingServer = this.GetServer(server.ServerName, server.ServerSiteID).UndoActLike();
 
             if (stagingServer != null)
             {
