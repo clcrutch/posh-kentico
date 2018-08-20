@@ -39,8 +39,9 @@ namespace PoshKentico.Cmdlets.Configuration.Servers
     ///     <code>$server | Set-CMSServer</code>
     /// </example>
     /// <example>
-    ///     <para>Set server specifying the display name, server name, status, and domain name.</para>
-    ///     <code>Set-CMSServer -DisplayName "My Test Name" -ServerName "My Server Name" -Status "Running or Stopped" -DomainName "My Domain Name"</code>
+    ///     <para>Get server specifying the ServerName and SiteID, Set its DisplayName, URL, Authentication, Enabled, UserName, Password.</para>
+    ///     <code>Set-CMSServer -ServerName "Server Name to find" -SiteID "Site ID to find" -DisplayName "New Display Name" -URL "New URL"
+    ///     -Authentication "UserName or X509" -Enabled "True or False" -UserName "New User Name" -Password "New Password"</code>
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]

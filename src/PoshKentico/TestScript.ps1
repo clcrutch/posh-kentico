@@ -9,6 +9,7 @@ Configuration KenticoTest
 	Import-DscResource -Name xWebPartCategory
 	Import-DscResource -Name xWebPart
 	Import-DscResource -Name xSite
+	Import-DscResource -Name xServer
 
 	Node localhost
 	{
@@ -29,6 +30,18 @@ Configuration KenticoTest
 			Ensure = "Present"
 		}
 
+		xServer TestServer
+		{
+			ServerName = "Kenticotest"
+			ServerSiteID = "2"
+			ServerURL = "http://dappcluster:743"
+			ServerDisplayName = "KenticoTest"
+			ServerAuthentication = "UserName"
+			ServerEnabled = $true
+			ServerUsername = "admin"
+			ServerPassword = "pass"
+			Ensure = "Present"
+		}
 	}
 }
 
