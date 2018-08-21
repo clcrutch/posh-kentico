@@ -1,4 +1,4 @@
-﻿// <copyright file="ISite.cs" company="Chris Crutchfield">
+﻿// <copyright file="IRole.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -15,42 +15,29 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using CMS.SiteProvider;
-
-namespace PoshKentico.Core.Services.Configuration.Sites
+namespace PoshKentico.Core.Services.Configuration.Roles
 {
     /// <summary>
-    /// Represents a Site Object.
+    /// Represents a Role Object.
     /// </summary>
-    public interface ISite
+    public interface IRole
     {
         #region Properties
 
         /// <summary>
-        /// Gets the display name for the site.
+        /// Gets the display name for the role.
         /// </summary>
-        string DisplayName { get; }
+        string RoleDisplayName { get; }
 
         /// <summary>
-        /// Gets the site name.
+        /// Gets the role name.
         /// </summary>
-        string SiteName { get; }
+        string RoleName { get; }
 
         /// <summary>
-        /// Gets the site status.
-        /// </summary>
-        SiteStatusEnum Status { get; }
-
-        /// <summary>
-        /// Gets the domain name for the site.
-        /// </summary>
-        string DomainName { get; }
-
-        /// <summary>
-        /// Gets the id for the site.
+        /// Gets the site id
         /// </summary>
         int SiteID { get; }
         #endregion
-
     }
 }

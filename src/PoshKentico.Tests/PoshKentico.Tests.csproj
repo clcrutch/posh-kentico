@@ -25,6 +25,7 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\PoshKentico.Tests.xml</DocumentationFile>
     <NoWarn>1573;1591</NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -479,6 +480,13 @@
     <Compile Include="Configuration\Sites\SiteServiceMock.cs" />
     <Compile Include="Configuration\Sites\StopCmsSiteBusinessTests.cs" />
     <Compile Include="Configuration\Sites\StartCmsSiteBusinessTests.cs" />
+    <Compile Include="Configuration\Staging\GetCmsServerTests.cs" />
+    <Compile Include="Configuration\Staging\NewCmsServerTests.cs" />
+    <Compile Include="Configuration\Staging\RemoveCmsServerTests.cs" />
+    <Compile Include="Configuration\Staging\RemoveCmsStagingTaskTests.cs" />
+    <Compile Include="Configuration\Staging\SetCmsServerTests.cs" />
+    <Compile Include="Configuration\Staging\StagingServiceMock.cs" />
+    <Compile Include="Configuration\Staging\SyncCmsStagingTaskTests.cs" />
     <Compile Include="Development\GetCMSWebPartCategoryTests.cs" />
     <Compile Include="Development\NewCMSWebPartCategoryTests.cs" />
     <Compile Include="Development\RemoveCMSWebPartCategoryTests.cs" />

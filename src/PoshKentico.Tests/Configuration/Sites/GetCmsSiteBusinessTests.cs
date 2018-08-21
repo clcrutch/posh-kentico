@@ -21,7 +21,7 @@ using Moq;
 using NUnit.Framework;
 using PoshKentico.Core.Services.Configuration.Sites;
 
-namespace PoshKentico.Business.Configuration.Sites.Tests
+namespace PoshKentico.Business.Configuration.Sites
 {
     [TestFixture]
     public class GetCmsSiteBusinessTests

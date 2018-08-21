@@ -52,7 +52,7 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSSite", DefaultParameterSetName = NONE)]
-    [OutputType(typeof(SiteInfo))]
+    [OutputType(typeof(SiteInfo[]))]
     [Alias("gsite")]
     public class GetCmsSiteCmdlet : MefCmdlet
     {

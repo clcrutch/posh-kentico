@@ -21,6 +21,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\PoshKentico.Business.xml</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -462,6 +463,14 @@
     <Compile Include="Configuration\Sites\SetCmsSiteBusiness.cs" />
     <Compile Include="Configuration\Sites\StartCmsSiteBusiness.cs" />
     <Compile Include="Configuration\Sites\StopCmsSiteBusiness.cs" />
+    <Compile Include="Configuration\Staging\GetCmsServerBusiness.cs" />
+    <Compile Include="Configuration\Staging\NewCmsServerBusiness.cs" />
+    <Compile Include="Configuration\Staging\RemoveCmsServerBusiness.cs" />
+    <Compile Include="Configuration\Staging\RemoveCmsStagingTaskBusiness.cs" />
+    <Compile Include="Configuration\Staging\SetCmsRoleLogBusiness.cs" />
+    <Compile Include="Configuration\Staging\SetCmsRoleNoLogBusiness.cs" />
+    <Compile Include="Configuration\Staging\SetCmsServerBusiness.cs" />
+    <Compile Include="Configuration\Staging\SyncCmsStagingTaskBusiness.cs" />
     <Compile Include="Development\GetCMSWebPartCategoryBusiness.cs" />
     <Compile Include="Development\NewCMSWebPartCategoryBusiness.cs" />
     <Compile Include="Development\RemoveCMSWebPartCategoryBusiness.cs" />

@@ -44,7 +44,7 @@ namespace PoshKentico.Business.Configuration.Sites
         #region Methods
 
         /// <summary>
-        /// Deletes the <see cref="ISite"/> in the CMS System.
+        /// Starts the <see cref="ISite"/> in the CMS System.
         /// </summary>
         /// <param name="site">The <see cref="ISite"/> to set.</param>
         public void Start(ISite site)
@@ -53,7 +53,7 @@ namespace PoshKentico.Business.Configuration.Sites
         }
 
         /// <summary>
-        /// Deletes the <see cref="ISite"/> in the CMS System.
+        /// Starts the <see cref="ISite"/> in the CMS System.
         /// </summary>
         /// <param name="ids">The IDs of the <see cref="ISite"/> to delete.</param>
         public void Start(params int[] ids)
@@ -65,7 +65,7 @@ namespace PoshKentico.Business.Configuration.Sites
         }
 
         /// <summary>
-        /// Deletes the <see cref="ISite"/> in the CMS System.
+        /// Starts the <see cref="ISite"/> in the CMS System.
         /// </summary>
         /// <param name="matchString">the string which to match the site to.</param>
         /// <param name="exact">A boolean which indicates if the match should be exact.</param>
@@ -78,7 +78,7 @@ namespace PoshKentico.Business.Configuration.Sites
         }
 
         /// <summary>
-        /// Deletes the <see cref="ISite"/> in the CMS System.
+        /// Starts the <see cref="ISite"/> in the CMS System.
         /// </summary>
         /// <param name="site">The <see cref="ISite"/> to set.</param>
         public void StartSite(ISite site)

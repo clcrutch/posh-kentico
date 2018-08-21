@@ -52,7 +52,7 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <summary>
         /// Gets a list of all of the <see cref="ISite"/> which match the specified criteria.
         /// </summary>
-        /// <param name="matchString">The string which to match the webparts to.</param>
+        /// <param name="matchString">The string which to match the sites to.</param>
         /// <param name="exact">A boolean which indicates if the match should be exact.</param>
         /// <returns>A list of all of the <see cref="ISite"/> which match the specified criteria.</returns>
         public IEnumerable<ISite> GetSites(string matchString, bool exact)
