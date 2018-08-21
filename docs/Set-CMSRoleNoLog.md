@@ -5,60 +5,57 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-CMSSite
+# Set-CMSRoleNoLog
 
 ## SYNOPSIS
-Sets a site.
+Sets a new role without logging any staging tasks.
 
 ## SYNTAX
 
 ### Object
 ```
-Set-CMSSite [-SiteToSet] <SiteInfo> [<CommonParameters>]
+Set-CMSRoleNoLog [-RoleToSet] <RoleInfo> [<CommonParameters>]
 ```
 
 ### Property
 ```
-Set-CMSSite [-DisplayName] <String> [-SiteName] <String> [-Status] <SiteStatusEnum> [-DomainName] <String>
- [<CommonParameters>]
+Set-CMSRoleNoLog [-RoleName] <String> [-SiteID] <Int32> [-DisplayName] <String> [<CommonParameters>]
 ```
 
 ### PassThru
 ```
-Set-CMSSite [-PassThru] [<CommonParameters>]
+Set-CMSRoleNoLog [-PassThru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Sets a new site based off of the provided input.
-
-This cmdlet returns the site to update when the -PassThru switch is used.
+{{Fill in the Description}}
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Set-CMSSite -Site $site
+Set-CMSRoleNoLog -Role $role
 ```
 
 ### EXAMPLE 2
 ```
-$site | Set-CMSSite
+$role | Set-CMSRoleNoLog
 ```
 
 ### EXAMPLE 3
 ```
-Set-CMSSite -DisplayName "My Test Name" -SiteName "My Site Name" -Status "Running or Stopped" -DomainName "My Domain Name"
+Set-CMSRoleNoLog -RoleDisplayName "Role Display Name" -RoleName "Role Name" -SiteID "Site Id"
 ```
 
 ## PARAMETERS
 
-### -SiteToSet
-A reference to the site to update.
+### -RoleToSet
+A reference to the role to set.
 
 ```yaml
-Type: SiteInfo
+Type: RoleInfo
 Parameter Sets: Object
-Aliases: Site
+Aliases:
 
 Required: True
 Position: 0
@@ -67,10 +64,8 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -DisplayName
-The display name for the site to update.
-
-Site display name cannot be blank.
+### -RoleName
+The role name for the role to set.
 
 ```yaml
 Type: String
@@ -84,43 +79,23 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SiteName
-The site name for the site to update.
-
-Site name cannot be blank.
+### -SiteID
+The role site id for the role to set.
 
 ```yaml
-Type: String
+Type: Int32
 Parameter Sets: Property
 Aliases:
 
 Required: True
 Position: 1
-Default value: None
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Status
-The status for the site to update.
-
-Possible values: Running, Stopped
-
-```yaml
-Type: SiteStatusEnum
-Parameter Sets: Property
-Aliases:
-Accepted values: Running, Stopped
-
-Required: True
-Position: 2
-Default value: Running
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DomainName
-The domain name for the site to update.
+### -DisplayName
+The display name for the role to set.
 
 ```yaml
 Type: String
@@ -128,14 +103,14 @@ Parameter Sets: Property
 Aliases:
 
 Required: True
-Position: 3
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -PassThru
-Tell the cmdlet to return the site to update.
+Tell the cmdlet to return the role to set.
 
 ```yaml
 Type: SwitchParameter
@@ -155,12 +130,12 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## INPUTS
 
-### CMS.SiteProvider.SiteInfo
-A reference to the site to update.
+### CMS.Membership.RoleInfo
+A reference to the role to set.
 
 ## OUTPUTS
 
-### CMS.SiteProvider.SiteInfo
+### CMS.Membership.RoleInfo
 
 ## NOTES
 
