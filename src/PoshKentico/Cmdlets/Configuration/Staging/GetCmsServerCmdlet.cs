@@ -70,7 +70,7 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSServer", DefaultParameterSetName = NONE)]
-    [OutputType(typeof(ServerInfo))]
+    [OutputType(typeof(ServerInfo[]))]
     [Alias("gserver")]
     public class GetCmsServerCmdlet : MefCmdlet
     {
