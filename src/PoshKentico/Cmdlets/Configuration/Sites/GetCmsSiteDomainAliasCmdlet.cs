@@ -30,7 +30,6 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// <summary>
     /// <para type="synopsis">Gets the domain aliases of the specified site.</para>
     /// <para type="description">Gets the domain aliases of the specified site based off of the provided input.</para>
-    /// <para type="description">This cmdlet returns the list of domain aliases when the -PassThru switch is used.</para>
     /// <example>
     ///     <para>Gets the domain aliases of a site specifying the site name "basic".</para>
     ///     <code>Get-CMSSiteDomainAlias -SiteName "basic" </code>

@@ -26,17 +26,18 @@ using PoshKentico.Core.Services.Configuration.Roles;
 namespace PoshKentico.Cmdlets.Configuration.Staging
 {
     /// <summary>
-    /// <para type="synopsis">Sets a new role without logging any staging tasks.</para>
+    /// <para type="synopsis">Set a new role to log staging tasks under specific task groups.</para>
+    /// <para type="description">Set a new role to log staging tasks under specific task groups.</para>
     /// <example>
-    ///     <para>Sets a new role without logging any staging tasks.</para>
+    ///     <para>Set a new role to log staging tasks under specific task groups.</para>
     ///     <code>Set-CMSRoleLog -Role $role -TaskGroupName "Group_Name"</code>
     /// </example>
     /// <example>
-    ///     <para>Set a new role without logging any staging tasks.</para>
+    ///     <para>Set a new role to log staging tasks under specific task groups.</para>
     ///     <code>$role | Set-CMSRoleLog -TaskGroupName "Group_Name"</code>
     /// </example>
     /// <example>
-    ///     <para>Set a new role without logging any staging tasks..</para>
+    ///     <para>Set a new role to log staging tasks under specific task groups.</para>
     ///     <code>Set-CMSRoleLog -RoleDisplayName "Role Display Name" -RoleName "Role Name" -SiteID "Site Id" -TaskGroupName "Group_Name"</code>
     /// </example>
     /// </summary>
