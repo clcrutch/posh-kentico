@@ -43,9 +43,10 @@ namespace PoshKentico.Business.Configuration.Staging
         /// Sets the <see cref="IServer"/> in the CMS System.
         /// </summary>
         /// <param name="server">The <see cref="IServer"/> to set.</param>
-        public void Set(IServer server)
+        /// <returns>the updated server</returns>
+        public IServer Set(IServer server)
         {
-            this.StagingService.Update(server);
+            return this.StagingService.Update(server);
         }
 
         /// <summary>
@@ -59,7 +60,8 @@ namespace PoshKentico.Business.Configuration.Staging
         /// <param name="enabled">The enabled status for server to update</param>
         /// <param name="userName">The user name for server to update</param>
         /// <param name="password">The password for server to update</param>
-        public void Set(
+        /// <returns>the updated server</returns>
+        public IServer Set(
                         string serverName,
                         int serverSiteId,
                         string displayName,
@@ -81,7 +83,7 @@ namespace PoshKentico.Business.Configuration.Staging
                 ServerPassword = password,
             };
 
-            this.StagingService.Update(data.ActLike<IServer>());
+            return this.StagingService.Update(data.ActLike<IServer>(), false);
         }
 
         #endregion

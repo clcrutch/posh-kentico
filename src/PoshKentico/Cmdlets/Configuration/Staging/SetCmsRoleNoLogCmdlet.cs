@@ -83,7 +83,8 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
         /// <summary>
         /// <para type="description">Tell the cmdlet to return the role to set.</para>
         /// </summary>
-        [Parameter(Mandatory = false, ParameterSetName = PASSTHRU)]
+        [Parameter(Mandatory = false, ParameterSetName = OBJECTSET)]
+        [Parameter(Mandatory = false, ParameterSetName = PROPERTYSET)]
         public SwitchParameter PassThru { get; set; }
 
         /// <summary>
@@ -106,6 +107,12 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
                     break;
                 case PROPERTYSET:
                     this.BusinessLayer.SetNoLogRole(this.DisplayName, this.RoleName, this.SiteID);
+                    this.RoleToSet = new RoleInfo
+                    {
+                        RoleDisplayName = this.DisplayName,
+                        RoleName = this.RoleName,
+                        SiteID = this.SiteID,
+                    };
                     break;
             }
 

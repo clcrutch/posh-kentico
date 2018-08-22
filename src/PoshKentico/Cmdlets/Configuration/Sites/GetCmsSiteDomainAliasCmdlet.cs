@@ -41,6 +41,7 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSSiteDomainAlias")]
+    [OutputType(typeof(SiteDomainAliasInfo[]))]
     [Alias("gscul")]
     public class GetCmsSiteDomainAliasCmdlet : MefCmdlet
     {

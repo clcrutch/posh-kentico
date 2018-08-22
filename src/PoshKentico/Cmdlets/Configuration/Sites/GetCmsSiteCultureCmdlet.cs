@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
+using CMS.Localization;
 using CMS.SiteProvider;
 using ImpromptuInterface;
 using PoshKentico.Business.Configuration.Sites;
@@ -42,6 +43,7 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSSiteCulture")]
+    [OutputType(typeof(CultureInfo[]))]
     [Alias("gscul")]
     public class GetCmsSiteCultureCmdlet : MefCmdlet
     {

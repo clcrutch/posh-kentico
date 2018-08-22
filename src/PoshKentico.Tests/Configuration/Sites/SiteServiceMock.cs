@@ -62,7 +62,7 @@ namespace PoshKentico.Business.Configuration.Sites
             throw new System.NotImplementedException();
         }
 
-        void ISiteService.Update(ISite site)
+        public ISite Update(ISite site, bool isReplace = true)
         {
             throw new System.NotImplementedException();
         }
