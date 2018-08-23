@@ -1,4 +1,4 @@
-﻿// <copyright file="GetCmsSettingValueBusiness.cs" company="Chris Crutchfield">
+﻿// <copyright file="GetCmsWebConfigValueBusiness.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -16,17 +16,15 @@
 // </copyright>
 
 using System.ComponentModel.Composition;
-using PoshKentico.Business.Configuration.Sites;
 using PoshKentico.Core.Services.Configuration.Settings;
-using PoshKentico.Core.Services.Configuration.Sites;
 
 namespace PoshKentico.Business.Configuration.Settings
 {
     /// <summary>
-    /// Business layer for the Set-CMSSettingValue cmdlet.
+    /// Business layer for the Set-CMSWebConfigValue cmdlet.
     /// </summary>
-    [Export(typeof(GetCmsSettingValueBusiness))]
-    public class GetCmsSettingValueBusiness : CmdletBusinessBase
+    [Export(typeof(GetCmsWebConfigValueBusiness))]
+    public class GetCmsWebConfigValueBusiness : CmdletBusinessBase
     {
         #region Properties
 
@@ -41,25 +39,14 @@ namespace PoshKentico.Business.Configuration.Settings
         #region Methods
 
         /// <summary>
-        /// Get a setting value from a site
+        /// Get a web.config setting value
         /// </summary>
-        /// <param name="site">the site to get the setting from</param>
-        /// <param name="key">the setting key associated with the setting</param>
-        /// <returns>the setting value</returns>
-        public object GetSettingValue(ISite site, string key)
+        /// <param name="appSettingKey">The key of the web.config setting</param>
+        /// <param name="culture">The culture info related to the setting, default is empty string</param>
+        /// <returns>The value of the setting</returns>
+        public object GetSettingValue(string appSettingKey, string culture = "")
         {
-            return this.SettingValueService.GetSettingValue(site.SiteName, key);
-        }
-
-        /// <summary>
-        /// Get a setting value from a site <see cref="ISite"/> in the CMS System.
-        /// </summary>
-        /// <param name="siteName">the site name of the site to get the setting from</param>
-        /// <param name="key">the setting key associated with the setting</param>
-        /// <returns>the setting value</returns>
-        public object GetSettingValue(string siteName, string key)
-        {
-            return this.SettingValueService.GetSettingValue(siteName, key);
+            return this.SettingValueService.GetWebConfigValue(appSettingKey, culture);
         }
 
         #endregion

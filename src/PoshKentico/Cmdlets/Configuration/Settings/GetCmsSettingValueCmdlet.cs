@@ -28,6 +28,10 @@ namespace PoshKentico.Cmdlets.Configuration.Settings
     /// <summary>
     /// <para type="synopsis">Gets the setting values by the provided setting key.</para>
     /// <para type="description">Gets the setting values by the provided setting key. </para>
+    /// /// <example>
+    ///     <para>Get all setting values with a site, and setting key "key".</para>
+    ///     <code>$site | Get-CMSSettingValue -Key "my key"</code>
+    /// </example>
     /// <example>
     ///     <para>Get all setting values with a site name "site", and setting key "key".</para>
     ///     <code>Get-CMSSettingValue -SiteName "my site" -Key "my key"</code>
@@ -46,25 +50,25 @@ namespace PoshKentico.Cmdlets.Configuration.Settings
         #region Properties
 
         /// <summary>
-        /// <para type="description">A reference to the site to update.</para>
+        /// <para type="description">A reference to the site to get setting from.</para>
         /// </summary>
         [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0, ParameterSetName = OBJECTSET)]
-        public SiteInfo SiteToSet { get; set; }
+        public SiteInfo Site { get; set; }
 
         /// <summary>
-        /// <para type="description">The display name of the SettingValue to retrive.</para>
+        /// <para type="description">The site name of the site to get setting from.</para>
         /// </summary>
         [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true, ParameterSetName = PROPERTYSET)]
         public string SiteName { get; set; }
 
         /// <summary>
-        /// <para type="description">The IDs of the SettingValue to retrieve.</para>
+        /// <para type="description">The key of the setting to get value from.</para>
         /// </summary>
         [Parameter(Mandatory = true, Position = 1, ParameterSetName = PROPERTYSET)]
         public string Key { get; set; }
 
         /// <summary>
-        /// Gets or sets the Business layer for this SettingValue. Populated by MEF.
+        /// Gets or sets the Business layer for this setting service. Populated by MEF.
         /// </summary>
         [Import]
         public GetCmsSettingValueBusiness BusinessLayer { get; set; }
@@ -80,7 +84,7 @@ namespace PoshKentico.Cmdlets.Configuration.Settings
             switch (this.ParameterSetName)
             {
                 case OBJECTSET:
-                    value = this.BusinessLayer.GetSettingValue(this.SiteToSet.ActLike<ISite>(), this.Key);
+                    value = this.BusinessLayer.GetSettingValue(this.Site.ActLike<ISite>(), this.Key);
                     break;
                 case PROPERTYSET:
                     value = this.BusinessLayer.GetSettingValue(this.SiteName, this.Key);

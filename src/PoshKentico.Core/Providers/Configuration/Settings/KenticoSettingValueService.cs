@@ -17,7 +17,9 @@
 
 using System;
 using System.ComponentModel.Composition;
+using CMS.Base;
 using CMS.DataEngine;
+using CMS.Helpers;
 using PoshKentico.Core.Services.Configuration.Settings;
 
 namespace PoshKentico.Core.Providers.Configuration.Settings
@@ -34,6 +36,13 @@ namespace PoshKentico.Core.Providers.Configuration.Settings
         public string GetSettingValue(string siteName, string settingKey)
         {
             return SettingsKeyInfoProvider.GetValue(siteName + "." + settingKey);
+        }
+
+        /// <inheritdoc/>
+        public string GetWebConfigValue(string settingKey, string culture = "")
+        {
+            // Gets the value of the "CMSApplicationName" key from the appSettings section of the web.config
+            return ValidationHelper.GetString(SettingsHelper.AppSettings[settingKey], culture);
         }
         #endregion
     }
