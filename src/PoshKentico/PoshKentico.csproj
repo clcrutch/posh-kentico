@@ -473,6 +473,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cmdlets\Configuration\Settings\GetCmsSettingValueCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Sites\AddCmsSiteCultureCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Sites\AddCmsSiteDomainAliasCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Sites\GetCmsSiteCmdlet.cs" />
