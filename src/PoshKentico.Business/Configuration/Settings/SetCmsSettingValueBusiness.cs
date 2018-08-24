@@ -1,4 +1,4 @@
-﻿// <copyright file="GetCmsWebConfigValueBusiness.cs" company="Chris Crutchfield">
+﻿// <copyright file="SetCmsSettingValueBusiness.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -17,14 +17,15 @@
 
 using System.ComponentModel.Composition;
 using PoshKentico.Core.Services.Configuration.Settings;
+using PoshKentico.Core.Services.Configuration.Sites;
 
 namespace PoshKentico.Business.Configuration.Settings
 {
     /// <summary>
-    /// Business layer for the Get-CMSWebConfigValue cmdlet.
+    /// Business layer for the Set-CMSSettingValue cmdlet.
     /// </summary>
-    [Export(typeof(GetCmsWebConfigValueBusiness))]
-    public class GetCmsWebConfigValueBusiness : CmdletBusinessBase
+    [Export(typeof(SetCmsSettingValueBusiness))]
+    public class SetCmsSettingValueBusiness : CmdletBusinessBase
     {
         #region Properties
 
@@ -39,14 +40,25 @@ namespace PoshKentico.Business.Configuration.Settings
         #region Methods
 
         /// <summary>
-        /// Get a web.config setting value
+        /// Set a new setting value from a site with provided key
         /// </summary>
-        /// <param name="appSettingKey">The key of the web.config setting</param>
-        /// <param name="culture">The culture info related to the setting, default is empty string</param>
-        /// <returns>The value of the setting</returns>
-        public object GetSettingValue(string appSettingKey, string culture = "")
+        /// <param name="site">the site to set the setting to</param>
+        /// <param name="settingKey">the setting key associated with the setting</param>
+        /// <param name="newVal">The new value of the setting</param>
+        public void SetSettingValue(ISite site, string settingKey, object newVal)
         {
-            return this.SettingValueService.GetWebConfigValue(appSettingKey, culture);
+           this.SettingValueService.SetSettingValue(site.SiteName, settingKey, newVal);
+        }
+
+        /// <summary>
+        /// Set a new setting value from a site with provided key
+        /// </summary>
+        /// <param name="siteName">The site name of the setting</param>
+        /// <param name="settingKey">The key of the setting</param>
+        /// <param name="newVal">The new value of the setting</param>
+        public void SetSettingValue(string siteName, string settingKey, object newVal)
+        {
+            this.SettingValueService.SetSettingValue(siteName, settingKey, newVal);
         }
 
         #endregion

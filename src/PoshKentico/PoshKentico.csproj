@@ -475,6 +475,7 @@
   <ItemGroup>
     <Compile Include="Cmdlets\Configuration\Settings\GetCmsSettingValueCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Settings\GetCmsWebConfigValueCmdlet.cs" />
+    <Compile Include="Cmdlets\Configuration\Settings\SetCmsSettingValueCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Sites\AddCmsSiteCultureCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Sites\AddCmsSiteDomainAliasCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Sites\GetCmsSiteCmdlet.cs" />

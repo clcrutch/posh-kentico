@@ -41,8 +41,13 @@ namespace PoshKentico.Core.Providers.Configuration.Settings
         /// <inheritdoc/>
         public string GetWebConfigValue(string settingKey, string culture = "")
         {
-            // Gets the value of the "CMSApplicationName" key from the appSettings section of the web.config
             return ValidationHelper.GetString(SettingsHelper.AppSettings[settingKey], culture);
+        }
+
+        /// <inheritdoc/>
+        public void SetSettingValue(string siteName, string settingKey, object newVal)
+        {
+            SettingsKeyInfoProvider.SetValue(siteName, settingKey, newVal);
         }
         #endregion
     }

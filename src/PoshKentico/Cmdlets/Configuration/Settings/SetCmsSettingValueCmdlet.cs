@@ -1,4 +1,4 @@
-﻿// <copyright file="GetCmsSettingValueCmdlet.cs" company="Chris Crutchfield">
+﻿// <copyright file="SetCmsSettingValueCmdlet.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -26,20 +26,20 @@ using PoshKentico.Core.Services.Configuration.Sites;
 namespace PoshKentico.Cmdlets.Configuration.Settings
 {
     /// <summary>
-    /// <para type="synopsis">Gets the setting values by the provided setting key.</para>
-    /// <para type="description">Gets the setting values by the provided setting key. </para>
+    /// <para type="synopsis">Sets the setting values by the provided setting key.</para>
+    /// <para type="description">Sets the setting values by the provided setting key. </para>
     /// /// <example>
-    ///     <para>Get all setting values with a site, and setting key "key".</para>
-    ///     <code>$site | Get-CMSSettingValue -Key "my key"</code>
+    ///     <para>Set setting values  with a new value "new val", for setting with a site, and setting key "key".</para>
+    ///     <code>$site | Set-CMSSettingValue -Key "my key" -Value "new val"</code>
     /// </example>
     /// <example>
-    ///     <para>Get all setting values with a site name "site", and setting key "key".</para>
-    ///     <code>Get-CMSSettingValue -SiteName "my site" -Key "my key"</code>
+    ///     <para>Set setting values with a new value "new val", for setting with site name "site", and setting key "key".</para>
+    ///     <code>Set-CMSSettingValue -SiteName "my site" -Key "my key" -Value "new val"</code>
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
-    [Cmdlet(VerbsCommon.Get, "CMSSettingValue")]
-    public class GetCmsSettingValueCmdlet : MefCmdlet
+    [Cmdlet(VerbsCommon.Set, "CMSSettingValue")]
+    public class SetCmsSettingValueCmdlet : MefCmdlet
     {
         #region Constants
 
@@ -50,29 +50,36 @@ namespace PoshKentico.Cmdlets.Configuration.Settings
         #region Properties
 
         /// <summary>
-        /// <para type="description">A reference to the site to get setting from.</para>
+        /// <para type="description">A reference to the site to set setting for.</para>
         /// </summary>
         [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0, ParameterSetName = OBJECTSET)]
         public SiteInfo Site { get; set; }
 
         /// <summary>
-        /// <para type="description">The site name of the site to get setting from.</para>
+        /// <para type="description">The site name of the site to set setting for.</para>
         /// </summary>
         [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true, ParameterSetName = PROPERTYSET)]
         public string SiteName { get; set; }
 
         /// <summary>
-        /// <para type="description">The key of the setting to get value from.</para>
+        /// <para type="description">The key of the setting to set value for.</para>
         /// </summary>
         [Parameter(Mandatory = true, Position = 1, ParameterSetName = OBJECTSET)]
         [Parameter(Mandatory = true, Position = 1, ParameterSetName = PROPERTYSET)]
         public string Key { get; set; }
 
         /// <summary>
+        /// <para type="description">The new value of the setting to set value for.</para>
+        /// </summary>
+        [Parameter(Mandatory = true, Position = 2, ParameterSetName = OBJECTSET)]
+        [Parameter(Mandatory = true, Position = 2, ParameterSetName = PROPERTYSET)]
+        public object Value { get; set; }
+
+        /// <summary>
         /// Gets or sets the Business layer for this setting service. Populated by MEF.
         /// </summary>
         [Import]
-        public GetCmsSettingValueBusiness BusinessLayer { get; set; }
+        public SetCmsSettingValueBusiness BusinessLayer { get; set; }
 
         #endregion
 
@@ -81,18 +88,15 @@ namespace PoshKentico.Cmdlets.Configuration.Settings
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
-            object value = null;
             switch (this.ParameterSetName)
             {
                 case OBJECTSET:
-                    value = this.BusinessLayer.GetSettingValue(this.Site.ActLike<ISite>(), this.Key);
+                    this.BusinessLayer.SetSettingValue(this.Site.ActLike<ISite>(), this.Key, this.Value);
                     break;
                 case PROPERTYSET:
-                    value = this.BusinessLayer.GetSettingValue(this.SiteName, this.Key);
+                    this.BusinessLayer.SetSettingValue(this.SiteName, this.Key, this.Value);
                     break;
             }
-
-            this.WriteObject(value);
         }
 
         #endregion
