@@ -64,7 +64,9 @@
                 <PropertyName>WebPartName</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>Path</PropertyName>
+                <ScriptBlock>
+                  "$(($_ | Get-CMSWebPartCategory).CategoryPath)/$($_.WebPartName)"
+                </ScriptBlock>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>

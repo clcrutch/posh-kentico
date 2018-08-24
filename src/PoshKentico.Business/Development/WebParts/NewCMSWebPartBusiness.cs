@@ -35,7 +35,7 @@ namespace PoshKentico.Business.Development.WebParts
                 WebPartFileName = fileName,
                 WebPartName = name,
 
-                WebPartCategoryID = -1,
+                WebPartCategoryID = parent.CategoryID,
             };
 
             return this.WebPartService.Create(data.ActLike<IWebPart>());

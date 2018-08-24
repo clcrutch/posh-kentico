@@ -19,7 +19,6 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
-using Castle.DynamicProxy;
 using CMS.PortalEngine;
 using ImpromptuInterface;
 using PoshKentico.Business.Development.WebParts;
@@ -50,6 +49,10 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     /// <example>
     ///     <para>Get web parts by name.</para>
     ///     <code>Get-CMSWebPart -WebPartName *webpartname*</code>
+    /// </example>
+    /// <example>
+    ///     <para>Get web parts by path</para>
+    ///     <code>Get-CMSWebPart -Path /path/to/webpart</code>
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
@@ -93,6 +96,9 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         [Alias("Name")]
         public string WebPartName { get; set; }
 
+        /// <summary>
+        /// <para type="description">The path to the webpart.</para>
+        /// </summary>
         [Parameter(Mandatory = true, ParameterSetName = PATH)]
         [Alias("Path")]
         public string WebPartPath { get; set; }

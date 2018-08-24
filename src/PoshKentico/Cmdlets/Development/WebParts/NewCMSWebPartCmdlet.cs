@@ -16,6 +16,7 @@
 // </copyright>
 
 using CMS.PortalEngine;
+using ImpromptuInterface;
 using PoshKentico.Business.Development.WebParts;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,8 @@ using System.Linq;
 using System.Management.Automation;
 using System.Text;
 using System.Threading.Tasks;
+
+using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.Development.WebParts
 {
@@ -43,6 +46,9 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         [Parameter(Mandatory = true, Position = 0)]
         public string Path { get; set; }
 
+        [Parameter]
+        public SwitchParameter PassThru { get; set; }
+
         [Import]
         public NewCMSWebPartBusiness BusinessLayer { get; set; }
 
@@ -50,6 +56,11 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         protected override void ProcessRecord()
         {
             var webPart = this.BusinessLayer.CreateWebPart(this.Path, this.FileName, this.DisplayName);
+
+            if (this.PassThru.ToBool())
+            {
+                this.WriteObject(webPart.UndoActLike());
+            }
         }
     }
 }

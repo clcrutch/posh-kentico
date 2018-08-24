@@ -68,7 +68,8 @@ namespace PoshKentico.Core.Providers.Development.WebParts
                 WebPartFileName = webPart.WebPartFileName,
                 WebPartDisplayName = webPart.WebPartDisplayName,
                 WebPartName = webPart.WebPartName,
-            };
+                WebPartProperties = "<form></form>",
+        };
 
             WebPartInfoProvider.SetWebPartInfo(webPartInfo);
 
