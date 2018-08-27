@@ -468,6 +468,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\Settings\GetCmsSettingValueTests.cs" />
+    <Compile Include="Configuration\Settings\GetCmsWebConfigValueTests.cs" />
+    <Compile Include="Configuration\Settings\SetCmsSettingValueTests.cs" />
     <Compile Include="Configuration\Sites\AddCmsSiteCultureBusinessTests.cs" />
     <Compile Include="Configuration\Sites\GetCmsSiteDomainAliasBusinessTests.cs" />
     <Compile Include="Configuration\Sites\AddCmsSiteDomainAliasBusinessTests.cs" />
