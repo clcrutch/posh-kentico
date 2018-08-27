@@ -47,7 +47,7 @@ namespace PoshKentico.Core.Providers.Configuration.Settings
         /// <inheritdoc/>
         public void SetSettingValue(string siteName, string settingKey, object newVal)
         {
-            SettingsKeyInfoProvider.SetValue(siteName, settingKey, newVal);
+            SettingsKeyInfoProvider.SetValue(settingKey, siteName, newVal);
         }
         #endregion
     }
