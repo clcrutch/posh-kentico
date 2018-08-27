@@ -15,7 +15,6 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using System;
 using System.ComponentModel.Composition;
 using CMS.Base;
 using CMS.DataEngine;
@@ -35,7 +34,6 @@ namespace PoshKentico.Core.Providers.Configuration.Settings
         /// <inheritdoc/>
         public string GetSettingValue(string siteName, string settingKey)
         {
-            ProviderHelper.ClearHashtables(typeof(SettingsKeyInfoProvider).ToString(), true);
             if (siteName == null)
             {
                 return SettingsKeyInfoProvider.GetValue(settingKey);
@@ -47,9 +45,9 @@ namespace PoshKentico.Core.Providers.Configuration.Settings
         }
 
         /// <inheritdoc/>
-        public string GetWebConfigValue(string settingKey, string culture = "")
+        public string GetWebConfigValue(string settingKey, string defaultValue = "")
         {
-            return ValidationHelper.GetString(SettingsHelper.AppSettings[settingKey], culture);
+            return ValidationHelper.GetString(SettingsHelper.AppSettings[settingKey], defaultValue);
         }
 
         /// <inheritdoc/>

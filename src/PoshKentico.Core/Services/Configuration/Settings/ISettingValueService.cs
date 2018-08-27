@@ -34,9 +34,9 @@ namespace PoshKentico.Core.Services.Configuration.Settings
         /// Get the web.config value based on the key
         /// </summary>
         /// <param name="appSettingKey">The key of the web.config setting</param>
-        /// <param name="culture">The culture info related to the setting, default is empty string</param>
+        /// <param name="defaultValue">The default value to return if no key is matched.</param>
         /// <returns>The value of the setting</returns>
-        string GetWebConfigValue(string appSettingKey, string culture = "");
+        string GetWebConfigValue(string appSettingKey, string defaultValue = "");
 
         /// <summary>
         /// Set the settings value based on the key

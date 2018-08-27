@@ -24,14 +24,14 @@ namespace PoshKentico.Cmdlets.Configuration.Settings
 {
     /// <summary>
     /// <para type="synopsis">Gets the web.config setting value by the provided setting key.</para>
-    /// <para type="description">Gets the web.config setting values by the provided setting key. </para>
+    /// <para type="description">Gets the web.config setting values by the provided setting key or default value if not. </para>
     /// /// <example>
     ///     <para>Get web.config setting values with a key.</para>
     ///     <code>Get-CMSSettingValue -Key "my key"</code>
     /// </example>
     /// <example>
     ///     <para>Get web.config setting values with a key and a culture.</para>
-    ///     <code>Get-CMSSettingValue -Key "my key" -Culture "the culture"</code>
+    ///     <code>Get-CMSSettingValue -Key "my key" -Default "the default value"</code>
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
@@ -47,10 +47,10 @@ namespace PoshKentico.Cmdlets.Configuration.Settings
         public string Key { get; set; }
 
         /// <summary>
-        /// <para type="description">The culture for the setting.</para>
+        /// <para type="description">The default value for the setting.</para>
         /// </summary>
         [Parameter(Mandatory = false, Position = 1)]
-        public string Culture { get; set; }
+        public string Default { get; set; }
 
         /// <summary>
         /// Gets or sets the Business layer for this setting service. Populated by MEF.
@@ -65,7 +65,7 @@ namespace PoshKentico.Cmdlets.Configuration.Settings
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
-            var value = this.BusinessLayer.GetSettingValue(this.Key, this.Culture);
+            var value = this.BusinessLayer.GetSettingValue(this.Key, this.Default);
 
             this.WriteObject(value);
         }
