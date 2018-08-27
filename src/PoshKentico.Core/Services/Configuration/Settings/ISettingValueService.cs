@@ -25,10 +25,10 @@ namespace PoshKentico.Core.Services.Configuration.Settings
         /// <summary>
         /// Get the settings value based on the key
         /// </summary>
-        /// <param name="settingKey">The key of the setting</param>
         /// <param name="siteName">The site name of the setting</param>
+        /// <param name="settingKey">The key of the setting</param>
         /// <returns>The value of the setting</returns>
-        string GetSettingValue(string settingKey, string siteName);
+        string GetSettingValue(string siteName, string settingKey);
 
         /// <summary>
         /// Get the web.config value based on the key
