@@ -38,11 +38,12 @@ namespace PoshKentico.Cmdlets.Configuration.Settings
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
-    [Cmdlet(VerbsCommon.Set, "CMSSettingValue")]
+    [Cmdlet(VerbsCommon.Set, "CMSSettingValue", DefaultParameterSetName = NONE)]
     public class SetCmsSettingValueCmdlet : MefCmdlet
     {
         #region Constants
 
+        private const string NONE = "None";
         private const string OBJECTSET = "Object";
         private const string PROPERTYSET = "Property";
 
@@ -52,13 +53,13 @@ namespace PoshKentico.Cmdlets.Configuration.Settings
         /// <summary>
         /// <para type="description">A reference to the site to set setting for.</para>
         /// </summary>
-        [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0, ParameterSetName = OBJECTSET)]
+        [Parameter(Mandatory = false, ValueFromPipeline = true, Position = 0, ParameterSetName = OBJECTSET)]
         public SiteInfo Site { get; set; }
 
         /// <summary>
         /// <para type="description">The site name of the site to set setting for.</para>
         /// </summary>
-        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true, ParameterSetName = PROPERTYSET)]
+        [Parameter(Mandatory = false, Position = 0, ValueFromPipeline = true, ParameterSetName = PROPERTYSET)]
         public string SiteName { get; set; }
 
         /// <summary>
@@ -66,6 +67,7 @@ namespace PoshKentico.Cmdlets.Configuration.Settings
         /// </summary>
         [Parameter(Mandatory = true, Position = 1, ParameterSetName = OBJECTSET)]
         [Parameter(Mandatory = true, Position = 1, ParameterSetName = PROPERTYSET)]
+        [Parameter(Mandatory = true, Position = 1, ParameterSetName = NONE)]
         public string Key { get; set; }
 
         /// <summary>
@@ -73,6 +75,7 @@ namespace PoshKentico.Cmdlets.Configuration.Settings
         /// </summary>
         [Parameter(Mandatory = true, Position = 2, ParameterSetName = OBJECTSET)]
         [Parameter(Mandatory = true, Position = 2, ParameterSetName = PROPERTYSET)]
+        [Parameter(Mandatory = true, Position = 2, ParameterSetName = NONE)]
         public object Value { get; set; }
 
         /// <summary>
@@ -94,6 +97,9 @@ namespace PoshKentico.Cmdlets.Configuration.Settings
                     this.BusinessLayer.SetSettingValue(this.Site.ActLike<ISite>(), this.Key, this.Value);
                     break;
                 case PROPERTYSET:
+                    this.BusinessLayer.SetSettingValue(this.SiteName, this.Key, this.Value);
+                    break;
+                case NONE:
                     this.BusinessLayer.SetSettingValue(this.SiteName, this.Key, this.Value);
                     break;
             }

@@ -35,7 +35,15 @@ namespace PoshKentico.Core.Providers.Configuration.Settings
         /// <inheritdoc/>
         public string GetSettingValue(string siteName, string settingKey)
         {
-            return SettingsKeyInfoProvider.GetValue(siteName + "." + settingKey);
+            ProviderHelper.ClearHashtables(typeof(SettingsKeyInfoProvider).ToString(), true);
+            if (siteName == null)
+            {
+                return SettingsKeyInfoProvider.GetValue(settingKey);
+            }
+            else
+            {
+                return SettingsKeyInfoProvider.GetValue(siteName + "." + settingKey);
+            }
         }
 
         /// <inheritdoc/>
@@ -47,7 +55,14 @@ namespace PoshKentico.Core.Providers.Configuration.Settings
         /// <inheritdoc/>
         public void SetSettingValue(string siteName, string settingKey, object newVal)
         {
-            SettingsKeyInfoProvider.SetValue(settingKey, siteName, newVal);
+            if (siteName == null)
+            {
+                SettingsKeyInfoProvider.SetGlobalValue(settingKey, newVal);
+            }
+            else
+            {
+                SettingsKeyInfoProvider.SetValue(settingKey, siteName, newVal);
+            }
         }
         #endregion
     }

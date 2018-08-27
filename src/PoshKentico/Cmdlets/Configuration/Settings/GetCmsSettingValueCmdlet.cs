@@ -38,11 +38,12 @@ namespace PoshKentico.Cmdlets.Configuration.Settings
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
-    [Cmdlet(VerbsCommon.Get, "CMSSettingValue")]
+    [Cmdlet(VerbsCommon.Get, "CMSSettingValue", DefaultParameterSetName = NONE)]
     public class GetCmsSettingValueCmdlet : MefCmdlet
     {
         #region Constants
 
+        private const string NONE = "None";
         private const string OBJECTSET = "Object";
         private const string PROPERTYSET = "Property";
 
@@ -66,6 +67,7 @@ namespace PoshKentico.Cmdlets.Configuration.Settings
         /// </summary>
         [Parameter(Mandatory = true, Position = 1, ParameterSetName = OBJECTSET)]
         [Parameter(Mandatory = true, Position = 1, ParameterSetName = PROPERTYSET)]
+        [Parameter(Mandatory = true, Position = 1, ParameterSetName = NONE)]
         public string Key { get; set; }
 
         /// <summary>
@@ -88,6 +90,9 @@ namespace PoshKentico.Cmdlets.Configuration.Settings
                     value = this.BusinessLayer.GetSettingValue(this.Site.ActLike<ISite>(), this.Key);
                     break;
                 case PROPERTYSET:
+                    value = this.BusinessLayer.GetSettingValue(this.SiteName, this.Key);
+                    break;
+                case NONE:
                     value = this.BusinessLayer.GetSettingValue(this.SiteName, this.Key);
                     break;
             }
