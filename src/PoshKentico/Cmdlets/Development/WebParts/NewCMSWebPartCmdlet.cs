@@ -22,10 +22,32 @@ using CMS.PortalEngine;
 using ImpromptuInterface;
 using PoshKentico.Business.Development.WebParts;
 using PoshKentico.Core.Services.Development.WebParts;
+
 using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.Development.WebParts
 {
+    /// <summary>
+    /// <para type="synopsis">Creates a new web part.</para>
+    /// <para type="description">Creates a new web part category based off of the provided input.</para>
+    /// <para type="description">This cmdlet returns the newly created web part when the -PassThru switch is used.</para>
+    /// <example>
+    ///     <para>Create a new web part implying the display name from the path.</para>
+    ///     <code>New-CMSWebPart -Path /TestCategory/TestWebPart -FileName Test.ascx</code>
+    /// </example>
+    /// <example>
+    ///     <para>Create a new web part using the path.</para>
+    ///     <code>New-CMSWebPart -Path /TestCategory/TestWebPart -FileName Test.ascx -DisplayName TestDisplayName</code>
+    /// </example>
+    /// <example>
+    ///     <para>Create a new web part implying the display name from the name.</para>
+    ///     <code>$category | New-CMSWebPart -Name TestWebPart -FileName Test.ascx</code>
+    /// </example>
+    /// <example>
+    ///     <para>Create a new web part using the category and name.</para>
+    ///     <code>$category | New-CMSWebPart -Name TestWebPart -FileName Test.ascx -DisplayName TestDisplayName</code>
+    /// </example>
+    /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.New, "CMSWebPart", DefaultParameterSetName = PATH)]
     [OutputType(typeof(WebPartInfo[]))]

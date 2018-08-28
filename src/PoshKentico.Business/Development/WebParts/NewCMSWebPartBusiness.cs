@@ -20,11 +20,21 @@ using PoshKentico.Core.Services.Development.WebParts;
 
 namespace PoshKentico.Business.Development.WebParts
 {
+    /// <summary>
+    /// Business layer fo the New-CMSWebPart cmdlet.
+    /// </summary>
     [Export(typeof(NewCMSWebPartBusiness))]
     public class NewCMSWebPartBusiness : WebPartBusinessBase
     {
         #region Methods
 
+        /// <summary>
+        /// Creates a <see cref="IWebPart"/> at the specified path.
+        /// </summary>
+        /// <param name="path">The path to create the <see cref="IWebPart"/> at.</param>
+        /// <param name="fileName">The file name for the underlying class file.</param>
+        /// <param name="displayName">The display name for the <see cref="IWebPart"/>.</param>
+        /// <returns>The newly created <see cref="IWebPart"/>.</returns>
         public IWebPart CreateWebPart(string path, string fileName, string displayName)
         {
             var name = path.Substring(path.LastIndexOf('/') + 1);
@@ -40,6 +50,14 @@ namespace PoshKentico.Business.Development.WebParts
             return this.CreateWebPart(name, fileName, displayName, parent);
         }
 
+        /// <summary>
+        /// Creates a <see cref="IWebPart"/> with the specified name under the specified <see cref="IWebPartCategory"/>.
+        /// </summary>
+        /// <param name="name">The name for the <see cref="IWebPart"/>.</param>
+        /// <param name="fileName">The file name for the underlying class file.</param>
+        /// <param name="displayName">The display name for the <see cref="IWebPart"/>.</param>
+        /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> to create the <see cref="IWebPart"/> under.</param>
+        /// <returns>The newly created <see cref="IWebPart"/>.</returns>
         public IWebPart CreateWebPart(string name, string fileName, string displayName, IWebPartCategory webPartCategory)
         {
             if (string.IsNullOrEmpty(displayName))

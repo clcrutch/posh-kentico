@@ -1,4 +1,4 @@
-﻿// <copyright file="IWebPart.cs" company="Chris Crutchfield">
+﻿// <copyright file="IWebPartField.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -18,43 +18,33 @@
 namespace PoshKentico.Core.Services.Development.WebParts
 {
     /// <summary>
-    /// Represents a Web Part.
+    /// Represents a Web Part field.
     /// </summary>
-    public interface IWebPart
+    public interface IWebPartField
     {
-        #region Properties
+        /// <summary>
+        /// Gets a value indicating whether the current field is allowed to be empty.
+        /// </summary>
+        bool AllowEmpty { get; }
 
         /// <summary>
-        /// Gets the ID for the web part category this web part belongs to.
+        /// Gets the data type for the current field.
         /// </summary>
-        int WebPartCategoryID { get; }
+        string DataType { get; }
 
         /// <summary>
-        /// Gets the display name for the current web part.
+        /// Gets the default value for the current field.
         /// </summary>
-        string WebPartDisplayName { get; }
+        string DefaultValue { get; }
 
         /// <summary>
-        /// Gets the file name for the current web part.
+        /// Gets the name for the current field.
         /// </summary>
-        string WebPartFileName { get; }
+        string Name { get; }
 
         /// <summary>
-        /// Gets the ID for the current web part.
+        /// Gets the size for the current field.
         /// </summary>
-        int WebPartID { get; }
-
-        /// <summary>
-        /// Gets the code name for the current web part.
-        /// </summary>
-        string WebPartName { get; }
-
-        /// <summary>
-        /// Gets or sets the properties for the current web part.
-        /// </summary>
-        string WebPartProperties { get; set; }
-
-        #endregion
-
+        int Size { get; }
     }
 }

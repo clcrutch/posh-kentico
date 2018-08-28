@@ -45,7 +45,8 @@ namespace PoshKentico.Core.Providers.Development.WebParts
 
         #region Methods
 
-        public IField AddField(IField field, IWebPart webPart)
+        /// <inheritdoc />
+        public IWebPartField AddField(IWebPartField field, IWebPart webPart)
         {
             var formInfo = new FormInfo(webPart.WebPartProperties);
             var fieldInfo = new FormFieldInfo
@@ -62,7 +63,7 @@ namespace PoshKentico.Core.Providers.Development.WebParts
 
             this.SaveFormUpdates(webPart);
 
-            return fieldInfo.ActLike<IField>();
+            return fieldInfo.ActLike<IWebPartField>();
         }
 
         /// <inheritdoc />

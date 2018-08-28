@@ -136,8 +136,11 @@ namespace PoshKentico.Cmdlets.Development.WebParts
                     webparts = this.BusinessLayer.GetWebParts(this.WebPartName, this.RegularExpression.ToBool());
                     break;
                 case PATH:
-                    this.WriteObject(this.BusinessLayer.GetWebPart(this.WebPartPath)?.UndoActLike());
-                    return;
+                    webparts = new IWebPart[]
+                    {
+                        this.BusinessLayer.GetWebPart(this.WebPartPath),
+                    };
+                    break;
 
                 case NONE:
                     webparts = this.BusinessLayer.GetWebParts();
@@ -146,7 +149,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
 
             foreach (var webpart in webparts)
             {
-                this.WriteObject(webpart.UndoActLike());
+                this.WriteObject(webpart?.UndoActLike());
             }
         }
 

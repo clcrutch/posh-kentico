@@ -28,6 +28,15 @@ using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.Development.WebParts
 {
+    /// <summary>
+    /// <para type="synopsis">Adds a field to a web part.</para>
+    /// <para type="description">Adds a field to the web part and then immediately saves the additional field in Kentico.</para>
+    /// <para type="description">This cmdlet returns the newly created web part field when the -PassThru switch is used.</para>
+    /// <example>
+    ///     <para>Add field to web part.</para>
+    ///     <code>$webPart | Add-CMSWebPartField -DataType Text -Name TestProp -required -size 150 -defaultvalue TestValue</code>
+    /// </example>
+    /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Add, "CMSWebPartField")]
     [OutputType(typeof(FormInfo))]
@@ -55,6 +64,9 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         [Parameter(Mandatory = true, Position = 1)]
         public string Name { get; set; }
 
+        /// <summary>
+        /// <para type="description">Tell the cmdlet to return the newly created web part field.</para>
+        /// </summary>
         [Parameter]
         public SwitchParameter PassThru { get; set; }
 

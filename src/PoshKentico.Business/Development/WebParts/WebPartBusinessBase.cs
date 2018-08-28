@@ -22,8 +22,24 @@ using PoshKentico.Core.Services.Development.WebParts;
 
 namespace PoshKentico.Business.Development.WebParts
 {
+    /// <summary>
+    /// Base class for all Cmdlet Business objects which depend on the <see cref="IWebPartService"/>.
+    /// </summary>
     public abstract class WebPartBusinessBase : CmdletBusinessBase
     {
+        #region Constructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WebPartBusinessBase"/> class.
+        /// </summary>
+        /// <param name="initCmsApplication">Indicates if the CMS Application should be initialized.</param>
+        public WebPartBusinessBase(bool initCmsApplication = true)
+            : base(initCmsApplication)
+        {
+        }
+
+        #endregion
+
         #region Properties
 
         /// <summary>
@@ -34,14 +50,18 @@ namespace PoshKentico.Business.Development.WebParts
 
         #endregion
 
-        public WebPartBusinessBase(bool initCmsApplication = true)
-            : base(initCmsApplication)
-        {
-        }
+        #region Methods
 
+        /// <summary>
+        /// Gets the <see cref="IWebPartCategory"/> which represents the current path.
+        /// </summary>
+        /// <param name="path">The path to look for the <see cref="IWebPartCategory"/>.</param>
+        /// <returns>Returns the <see cref="IWebPartCategory"/> that reprsents the supplied path.</returns>
         protected IWebPartCategory GetCategoryFromPath(string path) =>
             (from c in this.WebPartService.WebPartCategories
              where c.CategoryPath.Equals(path, StringComparison.InvariantCultureIgnoreCase)
              select c).Single();
+
+        #endregion
     }
 }

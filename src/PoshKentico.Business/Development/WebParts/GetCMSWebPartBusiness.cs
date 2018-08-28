@@ -41,6 +41,11 @@ namespace PoshKentico.Business.Development.WebParts
 
         #region Methods
 
+        /// <summary>
+        /// Gets the web part at the specified path.
+        /// </summary>
+        /// <param name="path">The path to look at for the desired web part.</param>
+        /// <returns>The webpart found at the desired path.</returns>
         public IWebPart GetWebPart(string path)
         {
             var name = path.Substring(path.LastIndexOf('/') + 1);
