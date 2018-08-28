@@ -15,52 +15,100 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
+using System.Management.Automation;
 using CMS.PortalEngine;
 using ImpromptuInterface;
 using PoshKentico.Business.Development.WebParts;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Management.Automation;
-using System.Text;
-using System.Threading.Tasks;
-
+using PoshKentico.Core.Services.Development.WebParts;
 using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.Development.WebParts
 {
     [ExcludeFromCodeCoverage]
-    [Cmdlet(VerbsCommon.New, "CMSWebPart")]
+    [Cmdlet(VerbsCommon.New, "CMSWebPart", DefaultParameterSetName = PATH)]
     [OutputType(typeof(WebPartInfo[]))]
     [Alias("nwp")]
     public class NewCMSWebPartCmdlet : MefCmdlet
     {
+        #region Constants
+        private const string PATH = "Path";
+        private const string CATEGORY = "Category";
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// <para type="description">The display name for the newly created webpart.</para>
+        /// </summary>
         [Parameter(Position = 2)]
         public string DisplayName { get; set; }
 
+        /// <summary>
+        /// <para type="description">The file name for the webpart code behind.</para>
+        /// </summary>
         [Parameter(Mandatory = true, Position = 1)]
+        [Alias("File")]
         public string FileName { get; set; }
 
-        [Parameter(Mandatory = true, Position = 0)]
+        /// <summary>
+        /// <para type="description">The Code Name for the webpart.</para>
+        /// </summary>
+        [Parameter(Mandatory = true, Position = 0, ParameterSetName = CATEGORY)]
+        [Alias("CodeName")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// <para type="description">The path to the webpart.</para>
+        /// </summary>
+        [Parameter(Mandatory = true, Position = 0, ParameterSetName = PATH)]
         public string Path { get; set; }
 
+        /// <summary>
+        /// <para type="description">Tell the cmdlet to return the newly created web part.</para>
+        /// </summary>
         [Parameter]
         public SwitchParameter PassThru { get; set; }
 
+        /// <summary>
+        /// <para type="description">The webpart category to add the webpart under.</para>
+        /// </summary>
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = CATEGORY)]
+        [Alias("Category", "Parent")]
+        public WebPartCategoryInfo WebPartCategory { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Business layer for this web part. Populated by MEF.
+        /// </summary>
         [Import]
         public NewCMSWebPartBusiness BusinessLayer { get; set; }
+
+        #endregion
+
+        #region Methods
 
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
-            var webPart = this.BusinessLayer.CreateWebPart(this.Path, this.FileName, this.DisplayName);
+            IWebPart webPart = null;
+            switch (this.ParameterSetName)
+            {
+                case PATH:
+                    webPart = this.BusinessLayer.CreateWebPart(this.Path, this.FileName, this.DisplayName);
+                    break;
+                case CATEGORY:
+                    webPart = this.BusinessLayer.CreateWebPart(this.Name, this.FileName, this.DisplayName, this.WebPartCategory.ActLike<IWebPartCategory>());
+                    break;
+            }
 
             if (this.PassThru.ToBool())
             {
                 this.WriteObject(webPart.UndoActLike());
             }
         }
+
+        #endregion
     }
 }

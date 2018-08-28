@@ -18,6 +18,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using CMS.FormEngine;
 using CMS.PortalEngine;
 using ImpromptuInterface;
 using PoshKentico.Core.Services.Development.WebParts;
@@ -44,6 +45,26 @@ namespace PoshKentico.Core.Providers.Development.WebParts
 
         #region Methods
 
+        public IField AddField(IField field, IWebPart webPart)
+        {
+            var formInfo = new FormInfo(webPart.WebPartProperties);
+            var fieldInfo = new FormFieldInfo
+            {
+                AllowEmpty = field.AllowEmpty,
+                DataType = field.DataType,
+                DefaultValue = field.DefaultValue,
+                Name = field.Name,
+                Size = field.Size,
+            };
+            formInfo.AddFormItem(fieldInfo);
+
+            webPart.WebPartProperties = formInfo.GetXmlDefinition();
+
+            this.SaveFormUpdates(webPart);
+
+            return fieldInfo.ActLike<IField>();
+        }
+
         /// <inheritdoc />
         public IWebPartCategory Create(IWebPartCategory webPartCategory)
         {
@@ -60,6 +81,7 @@ namespace PoshKentico.Core.Providers.Development.WebParts
             return category.ActLike<IWebPartCategory>();
         }
 
+        /// <inheritdoc />
         public IWebPart Create(IWebPart webPart)
         {
             var webPartInfo = new WebPartInfo
@@ -68,8 +90,8 @@ namespace PoshKentico.Core.Providers.Development.WebParts
                 WebPartFileName = webPart.WebPartFileName,
                 WebPartDisplayName = webPart.WebPartDisplayName,
                 WebPartName = webPart.WebPartName,
-                WebPartProperties = "<form></form>",
-        };
+                WebPartProperties = FormInfo.GetEmptyFormDocument().OuterXml,
+            };
 
             WebPartInfoProvider.SetWebPartInfo(webPartInfo);
 
@@ -112,6 +134,39 @@ namespace PoshKentico.Core.Providers.Development.WebParts
             category.CategoryParentID = webPartCategory.CategoryParentID;
 
             WebPartCategoryInfoProvider.SetWebPartCategoryInfo(category);
+        }
+
+        /// <inheritdoc />
+        public void Update(IWebPart webPart)
+        {
+            var webPartInfo = WebPartInfoProvider.GetWebPartInfo(webPart.WebPartID);
+
+            if (webPartInfo == null)
+            {
+                return;
+            }
+
+            webPartInfo.WebPartCategoryID = webPart.WebPartCategoryID;
+            webPartInfo.WebPartDisplayName = webPart.WebPartDisplayName;
+            webPartInfo.WebPartFileName = webPart.WebPartFileName;
+            webPartInfo.WebPartName = webPart.WebPartName;
+            webPartInfo.WebPartProperties = webPart.WebPartProperties;
+
+            WebPartInfoProvider.SetWebPartInfo(webPartInfo);
+        }
+
+        private void SaveFormUpdates(IWebPart webPart)
+        {
+            var webPartInfo = WebPartInfoProvider.GetWebPartInfo(webPart.WebPartID);
+
+            if (webPartInfo == null)
+            {
+                return;
+            }
+
+            webPartInfo.WebPartProperties = webPart.WebPartProperties;
+
+            WebPartInfoProvider.SetWebPartInfo(webPartInfo);
         }
 
         #endregion

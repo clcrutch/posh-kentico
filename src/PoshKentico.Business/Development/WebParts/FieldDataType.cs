@@ -1,4 +1,4 @@
-﻿// <copyright file="IWebPart.cs" company="Chris Crutchfield">
+﻿// <copyright file="FieldDataType.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -15,37 +15,17 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-namespace PoshKentico.Core.Services.Development.WebParts
+namespace PoshKentico.Business.Development.WebParts
 {
     /// <summary>
-    /// Represents a Web Part.
+    /// Represents the data type for a field of a web part.
     /// </summary>
-    public interface IWebPart
+    public enum FieldDataType
     {
-        #region Properties
-
         /// <summary>
-        /// Gets the ID for the web part category this web part belongs to.
+        /// The "text" data type for a web part field.
         /// </summary>
-        int WebPartCategoryID { get; }
-
-        /// <summary>
-        /// Gets the display name for the current web part.
-        /// </summary>
-        string WebPartDisplayName { get; }
-
-        string WebPartFileName { get; }
-
-        int WebPartID { get; }
-
-        /// <summary>
-        /// Gets the code name for the current web part.
-        /// </summary>
-        string WebPartName { get; }
-
-        string WebPartProperties { get; set; }
-
-        #endregion
-
+        [Value("text")]
+        Text,
     }
 }

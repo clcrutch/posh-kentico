@@ -40,6 +40,8 @@ namespace PoshKentico.Core.Services.Development.WebParts
 
         #region Methods
 
+        IField AddField(IField field, IWebPart webPart);
+
         /// <summary>
         /// Creates the <see cref="IWebPartCategory"/>.
         /// </summary>
@@ -81,6 +83,8 @@ namespace PoshKentico.Core.Services.Development.WebParts
         /// </summary>
         /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> to update.</param>
         void Update(IWebPartCategory webPartCategory);
+
+        void Update(IWebPart webPart);
 
         #endregion
 

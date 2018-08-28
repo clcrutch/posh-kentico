@@ -485,6 +485,7 @@
     <Compile Include="Cmdlets\Configuration\Sites\SetCmsSiteCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Sites\StartCmsSiteCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Sites\StopCmsSiteCmdlet.cs" />
+    <Compile Include="Cmdlets\Development\WebParts\AddCMSWebPartFieldCmdlet.cs" />
     <Compile Include="Cmdlets\Development\WebParts\GetCMSWebPartCmdlet.cs" />
     <Compile Include="Cmdlets\Development\WebParts\GetCMSWebPartCategoryCmdlet.cs" />
     <Compile Include="Cmdlets\Development\WebParts\NewCMSWebPartCategoryCmdlet.cs" />

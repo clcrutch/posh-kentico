@@ -15,10 +15,7 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using System;
 using System.ComponentModel.Composition;
-using System.Linq;
-using ImpromptuInterface;
 using PoshKentico.Core.Services.Development.WebParts;
 
 namespace PoshKentico.Business.Development.WebParts
@@ -55,7 +52,7 @@ namespace PoshKentico.Business.Development.WebParts
                 displayName = name;
             }
 
-            var data = new
+            var data = new WebPartCategory
             {
                 CategoryName = name,
                 CategoryPath = path,
@@ -66,7 +63,26 @@ namespace PoshKentico.Business.Development.WebParts
                 CategoryID = -1,
             };
 
-            return this.WebPartService.Create(data.ActLike<IWebPartCategory>());
+            return this.WebPartService.Create(data);
+        }
+
+        #endregion
+
+        #region Classes
+
+        private class WebPartCategory : IWebPartCategory
+        {
+            public string CategoryDisplayName { get; set; }
+
+            public int CategoryID { get; set; }
+
+            public string CategoryImagePath { get; set; }
+
+            public string CategoryName { get; set; }
+
+            public int CategoryParentID { get; set; }
+
+            public string CategoryPath { get; set; }
         }
 
         #endregion

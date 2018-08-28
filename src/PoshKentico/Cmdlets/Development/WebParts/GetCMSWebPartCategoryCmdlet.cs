@@ -78,6 +78,9 @@ namespace PoshKentico.Cmdlets.Development.WebPart
         [Alias("DisplayName", "Name")]
         public string CategoryName { get; set; }
 
+        /// <summary>
+        /// <para type="description">The path to get the web part category at.</para>
+        /// </summary>
         [Parameter(Mandatory = true, ParameterSetName = PATH)]
         [Alias("Path")]
         public string CategoryPath { get; set; }
@@ -111,6 +114,9 @@ namespace PoshKentico.Cmdlets.Development.WebPart
         [Alias("Regex")]
         public SwitchParameter RegularExpression { get; set; }
 
+        /// <summary>
+        /// <para type="description">The webpart to get the web part category for.</para>
+        /// </summary>
         [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = WEBPART)]
         public WebPartInfo WebPart { get; set; }
 
@@ -144,9 +150,11 @@ namespace PoshKentico.Cmdlets.Development.WebPart
                     categories = this.BusinessLayer.GetWebPartCategories(this.CategoryPath, this.Recurse.ToBool());
                     break;
                 case WEBPART:
-                    this.WriteObject(this.BusinessLayer.GetWebPartCategory(this.WebPart.ActLike<IWebPart>())?.UndoActLike());
-
-                    return;
+                    categories = new IWebPartCategory[]
+                    {
+                        this.BusinessLayer.GetWebPartCategory(this.WebPart.ActLike<IWebPart>()),
+                    };
+                    break;
 
                 case NONE:
                     categories = this.BusinessLayer.GetWebPartCategories();
@@ -155,7 +163,7 @@ namespace PoshKentico.Cmdlets.Development.WebPart
 
             foreach (var category in categories)
             {
-                this.WriteObject(category.UndoActLike());
+                this.WriteObject(category?.UndoActLike());
             }
         }
 

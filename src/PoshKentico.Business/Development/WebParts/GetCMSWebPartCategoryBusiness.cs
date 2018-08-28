@@ -118,6 +118,12 @@ namespace PoshKentico.Business.Development.WebParts
             }
         }
 
+        /// <summary>
+        /// Gets a list of web part categories by path.
+        /// </summary>
+        /// <param name="path">The path to get the list of web part categories.</param>
+        /// <param name="recurse">Indicates if the web part category children should be returned as well.</param>
+        /// <returns>A list of all of the web part categories found at the specified path.</returns>
         public IEnumerable<IWebPartCategory> GetWebPartCategories(string path, bool recurse)
         {
             var categories = from c in this.WebPartService.WebPartCategories
@@ -134,6 +140,11 @@ namespace PoshKentico.Business.Development.WebParts
             }
         }
 
+        /// <summary>
+        /// Gets the web part category for the current web part.
+        /// </summary>
+        /// <param name="webpart">The webpart to get the category for.</param>
+        /// <returns>The web part category.</returns>
         public IWebPartCategory GetWebPartCategory(IWebPart webpart) =>
             (from c in this.WebPartService.WebPartCategories
              where c.CategoryID == webpart.WebPartCategoryID
