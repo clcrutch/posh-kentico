@@ -57,7 +57,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSWebPart", DefaultParameterSetName = NONE)]
-    [OutputType(typeof(WebPartCategoryInfo[]))]
+    [OutputType(typeof(WebPartInfo[]))]
     [Alias("gwp")]
     public class GetCMSWebPartCmdlet : MefCmdlet
     {
@@ -68,7 +68,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         private const string NAME = "Name";
         private const string PATH = "Path";
 
-        private const string NONE = "None";
+        protected const string NONE = "None";
 
         #endregion
 
@@ -149,8 +149,13 @@ namespace PoshKentico.Cmdlets.Development.WebParts
 
             foreach (var webpart in webparts)
             {
-                this.WriteObject(webpart?.UndoActLike());
+                this.ActOnObject(webpart);
             }
+        }
+
+        protected virtual void ActOnObject(IWebPart webPart)
+        {
+            this.WriteObject(webPart?.UndoActLike());
         }
 
         #endregion

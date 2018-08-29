@@ -26,7 +26,7 @@ using PoshKentico.Core.Services.Development.WebParts;
 
 using AliasAttribute = System.Management.Automation.AliasAttribute;
 
-namespace PoshKentico.Cmdlets.Development.WebPart
+namespace PoshKentico.Cmdlets.Development.WebParts
 {
     /// <summary>
     /// <para type="synopsis">Gets the web part categories selected by the provided input.</para>
@@ -55,119 +55,43 @@ namespace PoshKentico.Cmdlets.Development.WebPart
     [Cmdlet(VerbsCommon.Get, "CMSWebPartCategory", DefaultParameterSetName = NONE)]
     [OutputType(typeof(WebPartCategoryInfo[]))]
     [Alias("gwpc")]
-    public class GetCMSWebPartCategoryCmdlet : MefCmdlet
+    public class GetCMSWebPartCategoryCmdlet : GetCMSWebPartCategoryCmdletBase
     {
-        #region Constants
-
-        private const string CATEGORYNAME = "Category Name";
-        private const string IDSETNAME = "ID";
         private const string PARENTCATEGORY = "Parent Category";
-        private const string PATH = "Path";
-        private const string WEBPART = "Web Part";
-
-        private const string NONE = "None";
-
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// <para type="description">The category name or display name the webpart category.</para>
-        /// </summary>
-        [Parameter(Mandatory = true, Position = 0, ParameterSetName = CATEGORYNAME)]
-        [Alias("DisplayName", "Name")]
-        public string CategoryName { get; set; }
-
-        /// <summary>
-        /// <para type="description">The path to get the web part category at.</para>
-        /// </summary>
-        [Parameter(Mandatory = true, ParameterSetName = PATH)]
-        [Alias("Path")]
-        public string CategoryPath { get; set; }
-
-        /// <summary>
-        /// <para type="description">The IDs of the web part category to retrieve.</para>
-        /// </summary>
-        [Parameter(Mandatory = true, Position = 0, ParameterSetName = IDSETNAME)]
-        public int[] ID { get; set; }
 
         /// <summary>
         /// <para type="description">The webpart category that contains the webpart categories.</para>
         /// </summary>
         [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true, ParameterSetName = PARENTCATEGORY)]
         [Alias("Parent", "ParentCategory")]
-        public IWebPartCategory ParentWebPartCategory { get; set; }
+        public WebPartCategoryInfo ParentWebPartCategory { get; set; }
 
-        /// <summary>
-        /// <para type="description">Indiciates if the cmdlet should look recursively for web part categories.</para>
-        /// </summary>
-        [Parameter(ParameterSetName = CATEGORYNAME)]
-        [Parameter(ParameterSetName = IDSETNAME)]
+        /// <inheritdoc />
         [Parameter(ParameterSetName = PARENTCATEGORY)]
-        [Parameter(ParameterSetName = PATH)]
-        public SwitchParameter Recurse { get; set; }
-
-        /// <summary>
-        /// <para type="description">Indicates if the CategoryName supplied is a regular expression.</para>
-        /// </summary>
-        [Parameter(ParameterSetName = CATEGORYNAME)]
-        [Alias("Regex")]
-        public SwitchParameter RegularExpression { get; set; }
-
-        /// <summary>
-        /// <para type="description">The webpart to get the web part category for.</para>
-        /// </summary>
-        [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = WEBPART)]
-        public WebPartInfo WebPart { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Business layer for this web part. Populated by MEF.
-        /// </summary>
-        [Import]
-        public GetCMSWebPartCategoryBusiness BusinessLayer { get; set; }
-
-        #endregion
-
-        #region Methods
+        public override SwitchParameter Recurse
+        {
+            get => base.Recurse;
+            set => base.Recurse = value;
+        }
 
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
             IEnumerable<IWebPartCategory> categories = null;
 
-            switch (this.ParameterSetName)
+            if (this.ParameterSetName == PARENTCATEGORY)
             {
-                case CATEGORYNAME:
-                    categories = this.BusinessLayer.GetWebPartCategories(this.CategoryName, this.RegularExpression.ToBool(), this.Recurse.ToBool());
-                    break;
-                case IDSETNAME:
-                    categories = this.BusinessLayer.GetWebPartCategories(this.ID, this.Recurse.ToBool());
-                    break;
-                case PARENTCATEGORY:
-                    categories = this.BusinessLayer.GetWebPartCategories(this.ParentWebPartCategory, this.Recurse.ToBool());
-                    break;
-                case PATH:
-                    categories = this.BusinessLayer.GetWebPartCategories(this.CategoryPath, this.Recurse.ToBool());
-                    break;
-                case WEBPART:
-                    categories = new IWebPartCategory[]
-                    {
-                        this.BusinessLayer.GetWebPartCategory(this.WebPart.ActLike<IWebPart>()),
-                    };
-                    break;
+                categories = this.BusinessLayer.GetWebPartCategories(this.ParentWebPartCategory.ActLike<IWebPartCategory>(), this.Recurse.ToBool());
 
-                case NONE:
-                    categories = this.BusinessLayer.GetWebPartCategories();
-                    break;
+                foreach (var category in categories)
+                {
+                    this.ActOnObject(category);
+                }
             }
-
-            foreach (var category in categories)
+            else
             {
-                this.WriteObject(category?.UndoActLike());
+                base.ProcessRecord();
             }
         }
-
-        #endregion
-
     }
 }

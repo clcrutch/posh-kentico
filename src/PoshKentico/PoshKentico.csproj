@@ -486,11 +486,13 @@
     <Compile Include="Cmdlets\Configuration\Sites\StartCmsSiteCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Sites\StopCmsSiteCmdlet.cs" />
     <Compile Include="Cmdlets\Development\WebParts\AddCMSWebPartFieldCmdlet.cs" />
+    <Compile Include="Cmdlets\Development\WebParts\GetCMSWebPartCategoryCmdletBase.cs" />
     <Compile Include="Cmdlets\Development\WebParts\GetCMSWebPartCmdlet.cs" />
     <Compile Include="Cmdlets\Development\WebParts\GetCMSWebPartCategoryCmdlet.cs" />
     <Compile Include="Cmdlets\Development\WebParts\NewCMSWebPartCategoryCmdlet.cs" />
     <Compile Include="Cmdlets\Development\WebParts\NewCMSWebPartCmdlet.cs" />
     <Compile Include="Cmdlets\Development\WebParts\RemoveCMSWebPartCategoryCmdlet.cs" />
+    <Compile Include="Cmdlets\Development\WebParts\RemoveCMSWebPartCmdlet.cs" />
     <Compile Include="Cmdlets\Development\WebParts\SetCMSWebPartCategoryCmdlet.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="MefCmdlet.cs" />

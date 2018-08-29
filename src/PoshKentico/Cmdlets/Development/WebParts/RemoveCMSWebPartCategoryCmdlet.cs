@@ -22,10 +22,9 @@ using CMS.PortalEngine;
 using ImpromptuInterface;
 using PoshKentico.Business.Development.WebParts;
 using PoshKentico.Core.Services.Development.WebParts;
-
 using AliasAttribute = System.Management.Automation.AliasAttribute;
 
-namespace PoshKentico.Cmdlets.Development.WebPart
+namespace PoshKentico.Cmdlets.Development.WebParts
 {
     /// <summary>
     /// <para type="synopsis">Deletes the web part categories selected by the provided input.</para>
@@ -42,60 +41,34 @@ namespace PoshKentico.Cmdlets.Development.WebPart
     /// </example>
     /// <example>
     ///     <para>Delete all webparts with a category name "basic", display name "basic", or path "basic"</para>
-    ///     <code>Remove-CMSWebPartCategory basic -Exact</code>
+    ///     <code>Remove-CMSWebPartCategory basic</code>
     /// </example>
     /// <example>
     ///     <para>Delete all the webparts with the specified IDs.</para>
-    ///     <code>Remove-CMSWebPartCategory -ID 5,304,5</code>
+    ///     <code>Remove-CMSWebPartCategory -ID 5,304,55</code>
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
-    [Cmdlet(VerbsCommon.Remove, "CMSWebPartCategory", SupportsShouldProcess = true, ConfirmImpact = ConfirmImpact.High)]
-    [Alias("rwpc")]
-    public class RemoveCMSWebPartCategoryCmdlet : MefCmdlet
+    [Cmdlet(VerbsCommon.Remove, "CMSWebPartCategory", SupportsShouldProcess = true, ConfirmImpact = ConfirmImpact.High, DefaultParameterSetName = NONE)]
+    [Alias("rmwpc")]
+    public class RemoveCMSWebPartCategoryCmdlet : GetCMSWebPartCategoryCmdletBase
     {
         #region Constants
 
-        private const string CATEGORYNAME = "Category Name";
-        private const string IDSETNAME = "ID";
-        private const string WEBPARTCATEGORY = "Web Part Category";
+        private const string WEBPARTCATEGORY = "WebPartCategory";
 
         #endregion
 
         #region Properties
 
-        /// <summary>
-        /// <para type="description">The category name, display name, or path of the webpart category.</para>
-        /// </summary>
-        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true, ParameterSetName = CATEGORYNAME)]
-        [Alias("DisplayName", "Name", "Path")]
-        public string CategoryName { get; set; }
-
-        /// <summary>
-        /// <para type="description">Indicates if the CategoryName supplied is a regular expression.</para>
-        /// </summary>
-        [Parameter(ParameterSetName = CATEGORYNAME)]
-        [Alias("Regex")]
-        public SwitchParameter RegularExpression { get; set; }
-
-        /// <summary>
-        /// <para type="description">The IDs of the web part category to delete.</para>
-        /// </summary>
-        [Parameter(Mandatory = true, Position = 0, ParameterSetName = IDSETNAME)]
-        public int[] ID { get; set; }
-
-        /// <summary>
-        /// <para type="description">A reference to the WebPart category to delete.</para>
-        /// </summary>
-        [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0, ParameterSetName = WEBPARTCATEGORY)]
-        [Alias("Category")]
+        [Parameter(ValueFromPipeline = true, Mandatory = true, ParameterSetName = WEBPARTCATEGORY)]
         public WebPartCategoryInfo WebPartCategory { get; set; }
 
         /// <summary>
         ///  Gets or sets the Business Layer for this web part.  Populated by MEF.
         /// </summary>
         [Import]
-        public RemoveCMSWebPartCategoryBusiness BusinessLayer { get; set; }
+        public RemoveCMSWebPartCategoryBusiness RemoveBusinessLayer { get; set; }
 
         #endregion
 
@@ -104,17 +77,26 @@ namespace PoshKentico.Cmdlets.Development.WebPart
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
-            switch (this.ParameterSetName)
+            if (this.ParameterSetName == WEBPARTCATEGORY)
             {
-                case CATEGORYNAME:
-                    this.BusinessLayer.RemoveWebPartCategories(this.CategoryName, this.RegularExpression.ToBool());
-                    break;
-                case IDSETNAME:
-                    this.BusinessLayer.RemoveWebPartCategories(this.ID);
-                    break;
-                case WEBPARTCATEGORY:
-                    this.BusinessLayer.RemoveWebPartCategory(this.WebPartCategory.ActLike<IWebPartCategory>());
-                    break;
+                this.ActOnObject(this.WebPartCategory.ActLike<IWebPartCategory>());
+            }
+            else
+            {
+                base.ProcessRecord();
+            }
+        }
+
+        protected override void ActOnObject(IWebPartCategory webPartCategory)
+        {
+            if (webPartCategory == null)
+            {
+                return;
+            }
+
+            if (this.ShouldProcess(webPartCategory.CategoryDisplayName, "Remove the web part category from Kentico."))
+            {
+                this.RemoveBusinessLayer.RemoveWebPartCategory(webPartCategory);
             }
         }
 

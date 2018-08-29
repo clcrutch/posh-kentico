@@ -104,6 +104,10 @@ namespace PoshKentico.Core.Providers.Development.WebParts
             WebPartCategoryInfoProvider.DeleteCategoryInfo(webPartCategory.CategoryID);
 
         /// <inheritdoc />
+        public void Delete(IWebPart webPart) =>
+            WebPartInfoProvider.DeleteWebPartInfo(webPart.WebPartID);
+
+        /// <inheritdoc />
         public IEnumerable<IWebPartCategory> GetWebPartCategories(IWebPartCategory parentWebPartCategory) =>
             (from c in this.WebPartCategories
              where c.CategoryParentID == parentWebPartCategory.CategoryID

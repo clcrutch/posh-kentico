@@ -69,6 +69,12 @@ namespace PoshKentico.Core.Services.Development.WebParts
         void Delete(IWebPartCategory webPartCategory);
 
         /// <summary>
+        /// Deletes the specified <see cref="IWebPart"/>.
+        /// </summary>
+        /// <param name="webPart">The <see cref="IWebPart"/> to delete.</param>
+        void Delete(IWebPart webPart);
+
+        /// <summary>
         /// Gets a list of <see cref="IWebPartCategory"/> that have <paramref name="parentWebPartCategory"/> as the parent.
         /// </summary>
         /// <param name="parentWebPartCategory">The parent <see cref="IWebPartCategory"/> to the desired web part categories.</param>

@@ -25,7 +25,7 @@ using PoshKentico.Core.Services.Development.WebParts;
 
 using AliasAttribute = System.Management.Automation.AliasAttribute;
 
-namespace PoshKentico.Cmdlets.Development.WebPart
+namespace PoshKentico.Cmdlets.Development.WebParts
 {
     /// <summary>
     /// <para type="synopsis">Sets a web part category.</para>
