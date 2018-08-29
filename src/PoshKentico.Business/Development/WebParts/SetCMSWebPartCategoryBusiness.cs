@@ -17,7 +17,6 @@
 
 using System.ComponentModel.Composition;
 using PoshKentico.Core.Services.Development.WebParts;
-using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.Business.Development.WebParts
 {

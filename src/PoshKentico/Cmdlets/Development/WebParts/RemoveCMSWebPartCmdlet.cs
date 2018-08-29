@@ -48,10 +48,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
                 return;
             }
 
-            if (this.ShouldProcess(webPart.WebPartName, "Remove the web part from Kentico."))
-            {
-                this.RemoveBusinessLayer.RemoveWebPart(webPart);
-            }
+            this.RemoveBusinessLayer.RemoveWebPart(webPart);
         }
     }
 }

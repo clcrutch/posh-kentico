@@ -15,7 +15,9 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System;
 using System.ComponentModel.Composition;
+using System.Linq;
 using PoshKentico.Core.Services.Development.WebParts;
 
 namespace PoshKentico.Business.Development.WebParts
@@ -33,9 +35,47 @@ namespace PoshKentico.Business.Development.WebParts
         /// Deletes the specified <see cref="IWebPartCategory"/>.
         /// </summary>
         /// <param name="webPartCategory">The webpart category to delete.</param>
-        public void RemoveWebPartCategory(IWebPartCategory webPartCategory)
+        public void RemoveWebPartCategory(IWebPartCategory webPartCategory, bool recurse)
         {
-            this.WebPartService.Delete(webPartCategory);
+            var webParts = this.WebPartService.GetWebParts(webPartCategory);
+            if (webParts.Any())
+            {
+                if (recurse)
+                {
+                    foreach (var webpart in webParts)
+                    {
+                        if (this.ShouldProcess(webpart.WebPartDisplayName, "Remove the web part from Kentico."))
+                        {
+                            this.WebPartService.Delete(webpart);
+                        }
+                    }
+                }
+                else
+                {
+                    throw new Exception($"Web Part Category {webPartCategory.CategoryDisplayName} has Web Parts associated.  Failed to delete.");
+                }
+            }
+
+            var webPartCategories = this.WebPartService.GetWebPartCategories(webPartCategory);
+            if (webPartCategories.Any())
+            {
+                if (recurse)
+                {
+                    foreach (var category in webPartCategories)
+                    {
+                        this.RemoveWebPartCategory(category, recurse);
+                    }
+                }
+                else
+                {
+                    throw new Exception($"Web Part Category {webPartCategory.CategoryDisplayName} has Web Parts Categories associated.  Failed to delete.");
+                }
+            }
+
+            if (this.ShouldProcess(webPartCategory.CategoryDisplayName, "Remove the web part category from Kentico."))
+            {
+                this.WebPartService.Delete(webPartCategory);
+            }
         }
 
         #endregion

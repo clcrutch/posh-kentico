@@ -54,17 +54,17 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         #region Properties
 
         /// <summary>
+        /// <para type="description">Tell the cmdlet to return the web part category.</para>
+        /// </summary>
+        [Parameter(Mandatory = false, ParameterSetName = PASSTHRU)]
+        public SwitchParameter PassThru { get; set; }
+
+        /// <summary>
         /// <para type="description">A reference to the WebPart category to update.</para>
         /// </summary>
         [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0)]
         [Alias("Category")]
         public WebPartCategoryInfo WebPartCategory { get; set; }
-
-        /// <summary>
-        /// <para type="description">Tell the cmdlet to return the newly created web part category.</para>
-        /// </summary>
-        [Parameter(Mandatory = false, ParameterSetName = PASSTHRU)]
-        public SwitchParameter PassThru { get; set; }
 
         /// <summary>
         ///  Gets or sets the Business Layer for this web part.  Populated by MEF.
@@ -83,7 +83,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
 
             if (this.PassThru.ToBool())
             {
-                this.WriteObject(this.WebPartCategory.UndoActLike());
+                this.WriteObject(this.WebPartCategory);
             }
         }
 

@@ -494,6 +494,7 @@
     <Compile Include="Cmdlets\Development\WebParts\RemoveCMSWebPartCategoryCmdlet.cs" />
     <Compile Include="Cmdlets\Development\WebParts\RemoveCMSWebPartCmdlet.cs" />
     <Compile Include="Cmdlets\Development\WebParts\SetCMSWebPartCategoryCmdlet.cs" />
+    <Compile Include="Cmdlets\Development\WebParts\SetCMSWebPartCmdlet.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="MefCmdlet.cs" />
     <Compile Include="GlobalSuppressions.cs" />

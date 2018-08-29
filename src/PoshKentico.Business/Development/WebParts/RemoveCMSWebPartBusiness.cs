@@ -13,7 +13,10 @@ namespace PoshKentico.Business.Development.WebParts
     {
         public void RemoveWebPart(IWebPart webPart)
         {
-            this.WebPartService.Delete(webPart);
+            if (this.ShouldProcess(webPart.WebPartName, "Remove the web part from Kentico."))
+            {
+                this.WebPartService.Delete(webPart);
+            }
         }
     }
 }

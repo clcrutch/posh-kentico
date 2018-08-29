@@ -470,6 +470,7 @@
     <Compile Include="Development\WebParts\NewCMSWebPartCategoryBusiness.cs" />
     <Compile Include="Development\WebParts\RemoveCMSWebPartBusiness.cs" />
     <Compile Include="Development\WebParts\RemoveCMSWebPartCategoryBusiness.cs" />
+    <Compile Include="Development\WebParts\SetCMSWebPartBusiness.cs" />
     <Compile Include="Development\WebParts\SetCMSWebPartCategoryBusiness.cs" />
     <Compile Include="Development\WebParts\ValueAttribute.cs" />
     <Compile Include="Development\WebParts\WebPartBusinessBase.cs" />
