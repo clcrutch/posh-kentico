@@ -28,9 +28,9 @@ namespace PoshKentico.Tests.Configuration.Staging
     {
         private IServer serverMock;
 
-        IEnumerable<IServer> IStagingService.Servers => throw new NotImplementedException();
+        public IEnumerable<IServer> Servers => throw new NotImplementedException();
 
-        IServer IStagingService.Create(IServer newServer)
+        public IServer Create(IServer newServer)
         {
             this.serverMock = newServer;
 
@@ -59,22 +59,22 @@ namespace PoshKentico.Tests.Configuration.Staging
             this.serverMock.ServerPassword.Should().Be(expectedServer.ServerPassword);
         }
 
-        void IStagingService.Delete(IServer server)
+        public void Delete(IServer server)
         {
             throw new NotImplementedException();
         }
 
-        IServer IStagingService.GetServer(int id)
+        public IServer GetServer(int id)
         {
             throw new NotImplementedException();
         }
 
-        IServer IStagingService.GetServer(string serverName, int serverServerId)
+        public IServer GetServer(string serverName, int serverServerId)
         {
             throw new NotImplementedException();
         }
 
-        void IStagingService.Update(IServer server)
+        public IServer Update(IServer server, bool isReplace = true)
         {
             throw new NotImplementedException();
         }

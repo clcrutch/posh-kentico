@@ -28,6 +28,7 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
 {
     /// <summary>
     /// <para type="synopsis">Synchronize the staging tasks that target the given server.</para>
+    /// <para type="description">Synchronize the staging tasks that target the given server.</para>
     /// <example>
     ///     <para>Given an existing server and synchronize all related staging tasks.</para>
     ///     <code>Sync-CMSStagingTask -Server $server</code>

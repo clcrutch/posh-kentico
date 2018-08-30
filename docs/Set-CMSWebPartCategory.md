@@ -75,7 +75,6 @@ A reference to the WebPart category to update.
 ## OUTPUTS
 
 ### CMS.PortalEngine.WebPartCategoryInfo
-
 ## NOTES
 
 ## RELATED LINKS

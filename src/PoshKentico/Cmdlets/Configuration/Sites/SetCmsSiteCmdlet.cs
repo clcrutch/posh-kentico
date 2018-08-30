@@ -45,13 +45,12 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Set, "CMSSite")]
-    [OutputType(typeof(SiteInfo), ParameterSetName = new string[] { PASSTHRU })]
+    [OutputType(typeof(SiteInfo))]
     [Alias("ssite")]
     public class SetCmsSiteCmdlet : MefCmdlet
     {
         #region Constants
 
-        private const string PASSTHRU = "PassThru";
         private const string OBJECTSET = "Object";
         private const string PROPERTYSET = "Property";
 
@@ -95,7 +94,8 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         /// <summary>
         /// <para type="description">Tell the cmdlet to return the site to update.</para>
         /// </summary>
-        [Parameter(Mandatory = false, ParameterSetName = PASSTHRU)]
+        [Parameter(Mandatory = false, ParameterSetName = OBJECTSET)]
+        [Parameter(Mandatory = false, ParameterSetName = PROPERTYSET)]
         public SwitchParameter PassThru { get; set; }
 
         /// <summary>
@@ -111,19 +111,21 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
+            ISite updatedSite = null;
+
             switch (this.ParameterSetName)
             {
                 case OBJECTSET:
-                    this.BusinessLayer.Set(this.SiteToSet.ActLike<ISite>());
+                    updatedSite = this.BusinessLayer.Set(this.SiteToSet.ActLike<ISite>());
                     break;
                 case PROPERTYSET:
-                    this.BusinessLayer.Set(this.DisplayName, this.SiteName, this.Status, this.DomainName);
+                    updatedSite = this.BusinessLayer.Set(this.DisplayName, this.SiteName, this.Status, this.DomainName);
                     break;
             }
 
             if (this.PassThru.ToBool())
             {
-                this.WriteObject(this.SiteToSet);
+                this.WriteObject(updatedSite.UndoActLike());
             }
         }
 
