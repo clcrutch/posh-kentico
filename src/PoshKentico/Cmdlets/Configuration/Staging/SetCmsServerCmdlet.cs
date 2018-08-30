@@ -46,13 +46,12 @@ namespace PoshKentico.Cmdlets.Configuration.Servers
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Set, "CMSServer")]
-    [OutputType(typeof(ServerInfo), ParameterSetName = new string[] { PASSTHRU })]
+    [OutputType(typeof(ServerInfo))]
     [Alias("sserver")]
     public class SetCmsServerCmdlet : MefCmdlet
     {
         #region Constants
 
-        private const string PASSTHRU = "PassThru";
         private const string OBJECTSET = "Object";
         private const string PROPERTYSET = "Property";
 
@@ -120,7 +119,8 @@ namespace PoshKentico.Cmdlets.Configuration.Servers
         /// <summary>
         /// <para type="description">Tell the cmdlet to return the server to update.</para>
         /// </summary>
-        [Parameter(Mandatory = false, ParameterSetName = PASSTHRU)]
+        [Parameter(Mandatory = false, ParameterSetName = OBJECTSET)]
+        [Parameter(Mandatory = false, ParameterSetName = PROPERTYSET)]
         public SwitchParameter PassThru { get; set; }
 
         /// <summary>
@@ -136,19 +136,20 @@ namespace PoshKentico.Cmdlets.Configuration.Servers
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
+            IServer updatedServer = null;
             switch (this.ParameterSetName)
             {
                 case OBJECTSET:
-                    this.BusinessLayer.Set(this.ServerToSet.ActLike<IServer>());
+                    updatedServer = this.BusinessLayer.Set(this.ServerToSet.ActLike<IServer>());
                     break;
                 case PROPERTYSET:
-                    this.BusinessLayer.Set(this.ServerName, this.SiteID, this.DisplayName, this.URL, this.Authentication, this.Enabled, this.UserName, this.Password);
+                    updatedServer = this.BusinessLayer.Set(this.ServerName, this.SiteID, this.DisplayName, this.URL, this.Authentication, this.Enabled, this.UserName, this.Password);
                     break;
             }
 
             if (this.PassThru.ToBool())
             {
-                this.WriteObject(this.ServerToSet);
+                this.WriteObject(updatedServer.UndoActLike());
             }
         }
 

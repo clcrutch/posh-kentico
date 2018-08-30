@@ -47,7 +47,7 @@ namespace PoshKentico.Tests.Configuration.Staging
 
             businessLayer.Set(serverMock1.Object);
 
-            serverServiceMock.Verify(x => x.Update(serverMock1.Object));
+            serverServiceMock.Verify(x => x.Update(serverMock1.Object, true));
         }
 
         [TestCase]
@@ -88,12 +88,12 @@ namespace PoshKentico.Tests.Configuration.Staging
 
             serverServiceMock.Verify(x => x.Update(
                 It.Is<IServer>(i => i.ServerDisplayName == "My Modified Server2"
-                && i.ServerAuthentication == ServerAuthenticationEnum.UserName && i.ServerURL == "localhost")));
+                && i.ServerAuthentication == ServerAuthenticationEnum.UserName && i.ServerURL == "localhost"), false));
 
             businessLayer.Set("myserver2", 12, "My Modified Server2", null, ServerAuthenticationEnum.UserName, true, "admin", "password");
 
             serverServiceMock.Verify(x => x.Update(
-                It.Is<IServer>(i => i.ServerUsername == "admin" && i.ServerPassword == "password")));
+                It.Is<IServer>(i => i.ServerUsername == "admin" && i.ServerPassword == "password"), false));
         }
     }
 }

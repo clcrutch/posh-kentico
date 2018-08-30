@@ -52,13 +52,12 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.New, "CMSServer")]
-    [OutputType(typeof(ServerInfo), ParameterSetName = new string[] { PASSTHRU })]
+    [OutputType(typeof(ServerInfo))]
     [Alias("nserver")]
     public class NewCmsServerCmdlet : MefCmdlet
     {
         #region Constants
 
-        private const string PASSTHRU = "PassThru";
         private const string OBJECTSET = "Object";
         private const string PROPERTYSET = "Property";
 
@@ -132,7 +131,8 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
         /// <summary>
         /// <para type="description">Tell the cmdlet to return the newly created server.</para>
         /// </summary>
-        [Parameter(Mandatory = false, ParameterSetName = PASSTHRU)]
+        [Parameter(Mandatory = false, ParameterSetName = OBJECTSET)]
+        [Parameter(Mandatory = false, ParameterSetName = PROPERTYSET)]
         public SwitchParameter PassThru { get; set; }
 
         /// <summary>

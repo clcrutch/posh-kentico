@@ -10,6 +10,7 @@ Configuration KenticoTest
 	Import-DscResource -Name xWebPart
 	Import-DscResource -Name xSite
 	Import-DscResource -Name xServer
+	Import-DscResource -Name xSettingValue
 
 	Node localhost
 	{
@@ -41,6 +42,13 @@ Configuration KenticoTest
 			ServerUsername = "admin"
 			ServerPassword = "pass"
 			Ensure = "Present"
+		}
+
+		xSettingValue TestSettingValue
+		{
+			Key = "CMSSchedulerTasksEnabled"
+			Value = "60"
+			SiteName = "Kenticotest"
 		}
 	}
 }

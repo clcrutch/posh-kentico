@@ -62,7 +62,9 @@ namespace PoshKentico.Core.Services.Configuration.Staging
         /// Updates the <see cref="IServer"/>.
         /// </summary>
         /// <param name="server">The <see cref="IServer"/> to update.</param>
-        void Update(IServer server);
+        /// <param name="isReplace">to indicate if replace the complete object or update only the properties</param>
+        /// <returns>The updated server.</returns>
+        IServer Update(IServer server, bool isReplace = true);
 
         /// <summary>
         /// Deletes the specified <see cref="IServer"/>.

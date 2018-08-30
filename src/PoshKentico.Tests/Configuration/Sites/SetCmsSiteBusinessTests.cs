@@ -48,7 +48,7 @@ namespace PoshKentico.Tests.Configuration.Sites
 
             businessLayer.Set(siteMock1.Object);
 
-            siteServiceMock.Verify(x => x.Update(siteMock1.Object));
+            siteServiceMock.Verify(x => x.Update(siteMock1.Object, true));
         }
 
         [TestCase]
@@ -83,7 +83,7 @@ namespace PoshKentico.Tests.Configuration.Sites
 
             siteServiceMock.Verify(x => x.Update(
                 It.Is<ISite>(i => i.DisplayName == "My Site3" && i.SiteName == "MySite1"
-                && i.Status == SiteStatusEnum.Running && i.DomainName == "localhost")));
+                && i.Status == SiteStatusEnum.Running && i.DomainName == "localhost"), false));
         }
     }
 }

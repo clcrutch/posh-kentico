@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
+using CMS.Localization;
 using CMS.SiteProvider;
 using ImpromptuInterface;
 using PoshKentico.Business.Configuration.Sites;
@@ -31,7 +32,6 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// <summary>
     /// <para type="synopsis">Gets the cultures of the specified site.</para>
     /// <para type="description">Gets the cultures of the specified site based off of the provided input.</para>
-    /// <para type="description">This cmdlet returns the list of cultures when the -PassThru switch is used.</para>
     /// <example>
     ///     <para>Gets the cultures of a site specifying the site name "basic".</para>
     ///     <code>Get-CMSSiteCulture -SiteName "basic" </code>
@@ -43,6 +43,7 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSSiteCulture")]
+    [OutputType(typeof(CultureInfo[]))]
     [Alias("gscul")]
     public class GetCmsSiteCultureCmdlet : MefCmdlet
     {

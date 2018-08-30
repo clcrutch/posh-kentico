@@ -473,6 +473,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cmdlets\Configuration\Settings\GetCmsSettingValueCmdlet.cs" />
+    <Compile Include="Cmdlets\Configuration\Settings\GetCmsWebConfigValueCmdlet.cs" />
+    <Compile Include="Cmdlets\Configuration\Settings\SetCmsSettingValueCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Sites\AddCmsSiteCultureCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Sites\AddCmsSiteDomainAliasCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Sites\GetCmsSiteCmdlet.cs" />
@@ -521,6 +524,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="DSCResources\xServer\xServer.schema.mof">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="DSCResources\xSettingValue\xSettingValue.psm1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="DSCResources\xSettingValue\xSettingValue.schema.mof">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="DSCResources\xSite\xSite.psm1">

@@ -27,6 +27,7 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
 {
     /// <summary>
     /// <para type="synopsis">Sets a new role without logging any staging tasks.</para>
+    /// <para type="description">Sets a new role without logging any staging tasks.</para>
     /// <example>
     ///     <para>Sets a new role without logging any staging tasks.</para>
     ///     <code>Set-CMSRoleNoLog -Role $role</code>
@@ -36,7 +37,7 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
     ///     <code>$role | Set-CMSRoleNoLog</code>
     /// </example>
     /// <example>
-    ///     <para>Set a new role without logging any staging tasks..</para>
+    ///     <para>Set a new role without logging any staging tasks.</para>
     ///     <code>Set-CMSRoleNoLog -RoleDisplayName "Role Display Name" -RoleName "Role Name" -SiteID "Site Id"</code>
     /// </example>
     /// </summary>
@@ -82,7 +83,8 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
         /// <summary>
         /// <para type="description">Tell the cmdlet to return the role to set.</para>
         /// </summary>
-        [Parameter(Mandatory = false, ParameterSetName = PASSTHRU)]
+        [Parameter(Mandatory = false, ParameterSetName = OBJECTSET)]
+        [Parameter(Mandatory = false, ParameterSetName = PROPERTYSET)]
         public SwitchParameter PassThru { get; set; }
 
         /// <summary>
@@ -105,6 +107,12 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
                     break;
                 case PROPERTYSET:
                     this.BusinessLayer.SetNoLogRole(this.DisplayName, this.RoleName, this.SiteID);
+                    this.RoleToSet = new RoleInfo
+                    {
+                        RoleDisplayName = this.DisplayName,
+                        RoleName = this.RoleName,
+                        SiteID = this.SiteID,
+                    };
                     break;
             }
 

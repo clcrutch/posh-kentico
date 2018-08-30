@@ -67,7 +67,9 @@ namespace PoshKentico.Core.Services.Configuration.Sites
         /// Updates the <see cref="ISite"/>.
         /// </summary>
         /// <param name="site">The <see cref="ISite"/> to update.</param>
-        void Update(ISite site);
+        /// <param name="isReplace">to indicate if replace the complete object or update only the properties</param>
+        /// <returns>the updated site</returns>
+        ISite Update(ISite site, bool isReplace = true);
 
         /// <summary>
         /// Starts the specified <see cref="ISite"/>.

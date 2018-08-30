@@ -27,7 +27,8 @@ using AliasAttribute = System.Management.Automation.AliasAttribute;
 namespace PoshKentico.Cmdlets.Configuration.Staging
 {
     /// <summary>
-    /// <para type="synopsis">Removehronize the staging tasks that target the given server.</para>
+    /// <para type="synopsis">Remove the staging tasks that target the given server.</para>
+    /// <para type="description">Removes the staging tasks that target the given server.</para>
     /// <example>
     ///     <para>Given an existing server and synchronize all related staging tasks.</para>
     ///     <code>Remove-CMSStagingTask -Server $server</code>
