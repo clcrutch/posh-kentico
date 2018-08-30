@@ -118,7 +118,6 @@ The category name, display name, or path of the webpart category.
 ## OUTPUTS
 
 ### CMS.PortalEngine.WebPartCategoryInfo
-
 ## NOTES
 
 ## RELATED LINKS

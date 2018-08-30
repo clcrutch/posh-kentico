@@ -107,7 +107,6 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## OUTPUTS
 
 ### CMS.PortalEngine.WebPartCategoryInfo
-
 ## NOTES
 
 ## RELATED LINKS
