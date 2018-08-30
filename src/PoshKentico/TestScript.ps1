@@ -34,7 +34,7 @@ Configuration KenticoTest
 		xServer TestServer
 		{
 			ServerName = "Kenticotest"
-			ServerSiteID = "2"
+			ServerSiteName = "Kenticotest"
 			ServerURL = "http://dappcluster:743"
 			ServerDisplayName = "KenticoTest"
 			ServerAuthentication = "UserName"
