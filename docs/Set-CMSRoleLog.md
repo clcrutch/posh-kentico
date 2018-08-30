@@ -152,6 +152,7 @@ A reference to the role to set.
 ## OUTPUTS
 
 ### CMS.Membership.RoleInfo
+
 ## NOTES
 
 ## RELATED LINKS
