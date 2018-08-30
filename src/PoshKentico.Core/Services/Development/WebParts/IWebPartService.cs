@@ -108,6 +108,8 @@ namespace PoshKentico.Core.Services.Development.WebParts
         /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> to update.</param>
         void Update(IWebPartCategory webPartCategory);
 
+        void RemoveField(IWebPartField field, IWebPart webPart);
+
         /// <summary>
         /// Updates the <see cref="IWebPart"/>.
         /// </summary>

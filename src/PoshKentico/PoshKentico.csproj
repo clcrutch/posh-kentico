@@ -494,6 +494,7 @@
     <Compile Include="Cmdlets\Development\WebParts\NewCMSWebPartCmdlet.cs" />
     <Compile Include="Cmdlets\Development\WebParts\RemoveCMSWebPartCategoryCmdlet.cs" />
     <Compile Include="Cmdlets\Development\WebParts\RemoveCMSWebPartCmdlet.cs" />
+    <Compile Include="Cmdlets\Development\WebParts\RemoveCMSWebPartFieldCmdlet.cs" />
     <Compile Include="Cmdlets\Development\WebParts\SetCMSWebPartCategoryCmdlet.cs" />
     <Compile Include="Cmdlets\Development\WebParts\SetCMSWebPartCmdlet.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
@@ -555,7 +556,9 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.0-beta004\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.0-beta004\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="DSCResources\xWebPartField\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PoshKentico.Business\PoshKentico.Business.csproj">
       <Project>{d065289d-5e97-4ab4-b395-6a9f43cc3e5f}</Project>

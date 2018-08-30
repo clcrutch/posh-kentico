@@ -18,6 +18,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using Castle.DynamicProxy;
 using CMS.FormEngine;
 using CMS.PortalEngine;
 using ImpromptuInterface;
@@ -31,6 +32,12 @@ namespace PoshKentico.Core.Providers.Development.WebParts
     [Export(typeof(IWebPartService))]
     public class KenticoWebPartService : IWebPartService
     {
+        #region Fields
+
+        private readonly ProxyGenerator proxyGenerator = new ProxyGenerator();
+
+        #endregion
+
         #region Properties
 
         /// <inheritdoc />
@@ -64,7 +71,7 @@ namespace PoshKentico.Core.Providers.Development.WebParts
 
             this.SaveFormUpdates(webPart);
 
-            return fieldInfo.ActLike<IWebPartField>();
+            return this.AppendWebPart(fieldInfo, webPart).ActLike<IWebPartField>();
         }
 
         /// <inheritdoc />
@@ -121,13 +128,23 @@ namespace PoshKentico.Core.Providers.Development.WebParts
         /// <inheritdoc />
         public IEnumerable<IWebPartField> GetWebPartFields(IWebPart webPart)
             => (from f in new FormInfo(webPart.WebPartProperties).GetFields<FormFieldInfo>()
-                select f.ActLike<IWebPartField>()).ToArray();
+                select this.AppendWebPart(f, webPart).ActLike<IWebPartField>()).ToArray();
 
         /// <inheritdoc />
         public IEnumerable<IWebPart> GetWebParts(IWebPartCategory webPartCategory) =>
             (from wp in this.WebParts
              where wp.WebPartCategoryID == webPartCategory.CategoryID
              select wp).ToArray();
+
+        public void RemoveField(IWebPartField field, IWebPart webPart)
+        {
+            var formInfo = new FormInfo(webPart.WebPartProperties);
+            formInfo.RemoveFields(x => x.Name == field.Name);
+
+            webPart.WebPartProperties = formInfo.GetXmlDefinition();
+
+            this.SaveFormUpdates(webPart);
+        }
 
         /// <inheritdoc />
         public void Update(IWebPartCategory webPartCategory)
@@ -164,6 +181,13 @@ namespace PoshKentico.Core.Providers.Development.WebParts
             webPartInfo.WebPartProperties = webPart.WebPartProperties;
 
             WebPartInfoProvider.SetWebPartInfo(webPartInfo);
+        }
+
+        private FormFieldInfo AppendWebPart(FormFieldInfo formFieldInfo, IWebPart webPart)
+        {
+            var options = new ProxyGenerationOptions();
+
+            return this.proxyGenerator.CreateClassProxyWithTarget(formFieldInfo, options);
         }
 
         private void SaveFormUpdates(IWebPart webPart)

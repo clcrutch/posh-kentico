@@ -32,6 +32,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     /// <para type="synopsis">Adds a field to a web part.</para>
     /// <para type="description">Adds a field to the web part and then immediately saves the additional field in Kentico.</para>
     /// <para type="description">This cmdlet returns the newly created web part field when the -PassThru switch is used.</para>
+    /// <para type="description">This command automatically initializes the connection to Kentico if not already initialized.</para>
     /// <example>
     ///     <para>Add field to web part.</para>
     ///     <code>$webPart | Add-CMSWebPartField -DataType Text -Name TestProp -required -size 150 -defaultvalue TestValue</code>

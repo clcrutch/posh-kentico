@@ -30,7 +30,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
 {
     /// <summary>
     /// <para type="synopsis">Gets the web parts selected by the provided input.</para>
-    /// <para type="description">Gets the web parts selected b y the provided input.</para>
+    /// <para type="description">Gets the web parts selected by the provided input.</para>
     /// <para type="description">This command automatically initializes the connection to Kentico if not already initialized.</para>
     /// <para type="description"></para>
     /// <para type="description">Without parameters, this command returns all webparts.</para>

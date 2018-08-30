@@ -49,7 +49,7 @@ namespace PoshKentico.Business.Development.WebParts
                 AllowEmpty = !addFieldParameter.Required,
                 Caption = addFieldParameter.Caption,
                 DataType = dataType,
-                DefaultValue = addFieldParameter.DefaultValue.ToString(),
+                DefaultValue = addFieldParameter.DefaultValue?.ToString(),
                 Name = addFieldParameter.Name,
                 Size = addFieldParameter.Size,
             };
