@@ -51,6 +51,9 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     ///     <code>Get-CMSWebPartCategory -ID 5,304,5</code>
     /// </example>
     /// </summary>
+    /// 
+
+
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSWebPartCategory", DefaultParameterSetName = NONE)]
     [OutputType(typeof(WebPartCategoryInfo[]))]

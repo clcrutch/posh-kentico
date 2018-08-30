@@ -34,6 +34,7 @@ namespace PoshKentico.Business.Development.WebParts
         /// Deletes the specified <see cref="IWebPartCategory"/>.  Throws exceptions if there are children.
         /// </summary>
         /// <param name="webPartCategory">The webpart category to delete.</param>
+        /// <param name="recurse">Indicates whether webpart categories and web parts should be removed recursively.</param>
         public void RemoveWebPartCategory(IWebPartCategory webPartCategory, bool recurse)
         {
             var webParts = this.WebPartService.GetWebParts(webPartCategory);

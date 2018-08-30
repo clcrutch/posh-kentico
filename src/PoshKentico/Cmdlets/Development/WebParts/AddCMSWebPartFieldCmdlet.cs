@@ -45,6 +45,9 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     {
         #region Properties
 
+        /// <summary>
+        /// <para type="description">The caption for the new field.</para>
+        /// </summary>
         [Parameter(Position = 2)]
         public string Caption { get; set; }
 

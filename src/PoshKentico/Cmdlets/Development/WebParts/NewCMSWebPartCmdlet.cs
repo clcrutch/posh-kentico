@@ -31,6 +31,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     /// <para type="synopsis">Creates a new web part.</para>
     /// <para type="description">Creates a new web part category based off of the provided input.</para>
     /// <para type="description">This cmdlet returns the newly created web part when the -PassThru switch is used.</para>
+    /// <para type="description">This command automatically initializes the connection to Kentico if not already initialized.</para>
     /// <example>
     ///     <para>Create a new web part implying the display name from the path.</para>
     ///     <code>New-CMSWebPart -Path /TestCategory/TestWebPart -FileName Test.ascx</code>

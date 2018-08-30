@@ -30,7 +30,8 @@ namespace PoshKentico.Cmdlets.Development.WebParts
 {
     /// <summary>
     /// <para type="synopsis">Gets the web parts selected by the provided input.</para>
-    /// <para type="description">Gets the web parts selected b y the provided input.  This command automatically initializes the connection to Kentico if not already initialized.</para>
+    /// <para type="description">Gets the web parts selected b y the provided input.</para>
+    /// <para type="description">This command automatically initializes the connection to Kentico if not already initialized.</para>
     /// <para type="description"></para>
     /// <para type="description">Without parameters, this command returns all webparts.</para>
     /// <para type="description">With parameters, this command returns the webparts that match the criteria.</para>
@@ -63,12 +64,15 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     {
         #region Constants
 
+        /// <summary>
+        /// Represents no parameters.
+        /// </summary>
+        protected const string NONE = "None";
+
         private const string CATEGORY = "Category";
         private const string CATEGORYNAME = "Category Name";
         private const string NAME = "Name";
         private const string PATH = "Path";
-
-        protected const string NONE = "None";
 
         #endregion
 
@@ -153,6 +157,10 @@ namespace PoshKentico.Cmdlets.Development.WebParts
             }
         }
 
+        /// <summary>
+        /// When overridden in a child class, operates on the specified web part.
+        /// </summary>
+        /// <param name="webPart">The web part to operate on.</param>
         protected virtual void ActOnObject(IWebPart webPart)
         {
             this.WriteObject(webPart?.UndoActLike());

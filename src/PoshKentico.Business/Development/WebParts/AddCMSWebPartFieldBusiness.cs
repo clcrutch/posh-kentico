@@ -66,6 +66,9 @@ namespace PoshKentico.Business.Development.WebParts
         /// </summary>
         public struct AddFieldParameter
         {
+            /// <summary>
+            /// Gets or sets the caption for the field.
+            /// </summary>
             public string Caption { get; set; }
 
             /// <summary>

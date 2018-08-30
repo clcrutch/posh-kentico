@@ -27,6 +27,9 @@ namespace PoshKentico.Core.Services.Development.WebParts
         /// </summary>
         bool AllowEmpty { get; }
 
+        /// <summary>
+        /// Gets the caption for the current field.
+        /// </summary>
         string Caption { get; }
 
         /// <summary>

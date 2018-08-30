@@ -28,7 +28,8 @@ namespace PoshKentico.Cmdlets.Development.WebParts
 {
     /// <summary>
     /// <para type="synopsis">Deletes the web part categories selected by the provided input.</para>
-    /// <para type="description">Deletes the web part categories selected by the provided input.  This command automatically initializes the connection to Kentico if not already initialized.</para>
+    /// <para type="description">Deletes the web part categories selected by the provided input.</para>
+    /// <para type="description">This command automatically initializes the connection to Kentico if not already initialized.</para>
     /// <para type="description"></para>
     /// <para type="description">This command deletes the webpart categories that match the criteria.</para>
     /// <example>
@@ -48,6 +49,8 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     ///     <code>Remove-CMSWebPartCategory -ID 5,304,55</code>
     /// </example>
     /// </summary>
+    /// 
+
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Remove, "CMSWebPartCategory", SupportsShouldProcess = true, ConfirmImpact = ConfirmImpact.High, DefaultParameterSetName = NONE)]
     [Alias("rmwpc")]
@@ -61,6 +64,9 @@ namespace PoshKentico.Cmdlets.Development.WebParts
 
         #region Properties
 
+        /// <summary>
+        /// <para type="description">The web part category to remove from the system.</para>
+        /// </summary>
         [Parameter(ValueFromPipeline = true, Mandatory = true, ParameterSetName = WEBPARTCATEGORY)]
         public WebPartCategoryInfo WebPartCategory { get; set; }
 
@@ -87,6 +93,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
             }
         }
 
+        /// <inheritdoc />
         protected override void ActOnObject(IWebPartCategory webPartCategory)
         {
             if (webPartCategory == null)

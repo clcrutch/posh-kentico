@@ -27,8 +27,23 @@ using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.Development.WebParts
 {
+    /// <summary>
+    /// <para type="synopsis">Gets the web part fields selected by the provided input.</para>
+    /// <para type="description">Gets the web part fields selected by the provided input.</para>
+    /// <para type="description">This command automatically initializes the connection to Kentico if not already initialized.</para>
+    /// <example>
+    ///     <para>Gets all the web part fields associated with a web part.</para>
+    ///     <code>$webPart | Get-CMSWebPartField</code>
+    /// </example>
+    /// <example>
+    ///     <para>Gets the web part fields associated with a web part that match the specified name.</para>
+    ///     <code>$webPart | Get-CMSWebPartField -Name Test*</code>
+    /// </example>
+    /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSWebPartField", DefaultParameterSetName = NONAME)]
+    [OutputType(typeof(WebPartInfo[]))]
+    [Alias("gwp")]
     public class GetCMSWebPartFieldCmdlet : MefCmdlet
     {
         #region Constants
@@ -40,6 +55,9 @@ namespace PoshKentico.Cmdlets.Development.WebParts
 
         #region Properties
 
+        /// <summary>
+        /// <para type="description">The name for the field to search for.</para>
+        /// </summary>
         [Parameter(Mandatory = true, Position = 0, ParameterSetName = NAME)]
         [Alias("Caption")]
         public string Name { get; set; }
@@ -51,6 +69,9 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         [Alias("Regex")]
         public SwitchParameter RegularExpression { get; set; }
 
+        /// <summary>
+        /// <para type="description">The web part to get the fields for.</para>
+        /// </summary>
         [Parameter(ValueFromPipeline = true, Mandatory = true, ParameterSetName = NONAME)]
         [Parameter(ValueFromPipeline = true, Mandatory = true, ParameterSetName = NAME)]
         public WebPartInfo WebPart { get; set; }

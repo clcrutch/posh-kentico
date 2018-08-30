@@ -30,13 +30,14 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     /// <summary>
     /// <para type="synopsis">Sets a web part category.</para>
     /// <para type="description">Sets a web part category.</para>
+    /// <para type="description">This command automatically initializes the connection to Kentico if not already initialized.</para>
     /// <example>
     ///     <para>Sets a web part category.</para>
     ///     <code>$webPartCategory | Set-CMSWebPartCategory</code>
     /// </example>
     /// <example>
     ///     <para>Sets a web part category and returns the result.</para>
-    ///     <code>$webPartCategory | Set-CMSWebPartCategory -Passthru</code>
+    ///     <code>$webPartCategory | Set-CMSWebPartCategory -PassThru</code>
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]

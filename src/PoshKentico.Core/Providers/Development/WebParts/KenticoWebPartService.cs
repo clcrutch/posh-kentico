@@ -118,6 +118,7 @@ namespace PoshKentico.Core.Providers.Development.WebParts
         public IWebPartCategory GetWebPartCategory(int id) =>
             (WebPartCategoryInfoProvider.GetWebPartCategoryInfoById(id) as WebPartCategoryInfo)?.ActLike<IWebPartCategory>();
 
+        /// <inheritdoc />
         public IEnumerable<IWebPartField> GetWebPartFields(IWebPart webPart)
             => (from f in new FormInfo(webPart.WebPartProperties).GetFields<FormFieldInfo>()
                 select f.ActLike<IWebPartField>()).ToArray();
