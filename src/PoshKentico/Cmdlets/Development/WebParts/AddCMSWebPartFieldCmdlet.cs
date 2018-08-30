@@ -45,6 +45,9 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     {
         #region Properties
 
+        [Parameter(Position = 2)]
+        public string Caption { get; set; }
+
         /// <summary>
         /// <para type="description">The data type for the new field.</para>
         /// </summary>
@@ -102,6 +105,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         protected override void ProcessRecord()
         {
             var addFieldParameter = default(AddCMSWebPartFieldBusiness.AddFieldParameter);
+            addFieldParameter.Caption = this.Caption;
             addFieldParameter.ColumnType = this.DataType;
             addFieldParameter.DefaultValue = this.DefaultValue;
             addFieldParameter.Name = this.Name;

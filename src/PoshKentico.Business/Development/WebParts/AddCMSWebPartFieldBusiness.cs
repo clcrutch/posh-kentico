@@ -47,6 +47,7 @@ namespace PoshKentico.Business.Development.WebParts
             var field = new Field
             {
                 AllowEmpty = !addFieldParameter.Required,
+                Caption = addFieldParameter.Caption,
                 DataType = dataType,
                 DefaultValue = addFieldParameter.DefaultValue.ToString(),
                 Name = addFieldParameter.Name,
@@ -65,6 +66,8 @@ namespace PoshKentico.Business.Development.WebParts
         /// </summary>
         public struct AddFieldParameter
         {
+            public string Caption { get; set; }
+
             /// <summary>
             /// Gets or sets the column type for the field.
             /// </summary>
@@ -94,6 +97,8 @@ namespace PoshKentico.Business.Development.WebParts
         private class Field : IWebPartField
         {
             public bool AllowEmpty { get; set; }
+
+            public string Caption { get; set; }
 
             public string DataType { get; set; }
 

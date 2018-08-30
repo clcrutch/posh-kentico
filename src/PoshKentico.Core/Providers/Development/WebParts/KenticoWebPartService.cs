@@ -52,6 +52,7 @@ namespace PoshKentico.Core.Providers.Development.WebParts
             var fieldInfo = new FormFieldInfo
             {
                 AllowEmpty = field.AllowEmpty,
+                Caption = field.Caption,
                 DataType = field.DataType,
                 DefaultValue = field.DefaultValue,
                 Name = field.Name,
