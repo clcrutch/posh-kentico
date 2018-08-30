@@ -464,6 +464,7 @@
     <Compile Include="Services\Configuration\Roles\IRole.cs" />
     <Compile Include="Services\Configuration\Staging\IServer.cs" />
     <Compile Include="Services\Configuration\Staging\IStagingService.cs" />
+    <Compile Include="Services\ContentManagement\MediaLibraries\IMediaLibrary.cs" />
     <Compile Include="Services\Development\IWebPartCategory.cs" />
     <Compile Include="Services\Development\IWebPartService.cs" />
     <Compile Include="Services\General\ICmsApplicationService.cs" />
