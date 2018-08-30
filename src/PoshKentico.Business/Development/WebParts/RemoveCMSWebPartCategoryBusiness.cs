@@ -28,11 +28,10 @@ namespace PoshKentico.Business.Development.WebParts
     [Export(typeof(RemoveCMSWebPartCategoryBusiness))]
     public class RemoveCMSWebPartCategoryBusiness : WebPartBusinessBase
     {
-
         #region Methods
 
         /// <summary>
-        /// Deletes the specified <see cref="IWebPartCategory"/>.
+        /// Deletes the specified <see cref="IWebPartCategory"/>.  Throws exceptions if there are children.
         /// </summary>
         /// <param name="webPartCategory">The webpart category to delete.</param>
         public void RemoveWebPartCategory(IWebPartCategory webPartCategory, bool recurse)

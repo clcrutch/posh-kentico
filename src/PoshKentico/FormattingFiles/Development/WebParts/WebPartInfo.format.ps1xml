@@ -2,41 +2,6 @@
 <Configuration>
   <ViewDefinitions>
     <View>
-      <Name>WebPartCategory</Name>
-      <ViewSelectedBy>
-        <TypeName>CMS.PortalEngine.WebPartCategoryInfo</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Width>25</Width>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Width>25</Width>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Width>25</Width>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>CategoryDisplayName</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>CategoryName</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>CategoryPath</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-
-    <View>
       <Name>WebPart</Name>
       <ViewSelectedBy>
         <TypeName>CMS.PortalEngine.WebPartInfo</TypeName>
@@ -51,7 +16,7 @@
           </TableColumnHeader>
           <TableColumnHeader>
             <Width>25</Width>
-            <Label>Name</Label>
+            <Label>Path</Label>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>

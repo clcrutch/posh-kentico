@@ -88,6 +88,8 @@ namespace PoshKentico.Core.Services.Development.WebParts
         /// <returns>The <see cref="IWebPartCategory"/> which matches the ID, else null.</returns>
         IWebPartCategory GetWebPartCategory(int id);
 
+        IEnumerable<IWebPartField> GetWebPartFields(IWebPart webPart);
+
         /// <summary>
         /// Gets a list of <see cref="IWebPart"/> which have <paramref name="webPartCategory"/> as their parent category.
         /// </summary>

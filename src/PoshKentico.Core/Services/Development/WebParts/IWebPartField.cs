@@ -27,6 +27,8 @@ namespace PoshKentico.Core.Services.Development.WebParts
         /// </summary>
         bool AllowEmpty { get; }
 
+        string Caption { get; }
+
         /// <summary>
         /// Gets the data type for the current field.
         /// </summary>

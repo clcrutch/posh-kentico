@@ -466,6 +466,7 @@
     <Compile Include="Development\WebParts\FieldDataType.cs" />
     <Compile Include="Development\WebParts\GetCMSWebPartBusiness.cs" />
     <Compile Include="Development\WebParts\GetCMSWebPartCategoryBusiness.cs" />
+    <Compile Include="Development\WebParts\GetCMSWebPartFieldBusiness.cs" />
     <Compile Include="Development\WebParts\NewCMSWebPartBusiness.cs" />
     <Compile Include="Development\WebParts\NewCMSWebPartCategoryBusiness.cs" />
     <Compile Include="Development\WebParts\RemoveCMSWebPartBusiness.cs" />
