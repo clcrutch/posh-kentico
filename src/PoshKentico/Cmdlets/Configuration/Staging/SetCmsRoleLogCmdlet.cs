@@ -26,17 +26,18 @@ using PoshKentico.Core.Services.Configuration.Roles;
 namespace PoshKentico.Cmdlets.Configuration.Staging
 {
     /// <summary>
-    /// <para type="synopsis">Sets a new role without logging any staging tasks.</para>
+    /// <para type="synopsis">Set a new role to log staging tasks under specific task groups.</para>
+    /// <para type="description">Set a new role to log staging tasks under specific task groups.</para>
     /// <example>
-    ///     <para>Sets a new role without logging any staging tasks.</para>
+    ///     <para>Set a new role to log staging tasks under specific task groups.</para>
     ///     <code>Set-CMSRoleLog -Role $role -TaskGroupName "Group_Name"</code>
     /// </example>
     /// <example>
-    ///     <para>Set a new role without logging any staging tasks.</para>
+    ///     <para>Set a new role to log staging tasks under specific task groups.</para>
     ///     <code>$role | Set-CMSRoleLog -TaskGroupName "Group_Name"</code>
     /// </example>
     /// <example>
-    ///     <para>Set a new role without logging any staging tasks..</para>
+    ///     <para>Set a new role to log staging tasks under specific task groups.</para>
     ///     <code>Set-CMSRoleLog -RoleDisplayName "Role Display Name" -RoleName "Role Name" -SiteID "Site Id" -TaskGroupName "Group_Name"</code>
     /// </example>
     /// </summary>
@@ -89,7 +90,8 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
         /// <summary>
         /// <para type="description">Tell the cmdlet to return the role to set.</para>
         /// </summary>
-        [Parameter(Mandatory = false, ParameterSetName = PASSTHRU)]
+        [Parameter(Mandatory = false, ParameterSetName = OBJECTSET)]
+        [Parameter(Mandatory = false, ParameterSetName = PROPERTYSET)]
         public SwitchParameter PassThru { get; set; }
 
         /// <summary>
@@ -112,6 +114,12 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
                     break;
                 case PROPERTYSET:
                     this.BusinessLayer.SetLogRole(this.DisplayName, this.RoleName, this.SiteID, this.TaskGroupName);
+                    this.RoleToSet = new RoleInfo
+                    {
+                        RoleDisplayName = this.DisplayName,
+                        RoleName = this.RoleName,
+                        SiteID = this.SiteID,
+                    };
                     break;
             }
 

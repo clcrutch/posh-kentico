@@ -84,23 +84,32 @@ namespace PoshKentico.Core.Providers.Configuration.Staging
         }
 
         /// <inheritdoc/>
-        public void Update(IServer server)
+        public IServer Update(IServer server, bool isReplace = true)
         {
             // Gets the staging server
             ServerInfo updateServer = ServerInfoProvider.GetServerInfo(server.ServerName, server.ServerSiteID);
             if (updateServer != null)
             {
-                // Updates the server properties
-                updateServer.ServerDisplayName = server.ServerDisplayName ?? updateServer.ServerDisplayName;
-                updateServer.ServerURL = server.ServerURL ?? updateServer.ServerURL;
-                updateServer.ServerEnabled = server.ServerEnabled == null ? updateServer.ServerEnabled : (bool)server.ServerEnabled;
-                updateServer.ServerAuthentication = server.ServerAuthentication;
-                updateServer.ServerUsername = server.ServerUsername ?? updateServer.ServerUsername;
-                updateServer.ServerPassword = server.ServerPassword ?? updateServer.ServerPassword;
+                if (isReplace)
+                {
+                    updateServer = server.UndoActLike();
+                }
+                else
+                {
+                    // Updates the server properties
+                    updateServer.ServerDisplayName = server.ServerDisplayName ?? updateServer.ServerDisplayName;
+                    updateServer.ServerURL = server.ServerURL ?? updateServer.ServerURL;
+                    updateServer.ServerEnabled = server.ServerEnabled == null ? updateServer.ServerEnabled : (bool)server.ServerEnabled;
+                    updateServer.ServerAuthentication = server.ServerAuthentication;
+                    updateServer.ServerUsername = server.ServerUsername ?? updateServer.ServerUsername;
+                    updateServer.ServerPassword = server.ServerPassword ?? updateServer.ServerPassword;
+                }
 
                 // Saves the updated server to the database
                 ServerInfoProvider.SetServerInfo(updateServer);
             }
+
+            return updateServer.ActLike<IServer>();
         }
 
         /// <inheritdoc/>

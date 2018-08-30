@@ -84,21 +84,30 @@ namespace PoshKentico.Core.Providers.Configuration.Sites
         }
 
         /// <inheritdoc/>
-        public void Update(ISite site)
+        public ISite Update(ISite site, bool isReplace = true)
         {
             // Gets the site
             SiteInfo updateSite = SiteInfoProvider.GetSiteInfo(site.SiteName);
             if (updateSite != null)
             {
-                // Updates the site properties
-                updateSite.DisplayName = site.DisplayName;
-                updateSite.DomainName = site.DomainName;
-                updateSite.SiteName = site.SiteName;
-                updateSite.Status = site.Status;
+                if (isReplace)
+                {
+                    updateSite = site.UndoActLike();
+                }
+                else
+                {
+                    // Updates the site properties
+                    updateSite.DisplayName = site.DisplayName;
+                    updateSite.DomainName = site.DomainName;
+                    updateSite.SiteName = site.SiteName;
+                    updateSite.Status = site.Status;
+                }
 
                 // Saves the modified site to the database
                 SiteInfoProvider.SetSiteInfo(updateSite);
             }
+
+            return updateSite.ActLike<ISite>();
         }
 
         /// <inheritdoc/>

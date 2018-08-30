@@ -29,7 +29,6 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// <summary>
     /// <para type="synopsis">Removes a domain alias to a specified site.</para>
     /// <para type="description">Removes a domain alias to a specified site based off of the provided input.</para>
-    /// <para type="description">This cmdlet returns the newly modified site when the -PassThru switch is used.</para>
     /// <example>
     ///     <para>Remove a domain alias with alias name "alias" to a specified site specifying the site name "*bas*", display name "*bas*", or a domain name "*bas*".</para>
     ///     <code>Remove-CMSSiteDomainAlias -SiteName "*bas*" -AliasName "alias"</code>
