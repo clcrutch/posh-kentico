@@ -15,6 +15,7 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -186,8 +187,16 @@ namespace PoshKentico.Core.Providers.Development.WebParts
         private FormFieldInfo AppendWebPart(FormFieldInfo formFieldInfo, IWebPart webPart)
         {
             var options = new ProxyGenerationOptions();
+            options.AddMixinInstance(new WebPartHolder
+            {
+                WebPart = webPart,
+            });
 
-            return this.proxyGenerator.CreateClassProxyWithTarget(formFieldInfo, options);
+            var result = this.proxyGenerator.CreateClassProxyWithTarget(formFieldInfo, options);
+
+            ((IWebPartHolder)result).WebPart = webPart;
+
+            return result as FormFieldInfo;
         }
 
         private void SaveFormUpdates(IWebPart webPart)
