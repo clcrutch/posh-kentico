@@ -15,6 +15,7 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System;
 using System.ComponentModel.Composition;
 using System.Linq;
 using PoshKentico.Core.Services.Development.WebParts;
@@ -110,6 +111,11 @@ namespace PoshKentico.Business.Development.WebParts
             public string Name { get; set; }
 
             public int Size { get; set; }
+
+            public IWebPart WebPart
+            {
+                get { throw new NotImplementedException(); }
+            }
         }
 
         #endregion

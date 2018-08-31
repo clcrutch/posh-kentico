@@ -63,6 +63,11 @@ namespace PoshKentico.Business.Development.WebParts
                     select wp).SingleOrDefault();
         }
 
+        public IWebPart GetWebPart(IWebPartField field)
+        {
+            return field.WebPart;
+        }
+
         /// <summary>
         /// Gets a list of all of the <see cref="IWebPart"/>.
         /// </summary>

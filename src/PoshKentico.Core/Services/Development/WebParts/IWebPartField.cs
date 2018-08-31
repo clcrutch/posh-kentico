@@ -51,5 +51,7 @@ namespace PoshKentico.Core.Services.Development.WebParts
         /// Gets the size for the current field.
         /// </summary>
         int Size { get; }
+
+        IWebPart WebPart { get; }
     }
 }

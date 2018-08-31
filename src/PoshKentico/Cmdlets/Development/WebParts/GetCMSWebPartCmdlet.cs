@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
+using CMS.FormEngine;
 using CMS.PortalEngine;
 using ImpromptuInterface;
 using PoshKentico.Business.Development.WebParts;
@@ -71,6 +72,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
 
         private const string CATEGORY = "Category";
         private const string CATEGORYNAME = "Category Name";
+        private const string FIELD = "Field";
         private const string NAME = "Name";
         private const string PATH = "Path";
 
@@ -84,6 +86,10 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         [Parameter(Mandatory = true, ParameterSetName = CATEGORYNAME)]
         [Alias("Category")]
         public string CategoryName { get; set; }
+
+        [Parameter(Mandatory = true, ParameterSetName = FIELD, ValueFromPipeline = true)]
+        [Alias("Property")]
+        public FormFieldInfo Field { get; set; }
 
         /// <summary>
         /// <para type="description">Indicates if the CategoryName or Name supplied is a regular expression.</para>
@@ -135,6 +141,12 @@ namespace PoshKentico.Cmdlets.Development.WebParts
                     break;
                 case CATEGORYNAME:
                     webparts = this.BusinessLayer.GetWebPartsByCategory(this.CategoryName, this.RegularExpression.ToBool());
+                    break;
+                case FIELD:
+                    webparts = new IWebPart[]
+                    {
+                        this.BusinessLayer.GetWebPart(this.Field.ActLike<IWebPartField>()),
+                    };
                     break;
                 case NAME:
                     webparts = this.BusinessLayer.GetWebParts(this.WebPartName, this.RegularExpression.ToBool());
