@@ -1,4 +1,4 @@
-﻿// <copyright file="SetCMSWebPartFieldBusiness.cs" company="Chris Crutchfield">
+﻿// <copyright file="IWebPartHolder.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -15,24 +15,18 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using System.ComponentModel.Composition;
 using PoshKentico.Core.Services.Development.WebParts;
 
-namespace PoshKentico.Business.Development.WebParts
+namespace PoshKentico.Core.Providers.Development.WebParts
 {
     /// <summary>
-    /// Business layer for the Set-CMSWebPartCategory cmdlet.
+    /// Used by Dynamic Proxy to add a place to set a <see cref="IWebPart"/>.
     /// </summary>
-    [Export(typeof(SetCMSWebPartFieldBusiness))]
-    public class SetCMSWebPartFieldBusiness : WebPartBusinessBase
+    internal interface IWebPartHolder
     {
         /// <summary>
-        /// Sets an <see cref="IWebPartField"/> in Kentico associated with an <see cref="IWebPart"/>.
+        /// Gets or sets a <see cref="IWebPart"/> associated with the current object.
         /// </summary>
-        /// <param name="field">The <see cref="IWebPartField"/> to update.</param>
-        public void Set(IWebPartField field)
-        {
-            this.WebPartService.Update(field);
-        }
+        IWebPart WebPart { get; set; }
     }
 }

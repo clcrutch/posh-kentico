@@ -52,6 +52,9 @@ namespace PoshKentico.Core.Services.Development.WebParts
         /// </summary>
         int Size { get; }
 
+        /// <summary>
+        /// Gets or sets the <see cref="IWebPart"/> associated with the <see cref="IWebPartField"/>.
+        /// </summary>
         IWebPart WebPart { get; set; }
     }
 }

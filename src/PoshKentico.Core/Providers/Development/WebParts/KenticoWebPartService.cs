@@ -137,6 +137,7 @@ namespace PoshKentico.Core.Providers.Development.WebParts
              where wp.WebPartCategoryID == webPartCategory.CategoryID
              select wp).ToArray();
 
+        /// <inheritdoc />
         public void RemoveField(IWebPartField field)
         {
             var formInfo = new FormInfo(field.WebPart.WebPartProperties);
@@ -184,6 +185,7 @@ namespace PoshKentico.Core.Providers.Development.WebParts
             WebPartInfoProvider.SetWebPartInfo(webPartInfo);
         }
 
+        /// <inheritdoc />
         public void Update(IWebPartField field)
         {
             var formInfo = new FormInfo(field.WebPart.WebPartProperties);
