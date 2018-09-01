@@ -114,7 +114,8 @@ namespace PoshKentico.Business.Development.WebParts
 
             public IWebPart WebPart
             {
-                get { throw new NotImplementedException(); }
+                get => throw new NotImplementedException();
+                set => throw new NotImplementedException();
             }
         }
 

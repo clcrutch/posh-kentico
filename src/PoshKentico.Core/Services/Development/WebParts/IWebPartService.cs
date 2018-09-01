@@ -102,19 +102,21 @@ namespace PoshKentico.Core.Services.Development.WebParts
         /// <returns>A list of <see cref="IWebPart"/> which are related to <paramref name="webPartCategory"/>.</returns>
         IEnumerable<IWebPart> GetWebParts(IWebPartCategory webPartCategory);
 
+        void RemoveField(IWebPartField field);
+
         /// <summary>
         /// Updates the <see cref="IWebPartCategory"/>.
         /// </summary>
         /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> to update.</param>
         void Update(IWebPartCategory webPartCategory);
 
-        void RemoveField(IWebPartField field, IWebPart webPart);
-
         /// <summary>
         /// Updates the <see cref="IWebPart"/>.
         /// </summary>
         /// <param name="webPart">The <see cref="IWebPart"/> to update.</param>
         void Update(IWebPart webPart);
+
+        void Update(IWebPartField field);
 
         #endregion
 

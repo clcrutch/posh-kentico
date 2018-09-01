@@ -497,6 +497,7 @@
     <Compile Include="Cmdlets\Development\WebParts\RemoveCMSWebPartFieldCmdlet.cs" />
     <Compile Include="Cmdlets\Development\WebParts\SetCMSWebPartCategoryCmdlet.cs" />
     <Compile Include="Cmdlets\Development\WebParts\SetCMSWebPartCmdlet.cs" />
+    <Compile Include="Cmdlets\Development\WebParts\SetCMSWebPartFieldCmdlet.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="MefCmdlet.cs" />
     <Compile Include="GlobalSuppressions.cs" />
@@ -577,10 +578,7 @@
     <Error Condition="!Exists('..\packages\XmlDoc2CmdletDoc.0.2.9\build\XmlDoc2CmdletDoc.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\XmlDoc2CmdletDoc.0.2.9\build\XmlDoc2CmdletDoc.targets'))" />
   </Target>
   <Import Project="..\packages\XmlDoc2CmdletDoc.0.2.9\build\XmlDoc2CmdletDoc.targets" Condition="Exists('..\packages\XmlDoc2CmdletDoc.0.2.9\build\XmlDoc2CmdletDoc.targets')" />
-
-  <UsingTask TaskName="PoshKentico.MSBuild.CMSVirtualTask"
-             AssemblyFile="$(ProjectDir)\..\PoshKentico.MSBuild\bin\$(Configuration)\net46\PoshKentico.MSBuild.dll" />
-  
+  <UsingTask TaskName="PoshKentico.MSBuild.CMSVirtualTask" AssemblyFile="$(ProjectDir)\..\PoshKentico.MSBuild\bin\$(Configuration)\net46\PoshKentico.MSBuild.dll" />
   <Target Name="AfterBuild">
     <CMSVirtualTask TargetDir="$(TargetDir)" />
   </Target>

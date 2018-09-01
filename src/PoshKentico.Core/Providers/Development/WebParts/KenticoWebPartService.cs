@@ -137,14 +137,14 @@ namespace PoshKentico.Core.Providers.Development.WebParts
              where wp.WebPartCategoryID == webPartCategory.CategoryID
              select wp).ToArray();
 
-        public void RemoveField(IWebPartField field, IWebPart webPart)
+        public void RemoveField(IWebPartField field)
         {
-            var formInfo = new FormInfo(webPart.WebPartProperties);
+            var formInfo = new FormInfo(field.WebPart.WebPartProperties);
             formInfo.RemoveFields(x => x.Name == field.Name);
 
-            webPart.WebPartProperties = formInfo.GetXmlDefinition();
+            field.WebPart.WebPartProperties = formInfo.GetXmlDefinition();
 
-            this.SaveFormUpdates(webPart);
+            this.SaveFormUpdates(field.WebPart);
         }
 
         /// <inheritdoc />
@@ -182,6 +182,24 @@ namespace PoshKentico.Core.Providers.Development.WebParts
             webPartInfo.WebPartProperties = webPart.WebPartProperties;
 
             WebPartInfoProvider.SetWebPartInfo(webPartInfo);
+        }
+
+        public void Update(IWebPartField field)
+        {
+            var formInfo = new FormInfo(field.WebPart.WebPartProperties);
+            var fieldInfo = formInfo.GetFormField(field.Name);
+
+            fieldInfo.AllowEmpty = field.AllowEmpty;
+            fieldInfo.Caption = field.Caption;
+            fieldInfo.DataType = field.DataType;
+            fieldInfo.DefaultValue = field.DefaultValue;
+            fieldInfo.Size = field.Size;
+
+            formInfo.UpdateFormField(field.Name, fieldInfo);
+
+            field.WebPart.WebPartProperties = formInfo.GetXmlDefinition();
+
+            this.SaveFormUpdates(field.WebPart);
         }
 
         private FormFieldInfo AppendWebPart(FormFieldInfo formFieldInfo, IWebPart webPart)

@@ -17,6 +17,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
 {
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Remove, "CMSWebPartField", SupportsShouldProcess = true, ConfirmImpact = ConfirmImpact.High)]
+    [Alias("rmwpf")]
     public class RemoveCMSWebPartFieldCmdlet : GetCMSWebPartFieldCmdlet
     {
         private const string FIELD = "Field";
@@ -43,7 +44,12 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         /// <inheritdoc/>
         protected override void ActOnObject(IWebPartField field)
         {
-            this.RemoveBusinessLayer.RemoveField(field, this.WebPart?.ActLike<IWebPart>() ?? field.WebPart);
+            if (this.WebPart != null)
+            {
+                field.WebPart = this.WebPart.ActLike<IWebPart>();
+            }
+
+            this.RemoveBusinessLayer.RemoveField(field);
         }
     }
 }

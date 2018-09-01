@@ -52,6 +52,6 @@ namespace PoshKentico.Core.Services.Development.WebParts
         /// </summary>
         int Size { get; }
 
-        IWebPart WebPart { get; }
+        IWebPart WebPart { get; set; }
     }
 }

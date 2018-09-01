@@ -11,11 +11,11 @@ namespace PoshKentico.Business.Development.WebParts
     [Export(typeof(RemoveCMSWebPartFieldBusiness))]
     public class RemoveCMSWebPartFieldBusiness : WebPartBusinessBase
     {
-        public void RemoveField(IWebPartField field, IWebPart webPart)
+        public void RemoveField(IWebPartField field)
         {
-            if (this.ShouldProcess(field.Name, $"Remove the field from web part named '{webPart.WebPartName}'."))
+            if (this.ShouldProcess(field.Name, $"Remove the field from web part named '{field.WebPart.WebPartName}'."))
             {
-                this.WebPartService.RemoveField(field, webPart);
+                this.WebPartService.RemoveField(field);
             }
         }
     }
