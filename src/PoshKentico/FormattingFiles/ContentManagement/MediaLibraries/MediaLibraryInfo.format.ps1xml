@@ -2,7 +2,7 @@
 <Configuration>
   <ViewDefinitions>
     <View>
-      <Name>Server</Name>
+      <Name>MediaLibraryInfo</Name>
       <ViewSelectedBy>
         <TypeName>CMS.MediaLibrary.MediaLibraryInfo</TypeName>
       </ViewSelectedBy>
