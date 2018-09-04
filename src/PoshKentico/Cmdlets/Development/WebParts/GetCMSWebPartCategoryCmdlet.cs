@@ -60,7 +60,13 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     [Alias("gwpc")]
     public class GetCMSWebPartCategoryCmdlet : GetCMSWebPartCategoryCmdletBase
     {
+        #region Constants
+
         private const string PARENTCATEGORY = "Parent Category";
+
+        #endregion
+
+        #region Properties
 
         /// <summary>
         /// <para type="description">The webpart category that contains the webpart categories.</para>
@@ -76,6 +82,10 @@ namespace PoshKentico.Cmdlets.Development.WebParts
             get => base.Recurse;
             set => base.Recurse = value;
         }
+
+        #endregion
+
+        #region Methods
 
         /// <inheritdoc />
         protected override void ProcessRecord()
@@ -96,5 +106,8 @@ namespace PoshKentico.Cmdlets.Development.WebParts
                 base.ProcessRecord();
             }
         }
+
+        #endregion
+
     }
 }

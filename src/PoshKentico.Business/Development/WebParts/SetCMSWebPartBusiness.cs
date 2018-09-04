@@ -26,6 +26,8 @@ namespace PoshKentico.Business.Development.WebParts
     [Export(typeof(SetCMSWebPartBusiness))]
     public class SetCMSWebPartBusiness : WebPartBusinessBase
     {
+        #region Methods
+
         /// <summary>
         /// Updates the <see cref="IWebPart"/> in the system.
         /// </summary>
@@ -34,5 +36,8 @@ namespace PoshKentico.Business.Development.WebParts
         {
             this.WebPartService.Update(webPart);
         }
+
+        #endregion
+
     }
 }

@@ -63,7 +63,13 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     [Alias("rmwp")]
     public class RemoveCMSWebPartCmdlet : GetCMSWebPartCmdlet
     {
+        #region Constants
+
         private const string WEBPART = "WebPart";
+
+        #endregion
+
+        #region Properties
 
         /// <summary>
         /// <para type="description">The web part to remove from the system.</para>
@@ -76,6 +82,10 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         /// </summary>
         [Import]
         public RemoveCMSWebPartBusiness RemoveBusinessLayer { get; set; }
+
+        #endregion
+
+        #region Methods
 
         /// <inheritdoc />
         protected override void ProcessRecord()
@@ -100,5 +110,8 @@ namespace PoshKentico.Cmdlets.Development.WebParts
 
             this.RemoveBusinessLayer.RemoveWebPart(webPart);
         }
+
+        #endregion
+
     }
 }

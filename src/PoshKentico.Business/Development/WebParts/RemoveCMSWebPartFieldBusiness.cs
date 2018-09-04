@@ -26,6 +26,8 @@ namespace PoshKentico.Business.Development.WebParts
     [Export(typeof(RemoveCMSWebPartFieldBusiness))]
     public class RemoveCMSWebPartFieldBusiness : WebPartBusinessBase
     {
+        #region Methods
+
         /// <summary>
         /// Removes an <see cref="IWebPartField"/> from Kentico.
         /// </summary>
@@ -37,5 +39,8 @@ namespace PoshKentico.Business.Development.WebParts
                 this.WebPartService.RemoveField(field);
             }
         }
+
+        #endregion
+
     }
 }

@@ -29,6 +29,8 @@ namespace PoshKentico.Business.Development.WebParts
     [Export(typeof(GetCMSWebPartFieldBusiness))]
     public class GetCMSWebPartFieldBusiness : WebPartBusinessBase
     {
+        #region Methods
+
         /// <summary>
         /// Gets a list of the <see cref="IWebPartField"/> associated with a <see cref="IWebPart"/>.
         /// </summary>
@@ -64,5 +66,8 @@ namespace PoshKentico.Business.Development.WebParts
 
             return matched.ToArray();
         }
+
+        #endregion
+
     }
 }

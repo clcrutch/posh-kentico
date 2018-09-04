@@ -22,17 +22,6 @@ namespace PoshKentico.Core.Providers.Development.WebParts
     /// <summary>
     /// Used by Dynamic Proxy to add a place to set a <see cref="IWebPart"/>.
     /// </summary>
-    internal interface IWebPartHolder 
-    {
-        /// <summary>
-        /// Gets or sets a <see cref="IWebPart"/> associated with the current object.
-        /// </summary>
-        IWebPart WebPart { get; set; }
-    }
-
-    /// <summary>
-    /// Used by Dynamic Proxy to add a place to set a <see cref="IWebPart"/>.
-    /// </summary>
     internal class WebPartHolder : IWebPartHolder
     {
         /// <inheritdoc />

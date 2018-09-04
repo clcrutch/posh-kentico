@@ -52,6 +52,8 @@ namespace PoshKentico.Cmdlets.Development.WebParts
 
         #endregion
 
+        #region Properties
+
         /// <summary>
         /// <para type="description">Tell the cmdlet to return the web part.</para>
         /// </summary>
@@ -70,6 +72,10 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         [Import]
         public SetCMSWebPartBusiness BusinessLayer { get; set; }
 
+        #endregion
+
+        #region Methods
+
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
@@ -80,5 +86,8 @@ namespace PoshKentico.Cmdlets.Development.WebParts
                 this.WriteObject(this.WebPart);
             }
         }
+
+        #endregion
+
     }
 }

@@ -42,7 +42,7 @@ namespace PoshKentico.Business.Development.WebParts
         #region Methods
 
         /// <summary>
-        /// Gets the web part at the specified path.
+        /// Gets the <see cref="IWebPart"/> at the specified path.
         /// </summary>
         /// <param name="path">The path to look at for the desired web part.</param>
         /// <returns>The webpart found at the desired path.</returns>
@@ -63,6 +63,11 @@ namespace PoshKentico.Business.Development.WebParts
                     select wp).SingleOrDefault();
         }
 
+        /// <summary>
+        /// Gets the <see cref="IWebPart"/> associated with <see cref="IWebPartField"/>.
+        /// </summary>
+        /// <param name="field">The <see cref="IWebPartField"/> associated with the desired <see cref="IWebPart"/>.</param>
+        /// <returns>Returns the <see cref="IWebPart"/> associated with the <see cref="IWebPartField"/>.</returns>
         public IWebPart GetWebPart(IWebPartField field)
         {
             return field.WebPart;

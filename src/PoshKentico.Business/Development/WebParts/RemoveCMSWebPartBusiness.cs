@@ -26,6 +26,8 @@ namespace PoshKentico.Business.Development.WebParts
     [Export(typeof(RemoveCMSWebPartBusiness))]
     public class RemoveCMSWebPartBusiness : WebPartBusinessBase
     {
+        #region Methods
+
         /// <summary>
         /// Removes the supplied <see cref="IWebPart"/> from the system.
         /// </summary>
@@ -37,5 +39,8 @@ namespace PoshKentico.Business.Development.WebParts
                 this.WebPartService.Delete(webPart);
             }
         }
+
+        #endregion
+
     }
 }

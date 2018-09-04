@@ -37,6 +37,8 @@ namespace PoshKentico.Cmdlets.Development.WebParts
 
         #endregion
 
+        #region Properties
+
         /// <summary>
         /// <para type="description">The field to set in Kentico.</para>
         /// </summary>
@@ -56,6 +58,10 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         [Import]
         public SetCMSWebPartFieldBusiness BusinessLayer { get; set; }
 
+        #endregion
+
+        #region Methods
+
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
@@ -66,5 +72,8 @@ namespace PoshKentico.Cmdlets.Development.WebParts
                 this.WriteObject(this.Field);
             }
         }
+
+        #endregion
+
     }
 }

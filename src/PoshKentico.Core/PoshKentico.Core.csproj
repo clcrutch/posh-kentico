@@ -452,6 +452,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\Configuration\Sites\KenticoSiteService.cs" />
+    <Compile Include="Providers\Development\WebParts\IWebPartHolder.cs" />
     <Compile Include="Providers\Development\WebParts\WebPartHolder.cs" />
     <Compile Include="Providers\General\KenticoCmsApplicationService.cs" />
     <Compile Include="Providers\Development\WebParts\KenticoWebPartService.cs" />
