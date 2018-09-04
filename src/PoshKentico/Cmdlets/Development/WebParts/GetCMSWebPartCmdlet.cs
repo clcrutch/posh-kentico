@@ -87,6 +87,9 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         [Alias("Category")]
         public string CategoryName { get; set; }
 
+        /// <summary>
+        /// <para type="description">The field to get the associated web part for.</para>
+        /// </summary>
         [Parameter(Mandatory = true, ParameterSetName = FIELD, ValueFromPipeline = true)]
         [Alias("Property")]
         public FormFieldInfo Field { get; set; }

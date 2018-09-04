@@ -33,24 +33,34 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     /// <para type="description"></para>
     /// <para type="description">This command deletes the webpart categories that match the criteria.</para>
     /// <example>
-    ///     <para>Delete all the webpart categories.</para>
-    ///     <code>Get-CMSWebPartCategory | Remove-CMSWebPartCategory</code>
+    ///     <para>Remove all the webpart categories.</para>
+    ///     <code>Remove-CMSWebPartCategory</code>
     /// </example>
     /// <example>
-    ///     <para>Delete all webparts with a category name "*bas*", display name "*bas*", or a path "bas*".</para>
-    ///     <code>Remove-CMSWebPartCategory bas</code>
+    ///     <para>Remove all web part categories with a category name "*bas*", display name "*bas*".</para>
+    ///     <code>Remove-CMSWebPartCategory *bas*</code>
     /// </example>
     /// <example>
-    ///     <para>Delete all webparts with a category name "basic", display name "basic", or path "basic"</para>
+    ///     <para>Remove all web part categories with a category name "basic", display name "basic"</para>
     ///     <code>Remove-CMSWebPartCategory basic</code>
     /// </example>
     /// <example>
-    ///     <para>Delete all the webparts with the specified IDs.</para>
-    ///     <code>Remove-CMSWebPartCategory -ID 5,304,55</code>
+    ///     <para>Remove all the web part categories with the specified IDs.</para>
+    ///     <code>Remove-CMSWebPartCategory -ID 5,304,5</code>
+    /// </example>
+    /// <example>
+    ///     <para>Remove all the web part categories under the basic category.</para>
+    ///     <code>Remove-CMSWebPartCategory basic -Recurse</code>
+    /// </example>
+    /// <example>
+    ///     <para>Remove the web part category associated with the web part.</para>
+    ///     <code>$webPart | Remove-WebPartCategory</code>
+    /// </example>
+    /// <example>
+    ///     <para>Remove the web part category from Kentico.</para>
+    ///     <code>$webPartCategory | Remove-WebPartCategory</code>
     /// </example>
     /// </summary>
-    /// 
-
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Remove, "CMSWebPartCategory", SupportsShouldProcess = true, ConfirmImpact = ConfirmImpact.High, DefaultParameterSetName = NONE)]
     [Alias("rmwpc")]

@@ -27,6 +27,23 @@ using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.Development.WebParts
 {
+    /// <summary>
+    /// <para type="synopsis">Remove the web part fields selected by the provided input.</para>
+    /// <para type="description">Remove the web part fields selected by the provided input.</para>
+    /// <para type="description">This command automatically initializes the connection to Kentico if not already initialized.</para>
+    /// <example>
+    ///     <para>Remove all the web part fields associated with a web part.</para>
+    ///     <code>$webPart | Remove-CMSWebPartField</code>
+    /// </example>
+    /// <example>
+    ///     <para>Remove the web part fields associated with a web part that match the specified name.</para>
+    ///     <code>$webPart | Remove-CMSWebPartField -Name Test*</code>
+    /// </example>
+    /// <example>
+    ///     <para>Remove the web part field from Kentico.</para>
+    ///     <code>$webPartField | Remove-WebPartField</code>
+    /// </example>
+    /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Remove, "CMSWebPartField", SupportsShouldProcess = true, ConfirmImpact = ConfirmImpact.High)]
     [Alias("rmwpf")]
@@ -40,6 +57,9 @@ namespace PoshKentico.Cmdlets.Development.WebParts
 
         #region Properties
 
+        /// <summary>
+        /// <para type="description">The field to remove from Kentico.</para>
+        /// </summary>
         [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = FIELD)]
         [Alias("Property")]
         public FormFieldInfo Field { get; set; }

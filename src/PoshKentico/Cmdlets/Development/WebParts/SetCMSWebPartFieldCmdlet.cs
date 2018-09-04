@@ -26,6 +26,19 @@ using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.Development.WebParts
 {
+    /// <summary>
+    /// <para type="synopsis">Sets a web part field.</para>
+    /// <para type="description">Sets a web part field.</para>
+    /// <para type="description">This command automatically initializes the connection to Kentico if not already initialized.</para>
+    /// <example>
+    ///     <para>Sets a web part field.</para>
+    ///     <code>$webPartField | Set-CMSWebPartField</code>
+    /// </example>
+    /// <example>
+    ///     <para>Sets a web part field and returns the result.</para>
+    ///     <code>$webPartField | Set-CMSWebPartField -PassThru</code>
+    /// </example>
+    /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Set, "CMSWebPartField")]
     [Alias("swpf")]

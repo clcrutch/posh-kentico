@@ -37,7 +37,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     /// </example>
     /// <example>
     ///     <para>Sets a web part and returns the result.</para>
-    ///     <code>$webPart | Set-CMSWebPart - PassThru</code>
+    ///     <code>$webPart | Set-CMSWebPart -PassThru</code>
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]

@@ -16,12 +16,10 @@
 // </copyright>
 
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 using CMS.PortalEngine;
 using ImpromptuInterface;
-using PoshKentico.Business.Development.WebParts;
 using PoshKentico.Core.Services.Development.WebParts;
 
 using AliasAttribute = System.Management.Automation.AliasAttribute;
@@ -39,21 +37,30 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     ///     <code>Get-CMSWebPartCategory</code>
     /// </example>
     /// <example>
-    ///     <para>Get all webparts with a category name "*bas*", display name "*bas*".</para>
+    ///     <para>Get all web part categories with a category name "*bas*", display name "*bas*".</para>
     ///     <code>Get-CMSWebPartCategory *bas*</code>
     /// </example>
     /// <example>
-    ///     <para>Get all webparts with a category name "basic", display name "basic"</para>
+    ///     <para>Get all web part categories with a category name "basic", display name "basic"</para>
     ///     <code>Get-CMSWebPartCategory basic</code>
     /// </example>
     /// <example>
-    ///     <para>Get all the webparts with the specified IDs.</para>
+    ///     <para>Get all the web part categories with the specified IDs.</para>
     ///     <code>Get-CMSWebPartCategory -ID 5,304,5</code>
     /// </example>
+    /// <example>
+    ///     <para>Get all the web part categories under the basic category.</para>
+    ///     <code>Get-CMSWebPartCategory basic -Recurse</code>
+    /// </example>
+    /// <example>
+    ///     <para>Get the web part category associated with the web part.</para>
+    ///     <code>$webPart | Get-WebPartCategory</code>
+    /// </example>
+    /// <example>
+    ///     <para>Get the web part categories under a parent category.</para>
+    ///     <code>$webPartCategory | Get-WebPartCategory</code>
+    /// </example>
     /// </summary>
-    /// 
-
-
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSWebPartCategory", DefaultParameterSetName = NONE)]
     [OutputType(typeof(WebPartCategoryInfo[]))]
