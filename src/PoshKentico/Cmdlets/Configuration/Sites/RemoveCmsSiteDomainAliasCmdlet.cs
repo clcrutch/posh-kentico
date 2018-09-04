@@ -75,8 +75,7 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         public string SiteName { get; set; }
 
         /// <summary>
-        /// <para type="description">If set, the match is exact,</para>
-        /// <para type="description">else the match performs a contains for site name.</para>
+        /// <para type="description">If set, the match is exact, else the match performs a contains for site name.</para>
         /// </summary>
         [Parameter(ParameterSetName = SITENAMESET)]
         public SwitchParameter Exact { get; set; }

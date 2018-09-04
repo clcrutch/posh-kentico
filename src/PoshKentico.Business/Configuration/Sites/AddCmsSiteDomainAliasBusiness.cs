@@ -44,10 +44,10 @@ namespace PoshKentico.Business.Configuration.Sites
         #region Methods
 
         /// <summary>
-        /// Add a domain alias to a site
+        /// Add a domain alias to a site.
         /// </summary>
-        /// <param name="site">the site to add domain alias to</param>
-        /// <param name="aliasName">the domain alias code for the domain alias to add to the site</param>
+        /// <param name="site">The site to add domain alias to.</param>
+        /// <param name="aliasName">The domain alias code for the domain alias to add to the site.</param>
         public void AddDomainAlias(ISite site, string aliasName)
         {
             this.AddSiteDomainAlias(site, aliasName);
@@ -56,9 +56,9 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <summary>
         /// Adds the domain alias to a <see cref="ISite"/> in the CMS System.
         /// </summary>
-        /// <param name="matchString">the string which to match the site to.</param>
+        /// <param name="matchString">The string which to match the site to.</param>
         /// <param name="exact">A boolean which indicates if the match should be exact.</param>
-        /// <param name="aliasName">the domain alias code for the domain alias to add to the site</param>
+        /// <param name="aliasName">The domain alias code for the domain alias to add to the site.</param>
         public void AddDomainAlias(string matchString, bool exact, string aliasName)
         {
             foreach (var site in this.GetCmsSiteBusiness.GetSites(matchString, exact))
@@ -71,7 +71,7 @@ namespace PoshKentico.Business.Configuration.Sites
         /// Adds the domain alias to a <see cref="ISite"/> in the CMS System.
         /// </summary>
         /// <param name="ids">The IDs of the <see cref="ISite"/> to add domain alias to.</param>
-        /// <param name="aliasName">the domain alias code for the domain alias to add to the site</param>
+        /// <param name="aliasName">The domain alias code for the domain alias to add to the site.</param>
         public void AddDomainAlias(int[] ids, string aliasName)
         {
             foreach (var site in this.GetCmsSiteBusiness.GetSites(ids))
@@ -81,10 +81,10 @@ namespace PoshKentico.Business.Configuration.Sites
         }
 
         /// <summary>
-        /// Add a domain alias to a site
+        /// Add a domain alias to a site.
         /// </summary>
-        /// <param name="site">the site to add domain alias to</param>
-        /// <param name="aliasName">the domain alias code for the domain alias to add to the site</param>
+        /// <param name="site">The site to add domain alias to.</param>
+        /// <param name="aliasName">The domain alias code for the domain alias to add to the site.</param>
         private void AddSiteDomainAlias(ISite site, string aliasName)
         {
             this.SiteService.AddSiteDomainAlias(site, aliasName);

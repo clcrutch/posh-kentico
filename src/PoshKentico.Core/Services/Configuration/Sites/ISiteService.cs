@@ -89,7 +89,7 @@ namespace PoshKentico.Core.Services.Configuration.Sites
         void AddSiteCulture(ISite site, string cultureCode);
 
         /// <summary>
-        /// Removes the culture from the site
+        /// Removes the culture from the site.
         /// </summary>
         /// <param name="site">the <see cref="ISite"/> to remove a culture from. </param>
         /// <param name="cultureCode">the culture code of <see cref="ICulture"/>. </param>
@@ -105,22 +105,22 @@ namespace PoshKentico.Core.Services.Configuration.Sites
         /// <summary>
         /// Adds the domain alias to the site.
         /// </summary>
-        /// <param name="site">the <see cref="ISite"/> to assign a alias to.</param>
-        /// <param name="aliasName">the alias name of domain alias</param>
+        /// <param name="site">The <see cref="ISite"/> to assign a alias to.</param>
+        /// <param name="aliasName">The alias name of domain alias.</param>
         void AddSiteDomainAlias(ISite site, string aliasName);
 
         /// <summary>
         /// Deletes the domain alias for the site.
         /// </summary>
-        /// <param name="site">the <see cref="ISite"/> to delete the alias from.</param>
-        /// <param name="aliasName">the alias name of domain alias</param>
+        /// <param name="site">The <see cref="ISite"/> to delete the alias from.</param>
+        /// <param name="aliasName">The alias name of domain alias.</param>
         void RemoveSiteDomainAlias(ISite site, string aliasName);
 
         /// <summary>
         /// Gets all site domain aliases assigned to the selected site.
         /// </summary>
-        /// <param name="site">the <see cref="ISite"/> to get the aliases from.</param>
-        /// <returns>the list of <see cref="ISiteDomainAlias"/> that the site has.</returns>
+        /// <param name="site">The <see cref="ISite"/> to get the aliases from.</param>
+        /// <returns>The list of <see cref="ISiteDomainAlias"/> that the site has.</returns>
         IEnumerable<ISiteDomainAlias> GetDomainAliases(ISite site);
         #endregion
     }
