@@ -36,7 +36,7 @@ namespace PoshKentico.Core.Configuration.ContentManagement.MediaLibraries
         /// <summary>
         /// Gets a list of all of the <see cref="IMediaLibrary"/> provided by the CMS System.
         /// </summary>
-        public IEnumerable<IMediaLibrary> MediaLibrarys => (from c in MediaLibraryInfoProvider.GetMediaLibraries()
+        public IEnumerable<IMediaLibrary> MediaLibraries => (from c in MediaLibraryInfoProvider.GetMediaLibraries()
                                               select Impromptu.ActLike<IMediaLibrary>(c as MediaLibraryInfo)).ToArray();
 
         #endregion
@@ -70,9 +70,10 @@ namespace PoshKentico.Core.Configuration.ContentManagement.MediaLibraries
         }
 
         /// <inheritdoc/>
-        public IMediaLibrary GetMediaLibrary(string libraryName, string librarySiteName)
+        public IMediaLibrary GetMediaLibrary(int librarySiteID, string libraryName)
         {
-            return (MediaLibraryInfoProvider.GetMediaLibraryInfo(libraryName, librarySiteName) as MediaLibraryInfo)?.ActLike<IMediaLibrary>();
+            string siteName = SiteInfoProvider.GetSiteName(librarySiteID);
+            return (MediaLibraryInfoProvider.GetMediaLibraryInfo(libraryName, siteName) as MediaLibraryInfo)?.ActLike<IMediaLibrary>();
         }
 
         /// <inheritdoc/>
@@ -90,6 +91,8 @@ namespace PoshKentico.Core.Configuration.ContentManagement.MediaLibraries
                 {
                     // Updates the library properties
                     updateLibrary.LibraryDisplayName = library.LibraryDisplayName ?? updateLibrary.LibraryDisplayName;
+                    updateLibrary.LibraryDescription = library.LibraryDescription ?? updateLibrary.LibraryDescription;
+                    updateLibrary.LibraryFolder = library.LibraryFolder ?? updateLibrary.LibraryFolder;
                 }
 
                 // Saves the updated library to the database

@@ -496,6 +496,10 @@
     <Compile Include="Cmdlets\Configuration\Staging\SetCmsRoleNoLogCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Staging\SetCmsServerCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Staging\SyncCmsStagingTaskCmdlet.cs" />
+    <Compile Include="Cmdlets\ContentManagement\MediaLibraries\GetCmsMediaLibraryCmdlet.cs" />
+    <Compile Include="Cmdlets\ContentManagement\MediaLibraries\NewCmsMediaLibraryCmdlet.cs" />
+    <Compile Include="Cmdlets\ContentManagement\MediaLibraries\RemoveCmsMediaLibraryCmdlet.cs" />
+    <Compile Include="Cmdlets\ContentManagement\MediaLibraries\SetCmsMediaLibraryCmdlet.cs" />
     <Compile Include="Cmdlets\Development\GetCMSWebPartCategoryCmdlet.cs" />
     <Compile Include="Cmdlets\Development\NewCMSWebPartCategoryCmdlet.cs" />
     <Compile Include="Cmdlets\Development\RemoveCMSWebPartCategoryCmdlet.cs" />

@@ -57,4 +57,3 @@ KenticoTest -OutputPath .\Temp
 
 Start-DscConfiguration -Wait -Force -Path .\Temp
 
-cd Kentico:

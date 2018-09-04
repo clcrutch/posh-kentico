@@ -29,7 +29,7 @@ namespace PoshKentico.Core.Services.ContentManagement.MediaLibraries
         /// <summary>
         /// Gets a list of all of the <see cref="IMediaLibrary"/> provided by the CMS System.
         /// </summary>
-        IEnumerable<IMediaLibrary> MediaLibrarys { get; }
+        IEnumerable<IMediaLibrary> MediaLibraries { get; }
 
         #endregion
 
@@ -52,10 +52,10 @@ namespace PoshKentico.Core.Services.ContentManagement.MediaLibraries
         /// <summary>
         /// Gets the <see cref="IMediaLibrary"/> which matches the supplied library name.
         /// </summary>
-        /// <param name="libraryName">The MediaLibrary Name of the <see cref="IMediaLibrary"/> to return.</param>
-        /// <param name="librarySiteName">The MediaLibrary site name of the <see cref="IMediaLibrary"/>to return.</param>
+        /// <param name="librarySiteID">The Media Library site id of the <see cref="IMediaLibrary"/>to return.</param>
+        /// <param name="libraryName">The Media Library Name of the <see cref="IMediaLibrary"/> to return.</param>
         /// <returns>The <see cref="IMediaLibrary"/> which matches the library name, else null.</returns>
-        IMediaLibrary GetMediaLibrary(string libraryName, string librarySiteName);
+        IMediaLibrary GetMediaLibrary(int librarySiteID, string libraryName);
 
         /// <summary>
         /// Updates the <see cref="IMediaLibrary"/>.
