@@ -1,23 +1,52 @@
-﻿using Microsoft.Build.Framework;
-using Microsoft.Build.Utilities;
-using Mono.Cecil;
+﻿// <copyright file="CMSVirtualTask.cs" company="Chris Crutchfield">
+// Copyright (C) 2017  Chris Crutchfield
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+// </copyright>
+
 using System;
 using System.IO;
-using System.Linq;
+using Microsoft.Build.Framework;
+using Microsoft.Build.Utilities;
+using Mono.Cecil;
 
 namespace PoshKentico.MSBuild
 {
+    /// <summary>
+    /// MSBuild Task for making properties of CMS.*.dll to virtual.
+    /// </summary>
     public class CMSVirtualTask : Task
     {
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the target dir for project.
+        /// </summary>
         [Required]
         public string TargetDir { get; set; }
 
+        #endregion
+
+        #region Methods
+
+        /// <inheritdoc />
         public override bool Execute()
         {
             var tempFolder = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
             var tempFolderInfo = Directory.CreateDirectory(tempFolder);
 
-            CopyFiles(new DirectoryInfo(TargetDir), tempFolderInfo);
+            this.CopyFiles(new DirectoryInfo(this.TargetDir), tempFolderInfo);
 
             try
             {
@@ -26,15 +55,15 @@ namespace PoshKentico.MSBuild
 
                 var parameters = new ReaderParameters
                 {
-                    AssemblyResolver = resolver
+                    AssemblyResolver = resolver,
                 };
 
                 foreach (var dll in tempFolderInfo.GetFiles("CMS.*.dll", SearchOption.TopDirectoryOnly))
                 {
                     using (var assembly = AssemblyDefinition.ReadAssembly(dll.FullName, parameters))
                     {
-                        MakePropertiesVirtual(assembly);
-                        assembly.Write(Path.Combine(TargetDir, dll.Name));
+                        this.MakePropertiesVirtual(assembly);
+                        assembly.Write(Path.Combine(this.TargetDir, dll.Name));
                     }
                 }
             }
@@ -79,8 +108,8 @@ namespace PoshKentico.MSBuild
         {
             foreach (var prop in typeDefinition.Properties)
             {
-                MakePropertyMethodVirtual(prop.GetMethod);
-                MakePropertyMethodVirtual(prop.SetMethod);
+                this.MakePropertyMethodVirtual(prop.GetMethod);
+                this.MakePropertyMethodVirtual(prop.SetMethod);
             }
         }
 
@@ -91,7 +120,7 @@ namespace PoshKentico.MSBuild
                 !methodDefinition.IsPublic ||
                 methodDefinition.DeclaringType.IsInterface ||
                 methodDefinition.IsAbstract ||
-                (methodDefinition.IsVirtual & !methodDefinition.IsNewSlot)) 
+                (methodDefinition.IsVirtual & !methodDefinition.IsNewSlot))
             {
                 return;
             }
@@ -103,5 +132,8 @@ namespace PoshKentico.MSBuild
                 MethodAttributes.NewSlot |
                 MethodAttributes.Virtual;
         }
+
+        #endregion
+
     }
 }
