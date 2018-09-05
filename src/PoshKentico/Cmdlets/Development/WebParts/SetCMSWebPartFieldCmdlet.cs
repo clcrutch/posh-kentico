@@ -41,6 +41,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Set, "CMSWebPartField")]
+    [OutputType(typeof(FormFieldInfo), ParameterSetName = new string[] { PASSTHRU })]
     [Alias("swpf")]
     public class SetCMSWebPartFieldCmdlet : MefCmdlet
     {

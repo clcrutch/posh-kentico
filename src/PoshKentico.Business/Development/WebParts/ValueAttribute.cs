@@ -22,7 +22,7 @@ namespace PoshKentico.Business.Development.WebParts
     /// <summary>
     /// Attribute used for setting the string value of an enumeration.
     /// </summary>
-    internal class ValueAttribute : Attribute
+    public class ValueAttribute : Attribute
     {
         #region Constructors
 

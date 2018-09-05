@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
+using CMS.FormEngine;
 using CMS.PortalEngine;
 using ImpromptuInterface;
 using PoshKentico.Business.Development.WebParts;
@@ -42,7 +43,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSWebPartField", DefaultParameterSetName = NONAME)]
-    [OutputType(typeof(WebPartInfo[]))]
+    [OutputType(typeof(FormFieldInfo[]))]
     [Alias("gwp")]
     public class GetCMSWebPartFieldCmdlet : MefCmdlet
     {

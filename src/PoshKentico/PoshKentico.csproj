@@ -519,6 +519,8 @@
     <None Include="DSCResources\xWebPartCategory\xWebPartCategory.schema.mof">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="DSCResources\xWebPartField\xWebPartField.psm1" />
+    <None Include="DSCResources\xWebPartField\xWebPartField.schema.mof" />
     <None Include="DSCResources\xWebPart\xWebPart.psm1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -557,9 +559,7 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.0-beta008\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.0-beta008\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DSCResources\xWebPartField\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\PoshKentico.Business\PoshKentico.Business.csproj">
       <Project>{d065289d-5e97-4ab4-b395-6a9f43cc3e5f}</Project>
