@@ -474,6 +474,8 @@
     <Compile Include="Configuration\Staging\SetCmsRoleNoLogBusiness.cs" />
     <Compile Include="Configuration\Staging\SetCmsServerBusiness.cs" />
     <Compile Include="Configuration\Staging\SyncCmsStagingTaskBusiness.cs" />
+    <Compile Include="ContentManagement\MediaLibraries\NewCmsMediaLibraryFileBusiness.cs" />
+    <Compile Include="ContentManagement\MediaLibraries\NewCmsMediaLibraryFolderBusiness.cs" />
     <Compile Include="ContentManagement\MediaLibraries\GetCmsMediaLibraryBusiness.cs" />
     <Compile Include="ContentManagement\MediaLibraries\NewCmsMediaLibraryBusiness.cs" />
     <Compile Include="ContentManagement\MediaLibraries\RemoveCmsMediaLibraryBusiness.cs" />

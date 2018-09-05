@@ -16,6 +16,7 @@
 // </copyright>
 
 using System.Collections.Generic;
+using CMS.MediaLibrary;
 
 namespace PoshKentico.Core.Services.ContentManagement.MediaLibraries
 {
@@ -52,8 +53,8 @@ namespace PoshKentico.Core.Services.ContentManagement.MediaLibraries
         /// <summary>
         /// Gets the <see cref="IMediaLibrary"/> which matches the supplied library name.
         /// </summary>
-        /// <param name="librarySiteID">The Media Library site id of the <see cref="IMediaLibrary"/>to return.</param>
-        /// <param name="libraryName">The Media Library Name of the <see cref="IMediaLibrary"/> to return.</param>
+        /// <param name="librarySiteID">The site id of the <see cref="IMediaLibrary"/>to return.</param>
+        /// <param name="libraryName">The name of the <see cref="IMediaLibrary"/> to return.</param>
         /// <returns>The <see cref="IMediaLibrary"/> which matches the library name, else null.</returns>
         IMediaLibrary GetMediaLibrary(int librarySiteID, string libraryName);
 
@@ -71,6 +72,26 @@ namespace PoshKentico.Core.Services.ContentManagement.MediaLibraries
         /// <param name="library">The <see cref="IMediaLibrary"/> to delete.</param>
         void Delete(IMediaLibrary library);
 
+        /// <summary>
+        /// Creates a media library folder within the <see cref="IMediaLibrary"/>
+        /// </summary>
+        /// <param name="librarySiteID">The site id of the <see cref="IMediaLibrary"/>to retrive for creating the new folder.</param>
+        /// <param name="libraryName">The name of the <see cref="IMediaLibrary"/> to retrive for creating the new folder.</param>
+        /// <param name="folderName">The new folder name to create within the media library</param>
+        void CreateMediaLibraryFolder(int librarySiteID, string libraryName, string folderName);
+
+        /// <summary>
+        /// Creates a media library file within the <see cref="IMediaLibrary"/>
+        /// </summary>
+        /// <param name="librarySiteID">The site id of the <see cref="IMediaLibrary"/>to retrive for creating the new file</param>
+        /// <param name="libraryName">The name of the <see cref="IMediaLibrary"/> to retrive for creating the new file</param>
+        /// <param name = "localFilePath" >The local file path for the <see cref="IMediaFile"/>.</param>
+        /// <param name="fileName">The file name for the <see cref="IMediaFile"/>.</param>
+        /// <param name="fileTitle">The file title for the <see cref="IMediaFile"/>.</param>
+        /// <param name="fileDesc">The file description for the <see cref="IMediaFile"/>.</param>
+        /// <param name="filePath">The file path for the <see cref="IMediaFile"/>.</param>
+        /// <returns>The newly created <see cref="IMediaFile"/>.</returns>
+        IMediaFile CreateMediaLibraryFile(int librarySiteID, string libraryName, string localFilePath, string fileName, string fileTitle, string fileDesc, string filePath);
         #endregion
 
     }

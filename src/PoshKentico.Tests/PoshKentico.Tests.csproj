@@ -490,6 +490,12 @@
     <Compile Include="Configuration\Staging\SetCmsServerTests.cs" />
     <Compile Include="Configuration\Staging\StagingServiceMock.cs" />
     <Compile Include="Configuration\Staging\SyncCmsStagingTaskTests.cs" />
+    <Compile Include="ContentManagement\MediaLibraries\GetCmsMediaLibraryTests.cs" />
+    <Compile Include="ContentManagement\MediaLibraries\MediaLibraryServiceMock.cs" />
+    <Compile Include="ContentManagement\MediaLibraries\NewCmsMediaLibraryFolderTests.cs" />
+    <Compile Include="ContentManagement\MediaLibraries\NewCmsMediaLibraryTests.cs" />
+    <Compile Include="ContentManagement\MediaLibraries\RemoveCmsMediaLibraryTests.cs" />
+    <Compile Include="ContentManagement\MediaLibraries\SetCmsMediaLibraryTests.cs" />
     <Compile Include="Development\GetCMSWebPartCategoryTests.cs" />
     <Compile Include="Development\NewCMSWebPartCategoryTests.cs" />
     <Compile Include="Development\RemoveCMSWebPartCategoryTests.cs" />

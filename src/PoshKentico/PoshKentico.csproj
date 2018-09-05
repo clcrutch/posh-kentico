@@ -498,6 +498,8 @@
     <Compile Include="Cmdlets\Configuration\Staging\SyncCmsStagingTaskCmdlet.cs" />
     <Compile Include="Cmdlets\ContentManagement\MediaLibraries\GetCmsMediaLibraryCmdlet.cs" />
     <Compile Include="Cmdlets\ContentManagement\MediaLibraries\NewCmsMediaLibraryCmdlet.cs" />
+    <Compile Include="Cmdlets\ContentManagement\MediaLibraries\NewCmsMediaLibraryFileCmdlet.cs" />
+    <Compile Include="Cmdlets\ContentManagement\MediaLibraries\NewCmsMediaLibraryFolderCmdlet.cs" />
     <Compile Include="Cmdlets\ContentManagement\MediaLibraries\RemoveCmsMediaLibraryCmdlet.cs" />
     <Compile Include="Cmdlets\ContentManagement\MediaLibraries\SetCmsMediaLibraryCmdlet.cs" />
     <Compile Include="Cmdlets\Development\GetCMSWebPartCategoryCmdlet.cs" />

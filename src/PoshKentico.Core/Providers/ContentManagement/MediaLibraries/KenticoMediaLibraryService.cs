@@ -18,6 +18,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using CMS.Helpers;
 using CMS.MediaLibrary;
 using CMS.SiteProvider;
 using ImpromptuInterface;
@@ -79,8 +80,7 @@ namespace PoshKentico.Core.Configuration.ContentManagement.MediaLibraries
         /// <inheritdoc/>
         public IMediaLibrary Update(IMediaLibrary library, bool isReplace = true)
         {
-            string siteName = SiteInfoProvider.GetSiteName(library.LibrarySiteID);
-            var updateLibrary = MediaLibraryInfoProvider.GetMediaLibraryInfo(library.LibraryName, siteName);
+            var updateLibrary = this.GetMediaLibrary(library);
             if (updateLibrary != null)
             {
                 if (isReplace)
@@ -106,14 +106,77 @@ namespace PoshKentico.Core.Configuration.ContentManagement.MediaLibraries
         public void Delete(IMediaLibrary library)
         {
             // Gets the media library
-            string siteName = SiteInfoProvider.GetSiteName(library.LibrarySiteID);
-            var deleteLibrary = MediaLibraryInfoProvider.GetMediaLibraryInfo(library.LibraryName, siteName);
+            var deleteLibrary = this.GetMediaLibrary(library);
 
             if (deleteLibrary != null)
             {
                 // Deletes the media library
                 MediaLibraryInfoProvider.DeleteMediaLibraryInfo(deleteLibrary);
             }
+        }
+
+        /// <inheritdoc/>
+        public void CreateMediaLibraryFolder(int librarySiteID, string libraryName, string folderName)
+        {
+            // Gets the media library
+            string siteName = SiteInfoProvider.GetSiteName(librarySiteID);
+            var existingLibrary = MediaLibraryInfoProvider.GetMediaLibraryInfo(libraryName, siteName);
+
+            if (existingLibrary != null)
+            {
+                // Creates the "NewFolder" folder within the media library
+                MediaLibraryInfoProvider.CreateMediaLibraryFolder(siteName, existingLibrary.LibraryID, folderName);
+            }
+        }
+
+        /// <inheritdoc/>
+        public IMediaFile CreateMediaLibraryFile(int librarySiteID, string libraryName, string localFilePath, string fileName, string fileTitle, string fileDesc, string filePath)
+        {
+            // Gets the media library
+            string siteName = SiteInfoProvider.GetSiteName(librarySiteID);
+            var existingLibrary = MediaLibraryInfoProvider.GetMediaLibraryInfo(libraryName, siteName);
+
+            if (existingLibrary != null)
+            {
+                // Prepares a CMS.IO.FileInfo object representing the local file
+                CMS.IO.FileInfo file = CMS.IO.FileInfo.New(localFilePath);
+
+                if (file != null)
+                {
+                    // Creates a new media library file object
+                    MediaFileInfo mediaFile = new MediaFileInfo(localFilePath, existingLibrary.LibraryID)
+                    {
+                        // Sets the media library file properties
+                        FileName = fileName,
+                        FileTitle = fileTitle,
+                        FileDescription = fileDesc,
+                        FilePath = filePath, // Sets the path within the media library's folder structure
+                        FileExtension = file.Extension,
+                        FileMimeType = MimeTypeHelper.GetMimetype(file.Extension),
+                        FileSiteID = SiteContext.CurrentSiteID,
+                        FileLibraryID = existingLibrary.LibraryID,
+                        FileSize = file.Length,
+                    };
+
+                    // Saves the media library file
+                    MediaFileInfoProvider.SetMediaFileInfo(mediaFile);
+
+                    return mediaFile.ActLike<IMediaFile>();
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Gets the media library info object
+        /// </summary>
+        /// <param name="library">the interface <see cref="IMediaLibrary"/>.</param>
+        /// <returns>the media library info object</returns>
+        private MediaLibraryInfo GetMediaLibrary(IMediaLibrary library)
+        {
+            string siteName = SiteInfoProvider.GetSiteName(library.LibrarySiteID);
+            return MediaLibraryInfoProvider.GetMediaLibraryInfo(library.LibraryName, siteName);
         }
 
         #endregion
