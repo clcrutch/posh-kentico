@@ -143,7 +143,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
                     webparts = this.BusinessLayer.GetWebPartsByCategory(this.WebPartCategory.ActLike<IWebPartCategory>());
                     break;
                 case CATEGORYNAME:
-                    webparts = this.BusinessLayer.GetWebPartsByCategory(this.CategoryName, this.RegularExpression.ToBool());
+                    webparts = this.BusinessLayer.GetWebPartsByCategories(this.CategoryName, this.RegularExpression.ToBool());
                     break;
                 case FIELD:
                     webparts = new IWebPart[]

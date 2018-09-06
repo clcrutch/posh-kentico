@@ -45,7 +45,7 @@ namespace PoshKentico.Business.Development.WebParts
         /// <param name="isRegex">Indicates whether <paramref name="matchString"/> is a regular expression.</param>
         /// <param name="recurse">Indicates whether webpart categories should be returned recursively.</param>
         /// <returns>A list of all of the <see cref="IWebPartCategory"/> which match the specified criteria.</returns>
-        public IEnumerable<IWebPartCategory> GetWebPartCategories(string matchString, bool isRegex, bool recurse)
+        public virtual IEnumerable<IWebPartCategory> GetWebPartCategories(string matchString, bool isRegex, bool recurse)
         {
             Regex regex = null;
 

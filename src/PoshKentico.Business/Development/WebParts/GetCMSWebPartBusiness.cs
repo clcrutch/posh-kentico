@@ -104,18 +104,11 @@ namespace PoshKentico.Business.Development.WebParts
                     select wp).ToArray();
         }
 
-        /// <summary>
-        /// Gets a list of <see cref="IWebPart"/> that are within the <paramref name="webPartCategory"/>.
-        /// </summary>
-        /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> that contains the desired <see cref="IWebPart"/>.</param>
-        /// <returns>A list of <see cref="IWebPart"/> that are within the <paramref name="webPartCategory"/>.</returns>
-        public IEnumerable<IWebPart> GetWebPartsByCategory(IWebPartCategory webPartCategory) => this.WebPartService.GetWebParts(webPartCategory);
-
         /// <summary>Gets a list of <see cref="IWebPart"/> that are within the <see cref="IWebPartCategory"/> matching the <paramref name="matchString"/>.</summary>
         /// <param name="matchString">The string which to match the webpart categories to.</param>
         /// <param name="isRegex">Indicates whether <paramref name="matchString"/> is a regular expression.</param>
         /// <returns>A list of <see cref="IWebPart"/> which are contained by the <see cref="IWebPartCategory"/> matching the <paramref name="matchString"/>.</returns>
-        public IEnumerable<IWebPart> GetWebPartsByCategory(string matchString, bool isRegex)
+        public IEnumerable<IWebPart> GetWebPartsByCategories(string matchString, bool isRegex)
         {
             var categories = this.GetCMSWebPartCategoryBusiness.GetWebPartCategories(matchString, isRegex, false);
 
@@ -126,6 +119,13 @@ namespace PoshKentico.Business.Development.WebParts
                     where ids.Contains(wp.WebPartCategoryID)
                     select wp).ToArray();
         }
+
+        /// <summary>
+        /// Gets a list of <see cref="IWebPart"/> that are within the <paramref name="webPartCategory"/>.
+        /// </summary>
+        /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> that contains the desired <see cref="IWebPart"/>.</param>
+        /// <returns>A list of <see cref="IWebPart"/> that are within the <paramref name="webPartCategory"/>.</returns>
+        public IEnumerable<IWebPart> GetWebPartsByCategory(IWebPartCategory webPartCategory) => this.WebPartService.GetWebParts(webPartCategory);
 
         #endregion
 
