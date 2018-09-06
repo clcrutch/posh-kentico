@@ -112,11 +112,7 @@ namespace PoshKentico.Business.Development.WebParts
 
             public int Size { get; set; }
 
-            public IWebPart WebPart
-            {
-                get => throw new NotImplementedException();
-                set => throw new NotImplementedException();
-            }
+            public IWebPart WebPart { get; set; }
         }
 
         #endregion

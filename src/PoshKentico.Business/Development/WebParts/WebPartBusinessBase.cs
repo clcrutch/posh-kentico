@@ -46,7 +46,7 @@ namespace PoshKentico.Business.Development.WebParts
         /// Gets or sets a reference to the <see cref="IWebPartService"/>.  Populated by MEF.
         /// </summary>
         [Import]
-        public IWebPartService WebPartService { get; set; }
+        public virtual IWebPartService WebPartService { get; set; }
 
         #endregion
 
@@ -63,5 +63,6 @@ namespace PoshKentico.Business.Development.WebParts
              select c).Single();
 
         #endregion
+
     }
 }
