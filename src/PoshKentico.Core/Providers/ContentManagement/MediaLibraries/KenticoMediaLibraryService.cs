@@ -150,10 +150,10 @@ namespace PoshKentico.Core.Configuration.ContentManagement.MediaLibraries
                         FileName = fileName,
                         FileTitle = fileTitle,
                         FileDescription = fileDesc,
-                        FilePath = filePath, // Sets the path within the media library's folder structure
+                        FilePath = $"{filePath}/{fileName}", // Sets the path within the media library's folder structure
                         FileExtension = file.Extension,
                         FileMimeType = MimeTypeHelper.GetMimetype(file.Extension),
-                        FileSiteID = SiteContext.CurrentSiteID,
+                        FileSiteID = librarySiteID,
                         FileLibraryID = existingLibrary.LibraryID,
                         FileSize = file.Length,
                     };
