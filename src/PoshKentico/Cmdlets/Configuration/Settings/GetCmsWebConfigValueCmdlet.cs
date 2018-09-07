@@ -25,7 +25,7 @@ namespace PoshKentico.Cmdlets.Configuration.Settings
     /// <summary>
     /// <para type="synopsis">Gets the web.config setting value by the provided setting key.</para>
     /// <para type="description">Gets the web.config setting values by the provided setting key or default value if not. </para>
-    /// /// <example>
+    /// <example>
     ///     <para>Get web.config setting values with a key.</para>
     ///     <code>Get-CMSSettingValue -Key "my key"</code>
     /// </example>
