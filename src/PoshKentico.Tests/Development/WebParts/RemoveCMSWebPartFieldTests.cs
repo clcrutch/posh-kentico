@@ -1,4 +1,4 @@
-﻿// <copyright file="RemoveCMSWebPartTests.cs" company="Chris Crutchfield">
+﻿// <copyright file="RemoveCMSWebPartFieldTests.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -26,18 +26,23 @@ namespace PoshKentico.Tests.Development.WebParts
 {
     [ExcludeFromCodeCoverage]
     [TestFixture]
-    public class RemoveCMSWebPartTests
+    public class RemoveCMSWebPartFieldTests
     {
         [TestCase]
-        public void ShouldRemoveWebPart()
+        public void ShouldRemoveWebPartField()
         {
             bool shouldProcessCalled = false;
 
             var webPartMock = new Mock<IWebPart>();
 
+            var webPartFieldMock = new Mock<IWebPartField>();
+            webPartFieldMock
+                .Setup(x => x.WebPart)
+                .Returns(webPartMock.Object);
+
             var webPartServiceMock = new Mock<IWebPartService>();
 
-            var businessLayer = new RemoveCMSWebPartBusiness
+            var businessLayer = new RemoveCMSWebPartFieldBusiness
             {
                 WebPartService = webPartServiceMock.Object,
                 WriteDebug = Assert.NotNull,
@@ -50,10 +55,10 @@ namespace PoshKentico.Tests.Development.WebParts
                 },
             };
 
-            businessLayer.RemoveWebPart(webPartMock.Object);
+            businessLayer.RemoveField(webPartFieldMock.Object);
 
             webPartServiceMock
-                .Verify(x => x.Delete(webPartMock.Object));
+                .Verify(x => x.RemoveField(webPartFieldMock.Object));
 
             shouldProcessCalled.Should().BeTrue();
         }
