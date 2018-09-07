@@ -52,8 +52,8 @@ namespace PoshKentico.Business.Configuration.Staging
         /// <summary>
         /// Syncs the <see cref="IServer"/> related staging tasks in the CMS System.
         /// </summary>
-        /// <param name="serverName">The server name to look for the server</param>
-        /// <param name="serverSiteId">The server site id to look for the server</param>
+        /// <param name="serverName">The server name to look for the server.</param>
+        /// <param name="serverSiteId">The server site id to look for the server.</param>
         public void SyncStaging(string serverName, int serverSiteId)
         {
             var data = new

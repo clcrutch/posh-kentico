@@ -68,7 +68,7 @@ namespace PoshKentico.Business.Configuration.Staging
         /// <summary>
         /// Gets a list of all of the <see cref="IServer"/> which match the specified criteria.
         /// </summary>
-        /// <param name="site">the associated site of the servers</param>
+        /// <param name="site">The associated site of the servers.</param>
         /// /// <param name="matchString">The string which to match the servers to.</param>
         /// <param name="exact">A boolean which indicates if the match should be exact.</param>
         /// <returns>A list of all of the <see cref="IServer"/> which match the specified criteria.</returns>
@@ -101,7 +101,7 @@ namespace PoshKentico.Business.Configuration.Staging
         /// <summary>
         /// Gets a list of all of the <see cref="IServer"/> which match the specified criteria.
         /// </summary>
-        /// <param name="siteId">the associated site id of the servers</param>
+        /// <param name="siteId">The associated site id of the servers.</param>
         /// /// <param name="matchString">The string which to match the servers to.</param>
         /// <param name="exact">A boolean which indicates if the match should be exact.</param>
         /// <returns>A list of all of the <see cref="IServer"/> which match the specified criteria.</returns>

@@ -41,11 +41,11 @@ namespace PoshKentico.Business.Configuration.Settings
         #region Methods
 
         /// <summary>
-        /// Get a setting value from a site
+        /// Get a setting value from a site.
         /// </summary>
-        /// <param name="site">the site to get the setting from</param>
-        /// <param name="key">the setting key associated with the setting</param>
-        /// <returns>the setting value</returns>
+        /// <param name="site">The site to get the setting from.</param>
+        /// <param name="key">The setting key associated with the setting.</param>
+        /// <returns>The setting value.</returns>
         public object GetSettingValue(ISite site, string key)
         {
             return this.SettingValueService.GetSettingValue(site.SiteName, key);
@@ -54,9 +54,9 @@ namespace PoshKentico.Business.Configuration.Settings
         /// <summary>
         /// Get a setting value from a site <see cref="ISite"/> in the CMS System.
         /// </summary>
-        /// <param name="siteName">the site name of the site to get the setting from</param>
-        /// <param name="key">the setting key associated with the setting</param>
-        /// <returns>the setting value</returns>
+        /// <param name="siteName">The site name of the site to get the setting from.</param>
+        /// <param name="key">The setting key associated with the setting.</param>
+        /// <returns>The setting value.</returns>
         public object GetSettingValue(string siteName, string key)
         {
             return this.SettingValueService.GetSettingValue(siteName, key);

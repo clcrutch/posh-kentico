@@ -40,22 +40,22 @@ namespace PoshKentico.Business.Configuration.Settings
         #region Methods
 
         /// <summary>
-        /// Set a new setting value from a site with provided key
+        /// Set a new setting value from a site with provided key.
         /// </summary>
-        /// <param name="site">the site to set the setting to</param>
-        /// <param name="settingKey">the setting key associated with the setting</param>
-        /// <param name="newVal">The new value of the setting</param>
+        /// <param name="site">The site to set the setting to.</param>
+        /// <param name="settingKey">The setting key associated with the setting.</param>
+        /// <param name="newVal">The new value of the setting.</param>
         public void SetSettingValue(ISite site, string settingKey, object newVal)
         {
            this.SettingValueService.SetSettingValue(site.SiteName, settingKey, newVal);
         }
 
         /// <summary>
-        /// Set a new setting value from a site with provided key
+        /// Set a new setting value from a site with provided key.
         /// </summary>
-        /// <param name="siteName">The site name of the setting</param>
-        /// <param name="settingKey">The key of the setting</param>
-        /// <param name="newVal">The new value of the setting</param>
+        /// <param name="siteName">The site name of the setting.</param>
+        /// <param name="settingKey">The key of the setting.</param>
+        /// <param name="newVal">The new value of the setting.</param>
         public void SetSettingValue(string siteName, string settingKey, object newVal)
         {
             this.SettingValueService.SetSettingValue(siteName, settingKey, newVal);
