@@ -15,11 +15,14 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace PoshKentico.Core.Providers.General
 {
     /// <summary>
     /// Model used for caching the Kentico site location.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     internal class KenticoSiteLocationCache
     {
         #region Properties

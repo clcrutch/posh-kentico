@@ -486,6 +486,7 @@
     <Compile Include="Development\WebParts\GetCMSWebPartCategoryTests.cs" />
     <Compile Include="Development\WebParts\NewCMSWebPartCategoryTests.cs" />
     <Compile Include="Development\WebParts\NewCMSWebPartTests.cs" />
+    <Compile Include="Development\WebParts\RemoveCMSWebPartCategoryTests.cs" />
     <Compile Include="Development\WebParts\RemoveCMSWebPartFieldTests.cs" />
     <Compile Include="Development\WebParts\RemoveCMSWebPartTests.cs" />
     <Compile Include="Development\WebParts\SetCMSWebPartCategoryTests.cs" />

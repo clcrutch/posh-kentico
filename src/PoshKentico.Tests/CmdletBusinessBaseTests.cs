@@ -15,11 +15,11 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System.Diagnostics.CodeAnalysis;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business;
 using PoshKentico.Core.Services.General;
-using System.Diagnostics.CodeAnalysis;
 
 namespace PoshKentico.Tests
 {

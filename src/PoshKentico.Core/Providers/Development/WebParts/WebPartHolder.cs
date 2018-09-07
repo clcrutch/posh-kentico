@@ -15,6 +15,7 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System.Diagnostics.CodeAnalysis;
 using PoshKentico.Core.Services.Development.WebParts;
 
 namespace PoshKentico.Core.Providers.Development.WebParts
@@ -22,6 +23,7 @@ namespace PoshKentico.Core.Providers.Development.WebParts
     /// <summary>
     /// Used by Dynamic Proxy to add a place to set a <see cref="IWebPart"/>.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     internal class WebPartHolder : IWebPartHolder
     {
         /// <inheritdoc />
