@@ -39,6 +39,8 @@ namespace PoshKentico.Tests.Development.WebParts
             var businessLayer = new GetCMSWebPartFieldBusiness
             {
                 WebPartService = webPartServiceMock.Object,
+                WriteDebug = Assert.NotNull,
+                WriteVerbose = Assert.NotNull,
             };
 
             businessLayer.GetWebPartFields(webPartMock.Object);
@@ -77,6 +79,8 @@ namespace PoshKentico.Tests.Development.WebParts
             var businessLayer = new GetCMSWebPartFieldBusiness
             {
                 WebPartService = webPartServiceMock.Object,
+                WriteDebug = Assert.NotNull,
+                WriteVerbose = Assert.NotNull,
             };
 
             // Get the results
@@ -133,6 +137,8 @@ namespace PoshKentico.Tests.Development.WebParts
             var businessLayer = new GetCMSWebPartFieldBusiness
             {
                 WebPartService = webPartServiceMock.Object,
+                WriteDebug = Assert.NotNull,
+                WriteVerbose = Assert.NotNull,
             };
 
             // Get the results

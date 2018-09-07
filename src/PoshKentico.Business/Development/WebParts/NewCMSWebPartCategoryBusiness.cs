@@ -16,6 +16,7 @@
 // </copyright>
 
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using PoshKentico.Core.Services.Development.WebParts;
 
 namespace PoshKentico.Business.Development.WebParts
@@ -70,6 +71,7 @@ namespace PoshKentico.Business.Development.WebParts
 
         #region Classes
 
+        [ExcludeFromCodeCoverage]
         private class WebPartCategory : IWebPartCategory
         {
             public string CategoryDisplayName { get; set; }

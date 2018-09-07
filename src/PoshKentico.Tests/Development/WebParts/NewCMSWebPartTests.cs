@@ -136,6 +136,8 @@ namespace PoshKentico.Tests.Development.WebParts
             var businessLayer = new NewCMSWebPartBusiness
             {
                 WebPartService = webPartServiceMock.Object,
+                WriteDebug = Assert.NotNull,
+                WriteVerbose = Assert.NotNull,
             };
 
             var results = businessLayer.CreateWebPart(name, fileName, displayName, webPartCategoryMock.Object);
@@ -186,6 +188,8 @@ namespace PoshKentico.Tests.Development.WebParts
             var businessLayer = new NewCMSWebPartBusiness
             {
                 WebPartService = webPartServiceMock.Object,
+                WriteDebug = Assert.NotNull,
+                WriteVerbose = Assert.NotNull,
             };
 
             var results = businessLayer.CreateWebPart(name, fileName, null, webPartCategoryMock.Object);

@@ -443,6 +443,8 @@ namespace PoshKentico.Tests.Development.WebParts
             var businessLayer = new GetCMSWebPartCategoryBusiness
             {
                 WebPartService = webPartServiceMock.Object,
+                WriteDebug = Assert.NotNull,
+                WriteVerbose = Assert.NotNull,
             };
 
             var results = businessLayer.GetWebPartCategories(new int[] { 15, 16, 18 }, false);
@@ -498,6 +500,8 @@ namespace PoshKentico.Tests.Development.WebParts
             var businessLayer = new GetCMSWebPartCategoryBusiness
             {
                 WebPartService = webPartServiceMock.Object,
+                WriteDebug = Assert.NotNull,
+                WriteVerbose = Assert.NotNull,
             };
 
             var results = businessLayer.GetWebPartCategories(new int[] { 15, 16, 18 }, true);
@@ -621,6 +625,8 @@ namespace PoshKentico.Tests.Development.WebParts
             var businessLayer = new GetCMSWebPartCategoryBusiness
             {
                 WebPartService = webPartServiceMock.Object,
+                WriteDebug = Assert.NotNull,
+                WriteVerbose = Assert.NotNull,
             };
 
             // Test business layer
@@ -663,6 +669,8 @@ namespace PoshKentico.Tests.Development.WebParts
             var businessLayer = new GetCMSWebPartCategoryBusiness
             {
                 WebPartService = webPartServiceMock.Object,
+                WriteDebug = Assert.NotNull,
+                WriteVerbose = Assert.NotNull,
             };
 
             // Test business layer
@@ -705,6 +713,8 @@ namespace PoshKentico.Tests.Development.WebParts
             var businessLayer = new GetCMSWebPartCategoryBusiness
             {
                 WebPartService = webPartServiceMock.Object,
+                WriteDebug = Assert.NotNull,
+                WriteVerbose = Assert.NotNull,
             };
 
             // Test business layer
@@ -763,6 +773,8 @@ namespace PoshKentico.Tests.Development.WebParts
             var businessLayer = new GetCMSWebPartCategoryBusiness
             {
                 WebPartService = webPartServiceMock.Object,
+                WriteDebug = Assert.NotNull,
+                WriteVerbose = Assert.NotNull,
             };
 
             // Test business layer
