@@ -16,6 +16,7 @@
 // </copyright>
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using FluentAssertions;
 using Moq;
 using PoshKentico.Core.Services.Configuration.Localization;
@@ -23,6 +24,7 @@ using PoshKentico.Core.Services.Configuration.Sites;
 
 namespace PoshKentico.Business.Configuration.Sites.Tests
 {
+    [ExcludeFromCodeCoverage]
     public class SiteServiceMock : ISiteService
     {
         private ISite siteMock;

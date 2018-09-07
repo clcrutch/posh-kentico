@@ -1,4 +1,4 @@
-﻿// <copyright file="AddCMSWebPartFieldBusinessTests.cs" company="Chris Crutchfield">
+﻿// <copyright file="AddCMSWebPartFieldTests.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -15,6 +15,7 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System.Diagnostics.CodeAnalysis;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
@@ -23,8 +24,9 @@ using PoshKentico.Core.Services.Development.WebParts;
 
 namespace PoshKentico.Tests.Development.WebParts
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
-    public class AddCMSWebPartFieldBusinessTests
+    public class AddCMSWebPartFieldTests
     {
         [TestCase(true)]
         [TestCase(false)]
@@ -56,6 +58,8 @@ namespace PoshKentico.Tests.Development.WebParts
             var businessLayer = new AddCMSWebPartFieldBusiness
             {
                 WebPartService = webPartServiceMock.Object,
+                WriteDebug = Assert.NotNull,
+                WriteVerbose = Assert.NotNull,
             };
 
             businessLayer.AddField(addFieldParameter, webPartObj);
@@ -108,6 +112,8 @@ namespace PoshKentico.Tests.Development.WebParts
             var businessLayer = new AddCMSWebPartFieldBusiness
             {
                 WebPartService = webPartServiceMock.Object,
+                WriteDebug = Assert.NotNull,
+                WriteVerbose = Assert.NotNull,
             };
 
             businessLayer.AddField(addFieldParameter, webPartObj);

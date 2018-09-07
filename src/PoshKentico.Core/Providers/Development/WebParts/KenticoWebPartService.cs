@@ -17,6 +17,7 @@
 
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Castle.DynamicProxy;
 using CMS.FormEngine;
@@ -29,6 +30,7 @@ namespace PoshKentico.Core.Providers.Development.WebParts
     /// <summary>
     /// Implementation of <see cref="IWebPartService"/> that uses Kentico.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     [Export(typeof(IWebPartService))]
     public class KenticoWebPartService : IWebPartService
     {

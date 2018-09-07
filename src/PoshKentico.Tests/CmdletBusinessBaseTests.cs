@@ -19,9 +19,11 @@ using Moq;
 using NUnit.Framework;
 using PoshKentico.Business;
 using PoshKentico.Core.Services.General;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PoshKentico.Tests
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     public class CmdletBusinessBaseTests
     {
@@ -37,6 +39,12 @@ namespace PoshKentico.Tests
             {
                 CallBase = true,
             };
+            mockBusiness
+                .Setup(x => x.WriteDebug)
+                .Returns(Assert.NotNull);
+            mockBusiness
+                .Setup(x => x.WriteVerbose)
+                .Returns(Assert.NotNull);
             var businessObj = mockBusiness.Object;
 
             businessObj.CmsApplicationService = cmsApplicationServiceMock.Object;

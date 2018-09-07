@@ -15,6 +15,7 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using FluentAssertions;
 using Moq;
@@ -24,6 +25,7 @@ using PoshKentico.Core.Services.Development.WebParts;
 
 namespace PoshKentico.Tests.Development.WebParts
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     public class WebPartBusinessBaseTests
     {
@@ -53,6 +55,12 @@ namespace PoshKentico.Tests.Development.WebParts
             businessMock
                 .Setup(x => x.WebPartService)
                 .Returns(webPartServiceMock.Object);
+            businessMock
+                .Setup(x => x.WriteDebug)
+                .Returns(Assert.NotNull);
+            businessMock
+                .Setup(x => x.WriteVerbose)
+                .Returns(Assert.NotNull);
 
             // We need to use reflection b/c the method is protected.
             var getCategoryFromPathMethod = typeof(WebPartBusinessBase).GetMethod("GetCategoryFromPath", BindingFlags.NonPublic | BindingFlags.Instance);

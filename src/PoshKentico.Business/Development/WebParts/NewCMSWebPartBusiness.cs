@@ -16,6 +16,7 @@
 // </copyright>
 
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using PoshKentico.Core.Services.Development.WebParts;
 
 namespace PoshKentico.Business.Development.WebParts
@@ -58,7 +59,7 @@ namespace PoshKentico.Business.Development.WebParts
         /// <param name="displayName">The display name for the <see cref="IWebPart"/>.</param>
         /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> to create the <see cref="IWebPart"/> under.</param>
         /// <returns>The newly created <see cref="IWebPart"/>.</returns>
-        public IWebPart CreateWebPart(string name, string fileName, string displayName, IWebPartCategory webPartCategory)
+        public virtual IWebPart CreateWebPart(string name, string fileName, string displayName, IWebPartCategory webPartCategory)
         {
             if (string.IsNullOrEmpty(displayName))
             {
@@ -81,6 +82,7 @@ namespace PoshKentico.Business.Development.WebParts
 
         #region Classes
 
+        [ExcludeFromCodeCoverage]
         private class WebPart : IWebPart
         {
             public int WebPartCategoryID { get; set; }

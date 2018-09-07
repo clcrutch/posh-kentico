@@ -480,8 +480,11 @@
     <Compile Include="Configuration\Sites\SiteServiceMock.cs" />
     <Compile Include="Configuration\Sites\StopCmsSiteBusinessTests.cs" />
     <Compile Include="Configuration\Sites\StartCmsSiteBusinessTests.cs" />
-    <Compile Include="Development\WebParts\AddCMSWebPartFieldBusinessTests.cs" />
-    <Compile Include="Development\WebParts\GetCMSWebPartBusinessTests.cs" />
+    <Compile Include="Development\WebParts\AddCMSWebPartFieldTests.cs" />
+    <Compile Include="Development\WebParts\GetCMSWebPartFieldTests.cs" />
+    <Compile Include="Development\WebParts\GetCMSWebPartTests.cs" />
+    <Compile Include="Development\WebParts\GetCMSWebPartCategoryTests.cs" />
+    <Compile Include="Development\WebParts\NewCMSWebPartTests.cs" />
     <Compile Include="Development\WebParts\WebPartBusinessBaseTests.cs" />
     <Compile Include="General\InitializeCMSApplicationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

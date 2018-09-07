@@ -56,12 +56,12 @@ namespace PoshKentico.Business.Development.WebParts
             }
             else
             {
-                regex = new Regex($"^{matchString.Replace("*", ".")}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                regex = new Regex($"^{matchString.Replace("*", ".*")}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             }
 
             var matched = from f in this.GetWebPartFields(webPart)
                           where regex.IsMatch(f.Name) ||
-                            regex.IsMatch(f.Caption)
+                            regex.IsMatch(f.Caption ?? string.Empty)
                           select f;
 
             return matched.ToArray();
