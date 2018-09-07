@@ -504,10 +504,6 @@
     <Compile Include="Configuration\Staging\SetCmsServerTests.cs" />
     <Compile Include="Configuration\Staging\StagingServiceMock.cs" />
     <Compile Include="Configuration\Staging\SyncCmsStagingTaskTests.cs" />
-    <Compile Include="Development\GetCMSWebPartCategoryTests.cs" />
-    <Compile Include="Development\NewCMSWebPartCategoryTests.cs" />
-    <Compile Include="Development\RemoveCMSWebPartCategoryTests.cs" />
-    <Compile Include="Development\SetCMSWebPartCategoryTests.cs" />
     <Compile Include="General\InitializeCMSApplicationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

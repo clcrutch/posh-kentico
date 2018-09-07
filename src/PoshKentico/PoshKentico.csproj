@@ -509,10 +509,6 @@
     <Compile Include="Cmdlets\Configuration\Staging\SetCmsRoleNoLogCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Staging\SetCmsServerCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Staging\SyncCmsStagingTaskCmdlet.cs" />
-    <Compile Include="Cmdlets\Development\GetCMSWebPartCategoryCmdlet.cs" />
-    <Compile Include="Cmdlets\Development\NewCMSWebPartCategoryCmdlet.cs" />
-    <Compile Include="Cmdlets\Development\RemoveCMSWebPartCategoryCmdlet.cs" />
-    <Compile Include="Cmdlets\Development\SetCMSWebPartCategoryCmdlet.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="MefCmdlet.cs" />
     <Compile Include="GlobalSuppressions.cs" />
@@ -567,6 +563,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="FormattingFiles\Development\WebParts\FormFieldInfo.format.ps1xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="FormattingFiles\Configuration\Staging\ServerInfo.format.ps1xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

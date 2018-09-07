@@ -23,27 +23,27 @@ namespace PoshKentico.Core.Services.Configuration.Settings
     public interface ISettingValueService
     {
         /// <summary>
-        /// Get the settings value based on the key
+        /// Get the settings value based on the key.
         /// </summary>
-        /// <param name="siteName">The site name of the setting</param>
-        /// <param name="settingKey">The key of the setting</param>
-        /// <returns>The value of the setting</returns>
+        /// <param name="siteName">The site name of the setting.</param>
+        /// <param name="settingKey">The key of the setting.</param>
+        /// <returns>The value of the setting.</returns>
         string GetSettingValue(string siteName, string settingKey);
 
         /// <summary>
-        /// Get the web.config value based on the key
+        /// Get the web.config value based on the key.
         /// </summary>
-        /// <param name="appSettingKey">The key of the web.config setting</param>
+        /// <param name="appSettingKey">The key of the web.config setting.</param>
         /// <param name="defaultValue">The default value to return if no key is matched.</param>
-        /// <returns>The value of the setting</returns>
+        /// <returns>The value of the setting.</returns>
         string GetWebConfigValue(string appSettingKey, string defaultValue = "");
 
         /// <summary>
-        /// Set the settings value based on the key
+        /// Set the settings value based on the key.
         /// </summary>
-        /// <param name="siteName">The site name of the setting</param>
-        /// /// <param name="settingKey">The key of the setting</param>
-        /// <param name="newVal">The new value of the setting</param>
+        /// <param name="siteName">The site name of the setting.</param>
+        /// /// <param name="settingKey">The key of the setting.</param>
+        /// <param name="newVal">The new value of the setting.</param>
         void SetSettingValue(string siteName, string settingKey, object newVal);
     }
 }

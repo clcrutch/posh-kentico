@@ -37,7 +37,7 @@ namespace PoshKentico.Core.Services.Configuration.Staging
         string ServerName { get; }
 
         /// <summary>
-        /// Gets the server Url
+        /// Gets the server Url.
         /// </summary>
         string ServerURL { get; }
 
