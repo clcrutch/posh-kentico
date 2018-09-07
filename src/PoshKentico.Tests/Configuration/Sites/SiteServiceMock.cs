@@ -22,7 +22,7 @@ using Moq;
 using PoshKentico.Core.Services.Configuration.Localization;
 using PoshKentico.Core.Services.Configuration.Sites;
 
-namespace PoshKentico.Business.Configuration.Sites.Tests
+namespace PoshKentico.Business.Configuration.Sites
 {
     [ExcludeFromCodeCoverage]
     public class SiteServiceMock : ISiteService
@@ -64,7 +64,7 @@ namespace PoshKentico.Business.Configuration.Sites.Tests
             throw new System.NotImplementedException();
         }
 
-        void ISiteService.Update(ISite site)
+        public ISite Update(ISite site, bool isReplace = true)
         {
             throw new System.NotImplementedException();
         }

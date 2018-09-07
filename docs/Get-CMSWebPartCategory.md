@@ -154,7 +154,6 @@ The webpart category that contains the webpart categories.
 ## OUTPUTS
 
 ### CMS.PortalEngine.WebPartCategoryInfo
-
 ## NOTES
 
 ## RELATED LINKS

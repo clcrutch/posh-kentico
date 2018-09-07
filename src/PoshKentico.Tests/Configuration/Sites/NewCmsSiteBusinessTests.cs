@@ -20,7 +20,7 @@ using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 
-namespace PoshKentico.Business.Configuration.Sites.Tests
+namespace PoshKentico.Business.Configuration.Sites
 {
     [TestFixture]
     public class NewCmsSiteBusinessTests

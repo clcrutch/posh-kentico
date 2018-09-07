@@ -37,7 +37,7 @@ This cmdlet returns the site to update when the -PassThru switch is used.
 
 ### EXAMPLE 1
 ```
-Set-CMSSite -Site "My Desired Site"
+Set-CMSSite -Site $site
 ```
 
 ### EXAMPLE 2
@@ -161,7 +161,6 @@ A reference to the site to update.
 ## OUTPUTS
 
 ### CMS.SiteProvider.SiteInfo
-
 ## NOTES
 
 ## RELATED LINKS

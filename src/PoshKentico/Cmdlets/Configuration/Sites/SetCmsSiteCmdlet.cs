@@ -32,7 +32,7 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// <para type="description">This cmdlet returns the site to update when the -PassThru switch is used.</para>
     /// <example>
     ///     <para>Set site specifying an existing site.</para>
-    ///     <code>Set-CMSSite -Site "My Desired Site"</code>
+    ///     <code>Set-CMSSite -Site $site</code>
     /// </example>
     /// <example>
     ///     <para>Set site specifying an existing site.</para>
@@ -51,7 +51,6 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     {
         #region Constants
 
-        private const string PASSTHRU = "PassThru";
         private const string OBJECTSET = "Object";
         private const string PROPERTYSET = "Property";
 
@@ -95,7 +94,8 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         /// <summary>
         /// <para type="description">Tell the cmdlet to return the site to update.</para>
         /// </summary>
-        [Parameter(Mandatory = false, ParameterSetName = PASSTHRU)]
+        [Parameter(Mandatory = false, ParameterSetName = OBJECTSET)]
+        [Parameter(Mandatory = false, ParameterSetName = PROPERTYSET)]
         public SwitchParameter PassThru { get; set; }
 
         /// <summary>
@@ -111,12 +111,15 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
+            ISite updatedSite = null;
+
             switch (this.ParameterSetName)
             {
                 case OBJECTSET:
-                    this.BusinessLayer.Set(this.SiteToSet.ActLike<ISite>());
+                    updatedSite = this.BusinessLayer.Set(this.SiteToSet.ActLike<ISite>());
                     break;
                 case PROPERTYSET:
+<<<<<<< HEAD
                     this.SiteToSet = new SiteInfo
                     {
                         DisplayName = this.DisplayName,
@@ -125,12 +128,15 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
                         DomainName = this.DomainName,
                     };
                     this.BusinessLayer.Set(this.SiteToSet.ActLike<ISite>());
+=======
+                    updatedSite = this.BusinessLayer.Set(this.DisplayName, this.SiteName, this.Status, this.DomainName);
+>>>>>>> df6cd1ca079de00547cea2b4c6b5c0693011969f
                     break;
             }
 
             if (this.PassThru.ToBool())
             {
-                this.WriteObject(this.SiteToSet);
+                this.WriteObject(updatedSite.UndoActLike());
             }
         }
 

@@ -25,6 +25,7 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\PoshKentico.Tests.xml</DocumentationFile>
     <NoWarn>1573;1591</NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -467,6 +468,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CmdletBusinessBaseTests.cs" />
+    <Compile Include="Configuration\Settings\GetCmsSettingValueTests.cs" />
+    <Compile Include="Configuration\Settings\GetCmsWebConfigValueTests.cs" />
+    <Compile Include="Configuration\Settings\SetCmsSettingValueTests.cs" />
     <Compile Include="Configuration\Sites\AddCmsSiteCultureBusinessTests.cs" />
     <Compile Include="Configuration\Sites\GetCmsSiteDomainAliasBusinessTests.cs" />
     <Compile Include="Configuration\Sites\AddCmsSiteDomainAliasBusinessTests.cs" />
@@ -493,6 +497,17 @@
     <Compile Include="Development\WebParts\SetCMSWebPartFieldTests.cs" />
     <Compile Include="Development\WebParts\SetCMSWebPartTests.cs" />
     <Compile Include="Development\WebParts\WebPartBusinessBaseTests.cs" />
+    <Compile Include="Configuration\Staging\GetCmsServerTests.cs" />
+    <Compile Include="Configuration\Staging\NewCmsServerTests.cs" />
+    <Compile Include="Configuration\Staging\RemoveCmsServerTests.cs" />
+    <Compile Include="Configuration\Staging\RemoveCmsStagingTaskTests.cs" />
+    <Compile Include="Configuration\Staging\SetCmsServerTests.cs" />
+    <Compile Include="Configuration\Staging\StagingServiceMock.cs" />
+    <Compile Include="Configuration\Staging\SyncCmsStagingTaskTests.cs" />
+    <Compile Include="Development\GetCMSWebPartCategoryTests.cs" />
+    <Compile Include="Development\NewCMSWebPartCategoryTests.cs" />
+    <Compile Include="Development\RemoveCMSWebPartCategoryTests.cs" />
+    <Compile Include="Development\SetCMSWebPartCategoryTests.cs" />
     <Compile Include="General\InitializeCMSApplicationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

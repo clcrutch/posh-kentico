@@ -27,7 +27,7 @@ CompanyName = 'Chris Crutchfield'
 Copyright = '(c) 2017 Chris Crutchfield. All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = 'PowerShell Administration module for Kentico CMS.'
+Description = 'PowerShell Administration module for Kentico 11.'
 
 # Minimum version of the Windows PowerShell engine required by this module
 PowerShellVersion = '5.0'
@@ -65,6 +65,9 @@ FormatsToProcess = @( `
     "./FormattingFiles/Configuration/Sites/CultureInfo.format.ps1xml", `
     "./FormattingFiles/Configuration/Sites/SiteDomainAliasInfo.format.ps1xml", `
     "./FormattingFiles/Configuration/Sites/SiteInfo.format.ps1xml", `
+
+    # Configuration/Staging
+	"./FormattingFiles/Configuration/Staging/ServerInfo.format.ps1xml" `
 
 	# Development/WebParts
 	"./FormattingFiles/Development/WebParts/FormFieldInfo.format.ps1xml", `

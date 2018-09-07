@@ -29,7 +29,6 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// <summary>
     /// <para type="synopsis">Adds a domain alias to a specified site.</para>
     /// <para type="description">Adds a domain alias to a specified site based off of the provided input.</para>
-    /// <para type="description">This cmdlet returns the newly modified site when the -PassThru switch is used.</para>
     /// <example>
     ///     <para>Add a domain alias with alias name "alias" to a specified site specifying the site name "*bas*", display name "*bas*", or a domain name "*bas*".</para>
     ///     <code>Add-CMSSiteDomainAlias -SiteName "*bas*" -AliasName "alias"</code>

@@ -21,6 +21,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\PoshKentico.Business.xml</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -450,6 +451,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CmdletBusinessBase.cs" />
+    <Compile Include="Configuration\Settings\GetCmsSettingValueBusiness.cs" />
+    <Compile Include="Configuration\Settings\GetCmsWebConfigValueBusiness.cs" />
+    <Compile Include="Configuration\Settings\SetCmsSettingValueBusiness.cs" />
     <Compile Include="Configuration\Sites\AddCmsSiteCultureBusiness.cs" />
     <Compile Include="Configuration\Sites\AddCmsSiteDomainAliasBusiness.cs" />
     <Compile Include="Configuration\Sites\GetCmsSiteBusiness.cs" />
@@ -477,6 +481,18 @@
     <Compile Include="Development\WebParts\SetCMSWebPartFieldBusiness.cs" />
     <Compile Include="Development\WebParts\ValueAttribute.cs" />
     <Compile Include="Development\WebParts\WebPartBusinessBase.cs" />
+    <Compile Include="Configuration\Staging\GetCmsServerBusiness.cs" />
+    <Compile Include="Configuration\Staging\NewCmsServerBusiness.cs" />
+    <Compile Include="Configuration\Staging\RemoveCmsServerBusiness.cs" />
+    <Compile Include="Configuration\Staging\RemoveCmsStagingTaskBusiness.cs" />
+    <Compile Include="Configuration\Staging\SetCmsRoleLogBusiness.cs" />
+    <Compile Include="Configuration\Staging\SetCmsRoleNoLogBusiness.cs" />
+    <Compile Include="Configuration\Staging\SetCmsServerBusiness.cs" />
+    <Compile Include="Configuration\Staging\SyncCmsStagingTaskBusiness.cs" />
+    <Compile Include="Development\GetCMSWebPartCategoryBusiness.cs" />
+    <Compile Include="Development\NewCMSWebPartCategoryBusiness.cs" />
+    <Compile Include="Development\RemoveCMSWebPartCategoryBusiness.cs" />
+    <Compile Include="Development\SetCMSWebPartCategoryBusiness.cs" />
     <Compile Include="General\InitializeCMSApplicationBusiness.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
