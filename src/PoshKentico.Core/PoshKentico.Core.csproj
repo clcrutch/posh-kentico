@@ -21,7 +21,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\PoshKentico.Core.xml</DocumentationFile>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -470,6 +470,10 @@
     <Compile Include="Services\Development\IWebPartService.cs" />
     <Compile Include="Services\General\ICmsApplicationService.cs" />
     <Compile Include="Services\General\InitializationState.cs" />
+    <Compile Include="Services\Resource\IResource.cs" />
+    <Compile Include="Services\Resource\IResourceService.cs" />
+    <Compile Include="Services\Resource\ResourceItem.cs" />
+    <Compile Include="Services\Resource\ResourceType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -481,6 +485,8 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.0-beta004\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.0-beta004\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Providers\Resource\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

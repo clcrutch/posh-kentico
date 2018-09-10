@@ -23,7 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <DocumentationFile>..\..\build\posh-kentico.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -473,6 +473,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CmdletProviders\CmdletProvider.cs" />
+    <Compile Include="CmdletProviders\ResourceProvider.cs" />
     <Compile Include="Cmdlets\Configuration\Settings\GetCmsSettingValueCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Settings\GetCmsWebConfigValueCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Settings\SetCmsSettingValueCmdlet.cs" />
@@ -505,6 +507,7 @@
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Extensions\PSObjectExtensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="MefCmdletProvider.cs" />
     <Compile Include="MefHost.cs" />
     <Compile Include="Navigation\DynamicParameters\NewWebPartCategoryDynamicParameter.cs" />
     <Compile Include="Navigation\DynamicParameters\NewWebPartDynamicParameter.cs" />
