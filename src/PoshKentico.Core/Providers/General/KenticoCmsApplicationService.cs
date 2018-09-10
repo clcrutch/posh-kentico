@@ -89,6 +89,13 @@ namespace PoshKentico.Core.Providers.General
             {
                 writeDebug?.Invoke($"Searching for \"web.config\" in {directoryInfo.FullName}.");
 
+                if (!directoryInfo.Exists)
+                {
+                    writeDebug?.Invoke($"Directory {directoryInfo.FullName} does not exist. Skipping.");
+
+                    continue;
+                }
+
                 // The web.config in the folder
                 var webConfigDirectoryInfo = directoryInfo.GetFiles("web.config").SingleOrDefault();
 

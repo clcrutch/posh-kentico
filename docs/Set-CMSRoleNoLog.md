@@ -14,21 +14,17 @@ Sets a new role without logging any staging tasks.
 
 ### Object
 ```
-Set-CMSRoleNoLog [-RoleToSet] <RoleInfo> [<CommonParameters>]
+Set-CMSRoleNoLog [-RoleToSet] <RoleInfo> [-PassThru] [<CommonParameters>]
 ```
 
 ### Property
 ```
-Set-CMSRoleNoLog [-RoleName] <String> [-SiteID] <Int32> [-DisplayName] <String> [<CommonParameters>]
-```
-
-### PassThru
-```
-Set-CMSRoleNoLog [-PassThru] [<CommonParameters>]
+Set-CMSRoleNoLog [-RoleName] <String> [-SiteID] <Int32> [-DisplayName] <String> [-PassThru]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+Sets a new role without logging any staging tasks.
 
 ## EXAMPLES
 
@@ -114,7 +110,7 @@ Tell the cmdlet to return the role to set.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: PassThru
+Parameter Sets: (All)
 Aliases:
 
 Required: False

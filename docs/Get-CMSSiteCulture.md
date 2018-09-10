@@ -25,8 +25,6 @@ Get-CMSSiteCulture [-SiteToWork] <SiteInfo> [<CommonParameters>]
 ## DESCRIPTION
 Gets the cultures of the specified site based off of the provided input.
 
-This cmdlet returns the list of cultures when the -PassThru switch is used.
-
 ## EXAMPLES
 
 ### EXAMPLE 1
@@ -81,6 +79,8 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 A reference to the site.
 
 ## OUTPUTS
+
+### CMS.Localization.CultureInfo[]
 
 ## NOTES
 

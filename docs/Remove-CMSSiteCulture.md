@@ -31,8 +31,6 @@ Remove-CMSSiteCulture [-SiteName] <String> [-ID] <Int32[]> [-CultureCode] <Strin
 ## DESCRIPTION
 Removes a culture to a specified site based off of the provided input.
 
-This cmdlet returns the newly modified site when the -PassThru switch is used.
-
 ## EXAMPLES
 
 ### EXAMPLE 1
@@ -88,9 +86,7 @@ Accept wildcard characters: False
 ```
 
 ### -Exact
-If set, the match is exact,
-
-else the match performs a contains for site name.
+If set, the match is exact, else the match performs a contains for site name.
 
 ```yaml
 Type: SwitchParameter

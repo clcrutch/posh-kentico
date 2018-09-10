@@ -44,10 +44,10 @@ namespace PoshKentico.Business.Configuration.Sites
         #region Methods
 
         /// <summary>
-        /// Remove a domain alias to a site
+        /// Remove a domain alias to a site.
         /// </summary>
-        /// <param name="site">the site to add domain alias to</param>
-        /// <param name="aliasName">the domain alias code for the domain alias to add to the site</param>
+        /// <param name="site">The site to add domain alias to.</param>
+        /// <param name="aliasName">The domain alias code for the domain alias to add to the site.</param>
         public void RemoveDomainAlias(ISite site, string aliasName)
         {
             this.RemoveSiteDomainAlias(site, aliasName);
@@ -58,7 +58,7 @@ namespace PoshKentico.Business.Configuration.Sites
         /// </summary>
         /// <param name="matchString">the string which to match the site to.</param>
         /// <param name="exact">A boolean which indicates if the match should be exact.</param>
-        /// <param name="aliasName">the domain alias code for the domain alias to add to the site</param>
+        /// <param name="aliasName">The domain alias code for the domain alias to add to the site.</param>
         public void RemoveDomainAlias(string matchString, bool exact, string aliasName)
         {
             foreach (var site in this.GetCmsSiteBusiness.GetSites(matchString, exact))
@@ -71,7 +71,7 @@ namespace PoshKentico.Business.Configuration.Sites
         /// Removes the domain alias to a <see cref="ISite"/> in the CMS System.
         /// </summary>
         /// <param name="ids">The IDs of the <see cref="ISite"/> to add domain alias to.</param>
-        /// <param name="aliasName">the domain alias code for the domain alias to add to the site</param>
+        /// <param name="aliasName">The domain alias code for the domain alias to add to the site.</param>
         public void RemoveDomainAlias(int[] ids, string aliasName)
         {
             foreach (var site in this.GetCmsSiteBusiness.GetSites(ids))
@@ -81,10 +81,10 @@ namespace PoshKentico.Business.Configuration.Sites
         }
 
         /// <summary>
-        /// Remove a domain alias to a site
+        /// Remove a domain alias to a site.
         /// </summary>
-        /// <param name="site">the site to add domain alias to</param>
-        /// <param name="aliasName">the domain alias code for the domain alias to add to the site</param>
+        /// <param name="site">The site to add domain alias to.</param>
+        /// <param name="aliasName">The domain alias code for the domain alias to add to the site.</param>
         private void RemoveSiteDomainAlias(ISite site, string aliasName)
         {
             this.SiteService.RemoveSiteDomainAlias(site, aliasName);

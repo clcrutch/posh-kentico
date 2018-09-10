@@ -8,28 +8,23 @@ schema: 2.0.0
 # Set-CMSRoleLog
 
 ## SYNOPSIS
-Sets a new role without logging any staging tasks.
+Set a new role to log staging tasks under specific task groups.
 
 ## SYNTAX
 
 ### Object
 ```
-Set-CMSRoleLog [-RoleToSet] <RoleInfo> [-TaskGroupName] <String> [<CommonParameters>]
+Set-CMSRoleLog [-RoleToSet] <RoleInfo> [-TaskGroupName] <String> [-PassThru] [<CommonParameters>]
 ```
 
 ### Property
 ```
 Set-CMSRoleLog [-RoleName] <String> [-SiteID] <Int32> [-DisplayName] <String> [-TaskGroupName] <String>
- [<CommonParameters>]
-```
-
-### PassThru
-```
-Set-CMSRoleLog [-PassThru] [<CommonParameters>]
+ [-PassThru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+Set a new role to log staging tasks under specific task groups.
 
 ## EXAMPLES
 
@@ -115,7 +110,7 @@ The task group name.
 
 ```yaml
 Type: String
-Parameter Sets: Object, Property
+Parameter Sets: (All)
 Aliases:
 
 Required: True
@@ -130,7 +125,7 @@ Tell the cmdlet to return the role to set.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: PassThru
+Parameter Sets: (All)
 Aliases:
 
 Required: False

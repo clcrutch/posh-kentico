@@ -28,7 +28,7 @@ namespace PoshKentico.Cmdlets.Configuration.Settings
     /// <summary>
     /// <para type="synopsis">Sets the setting values by the provided setting key.</para>
     /// <para type="description">Sets the setting values by the provided setting key. </para>
-    /// /// <example>
+    /// <example>
     ///     <para>Set setting values  with a new value "new val", for setting with a site, and setting key "key".</para>
     ///     <code>$site | Set-CMSSettingValue -Key "my key" -Value "new val"</code>
     /// </example>

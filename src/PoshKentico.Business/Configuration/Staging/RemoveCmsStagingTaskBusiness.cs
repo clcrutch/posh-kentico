@@ -50,8 +50,8 @@ namespace PoshKentico.Business.Configuration.Staging
         /// <summary>
         /// Removes the <see cref="IServer"/> related staging tasks in the CMS System.
         /// </summary>
-        /// <param name="serverName">The server name to look for the server</param>
-        /// <param name="serverSiteId">The server site id to look for the server</param>
+        /// <param name="serverName">The server name to look for the server.</param>
+        /// <param name="serverSiteId">The server site id to look for the server.</param>
         public void RemoveStaging(string serverName, int serverSiteId)
         {
             var data = new

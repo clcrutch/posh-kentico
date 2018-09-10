@@ -25,8 +25,6 @@ Get-CMSSiteDomainAlias [-SiteToWork] <SiteInfo> [<CommonParameters>]
 ## DESCRIPTION
 Gets the domain aliases of the specified site based off of the provided input.
 
-This cmdlet returns the list of domain aliases when the -PassThru switch is used.
-
 ## EXAMPLES
 
 ### EXAMPLE 1
@@ -81,6 +79,8 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 A reference to the site.
 
 ## OUTPUTS
+
+### CMS.SiteProvider.SiteDomainAliasInfo[]
 
 ## NOTES
 

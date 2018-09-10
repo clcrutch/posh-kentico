@@ -61,11 +61,18 @@ CLRVersion = '4.0'
 
 # Format files (.ps1xml) to be loaded when importing this module
 FormatsToProcess = @( `
-    "./FormattingFiles/development.format.ps1xml", `
+	# Configuration/Sites
     "./FormattingFiles/Configuration/Sites/CultureInfo.format.ps1xml", `
     "./FormattingFiles/Configuration/Sites/SiteDomainAliasInfo.format.ps1xml", `
     "./FormattingFiles/Configuration/Sites/SiteInfo.format.ps1xml", `
+
+    # Configuration/Staging
 	"./FormattingFiles/Configuration/Staging/ServerInfo.format.ps1xml" `
+
+	# Development/WebParts
+	"./FormattingFiles/Development/WebParts/FormFieldInfo.format.ps1xml", `
+    "./FormattingFiles/Development/WebParts/WebPartCategoryInfo.format.ps1xml", `
+	"./FormattingFiles/Development/WebParts/WebPartInfo.format.ps1xml" `
 )
 
 # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess

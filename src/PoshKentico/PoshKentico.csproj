@@ -488,6 +488,19 @@
     <Compile Include="Cmdlets\Configuration\Sites\SetCmsSiteCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Sites\StartCmsSiteCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Sites\StopCmsSiteCmdlet.cs" />
+    <Compile Include="Cmdlets\Development\WebParts\AddCMSWebPartFieldCmdlet.cs" />
+    <Compile Include="Cmdlets\Development\WebParts\GetCMSWebPartCategoryCmdletBase.cs" />
+    <Compile Include="Cmdlets\Development\WebParts\GetCMSWebPartCmdlet.cs" />
+    <Compile Include="Cmdlets\Development\WebParts\GetCMSWebPartCategoryCmdlet.cs" />
+    <Compile Include="Cmdlets\Development\WebParts\GetCMSWebPartFieldCmdlet.cs" />
+    <Compile Include="Cmdlets\Development\WebParts\NewCMSWebPartCategoryCmdlet.cs" />
+    <Compile Include="Cmdlets\Development\WebParts\NewCMSWebPartCmdlet.cs" />
+    <Compile Include="Cmdlets\Development\WebParts\RemoveCMSWebPartCategoryCmdlet.cs" />
+    <Compile Include="Cmdlets\Development\WebParts\RemoveCMSWebPartCmdlet.cs" />
+    <Compile Include="Cmdlets\Development\WebParts\RemoveCMSWebPartFieldCmdlet.cs" />
+    <Compile Include="Cmdlets\Development\WebParts\SetCMSWebPartCategoryCmdlet.cs" />
+    <Compile Include="Cmdlets\Development\WebParts\SetCMSWebPartCmdlet.cs" />
+    <Compile Include="Cmdlets\Development\WebParts\SetCMSWebPartFieldCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Staging\GetCmsServerCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Staging\NewCmsServerCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Staging\RemoveCmsServerCmslet.cs" />
@@ -496,26 +509,11 @@
     <Compile Include="Cmdlets\Configuration\Staging\SetCmsRoleNoLogCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Staging\SetCmsServerCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Staging\SyncCmsStagingTaskCmdlet.cs" />
-    <Compile Include="Cmdlets\Development\GetCMSWebPartCategoryCmdlet.cs" />
-    <Compile Include="Cmdlets\Development\NewCMSWebPartCategoryCmdlet.cs" />
-    <Compile Include="Cmdlets\Development\RemoveCMSWebPartCategoryCmdlet.cs" />
-    <Compile Include="Cmdlets\Development\SetCMSWebPartCategoryCmdlet.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="MefCmdlet.cs" />
-    <Compile Include="Extensions\DictionaryExtensions.cs" />
-    <Compile Include="Extensions\PSObjectExtensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="MefHost.cs" />
-    <Compile Include="Navigation\DynamicParameters\NewWebPartCategoryDynamicParameter.cs" />
-    <Compile Include="Navigation\DynamicParameters\NewWebPartDynamicParameter.cs" />
-    <Compile Include="Navigation\FileSystemItems\AbstractFileSystemItem.cs" />
-    <Compile Include="Navigation\FileSystemItems\RootFileSystemItem.cs" />
-    <Compile Include="Navigation\FileSystemItems\WebPartCategoryFileSystemItem.cs" />
-    <Compile Include="Navigation\FileSystemItems\IFileSystemItem.cs" />
-    <Compile Include="Navigation\FileSystemItems\WebPartFileSystemItem.cs" />
-    <Compile Include="Navigation\KenticoNavigationCmdletProvider.cs" />
     <Compile Include="Cmdlets\General\InitializeCMSApplicationCmdlet.cs" />
-    <Compile Include="Navigation\FileSystemItems\MetaFileSystemItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -544,6 +542,8 @@
     <None Include="DSCResources\xWebPartCategory\xWebPartCategory.schema.mof">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="DSCResources\xWebPartField\xWebPartField.psm1" />
+    <None Include="DSCResources\xWebPartField\xWebPartField.schema.mof" />
     <None Include="DSCResources\xWebPart\xWebPart.psm1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -559,11 +559,17 @@
     <Content Include="FormattingFiles\Configuration\Sites\CultureInfo.format.ps1xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="FormattingFiles\Development\WebParts\WebPartCategoryInfo.format.ps1xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FormattingFiles\Development\WebParts\FormFieldInfo.format.ps1xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="FormattingFiles\Configuration\Staging\ServerInfo.format.ps1xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
-    <Content Include="FormattingFiles\development.format.ps1xml">
+    <Content Include="FormattingFiles\Development\WebParts\WebPartInfo.format.ps1xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="posh-kentico.psd1">
@@ -576,8 +582,8 @@
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\AWSSDK.S3.3.1.9.0\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.0-beta004\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.0-beta004\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.0-beta009\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.0-beta009\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -598,11 +604,8 @@
     <Error Condition="!Exists('..\packages\XmlDoc2CmdletDoc.0.2.9\build\XmlDoc2CmdletDoc.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\XmlDoc2CmdletDoc.0.2.9\build\XmlDoc2CmdletDoc.targets'))" />
   </Target>
   <Import Project="..\packages\XmlDoc2CmdletDoc.0.2.9\build\XmlDoc2CmdletDoc.targets" Condition="Exists('..\packages\XmlDoc2CmdletDoc.0.2.9\build\XmlDoc2CmdletDoc.targets')" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
+  <UsingTask TaskName="PoshKentico.MSBuild.CMSVirtualTask" AssemblyFile="$(ProjectDir)\..\PoshKentico.MSBuild\bin\$(Configuration)\net46\PoshKentico.MSBuild.dll" />
   <Target Name="AfterBuild">
+    <CMSVirtualTask TargetDir="$(TargetDir)" />
   </Target>
-  -->
 </Project>

@@ -13,11 +13,13 @@ Sets a web part category.
 ## SYNTAX
 
 ```
-Set-CMSWebPartCategory [-WebPartCategory] <WebPartCategoryInfo> [-PassThru] [<CommonParameters>]
+Set-CMSWebPartCategory [-PassThru] [-WebPartCategory] <WebPartCategoryInfo> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 Sets a web part category.
+
+This command automatically initializes the connection to Kentico if not already initialized.
 
 ## EXAMPLES
 
@@ -28,10 +30,25 @@ $webPartCategory | Set-CMSWebPartCategory
 
 ### EXAMPLE 2
 ```
-$webPartCategory | Set-CMSWebPartCategory -Passthru
+$webPartCategory | Set-CMSWebPartCategory -PassThru
 ```
 
 ## PARAMETERS
+
+### -PassThru
+Tell the cmdlet to return the web part category.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -WebPartCategory
 A reference to the WebPart category to update.
@@ -48,21 +65,6 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -PassThru
-Tell the cmdlet to return the newly created web part category.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
 For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -74,7 +76,8 @@ A reference to the WebPart category to update.
 
 ## OUTPUTS
 
-### CMS.PortalEngine.WebPartCategoryInfo
+### CMS.PortalEngine.WebPartCategoryInfo[]
+
 ## NOTES
 
 ## RELATED LINKS

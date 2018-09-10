@@ -92,8 +92,7 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
         public string DisplayName { get; set; }
 
         /// <summary>
-        /// <para type="description">If set, the match is exact,</para>
-        /// <para type="description">else the match performs a contains for display name and category name and starts with for path.</para>
+        /// <para type="description">If set, the match is exact, else the match performs a contains for display name and category name and starts with for path.</para>
         /// </summary>
         [Parameter(ParameterSetName = DISPLAYNAME)]
         [Parameter(ParameterSetName = OBJECTSET)]

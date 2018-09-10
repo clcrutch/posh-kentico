@@ -48,7 +48,6 @@ namespace PoshKentico.Tests.Configuration.Sites
                 WriteVerbose = Assert.NotNull,
 
                 SiteService = siteServiceMock.Object,
-                GetCmsSiteBusiness = getBusinessLayer,
             };
 
             businessLayer.GetCultures(siteMock1.Object);
@@ -82,7 +81,6 @@ namespace PoshKentico.Tests.Configuration.Sites
                 WriteVerbose = Assert.NotNull,
 
                 SiteService = siteServiceMock.Object,
-                GetCmsSiteBusiness = getBusinessLayer,
             };
 
             businessLayer.GetCultures(siteMock1.Object.SiteName);

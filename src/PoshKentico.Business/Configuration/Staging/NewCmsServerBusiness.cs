@@ -45,14 +45,14 @@ namespace PoshKentico.Business.Configuration.Staging
         /// <summary>
         /// Creates a new <see cref="IServer"/> in the CMS System.
         /// </summary>
-        /// <param name="displayName">The Display Name for the new Server</param>
-        /// <param name="serverName">The Server Name for the new Server</param>
-        /// <param name="serverUrl">The Url for the new Server</param>
-        /// <param name="authentication">The authentication for the new Server</param>
-        /// <param name="enabled">The enabled status for the new Server</param>
-        /// <param name="userName">The user name for the new Server</param>
-        /// <param name="password">The password for the new Server</param>
-        /// <param name="siteID">The site id associated with the new Server</param>
+        /// <param name="displayName">The Display Name for the new Server.</param>
+        /// <param name="serverName">The Server Name for the new Server.</param>
+        /// <param name="serverUrl">The Url for the new Server.</param>
+        /// <param name="authentication">The authentication for the new Server.</param>
+        /// <param name="enabled">The enabled status for the new Server.</param>
+        /// <param name="userName">The user name for the new Server.</param>
+        /// <param name="password">The password for the new Server.</param>
+        /// <param name="siteID">The site id associated with the new Server.</param>
         /// <returns>The newly created <see cref="IServer"/>.</returns>
         public IServer CreateServer(
                                     string displayName,

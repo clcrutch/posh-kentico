@@ -36,11 +36,6 @@ namespace PoshKentico.Business.Configuration.Sites
         [Import]
         public ISiteService SiteService { get; set; }
 
-        /// <summary>
-        /// Gets or sets a reference to the <see cref="GetCmsSiteBusiness"/> used to get the site to get culture to.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public GetCmsSiteBusiness GetCmsSiteBusiness { get; set; }
         #endregion
 
         #region Methods
