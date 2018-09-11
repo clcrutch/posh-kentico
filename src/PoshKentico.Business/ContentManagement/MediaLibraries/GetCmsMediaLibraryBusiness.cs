@@ -24,7 +24,7 @@ using PoshKentico.Core.Services.ContentManagement.MediaLibraries;
 namespace PoshKentico.Business.ContentManagement.MediaLibraries
 {
     /// <summary>
-    /// Business Layer for Get-CMSMediaLibray cmdlet
+    /// Business Layer for Get-CMSMediaLibray cmdlet.
     /// </summary>
     [Export(typeof(GetCmsMediaLibraryBusiness))]
     public class GetCmsMediaLibraryBusiness : CmdletBusinessBase

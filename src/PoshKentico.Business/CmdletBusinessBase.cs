@@ -56,17 +56,17 @@ namespace PoshKentico.Business
         /// <summary>
         /// Gets or sets a delegate for writing to the debug stream.
         /// </summary>
-        public Action<string> WriteDebug { get; set; }
+        public virtual Action<string> WriteDebug { get; set; }
 
         /// <summary>
         /// Gets or sets a delegate for writing to the verbose stream.
         /// </summary>
-        public Action<string> WriteVerbose { get; set; }
+        public virtual Action<string> WriteVerbose { get; set; }
 
         /// <summary>
         /// Gets or sets a delegate for checking if the cmdlet should continue processing.
         /// </summary>
-        public Func<string, string, bool> ShouldProcess { get; set; }
+        public virtual Func<string, string, bool> ShouldProcess { get; set; }
 
         #endregion
 

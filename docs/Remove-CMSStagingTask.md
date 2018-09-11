@@ -8,7 +8,7 @@ schema: 2.0.0
 # Remove-CMSStagingTask
 
 ## SYNOPSIS
-Removehronize the staging tasks that target the given server.
+Remove the staging tasks that target the given server.
 
 ## SYNTAX
 
@@ -23,7 +23,7 @@ Remove-CMSStagingTask [-ServerName] <String> [-SiteID] <Int32> [<CommonParameter
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+Removes the staging tasks that target the given server.
 
 ## EXAMPLES
 

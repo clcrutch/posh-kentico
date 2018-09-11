@@ -22,7 +22,7 @@ using PoshKentico.Core.Services.ContentManagement.MediaLibraries;
 namespace PoshKentico.Business.ContentManagement.MediaLibraries
 {
     /// <summary>
-    /// Business Layer for Set-CMSMediaLibrary cmdlet
+    /// Business Layer for Set-CMSMediaLibrary cmdlet.
     /// </summary>
     [Export(typeof(SetCmsMediaLibraryBusiness))]
     public class SetCmsMediaLibraryBusiness : CmdletBusinessBase
@@ -43,7 +43,7 @@ namespace PoshKentico.Business.ContentManagement.MediaLibraries
         /// Sets the <see cref="IMediaLibrary"/> in the CMS System.
         /// </summary>
         /// <param name="library">The <see cref="IMediaLibrary"/> to set.</param>
-        /// <returns>The updated File</returns>
+        /// <returns>The updated File.</returns>
         public IMediaLibrary Set(IMediaLibrary library)
         {
             return this.MediaLibraryService.UpdateMediaLibrary(library);
@@ -54,9 +54,9 @@ namespace PoshKentico.Business.ContentManagement.MediaLibraries
         /// </summary>
         /// <param name="siteID">The site id of the <see cref="IMediaLibrary"/>to retrive for updating the file. </param>
         /// <param name="libraryName">The name of the <see cref="IMediaLibrary"/> to retrive for updating the file. </param>
-        /// <param name="displayName">the display name of the media file</param>
-        /// <param name="description">the description of the media file</param>
-        /// /// <param name="folder">the folder of the media file</param>
+        /// <param name="displayName">the display name of the media file.</param>
+        /// <param name="description">the description of the media file.</param>
+        /// /// <param name="folder">the folder of the media file.</param>
         /// <returns>The updated Media File.</returns>
         public IMediaLibrary Set(int siteID, string libraryName, string displayName, string description, string folder)
         {

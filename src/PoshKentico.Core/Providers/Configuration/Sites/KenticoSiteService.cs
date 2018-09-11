@@ -17,6 +17,7 @@
 
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using CMS.Localization;
 using CMS.SiteProvider;
@@ -29,6 +30,7 @@ namespace PoshKentico.Core.Providers.Configuration.Sites
     /// <summary>
     /// Implementation of <see cref="ISiteService"/> that uses Kentico.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     [Export(typeof(ISiteService))]
     public class KenticoSiteService : ISiteService
     {

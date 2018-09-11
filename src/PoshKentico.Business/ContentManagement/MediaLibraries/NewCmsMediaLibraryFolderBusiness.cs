@@ -41,9 +41,9 @@ namespace PoshKentico.Business.ContentManagement.MediaLibraries
         /// <summary>
         /// Creates a new Media Library Folder in the CMS System.
         /// </summary>
-        /// <param name="siteID">the site id of the media library</param>
-        /// <param name="name">The name of the media library</param>
-        /// <param name="folder">The name of the newly created folder</param>
+        /// <param name="siteID">the site id of the media library.</param>
+        /// <param name="name">The name of the media library.</param>
+        /// <param name="folder">The name of the newly created folder.</param>
         public void CreateMediaLibraryFolder(int siteID, string name, string folder)
         {
             this.MediaLibraryService.CreateMediaFolder(siteID, name, folder);

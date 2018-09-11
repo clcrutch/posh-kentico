@@ -42,11 +42,11 @@ namespace PoshKentico.Business.ContentManagement.MediaLibraries
         /// <summary>
         /// Creates a new Media Library in the CMS System.
         /// </summary>
-        /// <param name="displayName">The display name of the media library</param>
-        /// <param name="name">The name of the media library</param>
-        /// <param name="description">the description of the media library</param>
-        /// <param name="folder">the folder of the media library</param>
-        /// <param name="siteID">the site id of the media library</param>
+        /// <param name="displayName">The display name of the media library.</param>
+        /// <param name="name">The name of the media library.</param>
+        /// <param name="description">the description of the media library.</param>
+        /// <param name="folder">the folder of the media library.</param>
+        /// <param name="siteID">the site id of the media library.</param>
         /// <returns>The newly created Media Library.</returns>
         public IMediaLibrary CreateMediaLibrary(string displayName, string name, string description, string folder, int siteID)
         {

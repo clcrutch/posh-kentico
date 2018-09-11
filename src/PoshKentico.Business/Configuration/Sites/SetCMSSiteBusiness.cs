@@ -44,7 +44,7 @@ namespace PoshKentico.Business.Configuration.Sites
         /// Sets the <see cref="ISite"/> in the CMS System.
         /// </summary>
         /// <param name="site">The <see cref="ISite"/> to set.</param>
-        /// <returns>the updated site</returns>
+        /// <returns>The updated site.</returns>
         public ISite Set(ISite site)
         {
             return this.SiteService.Update(site);
@@ -53,11 +53,11 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <summary>
         /// Sets the <see cref="ISite"/> in the CMS System.
         /// </summary>
-        /// <param name="displayName">The Display Name for site to update</param>
-        /// <param name="siteName">The Site Name for site to update</param>
-        /// <param name="status">The Status for site to update</param>
-        /// <param name="domainName">The Domain Name for site to update</param>
-        /// <returns>the updated site</returns>
+        /// <param name="displayName">The Display Name for site to update.</param>
+        /// <param name="siteName">The Site Name for site to update.</param>
+        /// <param name="status">The Status for site to update.</param>
+        /// <param name="domainName">The Domain Name for site to update.</param>
+        /// <returns>The updated site.</returns>
         public ISite Set(string displayName, string siteName, SiteStatusEnum status, string domainName)
         {
             var site = new

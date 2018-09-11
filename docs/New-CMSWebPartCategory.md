@@ -22,6 +22,8 @@ Creates a new web part category based off of the provided input.
 
 This cmdlet returns the newly created web part category when the -PassThru switch is used.
 
+This command automatically initializes the connection to Kentico if not already initialized.
+
 ## EXAMPLES
 
 ### EXAMPLE 1
@@ -106,7 +108,8 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## OUTPUTS
 
-### CMS.PortalEngine.WebPartCategoryInfo
+### CMS.PortalEngine.WebPartCategoryInfo[]
+
 ## NOTES
 
 ## RELATED LINKS

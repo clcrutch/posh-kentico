@@ -466,6 +466,21 @@
     <Compile Include="Configuration\Sites\SetCmsSiteBusiness.cs" />
     <Compile Include="Configuration\Sites\StartCmsSiteBusiness.cs" />
     <Compile Include="Configuration\Sites\StopCmsSiteBusiness.cs" />
+    <Compile Include="Development\WebParts\AddCMSWebPartFieldBusiness.cs" />
+    <Compile Include="Development\WebParts\FieldDataType.cs" />
+    <Compile Include="Development\WebParts\GetCMSWebPartBusiness.cs" />
+    <Compile Include="Development\WebParts\GetCMSWebPartCategoryBusiness.cs" />
+    <Compile Include="Development\WebParts\GetCMSWebPartFieldBusiness.cs" />
+    <Compile Include="Development\WebParts\NewCMSWebPartBusiness.cs" />
+    <Compile Include="Development\WebParts\NewCMSWebPartCategoryBusiness.cs" />
+    <Compile Include="Development\WebParts\RemoveCMSWebPartBusiness.cs" />
+    <Compile Include="Development\WebParts\RemoveCMSWebPartCategoryBusiness.cs" />
+    <Compile Include="Development\WebParts\RemoveCMSWebPartFieldBusiness.cs" />
+    <Compile Include="Development\WebParts\SetCMSWebPartBusiness.cs" />
+    <Compile Include="Development\WebParts\SetCMSWebPartCategoryBusiness.cs" />
+    <Compile Include="Development\WebParts\SetCMSWebPartFieldBusiness.cs" />
+    <Compile Include="Development\WebParts\ValueAttribute.cs" />
+    <Compile Include="Development\WebParts\WebPartBusinessBase.cs" />
     <Compile Include="Configuration\Staging\GetCmsServerBusiness.cs" />
     <Compile Include="Configuration\Staging\NewCmsServerBusiness.cs" />
     <Compile Include="Configuration\Staging\RemoveCmsServerBusiness.cs" />
@@ -482,10 +497,6 @@
     <Compile Include="ContentManagement\MediaLibraries\RemoveCmsMediaLibraryBusiness.cs" />
     <Compile Include="ContentManagement\MediaLibraries\SetCmsMediaLibraryBusiness.cs" />
     <Compile Include="ContentManagement\MediaLibraries\SetCmsMediaLibraryFileBusiness.cs" />
-    <Compile Include="Development\GetCMSWebPartCategoryBusiness.cs" />
-    <Compile Include="Development\NewCMSWebPartCategoryBusiness.cs" />
-    <Compile Include="Development\RemoveCMSWebPartCategoryBusiness.cs" />
-    <Compile Include="Development\SetCMSWebPartCategoryBusiness.cs" />
     <Compile Include="General\InitializeCMSApplicationBusiness.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -497,8 +508,8 @@
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\AWSSDK.S3.3.1.9.0\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.0-beta004\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.0-beta004\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.0-beta009\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.0-beta009\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PoshKentico.Core\PoshKentico.Core.csproj">
@@ -506,6 +517,5 @@
       <Name>PoshKentico.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

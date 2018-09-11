@@ -91,7 +91,7 @@ namespace PoshKentico.Tests.ContentManagement.MediaLibraries
                 MediaLibraryService = libraryServiceMock.Object,
             };
 
-            businessLayer.Set("My Modified Library1", "MyLibrary1", "New Description", "images1", 1);
+            businessLayer.Set(1, "MyLibrary1", "My Modified Library1", "New Description", "images1");
 
             libraryServiceMock.Verify(x => x.UpdateMediaLibrary(
                 It.Is<IMediaLibrary>(i => i.LibraryDisplayName != "My Library1"

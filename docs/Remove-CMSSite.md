@@ -87,9 +87,7 @@ Accept wildcard characters: False
 ```
 
 ### -Exact
-If set, the match is exact,
-
-else the match performs a contains for site name.
+If set, the match is exact, else the match performs a contains for site name.
 
 ```yaml
 Type: SwitchParameter

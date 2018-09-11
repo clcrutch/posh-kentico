@@ -75,9 +75,7 @@ Accept wildcard characters: False
 ```
 
 ### -Exact
-If set, the match is exact,
-
-else the match performs a contains for display name and category name and starts with for path.
+If set, the match is exact, else the match performs a contains for display name and category name and starts with for path.
 
 ```yaml
 Type: SwitchParameter

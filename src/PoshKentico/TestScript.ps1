@@ -14,13 +14,6 @@ Configuration KenticoTest
 
 	Node localhost
 	{
-		xWebPart TestWebPart
-		{
-			Name = "TestWebPart"
-			Path = "Kentico:\Development\WebParts\TestCategory"
-			Ensure = "Absent"
-			FileName = "AbuseReport/AbuseReport.ascx"
-		}
 		
 		xSite TestSite
 		{
@@ -56,4 +49,3 @@ Configuration KenticoTest
 KenticoTest -OutputPath .\Temp
 
 Start-DscConfiguration -Wait -Force -Path .\Temp
-

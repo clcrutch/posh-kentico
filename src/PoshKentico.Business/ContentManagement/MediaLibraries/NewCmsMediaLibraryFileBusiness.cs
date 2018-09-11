@@ -39,10 +39,10 @@ namespace PoshKentico.Business.ContentManagement.MediaLibraries
         #region Methods
 
         /// <summary>
-        /// Creates a media library file <see cref="IMediaFile"/> within the <see cref="IMediaLibrary"/>
+        /// Creates a media library file <see cref="IMediaFile"/> within the <see cref="IMediaLibrary"/>.
         /// </summary>
-        /// <param name="librarySiteID">The site id of the <see cref="IMediaLibrary"/>to retrive for creating the new file</param>
-        /// <param name="libraryName">The name of the <see cref="IMediaLibrary"/> to retrive for creating the new file</param>
+        /// <param name="librarySiteID">The site id of the <see cref="IMediaLibrary"/>to retrive for creating the new file.</param>
+        /// <param name="libraryName">The name of the <see cref="IMediaLibrary"/> to retrive for creating the new file.</param>
         /// <param name = "localFilePath" >The local file path for the <see cref="IMediaFile"/>.</param>
         /// <param name="fileName">The file name for the <see cref="IMediaFile"/>.</param>
         /// <param name="fileTitle">The file title for the <see cref="IMediaFile"/>.</param>

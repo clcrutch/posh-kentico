@@ -17,14 +17,29 @@ Gets the web part categories selected by the provided input.
 Get-CMSWebPartCategory [<CommonParameters>]
 ```
 
+### Parent Category
+```
+Get-CMSWebPartCategory [-ParentWebPartCategory] <WebPartCategoryInfo> [-Recurse] [<CommonParameters>]
+```
+
 ### Category Name
 ```
-Get-CMSWebPartCategory [-CategoryName] <String> [-Exact] [<CommonParameters>]
+Get-CMSWebPartCategory [-CategoryName] <String> [-RegularExpression] [<CommonParameters>]
+```
+
+### Path
+```
+Get-CMSWebPartCategory -CategoryPath <String> [<CommonParameters>]
 ```
 
 ### ID
 ```
 Get-CMSWebPartCategory [-ID] <Int32[]> [<CommonParameters>]
+```
+
+### Web Part
+```
+Get-CMSWebPartCategory -WebPart <WebPartInfo> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -44,12 +59,12 @@ Get-CMSWebPartCategory
 
 ### EXAMPLE 2
 ```
-Get-CMSWebPartCategory bas
+Get-CMSWebPartCategory *bas*
 ```
 
 ### EXAMPLE 3
 ```
-Get-CMSWebPartCategory basic -Exact
+Get-CMSWebPartCategory basic
 ```
 
 ### EXAMPLE 4
@@ -57,15 +72,30 @@ Get-CMSWebPartCategory basic -Exact
 Get-CMSWebPartCategory -ID 5,304,5
 ```
 
+### EXAMPLE 5
+```
+Get-CMSWebPartCategory basic -Recurse
+```
+
+### EXAMPLE 6
+```
+$webPart | Get-WebPartCategory
+```
+
+### EXAMPLE 7
+```
+$webPartCategory | Get-WebPartCategory
+```
+
 ## PARAMETERS
 
-### -CategoryName
-The category name, display name, or path of the webpart category.
+### -ParentWebPartCategory
+The webpart category that contains the webpart categories.
 
 ```yaml
-Type: String
-Parameter Sets: Category Name
-Aliases: DisplayName, Name, Path
+Type: WebPartCategoryInfo
+Parameter Sets: Parent Category
+Aliases: Parent, ParentCategory
 
 Required: True
 Position: 0
@@ -74,19 +104,47 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Exact
-If set, the match is exact,
-
-else the match performs a contains for display name and category name and starts with for path.
+### -Recurse
+{{Fill Recurse Description}}
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: Category Name
+Parameter Sets: Parent Category
 Aliases:
 
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -CategoryName
+The category name or display name the webpart category.
+
+```yaml
+Type: String
+Parameter Sets: Category Name
+Aliases: DisplayName, Name
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -CategoryPath
+The path to get the web part category at.
+
+```yaml
+Type: String
+Parameter Sets: Path
+Aliases: Path
+
+Required: True
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -106,18 +164,52 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -RegularExpression
+Indicates if the CategoryName supplied is a regular expression.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: Category Name
+Aliases: Regex
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WebPart
+The webpart to get the web part category for.
+
+```yaml
+Type: WebPartInfo
+Parameter Sets: Web Part
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
 For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### System.String
-The category name, display name, or path of the webpart category.
+### CMS.PortalEngine.WebPartCategoryInfo
+The webpart category that contains the webpart categories.
+
+### CMS.PortalEngine.WebPartInfo
+The webpart to get the web part category for.
 
 ## OUTPUTS
 
-### CMS.PortalEngine.WebPartCategoryInfo
+### CMS.PortalEngine.WebPartCategoryInfo[]
+
 ## NOTES
 
 ## RELATED LINKS

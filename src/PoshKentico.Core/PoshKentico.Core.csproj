@@ -455,24 +455,28 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\Configuration\Settings\KenticoSettingValueService.cs" />
     <Compile Include="Providers\Configuration\Sites\KenticoSiteService.cs" />
+    <Compile Include="Providers\Development\WebParts\IWebPartHolder.cs" />
+    <Compile Include="Providers\Development\WebParts\WebPartHolder.cs" />
     <Compile Include="Providers\Configuration\Staging\KenticoStagingService.cs" />
     <Compile Include="Providers\ContentManagement\MediaLibraries\KenticoMediaLibraryService.cs" />
     <Compile Include="Providers\General\KenticoCmsApplicationService.cs" />
-    <Compile Include="Providers\Development\KenticoWebPartService.cs" />
+    <Compile Include="Providers\Development\WebParts\KenticoWebPartService.cs" />
     <Compile Include="Providers\General\KenticoSiteLocationCache.cs" />
     <Compile Include="Services\Configuration\Localization\ICulture.cs" />
     <Compile Include="Services\Configuration\Settings\ISettingValueService.cs" />
     <Compile Include="Services\Configuration\Sites\ISite.cs" />
     <Compile Include="Services\Configuration\Sites\ISiteDomainAlias.cs" />
     <Compile Include="Services\Configuration\Sites\ISiteService.cs" />
+    <Compile Include="Services\Development\WebParts\IWebPartField.cs" />
+    <Compile Include="Services\Development\WebParts\IWebPart.cs" />
+    <Compile Include="Services\Development\WebParts\IWebPartCategory.cs" />
+    <Compile Include="Services\Development\WebParts\IWebPartService.cs" />
     <Compile Include="Services\Configuration\Roles\IRole.cs" />
     <Compile Include="Services\Configuration\Staging\IServer.cs" />
     <Compile Include="Services\Configuration\Staging\IStagingService.cs" />
     <Compile Include="Services\ContentManagement\MediaLibraries\IMediaFile.cs" />
     <Compile Include="Services\ContentManagement\MediaLibraries\IMediaLibrary.cs" />
     <Compile Include="Services\ContentManagement\MediaLibraries\IMediaLibraryService.cs" />
-    <Compile Include="Services\Development\IWebPartCategory.cs" />
-    <Compile Include="Services\Development\IWebPartService.cs" />
     <Compile Include="Services\General\ICmsApplicationService.cs" />
     <Compile Include="Services\General\InitializationState.cs" />
   </ItemGroup>
@@ -483,8 +487,8 @@
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\AWSSDK.S3.3.1.9.0\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.0-beta004\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.0-beta004\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.0-beta009\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.0-beta009\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

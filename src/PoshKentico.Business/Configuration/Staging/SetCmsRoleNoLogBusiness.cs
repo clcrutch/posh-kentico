@@ -52,9 +52,9 @@ namespace PoshKentico.Business.Configuration.Staging
         /// <summary>
         /// Sets the <see cref="IRole"/> a new role without logging any staging tasks in the CMS System.
         /// </summary>
-        /// <param name="displayName">the role display name for the new role</param>
-        /// <param name="roleName">The role name for the new role</param>
-        /// <param name="roleSiteId">The role site id for the new role</param>
+        /// <param name="displayName">The role display name for the new role.</param>
+        /// <param name="roleName">The role name for the new role.</param>
+        /// <param name="roleSiteId">The role site id for the new role.</param>
         public void SetNoLogRole(string displayName, string roleName, int roleSiteId)
         {
             var data = new

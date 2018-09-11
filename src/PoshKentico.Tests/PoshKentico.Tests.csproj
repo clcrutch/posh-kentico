@@ -467,6 +467,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CmdletBusinessBaseTests.cs" />
     <Compile Include="Configuration\Settings\GetCmsSettingValueTests.cs" />
     <Compile Include="Configuration\Settings\GetCmsWebConfigValueTests.cs" />
     <Compile Include="Configuration\Settings\SetCmsSettingValueTests.cs" />
@@ -483,6 +484,19 @@
     <Compile Include="Configuration\Sites\SiteServiceMock.cs" />
     <Compile Include="Configuration\Sites\StopCmsSiteBusinessTests.cs" />
     <Compile Include="Configuration\Sites\StartCmsSiteBusinessTests.cs" />
+    <Compile Include="Development\WebParts\AddCMSWebPartFieldTests.cs" />
+    <Compile Include="Development\WebParts\GetCMSWebPartFieldTests.cs" />
+    <Compile Include="Development\WebParts\GetCMSWebPartTests.cs" />
+    <Compile Include="Development\WebParts\GetCMSWebPartCategoryTests.cs" />
+    <Compile Include="Development\WebParts\NewCMSWebPartCategoryTests.cs" />
+    <Compile Include="Development\WebParts\NewCMSWebPartTests.cs" />
+    <Compile Include="Development\WebParts\RemoveCMSWebPartCategoryTests.cs" />
+    <Compile Include="Development\WebParts\RemoveCMSWebPartFieldTests.cs" />
+    <Compile Include="Development\WebParts\RemoveCMSWebPartTests.cs" />
+    <Compile Include="Development\WebParts\SetCMSWebPartCategoryTests.cs" />
+    <Compile Include="Development\WebParts\SetCMSWebPartFieldTests.cs" />
+    <Compile Include="Development\WebParts\SetCMSWebPartTests.cs" />
+    <Compile Include="Development\WebParts\WebPartBusinessBaseTests.cs" />
     <Compile Include="Configuration\Staging\GetCmsServerTests.cs" />
     <Compile Include="Configuration\Staging\NewCmsServerTests.cs" />
     <Compile Include="Configuration\Staging\RemoveCmsServerTests.cs" />
@@ -496,10 +510,6 @@
     <Compile Include="ContentManagement\MediaLibraries\NewCmsMediaLibraryTests.cs" />
     <Compile Include="ContentManagement\MediaLibraries\RemoveCmsMediaLibraryTests.cs" />
     <Compile Include="ContentManagement\MediaLibraries\SetCmsMediaLibraryTests.cs" />
-    <Compile Include="Development\GetCMSWebPartCategoryTests.cs" />
-    <Compile Include="Development\NewCMSWebPartCategoryTests.cs" />
-    <Compile Include="Development\RemoveCMSWebPartCategoryTests.cs" />
-    <Compile Include="Development\SetCMSWebPartCategoryTests.cs" />
     <Compile Include="General\InitializeCMSApplicationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -528,6 +538,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

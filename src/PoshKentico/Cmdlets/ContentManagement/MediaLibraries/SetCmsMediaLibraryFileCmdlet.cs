@@ -39,7 +39,7 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
-    [Cmdlet(VerbsCommon.Set, "CMSMediaLibrary")]
+    [Cmdlet(VerbsCommon.Set, "CMSMediaLibraryFile")]
     [OutputType(typeof(MediaFileInfo))]
     public class SetCmsMediaLibraryFileCmdlet : MefCmdlet
     {

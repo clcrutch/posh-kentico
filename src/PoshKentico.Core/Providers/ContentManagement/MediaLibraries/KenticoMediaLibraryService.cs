@@ -200,10 +200,10 @@ namespace PoshKentico.Core.Configuration.ContentManagement.MediaLibraries
         }
 
         /// <summary>
-        /// Gets the media library info object
+        /// Gets the media library info object.
         /// </summary>
         /// <param name="library">the interface <see cref="IMediaLibrary"/>.</param>
-        /// <returns>the media library info object</returns>
+        /// <returns>the media library info object.</returns>
         private MediaLibraryInfo GetMediaLibrary(IMediaLibrary library)
         {
             string siteName = SiteInfoProvider.GetSiteName(library.LibrarySiteID);

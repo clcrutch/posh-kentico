@@ -14,19 +14,14 @@ Sets a server.
 
 ### Object
 ```
-Set-CMSServer [-ServerToSet] <ServerInfo> [<CommonParameters>]
+Set-CMSServer [-ServerToSet] <ServerInfo> [-PassThru] [<CommonParameters>]
 ```
 
 ### Property
 ```
 Set-CMSServer [-ServerName] <String> [-SiteID] <Int32> [[-DisplayName] <String>] [[-URL] <String>]
  [[-Authentication] <ServerAuthenticationEnum>] [[-Enabled] <Boolean>] [[-UserName] <String>]
- [[-Password] <String>] [<CommonParameters>]
-```
-
-### PassThru
-```
-Set-CMSServer [-PassThru] [<CommonParameters>]
+ [[-Password] <String>] [-PassThru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -201,7 +196,7 @@ Tell the cmdlet to return the server to update.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: PassThru
+Parameter Sets: (All)
 Aliases:
 
 Required: False
