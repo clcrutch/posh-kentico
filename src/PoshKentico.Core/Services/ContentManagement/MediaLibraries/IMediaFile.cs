@@ -58,6 +58,11 @@ namespace PoshKentico.Core.Services.ContentManagement.MediaLibraries
         long FileSize { get; }
 
         /// <summary>
+        /// Gets the file id for the media file.
+        /// </summary>
+        int FileID { get; }
+
+        /// <summary>
         /// Gets the site id for the media file.
         /// </summary>
         int FileSiteID { get; }

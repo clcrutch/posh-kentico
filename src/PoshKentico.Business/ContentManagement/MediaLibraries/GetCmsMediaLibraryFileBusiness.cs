@@ -62,20 +62,27 @@ namespace PoshKentico.Business.ContentManagement.MediaLibraries
         {
             if (exact)
             {
-                return (from c in this.MediaLibraryService.MediaFiles
-                        where c.FileLibraryID == libraryID &&
-                            c.FileExtension.ToLowerInvariant().Equals(extension, StringComparison.InvariantCultureIgnoreCase) &&
-                            c.FilePath.ToLowerInvariant().Equals(filePath, StringComparison.InvariantCultureIgnoreCase)
-                        select c).ToArray();
+                var res = this.MediaLibraryService.MediaFiles.Select(c => c).Where(c => c.FileLibraryID == libraryID);
+                if (extension != null)
+                {
+                    res = res.Select(x => x).Where(x => x.FileExtension.ToLowerInvariant() == extension.ToLowerInvariant());
+                }
+
+                if (filePath != null)
+                {
+                    res = res.Select(x => x).Where(x => x.FilePath.ToLowerInvariant() == filePath.ToLowerInvariant());
+                }
+
+                return res;
             }
             else
             {
-                var lowerExtension = extension.ToLowerInvariant();
-                var lowerFilePath = extension.ToLowerInvariant();
+                var lowerExtension = extension == null ? string.Empty : extension.ToLowerInvariant();
+                var lowerFilePath = filePath == null ? string.Empty : filePath.ToLowerInvariant();
 
                 return (from c in this.MediaLibraryService.MediaFiles
                         where c.FileLibraryID == libraryID && (
-                            c.FileExtension.ToLowerInvariant().Contains(lowerExtension) ||
+                            c.FileExtension.ToLowerInvariant().Contains(lowerExtension) &&
                             c.FilePath.ToLowerInvariant().Contains(lowerFilePath))
                         select c).ToArray();
             }

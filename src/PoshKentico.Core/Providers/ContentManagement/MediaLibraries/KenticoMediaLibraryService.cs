@@ -181,9 +181,18 @@ namespace PoshKentico.Core.Configuration.ContentManagement.MediaLibraries
         }
 
         /// <inheritdoc/>
-        public IMediaFile UpdateMediaFile(IMediaLibrary library, IMediaFile file, bool isReplace = true)
+        public IMediaFile UpdateMediaFile(IMediaFile file)
         {
-            throw new System.NotImplementedException();
+            MediaFileInfo mediaFileInfo = MediaFileInfoProvider.GetMediaFileInfo(file.FileID);
+
+            if (mediaFileInfo == null)
+            {
+                return null;
+            }
+
+            MediaFileInfoProvider.SetMediaFileInfo(mediaFileInfo);
+
+            return mediaFileInfo.ActLike<IMediaFile>();
         }
 
         /// <inheritdoc/>

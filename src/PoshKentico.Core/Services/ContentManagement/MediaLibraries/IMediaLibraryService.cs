@@ -116,11 +116,9 @@ namespace PoshKentico.Core.Services.ContentManagement.MediaLibraries
         /// <summary>
         /// Updates the <see cref="IMediaFile"/>.
         /// </summary>
-        /// <param name="library">The <see cref="IMediaLibrary"/>to retrive for updating the file.</param>
         /// <param name="file">The <see cref="IMediaFile"/> to update.</param>
-        /// <param name="isReplace">to indicate if replace the complete object or update only the properties.</param>
         /// <returns>The updated media file.</returns>
-        IMediaFile UpdateMediaFile(IMediaLibrary library, IMediaFile file, bool isReplace = true);
+        IMediaFile UpdateMediaFile(IMediaFile file);
 
         #endregion
 

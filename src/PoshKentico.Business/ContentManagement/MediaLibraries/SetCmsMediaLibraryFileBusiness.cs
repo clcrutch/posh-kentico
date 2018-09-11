@@ -42,36 +42,11 @@ namespace PoshKentico.Business.ContentManagement.MediaLibraries
         /// <summary>
         /// Sets the <see cref="IMediaFile"/> in the CMS System.
         /// </summary>
-        /// <param name="siteID">The site id of the <see cref="IMediaLibrary"/>to retrive for creating the new file.</param>
-        /// <param name="libraryName">The name of the <see cref="IMediaLibrary"/> to retrive for creating the new file.</param>
         /// <param name="file">The <see cref="IMediaFile"/> to set.</param>
         /// <returns>The updated File.</returns>
-        public IMediaFile Set(int siteID, string libraryName, IMediaFile file)
+        public IMediaFile Set(IMediaFile file)
         {
-            IMediaLibrary library = this.MediaLibraryService.GetMediaLibrary(siteID, libraryName);
-            return this.MediaLibraryService.UpdateMediaFile(library, file);
-        }
-
-        /// <summary>
-        /// Sets the <see cref="IMediaLibrary"/> in the CMS System.
-        /// </summary>
-        /// <param name="siteID">The site id of the <see cref="IMediaLibrary"/>to retrive for creating the new file.</param>
-        /// <param name="libraryName">The name of the <see cref="IMediaLibrary"/> to retrive for creating the new file.</param>
-        /// <param name="file">the Folder/FileName of the media file.</param>
-        /// <param name="title">the title of the media file.</param>
-        /// /// <param name="description">the description of the media file.</param>
-        /// <returns>The updated Media File.</returns>
-        public IMediaFile Set(int siteID, string libraryName, string file, string title, string description)
-        {
-            IMediaLibrary library = this.MediaLibraryService.GetMediaLibrary(siteID, libraryName);
-            var data = new
-            {
-                LibraryDescription = description,
-                LibraryFolder = title,
-                LibrarySiteID = siteID,
-            };
-
-            return this.MediaLibraryService.UpdateMediaFile(library, data.ActLike<IMediaFile>(), false);
+            return this.MediaLibraryService.UpdateMediaFile(file);
         }
 
         #endregion

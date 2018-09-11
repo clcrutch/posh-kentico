@@ -15,27 +15,27 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 using CMS.MediaLibrary;
+using ImpromptuInterface;
+using PoshKentico.Business.ContentManagement.MediaLibraries;
+using PoshKentico.Core.Services.ContentManagement.MediaLibraries;
 
 namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
 {
     /// <summary>
     /// <para type="synopsis">Sets a media file.</para>
     /// <para type="description">Sets a media file based off of the provided input.</para>
-    /// <para type="description">This cmdlet returns the updated library when the -PassThru switch is used.</para>
+    /// <para type="description">This cmdlet returns the updated library file when the -PassThru switch is used.</para>
     /// <example>
     ///     <para>Set library specifying an existing library.</para>
-    ///     <code>Set-CMSMediaLibrary -MediaLibrary $library</code>
+    ///     <code>Set-CMSMediaLibraryFile -MediaFile $libraryFile</code>
     /// </example>
     /// <example>
     ///     <para>Set library specifying an existing library.</para>
-    ///     <code>$library | Set-CMSMediaLibrary</code>
-    /// </example>
-    /// <example>
-    ///     <para>Get library specifying the SiteID and DisplayName, set its LibraryName, Description and Folder.</para>
-    ///     <code>Set-CMSMediaLibrary -SiteID 1 -LibraryName "Name" -DisplayName "My Test Name" -Description "Library description" -Folder "Images"</code>
+    ///     <code>$libraryFile | Set-CMSMediaLibraryFile</code>
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
@@ -43,5 +43,48 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
     [OutputType(typeof(MediaFileInfo))]
     public class SetCmsMediaLibraryFileCmdlet : MefCmdlet
     {
+        #region Constants
+
+        private const string PASSTHRU = "PassThru";
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// <para type="description">Tell the cmdlet to return the media library file.</para>
+        /// </summary>
+        [Parameter(Mandatory = false, ParameterSetName = PASSTHRU)]
+        public SwitchParameter PassThru { get; set; }
+
+        /// <summary>
+        /// <para type="description">The media library file to set.</para>
+        /// </summary>
+        [Parameter(Mandatory = true, ValueFromPipeline = true)]
+        public MediaFileInfo MediaFile { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Business layer for this media library file. Populated by MEF.
+        /// </summary>
+        [Import]
+        public SetCmsMediaLibraryFileBusiness BusinessLayer { get; set; }
+
+        #endregion
+
+        #region Methods
+
+        /// <inheritdoc />
+        protected override void ProcessRecord()
+        {
+            this.BusinessLayer.Set(this.MediaFile.ActLike<IMediaFile>());
+
+            if (this.PassThru.ToBool())
+            {
+                this.WriteObject(this.MediaFile);
+            }
+        }
+
+        #endregion
+
     }
 }

@@ -24,7 +24,7 @@ using ImpromptuInterface;
 using PoshKentico.Business.ContentManagement.MediaLibraries;
 using PoshKentico.Core.Services.ContentManagement.MediaLibraries;
 
-namespace PoshKentico.Cmdlets.ContentManagement.MediaFiles
+namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
 {
     /// <summary>
     /// <para type="synopsis">Gets a list of library files.</para>
@@ -60,7 +60,7 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaFiles
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
-    [Cmdlet(VerbsCommon.Get, "CMSMediaLibraryFile")]
+    [Cmdlet(VerbsCommon.Get, "CMSMediaLibraryFile", DefaultParameterSetName = NONE)]
     [OutputType(typeof(MediaLibraryInfo))]
     public class GetCmsMediaLibraryFileCmdlet : MefCmdlet
     {
@@ -77,31 +77,34 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaFiles
         /// <summary>
         /// <para type="description">The associalted library for the library files to retrieve.</para>
         /// </summary>
-        [Parameter(Mandatory = false, ValueFromPipeline = true, Position = 0, ParameterSetName = OBJECTSET)]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0, ParameterSetName = OBJECTSET)]
         public MediaLibraryInfo Library { get; set; }
 
         /// <summary>
         /// <para type="description">The library ID of the library files to retrive.</para>
         /// </summary>
         [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0, ParameterSetName = PROPERTYSET)]
-        public int FileLibraryID { get; set; }
+        public int LibraryID { get; set; }
 
         /// <summary>
         /// <para type="description">The file extension of the library files to retrive.</para>
         /// </summary>
         [Parameter(Mandatory = false, Position = 1, ParameterSetName = PROPERTYSET)]
-        public string FileExtension { get; set; }
+        [Parameter(Mandatory = false, Position = 1, ParameterSetName = OBJECTSET)]
+        public string Extension { get; set; }
 
         /// <summary>
         /// <para type="description">The file path of the library files to retrive.</para>
         /// </summary>
         [Parameter(Mandatory = false, Position = 2, ParameterSetName = PROPERTYSET)]
+        [Parameter(Mandatory = false, Position = 2, ParameterSetName = OBJECTSET)]
         public string FilePath { get; set; }
 
         /// <summary>
         /// <para type="description">If set, the match is exact, else the match performs a contains for file extension and file path.</para>
         /// </summary>
         [Parameter(ParameterSetName = PROPERTYSET)]
+        [Parameter(ParameterSetName = OBJECTSET)]
         public SwitchParameter Exact { get; set; }
 
         /// <summary>
@@ -128,10 +131,10 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaFiles
             switch (this.ParameterSetName)
             {
                 case OBJECTSET:
-                    files = this.BusinessLayer.GetMediaFiles(this.Library.LibraryID, this.FileExtension, this.FilePath, this.Exact.ToBool());
+                    files = this.BusinessLayer.GetMediaFiles(this.Library.LibraryID, this.Extension, this.FilePath, this.Exact.ToBool());
                     break;
                 case PROPERTYSET:
-                    files = this.BusinessLayer.GetMediaFiles(this.FileLibraryID, this.FileExtension, this.FilePath, this.Exact.ToBool());
+                    files = this.BusinessLayer.GetMediaFiles(this.LibraryID, this.Extension, this.FilePath, this.Exact.ToBool());
                     break;
                 case IDSETNAME:
                     files = this.BusinessLayer.GetMediaFiles(this.ID);
