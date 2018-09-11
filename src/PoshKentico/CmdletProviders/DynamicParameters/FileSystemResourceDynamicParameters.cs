@@ -5,9 +5,9 @@ using System.Management.Automation;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PoshKentico.Business.Resource
+namespace PoshKentico.CmdletProviders.DynamicParameters
 {
-    public class ResourceDynamicParameters
+    public class FileSystemResourceDynamicParameters
     {
         [Parameter]
         [ValidateSet("Directory", "File")]
