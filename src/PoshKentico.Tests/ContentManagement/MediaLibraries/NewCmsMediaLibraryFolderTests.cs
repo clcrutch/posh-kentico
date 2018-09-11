@@ -56,10 +56,10 @@ namespace PoshKentico.Tests.ContentManagement.MediaLibraries
 
             string folder = "NewFolder";
             businessLayer.CreateMediaLibraryFolder(1, "MyLibrary1", folder);
-            libraryServiceMock.Verify(x => x.CreateMediaLibraryFolder(libraryMock1.Object.LibrarySiteID, libraryMock1.Object.LibraryName, folder));
+            libraryServiceMock.Verify(x => x.CreateMediaFolder(libraryMock1.Object.LibrarySiteID, libraryMock1.Object.LibraryName, folder));
 
             businessLayer.CreateMediaLibraryFolder(1, "MyLibrary2", folder);
-            libraryServiceMock.Verify(x => x.CreateMediaLibraryFolder(libraryMock2.Object.LibrarySiteID, libraryMock2.Object.LibraryName, folder));
+            libraryServiceMock.Verify(x => x.CreateMediaFolder(libraryMock2.Object.LibrarySiteID, libraryMock2.Object.LibraryName, folder));
         }
     }
 }

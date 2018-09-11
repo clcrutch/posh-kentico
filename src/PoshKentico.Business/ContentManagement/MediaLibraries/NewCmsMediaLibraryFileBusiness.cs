@@ -58,7 +58,7 @@ namespace PoshKentico.Business.ContentManagement.MediaLibraries
                                                 string fileDesc,
                                                 string filePath)
         {
-            return this.MediaLibraryService.CreateMediaLibraryFile(librarySiteID, libraryName, localFilePath, fileName, fileTitle, fileDesc, filePath);
+            return this.MediaLibraryService.CreateMediaFile(librarySiteID, libraryName, localFilePath, fileName, fileTitle, fileDesc, filePath);
         }
 
         #endregion

@@ -43,33 +43,33 @@ namespace PoshKentico.Business.ContentManagement.MediaLibraries
         /// Sets the <see cref="IMediaLibrary"/> in the CMS System.
         /// </summary>
         /// <param name="library">The <see cref="IMediaLibrary"/> to set.</param>
-        /// <returns>the updated library</returns>
+        /// <returns>The updated File</returns>
         public IMediaLibrary Set(IMediaLibrary library)
         {
-            return this.MediaLibraryService.Update(library);
+            return this.MediaLibraryService.UpdateMediaLibrary(library);
         }
 
         /// <summary>
         /// Sets the <see cref="IMediaLibrary"/> in the CMS System.
         /// </summary>
-        /// <param name="displayName">The display name of the media library</param>
-        /// <param name="name">The name of the media library</param>
-        /// <param name="description">the description of the media library</param>
-        /// <param name="folder">the folder of the media library</param>
-        /// <param name="siteID">the site id of the media library</param>
-        /// <returns>The updated Media Library.</returns>
-        public IMediaLibrary Set(string displayName, string name, string description, string folder, int siteID)
+        /// <param name="siteID">The site id of the <see cref="IMediaLibrary"/>to retrive for updating the file. </param>
+        /// <param name="libraryName">The name of the <see cref="IMediaLibrary"/> to retrive for updating the file. </param>
+        /// <param name="displayName">the display name of the media file</param>
+        /// <param name="description">the description of the media file</param>
+        /// /// <param name="folder">the folder of the media file</param>
+        /// <returns>The updated Media File.</returns>
+        public IMediaLibrary Set(int siteID, string libraryName, string displayName, string description, string folder)
         {
             var data = new
             {
+                LibrarySiteID = siteID,
+                LibraryName = libraryName,
                 LibraryDisplayName = displayName,
-                LibraryName = name,
                 LibraryDescription = description,
                 LibraryFolder = folder,
-                LibrarySiteID = siteID,
             };
 
-            return this.MediaLibraryService.Update(data.ActLike<IMediaLibrary>(), false);
+            return this.MediaLibraryService.UpdateMediaLibrary(data.ActLike<IMediaLibrary>(), false);
         }
 
         #endregion

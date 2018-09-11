@@ -87,7 +87,7 @@ namespace PoshKentico.Business.ContentManagement.MediaLibraries
         {
             if (this.ShouldProcess(library.LibraryName, "delete"))
             {
-                this.MediaLibraryService.Delete(library);
+                this.MediaLibraryService.DeleteMediaLibrary(library);
             }
         }
 

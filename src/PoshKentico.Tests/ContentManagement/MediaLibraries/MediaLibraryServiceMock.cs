@@ -28,7 +28,9 @@ namespace PoshKentico.Tests.ContentManagement.MediaLibraries
 
         public IEnumerable<IMediaLibrary> MediaLibraries => throw new System.NotImplementedException();
 
-        public IMediaLibrary Create(IMediaLibrary library)
+        public IEnumerable<IMediaFile> MediaFiles => throw new System.NotImplementedException();
+
+        public IMediaLibrary CreateMediaLibrary(IMediaLibrary library)
         {
             this.libraryMock = library;
 
@@ -51,17 +53,17 @@ namespace PoshKentico.Tests.ContentManagement.MediaLibraries
             this.libraryMock.LibraryFolder.Should().Be(expectedLibrary.LibraryFolder);
         }
 
-        public IMediaFile CreateMediaLibraryFile(int librarySiteID, string libraryName, string localFilePath, string fileName, string fileTitle, string fileDesc, string filePath)
+        public IMediaFile CreateMediaFile(int librarySiteID, string libraryName, string localFilePath, string fileName, string fileTitle, string fileDesc, string filePath)
         {
             throw new System.NotImplementedException();
         }
 
-        public void CreateMediaLibraryFolder(int librarySiteID, string libraryName, string folderName)
+        public void CreateMediaFolder(int librarySiteID, string libraryName, string folderName)
         {
             throw new System.NotImplementedException();
         }
 
-        public void Delete(IMediaLibrary library)
+        public void DeleteMediaLibrary(IMediaLibrary library)
         {
             throw new System.NotImplementedException();
         }
@@ -76,7 +78,22 @@ namespace PoshKentico.Tests.ContentManagement.MediaLibraries
             throw new System.NotImplementedException();
         }
 
-        public IMediaLibrary Update(IMediaLibrary library, bool isReplace = true)
+        public IMediaLibrary UpdateMediaLibrary(IMediaLibrary library, bool isReplace = true)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IMediaFile GetMediaFile(int mediaFileId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IMediaFile GetMediaFile(IMediaLibrary library, string folder, string fileName)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IMediaFile UpdateMediaFile(IMediaLibrary library, IMediaFile file, bool isReplace = true)
         {
             throw new System.NotImplementedException();
         }

@@ -59,7 +59,7 @@ namespace PoshKentico.Business.ContentManagement.MediaLibraries
                 LibrarySiteID = siteID,
             };
 
-            return this.MediaLibraryService.Create(data.ActLike<IMediaLibrary>());
+            return this.MediaLibraryService.CreateMediaLibrary(data.ActLike<IMediaLibrary>());
         }
 
         #endregion

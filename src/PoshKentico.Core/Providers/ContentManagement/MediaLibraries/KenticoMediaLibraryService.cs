@@ -34,18 +34,20 @@ namespace PoshKentico.Core.Configuration.ContentManagement.MediaLibraries
     {
         #region Properties
 
-        /// <summary>
-        /// Gets a list of all of the <see cref="IMediaLibrary"/> provided by the CMS System.
-        /// </summary>
+        /// <inheritdoc/>
         public IEnumerable<IMediaLibrary> MediaLibraries => (from c in MediaLibraryInfoProvider.GetMediaLibraries()
-                                              select Impromptu.ActLike<IMediaLibrary>(c as MediaLibraryInfo)).ToArray();
+                                                            select Impromptu.ActLike<IMediaLibrary>(c as MediaLibraryInfo)).ToArray();
+
+        /// <inheritdoc/>
+        public IEnumerable<IMediaFile> MediaFiles => (from f in MediaFileInfoProvider.GetMediaFiles()
+                                                      select Impromptu.ActLike<IMediaFile>(f as MediaFileInfo)).ToArray();
 
         #endregion
 
         #region Methods
 
         /// <inheritdoc/>
-        public IMediaLibrary Create(IMediaLibrary library)
+        public IMediaLibrary CreateMediaLibrary(IMediaLibrary library)
         {
             // Creates a new media library object
             MediaLibraryInfo newLibrary = new MediaLibraryInfo
@@ -65,6 +67,59 @@ namespace PoshKentico.Core.Configuration.ContentManagement.MediaLibraries
         }
 
         /// <inheritdoc/>
+        public void CreateMediaFolder(int librarySiteID, string libraryName, string folderName)
+        {
+            // Gets the media library
+            string siteName = SiteInfoProvider.GetSiteName(librarySiteID);
+            var existingLibrary = MediaLibraryInfoProvider.GetMediaLibraryInfo(libraryName, siteName);
+
+            if (existingLibrary != null)
+            {
+                // Creates the "NewFolder" folder within the media library
+                MediaLibraryInfoProvider.CreateMediaLibraryFolder(siteName, existingLibrary.LibraryID, folderName);
+            }
+        }
+
+        /// <inheritdoc/>
+        public IMediaFile CreateMediaFile(int librarySiteID, string libraryName, string localFilePath, string fileName, string fileTitle, string fileDesc, string folder)
+        {
+            // Gets the media library
+            string siteName = SiteInfoProvider.GetSiteName(librarySiteID);
+            var existingLibrary = MediaLibraryInfoProvider.GetMediaLibraryInfo(libraryName, siteName);
+
+            if (existingLibrary != null)
+            {
+                // Prepares a CMS.IO.FileInfo object representing the local file
+                CMS.IO.FileInfo file = CMS.IO.FileInfo.New(localFilePath);
+
+                if (file != null)
+                {
+                    // Creates a new media library file object
+                    MediaFileInfo mediaFile = new MediaFileInfo(localFilePath, existingLibrary.LibraryID)
+                    {
+                        // Sets the media library file properties
+                        FileName = fileName,
+                        FileTitle = fileTitle,
+                        FileDescription = fileDesc,
+                        FilePath = $"{folder}/{fileName}", // Sets the path within the media library's folder structure
+                        FileExtension = file.Extension,
+                        FileMimeType = MimeTypeHelper.GetMimetype(file.Extension),
+                        FileSiteID = librarySiteID,
+                        FileLibraryID = existingLibrary.LibraryID,
+                        FileSize = file.Length,
+                    };
+
+                    // Saves the media library file
+                    MediaFileInfoProvider.SetMediaFileInfo(mediaFile);
+
+                    return mediaFile.ActLike<IMediaFile>();
+                }
+            }
+
+            return null;
+        }
+
+        /// <inheritdoc/>
         public IMediaLibrary GetMediaLibrary(int id)
         {
             return (MediaLibraryInfoProvider.GetMediaLibraryInfo(id) as MediaLibraryInfo)?.ActLike<IMediaLibrary>();
@@ -78,7 +133,30 @@ namespace PoshKentico.Core.Configuration.ContentManagement.MediaLibraries
         }
 
         /// <inheritdoc/>
-        public IMediaLibrary Update(IMediaLibrary library, bool isReplace = true)
+        public IMediaFile GetMediaFile(int mediaFileId)
+        {
+            return (MediaFileInfoProvider.GetMediaFileInfo(mediaFileId) as MediaFileInfo)?.ActLike<IMediaFile>();
+        }
+
+        /// <inheritdoc/>
+        public IMediaFile GetMediaFile(IMediaLibrary library, string filePath, string extension)
+        {
+            MediaFileInfo mediaFile = null;
+
+            // Gets the media library
+            var existingLibrary = this.GetMediaLibrary(library);
+
+            if (existingLibrary != null)
+            {
+                // Gets the media file
+                mediaFile = MediaFileInfoProvider.GetMediaFileInfo(existingLibrary.LibraryID, $"{filePath}.{extension}");
+            }
+
+            return mediaFile.ActLike<IMediaFile>();
+        }
+
+        /// <inheritdoc/>
+        public IMediaLibrary UpdateMediaLibrary(IMediaLibrary library, bool isReplace = true)
         {
             var updateLibrary = this.GetMediaLibrary(library);
             if (updateLibrary != null)
@@ -103,7 +181,13 @@ namespace PoshKentico.Core.Configuration.ContentManagement.MediaLibraries
         }
 
         /// <inheritdoc/>
-        public void Delete(IMediaLibrary library)
+        public IMediaFile UpdateMediaFile(IMediaLibrary library, IMediaFile file, bool isReplace = true)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        /// <inheritdoc/>
+        public void DeleteMediaLibrary(IMediaLibrary library)
         {
             // Gets the media library
             var deleteLibrary = this.GetMediaLibrary(library);
@@ -113,59 +197,6 @@ namespace PoshKentico.Core.Configuration.ContentManagement.MediaLibraries
                 // Deletes the media library
                 MediaLibraryInfoProvider.DeleteMediaLibraryInfo(deleteLibrary);
             }
-        }
-
-        /// <inheritdoc/>
-        public void CreateMediaLibraryFolder(int librarySiteID, string libraryName, string folderName)
-        {
-            // Gets the media library
-            string siteName = SiteInfoProvider.GetSiteName(librarySiteID);
-            var existingLibrary = MediaLibraryInfoProvider.GetMediaLibraryInfo(libraryName, siteName);
-
-            if (existingLibrary != null)
-            {
-                // Creates the "NewFolder" folder within the media library
-                MediaLibraryInfoProvider.CreateMediaLibraryFolder(siteName, existingLibrary.LibraryID, folderName);
-            }
-        }
-
-        /// <inheritdoc/>
-        public IMediaFile CreateMediaLibraryFile(int librarySiteID, string libraryName, string localFilePath, string fileName, string fileTitle, string fileDesc, string filePath)
-        {
-            // Gets the media library
-            string siteName = SiteInfoProvider.GetSiteName(librarySiteID);
-            var existingLibrary = MediaLibraryInfoProvider.GetMediaLibraryInfo(libraryName, siteName);
-
-            if (existingLibrary != null)
-            {
-                // Prepares a CMS.IO.FileInfo object representing the local file
-                CMS.IO.FileInfo file = CMS.IO.FileInfo.New(localFilePath);
-
-                if (file != null)
-                {
-                    // Creates a new media library file object
-                    MediaFileInfo mediaFile = new MediaFileInfo(localFilePath, existingLibrary.LibraryID)
-                    {
-                        // Sets the media library file properties
-                        FileName = fileName,
-                        FileTitle = fileTitle,
-                        FileDescription = fileDesc,
-                        FilePath = $"{filePath}/{fileName}", // Sets the path within the media library's folder structure
-                        FileExtension = file.Extension,
-                        FileMimeType = MimeTypeHelper.GetMimetype(file.Extension),
-                        FileSiteID = librarySiteID,
-                        FileLibraryID = existingLibrary.LibraryID,
-                        FileSize = file.Length,
-                    };
-
-                    // Saves the media library file
-                    MediaFileInfoProvider.SetMediaFileInfo(mediaFile);
-
-                    return mediaFile.ActLike<IMediaFile>();
-                }
-            }
-
-            return null;
         }
 
         /// <summary>

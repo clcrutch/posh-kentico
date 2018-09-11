@@ -474,12 +474,14 @@
     <Compile Include="Configuration\Staging\SetCmsRoleNoLogBusiness.cs" />
     <Compile Include="Configuration\Staging\SetCmsServerBusiness.cs" />
     <Compile Include="Configuration\Staging\SyncCmsStagingTaskBusiness.cs" />
+    <Compile Include="ContentManagement\MediaLibraries\GetCmsMediaLibraryFileBusiness.cs" />
     <Compile Include="ContentManagement\MediaLibraries\NewCmsMediaLibraryFileBusiness.cs" />
     <Compile Include="ContentManagement\MediaLibraries\NewCmsMediaLibraryFolderBusiness.cs" />
     <Compile Include="ContentManagement\MediaLibraries\GetCmsMediaLibraryBusiness.cs" />
     <Compile Include="ContentManagement\MediaLibraries\NewCmsMediaLibraryBusiness.cs" />
     <Compile Include="ContentManagement\MediaLibraries\RemoveCmsMediaLibraryBusiness.cs" />
     <Compile Include="ContentManagement\MediaLibraries\SetCmsMediaLibraryBusiness.cs" />
+    <Compile Include="ContentManagement\MediaLibraries\SetCmsMediaLibraryFileBusiness.cs" />
     <Compile Include="Development\GetCMSWebPartCategoryBusiness.cs" />
     <Compile Include="Development\NewCMSWebPartCategoryBusiness.cs" />
     <Compile Include="Development\RemoveCMSWebPartCategoryBusiness.cs" />

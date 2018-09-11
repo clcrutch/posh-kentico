@@ -68,11 +68,11 @@ namespace PoshKentico.Tests.ContentManagement.MediaLibraries
 
             businessLayer.Remove(libraryMock1.Object);
 
-            libraryServiceMock.Verify(x => x.Delete(libraryMock1.Object));
+            libraryServiceMock.Verify(x => x.DeleteMediaLibrary(libraryMock1.Object));
 
             businessLayer.Remove(libraryMock2.Object);
 
-            libraryServiceMock.Verify(x => x.Delete(libraryMock2.Object));
+            libraryServiceMock.Verify(x => x.DeleteMediaLibrary(libraryMock2.Object));
         }
 
         [Test]
@@ -117,7 +117,7 @@ namespace PoshKentico.Tests.ContentManagement.MediaLibraries
 
             businessLayer.Remove(1, "MyLibrary1", true);
 
-            libraryServiceMock.Verify(x => x.Delete(libraryMock1.Object));
+            libraryServiceMock.Verify(x => x.DeleteMediaLibrary(libraryMock1.Object));
         }
 
         [Test]
@@ -162,8 +162,8 @@ namespace PoshKentico.Tests.ContentManagement.MediaLibraries
 
             businessLayer.Remove(1, "library", false);
 
-            libraryServiceMock.Verify(x => x.Delete(libraryMock1.Object));
-            libraryServiceMock.Verify(x => x.Delete(libraryMock2.Object));
+            libraryServiceMock.Verify(x => x.DeleteMediaLibrary(libraryMock1.Object));
+            libraryServiceMock.Verify(x => x.DeleteMediaLibrary(libraryMock2.Object));
         }
 
         [Test]
@@ -209,8 +209,8 @@ namespace PoshKentico.Tests.ContentManagement.MediaLibraries
 
             businessLayer.Remove(1, 2, 3);
 
-            libraryServiceMock.Verify(x => x.Delete(libraryMock1.Object));
-            libraryServiceMock.Verify(x => x.Delete(libraryMock2.Object));
+            libraryServiceMock.Verify(x => x.DeleteMediaLibrary(libraryMock1.Object));
+            libraryServiceMock.Verify(x => x.DeleteMediaLibrary(libraryMock2.Object));
         }
     }
 }

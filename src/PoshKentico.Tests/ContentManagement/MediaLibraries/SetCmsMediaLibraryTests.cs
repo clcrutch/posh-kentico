@@ -56,11 +56,11 @@ namespace PoshKentico.Tests.ContentManagement.MediaLibraries
 
             businessLayer.Set(libraryMock1.Object);
 
-            libraryServiceMock.Verify(x => x.Update(libraryMock1.Object, true));
+            libraryServiceMock.Verify(x => x.UpdateMediaLibrary(libraryMock1.Object, true));
 
             businessLayer.Set(libraryMock2.Object);
 
-            libraryServiceMock.Verify(x => x.Update(libraryMock2.Object, true));
+            libraryServiceMock.Verify(x => x.UpdateMediaLibrary(libraryMock2.Object, true));
         }
 
         [Test]
@@ -93,11 +93,11 @@ namespace PoshKentico.Tests.ContentManagement.MediaLibraries
 
             businessLayer.Set("My Modified Library1", "MyLibrary1", "New Description", "images1", 1);
 
-            libraryServiceMock.Verify(x => x.Update(
+            libraryServiceMock.Verify(x => x.UpdateMediaLibrary(
                 It.Is<IMediaLibrary>(i => i.LibraryDisplayName != "My Library1"
                 && i.LibraryDescription == "New Description"), false));
 
-            libraryServiceMock.Verify(x => x.Update(
+            libraryServiceMock.Verify(x => x.UpdateMediaLibrary(
                 It.Is<IMediaLibrary>(i => i.LibraryDisplayName == "My Modified Library1"
                 && i.LibraryDescription == "New Description"), false));
         }

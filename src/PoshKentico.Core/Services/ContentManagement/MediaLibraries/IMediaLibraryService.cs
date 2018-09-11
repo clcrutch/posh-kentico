@@ -32,6 +32,10 @@ namespace PoshKentico.Core.Services.ContentManagement.MediaLibraries
         /// </summary>
         IEnumerable<IMediaLibrary> MediaLibraries { get; }
 
+        /// <summary>
+        /// Gets a list of all of the <see cref="IMediaFile"/> provided by the CMS System.
+        /// </summary>
+        IEnumerable<IMediaFile> MediaFiles { get; }
         #endregion
 
         #region Methods
@@ -41,7 +45,7 @@ namespace PoshKentico.Core.Services.ContentManagement.MediaLibraries
         /// </summary>
         /// <param name="library">The <see cref="IMediaLibrary"/> to create.</param>
         /// <returns>The newly created <see cref="IMediaLibrary"/>.</returns>
-        IMediaLibrary Create(IMediaLibrary library);
+        IMediaLibrary CreateMediaLibrary(IMediaLibrary library);
 
         /// <summary>
         /// Gets the <see cref="IMediaLibrary"/> which matches the supplied ID.
@@ -55,7 +59,7 @@ namespace PoshKentico.Core.Services.ContentManagement.MediaLibraries
         /// </summary>
         /// <param name="librarySiteID">The site id of the <see cref="IMediaLibrary"/>to return.</param>
         /// <param name="libraryName">The name of the <see cref="IMediaLibrary"/> to return.</param>
-        /// <returns>The <see cref="IMediaLibrary"/> which matches the library name, else null.</returns>
+        /// <returns>the media library info object</returns>
         IMediaLibrary GetMediaLibrary(int librarySiteID, string libraryName);
 
         /// <summary>
@@ -64,13 +68,13 @@ namespace PoshKentico.Core.Services.ContentManagement.MediaLibraries
         /// <param name="library">The <see cref="IMediaLibrary"/> to update.</param>
         /// <param name="isReplace">to indicate if replace the complete object or update only the properties</param>
         /// <returns>The updated library.</returns>
-        IMediaLibrary Update(IMediaLibrary library, bool isReplace = true);
+        IMediaLibrary UpdateMediaLibrary(IMediaLibrary library, bool isReplace = true);
 
         /// <summary>
         /// Deletes the specified <see cref="IMediaLibrary"/>.
         /// </summary>
         /// <param name="library">The <see cref="IMediaLibrary"/> to delete.</param>
-        void Delete(IMediaLibrary library);
+        void DeleteMediaLibrary(IMediaLibrary library);
 
         /// <summary>
         /// Creates a media library folder within the <see cref="IMediaLibrary"/>
@@ -78,7 +82,7 @@ namespace PoshKentico.Core.Services.ContentManagement.MediaLibraries
         /// <param name="librarySiteID">The site id of the <see cref="IMediaLibrary"/>to retrive for creating the new folder.</param>
         /// <param name="libraryName">The name of the <see cref="IMediaLibrary"/> to retrive for creating the new folder.</param>
         /// <param name="folderName">The new folder name to create within the media library</param>
-        void CreateMediaLibraryFolder(int librarySiteID, string libraryName, string folderName);
+        void CreateMediaFolder(int librarySiteID, string libraryName, string folderName);
 
         /// <summary>
         /// Creates a media library file within the <see cref="IMediaLibrary"/>
@@ -91,7 +95,33 @@ namespace PoshKentico.Core.Services.ContentManagement.MediaLibraries
         /// <param name="fileDesc">The file description for the <see cref="IMediaFile"/>.</param>
         /// <param name="filePath">The file path for the <see cref="IMediaFile"/>.</param>
         /// <returns>The newly created <see cref="IMediaFile"/>.</returns>
-        IMediaFile CreateMediaLibraryFile(int librarySiteID, string libraryName, string localFilePath, string fileName, string fileTitle, string fileDesc, string filePath);
+        IMediaFile CreateMediaFile(int librarySiteID, string libraryName, string localFilePath, string fileName, string fileTitle, string fileDesc, string filePath);
+
+        /// <summary>
+        /// Gets the <see cref="IMediaFile"/> which matches the supplied ID.
+        /// </summary>
+        /// <param name="mediaFileId">The media file ID of the <see cref="IMediaFile"/>.</param>
+        /// <returns>The <see cref="IMediaFile"/> which matches the ID, else null.</returns>
+        IMediaFile GetMediaFile(int mediaFileId);
+
+        /// <summary>
+        /// Gets the <see cref="IMediaFile"/> which matches the supplied library <see cref="IMediaLibrary"/> and file path.
+        /// </summary>
+        /// <param name="library">The specified <see cref="IMediaLibrary"/> to look for the media file</param>
+        /// <param name="folder">The folder of the media file</param>
+        /// <param name="fileName">The file name of the media file</param>
+        /// <returns>The list of <see cref="IMediaFile"/> which matches the input, else null.</returns>
+        IMediaFile GetMediaFile(IMediaLibrary library, string folder, string fileName);
+
+        /// <summary>
+        /// Updates the <see cref="IMediaFile"/>.
+        /// </summary>
+        /// <param name="library">The <see cref="IMediaLibrary"/>to retrive for updating the file</param>
+        /// <param name="file">The <see cref="IMediaFile"/> to update.</param>
+        /// <param name="isReplace">to indicate if replace the complete object or update only the properties</param>
+        /// <returns>The updated media file.</returns>
+        IMediaFile UpdateMediaFile(IMediaLibrary library, IMediaFile file, bool isReplace = true);
+
         #endregion
 
     }

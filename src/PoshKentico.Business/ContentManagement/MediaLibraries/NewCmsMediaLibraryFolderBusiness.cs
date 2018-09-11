@@ -46,7 +46,7 @@ namespace PoshKentico.Business.ContentManagement.MediaLibraries
         /// <param name="folder">The name of the newly created folder</param>
         public void CreateMediaLibraryFolder(int siteID, string name, string folder)
         {
-            this.MediaLibraryService.CreateMediaLibraryFolder(siteID, name, folder);
+            this.MediaLibraryService.CreateMediaFolder(siteID, name, folder);
         }
 
         #endregion

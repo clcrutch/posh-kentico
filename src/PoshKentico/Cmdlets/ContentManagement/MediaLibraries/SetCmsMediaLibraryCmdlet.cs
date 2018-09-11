@@ -27,7 +27,7 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
 {
     /// <summary>
     /// <para type="synopsis">Sets a library.</para>
-    /// <para type="description">Sets a new library based off of the provided input.</para>
+    /// <para type="description">Sets a library based off of the provided input.</para>
     /// <para type="description">This cmdlet returns the updated library when the -PassThru switch is used.</para>
     /// <example>
     ///     <para>Set library specifying an existing library.</para>
@@ -39,7 +39,7 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
     /// </example>
     /// <example>
     ///     <para>Get library specifying the SiteID and DisplayName, set its LibraryName, Description and Folder.</para>
-    ///     <code>Set-CMSMediaLibrary -SiteID 1 -DisplayName "My Test Name" -LibraryName "Name" -Description "Library description" -Folder "Images"</code>
+    ///     <code>Set-CMSMediaLibrary -SiteID 1 -LibraryName "Name" -DisplayName "My Test Name" -Description "Library description" -Folder "Images"</code>
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
@@ -69,18 +69,18 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
         public int SiteID { get; set; }
 
         /// <summary>
-        /// <para type="description">The display name for the updated library.</para>
-        /// <para type="description">The Media Library display name cannot be blank.</para>
-        /// </summary>
-        [Parameter(Mandatory = true, Position = 1, ParameterSetName = PROPERTYSET)]
-        public string DisplayName { get; set; }
-
-        /// <summary>
         /// <para type="description">The library name for the updated library.</para>
         /// <para type="description">The library name cannot be blank.</para>
         /// </summary>
-        [Parameter(Mandatory = false, Position = 2, ParameterSetName = PROPERTYSET)]
+        [Parameter(Mandatory = true, Position = 1, ParameterSetName = PROPERTYSET)]
         public string LibraryName { get; set; }
+
+        /// <summary>
+        /// <para type="description">The display name for the updated library.</para>
+        /// <para type="description">The Media Library display name cannot be blank.</para>
+        /// </summary>
+        [Parameter(Mandatory = false, Position = 2, ParameterSetName = PROPERTYSET)]
+        public string DisplayName { get; set; }
 
         /// <summary>
         /// <para type="description">The library description for the updated library.</para>
@@ -121,7 +121,7 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
                     updatedLibrary = this.BusinessLayer.Set(this.LibraryToSet.ActLike<IMediaLibrary>());
                     break;
                 case PROPERTYSET:
-                    updatedLibrary = this.BusinessLayer.Set(this.DisplayName, this.LibraryName, this.Description, this.Folder, this.SiteID);
+                    updatedLibrary = this.BusinessLayer.Set(this.SiteID, this.LibraryName, this.DisplayName, this.Description, this.Folder);
                     break;
             }
 
