@@ -98,32 +98,32 @@ namespace PoshKentico.CmdletProviders
 
         #region IContentCmdletProvider Implementation
 
-        public IContentReader GetContentReader(string path)
+        public virtual IContentReader GetContentReader(string path)
         {
             throw new NotImplementedException();
         }
 
-        public object GetContentReaderDynamicParameters(string path)
+        public virtual object GetContentReaderDynamicParameters(string path)
         {
             throw new NotImplementedException();
         }
 
-        public IContentWriter GetContentWriter(string path)
+        public virtual IContentWriter GetContentWriter(string path)
         {
             throw new NotImplementedException();
         }
 
-        public object GetContentWriterDynamicParameters(string path)
+        public virtual object GetContentWriterDynamicParameters(string path)
         {
             throw new NotImplementedException();
         }
 
-        public void ClearContent(string path)
+        public virtual void ClearContent(string path)
         {
             throw new NotImplementedException();
         }
 
-        public object ClearContentDynamicParameters(string path)
+        public virtual object ClearContentDynamicParameters(string path)
         {
             throw new NotImplementedException();
         } 
