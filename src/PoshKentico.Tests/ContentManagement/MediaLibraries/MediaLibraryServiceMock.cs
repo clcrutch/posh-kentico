@@ -97,5 +97,15 @@ namespace PoshKentico.Tests.ContentManagement.MediaLibraries
         {
             throw new System.NotImplementedException();
         }
+
+        public IMediaFile UpdateMediaFile(IMediaFile file)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void DeleteMediaFile(IMediaFile file)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
