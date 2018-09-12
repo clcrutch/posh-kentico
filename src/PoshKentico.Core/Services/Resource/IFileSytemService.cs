@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PoshKentico.Core.Services.Resource
 {
-    public interface IFileSytemService : IResourceService
+    public interface IFileSystemResourceService : IResourceService
     {
 
     }

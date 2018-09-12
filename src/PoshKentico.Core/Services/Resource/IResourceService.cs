@@ -9,11 +9,16 @@ namespace PoshKentico.Core.Services.Resource
 {
     public interface IResourceService
     {
-        IResource Get(string path);
-        IEnumerable<IResource> Get(string path, bool recurse);
+        void CreateContainer(IResource resource);
+        void CreateItem(IResource resource);
+        IEnumerable<IResource> GetItems(string path);
+        IResource GetItem(string path);
+        IEnumerable<IResource> GetContainers(string path, bool recurse);
+        IResource GetContainer(string path, bool recurse);
+        IEnumerable<IResource> GetAll(string path, bool recurse);
+        void DeleteContainer(string path, bool recurse);
+        void DeleteItem(string path);
+        bool IsContainer(string path);
         bool Exists(string path);
-        IResource Create(IResource parent, ResourceType resourceType, string path, string content = "");
-        void Create(IResource resource);
-        bool Delete(IResource resource, bool recurse);
     }
 }

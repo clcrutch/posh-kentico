@@ -55,13 +55,11 @@ namespace PoshKentico.CmdletProviders
 
         #region IPropertyCmdletProvider Implementation
 
-        /// <inheritdoc/>
         public virtual void GetProperty(string path, Collection<string> providerSpecificPickList)
         {
             this.Initialize();
 
-            var resource = this.ResourceBusiness.FindPath(path);
-            var outputObject = this.ResourceBusiness.GetProperty(resource, providerSpecificPickList)?.ToPSObject();
+            var outputObject = this.ResourceBusiness.GetProperty(path, providerSpecificPickList)?.ToPSObject();
 
             if (outputObject != null)
             {
@@ -69,32 +67,26 @@ namespace PoshKentico.CmdletProviders
             }
         }
 
-        /// <inheritdoc/>
         public virtual object GetPropertyDynamicParameters(string path, Collection<string> providerSpecificPickList)
         {
             return null;
         }
 
-        /// <inheritdoc/>
         public virtual void SetProperty(string path, PSObject propertyValue)
         {
-            var resource = this.ResourceBusiness.FindPath(path);
-            this.ResourceBusiness.SetProperty(resource, propertyValue.ToDictionary());
+            this.ResourceBusiness.SetProperty(path, propertyValue.ToDictionary());
         }
 
-        /// <inheritdoc/>
         public virtual object SetPropertyDynamicParameters(string path, PSObject propertyValue)
         {
             return null;
         }
 
-        /// <inheritdoc/>
         public virtual void ClearProperty(string path, Collection<string> propertyToClear)
         {
             throw new PSNotSupportedException();
         }
 
-        /// <inheritdoc/>
         public virtual object ClearPropertyDynamicParameters(string path, Collection<string> propertyToClear)
         {
             throw new PSNotSupportedException();
@@ -108,17 +100,15 @@ namespace PoshKentico.CmdletProviders
 
             var regex = new Regex($"^{this.PSDriveInfo.CurrentLocation.Replace("\\", "\\\\")}\\\\", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
-            return (from i in this.ResourceBusiness.GetResources(path)
+            return (from i in this.ResourceBusiness.GetAll(path, true).Flatten(i => i.Children)
                     select regex.Replace(i.Path, string.Empty)).ToArray();
         }
 
-        /// <inheritdoc/>
         protected override bool IsValidPath(string path)
         {
             return true;
         }
 
-        /// <inheritdoc/>
         protected override Collection<PSDriveInfo> InitializeDefaultDrives()
         {
             this.Initialize();
@@ -134,19 +124,6 @@ namespace PoshKentico.CmdletProviders
             return path.Replace('/', '\\');
         }
 
-        protected override void RemoveItem(string path, bool recurse)
-        {
-            this.Initialize();
-            var resource = this.ResourceBusiness.FindPath(path);
-            var isDeleted = this.ResourceBusiness.Delete(resource, recurse);
-
-            if (!isDeleted)
-            {
-                throw new Exception($"Cannot delete item at \"{path}\".");
-            }
-        }
-
-
         protected override bool ItemExists(string path)
         {
             return this.ResourceBusiness.Exists(path);
@@ -156,7 +133,7 @@ namespace PoshKentico.CmdletProviders
         {
             this.Initialize();
 
-            var resource = this.ResourceBusiness.FindPath(path);
+            var resource = this.ResourceBusiness.Get(path);
             return (resource?.IsContainer).GetValueOrDefault(false);
         }
 
@@ -164,40 +141,51 @@ namespace PoshKentico.CmdletProviders
         {
             this.Initialize();
 
-            var fileSresourystemItem = this.ResourceBusiness.GetResources(path, recurse);
+            var resources = this.ResourceBusiness.GetAll(path, recurse);
+            var flattenResources = resources.Flatten(i => i.Children);
+
+            foreach (var child in recurse ? flattenResources : resources)
+            {
+                this.WriteItemObject(child, recurse);
+            }
         }
 
         protected override void GetItem(string path)
         {
             this.Initialize();
 
-            this.WriteItemObject(this.ResourceBusiness.FindPath(path), false);
+            this.WriteItemObject(this.ResourceBusiness.Get(path), false);
         }
 
         protected override bool HasChildItems(string path)
         {
             this.Initialize();
-            var resource = this.ResourceBusiness.FindPath(path);
+
+            var resource = this.ResourceBusiness.Get(path, true);
             
             return (resource?.Children?.Any()).GetValueOrDefault(false);
         }
 
-        protected virtual void WriteItemObject(IResource resource, bool recurse)
+        protected override void NewItem(string name, string itemTypeName, object newItemValue)
         {
-            this.WriteItemObject(new IResource[] { resource }, resource.Path, resource.IsContainer);
+            this.ResourceBusiness.Create(name, itemTypeName, newItemValue);
         }
 
-        protected virtual void WriteItemObject(IEnumerable<IResource> resources, bool recurse)
+        protected override void RemoveItem(string path, bool recurse)
         {
-            foreach (var resource in resources)
+            this.Initialize();
+
+            var isDeleted = this.ResourceBusiness.Delete(path, recurse);
+
+            if (!isDeleted)
             {
-                base.WriteItemObject(resource, resource.Path, resource.IsContainer);
+                throw new Exception($"Cannot delete item at \"{path}\".");
             }
         }
 
-        protected override void NewItem(string name, string itemTypeName, object newItemValue)
+        protected virtual void WriteItemObject(IResource resource, bool recurse)
         {
-            this.ResourceBusiness.NewItem(name, itemTypeName, newItemValue);
+            base.WriteItemObject(new IResource[] { resource }, resource.Path, resource.IsContainer);
         }
 
         protected virtual void Initialize()

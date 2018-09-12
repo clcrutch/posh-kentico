@@ -1,9 +1,11 @@
-﻿using PoshKentico.Core.Services.Resource;
+﻿using ImpromptuInterface;
+using PoshKentico.Core.Services.Resource;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Management.Automation;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -14,8 +16,73 @@ namespace PoshKentico.Business
     {
         public virtual IResourceService ResourceService { get; set; }
 
-        public virtual Dictionary<string, object> GetProperty(IResource resource, Collection<string> providerSpecificPickList)
+        public virtual bool Exists(string path)
         {
+            return this.ResourceService.Exists(path);
+        }
+
+        public virtual void Create(string name, string itemTypeName, object newItemValue)
+        {
+            IResource resource = resource = new
+            {
+                Children = new IResource[] { },
+                ResourceType = ResourceType.File,
+                IsContainer = false,
+                Path = name,
+                Content = newItemValue as string,
+                CreationTime = DateTime.Now,
+            }.ActLike<IResource>();
+
+            if (this.ResourceService.IsContainer(name))
+            {
+                resource.IsContainer = true;
+                resource.ResourceType = ResourceType.Directory;
+                this.ResourceService.CreateContainer(resource);
+            }
+            else
+            {
+                this.ResourceService.CreateItem(resource);
+            }
+        }
+
+        public virtual bool Delete(string path, bool recurse = false)
+        {
+            try
+            {
+                if (this.ResourceService.Exists(path))
+                {
+                    if (this.ResourceService.IsContainer(path))
+                        this.ResourceService.DeleteContainer(path, recurse);
+                    else
+                        this.ResourceService.DeleteItem(path);
+                }
+            }
+            catch (Exception ex)
+            {
+                // log exception?
+            }
+
+            return this.ResourceService.Exists(path);
+        }
+
+        public virtual IResource Get(string path, bool recurse = false)
+        {
+            if (this.ResourceService.IsContainer(path))
+                return this.ResourceService.GetContainer(path, recurse);
+            else
+                return this.ResourceService.GetItem(path);
+        }
+
+        public virtual IEnumerable<IResource> GetAll(string path, bool recurse = false)
+        {
+            return this.ResourceService.GetAll(path, recurse);
+        }
+
+        public virtual Dictionary<string, object> GetProperty(string path, Collection<string> providerSpecificPickList)
+        {
+            this.Initialize();
+
+            var resource = this.ResourceService.IsContainer(path) ? this.ResourceService.GetContainer(path, false) : this.ResourceService.GetItem(path);
             var properties = new Dictionary<string, object>
             {
                 { "resourcename", resource.Name },
@@ -25,58 +92,6 @@ namespace PoshKentico.Business
             this.PurgeUnwantedProperties(providerSpecificPickList, properties);
 
             return properties;
-        }
-
-        public virtual IResource FindPath(string path)
-        {
-            return this.ResourceService.Get(path);
-        }
-
-        public virtual IEnumerable<IResource> GetResources(string path, bool recurse = false)
-        {
-            return this.ResourceService.Get(path, recurse);
-        }
-
-        public virtual bool Exists(string path)
-        {
-            return this.ResourceService.Exists(path);
-        }
-        public virtual IResource[] GetResourcesFromRegEx(string path, Regex regex)
-        {
-            var children = this.ResourceService.Get(path, false);
-
-            if (children == null)
-            {
-                return null;
-            }
-
-            return (from c in children
-                    where regex.IsMatch(c.Name)
-                    select c).ToArray();
-        }
-
-        public virtual void NewItem(string name, string itemTypeName, object newItemValue)
-        {
-            this.ResourceService.Create(null, (ResourceType)Enum.Parse(typeof(ResourceType), itemTypeName, true), name, newItemValue as string);
-        }
-
-        public virtual void SetProperty(IResource resource, Dictionary<string, object> propertyValue)
-        {
-            bool updatedValue = false;
-            if (propertyValue.ContainsKey("content"))
-            {
-                resource.Content = propertyValue["content"] as string;
-                updatedValue = true;
-            }
-
-            if (updatedValue)
-            {
-                this.ResourceService.Create(resource);
-            }
-        }
-        public virtual bool Delete(IResource resource, bool recurse = false)
-        {
-            return this.ResourceService.Delete(resource, recurse);
         }
 
         public virtual void PurgeUnwantedProperties(Collection<string> providerSpecificPickList, Dictionary<string, object> properties)
@@ -91,9 +106,19 @@ namespace PoshKentico.Business
                 }
             }
         }
-        public virtual void Initialize()
+
+        public virtual void SetProperty(string path, Dictionary<string, object> propertyValue)
         {
-            base.Initialize();
+            if (this.ResourceService.IsContainer(path))
+                return;
+
+            var resource = this.ResourceService.GetItems(path)?.FirstOrDefault();
+
+            if (propertyValue.ContainsKey("content"))
+            {
+                resource.Content = propertyValue["content"] as string;
+                this.ResourceService.CreateItem(resource);
+            }
         }
     }
 }
