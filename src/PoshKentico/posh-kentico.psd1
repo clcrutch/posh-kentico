@@ -63,6 +63,7 @@ CLRVersion = '4.0'
 FormatsToProcess = @( `
 	#ContentManagement/MediaLibraries
 	"./FormattingFiles/ContentManagement/MediaLibraries/MediaLibraryInfo.format.ps1xml", `
+	"./FormattingFiles/ContentManagement/MediaLibraries/MediaFileInfo.format.ps1xml", `
 
 	# Configuration/Sites
     "./FormattingFiles/Configuration/Sites/CultureInfo.format.ps1xml", `
