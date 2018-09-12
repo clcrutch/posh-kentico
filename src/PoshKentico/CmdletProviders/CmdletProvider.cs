@@ -13,7 +13,7 @@ using System.Text.RegularExpressions;
 
 namespace PoshKentico.CmdletProviders
 {
-    public abstract class CmdletProvider<T> : NavigationCmdletProvider, IPropertyCmdletProvider
+    public abstract class CmdletProvider<T> : NavigationCmdletProvider, IPropertyCmdletProvider, IContentCmdletProvider
         where T : CmdletProviderBusinessBase
     {
         protected abstract string ProviderName { get; }
@@ -93,6 +93,40 @@ namespace PoshKentico.CmdletProviders
         {
             throw new PSNotSupportedException();
         }
+
+        #endregion
+
+        #region IContentCmdletProvider Implementation
+
+        public IContentReader GetContentReader(string path)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object GetContentReaderDynamicParameters(string path)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IContentWriter GetContentWriter(string path)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object GetContentWriterDynamicParameters(string path)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ClearContent(string path)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object ClearContentDynamicParameters(string path)
+        {
+            throw new NotImplementedException();
+        } 
 
         #endregion
 
