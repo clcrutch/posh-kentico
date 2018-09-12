@@ -9,7 +9,7 @@ using System.Management.Automation.Provider;
 
 namespace PoshKentico.CmdletProviders
 {
-    [OutputType(typeof(ResourceItem), ProviderCmdlet = "Get-Item")]
+    [OutputType(typeof(ResourceItem), ProviderCmdlet = ProviderCmdlet.GetItem)]
     [CmdletProvider("KenticoResourceProvider", ProviderCapabilities.ExpandWildcards)]
     public class ResourceProvider : CmdletProvider<KenticoFileSystemBusiness>
     {
