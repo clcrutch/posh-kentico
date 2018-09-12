@@ -1,4 +1,4 @@
-﻿// <copyright file="RemoveCmsMediaLibraryFileBusiness.cs" company="Chris Crutchfield">
+﻿// <copyright file="RemoveCmsMediaLibraryFolderBusiness.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -21,10 +21,10 @@ using PoshKentico.Core.Services.ContentManagement.MediaLibraries;
 namespace PoshKentico.Business.ContentManagement.MediaLibraries
 {
     /// <summary>
-    /// Business Layer for Remove-CMSMediaLibraryFile cmdlet.
+    /// Business layer for the Remove-CMSMediaLibraryFolder cmdlet.
     /// </summary>
-    [Export(typeof(RemoveCmsMediaLibraryFileBusiness))]
-    public class RemoveCmsMediaLibraryFileBusiness : CmdletBusinessBase
+    [Export(typeof(RemoveCmsMediaLibraryFolderBusiness))]
+    public class RemoveCmsMediaLibraryFolderBusiness : CmdletBusinessBase
     {
         #region Properties
 
@@ -39,16 +39,16 @@ namespace PoshKentico.Business.ContentManagement.MediaLibraries
         #region Methods
 
         /// <summary>
-        /// Deletes the <see cref="IMediaFile"/> in the CMS System.
+        /// Removes a new Media Library Folder in the CMS System.
         /// </summary>
-        /// <param name="file">The <see cref="IMediaFile"/> to set.</param>
-        public void RemoveMediaFile(IMediaFile file)
+        /// <param name="siteID">the site id of the media library.</param>
+        /// <param name="name">The name of the media library.</param>
+        /// <param name="folder">The name of the newly created folder.</param>
+        public void RemoveMediaLibraryFolder(int siteID, string name, string folder)
         {
-            if (this.ShouldProcess(file.FileName, "delete"))
-            {
-                this.MediaLibraryService.DeleteMediaFile(file);
-            }
+            this.MediaLibraryService.DeleteMediaFolder(siteID, name, folder);
         }
+
         #endregion
     }
 }

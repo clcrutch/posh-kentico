@@ -93,17 +93,17 @@ namespace PoshKentico.Tests.ContentManagement.MediaLibraries
             throw new System.NotImplementedException();
         }
 
-        public IMediaFile UpdateMediaFile(IMediaLibrary library, IMediaFile file, bool isReplace = true)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public IMediaFile UpdateMediaFile(IMediaFile file)
         {
             throw new System.NotImplementedException();
         }
 
         public void DeleteMediaFile(IMediaFile file)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void DeleteMediaFolder(int librarySiteID, string libraryName, string folderName)
         {
             throw new System.NotImplementedException();
         }

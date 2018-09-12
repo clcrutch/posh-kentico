@@ -489,6 +489,7 @@
     <Compile Include="Cmdlets\Configuration\Sites\StartCmsSiteCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Sites\StopCmsSiteCmdlet.cs" />
     <Compile Include="Cmdlets\ContentManagement\MediaLibraries\RemoveCmsMediaLibraryFileCmdlet.cs" />
+    <Compile Include="Cmdlets\ContentManagement\MediaLibraries\RemoveCmsMediaLibraryFolderCmdlet.cs" />
     <Compile Include="Cmdlets\Development\WebParts\AddCMSWebPartFieldCmdlet.cs" />
     <Compile Include="Cmdlets\Development\WebParts\GetCMSWebPartCategoryCmdletBase.cs" />
     <Compile Include="Cmdlets\Development\WebParts\GetCMSWebPartCmdlet.cs" />

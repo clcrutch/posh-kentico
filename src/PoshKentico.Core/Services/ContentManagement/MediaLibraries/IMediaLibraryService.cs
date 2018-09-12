@@ -125,6 +125,14 @@ namespace PoshKentico.Core.Services.ContentManagement.MediaLibraries
         /// </summary>
         /// <param name="file">The <see cref="IMediaFile"/> to delete.</param>
         void DeleteMediaFile(IMediaFile file);
+
+        /// <summary>
+        /// Deletes a media library folder within the <see cref="IMediaLibrary"/>.
+        /// </summary>
+        /// <param name="librarySiteID">The site id of the <see cref="IMediaLibrary"/>to retrive for creating the new folder.</param>
+        /// <param name="libraryName">The name of the <see cref="IMediaLibrary"/> to retrive for creating the new folder.</param>
+        /// <param name="folderName">The new folder name to create within the media library.</param>
+        void DeleteMediaFolder(int librarySiteID, string libraryName, string folderName);
         #endregion
 
     }

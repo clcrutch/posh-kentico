@@ -222,6 +222,20 @@ namespace PoshKentico.Core.Configuration.ContentManagement.MediaLibraries
             MediaFileInfoProvider.DeleteMediaFileInfo(mediaFileInfo);
         }
 
+        /// <inheritdoc/>
+        public void DeleteMediaFolder(int librarySiteID, string libraryName, string folderName)
+        {
+            // Gets the media library
+            string siteName = SiteInfoProvider.GetSiteName(librarySiteID);
+            var existingLibrary = MediaLibraryInfoProvider.GetMediaLibraryInfo(libraryName, siteName);
+
+            if (existingLibrary != null)
+            {
+                // Deletes the "NewFolder" folder within the media library
+                MediaLibraryInfoProvider.DeleteMediaLibraryFolder(siteName, existingLibrary.LibraryID, folderName, false);
+            }
+        }
+
         /// <summary>
         /// Gets the media library info object.
         /// </summary>
