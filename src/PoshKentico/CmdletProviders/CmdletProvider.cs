@@ -102,7 +102,7 @@ namespace PoshKentico.CmdletProviders
 
             var regex = new Regex($"^{this.PSDriveInfo.CurrentLocation.Replace("\\", "\\\\")}\\\\", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
-            return (from i in this.ResourceBusiness.GetAll(path, true).Flatten(i => i.Children)
+            return (from i in this.ResourceBusiness.GetAll(this.PSDriveInfo.CurrentLocation, true).Flatten(i => i.Children)
                     select regex.Replace(i.Path, string.Empty)).ToArray();
         }
 
