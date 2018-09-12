@@ -126,6 +126,8 @@ namespace PoshKentico.CmdletProviders
 
         protected override bool ItemExists(string path)
         {
+            this.Initialize();
+
             return this.ResourceBusiness.Exists(path);
         }
 
@@ -168,6 +170,8 @@ namespace PoshKentico.CmdletProviders
 
         protected override void NewItem(string name, string itemTypeName, object newItemValue)
         {
+            this.Initialize();
+
             this.ResourceBusiness.Create(name, itemTypeName, newItemValue);
         }
 
@@ -185,7 +189,18 @@ namespace PoshKentico.CmdletProviders
 
         protected virtual void WriteItemObject(IResource resource, bool recurse)
         {
-            base.WriteItemObject(new IResource[] { resource }, resource.Path, resource.IsContainer);
+            if (resource == null)
+                return;
+
+            base.WriteItemObject(resource, resource.Path, resource.IsContainer);
+
+            if (recurse && (resource.Children?.Any()).GetValueOrDefault(false))
+            {
+                foreach (var childResource in resource.Children.Flatten(i => i.Children))
+                {
+                    base.WriteItemObject(new IResource[] { resource }, resource.Path, resource.IsContainer);
+                }
+            }
         }
 
         protected virtual void Initialize()
