@@ -15,6 +15,7 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
@@ -61,7 +62,7 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSMediaLibraryFile", DefaultParameterSetName = NONE)]
-    [OutputType(typeof(MediaLibraryInfo))]
+    [OutputType(typeof(MediaFileInfo[]))]
     public class GetCmsMediaLibraryFileCmdlet : MefCmdlet
     {
         #region Constants
@@ -146,10 +147,18 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
 
             foreach (var file in files)
             {
-                this.WriteObject(file.UndoActLike());
+                this.ActOnObject(file);
             }
-
-            #endregion
         }
+
+        /// <summary>
+        /// When overridden in a child class, operates on the specified action.
+        /// </summary>
+        /// <param name="file">The media library file to operate on.</param>
+        protected virtual void ActOnObject(IMediaFile file)
+        {
+            this.WriteObject(file.UndoActLike());
+        }
+        #endregion
     }
 }

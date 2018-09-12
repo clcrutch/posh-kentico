@@ -120,6 +120,11 @@ namespace PoshKentico.Core.Services.ContentManagement.MediaLibraries
         /// <returns>The updated media file.</returns>
         IMediaFile UpdateMediaFile(IMediaFile file);
 
+        /// <summary>
+        /// Deletes the specified <see cref="IMediaFile"/>.
+        /// </summary>
+        /// <param name="file">The <see cref="IMediaFile"/> to delete.</param>
+        void DeleteMediaFile(IMediaFile file);
         #endregion
 
     }

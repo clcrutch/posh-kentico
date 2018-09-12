@@ -208,6 +208,20 @@ namespace PoshKentico.Core.Configuration.ContentManagement.MediaLibraries
             }
         }
 
+        /// <inheritdoc/>
+        public void DeleteMediaFile(IMediaFile file)
+        {
+            MediaFileInfo mediaFileInfo = MediaFileInfoProvider.GetMediaFileInfo(file.FileID);
+
+            if (mediaFileInfo == null)
+            {
+                return;
+            }
+
+            // Deletes the media file
+            MediaFileInfoProvider.DeleteMediaFileInfo(mediaFileInfo);
+        }
+
         /// <summary>
         /// Gets the media library info object.
         /// </summary>

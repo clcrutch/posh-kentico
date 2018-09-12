@@ -466,6 +466,7 @@
     <Compile Include="Configuration\Sites\SetCmsSiteBusiness.cs" />
     <Compile Include="Configuration\Sites\StartCmsSiteBusiness.cs" />
     <Compile Include="Configuration\Sites\StopCmsSiteBusiness.cs" />
+    <Compile Include="ContentManagement\MediaLibraries\RemoveCMSMediaLibraryFileBusiness.cs" />
     <Compile Include="Development\WebParts\AddCMSWebPartFieldBusiness.cs" />
     <Compile Include="Development\WebParts\FieldDataType.cs" />
     <Compile Include="Development\WebParts\GetCMSWebPartBusiness.cs" />
