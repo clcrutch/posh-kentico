@@ -46,5 +46,10 @@ namespace PoshKentico.Core.Services.ContentManagement.MediaLibraries
         /// Gets the site id for the media library.
         /// </summary>
         int LibrarySiteID { get; }
+
+        /// <summary>
+        /// Gets the library id for the media library.
+        /// </summary>
+        int LibraryID { get; }
     }
 }
