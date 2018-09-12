@@ -35,7 +35,7 @@ namespace PoshKentico.Core.Providers.Resource
             foreach (var item in Directory.EnumerateFiles(path))
             {
 
-                items.Add(this.GetItem(path));
+                items.Add(this.GetItem(item));
             }
 
             return items.AsEnumerable();
@@ -63,7 +63,7 @@ namespace PoshKentico.Core.Providers.Resource
 
             foreach (var item in Directory.EnumerateDirectories(path))
             {
-                items.Add(this.GetContainer(path, recurse));
+                items.Add(this.GetContainer(item, recurse));
             }
 
             return items.AsEnumerable();

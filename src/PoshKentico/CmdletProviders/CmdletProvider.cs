@@ -18,6 +18,8 @@ namespace PoshKentico.CmdletProviders
     {
         protected abstract string ProviderName { get; }
         protected abstract string DriveName { get; }
+        protected abstract string DriveRootPath { get; }
+        protected abstract string DriveDescription { get; }
 
         [Import]
         public ICmsApplicationService CmsApplicationService { get; set; }
@@ -113,7 +115,7 @@ namespace PoshKentico.CmdletProviders
         {
             this.Initialize();
 
-            var drive = new PSDriveInfo(this.DriveName, this.ProviderInfo, string.Empty, string.Empty, null);
+            var drive = new PSDriveInfo(this.DriveName, this.ProviderInfo, this.DriveRootPath, this.DriveDescription, null);
             var drives = new Collection<PSDriveInfo>() { drive };
 
             return drives;
@@ -135,8 +137,7 @@ namespace PoshKentico.CmdletProviders
         {
             this.Initialize();
 
-            var resource = this.ResourceBusiness.Get(path);
-            return (resource?.IsContainer).GetValueOrDefault(false);
+            return this.ResourceBusiness.IsContainer(path);
         }
 
         protected override void GetChildItems(string path, bool recurse)
@@ -144,9 +145,8 @@ namespace PoshKentico.CmdletProviders
             this.Initialize();
 
             var resources = this.ResourceBusiness.GetAll(path, recurse);
-            var flattenResources = resources.Flatten(i => i.Children);
 
-            foreach (var child in recurse ? flattenResources : resources)
+            foreach (var child in recurse ? resources.Flatten(i => i.Children) : resources)
             {
                 this.WriteItemObject(child, recurse);
             }

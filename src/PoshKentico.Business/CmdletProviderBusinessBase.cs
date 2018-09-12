@@ -120,5 +120,10 @@ namespace PoshKentico.Business
                 this.ResourceService.CreateItem(resource);
             }
         }
+
+        public bool IsContainer(string path)
+        {
+            return this.ResourceService.IsContainer(path);
+        }
     }
 }

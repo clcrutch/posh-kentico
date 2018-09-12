@@ -1,4 +1,5 @@
-﻿using PoshKentico.Business;
+﻿using CMS.Base;
+using PoshKentico.Business;
 using PoshKentico.Business.Resource;
 using PoshKentico.CmdletProviders.DynamicParameters;
 using PoshKentico.Core.Services.Resource;
@@ -12,8 +13,10 @@ namespace PoshKentico.CmdletProviders
     [CmdletProvider("KenticoResourceProvider", ProviderCapabilities.ExpandWildcards)]
     public class ResourceProvider : CmdletProvider<KenticoFileSystemBusiness>
     {
-        protected override string ProviderName { get => "KenticoResourceProvider"; }
-        protected override string DriveName { get => "Kenti"; }
+        protected sealed override string ProviderName { get => "KenticoResourceProvider"; }
+        protected sealed override string DriveName { get => "Kenti"; }
+        protected sealed override string DriveRootPath { get => SystemContext.WebApplicationPhysicalPath; }
+        protected sealed override string DriveDescription { get => "Kentico resource provider."; }
 
         protected override object NewItemDynamicParameters(string path, string itemTypeName, object newItemValue)
         {
