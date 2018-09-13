@@ -468,6 +468,7 @@
     <Compile Include="Configuration\Sites\StopCmsSiteBusiness.cs" />
     <Compile Include="ContentManagement\MediaLibraries\RemoveCmsMediaLibraryFileBusiness.cs" />
     <Compile Include="ContentManagement\MediaLibraries\RemoveCmsMediaLibraryFolderBusiness.cs" />
+    <Compile Include="ContentManagement\MediaLibraries\SetCmsMediaLibrarySecurityOptionBusiness.cs" />
     <Compile Include="Development\WebParts\AddCMSWebPartFieldBusiness.cs" />
     <Compile Include="Development\WebParts\FieldDataType.cs" />
     <Compile Include="Development\WebParts\GetCMSWebPartBusiness.cs" />

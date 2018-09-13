@@ -467,6 +467,7 @@
     <Compile Include="Services\Configuration\Sites\ISite.cs" />
     <Compile Include="Services\Configuration\Sites\ISiteDomainAlias.cs" />
     <Compile Include="Services\Configuration\Sites\ISiteService.cs" />
+    <Compile Include="Services\ContentManagement\MediaLibraries\SecurityPropertyEnum.cs" />
     <Compile Include="Services\Development\WebParts\IWebPartField.cs" />
     <Compile Include="Services\Development\WebParts\IWebPart.cs" />
     <Compile Include="Services\Development\WebParts\IWebPartCategory.cs" />

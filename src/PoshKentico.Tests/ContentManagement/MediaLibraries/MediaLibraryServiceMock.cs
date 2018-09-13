@@ -16,6 +16,7 @@
 // </copyright>
 
 using System.Collections.Generic;
+using CMS.Helpers;
 using FluentAssertions;
 using Moq;
 using PoshKentico.Core.Services.ContentManagement.MediaLibraries;
@@ -104,6 +105,11 @@ namespace PoshKentico.Tests.ContentManagement.MediaLibraries
         }
 
         public void DeleteMediaFolder(int librarySiteID, string libraryName, string folderName)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void SetMediaLibrarySecurityOption(IMediaLibrary library, SecurityPropertyEnum option, SecurityAccessEnum securityAccess)
         {
             throw new System.NotImplementedException();
         }

@@ -135,10 +135,18 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
 
             foreach (var library in libraries)
             {
-                this.WriteObject(library.UndoActLike());
+                this.ActOnObject(library);
             }
-
-            #endregion
         }
+
+        /// <summary>
+        /// When overridden in a child class, operates on the specified action.
+        /// </summary>
+        /// <param name="library">The media library to operate on.</param>
+        protected virtual void ActOnObject(IMediaLibrary library)
+        {
+            this.WriteObject(library.UndoActLike());
+        }
+        #endregion
     }
 }

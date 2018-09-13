@@ -48,13 +48,11 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Remove, "CMSMediaLibrary", SupportsShouldProcess = true, ConfirmImpact = ConfirmImpact.High)]
-    public class RemoveCmsMediaLibraryCmdlet : MefCmdlet
+    public class RemoveCmsMediaLibraryCmdlet : GetCmsMediaLibraryCmdlet
     {
         #region Constants
 
-        private const string OBJECTSET = "ObjectSet";
-        private const string DISPLAYNAME = "Dislpay Name";
-        private const string IDSETNAME = "ID";
+        private const string MEDIALIBRARY = "Media Library";
 
         #endregion
         #region Properties
@@ -62,38 +60,14 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
         /// <summary>
         /// <para type="description">The associalted site for the library to retrieve.</para>
         /// </summary>
-        [Parameter(Mandatory = false, ValueFromPipeline = true, Position = 0, ParameterSetName = OBJECTSET)]
-        public MediaLibraryInfo Library { get; set; }
-
-        /// <summary>
-        /// <para type="description">The site name of the library to retrive.</para>
-        /// </summary>
-        [Parameter(Mandatory = false, Position = 0, ValueFromPipeline = true, ParameterSetName = DISPLAYNAME)]
-        public int SiteID { get; set; }
-
-        /// <summary>
-        /// <para type="description">The display name of the library to retrive.</para>
-        /// </summary>
-        [Parameter(Mandatory = false, Position = 1, ParameterSetName = DISPLAYNAME)]
-        public string DisplayName { get; set; }
-
-        /// <summary>
-        /// <para type="description">If set, the match is exact,else the match performs a contains for display name and category name and starts with for path.</para>
-        /// </summary>
-        [Parameter(ParameterSetName = DISPLAYNAME)]
-        public SwitchParameter Exact { get; set; }
-
-        /// <summary>
-        /// <para type="description">The IDs of the library to retrieve.</para>
-        /// </summary>
-        [Parameter(Mandatory = false, Position = 0, ParameterSetName = IDSETNAME)]
-        public int[] ID { get; set; }
+        [Parameter(Mandatory = false, ValueFromPipeline = true, Position = 0, ParameterSetName = MEDIALIBRARY)]
+        public MediaLibraryInfo MediaLibrary { get; set; }
 
         /// <summary>
         /// Gets or sets the Business layer for this media library service. Populated by MEF.
         /// </summary>
         [Import]
-        public RemoveCmsMediaLibraryBusiness BusinessLayer { get; set; }
+        public RemoveCmsMediaLibraryBusiness RemoveBusinessLayer { get; set; }
 
         #endregion
 
@@ -102,20 +76,26 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
-            switch (this.ParameterSetName)
+            if (this.ParameterSetName == MEDIALIBRARY)
             {
-                case DISPLAYNAME:
-                    this.BusinessLayer.Remove(this.SiteID, this.DisplayName, this.Exact.ToBool());
-                    break;
-                case OBJECTSET:
-                    this.BusinessLayer.Remove(this.Library.ActLike<IMediaLibrary>());
-                    break;
-                case IDSETNAME:
-                    this.BusinessLayer.Remove(this.ID);
-                    break;
+                this.ActOnObject(this.MediaLibrary.ActLike<IMediaLibrary>());
+            }
+            else
+            {
+                base.ProcessRecord();
+            }
+        }
+
+        /// <inheritdoc/>
+        protected override void ActOnObject(IMediaLibrary library)
+        {
+            if (this.MediaLibrary != null)
+            {
+                library = this.MediaLibrary.ActLike<IMediaLibrary>();
             }
 
-            #endregion
+            this.RemoveBusinessLayer.Remove(library);
         }
+        #endregion
     }
 }

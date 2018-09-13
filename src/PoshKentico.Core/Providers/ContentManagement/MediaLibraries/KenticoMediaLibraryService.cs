@@ -15,6 +15,7 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -236,6 +237,25 @@ namespace PoshKentico.Core.Configuration.ContentManagement.MediaLibraries
             }
         }
 
+        /// <inheritdoc/>
+        public void SetMediaLibrarySecurityOption(IMediaLibrary library, SecurityPropertyEnum option, SecurityAccessEnum securityAccess)
+        {
+            // Gets the media library
+            var existingLibrary = this.GetMediaLibrary(library);
+
+            if (existingLibrary != null)
+            {
+                // Get security property name from enum
+                string propName = Enum.GetName(typeof(SecurityPropertyEnum), option);
+
+                // Set security property value using reflection
+                existingLibrary.GetType().GetProperty(propName).SetValue(existingLibrary, securityAccess);
+
+                // Saves the updated media library to the database
+                MediaLibraryInfoProvider.SetMediaLibraryInfo(existingLibrary);
+            }
+        }
+
         /// <summary>
         /// Gets the media library info object.
         /// </summary>
@@ -246,7 +266,6 @@ namespace PoshKentico.Core.Configuration.ContentManagement.MediaLibraries
             string siteName = SiteInfoProvider.GetSiteName(library.LibrarySiteID);
             return MediaLibraryInfoProvider.GetMediaLibraryInfo(library.LibraryName, siteName);
         }
-
         #endregion
 
     }

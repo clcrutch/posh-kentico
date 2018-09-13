@@ -16,6 +16,7 @@
 // </copyright>
 
 using System.Collections.Generic;
+using CMS.Helpers;
 using CMS.MediaLibrary;
 
 namespace PoshKentico.Core.Services.ContentManagement.MediaLibraries
@@ -133,6 +134,14 @@ namespace PoshKentico.Core.Services.ContentManagement.MediaLibraries
         /// <param name="libraryName">The name of the <see cref="IMediaLibrary"/> to retrive for creating the new folder.</param>
         /// <param name="folderName">The new folder name to create within the media library.</param>
         void DeleteMediaFolder(int librarySiteID, string libraryName, string folderName);
+
+        /// <summary>
+        /// Sets the security options for a media library.
+        /// </summary>
+        /// <param name="library">The specified <see cref="IMediaLibrary"/> to look for setting the security option.</param>
+        /// <param name="option">The security option <see cref="SecurityPropertyEnum"/>.</param>
+        /// <param name="securityAccess">The security acess enum <see cref="SecurityAccessEnum"/>.</param>
+        void SetMediaLibrarySecurityOption(IMediaLibrary library, SecurityPropertyEnum option, SecurityAccessEnum securityAccess);
         #endregion
 
     }
