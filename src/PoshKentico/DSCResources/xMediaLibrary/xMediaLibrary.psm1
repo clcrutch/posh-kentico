@@ -45,9 +45,9 @@ function Get-TargetResource
 	if ($site -ne $null)
 	{
         Write-Verbose -Message "The Site with SiteName $($LibrarySiteName) exist"
-		$Library = Get-CMSMediaLibrary -SiteID $site.SiteID -LibraryName $LibraryName -Exact
+		$library = Get-CMSMediaLibrary -SiteID $site.SiteID -LibraryName $LibraryName -Exact
 		
-		if ($Library -ne $null)
+		if ($library -ne $null)
 		{
 			# $Library is not null, Add all library properties to the hash table
 			$getTargetResourceResult = @{
@@ -107,7 +107,7 @@ function Set-TargetResource
 	if ($site -ne $null)
 	{
         Write-Verbose -Message "The Site with SiteName $($LibrarySiteName) exist"
-	    $Library = Get-CMSMediaLibrary -SiteID $site.SiteID -LibraryName $LibraryName -Exact
+	    $library = Get-CMSMediaLibrary -SiteID $site.SiteID -LibraryName $LibraryName -Exact
 
 	    if ($Ensure -eq "Present")
         {
@@ -176,7 +176,7 @@ function Test-TargetResource
 	{
 		Write-Verbose -Message "The Site with SiteName $($LibrarySiteName) exist"
 
-	    $Library = Get-CMSMediaLibrary -SiteID $site.SiteID -LibraryName $LibraryName -Exact
+	    $library = Get-CMSMediaLibrary -SiteID $site.SiteID -LibraryName $LibraryName -Exact
 
         if ($Ensure -eq "Present")
         {

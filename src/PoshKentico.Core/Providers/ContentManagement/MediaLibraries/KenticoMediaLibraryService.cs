@@ -140,7 +140,7 @@ namespace PoshKentico.Core.Configuration.ContentManagement.MediaLibraries
         }
 
         /// <inheritdoc/>
-        public IMediaFile GetMediaFile(IMediaLibrary library, string filePath, string extension)
+        public IMediaFile GetMediaFile(IMediaLibrary library, string folder, string fileName)
         {
             MediaFileInfo mediaFile = null;
 
@@ -150,7 +150,7 @@ namespace PoshKentico.Core.Configuration.ContentManagement.MediaLibraries
             if (existingLibrary != null)
             {
                 // Gets the media file
-                mediaFile = MediaFileInfoProvider.GetMediaFileInfo(existingLibrary.LibraryID, $"{filePath}.{extension}");
+                mediaFile = MediaFileInfoProvider.GetMediaFileInfo(existingLibrary.LibraryID, $"{folder}/{fileName}");
             }
 
             return mediaFile.ActLike<IMediaFile>();
