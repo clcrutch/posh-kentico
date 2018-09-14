@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace PoshKentico.Core.Services.Resource
 {
-    public interface IFileSystemResourceService : IResourceService
+    public interface IFileSystemReaderWriterService : IResourceReaderWriterService
     {
-
     }
 }

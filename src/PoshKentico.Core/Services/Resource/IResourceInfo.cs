@@ -7,28 +7,18 @@ using System.Threading.Tasks;
 
 namespace PoshKentico.Core.Services.Resource
 {
-    public interface IResource
+    public interface IResourceInfo
     {
         #region Properties
-
-        IEnumerable<IResource> Children { get; set; }
-
         bool IsContainer { get; set; }
-
-        ResourceType ResourceType { get; set; }
-
-        object Item { get; set; }
-
+        string ContainerPath { get; set; }
         string Name { get; set; }
-
         string Path { get; set; }
-
         string Content { get; set; }
-
         DateTime CreationTime { get; set; }
-
         DateTime LastWriteTime { get; set; }
-
+        ResourceType ResourceType { get; set; }
+        IEnumerable<IResourceInfo> Children { get; set; }
         #endregion
     }
 }

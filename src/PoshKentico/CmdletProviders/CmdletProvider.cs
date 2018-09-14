@@ -13,8 +13,8 @@ using System.Text.RegularExpressions;
 
 namespace PoshKentico.CmdletProviders
 {
-    public abstract class CmdletProvider<T> : NavigationCmdletProvider, IPropertyCmdletProvider, IContentCmdletProvider
-        where T : CmdletProviderBusinessBase
+    public abstract class CmdletProvider<TBusinessProvider> : NavigationCmdletProvider, IPropertyCmdletProvider, IContentCmdletProvider
+        where TBusinessProvider : CmdletProviderBusinessBase
     {
         protected abstract string ProviderName { get; }
         protected abstract string DriveName { get; }
@@ -25,7 +25,7 @@ namespace PoshKentico.CmdletProviders
         public ICmsApplicationService CmsApplicationService { get; set; }
 
         [Import]
-        public T ResourceBusiness { get; set; }
+        public TBusinessProvider Business { get; set; }
 
         #region Statics
 
@@ -61,7 +61,7 @@ namespace PoshKentico.CmdletProviders
         {
             this.Initialize();
 
-            var outputObject = this.ResourceBusiness.GetProperty(path, providerSpecificPickList)?.ToPSObject();
+            var outputObject = this.Business.GetProperty(path, providerSpecificPickList)?.ToPSObject();
 
             if (outputObject != null)
             {
@@ -76,7 +76,7 @@ namespace PoshKentico.CmdletProviders
 
         public virtual void SetProperty(string path, PSObject propertyValue)
         {
-            this.ResourceBusiness.SetProperty(path, propertyValue.ToDictionary());
+            this.Business.SetProperty(path, propertyValue.ToDictionary());
         }
 
         public virtual object SetPropertyDynamicParameters(string path, PSObject propertyValue)
@@ -100,33 +100,37 @@ namespace PoshKentico.CmdletProviders
 
         public virtual IContentReader GetContentReader(string path)
         {
-            throw new NotImplementedException();
+            this.Initialize();
+
+            return new ResourceContentReaderWriter(Business.GetReaderWriter(path));
         }
 
         public virtual object GetContentReaderDynamicParameters(string path)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         public virtual IContentWriter GetContentWriter(string path)
         {
-            throw new NotImplementedException();
+            this.Initialize();
+
+            return new ResourceContentReaderWriter(Business.GetReaderWriter(path));
         }
 
         public virtual object GetContentWriterDynamicParameters(string path)
         {
-            throw new NotImplementedException();
+            throw new PSNotSupportedException();
         }
 
         public virtual void ClearContent(string path)
         {
-            throw new NotImplementedException();
+            throw new PSNotSupportedException();
         }
 
         public virtual object ClearContentDynamicParameters(string path)
         {
-            throw new NotImplementedException();
-        } 
+            throw new PSNotSupportedException();
+        }
 
         #endregion
 
@@ -134,10 +138,7 @@ namespace PoshKentico.CmdletProviders
         {
             this.Initialize();
 
-            var regex = new Regex($"^{this.PSDriveInfo.CurrentLocation.Replace("\\", "\\\\")}\\\\", RegexOptions.IgnoreCase | RegexOptions.Compiled);
-
-            return (from i in this.ResourceBusiness.GetAll(this.PSDriveInfo.CurrentLocation, true).Flatten(i => i.Children)
-                    select regex.Replace(i.Path, string.Empty)).ToArray();
+            return Business.ExpandPath(path, PSDriveInfo.CurrentLocation);
         }
 
         protected override bool IsValidPath(string path)
@@ -157,28 +158,30 @@ namespace PoshKentico.CmdletProviders
 
         protected override string NormalizeRelativePath(string path, string basePath)
         {
-            return path.Replace('/', '\\');
+            this.Initialize();
+
+            return Business.NormalizeRelativePath(path, basePath);
         }
 
         protected override bool ItemExists(string path)
         {
             this.Initialize();
 
-            return this.ResourceBusiness.Exists(path);
+            return this.Business.Exists(path);
         }
 
         protected override bool IsItemContainer(string path)
         {
             this.Initialize();
 
-            return this.ResourceBusiness.IsContainer(path);
+            return this.Business.IsContainer(path);
         }
 
         protected override void GetChildItems(string path, bool recurse)
         {
             this.Initialize();
 
-            var resources = this.ResourceBusiness.GetAll(path, recurse);
+            var resources = this.Business.GetAllResources(path, recurse);
 
             foreach (var child in recurse ? resources.Flatten(i => i.Children) : resources)
             {
@@ -190,14 +193,14 @@ namespace PoshKentico.CmdletProviders
         {
             this.Initialize();
 
-            this.WriteItemObject(this.ResourceBusiness.Get(path), false);
+            this.WriteItemObject(this.Business.GetResource(path), false);
         }
 
         protected override bool HasChildItems(string path)
         {
             this.Initialize();
 
-            var resource = this.ResourceBusiness.Get(path, true);
+            var resource = this.Business.GetResource(path, false);
             
             return (resource?.Children?.Any()).GetValueOrDefault(false);
         }
@@ -206,14 +209,14 @@ namespace PoshKentico.CmdletProviders
         {
             this.Initialize();
 
-            this.ResourceBusiness.Create(name, itemTypeName, newItemValue);
+            this.Business.CreateResource(name, itemTypeName, newItemValue);
         }
 
         protected override void RemoveItem(string path, bool recurse)
         {
             this.Initialize();
 
-            var isDeleted = this.ResourceBusiness.Delete(path, recurse);
+            var isDeleted = this.Business.Delete(path, recurse);
 
             if (!isDeleted)
             {
@@ -221,7 +224,19 @@ namespace PoshKentico.CmdletProviders
             }
         }
 
-        protected virtual void WriteItemObject(IResource resource, bool recurse)
+        protected override void CopyItem(string path, string copyPath, bool recurse)
+        {
+            this.Initialize();
+
+            Business.CopyItem(path, copyPath, recurse);
+        }
+
+        protected override object CopyItemDynamicParameters(string path, string destination, bool recurse)
+        {
+            return new PSNotSupportedException();
+        }
+
+        protected virtual void WriteItemObject(IResourceInfo resource, bool recurse)
         {
             if (resource == null)
                 return;
@@ -232,7 +247,7 @@ namespace PoshKentico.CmdletProviders
             {
                 foreach (var childResource in resource.Children.Flatten(i => i.Children))
                 {
-                    base.WriteItemObject(new IResource[] { resource }, resource.Path, resource.IsContainer);
+                    base.WriteItemObject(new IResourceInfo[] { resource }, resource.Path, resource.IsContainer);
                 }
             }
         }
@@ -243,7 +258,7 @@ namespace PoshKentico.CmdletProviders
             MefHost.Container.ComposeParts(this);
 
             this.CmsApplicationService.Initialize(true, this.WriteVerbose, this.WriteDebug);
-            this.ResourceBusiness.Initialize();
+            this.Business.Initialize();
         }
     }
 }

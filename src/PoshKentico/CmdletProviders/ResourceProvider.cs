@@ -11,22 +11,11 @@ namespace PoshKentico.CmdletProviders
 {
     [OutputType(typeof(ResourceItem), ProviderCmdlet = ProviderCmdlet.GetItem)]
     [CmdletProvider("KenticoResourceProvider", ProviderCapabilities.ExpandWildcards)]
-    public class ResourceProvider : CmdletProvider<KenticoFileSystemBusiness>
+    public class ResourceProvider : CmdletProvider<KenticoFileSystemBusines>
     {
         protected sealed override string ProviderName { get => "KenticoResourceProvider"; }
         protected sealed override string DriveName { get => "Kenti"; }
         protected sealed override string DriveRootPath { get => SystemContext.WebApplicationPhysicalPath; }
         protected sealed override string DriveDescription { get => "Kentico resource provider."; }
-
-        protected override object NewItemDynamicParameters(string path, string itemTypeName, object newItemValue)
-        {
-            switch (itemTypeName.ToLowerInvariant())
-            {
-                case "filesystem":
-                    return new FileSystemResourceDynamicParameters();
-                default:
-                    return null;
-            }
-        }
     }
 }

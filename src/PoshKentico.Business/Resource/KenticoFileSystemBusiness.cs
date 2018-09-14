@@ -10,10 +10,13 @@ using PoshKentico.Core.Services.Resource;
 
 namespace PoshKentico.Business.Resource
 {
-    [Export(typeof(KenticoFileSystemBusiness))]
-    public class KenticoFileSystemBusiness : CmdletProviderBusinessBase
+    [Export(typeof(KenticoFileSystemBusines))]
+    public class KenticoFileSystemBusines : CmdletProviderBusinessBase
     {
         [Import(typeof(IFileSystemResourceService))]
         public override IResourceService ResourceService { get; set; }
+
+        [Import(typeof(IFileSystemReaderWriterService))]
+        public override IResourceReaderWriterService ReaderWriterService { get; set; }
     }
 }
