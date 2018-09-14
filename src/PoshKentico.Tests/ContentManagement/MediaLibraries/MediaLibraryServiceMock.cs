@@ -15,6 +15,7 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System;
 using System.Collections.Generic;
 using CMS.Helpers;
 using FluentAssertions;
@@ -111,7 +112,13 @@ namespace PoshKentico.Tests.ContentManagement.MediaLibraries
 
         public void SetMediaLibrarySecurityOption(IMediaLibrary library, SecurityPropertyEnum option, SecurityAccessEnum securityAccess)
         {
-            throw new System.NotImplementedException();
+            MediaLibraryMock mock = (MediaLibraryMock)library;
+
+             // Get security property name from enum
+            string propName = Enum.GetName(typeof(SecurityPropertyEnum), option);
+
+            // Set security property value using reflection
+            mock.GetType().GetProperty(propName).SetValue(library, securityAccess);
         }
     }
 }
