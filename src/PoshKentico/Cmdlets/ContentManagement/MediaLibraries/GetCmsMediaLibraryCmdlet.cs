@@ -37,20 +37,20 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
     ///     <code>Get-CMSMediaLibrary</code>
     /// </example>
     /// <example>
-    ///     <para>Get all libraries with a site ID 1 and display name "*tes*".</para>
-    ///     <code>Get-CMSMediaLibrary -SiteID 1 -DisplayName bas</code>
+    ///     <para>Get all libraries with a site ID 1 and library name "*tes*".</para>
+    ///     <code>Get-CMSMediaLibrary -SiteID 1 -LibraryName bas</code>
     /// </example>
     /// <example>
-    ///     <para>Get all libraries with a site ID 1 and display name "test"</para>
-    ///     <code>Get-CMSMediaLibrary -SiteID 1 -DisplayName "test" -Exact</code>
+    ///     <para>Get all libraries with a site ID 1 and library name "test"</para>
+    ///     <code>Get-CMSMediaLibrary -SiteID 1 -LibraryName "test" -Exact</code>
     /// </example>
     /// <example>
-    ///     <para>Get all libraries with a site $site and display name "*tes*".</para>
-    ///     <code>$site | Get-CMSMediaLibrary -DisplayName bas</code>
+    ///     <para>Get all libraries with a site $site and library name "*tes*".</para>
+    ///     <code>$site | Get-CMSMediaLibrary -LibraryName bas</code>
     /// </example>
     /// <example>
-    ///     <para>Get all libraries with a site $site and display name "test"</para>
-    ///     <code>$site | Get-CMSMediaLibrary -DisplayName "test" -Exact</code>
+    ///     <para>Get all libraries with a site $site and library name "test"</para>
+    ///     <code>$site | Get-CMSMediaLibrary -LibraryName "test" -Exact</code>
     /// </example>
     /// <example>
     ///     <para>Get all the libraries with the specified IDs.</para>
@@ -66,7 +66,7 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
 
         private const string NONE = "None";
         private const string OBJECTSET = "Object";
-        private const string DISPLAYNAME = "Dislpay Name";
+        private const string LIBRARYNAME = "Library Name";
         private const string IDSETNAME = "ID";
 
         #endregion
@@ -81,19 +81,19 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
         /// <summary>
         /// <para type="description">The site name of the library to retrive.</para>
         /// </summary>
-        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true, ParameterSetName = DISPLAYNAME)]
+        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true, ParameterSetName = LIBRARYNAME)]
         public int SiteID { get; set; }
 
         /// <summary>
-        /// <para type="description">The display name of the library to retrive.</para>
+        /// <para type="description">The library name of the library to retrive.</para>
         /// </summary>
-        [Parameter(Mandatory = true, Position = 1, ParameterSetName = DISPLAYNAME)]
-        public string DisplayName { get; set; }
+        [Parameter(Mandatory = true, Position = 1, ParameterSetName = LIBRARYNAME)]
+        public string LibraryName { get; set; }
 
         /// <summary>
-        /// <para type="description">If set, the match is exact,else the match performs a contains for display name and category name and starts with for path.</para>
+        /// <para type="description">If set, the match is exact,else the match performs a contains for library name and category name and starts with for path.</para>
         /// </summary>
-        [Parameter(ParameterSetName = DISPLAYNAME)]
+        [Parameter(ParameterSetName = LIBRARYNAME)]
         public SwitchParameter Exact { get; set; }
 
         /// <summary>
@@ -120,10 +120,10 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
             switch (this.ParameterSetName)
             {
                 case OBJECTSET:
-                    libraries = this.BusinessLayer.GetMediaLibraries(this.Site.SiteID, this.DisplayName, this.Exact.ToBool());
+                    libraries = this.BusinessLayer.GetMediaLibraries(this.Site.SiteID, this.LibraryName, this.Exact.ToBool());
                     break;
-                case DISPLAYNAME:
-                    libraries = this.BusinessLayer.GetMediaLibraries(this.SiteID, this.DisplayName, this.Exact.ToBool());
+                case LIBRARYNAME:
+                    libraries = this.BusinessLayer.GetMediaLibraries(this.SiteID, this.LibraryName, this.Exact.ToBool());
                     break;
                 case IDSETNAME:
                     libraries = this.BusinessLayer.GetMediaLibraries(this.ID);
