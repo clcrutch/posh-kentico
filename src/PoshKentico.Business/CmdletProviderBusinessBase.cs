@@ -115,12 +115,9 @@ namespace PoshKentico.Business
             if (this.ResourceService.IsContainer(path))
                 return;
 
-            var resource = this.ResourceService.GetItems(path)?.FirstOrDefault();
-
             if (propertyValue.ContainsKey("content"))
             {
-                resource.Content = propertyValue["content"] as string;
-                this.ResourceService.CreateItem(resource);
+                this.ResourceService.CreateItem(path, propertyValue["content"] as string);
             }
         }
 
