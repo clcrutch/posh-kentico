@@ -1,13 +1,10 @@
-﻿using PoshKentico.Core.Services.Resource;
-using System;
+﻿using CMS.IO;
+using ImpromptuInterface;
+using PoshKentico.Core.Services.Resource;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CMS.IO;
-using ImpromptuInterface;
-using System.Collections;
 
 namespace PoshKentico.Core.Providers.Resource
 {
@@ -63,7 +60,7 @@ namespace PoshKentico.Core.Providers.Resource
                 ContainerPath = itemInfo.Directory.FullName,
                 CreationTime = itemInfo.CreationTime,
                 LastWriteTime = itemInfo.LastWriteTime,
-                ResourceType = ResourceType.File,
+                ResourceType = ResourceType.Item,
                 IsContainer = false,
                 Children = new IResourceInfo[] { },
             }.ActLike<IResourceInfo>();
@@ -89,9 +86,10 @@ namespace PoshKentico.Core.Providers.Resource
             {
                 Name = itemInfo.Name,
                 Path = itemInfo.FullName,
+                ContainerPath = itemInfo.Parent.FullName,
                 CreationTime = itemInfo.CreationTime,
                 LastWriteTime = itemInfo.LastWriteTime,
-                ResourceType = ResourceType.Directory,
+                ResourceType = ResourceType.Container,
                 IsContainer = true,
                 Children = recurse ? this.GetAll(itemInfo.FullName, true) : this.GetAll(itemInfo.FullName, false),
             }.ActLike<IResourceInfo>();
@@ -128,17 +126,15 @@ namespace PoshKentico.Core.Providers.Resource
             File.Copy(source, destination);
         }
 
-        public IList Write(string path, IList content, ref bool isWriting)
+        public byte[] Write(string path, byte[] content, ref bool isWriting)
         {
-            var bytes = content.Cast<byte[]>().ToArray();
-
             if (!isWriting)
-                File.WriteAllBytes(path, bytes[0]);
+                File.WriteAllBytes(path, content);
             else
             {
                 using (var stream = FileStream.New(path, FileMode.Append))
                 {
-                    stream.Write(bytes[0], 0, bytes[0].Length);
+                    stream.Write(content, 0, content.Length);
                 }
             }
 
@@ -146,7 +142,7 @@ namespace PoshKentico.Core.Providers.Resource
             return content;
         }
 
-        public IList Read(string path, ref bool finishedReading)
+        public byte[] Read(string path, ref bool finishedReading)
         {
             if (finishedReading)
                 return null;
@@ -160,9 +156,7 @@ namespace PoshKentico.Core.Providers.Resource
             if (content == null || content.Length == 0)
                 return null;
 
-            lines.Add(content);
-
-            return lines;
+            return content;
         }
 
         public void ClearAttributes(string path)

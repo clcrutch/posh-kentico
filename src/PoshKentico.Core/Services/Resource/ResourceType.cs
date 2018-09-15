@@ -8,7 +8,7 @@ namespace PoshKentico.Core.Services.Resource
 {
     public enum ResourceType
     {
-        File,
-        Directory
+        Item,
+        Container
     }
 }

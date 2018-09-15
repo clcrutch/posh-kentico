@@ -81,8 +81,16 @@ namespace PoshKentico.Business
             var resource = this.ResourceService.IsContainer(path) ? this.ResourceService.GetContainer(path, false) : this.ResourceService.GetItem(path);
             var properties = new Dictionary<string, object>
             {
-                { "resourcename", resource.Name },
-                { "resourcepath", resource.Path },
+                { "IsContainer", resource.IsContainer },
+                { "ContainerPath", resource.ContainerPath },
+                { "Name", resource.Name },
+                { "Path", resource.Path },
+                { "CreationTime", resource.CreationTime },
+                { "LastWriteTime", resource.LastWriteTime },
+                { "ResourceType", resource.ResourceType },
+                { "TotalContainers", resource.Children.Where(i => i.IsContainer).Count() },
+                { "TotalItems", resource.Children.Where(i => !i.IsContainer).Count() },
+                { "TotalResources", resource.Children.Count() },
             };
 
             this.PurgeUnwantedProperties(providerSpecificPickList, properties);
@@ -171,7 +179,7 @@ namespace PoshKentico.Business
             var sourceReader = GetReaderWriter(sourceResource.Path);
             var destinationWriter = GetReaderWriter(destinationPath);
 
-            destinationWriter.Write(sourceReader.Read(0));
+            destinationWriter.Write(sourceReader.Read());
         }
 
         private void CopyContainer(IResourceInfo sourceResource, string destinationBasePath, bool recurse)
@@ -185,12 +193,12 @@ namespace PoshKentico.Business
                             .GroupBy(i => i.Resource.ResourceType)
                             .ToDictionary(i => i.Key, i => i.AsEnumerable());
 
-            foreach (var item in children[ResourceType.Directory].OrderBy(i => i.NewPath))
+            foreach (var item in children[ResourceType.Container].OrderBy(i => i.NewPath))
             {
                 ResourceService.CreateContainer(item.NewPath);
             }
 
-            foreach (var item in children[ResourceType.File].OrderBy(i => i.NewPath))
+            foreach (var item in children[ResourceType.Item].OrderBy(i => i.NewPath))
             {
                 ResourceService.CopyResourceItem(item.Resource.Path, item.NewPath);
             }

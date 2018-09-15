@@ -23,8 +23,8 @@ namespace PoshKentico.Core.Services.Resource
         IEnumerable<IResourceInfo> GetContainers(string path, bool recurse);
         IResourceInfo GetContainer(string path, bool recurse);
         IEnumerable<IResourceInfo> GetAll(string path, bool recurse);
-        IList Write(string path, IList content, ref bool isWriting);
-        IList Read(string path, ref bool finishedReading);
+        byte[] Write(string path, byte[] content, ref bool isWriting);
+        byte[] Read(string path, ref bool finishedReading);
         void CreateItem(string path, string content);
         void CreateContainer(string path);
         void CopyResourceItem(string path, string newPath);

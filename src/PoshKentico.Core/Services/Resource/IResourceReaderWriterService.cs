@@ -13,7 +13,7 @@ namespace PoshKentico.Core.Services.Resource
         void Close();
         void Dispose();
         void Initialize(IResourceService resourceService, string path);
-        IList Read(long readCount);
-        IList Write(IList content);
+        byte[] Read();
+        byte[] Write(byte[] content);
     }
 }

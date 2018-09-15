@@ -474,9 +474,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CmdletProviders\CmdletProvider.cs" />
-    <Compile Include="CmdletProviders\DynamicParameters\FileSystemResourceDynamicParameters.cs" />
-    <Compile Include="CmdletProviders\ResourceContentReaderWriter.cs" />
-    <Compile Include="CmdletProviders\ResourceProvider.cs" />
+    <Compile Include="CmdletProviders\Resource\ResourceContentReaderWriter.cs" />
+    <Compile Include="CmdletProviders\Resource\ResourceProvider.cs" />
     <Compile Include="Cmdlets\Configuration\Settings\GetCmsSettingValueCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Settings\GetCmsWebConfigValueCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Settings\SetCmsSettingValueCmdlet.cs" />

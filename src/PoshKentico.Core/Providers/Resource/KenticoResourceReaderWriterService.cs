@@ -1,11 +1,5 @@
-﻿using CMS.IO;
-using PoshKentico.Core.Services.Resource;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using PoshKentico.Core.Services.Resource;
 using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
 
 namespace PoshKentico.Core.Providers.Resource
 {
@@ -16,7 +10,6 @@ namespace PoshKentico.Core.Providers.Resource
         private bool _finishedReading;
         public string Path { get; private set; }
 
-        [Import]
         IResourceService ResourceService { get; set; }
 
         public void Close()
@@ -27,14 +20,14 @@ namespace PoshKentico.Core.Providers.Resource
         {
         }
 
-        public IList Read(long readCount)
+        public byte[] Read()
         {
             ResourceService.ClearAttributes(Path);
 
             return ResourceService.Read(Path, ref _finishedReading);
         }
 
-        public IList Write(IList content)
+        public byte[] Write(byte[] content)
         {
             ResourceService.ClearAttributes(Path);
 

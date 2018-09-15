@@ -1,13 +1,10 @@
 ﻿using CMS.Base;
-using PoshKentico.Business;
 using PoshKentico.Business.Resource;
-using PoshKentico.CmdletProviders.DynamicParameters;
 using PoshKentico.Core.Services.Resource;
-using System.ComponentModel.Composition;
 using System.Management.Automation;
 using System.Management.Automation.Provider;
 
-namespace PoshKentico.CmdletProviders
+namespace PoshKentico.CmdletProviders.Resource
 {
     [OutputType(typeof(ResourceItem), ProviderCmdlet = ProviderCmdlet.GetItem)]
     [CmdletProvider("KenticoResourceProvider", ProviderCapabilities.ExpandWildcards)]
