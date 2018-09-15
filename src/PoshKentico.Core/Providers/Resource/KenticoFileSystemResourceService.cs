@@ -169,10 +169,5 @@ namespace PoshKentico.Core.Providers.Resource
                 File.SetAttributes(path, (FileInfo.New(path).Attributes & ~attributesToClear));
             }
         }
-
-        public void Init()
-        {
-
-        }
     }
 }
