@@ -13,7 +13,8 @@ namespace PoshKentico.Core.Services.Resource
         bool IsContainer { get; set; }
         string ContainerPath { get; set; }
         string Name { get; set; }
-        string Path { get; set; }        DateTime CreationTime { get; set; }
+        string Path { get; set; }
+        DateTime CreationTime { get; set; }
         DateTime LastWriteTime { get; set; }
         ResourceType ResourceType { get; set; }
         IEnumerable<IResourceInfo> Children { get; set; }
