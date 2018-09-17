@@ -466,6 +466,9 @@
     <Compile Include="Configuration\Sites\SetCmsSiteBusiness.cs" />
     <Compile Include="Configuration\Sites\StartCmsSiteBusiness.cs" />
     <Compile Include="Configuration\Sites\StopCmsSiteBusiness.cs" />
+    <Compile Include="Configuration\Users\GetCmsUserBusiness.cs" />
+    <Compile Include="Configuration\Users\NewCmsUserBusiness.cs" />
+    <Compile Include="Configuration\Users\SetCmsUserBusiness.cs" />
     <Compile Include="ContentManagement\MediaLibraries\RemoveCmsMediaLibraryFileBusiness.cs" />
     <Compile Include="ContentManagement\MediaLibraries\RemoveCmsMediaLibraryFolderBusiness.cs" />
     <Compile Include="ContentManagement\MediaLibraries\SetCmsMediaLibrarySecurityOptionBusiness.cs" />
