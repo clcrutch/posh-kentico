@@ -171,7 +171,6 @@ The associalted site for the server to retrieve.
 ## OUTPUTS
 
 ### CMS.Synchronization.ServerInfo[]
-
 ## NOTES
 
 ## RELATED LINKS

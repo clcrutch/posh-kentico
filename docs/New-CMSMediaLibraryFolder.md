@@ -5,51 +5,45 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-CMSRoleNoLog
+# New-CMSMediaLibraryFolder
 
 ## SYNOPSIS
-Sets a new role without logging any staging tasks.
+Creates a media library folder.
 
 ## SYNTAX
 
 ### Object
 ```
-Set-CMSRoleNoLog [-RoleToSet] <RoleInfo> [-PassThru] [<CommonParameters>]
+New-CMSMediaLibraryFolder [-Library] <MediaLibraryInfo> [-Folder] <String> [<CommonParameters>]
 ```
 
 ### Property
 ```
-Set-CMSRoleNoLog [-RoleName] <String> [-SiteID] <Int32> [-DisplayName] <String> [-PassThru]
- [<CommonParameters>]
+New-CMSMediaLibraryFolder [-SiteID] <Int32> [-LibraryName] <String> [-Folder] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Sets a new role without logging any staging tasks.
+Creates a media library folder based off of the provided input.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Set-CMSRoleNoLog -Role $role
+New-CMSMediaLibraryFolder -SiteID 1 -LibraryName "Name" -Folder "Images"
 ```
 
 ### EXAMPLE 2
 ```
-$role | Set-CMSRoleNoLog
-```
-
-### EXAMPLE 3
-```
-Set-CMSRoleNoLog -RoleDisplayName "Role Display Name" -RoleName "Role Name" -SiteID "Site Id"
+$library | New-CMSMediaLibraryFolder -Folder "Images"
 ```
 
 ## PARAMETERS
 
-### -RoleToSet
-A reference to the role to set.
+### -Library
+The associalted library for the new folder.
 
 ```yaml
-Type: RoleInfo
+Type: MediaLibraryInfo
 Parameter Sets: Object
 Aliases:
 
@@ -60,23 +54,8 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -RoleName
-The role name for the role to set.
-
-```yaml
-Type: String
-Parameter Sets: Property
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -SiteID
-The role site id for the role to set.
+The associalted library site id for the new folder.
 
 ```yaml
 Type: Int32
@@ -84,14 +63,14 @@ Parameter Sets: Property
 Aliases:
 
 Required: True
-Position: 1
+Position: 0
 Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -DisplayName
-The display name for the role to set.
+### -LibraryName
+The library name for the new folder.
 
 ```yaml
 Type: String
@@ -99,23 +78,23 @@ Parameter Sets: Property
 Aliases:
 
 Required: True
-Position: 2
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -PassThru
-Tell the cmdlet to return the role to set.
+### -Folder
+The folder name for the new folder.
 
 ```yaml
-Type: SwitchParameter
+Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: False
-Position: Named
-Default value: False
+Required: True
+Position: 2
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -126,12 +105,11 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## INPUTS
 
-### CMS.Membership.RoleInfo
-A reference to the role to set.
+### CMS.MediaLibrary.MediaLibraryInfo
+The associalted library for the new folder.
 
 ## OUTPUTS
 
-### CMS.Membership.RoleInfo
 ## NOTES
 
 ## RELATED LINKS
