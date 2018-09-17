@@ -28,7 +28,7 @@ namespace PoshKentico.CmdletProviders.Resource
     public class ResourceProvider : MefCmdletProvider<KenticoFileSystemBusines>
     {
         protected sealed override string ProviderName { get => "KenticoResourceProvider"; }
-        protected sealed override string DriveName { get => "Kenti"; }
+        protected sealed override string DriveName { get => "KenticoResources"; }
         protected sealed override string DriveRootPath { get => SystemContext.WebApplicationPhysicalPath; }
         protected sealed override string DriveDescription { get => "Kentico resource provider."; }
     }
