@@ -15,9 +15,6 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using ImpromptuInterface;
-using PoshKentico.Core.Extensions;
-using PoshKentico.Core.Services.Resource;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,6 +25,9 @@ using System.Management.Automation;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using ImpromptuInterface;
+using PoshKentico.Core.Extensions;
+using PoshKentico.Core.Services.Resource;
 
 namespace PoshKentico.Business
 {

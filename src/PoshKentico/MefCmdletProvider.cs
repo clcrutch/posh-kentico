@@ -1,14 +1,14 @@
-﻿using PoshKentico.Business;
-using PoshKentico.CmdletProviders.Resource;
-using PoshKentico.Core.Services.General;
-using PoshKentico.Core.Services.Resource;
-using PoshKentico.Extensions;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Provider;
+using PoshKentico.Business;
+using PoshKentico.CmdletProviders.Resource;
+using PoshKentico.Core.Services.General;
+using PoshKentico.Core.Services.Resource;
+using PoshKentico.Extensions;
 
 namespace PoshKentico
 {

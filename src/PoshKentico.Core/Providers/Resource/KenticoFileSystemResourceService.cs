@@ -15,13 +15,13 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using CMS.IO;
-using ImpromptuInterface;
-using PoshKentico.Core.Services.Resource;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using CMS.IO;
+using ImpromptuInterface;
+using PoshKentico.Core.Services.Resource;
 
 namespace PoshKentico.Core.Providers.Resource
 {

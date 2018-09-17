@@ -15,11 +15,11 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System.Management.Automation;
+using System.Management.Automation.Provider;
 using CMS.Base;
 using PoshKentico.Business.Resource;
 using PoshKentico.Core.Services.Resource;
-using System.Management.Automation;
-using System.Management.Automation.Provider;
 
 namespace PoshKentico.CmdletProviders.Resource
 {
