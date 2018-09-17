@@ -473,7 +473,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CmdletProviders\CmdletProvider.cs" />
+    <Compile Include="MefCmdletProvider.cs" />
     <Compile Include="CmdletProviders\Resource\ResourceContentReaderWriter.cs" />
     <Compile Include="CmdletProviders\Resource\ResourceProvider.cs" />
     <Compile Include="Cmdlets\Configuration\Settings\GetCmsSettingValueCmdlet.cs" />
@@ -509,7 +509,6 @@
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Extensions\PSObjectExtensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="MefCmdletProvider.cs" />
     <Compile Include="MefHost.cs" />
     <Compile Include="Navigation\DynamicParameters\NewWebPartCategoryDynamicParameter.cs" />
     <Compile Include="Navigation\DynamicParameters\NewWebPartDynamicParameter.cs" />
