@@ -56,7 +56,10 @@ namespace PoshKentico.Cmdlets.Configuration.Users
     {
         #region Constants
 
-        private const string NONE = "None";
+        /// <summary>
+        /// Represents no parameters.
+        /// </summary>
+        protected const string NONE = "None";
         private const string USERNAME = "User Name";
         private const string IDSETNAME = "ID";
 

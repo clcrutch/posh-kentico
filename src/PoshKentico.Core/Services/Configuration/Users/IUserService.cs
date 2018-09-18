@@ -63,6 +63,12 @@ namespace PoshKentico.Core.Services.Configuration.Users
         /// <param name="userName">The UserName of the user <see cref="IUser"/> to return. </param>
         /// <returns>The <see cref="IUser"/> which matches the UserName, else null.</returns>
         IUser GetUser(string userName);
+
+        /// <summary>
+        /// Deletes the <see cref="IUser"/> which matches the supplied user name.
+        /// </summary>
+        /// <param name="user">The user <see cref="IUser"/> to delete.</param>
+        void DeleteUser(IUser user);
         #endregion
 
     }

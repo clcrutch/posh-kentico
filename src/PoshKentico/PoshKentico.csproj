@@ -490,6 +490,7 @@
     <Compile Include="Cmdlets\Configuration\Sites\StopCmsSiteCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Users\GetCmsUserCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Users\NewCmsUserCmdlet.cs" />
+    <Compile Include="Cmdlets\Configuration\Users\RemoveCmsUserCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Users\SetCmsUserCmdlet.cs" />
     <Compile Include="Cmdlets\ContentManagement\MediaLibraries\RemoveCmsMediaLibraryFileCmdlet.cs" />
     <Compile Include="Cmdlets\ContentManagement\MediaLibraries\RemoveCmsMediaLibraryFolderCmdlet.cs" />

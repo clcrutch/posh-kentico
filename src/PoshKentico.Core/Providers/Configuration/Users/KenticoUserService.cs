@@ -94,5 +94,18 @@ namespace PoshKentico.Core.Providers.Configuration.Users
         {
             return (UserInfoProvider.GetUserInfo(userName) as UserInfo)?.ActLike<IUser>();
         }
+
+        /// <inheritdoc/>
+        public void DeleteUser(IUser user)
+        {
+            // Gets the user
+            UserInfo deleteUser = UserInfoProvider.GetUserInfo(user.UserName);
+
+            if (deleteUser != null)
+            {
+                // Deletes the user
+                UserInfoProvider.DeleteUser(deleteUser);
+            }
+        }
     }
 }
