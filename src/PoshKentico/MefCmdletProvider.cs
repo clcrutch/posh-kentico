@@ -29,7 +29,7 @@ using PoshKentico.Extensions;
 
 namespace PoshKentico
 {
-    public abstract class MefCmdletProvider<TBusinessProvider> : NavigationCmdletProvider, IPropertyCmdletProvider, IContentCmdletProvider
+    public abstract class MefCmdletProvider<TBusinessProvider> : NavigationCmdletProvider, IPropertyCmdletProvider, IContentCmdletProvider, ICmdlet
         where TBusinessProvider : CmdletProviderBusinessBase
     {
         protected abstract string ProviderName { get; }
@@ -270,8 +270,7 @@ namespace PoshKentico
 
         protected virtual void Initialize()
         {
-            MefHost.Initialize();
-            MefHost.Container.ComposeParts(this);
+            Bootstrapper.Instance.Initialize(this);
 
             this.CmsApplicationService.Initialize(true, this.WriteVerbose, this.WriteDebug);
             this.Business.Initialize();

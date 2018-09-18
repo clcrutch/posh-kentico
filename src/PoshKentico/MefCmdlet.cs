@@ -27,7 +27,7 @@ namespace PoshKentico
     /// <summary>
     /// Base class for MEF cmdlets which automatically fullfill their own dependencies.
     /// </summary>
-    public abstract class MefCmdlet : PSCmdlet
+    public abstract class MefCmdlet : PSCmdlet, ICmdlet
     {
         #region Methods
 
@@ -41,23 +41,7 @@ namespace PoshKentico
 
         private void Initialize()
         {
-            MefHost.Initialize();
-
-            MefHost.Container.ComposeParts(this);
-
-            var businessLayerProps = (from p in this.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public)
-                                      where p.PropertyType.InheritsFrom(typeof(CmdletBusinessBase))
-                                      select p).ToArray();
-
-            foreach (var prop in businessLayerProps)
-            {
-                var instance = (CmdletBusinessBase)prop.GetValue(this);
-                instance.WriteDebug = this.WriteDebug;
-                instance.WriteVerbose = this.WriteVerbose;
-                instance.ShouldProcess = this.ShouldProcess;
-
-                instance.Initialize();
-            }
+            Bootstrapper.Instance.Initialize(this);
         }
 
         #endregion
