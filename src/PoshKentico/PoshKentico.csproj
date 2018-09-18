@@ -473,7 +473,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IKenticoCmdlet.cs" />
+    <Compile Include="ICmdlet.cs" />
     <Compile Include="MefCmdletProvider.cs" />
     <Compile Include="CmdletProviders\Resource\ResourceContentReaderWriter.cs" />
     <Compile Include="CmdletProviders\Resource\ResourceProvider.cs" />

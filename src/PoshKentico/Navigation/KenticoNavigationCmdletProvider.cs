@@ -37,7 +37,7 @@ namespace PoshKentico.Navigation
     /// </summary>
     [OutputType(typeof(WebPartCategoryInfo), typeof(WebPartInfo), ProviderCmdlet = "Get-Item")]
     [CmdletProvider("KenticoProvider", ProviderCapabilities.ExpandWildcards)]
-    public class KenticoNavigationCmdletProvider : NavigationCmdletProvider, IPropertyCmdletProvider
+    public class KenticoNavigationCmdletProvider : NavigationCmdletProvider, IPropertyCmdletProvider, ICmdlet
     {
         #region Constants
 
@@ -296,8 +296,7 @@ namespace PoshKentico.Navigation
 
         private void Initialize()
         {
-            MefHost.Initialize();
-            MefHost.Container.ComposeParts(this);
+            Bootstrapper.Instance.Initialize(this);
 
             this.CmsApplicationService.Initialize(true, this.WriteVerbose, this.WriteDebug);
         }
