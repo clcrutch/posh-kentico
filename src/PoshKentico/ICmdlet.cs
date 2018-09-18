@@ -15,12 +15,12 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using PoshKentico.Core.Services.General;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PoshKentico.Core.Services.General;
 
 namespace PoshKentico
 {

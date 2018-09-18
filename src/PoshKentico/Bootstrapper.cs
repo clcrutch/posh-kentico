@@ -15,8 +15,6 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using PoshKentico.Business;
-using PoshKentico.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
@@ -26,6 +24,8 @@ using System.Management.Automation.Provider;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using PoshKentico.Business;
+using PoshKentico.Extensions;
 
 namespace PoshKentico
 {
