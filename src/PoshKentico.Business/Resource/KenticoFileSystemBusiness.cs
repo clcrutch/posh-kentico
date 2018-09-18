@@ -27,8 +27,8 @@ using PoshKentico.Core.Services.Resource;
 
 namespace PoshKentico.Business.Resource
 {
-    [Export(typeof(KenticoFileSystemBusines))]
-    public class KenticoFileSystemBusines : CmdletProviderBusinessBase
+    [Export(typeof(KenticoFileSystemBusiness))]
+    public class KenticoFileSystemBusiness : CmdletProviderBusinessBase
     {
         [Import(typeof(IFileSystemResourceService))]
         public override IResourceService ResourceService { get; set; }
