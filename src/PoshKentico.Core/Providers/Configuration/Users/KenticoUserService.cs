@@ -71,7 +71,7 @@ namespace PoshKentico.Core.Providers.Configuration.Users
                 else
                 {
                     existingUser.FullName = user.FullName ?? existingUser.FullName;
-                    existingUser.Email = user.Email ?? existingUser.FullName;
+                    existingUser.Email = user.Email ?? existingUser.Email;
                     existingUser.PreferredCultureCode = user.PreferredCultureCode ?? existingUser.PreferredCultureCode;
                     existingUser.SiteIndependentPrivilegeLevel = user.SiteIndependentPrivilegeLevel;
                 }

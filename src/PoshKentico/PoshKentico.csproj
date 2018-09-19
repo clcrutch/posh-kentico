@@ -608,6 +608,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <AdditionalFiles Include="stylecop.json" />
+    <None Include="PSCmdlets.psm1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="TestScript.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

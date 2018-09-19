@@ -2,7 +2,7 @@
 
 $VerbosePreference = "Continue"
 $DebugPreference = "Continue"
-Import-Module posh-kentico
+Import-Module ./PSCmdlets.psm1
 
 Configuration KenticoTest
 {
