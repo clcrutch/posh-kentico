@@ -32,19 +32,19 @@ namespace PoshKentico.Cmdlets.Configuration.Users
     /// <para type="description"></para>
     /// <example>
     ///     <para>Remove the specified user from the site.</para>
-    ///     <code>$user | Remove-CMSUserToSite -Site $site</code>
+    ///     <code>$user | Remove-CMSUserFromSite -Site $site</code>
     /// </example>
     /// <example>
     ///     <para>Remove the specified user from the site.</para>
-    ///     <code>$user | Remove-CMSUserToSite -SiteName "MySite"</code>
+    ///     <code>$user | Remove-CMSUserFromSite -SiteName "MySite"</code>
     /// </example>
     /// <example>
     ///     <para>Remove the specified user from the site.</para>
-    ///     <code>Remove-CMSUserToSite -User $user -Site $site</code>
+    ///     <code>Remove-CMSUserFromSite -User $user -Site $site</code>
     /// </example>
     /// <example>
     ///     <para>Remove the specified user from the site.</para>
-    ///     <code>Remove-CMSUserToSite -User $user -SiteName "MySite"</code>
+    ///     <code>Remove-CMSUserFromSite -User $user -SiteName "MySite"</code>
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
