@@ -24,25 +24,40 @@ using PoshKentico.Core.Services.Resource;
 
 namespace PoshKentico.CmdletProviders.Resource
 {
+    /// <summary>
+    /// Used by providers for reading and writing content
+    /// </summary>
     public class ResourceContentReaderWriter : IContentWriter, IContentReader
     {
+        /// <summary>
+        /// <see cref="IResourceReaderWriterService"/>
+        /// </summary>
         private IResourceReaderWriterService ReadWriteService { get; set; }
 
+#pragma warning disable SA1201 // Elements should appear in the correct order
+                              /// <summary>
+                              /// Initializes a new instance of the <see cref="ResourceContentReaderWriter"/> class.
+                              /// </summary>
+                              /// <param name="readWriteService">The <see cref="IResourceReaderWriterService"/></param>
         public ResourceContentReaderWriter(IResourceReaderWriterService readWriteService)
+#pragma warning restore SA1201 // Elements should appear in the correct order
         {
-            this.ReadWriteService = readWriteService;
+            ReadWriteService = readWriteService;
         }
 
+        /// <inheritdoc/>
         public void Close()
         {
             ReadWriteService.Close();
         }
 
+        /// <inheritdoc/>
         public void Dispose()
         {
             ReadWriteService.Dispose();
         }
 
+        /// <inheritdoc/>
         public IList Read(long readCount)
         {
             ArrayList list = new ArrayList();
@@ -55,11 +70,13 @@ namespace PoshKentico.CmdletProviders.Resource
             return list;
         }
 
+        /// <inheritdoc/>
         public void Seek(long offset, SeekOrigin origin)
         {
             throw new PSNotSupportedException();
         }
 
+        /// <inheritdoc/>
         public IList Write(IList content)
         {
             return ReadWriteService.Write(content.Cast<byte>().ToArray());

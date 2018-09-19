@@ -23,15 +23,33 @@ using System.Threading.Tasks;
 
 namespace PoshKentico.Core.Services.Resource
 {
-    public class ResourceItem : IResourceInfo
+    /// <summary>
+    /// The concreate implementation of <see cref="IResourceInfo"/>
+    /// </summary>
+    public class Resource : IResourceInfo
     {
+        /// <inheritdoc />
         public bool IsContainer { get; set; }
+
+        /// <inheritdoc />
         public string ContainerPath { get; set; }
+
+        /// <inheritdoc />
         public string Name { get; set; }
+
+        /// <inheritdoc />
         public string Path { get; set; }
+
+        /// <inheritdoc />
         public DateTime CreationTime { get; set; }
+
+        /// <inheritdoc />
         public DateTime LastWriteTime { get; set; }
+
+        /// <inheritdoc />
         public ResourceType ResourceType { get; set; }
+
+        /// <inheritdoc />
         public IEnumerable<IResourceInfo> Children { get; set; }
     }
 }

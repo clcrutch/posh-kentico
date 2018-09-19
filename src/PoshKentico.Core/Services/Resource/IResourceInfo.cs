@@ -24,16 +24,51 @@ using System.Threading.Tasks;
 
 namespace PoshKentico.Core.Services.Resource
 {
+    /// <summary>
+    /// Represents a <see cref="Resource"/>
+    /// </summary>
     public interface IResourceInfo
     {
         #region Properties
+
+        /// <summary>
+        /// Determines if the resource is a container
+        /// </summary>
         bool IsContainer { get; set; }
+
+        /// <summary>
+        /// The full path to the container this resource resides in
+        /// </summary>
         string ContainerPath { get; set; }
+
+        /// <summary>
+        /// The name of the container
+        /// </summary>
         string Name { get; set; }
+
+        /// <summary>
+        /// The full path to this resource
+        /// </summary>
         string Path { get; set; }
+
+        /// <summary>
+        /// The date this resource was creatd
+        /// </summary>
         DateTime CreationTime { get; set; }
+
+        /// <summary>
+        /// The last time this resource was written to
+        /// </summary>
         DateTime LastWriteTime { get; set; }
+
+        /// <summary>
+        /// The type of resource. <see cref="ResourceType"/>
+        /// </summary>
         ResourceType ResourceType { get; set; }
+
+        /// <summary>
+        /// The child resources. Only applicable if the resource is a container
+        /// </summary>
         IEnumerable<IResourceInfo> Children { get; set; }
         #endregion
     }

@@ -23,13 +23,24 @@ using PoshKentico.Core.Services.Resource;
 
 namespace PoshKentico.CmdletProviders.Resource
 {
-    [OutputType(typeof(ResourceItem), ProviderCmdlet = ProviderCmdlet.GetItem)]
+    /// <summary>
+    /// Kentico CMS resource provider for PowerShell.
+    /// Creates KenticoResource by default.
+    /// </summary>
+    [OutputType(typeof(Core.Services.Resource.Resource), ProviderCmdlet = ProviderCmdlet.GetItem)]
     [CmdletProvider("KenticoResourceProvider", ProviderCapabilities.ExpandWildcards)]
-    public class ResourceProvider : MefCmdletProvider<KenticoFileSystemBusines>
+    public class ResourceProvider : MefCmdletProvider<KenticoFileSystemBusiness>
     {
+        /// <inheritdoc/>
         protected sealed override string ProviderName { get => "KenticoResourceProvider"; }
-        protected sealed override string DriveName { get => "KenticoResources"; }
+
+        /// <inheritdoc/>
+        protected sealed override string DriveName { get => "KenticoResource"; }
+
+        /// <inheritdoc/>
         protected sealed override string DriveRootPath { get => SystemContext.WebApplicationPhysicalPath; }
+
+        /// <inheritdoc/>
         protected sealed override string DriveDescription { get => "Kentico resource provider."; }
     }
 }

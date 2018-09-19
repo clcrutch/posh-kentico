@@ -24,6 +24,9 @@ using System.Threading.Tasks;
 
 namespace PoshKentico.Core.Services.Resource
 {
+    /// <summary>
+    /// Service that provides access to a file system 
+    /// </summary>
     public interface IFileSystemResourceService : IResourceService
     {
     }

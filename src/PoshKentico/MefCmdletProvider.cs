@@ -29,17 +29,42 @@ using PoshKentico.Extensions;
 
 namespace PoshKentico
 {
+    /// <summary>
+    /// Base class for navigation cmdlet providers.
+    /// </summary>
+    /// <typeparam name="TBusinessProvider">The Business provider to use for accessing Kentico resources. Must inherit from <see cref="CmdletProviderBusinessBase"/></></typeparam>
     public abstract class MefCmdletProvider<TBusinessProvider> : NavigationCmdletProvider, IPropertyCmdletProvider, IContentCmdletProvider, ICmdlet
         where TBusinessProvider : CmdletProviderBusinessBase
     {
-        protected abstract string ProviderName { get; }
-        protected abstract string DriveName { get; }
-        protected abstract string DriveRootPath { get; }
-        protected abstract string DriveDescription { get; }
-
+        /// <summary>
+        /// <see cref=" ICmsApplicationService"/>
+        /// </summary>
         [Import]
         public ICmsApplicationService CmsApplicationService { get; set; }
 
+        /// <summary>
+        /// The name of the provider
+        /// </summary>
+        protected abstract string ProviderName { get; }
+
+        /// <summary>
+        /// The provider drive name
+        /// </summary>
+        protected abstract string DriveName { get; }
+
+        /// <summary>
+        /// The root path of the drive
+        /// </summary>
+        protected abstract string DriveRootPath { get; }
+
+        /// <summary>
+        /// The 
+        /// </summary>
+        protected abstract string DriveDescription { get; }
+
+        /// <summary>
+        /// Gets or sets the <see cref="TBusinessProvider"/> for this provider.
+        /// </summary>
         [Import]
         public TBusinessProvider Business { get; set; }
 
@@ -73,6 +98,7 @@ namespace PoshKentico
 
         #region IPropertyCmdletProvider Implementation
 
+        /// <inheritdoc />
         public virtual void GetProperty(string path, Collection<string> providerSpecificPickList)
         {
             this.Initialize();
@@ -85,26 +111,31 @@ namespace PoshKentico
             }
         }
 
+        /// <inheritdoc />
         public virtual object GetPropertyDynamicParameters(string path, Collection<string> providerSpecificPickList)
         {
             return null;
         }
 
+        /// <inheritdoc />
         public virtual void SetProperty(string path, PSObject propertyValue)
         {
             this.Business.SetProperty(path, propertyValue.ToDictionary());
         }
 
+        /// <inheritdoc />
         public virtual object SetPropertyDynamicParameters(string path, PSObject propertyValue)
         {
             return null;
         }
 
+        /// <inheritdoc />
         public virtual void ClearProperty(string path, Collection<string> propertyToClear)
         {
             throw new PSNotSupportedException();
         }
 
+        /// <inheritdoc />
         public virtual object ClearPropertyDynamicParameters(string path, Collection<string> propertyToClear)
         {
             throw new PSNotSupportedException();
@@ -114,6 +145,7 @@ namespace PoshKentico
 
         #region IContentCmdletProvider Implementation
 
+        /// <inheritdoc />
         public virtual IContentReader GetContentReader(string path)
         {
             this.Initialize();
@@ -121,11 +153,13 @@ namespace PoshKentico
             return new ResourceContentReaderWriter(Business.GetReaderWriter(path));
         }
 
+        /// <inheritdoc />
         public virtual object GetContentReaderDynamicParameters(string path)
         {
             return null;
         }
 
+        /// <inheritdoc />
         public virtual IContentWriter GetContentWriter(string path)
         {
             this.Initialize();
@@ -133,16 +167,19 @@ namespace PoshKentico
             return new ResourceContentReaderWriter(Business.GetReaderWriter(path));
         }
 
+        /// <inheritdoc />
         public virtual object GetContentWriterDynamicParameters(string path)
         {
             return null;
         }
 
+        /// <inheritdoc />
         public virtual void ClearContent(string path)
         {
             return;
         }
 
+        /// <inheritdoc />
         public virtual object ClearContentDynamicParameters(string path)
         {
             return null;
@@ -150,6 +187,7 @@ namespace PoshKentico
 
         #endregion
 
+        /// <inheritdoc />
         protected override string[] ExpandPath(string path)
         {
             this.Initialize();
@@ -157,11 +195,13 @@ namespace PoshKentico
             return Business.ExpandPath(path, PSDriveInfo.CurrentLocation);
         }
 
+        /// <inheritdoc />
         protected override bool IsValidPath(string path)
         {
             return true;
         }
 
+        /// <inheritdoc />
         protected override Collection<PSDriveInfo> InitializeDefaultDrives()
         {
             this.Initialize();
@@ -172,6 +212,7 @@ namespace PoshKentico
             return drives;
         }
 
+        /// <inheritdoc />
         protected override string NormalizeRelativePath(string path, string basePath)
         {
             this.Initialize();
@@ -179,6 +220,7 @@ namespace PoshKentico
             return Business.NormalizeRelativePath(path, basePath);
         }
 
+        /// <inheritdoc />
         protected override bool ItemExists(string path)
         {
             this.Initialize();
@@ -186,6 +228,7 @@ namespace PoshKentico
             return this.Business.Exists(path);
         }
 
+        /// <inheritdoc />
         protected override bool IsItemContainer(string path)
         {
             this.Initialize();
@@ -193,6 +236,7 @@ namespace PoshKentico
             return this.Business.IsContainer(path);
         }
 
+        /// <inheritdoc />
         protected override void GetChildItems(string path, bool recurse)
         {
             this.Initialize();
@@ -205,6 +249,7 @@ namespace PoshKentico
             }
         }
 
+        /// <inheritdoc />
         protected override void GetItem(string path)
         {
             this.Initialize();
@@ -212,6 +257,7 @@ namespace PoshKentico
             this.WriteItemObject(this.Business.GetResource(path), false);
         }
 
+        /// <inheritdoc />
         protected override bool HasChildItems(string path)
         {
             this.Initialize();
@@ -221,6 +267,7 @@ namespace PoshKentico
             return (resource?.Children?.Any()).GetValueOrDefault(false);
         }
 
+        /// <inheritdoc />
         protected override void NewItem(string name, string itemTypeName, object newItemValue)
         {
             this.Initialize();
@@ -228,6 +275,7 @@ namespace PoshKentico
             this.Business.CreateResource(name, itemTypeName, newItemValue);
         }
 
+        /// <inheritdoc />
         protected override void RemoveItem(string path, bool recurse)
         {
             this.Initialize();
@@ -240,6 +288,7 @@ namespace PoshKentico
             }
         }
 
+        /// <inheritdoc />
         protected override void CopyItem(string path, string copyPath, bool recurse)
         {
             this.Initialize();
@@ -247,11 +296,17 @@ namespace PoshKentico
             Business.CopyItem(path, copyPath, recurse);
         }
 
+        /// <inheritdoc />
         protected override object CopyItemDynamicParameters(string path, string destination, bool recurse)
         {
             return new PSNotSupportedException();
         }
 
+        /// <summary>
+        /// Writes the <see cref="IResourceInfo"/> to the output
+        /// </summary>
+        /// <param name="resource">The <see cref="IResourceInfo"/> to be written to the output</param>
+        /// <param name="recurse">When set to true, will recurse through all child containers of <paramref name="resource"/></param> and write them to the output.
         protected virtual void WriteItemObject(IResourceInfo resource, bool recurse)
         {
             if (resource == null)
@@ -268,6 +323,9 @@ namespace PoshKentico
             }
         }
 
+        /// <summary>
+        /// Performs the necessary initialization for this provider.
+        /// </summary>
         protected virtual void Initialize()
         {
             Bootstrapper.Instance.Initialize(this);

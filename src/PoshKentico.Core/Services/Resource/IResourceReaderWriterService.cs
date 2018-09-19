@@ -24,13 +24,44 @@ using System.Threading.Tasks;
 
 namespace PoshKentico.Core.Services.Resource
 {
+    /// <summary>
+    /// Service used to read from or write to a resource item
+    /// </summary>
     public interface IResourceReaderWriterService
     {
+        /// <summary>
+        /// Full path to a resource item
+        /// </summary>
         string Path { get; }
+
+        /// <summary>
+        /// Closes the reader/writer
+        /// </summary>
         void Close();
+
+        /// <summary>
+        /// Disposes the reader/writer
+        /// </summary>
         void Dispose();
+
+        /// <summary>
+        /// Initializes the reader/wrtier
+        /// </summary>
+        /// <param name="resourceService">Service used to do the actual reading and writting</param>
+        /// <param name="path">Full path to the resource item</param>
         void Initialize(IResourceService resourceService, string path);
+
+        /// <summary>
+        /// Reads content from resource item
+        /// </summary>
+        /// <returns>Items read from the resource item</returns>
         byte[] Read();
+
+        /// <summary>
+        /// Writes content to a resource item
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns>Items written to the resource item</returns>
         byte[] Write(byte[] content);
     }
 }

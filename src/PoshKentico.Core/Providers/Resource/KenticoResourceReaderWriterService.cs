@@ -20,23 +20,32 @@ using PoshKentico.Core.Services.Resource;
 
 namespace PoshKentico.Core.Providers.Resource
 {
+    /// <summary>
+    /// Implementation of <see cref="IFileSystemReaderWriterService"/> that uses Kentico
+    /// </summary>
     [Export(typeof(IFileSystemReaderWriterService))]
     public class KenticoResourceReaderWriterService : IResourceReaderWriterService
     {
         private bool _isWriting;
         private bool _finishedReading;
+
+        /// <inheritdoc />
         public string Path { get; private set; }
 
+        /// <inheritdoc />
         IResourceService ResourceService { get; set; }
 
+        /// <inheritdoc />
         public void Close()
         {
         }
 
+        /// <inheritdoc />
         public void Dispose()
         {
         }
 
+        /// <inheritdoc />
         public byte[] Read()
         {
             ResourceService.ClearAttributes(Path);
@@ -44,6 +53,7 @@ namespace PoshKentico.Core.Providers.Resource
             return ResourceService.Read(Path, ref _finishedReading);
         }
 
+        /// <inheritdoc />
         public byte[] Write(byte[] content)
         {
             ResourceService.ClearAttributes(Path);
@@ -51,6 +61,7 @@ namespace PoshKentico.Core.Providers.Resource
             return ResourceService.Write(Path, content, ref _isWriting);
         }
 
+        /// <inheritdoc />
         public void Initialize(IResourceService resourceService, string path)
         {
             ResourceService = resourceService;

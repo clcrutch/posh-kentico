@@ -23,9 +23,19 @@ using System.Threading.Tasks;
 
 namespace PoshKentico.Core.Services.Resource
 {
+    /// <summary>
+    /// Identified <see cref="IResourceInfo"/> as a Container or Item
+    /// </summary>
     public enum ResourceType
     {
+        /// <summary>
+        /// Items are considered the smallest unit in your drive. Think of an item like a file in a file system.
+        /// </summary>
         Item,
+
+        /// <summary>
+        /// A container can store a collection of items and containers. Think of containers like a folder in a file sytstem.
+        /// </summary>
         Container
     }
 }

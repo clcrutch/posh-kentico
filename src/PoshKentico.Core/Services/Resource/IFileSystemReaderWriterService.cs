@@ -23,6 +23,9 @@ using System.Threading.Tasks;
 
 namespace PoshKentico.Core.Services.Resource
 {
+    /// <summary>
+    /// Service that reads and writes to a file
+    /// </summary>
     public interface IFileSystemReaderWriterService : IResourceReaderWriterService
     {
     }

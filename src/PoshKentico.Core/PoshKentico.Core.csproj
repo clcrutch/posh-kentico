@@ -478,7 +478,7 @@
     <Compile Include="Services\Resource\IResourceInfo.cs" />
     <Compile Include="Services\Resource\IResourceReaderWriterService.cs" />
     <Compile Include="Services\Resource\IResourceService.cs" />
-    <Compile Include="Services\Resource\ResourceItem.cs" />
+    <Compile Include="Services\Resource\Resource.cs" />
     <Compile Include="Services\Resource\ResourceType.cs" />
   </ItemGroup>
   <ItemGroup>
