@@ -488,6 +488,8 @@
     <Compile Include="Cmdlets\Configuration\Sites\SetCmsSiteCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Sites\StartCmsSiteCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Sites\StopCmsSiteCmdlet.cs" />
+    <Compile Include="Cmdlets\Configuration\Users\RemoveUserFromSiteCmdlet.cs" />
+    <Compile Include="Cmdlets\Configuration\Users\AddUserToSiteCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Users\GetCmsUserCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Users\NewCmsUserCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Users\RemoveCmsUserCmdlet.cs" />

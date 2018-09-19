@@ -16,6 +16,7 @@
 // </copyright>
 
 using System.Collections.Generic;
+using PoshKentico.Core.Services.Configuration.Sites;
 
 namespace PoshKentico.Core.Services.Configuration.Users
 {
@@ -69,6 +70,20 @@ namespace PoshKentico.Core.Services.Configuration.Users
         /// </summary>
         /// <param name="user">The user <see cref="IUser"/> to delete.</param>
         void DeleteUser(IUser user);
+
+        /// <summary>
+        /// Assigns a user to a site.
+        /// </summary>
+        /// <param name="user">The user <see cref="IUser"/> to assign to a site. </param>
+        /// <param name="siteName">The site name of the <see cref="ISite"/> to assign the user to. </param>
+        void AddUserToSite(IUser user, string siteName);
+
+        /// <summary>
+        /// Removes a user from a site.
+        /// </summary>
+        /// <param name="user">The user <see cref="IUser"/> to remove from a site. </param>
+        /// <param name="siteName">The site name of the <see cref="ISite"/> to remove the user from. </param>
+        void RemoveUserFromSite(IUser user, string siteName);
         #endregion
 
     }

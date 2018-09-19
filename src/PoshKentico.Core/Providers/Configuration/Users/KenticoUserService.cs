@@ -99,12 +99,38 @@ namespace PoshKentico.Core.Providers.Configuration.Users
         public void DeleteUser(IUser user)
         {
             // Gets the user
-            UserInfo deleteUser = UserInfoProvider.GetUserInfo(user.UserName);
+            UserInfo existingUser = UserInfoProvider.GetUserInfo(user.UserName);
 
-            if (deleteUser != null)
+            if (existingUser != null)
             {
                 // Deletes the user
-                UserInfoProvider.DeleteUser(deleteUser);
+                UserInfoProvider.DeleteUser(existingUser);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void AddUserToSite(IUser user, string siteName)
+        {
+            // Gets the user
+            UserInfo existingUser = UserInfoProvider.GetUserInfo(user.UserName);
+
+            if (existingUser != null)
+            {
+                // Adds the user to the site
+                UserInfoProvider.AddUserToSite(existingUser.UserName, siteName);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void RemoveUserFromSite(IUser user, string siteName)
+        {
+            // Gets the user
+            UserInfo existingUser = UserInfoProvider.GetUserInfo(user.UserName);
+
+            if (existingUser != null)
+            {
+                // Removes the user from the site
+                UserInfoProvider.RemoveUserFromSite(existingUser.UserName, siteName);
             }
         }
     }
