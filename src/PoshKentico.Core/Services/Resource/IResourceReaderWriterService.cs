@@ -30,7 +30,7 @@ namespace PoshKentico.Core.Services.Resource
     public interface IResourceReaderWriterService
     {
         /// <summary>
-        /// Full path to a resource item
+        /// Gets full path to a resource item
         /// </summary>
         string Path { get; }
 
@@ -60,7 +60,7 @@ namespace PoshKentico.Core.Services.Resource
         /// <summary>
         /// Writes content to a resource item
         /// </summary>
-        /// <param name="content"></param>
+        /// <param name="content">Content to be written</param>
         /// <returns>Items written to the resource item</returns>
         byte[] Write(byte[] content);
     }

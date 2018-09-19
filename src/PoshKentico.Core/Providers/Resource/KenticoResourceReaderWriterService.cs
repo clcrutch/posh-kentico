@@ -26,14 +26,16 @@ namespace PoshKentico.Core.Providers.Resource
     [Export(typeof(IFileSystemReaderWriterService))]
     public class KenticoResourceReaderWriterService : IResourceReaderWriterService
     {
-        private bool _isWriting;
-        private bool _finishedReading;
+        private bool isWriting;
 
-        /// <inheritdoc />
+        private bool finishedReading;
+
+        private IResourceService ResourceService { get; set; }
+
+#pragma warning disable SA1202 // Elements should be ordered by access
+                              /// <inheritdoc />
         public string Path { get; private set; }
-
-        /// <inheritdoc />
-        IResourceService ResourceService { get; set; }
+#pragma warning restore SA1202 // Elements should be ordered by access
 
         /// <inheritdoc />
         public void Close()
@@ -48,24 +50,24 @@ namespace PoshKentico.Core.Providers.Resource
         /// <inheritdoc />
         public byte[] Read()
         {
-            ResourceService.ClearAttributes(Path);
+            this.ResourceService.ClearAttributes(this.Path);
 
-            return ResourceService.Read(Path, ref _finishedReading);
+            return this.ResourceService.Read(this.Path, ref this.finishedReading);
         }
 
         /// <inheritdoc />
         public byte[] Write(byte[] content)
         {
-            ResourceService.ClearAttributes(Path);
+            this.ResourceService.ClearAttributes(this.Path);
 
-            return ResourceService.Write(Path, content, ref _isWriting);
+            return this.ResourceService.Write(this.Path, content, ref this.isWriting);
         }
 
         /// <inheritdoc />
         public void Initialize(IResourceService resourceService, string path)
         {
-            ResourceService = resourceService;
-            Path = path;
+            this.ResourceService = resourceService;
+            this.Path = path;
         }
     }
 }

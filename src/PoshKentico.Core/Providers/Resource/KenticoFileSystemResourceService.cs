@@ -40,7 +40,7 @@ namespace PoshKentico.Core.Providers.Resource
         /// <inheritdoc />
         public bool Exists(string path)
         {
-            return (Directory.Exists(path) || File.Exists(path));
+            return Directory.Exists(path) || File.Exists(path);
         }
 
         /// <inheritdoc />

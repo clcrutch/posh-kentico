@@ -43,6 +43,12 @@ namespace PoshKentico
         public ICmsApplicationService CmsApplicationService { get; set; }
 
         /// <summary>
+        /// Gets or sets the business provider/> for this provider.
+        /// </summary>
+        [Import]
+        public TBusinessProvider Business { get; set; }
+
+        /// <summary>
         /// The name of the provider
         /// </summary>
         protected abstract string ProviderName { get; }
@@ -58,43 +64,9 @@ namespace PoshKentico
         protected abstract string DriveRootPath { get; }
 
         /// <summary>
-        /// The 
+        /// The drive description
         /// </summary>
         protected abstract string DriveDescription { get; }
-
-        /// <summary>
-        /// Gets or sets the <see cref="TBusinessProvider"/> for this provider.
-        /// </summary>
-        [Import]
-        public TBusinessProvider Business { get; set; }
-
-        #region Statics
-
-        public static string GetDirectory(string path)
-        {
-            string adjustedPath = path.TrimEnd('\\');
-            int lastSlashIndex = adjustedPath.LastIndexOf('\\');
-
-            return lastSlashIndex > -1 ? adjustedPath.Substring(0, lastSlashIndex) : string.Empty;
-        }
-
-        public static string GetName(string path)
-        {
-            string adjustedPath = path.TrimEnd('\\');
-            int lastSlashIndex = adjustedPath.LastIndexOf('\\');
-
-            return lastSlashIndex > -1 ? adjustedPath.Substring(lastSlashIndex + 1, adjustedPath.Length - lastSlashIndex - 1) : adjustedPath;
-        }
-
-        public static string JoinPath(params string[] items)
-        {
-#pragma warning disable SA1118 // Parameter must not span multiple lines
-            return string.Join("\\", from i in items
-                                     select i.TrimEnd('\\'));
-#pragma warning restore SA1118 // Parameter must not span multiple lines
-        }
-
-        #endregion
 
         #region IPropertyCmdletProvider Implementation
 
@@ -150,7 +122,7 @@ namespace PoshKentico
         {
             this.Initialize();
 
-            return new ResourceContentReaderWriter(Business.GetReaderWriter(path));
+            return new ResourceContentReaderWriter(this.Business.GetReaderWriter(path));
         }
 
         /// <inheritdoc />
@@ -164,7 +136,7 @@ namespace PoshKentico
         {
             this.Initialize();
 
-            return new ResourceContentReaderWriter(Business.GetReaderWriter(path));
+            return new ResourceContentReaderWriter(this.Business.GetReaderWriter(path));
         }
 
         /// <inheritdoc />
@@ -192,7 +164,7 @@ namespace PoshKentico
         {
             this.Initialize();
 
-            return Business.ExpandPath(path, PSDriveInfo.CurrentLocation);
+            return this.Business.ExpandPath(path, this.PSDriveInfo.CurrentLocation);
         }
 
         /// <inheritdoc />
@@ -217,7 +189,7 @@ namespace PoshKentico
         {
             this.Initialize();
 
-            return Business.NormalizeRelativePath(path, basePath);
+            return this.Business.NormalizeRelativePath(path, basePath);
         }
 
         /// <inheritdoc />
@@ -263,7 +235,7 @@ namespace PoshKentico
             this.Initialize();
 
             var resource = this.Business.GetResource(path, false);
-            
+
             return (resource?.Children?.Any()).GetValueOrDefault(false);
         }
 
@@ -293,7 +265,7 @@ namespace PoshKentico
         {
             this.Initialize();
 
-            Business.CopyItem(path, copyPath, recurse);
+            this.Business.CopyItem(path, copyPath, recurse);
         }
 
         /// <inheritdoc />
@@ -310,15 +282,17 @@ namespace PoshKentico
         protected virtual void WriteItemObject(IResourceInfo resource, bool recurse)
         {
             if (resource == null)
+            {
                 return;
+            }
 
-            base.WriteItemObject(resource, resource.Path, resource.IsContainer);
+            this.WriteItemObject(resource, resource.Path, resource.IsContainer);
 
             if (recurse && (resource.Children?.Any()).GetValueOrDefault(false))
             {
                 foreach (var childResource in resource.Children.Flatten(i => i.Children))
                 {
-                    base.WriteItemObject(new IResourceInfo[] { resource }, resource.Path, resource.IsContainer);
+                    this.WriteItemObject(new IResourceInfo[] { resource }, resource.Path, resource.IsContainer);
                 }
             }
         }

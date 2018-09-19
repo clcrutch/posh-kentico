@@ -42,19 +42,19 @@ namespace PoshKentico.CmdletProviders.Resource
         public ResourceContentReaderWriter(IResourceReaderWriterService readWriteService)
 #pragma warning restore SA1201 // Elements should appear in the correct order
         {
-            ReadWriteService = readWriteService;
+            this.ReadWriteService = readWriteService;
         }
 
         /// <inheritdoc/>
         public void Close()
         {
-            ReadWriteService.Close();
+            this.ReadWriteService.Close();
         }
 
         /// <inheritdoc/>
         public void Dispose()
         {
-            ReadWriteService.Dispose();
+            this.ReadWriteService.Dispose();
         }
 
         /// <inheritdoc/>
@@ -62,10 +62,12 @@ namespace PoshKentico.CmdletProviders.Resource
         {
             ArrayList list = new ArrayList();
 
-            var content = ReadWriteService.Read();
+            var content = this.ReadWriteService.Read();
 
             if (content != null)
+            {
                 list.Add(content);
+            }
 
             return list;
         }
@@ -79,7 +81,7 @@ namespace PoshKentico.CmdletProviders.Resource
         /// <inheritdoc/>
         public IList Write(IList content)
         {
-            return ReadWriteService.Write(content.Cast<byte>().ToArray());
+            return this.ReadWriteService.Write(content.Cast<byte>().ToArray());
         }
     }
 }
