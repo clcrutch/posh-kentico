@@ -55,13 +55,13 @@ namespace PoshKentico.Core.Services.Resource
         /// Reads content from resource item
         /// </summary>
         /// <returns>Items read from the resource item</returns>
-        byte[] Read();
+        IList Read();
 
         /// <summary>
         /// Writes content to a resource item
         /// </summary>
         /// <param name="content">Content to be written</param>
         /// <returns>Items written to the resource item</returns>
-        byte[] Write(byte[] content);
+        IList Write(IList content);
     }
 }

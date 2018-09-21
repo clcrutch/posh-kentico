@@ -128,7 +128,9 @@ namespace PoshKentico.Core.Providers.Resource
         public void CreateContainer(string path)
         {
             if (!Directory.Exists(path))
+            {
                 Directory.CreateDirectory(path);
+            }
         }
 
         /// <inheritdoc />
@@ -162,15 +164,18 @@ namespace PoshKentico.Core.Providers.Resource
         }
 
         /// <inheritdoc />
-        public byte[] Write(string path, byte[] content, ref bool isWriting)
+        public IList Write(string path, IList content, ref bool isWriting)
         {
+            var bytes = content.Cast<byte>().ToArray();
             if (!isWriting)
-                File.WriteAllBytes(path, content);
+            {
+                File.WriteAllBytes(path, bytes);
+            }
             else
             {
                 using (var stream = FileStream.New(path, FileMode.Append))
                 {
-                    stream.Write(content, 0, content.Length);
+                    stream.Write(bytes, 0, bytes.Length);
                 }
             }
 
@@ -179,10 +184,12 @@ namespace PoshKentico.Core.Providers.Resource
         }
 
         /// <inheritdoc />
-        public byte[] Read(string path, ref bool finishedReading)
+        public IList Read(string path, ref bool finishedReading)
         {
             if (finishedReading)
+            {
                 return null;
+            }
 
             finishedReading = true;
 
@@ -191,7 +198,9 @@ namespace PoshKentico.Core.Providers.Resource
             var content = File.ReadAllBytes(path);
 
             if (content == null || content.Length == 0)
+            {
                 return null;
+            }
 
             return content;
         }
@@ -204,7 +213,7 @@ namespace PoshKentico.Core.Providers.Resource
                 var attributesToClear = FileAttributes.Hidden;
                 attributesToClear |= FileAttributes.ReadOnly;
 
-                File.SetAttributes(path, (FileInfo.New(path).Attributes & ~attributesToClear));
+                File.SetAttributes(path, FileInfo.New(path).Attributes & ~attributesToClear);
             }
         }
     }

@@ -130,7 +130,7 @@ namespace PoshKentico.Core.Services.Resource
         /// <param name="content"><see cref="byte"/>Data that will be written to a resource</param>
         /// <param name="isWriting">Is currently writting?</param>
         /// <returns>What was written of the resource</returns>
-        byte[] Write(string path, byte[] content, ref bool isWriting);
+        IList Write(string path, IList content, ref bool isWriting);
 
         /// <summary>
         /// Reads the content from a resource
@@ -138,7 +138,7 @@ namespace PoshKentico.Core.Services.Resource
         /// <param name="path">The full path of the resource item</param>
         /// <param name="finishedReading">Has it been read?</param>
         /// <returns>Returns what was read from the resource</returns>
-        byte[] Read(string path, ref bool finishedReading);
+        IList Read(string path, ref bool finishedReading);
 
         /// <summary>
         /// Creates the resource item

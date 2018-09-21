@@ -36,6 +36,6 @@ namespace PoshKentico.Core.Services.Resource
         /// <summary>
         /// A container can store a collection of items and containers. Think of containers like a folder in a file sytstem.
         /// </summary>
-        Container
+        Container,
     }
 }

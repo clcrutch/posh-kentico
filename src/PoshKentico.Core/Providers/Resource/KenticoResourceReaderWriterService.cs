@@ -15,6 +15,7 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System.Collections;
 using System.ComponentModel.Composition;
 using PoshKentico.Core.Services.Resource;
 
@@ -48,7 +49,7 @@ namespace PoshKentico.Core.Providers.Resource
         }
 
         /// <inheritdoc />
-        public byte[] Read()
+        public IList Read()
         {
             this.ResourceService.ClearAttributes(this.Path);
 
@@ -56,7 +57,7 @@ namespace PoshKentico.Core.Providers.Resource
         }
 
         /// <inheritdoc />
-        public byte[] Write(byte[] content)
+        public IList Write(IList content)
         {
             this.ResourceService.ClearAttributes(this.Path);
 
