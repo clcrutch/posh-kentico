@@ -23,6 +23,7 @@ using CMS.Membership;
 using ImpromptuInterface;
 using PoshKentico.Business.Configuration.Users;
 using PoshKentico.Core.Services.Configuration.Users;
+using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.Configuration.Users
 {
@@ -52,6 +53,7 @@ namespace PoshKentico.Cmdlets.Configuration.Users
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSUser", DefaultParameterSetName = NONE)]
     [OutputType(typeof(UserInfo[]))]
+    [Alias("guser")]
     public class GetCmsUserCmdlet : MefCmdlet
     {
         #region Constants

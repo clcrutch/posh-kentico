@@ -22,6 +22,7 @@ using CMS.MediaLibrary;
 using ImpromptuInterface;
 using PoshKentico.Business.ContentManagement.MediaLibraries;
 using PoshKentico.Core.Services.ContentManagement.MediaLibraries;
+using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
 {
@@ -45,6 +46,7 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Set, "CMSMediaLibrary")]
     [OutputType(typeof(MediaLibraryInfo))]
+    [Alias("smlib")]
     public class SetCmsMediaLibraryCmdlet : MefCmdlet
     {
         #region Constants

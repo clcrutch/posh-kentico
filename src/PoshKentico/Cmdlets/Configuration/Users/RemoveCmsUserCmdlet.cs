@@ -22,6 +22,7 @@ using CMS.Membership;
 using ImpromptuInterface;
 using PoshKentico.Business.Configuration.Users;
 using PoshKentico.Core.Services.Configuration.Users;
+using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.Configuration.Users
 {
@@ -58,6 +59,7 @@ namespace PoshKentico.Cmdlets.Configuration.Users
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Remove, "CMSUser", SupportsShouldProcess = true, ConfirmImpact = ConfirmImpact.High, DefaultParameterSetName = NONE)]
+    [Alias("ruser")]
     public class RemoveCmsUserCmdlet : GetCmsUserCmdlet
     {
         #region Constants

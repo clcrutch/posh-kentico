@@ -20,7 +20,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Management.Automation;
 using CMS.MediaLibrary;
+using ImpromptuInterface;
 using PoshKentico.Business.ContentManagement.MediaLibraries;
+using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
 {
@@ -38,6 +40,8 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.New, "CMSMediaLibraryFile")]
+    [OutputType(typeof(MediaFileInfo))]
+    [Alias("nmlfil")]
     public class NewCmsMediaLibraryFileCmdlet : MefCmdlet
     {
         #region Constants
@@ -119,7 +123,12 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
             int siteID = this.ParameterSetName == PROPERTYSET ? this.SiteID : this.Library.LibrarySiteID;
             string libraryName = this.ParameterSetName == PROPERTYSET ? this.LibraryName : this.Library.LibraryName;
 
-            this.BusinessLayer.CreateMediaLibraryFile(siteID, libraryName, this.LocalFile.FullName, this.FileName, this.FileTitle, this.FileDescription, this.FilePath);
+            var mediaFile = this.BusinessLayer.CreateMediaLibraryFile(siteID, libraryName, this.LocalFile.FullName, this.FileName, this.FileTitle, this.FileDescription, this.FilePath);
+
+            if (this.PassThru.ToBool())
+            {
+                this.WriteObject(mediaFile.UndoActLike());
+            }
         }
 
         #endregion

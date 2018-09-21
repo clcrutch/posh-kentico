@@ -22,6 +22,7 @@ using CMS.Membership;
 using ImpromptuInterface;
 using PoshKentico.Business.Configuration.Staging;
 using PoshKentico.Core.Services.Configuration.Roles;
+using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.Configuration.Staging
 {
@@ -44,6 +45,7 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
     [ExcludeFromCodeCoverage]
     [Cmdlet("Set", "CMSRoleNoLog")]
     [OutputType(typeof(RoleInfo), ParameterSetName = new string[] { PASSTHRU })]
+    [Alias("srnolog")]
     public class SetCmsRoleNoLogCmdlet : MefCmdlet
     {
         #region Constants

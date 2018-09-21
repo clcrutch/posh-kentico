@@ -23,6 +23,7 @@ using CMS.Membership;
 using ImpromptuInterface;
 using PoshKentico.Business.Configuration.Users;
 using PoshKentico.Core.Services.Configuration.Users;
+using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.Configuration.Users
 {
@@ -46,6 +47,7 @@ namespace PoshKentico.Cmdlets.Configuration.Users
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Set, "CMSUser")]
     [OutputType(typeof(UserInfo))]
+    [Alias("suser")]
     public class SetCmsUserCmdlet : MefCmdlet
     {
         #region Constants
