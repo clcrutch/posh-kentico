@@ -60,7 +60,7 @@ namespace PoshKentico.Tests.ContentManagement.MediaLibraries
             throw new System.NotImplementedException();
         }
 
-        public void CreateMediaFolder(int librarySiteID, string libraryName, string folderName)
+        public string CreateMediaFolder(int librarySiteID, string libraryName, string folderName)
         {
             throw new System.NotImplementedException();
         }
