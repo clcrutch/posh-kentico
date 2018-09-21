@@ -110,6 +110,7 @@ The associalted library for the new folder.
 
 ## OUTPUTS
 
+### System.String
 ## NOTES
 
 ## RELATED LINKS
