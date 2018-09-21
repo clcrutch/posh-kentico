@@ -15,11 +15,13 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System.Diagnostics.CodeAnalysis;
 using CMS.Helpers;
 using PoshKentico.Core.Services.ContentManagement.MediaLibraries;
 
 namespace PoshKentico.Tests.ContentManagement.MediaLibraries
 {
+    [ExcludeFromCodeCoverage]
     public class MediaLibraryMock : IMediaLibrary
     {
         /// <summary>

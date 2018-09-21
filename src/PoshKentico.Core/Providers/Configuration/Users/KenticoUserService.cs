@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using CMS.Base;
 using CMS.Membership;
@@ -29,6 +30,7 @@ namespace PoshKentico.Core.Providers.Configuration.Users
     /// <summary>
     /// Implementation of <see cref="IUserService"/> that uses Kentico.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     [Export(typeof(IUserService))]
     public class KenticoUserService : IUserService
     {

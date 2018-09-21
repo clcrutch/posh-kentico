@@ -16,6 +16,7 @@
 // </copyright>
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Configuration.Staging;
@@ -23,6 +24,7 @@ using PoshKentico.Core.Services.Configuration.Staging;
 
 namespace PoshKentico.Tests.Configuration.Staging
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     public class SyncCmsStagingTaskTests
     {
