@@ -31,28 +31,55 @@ using PoshKentico.Core.Services.Resource;
 
 namespace PoshKentico.Business
 {
+    /// <summary>
+    /// Base class for cmdlet business providers
+    /// </summary>
     public abstract class CmdletProviderBusinessBase : CmdletBusinessBase
     {
+        /// <summary>
+        /// Gets or sets the resource service
+        /// </summary>
         public virtual IResourceService ResourceService { get; set; }
+
+        /// <summary>
+        /// Gets or sets the resource resource reader/writer
+        /// </summary>
         public virtual IResourceReaderWriterService ReaderWriterService { get; set; }
 
+        /// <summary>
+        /// Determines if the resource exists
+        /// </summary>
+        /// <param name="path">The absolute path of the resource</param>
+        /// <returns>If the resource exists</returns>
         public virtual bool Exists(string path)
         {
             return this.ResourceService.Exists(path);
         }
 
-        public virtual void CreateResource(string name, string itemTypeName, object newItemValue)
+        /// <summary>
+        /// Creates the resource
+        /// </summary>
+        /// <param name="path">The resource path</param>
+        /// <param name="itemTypeName">The type of resource</param>
+        /// <param name="newItemValue">New resource property values</param>
+        public virtual void CreateResource(string path, string itemTypeName, object newItemValue)
         {
-            if (this.ResourceService.IsContainer(name))
+            if (this.ResourceService.IsContainer(path))
             {
-                ResourceService.CreateContainer(name);
+                this.ResourceService.CreateContainer(path);
             }
             else
             {
-                ResourceService.CreateItem(name, newItemValue as string);
+                this.ResourceService.CreateItem(path, newItemValue as string);
             }
         }
 
+        /// <summary>
+        /// Deletes a resource
+        /// </summary>
+        /// <param name="path">The full path of the resource to be deleted</param>
+        /// <param name="recurse">If true, will delete all resources in a container</param>
+        /// <returns>If resource was deleted</returns>
         public virtual bool Delete(string path, bool recurse = false)
         {
             try
@@ -60,12 +87,18 @@ namespace PoshKentico.Business
                 if (this.ResourceService.Exists(path))
                 {
                     if (this.ResourceService.IsContainer(path))
+                    {
                         this.ResourceService.DeleteContainer(path, recurse);
+                    }
                     else
+                    {
                         this.ResourceService.DeleteItem(path);
+                    }
                 }
             }
+#pragma warning disable CS0168 // Variable is declared but never used
             catch (Exception ex)
+#pragma warning restore CS0168 // Variable is declared but never used
             {
                 // log exception?
             }
@@ -73,24 +106,44 @@ namespace PoshKentico.Business
             return this.ResourceService.Exists(path);
         }
 
+        /// <summary>
+        /// Gets the resource
+        /// </summary>
+        /// <param name="path">The full path of the resource</param>
+        /// <param name="recurse">If true, retrieves all containers. If false, will only retrieve immediate containers</param>
+        /// <returns>Returns the resource item <see cref="IResourceInfo"/> </returns>
         public virtual IResourceInfo GetResource(string path, bool recurse = false)
         {
             if (!this.ResourceService.IsContainer(path))
+            {
                 return this.ResourceService.GetItem(path);
+            }
 
             if (recurse)
             {
                 return this.ResourceService.GetContainer(path, recurse);
             }
 
-            return this.ResourceService.GetContainer(path, false); ;
+            return this.ResourceService.GetContainer(path, false);
         }
 
+        /// <summary>
+        /// Retrieves resource items and containers
+        /// </summary>
+        /// <param name="path">The path to the resource</param>
+        /// <param name="recurse">If true and resource is a container, will retrieve all of its children</param>
+        /// <returns>Returns a list of <see cref="IResourceInfo"/></returns>
         public virtual IEnumerable<IResourceInfo> GetAllResources(string path, bool recurse = false)
         {
             return this.ResourceService.GetAll(path, recurse);
         }
 
+        /// <summary>
+        /// Gets the specified properties from the resource.
+        /// </summary>
+        /// <param name="path">The path to the resource</param>
+        /// <param name="providerSpecificPickList">List of properties to retrieve.</param>
+        /// <returns>A dictionary containing the requested properties.</returns>
         public virtual Dictionary<string, object> GetProperty(string path, Collection<string> providerSpecificPickList)
         {
             this.Initialize();
@@ -115,6 +168,11 @@ namespace PoshKentico.Business
             return properties;
         }
 
+        /// <summary>
+        /// Removes properties not specified from the provided dictionary.
+        /// </summary>
+        /// <param name = "providerSpecificPickList" > List of properties to keep in the dictionary.</param>
+        /// <param name = "properties" > Dictionary which contains properties and values.</param>
         public virtual void PurgeUnwantedProperties(Collection<string> providerSpecificPickList, Dictionary<string, object> properties)
         {
             if (providerSpecificPickList.Count > 0)
@@ -128,17 +186,29 @@ namespace PoshKentico.Business
             }
         }
 
+        /// <summary>
+        /// Retrieves the <see cref="IResourceReaderWriterService"/>
+        /// </summary>
+        /// <param name="path">The path to the resource</param>
+        /// <returns>The service used to read and write to a resource</returns>
         public IResourceReaderWriterService GetReaderWriter(string path)
         {
-            var instance = (IResourceReaderWriterService)Activator.CreateInstance(ReaderWriterService.GetType());
+            var instance = (IResourceReaderWriterService)Activator.CreateInstance(this.ReaderWriterService.GetType());
             instance.Initialize(this.ResourceService, path);
             return instance;
         }
 
+        /// <summary>
+        /// Sets the specified properties on the resource
+        /// </summary>
+        /// <param name="path">The path to the resource</param>
+        /// <param name="propertyValue">A dictionary containing the properties and their respective values.</param>
         public virtual void SetProperty(string path, Dictionary<string, object> propertyValue)
         {
             if (this.ResourceService.IsContainer(path))
+            {
                 return;
+            }
 
             if (propertyValue.ContainsKey("content"))
             {
@@ -146,17 +216,23 @@ namespace PoshKentico.Business
             }
         }
 
+        /// <summary>
+        /// Resolves the wildcard characters in a path, and displays the path contents.
+        /// </summary>
+        /// <param name="path">The path with wildcard characters</param>
+        /// <param name="currentLocation">The current directory</param>
+        /// <returns>List of resource paths</returns>
         public virtual string[] ExpandPath(string path, string currentLocation)
         {
-            var resource = GetResource(currentLocation, false);
+            var resource = this.GetResource(currentLocation, false);
 
             if (resource.Children == null)
             {
                 return null;
             }
 
-            var normalizedPath = NormalizeRelativePath(path, null);
-            var resourceName = ResourceService.GetName(normalizedPath);
+            var normalizedPath = this.NormalizeRelativePath(path, null);
+            var resourceName = this.ResourceService.GetName(normalizedPath);
             var regexString = Regex.Escape(resourceName).Replace("\\*", ".*");
             var regex = new Regex("^" + regexString + "$", RegexOptions.IgnoreCase);
 
@@ -167,70 +243,104 @@ namespace PoshKentico.Business
             return matchingItems.Any() ? matchingItems : null;
         }
 
+        /// <summary>
+        /// Normalizes the path that was passed in and returns the normalized path as a relative path to the basePath that was passed.
+        /// </summary>
+        /// <param name="path">The full path of the resource</param>
+        /// <param name="basePath">The path that the return value should be relative to</param>
+        /// <returns>A normalized path that is relative to the basePath that was passed</returns>
         public virtual string NormalizeRelativePath(string path, string basePath)
         {
             return path.Replace('/', '\\');
         }
 
+        /// <summary>
+        /// Is the resource a container
+        /// </summary>
+        /// <param name="path">Full path of the rosource</param>
+        /// <returns>If the requested path is a container</returns>
         public virtual bool IsContainer(string path)
         {
             return this.ResourceService.IsContainer(path);
         }
 
+        /// <summary>
+        /// Copies either a resource or a resource item
+        /// </summary>
+        /// <param name="sourcePath">The full path to the resource being copied</param>
+        /// <param name="destinationPath">The destination where the resource will be copied to</param>
+        /// <param name="recurse">If true, will copy all of a containers child resources</param>
         public virtual void CopyItem(string sourcePath, string destinationPath, bool recurse)
         {
-            var sourceResource = GetResource(sourcePath, recurse);
-            var normalizedDestinationPath = NormalizeDestinationPath(sourcePath, destinationPath);
+            var sourceResource = this.GetResource(sourcePath, recurse);
+            var normalizedDestinationPath = this.NormalizeDestinationPath(sourcePath, destinationPath);
 
             if (sourceResource.IsContainer)
             {
-                CopyContainer(sourceResource, normalizedDestinationPath, recurse);
+                this.CopyContainer(sourceResource, normalizedDestinationPath, recurse);
                 return;
             }
 
-            CopyItem(sourceResource, normalizedDestinationPath);
+            this.CopyItem(sourceResource, normalizedDestinationPath);
         }
 
+        /// <summary>
+        /// Copies a resource item
+        /// </summary>
+        /// <param name="sourceResource">The full path to the resource being copied</param>
+        /// <param name="destinationPath">The destination where the resource item will be copied to</param>
         private void CopyItem(IResourceInfo sourceResource, string destinationPath)
         {
-            var sourceReader = GetReaderWriter(sourceResource.Path);
-            var destinationWriter = GetReaderWriter(destinationPath);
+            var sourceReader = this.GetReaderWriter(sourceResource.Path);
+            var destinationWriter = this.GetReaderWriter(destinationPath);
 
             destinationWriter.Write(sourceReader.Read());
         }
 
+        /// <summary>
+        /// Copies a resource container
+        /// </summary>
+        /// <param name="sourceResource">The full path to the resource being copied</param>
+        /// <param name="destinationBasePath">The destination where the resource item will be copied to</param>
+        /// <param name="recurse">If true, will copy all of a containers child resources</param>
         private void CopyContainer(IResourceInfo sourceResource, string destinationBasePath, bool recurse)
         {
             var children = sourceResource.Children.Flatten(i => i.Children)
                             .Select(i => new
                             {
                                 Resource = i,
-                                NewPath = ResourceService.JoinPath(destinationBasePath, i.Path.Replace(sourceResource.Path, string.Empty))
+                                NewPath = this.ResourceService.JoinPath(destinationBasePath, i.Path.Replace(sourceResource.Path, string.Empty)),
                             })
                             .GroupBy(i => i.Resource.ResourceType)
                             .ToDictionary(i => i.Key, i => i.AsEnumerable());
 
             foreach (var item in children[ResourceType.Container].OrderBy(i => i.NewPath))
             {
-                ResourceService.CreateContainer(item.NewPath);
+                this.ResourceService.CreateContainer(item.NewPath);
             }
 
             foreach (var item in children[ResourceType.Item].OrderBy(i => i.NewPath))
             {
-                ResourceService.CopyResourceItem(item.Resource.Path, item.NewPath);
+                this.ResourceService.CopyResourceItem(item.Resource.Path, item.NewPath);
             }
         }
 
+        /// <summary>
+        /// Normalizes the path that was passed in and returns the normalized path as a relative path to the basePath that was passed.
+        /// </summary>
+        /// <param name="sourcePath">The full path of the resource</param>
+        /// <param name="destinationPath">The path that the return value should be relative to</param>
+        /// <returns>A normalized path that is relative to the basePath that was passed</returns>
         private string NormalizeDestinationPath(string sourcePath, string destinationPath)
         {
             string normalizedDestinationPath = string.Empty;
 
-            var isRelativePath = ResourceService.IsAbsolutePath(destinationPath);
+            var isRelativePath = this.ResourceService.IsAbsolutePath(destinationPath);
 
             if (!isRelativePath)
             {
-                normalizedDestinationPath = NormalizeRelativePath(destinationPath, null);
-                return ResourceService.JoinPath(sourcePath, normalizedDestinationPath);
+                normalizedDestinationPath = this.NormalizeRelativePath(destinationPath, null);
+                return this.ResourceService.JoinPath(sourcePath, normalizedDestinationPath);
             }
 
             return destinationPath;

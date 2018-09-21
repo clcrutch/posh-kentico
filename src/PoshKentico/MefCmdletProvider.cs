@@ -23,6 +23,7 @@ using System.Management.Automation;
 using System.Management.Automation.Provider;
 using PoshKentico.Business;
 using PoshKentico.CmdletProviders.Resource;
+using PoshKentico.Core.Extensions;
 using PoshKentico.Core.Services.General;
 using PoshKentico.Core.Services.Resource;
 using PoshKentico.Extensions;
@@ -32,7 +33,7 @@ namespace PoshKentico
     /// <summary>
     /// Base class for navigation cmdlet providers.
     /// </summary>
-    /// <typeparam name="TBusinessProvider">The Business provider to use for accessing Kentico resources. Must inherit from <see cref="CmdletProviderBusinessBase"/></></typeparam>
+    /// <typeparam name="TBusinessProvider">The Business provider to use for accessing Kentico resources. Must inherit from <see cref="CmdletProviderBusinessBase"/></typeparam>
     public abstract class MefCmdletProvider<TBusinessProvider> : NavigationCmdletProvider, IPropertyCmdletProvider, IContentCmdletProvider, ICmdlet
         where TBusinessProvider : CmdletProviderBusinessBase
     {

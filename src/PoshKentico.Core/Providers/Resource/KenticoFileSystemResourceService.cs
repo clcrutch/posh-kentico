@@ -68,7 +68,6 @@ namespace PoshKentico.Core.Providers.Resource
 
             foreach (var item in Directory.EnumerateFiles(path))
             {
-
                 items.Add(this.GetItem(item));
             }
 

@@ -23,7 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DocumentationFile>..\..\build\posh-kentico.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -504,7 +504,6 @@
     <Compile Include="Cmdlets\Development\NewCMSWebPartCategoryCmdlet.cs" />
     <Compile Include="Cmdlets\Development\RemoveCMSWebPartCategoryCmdlet.cs" />
     <Compile Include="Cmdlets\Development\SetCMSWebPartCategoryCmdlet.cs" />
-    <Compile Include="Extensions\IEnumberableExtension.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="MefCmdlet.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />

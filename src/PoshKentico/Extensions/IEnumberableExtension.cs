@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PoshKentico.Extensions
 {
-    public static class ResourceExtensions
+    public static class EnumerableExtensions
     {
         public static IEnumerable<T> Flatten<T>(this IEnumerable<T> items, Func<T, IEnumerable<T>> flattenItems)
         {

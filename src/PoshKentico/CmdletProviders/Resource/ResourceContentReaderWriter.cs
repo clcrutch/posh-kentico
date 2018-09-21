@@ -1,4 +1,4 @@
-﻿// <copyright file="ResourceProvider.cs" company="Chris Crutchfield">
+﻿// <copyright file="ResourceContentReaderWriter.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify

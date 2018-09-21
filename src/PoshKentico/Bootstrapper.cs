@@ -1,4 +1,4 @@
-﻿// <copyright file="MefCmdlet.cs" company="Chris Crutchfield">
+﻿// <copyright file="Bootstrapper.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -29,14 +29,29 @@ using PoshKentico.Extensions;
 
 namespace PoshKentico
 {
+    /// <summary>
+    /// A singleton used for initialization
+    /// </summary>
     public sealed class Bootstrapper
     {
+#pragma warning disable SA1311 // Static readonly fields should begin with upper-case letter
+                              /// <summary>
+                              /// The instance
+                              /// </summary>
         private static readonly Bootstrapper instance = new Bootstrapper();
+#pragma warning restore SA1311 // Static readonly fields should begin with upper-case letter
 
-        static Bootstrapper() { }
+        static Bootstrapper()
+        {
+        }
 
-        private Bootstrapper() { }
+        private Bootstrapper()
+        {
+        }
 
+        /// <summary>
+        /// The instance
+        /// </summary>
         public static Bootstrapper Instance
         {
             get
@@ -45,6 +60,10 @@ namespace PoshKentico
             }
         }
 
+        /// <summary>
+        /// Cmdlet initialization logic
+        /// </summary>
+        /// <param name="cmdlet">The </param>
         public void Initialize(ICmdlet cmdlet)
         {
             MefHost.Initialize();

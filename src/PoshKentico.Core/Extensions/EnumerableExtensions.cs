@@ -1,4 +1,4 @@
-﻿// <copyright file="KenticoFileSystemBusiness.cs" company="Chris Crutchfield">
+﻿// <copyright file="EnumerableExtensions.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -17,28 +17,28 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using PoshKentico.Core.Services.Resource;
 
-namespace PoshKentico.Business.Resource
+namespace PoshKentico.Core.Extensions
 {
     /// <summary>
-    /// Business layer for NavigationCmdletProvider
+    /// Resource extensions
     /// </summary>
-    [Export(typeof(KenticoFileSystemBusiness))]
-    public class KenticoFileSystemBusiness : CmdletProviderBusinessBase
+    public static class EnumerableExtensions
     {
-        /// <inheritdoc />
-        [Import(typeof(IFileSystemResourceService))]
-        public override IResourceService ResourceService { get; set; }
-
-        /// <inheritdoc />
-        [Import(typeof(IFileSystemReaderWriterService))]
-        public override IResourceReaderWriterService ReaderWriterService { get; set; }
+        /// <summary>
+        /// Flattens a collection of collections into a single collection
+        /// </summary>
+        /// <typeparam name="T">The type of collection</typeparam>
+        /// <param name="items">The collection the extension is applied on</param>
+        /// <param name="flattenItems">The collection to be flattened</param>
+        /// <returns>A flattened collection </returns>
+        public static IEnumerable<T> Flatten<T>(this IEnumerable<T> items, Func<T, IEnumerable<T>> flattenItems)
+        {
+            return items.SelectMany(c => flattenItems(c).Flatten(flattenItems)).Concat(items);
+        }
     }
 }
