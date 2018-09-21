@@ -43,7 +43,7 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
-    [Cmdlet("Set", "CMSRoleNoLog")]
+    [Cmdlet(VerbsCommon.Set, "CMSRoleNoLog")]
     [OutputType(typeof(RoleInfo), ParameterSetName = new string[] { PASSTHRU })]
     [Alias("srnolog")]
     public class SetCmsRoleNoLogCmdlet : MefCmdlet

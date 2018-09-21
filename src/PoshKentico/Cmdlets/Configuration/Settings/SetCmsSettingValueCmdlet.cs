@@ -40,7 +40,7 @@ namespace PoshKentico.Cmdlets.Configuration.Settings
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Set, "CMSSettingValue", DefaultParameterSetName = NONE)]
-    [Alias("ssv")]
+    [Alias("ssval")]
     public class SetCmsSettingValueCmdlet : MefCmdlet
     {
         #region Constants
