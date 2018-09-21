@@ -24,6 +24,7 @@ using CMS.MediaLibrary;
 using ImpromptuInterface;
 using PoshKentico.Business.ContentManagement.MediaLibraries;
 using PoshKentico.Core.Services.ContentManagement.MediaLibraries;
+using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
 {
@@ -63,6 +64,7 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSMediaLibraryFile", DefaultParameterSetName = NONE)]
     [OutputType(typeof(MediaFileInfo[]))]
+    [Alias("gmlfil")]
     public class GetCmsMediaLibraryFileCmdlet : MefCmdlet
     {
         #region Constants
