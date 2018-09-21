@@ -1,0 +1,89 @@
+﻿// <copyright file="KenticoRoleService.cs" company="Chris Crutchfield">
+// Copyright (C) 2017  Chris Crutchfield
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+// </copyright>
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.Linq;
+using CMS.Membership;
+using ImpromptuInterface;
+using PoshKentico.Core.Services.Configuration.Roles;
+
+namespace PoshKentico.Core.Providers.Configuration.Roles
+{
+    /// <summary>
+    /// Implementation of <see cref="IRoleService"/> that uses Kentico.
+    /// </summary>
+    [Export(typeof(IRoleService))]
+    public class KenticoRoleService : IRoleService
+    {
+        /// <inheritdoc/>
+        public IEnumerable<IRole> Roles => (from c in RoleInfoProvider.GetRoles()
+                                            select Impromptu.ActLike<IRole>(c as RoleInfo)).ToArray();
+
+        /// <inheritdoc/>
+        public IRole CreateRole(IRole role)
+        {
+            // Creates a new role object
+            RoleInfo newRole = new RoleInfo
+            {
+                // Sets the role properties
+                RoleDisplayName = role.RoleDisplayName,
+                RoleName = role.RoleName,
+                SiteID = role.SiteID,
+            };
+
+            // Verifies that the role is unique for the current site
+            if (RoleInfoProvider.GetRoleInfo(role.RoleName, role.SiteID) != null)
+            {
+                // Saves the role to the database
+                RoleInfoProvider.SetRoleInfo(newRole);
+            }
+            else
+            {
+                // A role with the same name already exists on the site
+                throw new Exception("A role with the same name already exists on the site");
+            }
+
+            return newRole.ActLike<IRole>();
+        }
+
+        /// <inheritdoc/>
+        public IRole SetRole(IRole role, bool isReplace = true)
+        {
+            RoleInfo existingRole = RoleInfoProvider.GetRoleInfo(role.RoleName, role.SiteID);
+
+            if (existingRole != null)
+            {
+                // Updates the role's properties
+                if (isReplace)
+                {
+                    existingRole = role.UndoActLike();
+                }
+                else
+                {
+                    existingRole.RoleDisplayName = role.RoleDisplayName ?? existingRole.RoleDisplayName;
+                }
+
+                // Saves the changes to the database
+                RoleInfoProvider.SetRoleInfo(existingRole);
+            }
+
+            return existingRole.ActLike<IRole>();
+        }
+    }
+}

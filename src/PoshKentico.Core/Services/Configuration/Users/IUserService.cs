@@ -46,9 +46,9 @@ namespace PoshKentico.Core.Services.Configuration.Users
         /// <summary>
         /// Sets the <see cref="IUser"/>.
         /// </summary>
-        /// <param name="user">The <see cref="IUser"/> to create.</param>
+        /// <param name="user">The <see cref="IUser"/> to update to.</param>
         /// <param name="isReplace">To indicate if replace the complete object or update only the properties.</param>
-        /// <returns>The <see cref="IUser"/> which matches the ID, else null.</returns>
+        /// <returns>The updated <see cref="IUser"/>.</returns>
         IUser SetUser(IUser user, bool isReplace = true);
 
         /// <summary>

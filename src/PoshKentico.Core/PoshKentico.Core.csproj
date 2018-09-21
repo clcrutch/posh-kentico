@@ -453,6 +453,7 @@
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\Configuration\Roles\KenticoRoleService.cs" />
     <Compile Include="Providers\Configuration\Settings\KenticoSettingValueService.cs" />
     <Compile Include="Providers\Configuration\Sites\KenticoSiteService.cs" />
     <Compile Include="Providers\Configuration\Users\KenticoUserService.cs" />
@@ -464,6 +465,7 @@
     <Compile Include="Providers\Development\WebParts\KenticoWebPartService.cs" />
     <Compile Include="Providers\General\KenticoSiteLocationCache.cs" />
     <Compile Include="Services\Configuration\Localization\ICulture.cs" />
+    <Compile Include="Services\Configuration\Roles\IRoleService.cs" />
     <Compile Include="Services\Configuration\Settings\ISettingValueService.cs" />
     <Compile Include="Services\Configuration\Sites\ISite.cs" />
     <Compile Include="Services\Configuration\Sites\ISiteDomainAlias.cs" />
