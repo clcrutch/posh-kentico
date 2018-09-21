@@ -37,7 +37,7 @@ namespace PoshKentico.Cmdlets.Configuration.Settings
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSWebConfigValue")]
-    [Alias("gwcv")]
+    [Alias("gwcval")]
     public class GetCmsWebConfigValueCmdlet : MefCmdlet
     {
         #region Properties
