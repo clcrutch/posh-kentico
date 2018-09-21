@@ -68,7 +68,7 @@ namespace PoshKentico.Core.Configuration.ContentManagement.MediaLibraries
         }
 
         /// <inheritdoc/>
-        public void CreateMediaFolder(int librarySiteID, string libraryName, string folderName)
+        public string CreateMediaFolder(int librarySiteID, string libraryName, string folderName)
         {
             // Gets the media library
             string siteName = SiteInfoProvider.GetSiteName(librarySiteID);
@@ -79,6 +79,8 @@ namespace PoshKentico.Core.Configuration.ContentManagement.MediaLibraries
                 // Creates the "NewFolder" folder within the media library
                 MediaLibraryInfoProvider.CreateMediaLibraryFolder(siteName, existingLibrary.LibraryID, folderName);
             }
+
+            return folderName;
         }
 
         /// <inheritdoc/>

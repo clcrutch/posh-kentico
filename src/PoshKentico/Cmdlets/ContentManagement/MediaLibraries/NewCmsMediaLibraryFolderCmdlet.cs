@@ -38,6 +38,7 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.New, "CMSMediaLibraryFolder")]
+    [OutputType(typeof(string))]
     [Alias("nmlfol")]
     public class NewCmsMediaLibraryFolderCmdlet : MefCmdlet
     {
@@ -91,7 +92,9 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
             int siteID = this.ParameterSetName == PROPERTYSET ? this.SiteID : this.Library.LibrarySiteID;
             string libraryName = this.ParameterSetName == PROPERTYSET ? this.LibraryName : this.Library.LibraryName;
 
-            this.BusinessLayer.CreateMediaLibraryFolder(siteID, libraryName, this.Folder);
+            string folder = this.BusinessLayer.CreateMediaLibraryFolder(siteID, libraryName, this.Folder);
+
+            this.WriteObject(folder);
         }
 
         #endregion
