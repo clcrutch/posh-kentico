@@ -48,7 +48,7 @@ namespace PoshKentico.Core.Providers.Configuration.Roles
             };
 
             // Verifies that the role is unique for the current site
-            if (RoleInfoProvider.GetRoleInfo(role.RoleName, role.SiteID) != null)
+            if (RoleInfoProvider.GetRoleInfo(role.RoleName, role.SiteID) == null)
             {
                 // Saves the role to the database
                 RoleInfoProvider.SetRoleInfo(newRole);
@@ -82,8 +82,34 @@ namespace PoshKentico.Core.Providers.Configuration.Roles
                 // Saves the changes to the database
                 RoleInfoProvider.SetRoleInfo(existingRole);
             }
+            else
+            {
+                // A role with the specified name not exists on the site
+                throw new Exception(string.Format("A role with the role name {0} does not exist on the specified site with site ID {1}", role.RoleName, role.SiteID));
+            }
 
             return existingRole.ActLike<IRole>();
+        }
+
+        /// <inheritdoc/>
+        public IRole GetRole(string roleName, string siteID)
+        {
+            RoleInfo existingRole = RoleInfoProvider.GetRoleInfo(roleName, siteID);
+
+            return existingRole.ActLike<IRole>();
+        }
+
+        /// <inheritdoc/>
+        public void DeleteRole(string roleName, string siteID)
+        {
+            // Gets the role
+            RoleInfo deleteRole = RoleInfoProvider.GetRoleInfo(roleName, siteID);
+
+            if (deleteRole != null)
+            {
+                // Deletes the role
+                RoleInfoProvider.DeleteRoleInfo(deleteRole);
+            }
         }
     }
 }

@@ -58,7 +58,7 @@ namespace PoshKentico.Business.Configuration.Users
         /// <param name="email">The Email for the new User.</param>
         /// <param name="preferredCultureCode">The Preferred Culture Code for the new User.</param>
         /// <param name="privilegeLevel">The User Privilege Level for the new User.</param>
-        /// <returns>The newly created <see cref="IUser"/>.</returns>
+        /// <returns>The newly updated <see cref="IUser"/>.</returns>
         public IUser Set(
                         string userName,
                         string fullName,

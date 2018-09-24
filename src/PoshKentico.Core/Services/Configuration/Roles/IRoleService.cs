@@ -49,6 +49,21 @@ namespace PoshKentico.Core.Services.Configuration.Roles
         /// <param name="isReplace">To indicate if replace the complete object or update only the properties.</param>
         /// <returns>The updated <see cref="IRole"/>.</returns>
         IRole SetRole(IRole role, bool isReplace = true);
+
+        /// <summary>
+        /// Gets the <see cref="IRole"/> which matches the supplied role name.
+        /// </summary>
+        /// <param name="roleName">The RoleName of the role <see cref="IRole"/> to return. </param>
+        /// <param name="siteID">The SiteID of the role <see cref="IRole"/> to return.</param>
+        /// <returns>The <see cref="IRole"/> which matches the RoleName, else null.</returns>
+        IRole GetRole(string roleName, string siteID);
+
+        /// <summary>
+        /// Deletes the <see cref="IRole"/> which matches the supplied role name.
+        /// </summary>
+        /// <param name="roleName">The RoleName of the role <see cref="IRole"/> to delete. </param>
+        /// <param name="siteID">The SiteID of the role <see cref="IRole"/> to delete.</param>
+        void DeleteRole(string roleName, string siteID);
         #endregion
     }
 }

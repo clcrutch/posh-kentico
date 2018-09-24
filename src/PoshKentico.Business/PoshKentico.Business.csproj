@@ -451,6 +451,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CmdletBusinessBase.cs" />
+    <Compile Include="Configuration\Roles\NewCmsRoleBusiness.cs" />
+    <Compile Include="Configuration\Roles\SetCmsRoleBusiness.cs" />
     <Compile Include="Configuration\Settings\GetCmsSettingValueBusiness.cs" />
     <Compile Include="Configuration\Settings\GetCmsWebConfigValueBusiness.cs" />
     <Compile Include="Configuration\Settings\SetCmsSettingValueBusiness.cs" />
@@ -526,5 +528,6 @@
       <Name>PoshKentico.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
