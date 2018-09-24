@@ -32,6 +32,11 @@ namespace PoshKentico.Core.Services.General
         /// </summary>
         InitializationState InitializationState { get; }
 
+        /// <summary>
+        /// Gets the location of the Kentico site.
+        /// </summary>
+        string SiteLocation { get; }
+
         #endregion
 
         #region Methods

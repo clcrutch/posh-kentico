@@ -1,4 +1,4 @@
-﻿// <copyright file="MefHost.cs" company="Chris Crutchfield">
+﻿// <copyright file="ProxyBase.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -15,18 +15,34 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System;
+using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
-using PoshKentico.Business;
 using PoshKentico.Core.Services.General;
 
-namespace PoshKentico
+namespace PoshKentico.Core.AppDomainProxies
 {
     /// <summary>
-    /// Hosts a shared MEF container which can be used by cmdlets and the navigation provider.
+    /// The base class for all app domain proxies.
     /// </summary>
-    public class MefHost
+    internal abstract class ProxyBase : MarshalByRefObject
     {
+        #region Constructors
+
+        static ProxyBase()
+        {
+            Container = new CompositionContainer(new AssemblyCatalog(typeof(ProxyBase).Assembly));
+        }
+
+        #endregion
+
         #region Properties
+
+        /// <summary>
+        /// Gets or sets the <see cref="ICmsApplicationService"/>.
+        /// </summary>
+        [Import]
+        public ICmsApplicationService CmsApplicationService { get; set; }
 
         /// <summary>
         /// Gets or sets the MEF container used for DI.
@@ -38,20 +54,16 @@ namespace PoshKentico
         #region Methods
 
         /// <summary>
-        /// Initialize the container.
+        /// Initailizes the MEF container, the object, and the CMSApplicationService.
         /// </summary>
-        internal static void Initialize()
+        public void Initialize()
         {
-            if (Container == null)
-            {
-                var catalog = new AggregateCatalog(
-                    new AssemblyCatalog(typeof(ICmsApplicationService).Assembly),
-                    new AssemblyCatalog(typeof(CmdletBusinessBase).Assembly));
+            Container.ComposeParts(this);
 
-                Container = new CompositionContainer(catalog);
-            }
+            this.CmsApplicationService.Initialize(true);
         }
 
         #endregion
+
     }
 }

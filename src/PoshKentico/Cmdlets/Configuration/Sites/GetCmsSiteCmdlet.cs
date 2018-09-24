@@ -19,9 +19,11 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
+using CMS.Scheduler;
 using CMS.SiteProvider;
 using ImpromptuInterface;
 using PoshKentico.Business.Configuration.Sites;
+using PoshKentico.Core.Services.Configuration.ScheduledTasks;
 using PoshKentico.Core.Services.Configuration.Sites;
 using AliasAttribute = System.Management.Automation.AliasAttribute;
 
@@ -61,14 +63,16 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         private const string NONE = "None";
         private const string DISPLAYNAME = "Dislpay Name";
         private const string IDSETNAME = "ID";
+        private const string TASK = "Task";
 
         #endregion
+
         #region Properties
 
         /// <summary>
         /// <para type="description">The display name of the site to retrive.</para>
         /// </summary>
-        [Parameter(Mandatory = false, Position = 0, ValueFromPipeline = true, ParameterSetName = DISPLAYNAME)]
+        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true, ParameterSetName = DISPLAYNAME)]
         [Alias("SiteName", "DomainName")]
         public string DisplayName { get; set; }
 
@@ -81,8 +85,12 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         /// <summary>
         /// <para type="description">The IDs of the site to retrieve.</para>
         /// </summary>
-        [Parameter(Mandatory = false, Position = 0, ParameterSetName = IDSETNAME)]
+        [Parameter(Mandatory = true, Position = 0, ParameterSetName = IDSETNAME)]
         public int[] ID { get; set; }
+
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = TASK)]
+        [Alias("ScheduledTask", "Task")]
+        public TaskInfo TaskInfo { get; set; }
 
         /// <summary>
         /// Gets or sets the Business layer for this site. Populated by MEF.
@@ -107,6 +115,10 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
                 case IDSETNAME:
                     sites = this.BusinessLayer.GetSites(this.ID);
                     break;
+                case TASK:
+                    sites = new ISite[] { this.BusinessLayer.GetSite(this.TaskInfo.ActLike<IScheduledTask>()).UndoActLike() };
+                    break;
+
                 case NONE:
                     sites = this.BusinessLayer.GetSites();
                     break;

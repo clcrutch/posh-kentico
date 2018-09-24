@@ -17,6 +17,7 @@
 
 using System.Collections.Generic;
 using PoshKentico.Core.Services.Configuration.Localization;
+using PoshKentico.Core.Services.Configuration.ScheduledTasks;
 
 namespace PoshKentico.Core.Services.Configuration.Sites
 {
@@ -62,6 +63,8 @@ namespace PoshKentico.Core.Services.Configuration.Sites
         /// <param name="siteName">The Site Name of the <see cref="ISite"/> to return.</param>
         /// <returns>The <see cref="ISite"/> which matches the site name, else null.</returns>
         ISite GetSite(string siteName);
+
+        ISite GetSite(IScheduledTask scheduledTask);
 
         /// <summary>
         /// Updates the <see cref="ISite"/>.

@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using PoshKentico.Core.Services.Configuration.ScheduledTasks;
 using PoshKentico.Core.Services.Configuration.Sites;
 
 namespace PoshKentico.Business.Configuration.Sites
@@ -39,6 +40,9 @@ namespace PoshKentico.Business.Configuration.Sites
         #endregion
 
         #region Methods
+
+        public ISite GetSite(IScheduledTask scheduledTask) =>
+            this.SiteService.GetSite(scheduledTask);
 
         /// <summary>
         /// Gets a list of all of the <see cref="ISite"/> in the CMS System.

@@ -20,9 +20,11 @@ using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using CMS.Localization;
+using CMS.Scheduler;
 using CMS.SiteProvider;
 using ImpromptuInterface;
 using PoshKentico.Core.Services.Configuration.Localization;
+using PoshKentico.Core.Services.Configuration.ScheduledTasks;
 using PoshKentico.Core.Services.Configuration.Sites;
 
 namespace PoshKentico.Core.Providers.Configuration.Sites
@@ -70,6 +72,14 @@ namespace PoshKentico.Core.Providers.Configuration.Sites
         public ISite GetSite(string siteName)
         {
             return (SiteInfoProvider.GetSiteInfo(siteName) as SiteInfo)?.ActLike<ISite>();
+        }
+
+        /// <inheritdoc/>
+        public ISite GetSite(IScheduledTask scheduledTask)
+        {
+            var taskInfo = TaskInfoProvider.GetTaskInfo(scheduledTask.TaskID);
+
+            return (taskInfo?.Site as SiteInfo)?.ActLike<ISite>();
         }
 
         /// <inheritdoc/>
@@ -243,5 +253,6 @@ namespace PoshKentico.Core.Providers.Configuration.Sites
             return aliases;
         }
         #endregion
+
     }
 }

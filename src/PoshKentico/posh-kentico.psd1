@@ -61,6 +61,9 @@ CLRVersion = '4.0'
 
 # Format files (.ps1xml) to be loaded when importing this module
 FormatsToProcess = @( `
+	# Configuration/ScheduledTasks
+	"./FormattingFiles/Configuration/ScheduledTasks/TaskInfo.format.ps1xml", `
+
 	# Configuration/Sites
     "./FormattingFiles/Configuration/Sites/CultureInfo.format.ps1xml", `
     "./FormattingFiles/Configuration/Sites/SiteDomainAliasInfo.format.ps1xml", `

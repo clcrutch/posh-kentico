@@ -215,8 +215,6 @@ namespace PoshKentico.Core.Providers.Development.WebParts
 
             var result = this.proxyGenerator.CreateClassProxyWithTarget(formFieldInfo, options);
 
-            ((IWebPartHolder)result).WebPart = webPart;
-
             return result as FormFieldInfo;
         }
 

@@ -1,4 +1,4 @@
-﻿// <copyright file="ValueAttribute.cs" company="Chris Crutchfield">
+﻿// <copyright file="ITaskInfoHolder.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -15,34 +15,18 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using System;
+using CMS.Scheduler;
 
-namespace PoshKentico.Business.Development.WebParts
+namespace PoshKentico.Core.Providers.Configuration.ScheduledTasks
 {
-    /// <summary>
-    /// Attribute used for setting the string value of an enumeration.
-    /// </summary>
-    public class ValueAttribute : Attribute
+    internal interface ITaskInfoHolder
     {
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ValueAttribute"/> class.
-        /// </summary>
-        /// <param name="value">The value provided by this attribute.</param>
-        public ValueAttribute(string value)
-        {
-            this.Value = value;
-        }
-
-        #endregion
-
         #region Properties
 
         /// <summary>
-        /// Gets the value for provided by this attribute.
+        /// Gets the <see cref="TaskInfo"/>.
         /// </summary>
-        public string Value { get; }
+        TaskInfo TaskInfo { get; set; }
 
         #endregion
 
