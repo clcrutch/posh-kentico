@@ -33,12 +33,12 @@ namespace PoshKentico
     /// <summary>
     /// Base class for navigation cmdlet providers.
     /// </summary>
-    /// <typeparam name="TBusinessProvider">The Business provider to use for accessing Kentico resources. Must inherit from <see cref="CmdletProviderBusinessBase"/></typeparam>
+    /// <typeparam name="TBusinessProvider">The Business provider to use for accessing Kentico resources. Must inherit from <see cref="CmdletProviderBusinessBase"/>.</typeparam>
     public abstract class MefCmdletProvider<TBusinessProvider> : NavigationCmdletProvider, IPropertyCmdletProvider, IContentCmdletProvider, ICmdlet
         where TBusinessProvider : CmdletProviderBusinessBase
     {
         /// <summary>
-        /// <see cref=" ICmsApplicationService"/>
+        /// <see cref=" ICmsApplicationService"/>.
         /// </summary>
         [Import]
         public ICmsApplicationService CmsApplicationService { get; set; }
@@ -50,22 +50,22 @@ namespace PoshKentico
         public TBusinessProvider Business { get; set; }
 
         /// <summary>
-        /// The name of the provider
+        /// The name of the provider.
         /// </summary>
         protected abstract string ProviderName { get; }
 
         /// <summary>
-        /// The provider drive name
+        /// The provider drive name.
         /// </summary>
         protected abstract string DriveName { get; }
 
         /// <summary>
-        /// The root path of the drive
+        /// The root path of the drive.
         /// </summary>
         protected abstract string DriveRootPath { get; }
 
         /// <summary>
-        /// The drive description
+        /// The drive description.
         /// </summary>
         protected abstract string DriveDescription { get; }
 
@@ -76,7 +76,21 @@ namespace PoshKentico
         {
             this.Initialize();
 
-            var outputObject = this.Business.GetProperty(path, providerSpecificPickList)?.ToPSObject();
+            var properties = this.Business.GetProperty(path, providerSpecificPickList);
+
+            if (properties == null)
+            {
+                return;
+            }
+
+            var outputObject = new PSObject();
+            var psNoteProperties = from p in properties
+                                   select new PSNoteProperty(p.Key, p.Value);
+
+            foreach (var noteProperty in psNoteProperties)
+            {
+                outputObject.Properties.Add(noteProperty);
+            }
 
             if (outputObject != null)
             {
@@ -93,7 +107,7 @@ namespace PoshKentico
         /// <inheritdoc />
         public virtual void SetProperty(string path, PSObject propertyValue)
         {
-            this.Business.SetProperty(path, propertyValue.ToDictionary());
+            this.Business.SetProperty(path, propertyValue.Properties.ToDictionary(p => p.Name.ToLowerInvariant(), p => p.Value));
         }
 
         /// <inheritdoc />
@@ -276,10 +290,10 @@ namespace PoshKentico
         }
 
         /// <summary>
-        /// Writes the <see cref="IResourceInfo"/> to the output
+        /// Writes the <see cref="IResourceInfo"/> to the output.
         /// </summary>
-        /// <param name="resource">The <see cref="IResourceInfo"/> to be written to the output</param>
-        /// <param name="recurse">When set to true, will recurse through all child containers of <paramref name="resource"/></param> and write them to the output.
+        /// <param name="resource">The <see cref="IResourceInfo"/> to be written to the output.</param>
+        /// <param name="recurse">When set to true, will recurse through all child containers of <paramref name="resource"/>.</param> and write them to the output.
         protected virtual void WriteItemObject(IResourceInfo resource, bool recurse)
         {
             if (resource == null)

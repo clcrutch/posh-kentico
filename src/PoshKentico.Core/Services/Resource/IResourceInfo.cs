@@ -25,49 +25,49 @@ using System.Threading.Tasks;
 namespace PoshKentico.Core.Services.Resource
 {
     /// <summary>
-    /// Represents a <see cref="Resource"/>
+    /// Represents a <see cref="Resource"/>.
     /// </summary>
     public interface IResourceInfo
     {
         #region Properties
 
         /// <summary>
-        /// Gets or sets a value indicating whether the resource is a container
+        /// Gets or sets a value indicating whether the resource is a container.
         /// </summary>
         bool IsContainer { get; set; }
 
         /// <summary>
-        /// Gets or sets the full path to the container this resource resides in
+        /// Gets or sets the full path to the container this resource resides in.
         /// </summary>
         string ContainerPath { get; set; }
 
         /// <summary>
-        /// Gets or sets the name of the container
+        /// Gets or sets the name of the container.
         /// </summary>
         string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the full path to this resource
+        /// Gets or sets the full path to this resource.
         /// </summary>
         string Path { get; set; }
 
         /// <summary>
-        /// Gets or sets the date this resource was creatd
+        /// Gets or sets the date this resource was creatd.
         /// </summary>
         DateTime CreationTime { get; set; }
 
         /// <summary>
-        /// Gets or sets the last time this resource was written to
+        /// Gets or sets the last time this resource was written to.
         /// </summary>
         DateTime LastWriteTime { get; set; }
 
         /// <summary>
-        /// Gets or sets the <see cref="ResourceType"/>
+        /// Gets or sets the <see cref="ResourceType"/>.
         /// </summary>
         ResourceType ResourceType { get; set; }
 
         /// <summary>
-        /// Gets or sets the child resources. Only applicable if the resource is a container
+        /// Gets or sets the child resources. Only applicable if the resource is a container.
         /// </summary>
         IEnumerable<IResourceInfo> Children { get; set; }
         #endregion

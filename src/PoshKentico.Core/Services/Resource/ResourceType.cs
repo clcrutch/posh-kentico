@@ -24,7 +24,7 @@ using System.Threading.Tasks;
 namespace PoshKentico.Core.Services.Resource
 {
     /// <summary>
-    /// Identified <see cref="IResourceInfo"/> as a Container or Item
+    /// Identified <see cref="IResourceInfo"/> as a Container or Item.
     /// </summary>
     public enum ResourceType
     {

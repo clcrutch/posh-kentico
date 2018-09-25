@@ -30,13 +30,13 @@ using PoshKentico.Extensions;
 namespace PoshKentico
 {
     /// <summary>
-    /// A singleton used for initialization
+    /// A singleton used for initialization.
     /// </summary>
     public sealed class Bootstrapper
     {
 #pragma warning disable SA1311 // Static readonly fields should begin with upper-case letter
                               /// <summary>
-                              /// The instance
+                              /// The instance.
                               /// </summary>
         private static readonly Bootstrapper instance = new Bootstrapper();
 #pragma warning restore SA1311 // Static readonly fields should begin with upper-case letter
@@ -50,7 +50,7 @@ namespace PoshKentico
         }
 
         /// <summary>
-        /// The instance
+        /// The instance.
         /// </summary>
         public static Bootstrapper Instance
         {
@@ -61,9 +61,9 @@ namespace PoshKentico
         }
 
         /// <summary>
-        /// Cmdlet initialization logic
+        /// Cmdlet initialization logic.
         /// </summary>
-        /// <param name="cmdlet">The </param>
+        /// <param name="cmdlet">The. </param>
         public void Initialize(ICmdlet cmdlet)
         {
             MefHost.Initialize();

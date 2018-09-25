@@ -26,7 +26,7 @@ using PoshKentico.Core.Services.Resource;
 namespace PoshKentico.Core.Providers.Resource
 {
     /// <summary>
-    /// Implementation of <see cref="IFileSystemResourceService"/> that uses Kentico
+    /// Implementation of <see cref="IFileSystemResourceService"/> that uses Kentico.
     /// </summary>
     [Export(typeof(IFileSystemResourceService))]
     public class KenticoFileSystemResourceService : IFileSystemResourceService

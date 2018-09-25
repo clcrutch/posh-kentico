@@ -22,7 +22,7 @@ using PoshKentico.Core.Services.Resource;
 namespace PoshKentico.Core.Providers.Resource
 {
     /// <summary>
-    /// Implementation of <see cref="IFileSystemReaderWriterService"/> that uses Kentico
+    /// Implementation of <see cref="IFileSystemReaderWriterService"/> that uses Kentico.
     /// </summary>
     [Export(typeof(IFileSystemReaderWriterService))]
     public class KenticoResourceReaderWriterService : IResourceReaderWriterService

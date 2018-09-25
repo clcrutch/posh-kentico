@@ -25,17 +25,17 @@ using PoshKentico.Core.Services.Resource;
 namespace PoshKentico.Core.Extensions
 {
     /// <summary>
-    /// Resource extensions
+    /// Resource extensions.
     /// </summary>
     public static class EnumerableExtensions
     {
         /// <summary>
-        /// Flattens a collection of collections into a single collection
+        /// Flattens a collection of collections into a single collection.
         /// </summary>
-        /// <typeparam name="T">The type of collection</typeparam>
-        /// <param name="items">The collection the extension is applied on</param>
-        /// <param name="flattenItems">The collection to be flattened</param>
-        /// <returns>A flattened collection </returns>
+        /// <typeparam name="T">The type of collection.</typeparam>
+        /// <param name="items">The collection the extension is applied on.</param>
+        /// <param name="flattenItems">The collection to be flattened.</param>
+        /// <returns>A flattened collection. </returns>
         public static IEnumerable<T> Flatten<T>(this IEnumerable<T> items, Func<T, IEnumerable<T>> flattenItems)
         {
             return items.SelectMany(c => flattenItems(c).Flatten(flattenItems)).Concat(items);

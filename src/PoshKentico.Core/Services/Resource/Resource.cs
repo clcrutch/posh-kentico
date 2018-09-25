@@ -24,7 +24,7 @@ using System.Threading.Tasks;
 namespace PoshKentico.Core.Services.Resource
 {
     /// <summary>
-    /// The concreate implementation of <see cref="IResourceInfo"/>
+    /// The concreate implementation of <see cref="IResourceInfo"/>.
     /// </summary>
     public class Resource : IResourceInfo
     {

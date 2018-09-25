@@ -28,7 +28,7 @@ using PoshKentico.Core.Services.Resource;
 namespace PoshKentico.Business.Resource
 {
     /// <summary>
-    /// Business layer for NavigationCmdletProvider
+    /// Business layer for NavigationCmdletProvider.
     /// </summary>
     [Export(typeof(KenticoFileSystemBusiness))]
     public class KenticoFileSystemBusiness : CmdletProviderBusinessBase
