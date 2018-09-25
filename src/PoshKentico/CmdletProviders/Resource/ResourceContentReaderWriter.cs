@@ -25,12 +25,12 @@ using PoshKentico.Core.Services.Resource;
 namespace PoshKentico.CmdletProviders.Resource
 {
     /// <summary>
-    /// Used by providers for reading and writing content
+    /// Used by providers for reading and writing content.
     /// </summary>
     public class ResourceContentReaderWriter : IContentWriter, IContentReader
     {
         /// <summary>
-        /// <see cref="IResourceReaderWriterService"/>
+        /// <see cref="IResourceReaderWriterService"/>.
         /// </summary>
         private IResourceReaderWriterService ReadWriteService { get; set; }
 
@@ -38,7 +38,7 @@ namespace PoshKentico.CmdletProviders.Resource
                               /// <summary>
                               /// Initializes a new instance of the <see cref="ResourceContentReaderWriter"/> class.
                               /// </summary>
-                              /// <param name="readWriteService">The <see cref="IResourceReaderWriterService"/></param>
+                              /// <param name="readWriteService">The <see cref="IResourceReaderWriterService"/>.</param>
         public ResourceContentReaderWriter(IResourceReaderWriterService readWriteService)
 #pragma warning restore SA1201 // Elements should appear in the correct order
         {

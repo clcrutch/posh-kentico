@@ -25,43 +25,43 @@ using System.Threading.Tasks;
 namespace PoshKentico.Core.Services.Resource
 {
     /// <summary>
-    /// Service used to read from or write to a resource item
+    /// Service used to read from or write to a resource item.
     /// </summary>
     public interface IResourceReaderWriterService
     {
         /// <summary>
-        /// Gets full path to a resource item
+        /// Gets full path to a resource item.
         /// </summary>
         string Path { get; }
 
         /// <summary>
-        /// Closes the reader/writer
+        /// Closes the reader/writer.
         /// </summary>
         void Close();
 
         /// <summary>
-        /// Disposes the reader/writer
+        /// Disposes the reader/writer.
         /// </summary>
         void Dispose();
 
         /// <summary>
-        /// Initializes the reader/wrtier
+        /// Initializes the reader/wrtier.
         /// </summary>
-        /// <param name="resourceService">Service used to do the actual reading and writting</param>
-        /// <param name="path">Full path to the resource item</param>
+        /// <param name="resourceService">Service used to do the actual reading and writting.</param>
+        /// <param name="path">Full path to the resource item.</param>
         void Initialize(IResourceService resourceService, string path);
 
         /// <summary>
-        /// Reads content from resource item
+        /// Reads content from resource item.
         /// </summary>
-        /// <returns>Items read from the resource item</returns>
+        /// <returns>Items read from the resource item.</returns>
         IList Read();
 
         /// <summary>
-        /// Writes content to a resource item
+        /// Writes content to a resource item.
         /// </summary>
-        /// <param name="content">Content to be written</param>
-        /// <returns>Items written to the resource item</returns>
+        /// <param name="content">Content to be written..</param>
+        /// <returns>Items written to the resource item.</returns>
         IList Write(IList content);
     }
 }

@@ -32,36 +32,36 @@ using PoshKentico.Core.Services.Resource;
 namespace PoshKentico.Business
 {
     /// <summary>
-    /// Base class for cmdlet business providers
+    /// Base class for cmdlet business providers.
     /// </summary>
     public abstract class CmdletProviderBusinessBase : CmdletBusinessBase
     {
         /// <summary>
-        /// Gets or sets the resource service
+        /// Gets or sets the resource service.
         /// </summary>
         public virtual IResourceService ResourceService { get; set; }
 
         /// <summary>
-        /// Gets or sets the resource resource reader/writer
+        /// Gets or sets the resource resource reader/writer.
         /// </summary>
         public virtual IResourceReaderWriterService ReaderWriterService { get; set; }
 
         /// <summary>
-        /// Determines if the resource exists
+        /// Determines if the resource exists.
         /// </summary>
-        /// <param name="path">The absolute path of the resource</param>
-        /// <returns>If the resource exists</returns>
+        /// <param name="path">The absolute path of the resource..</param>
+        /// <returns>If the resource exists.</returns>
         public virtual bool Exists(string path)
         {
             return this.ResourceService.Exists(path);
         }
 
         /// <summary>
-        /// Creates the resource
+        /// Creates the resource.
         /// </summary>
-        /// <param name="path">The resource path</param>
-        /// <param name="itemTypeName">The type of resource</param>
-        /// <param name="newItemValue">New resource property values</param>
+        /// <param name="path">The resource path.</param>
+        /// <param name="itemTypeName">The type of resource.</param>
+        /// <param name="newItemValue">New resource property values.</param>
         public virtual void CreateResource(string path, string itemTypeName, object newItemValue)
         {
             if (this.ResourceService.IsContainer(path))
@@ -75,11 +75,11 @@ namespace PoshKentico.Business
         }
 
         /// <summary>
-        /// Deletes a resource
+        /// Deletes a resource.
         /// </summary>
-        /// <param name="path">The full path of the resource to be deleted</param>
-        /// <param name="recurse">If true, will delete all resources in a container</param>
-        /// <returns>If resource was deleted</returns>
+        /// <param name="path">The full path of the resource to be deleted.</param>
+        /// <param name="recurse">If true, will delete all resources in a container.</param>
+        /// <returns>If resource was deleted.</returns>
         public virtual bool Delete(string path, bool recurse = false)
         {
             try
@@ -107,11 +107,11 @@ namespace PoshKentico.Business
         }
 
         /// <summary>
-        /// Gets the resource
+        /// Gets the resource.
         /// </summary>
-        /// <param name="path">The full path of the resource</param>
-        /// <param name="recurse">If true, retrieves all containers. If false, will only retrieve immediate containers</param>
-        /// <returns>Returns the resource item <see cref="IResourceInfo"/> </returns>
+        /// <param name="path">The full path of the resource.</param>
+        /// <param name="recurse">If true, retrieves all containers. If false, will only retrieve immediate containers.</param>
+        /// <returns>Returns the resource item <see cref="IResourceInfo"/>. </returns>
         public virtual IResourceInfo GetResource(string path, bool recurse = false)
         {
             if (!this.ResourceService.IsContainer(path))
@@ -128,11 +128,11 @@ namespace PoshKentico.Business
         }
 
         /// <summary>
-        /// Retrieves resource items and containers
+        /// Retrieves resource items and containers.
         /// </summary>
-        /// <param name="path">The path to the resource</param>
-        /// <param name="recurse">If true and resource is a container, will retrieve all of its children</param>
-        /// <returns>Returns a list of <see cref="IResourceInfo"/></returns>
+        /// <param name="path">The path to the resource.</param>
+        /// <param name="recurse">If true and resource is a container, will retrieve all of its children.</param>
+        /// <returns>Returns a list of <see cref="IResourceInfo"/>.</returns>
         public virtual IEnumerable<IResourceInfo> GetAllResources(string path, bool recurse = false)
         {
             return this.ResourceService.GetAll(path, recurse);
@@ -141,7 +141,7 @@ namespace PoshKentico.Business
         /// <summary>
         /// Gets the specified properties from the resource.
         /// </summary>
-        /// <param name="path">The path to the resource</param>
+        /// <param name="path">The path to the resource.</param>
         /// <param name="providerSpecificPickList">List of properties to retrieve.</param>
         /// <returns>A dictionary containing the requested properties.</returns>
         public virtual Dictionary<string, object> GetProperty(string path, Collection<string> providerSpecificPickList)
@@ -187,10 +187,10 @@ namespace PoshKentico.Business
         }
 
         /// <summary>
-        /// Retrieves the <see cref="IResourceReaderWriterService"/>
+        /// Retrieves the <see cref="IResourceReaderWriterService"/>.
         /// </summary>
-        /// <param name="path">The path to the resource</param>
-        /// <returns>The service used to read and write to a resource</returns>
+        /// <param name="path">The path to the resource.</param>
+        /// <returns>The service used to read and write to a resource.</returns>
         public IResourceReaderWriterService GetReaderWriter(string path)
         {
             var instance = (IResourceReaderWriterService)Activator.CreateInstance(this.ReaderWriterService.GetType());
@@ -199,9 +199,9 @@ namespace PoshKentico.Business
         }
 
         /// <summary>
-        /// Sets the specified properties on the resource
+        /// Sets the specified properties on the resource.
         /// </summary>
-        /// <param name="path">The path to the resource</param>
+        /// <param name="path">The path to the resource.</param>
         /// <param name="propertyValue">A dictionary containing the properties and their respective values.</param>
         public virtual void SetProperty(string path, Dictionary<string, object> propertyValue)
         {
@@ -219,9 +219,9 @@ namespace PoshKentico.Business
         /// <summary>
         /// Resolves the wildcard characters in a path, and displays the path contents.
         /// </summary>
-        /// <param name="path">The path with wildcard characters</param>
-        /// <param name="currentLocation">The current directory</param>
-        /// <returns>List of resource paths</returns>
+        /// <param name="path">The path with wildcard characters.</param>
+        /// <param name="currentLocation">The current directory.</param>
+        /// <returns>List of resource paths.</returns>
         public virtual string[] ExpandPath(string path, string currentLocation)
         {
             var resource = this.GetResource(currentLocation, false);
@@ -246,30 +246,30 @@ namespace PoshKentico.Business
         /// <summary>
         /// Normalizes the path that was passed in and returns the normalized path as a relative path to the basePath that was passed.
         /// </summary>
-        /// <param name="path">The full path of the resource</param>
-        /// <param name="basePath">The path that the return value should be relative to</param>
-        /// <returns>A normalized path that is relative to the basePath that was passed</returns>
+        /// <param name="path">The full path of the resource.</param>
+        /// <param name="basePath">The path that the return value should be relative to.</param>
+        /// <returns>A normalized path that is relative to the basePath that was passed.</returns>
         public virtual string NormalizeRelativePath(string path, string basePath)
         {
             return path.Replace('/', '\\');
         }
 
         /// <summary>
-        /// Is the resource a container
+        /// Is the resource a container.
         /// </summary>
-        /// <param name="path">Full path of the rosource</param>
-        /// <returns>If the requested path is a container</returns>
+        /// <param name="path">Full path of the rosource.</param>
+        /// <returns>If the requested path is a container.</returns>
         public virtual bool IsContainer(string path)
         {
             return this.ResourceService.IsContainer(path);
         }
 
         /// <summary>
-        /// Copies either a resource or a resource item
+        /// Copies either a resource or a resource item.
         /// </summary>
-        /// <param name="sourcePath">The full path to the resource being copied</param>
-        /// <param name="destinationPath">The destination where the resource will be copied to</param>
-        /// <param name="recurse">If true, will copy all of a containers child resources</param>
+        /// <param name="sourcePath">The full path to the resource being copied.</param>
+        /// <param name="destinationPath">The destination where the resource will be copied to.</param>
+        /// <param name="recurse">If true, will copy all of a containers child resources.</param>
         public virtual void CopyItem(string sourcePath, string destinationPath, bool recurse)
         {
             var sourceResource = this.GetResource(sourcePath, recurse);
@@ -285,10 +285,10 @@ namespace PoshKentico.Business
         }
 
         /// <summary>
-        /// Copies a resource item
+        /// Copies a resource item.
         /// </summary>
-        /// <param name="sourceResource">The full path to the resource being copied</param>
-        /// <param name="destinationPath">The destination where the resource item will be copied to</param>
+        /// <param name="sourceResource">The full path to the resource being copied.</param>
+        /// <param name="destinationPath">The destination where the resource item will be copied to.</param>
         private void CopyItem(IResourceInfo sourceResource, string destinationPath)
         {
             var sourceReader = this.GetReaderWriter(sourceResource.Path);
@@ -298,11 +298,11 @@ namespace PoshKentico.Business
         }
 
         /// <summary>
-        /// Copies a resource container
+        /// Copies a resource container.
         /// </summary>
-        /// <param name="sourceResource">The full path to the resource being copied</param>
-        /// <param name="destinationBasePath">The destination where the resource item will be copied to</param>
-        /// <param name="recurse">If true, will copy all of a containers child resources</param>
+        /// <param name="sourceResource">The full path to the resource being copied.</param>
+        /// <param name="destinationBasePath">The destination where the resource item will be copied to.</param>
+        /// <param name="recurse">If true, will copy all of a containers child resources.</param>
         private void CopyContainer(IResourceInfo sourceResource, string destinationBasePath, bool recurse)
         {
             var children = sourceResource.Children.Flatten(i => i.Children)
@@ -328,9 +328,9 @@ namespace PoshKentico.Business
         /// <summary>
         /// Normalizes the path that was passed in and returns the normalized path as a relative path to the basePath that was passed.
         /// </summary>
-        /// <param name="sourcePath">The full path of the resource</param>
-        /// <param name="destinationPath">The path that the return value should be relative to</param>
-        /// <returns>A normalized path that is relative to the basePath that was passed</returns>
+        /// <param name="sourcePath">The full path of the resource.</param>
+        /// <param name="destinationPath">The path that the return value should be relative to.</param>
+        /// <returns>A normalized path that is relative to the basePath that was passed.</returns>
         private string NormalizeDestinationPath(string sourcePath, string destinationPath)
         {
             string normalizedDestinationPath = string.Empty;
