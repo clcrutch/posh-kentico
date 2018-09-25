@@ -603,6 +603,9 @@
     <Content Include="FormattingFiles\Configuration\Users\UserInfo.format.ps1xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="FormattingFiles\Configuration\Roles\RoleInfo.format.ps1xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <Content Include="FormattingFiles\Development\WebParts\WebPartInfo.format.ps1xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

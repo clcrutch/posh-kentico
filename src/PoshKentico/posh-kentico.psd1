@@ -65,6 +65,9 @@ FormatsToProcess = @( `
 	"./FormattingFiles/ContentManagement/MediaLibraries/MediaLibraryInfo.format.ps1xml", `
 	"./FormattingFiles/ContentManagement/MediaLibraries/MediaFileInfo.format.ps1xml", `
 
+	# Configuration/Roles
+	"./FormattingFiles/Configuration/Roles/RoleInfo.format.ps1xml", `
+
 	# Configuration/Sites
     "./FormattingFiles/Configuration/Sites/CultureInfo.format.ps1xml", `
     "./FormattingFiles/Configuration/Sites/SiteDomainAliasInfo.format.ps1xml", `
