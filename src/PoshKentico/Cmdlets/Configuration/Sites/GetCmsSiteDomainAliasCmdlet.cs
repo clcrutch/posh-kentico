@@ -42,7 +42,7 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSSiteDomainAlias")]
     [OutputType(typeof(SiteDomainAliasInfo[]))]
-    [Alias("gscul")]
+    [Alias("gsda")]
     public class GetCmsSiteDomainAliasCmdlet : MefCmdlet
     {
         #region Constants

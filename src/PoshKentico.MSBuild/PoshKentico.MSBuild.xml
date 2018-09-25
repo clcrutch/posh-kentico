@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PoshKentico.MSBuild</name>
+    </assembly>
+    <members>
+        <member name="T:PoshKentico.MSBuild.CMSVirtualTask">
+            <summary>
+            MSBuild Task for making properties of CMS.*.dll to virtual.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.MSBuild.CMSVirtualTask.TargetDir">
+            <summary>
+            Gets or sets the target dir for project.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.MSBuild.CMSVirtualTask.Execute">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

@@ -44,7 +44,7 @@ namespace PoshKentico.Business.Configuration.Staging
         /// Sets the <see cref="IRole"/> a new role without logging any staging tasks in the CMS System.
         /// </summary>
         /// <param name="role">The <see cref="IRole"/> to sync.</param>
-        /// <param name="taskGroupName">the task group code name</param>
+        /// <param name="taskGroupName">The task group code name.</param>
         public void SetLogRole(IRole role, string taskGroupName)
         {
             this.StagingService.SetLoggingRole(role, taskGroupName);
@@ -53,10 +53,10 @@ namespace PoshKentico.Business.Configuration.Staging
         /// <summary>
         /// Sets the <see cref="IRole"/> a new role without logging any staging tasks in the CMS System.
         /// </summary>
-        /// <param name="displayName">the role display name for the new role</param>
-        /// <param name="roleName">The role name for the new role</param>
-        /// <param name="roleSiteId">The role site id for the new role</param>
-        /// <param name="taskGroupName">the task group code name</param>
+        /// <param name="displayName">The role display name for the new role.</param>
+        /// <param name="roleName">The role name for the new role.</param>
+        /// <param name="roleSiteId">The role site id for the new role.</param>
+        /// <param name="taskGroupName">The task group code name.</param>
         public void SetLogRole(string displayName, string roleName, int roleSiteId, string taskGroupName)
         {
             var data = new

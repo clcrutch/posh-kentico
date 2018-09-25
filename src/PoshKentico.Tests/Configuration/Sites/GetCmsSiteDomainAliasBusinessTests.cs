@@ -58,10 +58,8 @@ namespace PoshKentico.Tests.Configuration.Sites
             {
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
-                ShouldProcess = (x, y) => true,
 
                 SiteService = siteServiceMock.Object,
-                GetCmsSiteBusiness = getBusinessLayer,
             };
 
             businessLayer.GetDomainAliases(siteMock1.Object);
@@ -102,10 +100,8 @@ namespace PoshKentico.Tests.Configuration.Sites
             {
                 WriteDebug = Assert.NotNull,
                 WriteVerbose = Assert.NotNull,
-                ShouldProcess = (x, y) => true,
 
                 SiteService = siteServiceMock.Object,
-                GetCmsSiteBusiness = getBusinessLayer,
             };
 
             businessLayer.GetDomainAliases("yoursite2");

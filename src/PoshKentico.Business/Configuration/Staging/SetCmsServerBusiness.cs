@@ -43,7 +43,7 @@ namespace PoshKentico.Business.Configuration.Staging
         /// Sets the <see cref="IServer"/> in the CMS System.
         /// </summary>
         /// <param name="server">The <see cref="IServer"/> to set.</param>
-        /// <returns>the updated server</returns>
+        /// <returns>The updated server.</returns>
         public IServer Set(IServer server)
         {
             return this.StagingService.Update(server);
@@ -52,15 +52,15 @@ namespace PoshKentico.Business.Configuration.Staging
         /// <summary>
         /// Sets the <see cref="IServer"/> in the CMS System.
         /// </summary>
-        /// <param name="serverName">The server name to look for the server</param>
-        /// <param name="serverSiteId">The server site id to look for the server</param>
-        /// <param name="displayName">The Display Name for server to update</param>
-        /// <param name="serverUrl">The Server Url for server to update</param>
-        /// <param name="authentication">The authentication for server to update</param>
-        /// <param name="enabled">The enabled status for server to update</param>
-        /// <param name="userName">The user name for server to update</param>
-        /// <param name="password">The password for server to update</param>
-        /// <returns>the updated server</returns>
+        /// <param name="serverName">The server name to look for the server.</param>
+        /// <param name="serverSiteId">The server site id to look for the server.</param>
+        /// <param name="displayName">The Display Name for server to update.</param>
+        /// <param name="serverUrl">The Server Url for server to update.</param>
+        /// <param name="authentication">The authentication for server to update.</param>
+        /// <param name="enabled">The enabled status for server to update.</param>
+        /// <param name="userName">The user name for server to update.</param>
+        /// <param name="password">The password for server to update.</param>
+        /// <returns>The updated server.</returns>
         public IServer Set(
                         string serverName,
                         int serverSiteId,

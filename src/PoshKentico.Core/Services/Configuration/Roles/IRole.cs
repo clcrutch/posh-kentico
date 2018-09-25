@@ -35,7 +35,7 @@ namespace PoshKentico.Core.Services.Configuration.Roles
         string RoleName { get; }
 
         /// <summary>
-        /// Gets the site id
+        /// Gets the site id.
         /// </summary>
         int SiteID { get; }
         #endregion

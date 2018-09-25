@@ -29,12 +29,12 @@ namespace PoshKentico.Cmdlets.General
     /// <para type="description"></para>
     /// <para type="description">If this cmdlet is run without parameters, then it requires administrator permissions to find the Kentico site.</para>
     /// <para type="description">It does so by performing the following steps:</para>
-    /// <para type="description">1. Get a list of all the sites from IIS</para>
-    /// <para type="description">2. Get a list of all applications from the sites</para>
-    /// <para type="description">3. Get a list of all the virtual directories from the applications</para>
-    /// <para type="description">4. Continue processing virtual directory if a web.config file exits</para>
-    /// <para type="description">5. Parse the document and find an "add" node with name="CMSConnectionString"</para>
-    /// <para type="description">6. If the connection string is valid, then stop processing</para>
+    /// <para type="description">1. Get a list of all the sites from IIS.</para>
+    /// <para type="description">2. Get a list of all applications from the sites.</para>
+    /// <para type="description">3. Get a list of all the virtual directories from the applications.</para>
+    /// <para type="description">4. Continue processing virtual directory if a web.config file exits.</para>
+    /// <para type="description">5. Parse the document and find an "add" node with name="CMSConnectionString".</para>
+    /// <para type="description">6. If the connection string is valid, then stop processing.</para>
     /// <example>
     ///     <para>Initialize the Kentico CMS Application by searching for the Kentico site.</para>
     ///     <para>This option requires administrator rights.</para>

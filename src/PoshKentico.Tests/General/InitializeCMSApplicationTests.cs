@@ -17,6 +17,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.General;
@@ -85,6 +86,44 @@ namespace PoshKentico.Tests.General
             businessLayer.Initialize("databaseServer", "database", 103, webRoot);
 
             applicationServiceMock.Verify(x => x.Initialize(webRoot, $"Data Source=databaseServer;Initial Catalog=database;Integrated Security=True;Persist Security Info=False;Connect Timeout=103;Encrypt=False;Current Language=English", Assert.NotNull, Assert.NotNull));
+        }
+
+        [TestCase]
+        public void Initialize_ConnectionString_WebRoot_AlreadyInitialized()
+        {
+            var applicationServiceMock = new Mock<ICmsApplicationService>();
+            applicationServiceMock
+                .Setup(x => x.InitializationState)
+                .Returns(InitializationState.Initialized);
+
+            var businessLayer = new InitializeCMSApplicationBusiness
+            {
+                WriteDebug = Assert.NotNull,
+                WriteVerbose = x => x.Should().Be("Kentico is already initialized.  Skipping..."),
+
+                CmsApplicationService = applicationServiceMock.Object,
+            };
+
+            businessLayer.Initialize(null, null);
+        }
+
+        [TestCase]
+        public void Initialize_Cached_AlreadyInitialized()
+        {
+            var applicationServiceMock = new Mock<ICmsApplicationService>();
+            applicationServiceMock
+                .Setup(x => x.InitializationState)
+                .Returns(InitializationState.Initialized);
+
+            var businessLayer = new InitializeCMSApplicationBusiness
+            {
+                WriteDebug = Assert.NotNull,
+                WriteVerbose = x => x.Should().Be("Kentico is already initialized.  Skipping..."),
+
+                CmsApplicationService = applicationServiceMock.Object,
+            };
+
+            businessLayer.Initialize(true);
         }
     }
 }

@@ -43,10 +43,10 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <summary>
         /// Creates a new <see cref="ISite"/> in the CMS System.
         /// </summary>
-        /// <param name="displayName">The Display Name for the new Site</param>
-        /// <param name="siteName">The Site Name for the new Site</param>
-        /// <param name="status">The Status for the new Site</param>
-        /// <param name="domainName">The Domain Name for the new Site</param>
+        /// <param name="displayName">The Display Name for the new Site.</param>
+        /// <param name="siteName">The Site Name for the new Site.</param>
+        /// <param name="status">The Status for the new Site.</param>
+        /// <param name="domainName">The Domain Name for the new Site.</param>
         /// <returns>A list of all of the <see cref="ISite"/>.</returns>
         public ISite CreateSite(string displayName, string siteName, SiteStatusEnum status, string domainName)
         {

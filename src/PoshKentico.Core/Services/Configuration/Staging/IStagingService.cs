@@ -62,7 +62,7 @@ namespace PoshKentico.Core.Services.Configuration.Staging
         /// Updates the <see cref="IServer"/>.
         /// </summary>
         /// <param name="server">The <see cref="IServer"/> to update.</param>
-        /// <param name="isReplace">to indicate if replace the complete object or update only the properties</param>
+        /// <param name="isReplace">To indicate if replace the complete object or update only the properties.</param>
         /// <returns>The updated server.</returns>
         IServer Update(IServer server, bool isReplace = true);
 
@@ -73,27 +73,27 @@ namespace PoshKentico.Core.Services.Configuration.Staging
         void Delete(IServer server);
 
         /// <summary>
-        /// Synchronize staging tasks at specified <see cref="IServer"/>
+        /// Synchronize staging tasks at specified <see cref="IServer"/>.
         /// </summary>
         /// <param name="server">The <see cref="IServer"/> to synchronize the tasks.</param>
-        /// <returns>the error message</returns>
+        /// <returns>The error message.</returns>
         string SynchronizeStagingTask(IServer server);
 
         /// <summary>
-        /// Delete staging tasks at specified <see cref="IServer"/>
+        /// Delete staging tasks at specified <see cref="IServer"/>.
         /// </summary>
         /// <param name="server">The <see cref="IServer"/> to delete the tasks.</param>
         void DeleteStagingTask(IServer server);
 
         /// <summary>
-        /// Set a new role for logging staging tasks under specific task groups
+        /// Set a new role for logging staging tasks under specific task groups.
         /// </summary>
         /// <param name="role">The <see cref="IRole"/>.</param>
-        /// <param name="taskGroupName">the task group code name</param>
+        /// <param name="taskGroupName">The task group code name.</param>
         void SetLoggingRole(IRole role, string taskGroupName);
 
         /// <summary>
-        /// Set a new role for running code without logging of staging tasks
+        /// Set a new role for running code without logging of staging tasks.
         /// </summary>
         /// <param name="role">The <see cref="IRole"/>.</param>
         void SetNoLoggingRole(IRole role);

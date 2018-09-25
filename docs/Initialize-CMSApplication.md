@@ -36,22 +36,22 @@ If this cmdlet is run without parameters, then it requires administrator permiss
 It does so by performing the following steps:
 
 1.
-Get a list of all the sites from IIS
+Get a list of all the sites from IIS.
 
 2.
-Get a list of all applications from the sites
+Get a list of all applications from the sites.
 
 3.
-Get a list of all the virtual directories from the applications
+Get a list of all the virtual directories from the applications.
 
 4.
-Continue processing virtual directory if a web.config file exits
+Continue processing virtual directory if a web.config file exits.
 
 5.
-Parse the document and find an "add" node with name="CMSConnectionString"
+Parse the document and find an "add" node with name="CMSConnectionString".
 
 6.
-If the connection string is valid, then stop processing
+If the connection string is valid, then stop processing.
 
 ## EXAMPLES
 

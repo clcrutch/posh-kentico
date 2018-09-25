@@ -16,19 +16,14 @@ Creates a new server.
 ```
 New-CMSServer [-Site] <SiteInfo> [-DisplayName] <String> [[-ServerName] <String>] [-URL] <String>
  [[-Authentication] <ServerAuthenticationEnum>] [[-Enabled] <Boolean>] [[-UserName] <String>]
- [[-Password] <String>] [<CommonParameters>]
+ [[-Password] <String>] [-PassThru] [<CommonParameters>]
 ```
 
 ### Property
 ```
 New-CMSServer [-SiteID] <Int32> [-DisplayName] <String> [[-ServerName] <String>] [-URL] <String>
  [[-Authentication] <ServerAuthenticationEnum>] [[-Enabled] <Boolean>] [[-UserName] <String>]
- [[-Password] <String>] [<CommonParameters>]
-```
-
-### PassThru
-```
-New-CMSServer [-PassThru] [<CommonParameters>]
+ [[-Password] <String>] [-PassThru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -99,7 +94,7 @@ Server display name cannot be blank.
 
 ```yaml
 Type: String
-Parameter Sets: Object, Property
+Parameter Sets: (All)
 Aliases:
 
 Required: True
@@ -116,7 +111,7 @@ If null, then the display name is used for the server name.
 
 ```yaml
 Type: String
-Parameter Sets: Object, Property
+Parameter Sets: (All)
 Aliases:
 
 Required: False
@@ -131,7 +126,7 @@ The server url for the newly created server.
 
 ```yaml
 Type: String
-Parameter Sets: Object, Property
+Parameter Sets: (All)
 Aliases:
 
 Required: True
@@ -148,7 +143,7 @@ Possible values: UserName, X509
 
 ```yaml
 Type: ServerAuthenticationEnum
-Parameter Sets: Object, Property
+Parameter Sets: (All)
 Aliases:
 Accepted values: UserName, X509
 
@@ -164,7 +159,7 @@ The enabled status for the newly created server.
 
 ```yaml
 Type: Boolean
-Parameter Sets: Object, Property
+Parameter Sets: (All)
 Aliases:
 
 Required: False
@@ -179,7 +174,7 @@ The user name for the newly created server.
 
 ```yaml
 Type: String
-Parameter Sets: Object, Property
+Parameter Sets: (All)
 Aliases:
 
 Required: False
@@ -194,7 +189,7 @@ The password for the newly created server.
 
 ```yaml
 Type: String
-Parameter Sets: Object, Property
+Parameter Sets: (All)
 Aliases:
 
 Required: False
@@ -209,7 +204,7 @@ Tell the cmdlet to return the newly created server.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: PassThru
+Parameter Sets: (All)
 Aliases:
 
 Required: False

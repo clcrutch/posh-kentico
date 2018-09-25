@@ -39,11 +39,11 @@ namespace PoshKentico.Business.Configuration.Settings
         #region Methods
 
         /// <summary>
-        /// Get a web.config setting value
+        /// Get a web.config setting value.
         /// </summary>
-        /// <param name="appSettingKey">The key of the web.config setting</param>
+        /// <param name="appSettingKey">The key of the web.config setting.</param>
         /// <param name="defaultValue">The default value to return if no key is matched.</param>
-        /// <returns>The value of the setting</returns>
+        /// <returns>The value of the setting.</returns>
         public object GetSettingValue(string appSettingKey, string defaultValue = "")
         {
             return this.SettingValueService.GetWebConfigValue(appSettingKey, defaultValue);

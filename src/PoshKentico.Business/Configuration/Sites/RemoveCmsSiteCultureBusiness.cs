@@ -46,10 +46,10 @@ namespace PoshKentico.Business.Configuration.Sites
         #region Methods
 
         /// <summary>
-        /// Remove a culture to a site
+        /// Remove a culture to a site.
         /// </summary>
-        /// <param name="site">the site to remove culture to</param>
-        /// <param name="cultureCode">the culture code for the culture to remove to the site</param>
+        /// <param name="site">The site to remove culture to.</param>
+        /// <param name="cultureCode">The culture code for the culture to remove to the site.</param>
         public void RemoveCulture(ISite site, string cultureCode)
         {
             this.RemoveSiteCulture(site, cultureCode);
@@ -58,9 +58,9 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <summary>
         /// Remove the culture to a <see cref="ISite"/> in the CMS System.
         /// </summary>
-        /// <param name="matchString">the string which to match the site to.</param>
+        /// <param name="matchString">The string which to match the site to.</param>
         /// <param name="exact">A boolean which indicates if the match should be exact.</param>
-        /// <param name="cultureCode">the culture code for the culture to remove to the site</param>
+        /// <param name="cultureCode">The culture code for the culture to remove to the site.</param>
         public void RemoveCulture(string matchString, bool exact, string cultureCode)
         {
             foreach (var site in this.GetCmsSiteBusiness.GetSites(matchString, exact))
@@ -73,7 +73,7 @@ namespace PoshKentico.Business.Configuration.Sites
         /// Remove the culture to a <see cref="ISite"/> in the CMS System.
         /// </summary>
         /// <param name="ids">The IDs of the <see cref="ISite"/> to remove culture to.</param>
-        /// <param name="cultureCode">the culture code for the culture to remove from the site</param>
+        /// <param name="cultureCode">The culture code for the culture to remove from the site.</param>
         public void RemoveCulture(int[] ids, string cultureCode)
         {
             foreach (var site in this.GetCmsSiteBusiness.GetSites(ids))
@@ -83,10 +83,10 @@ namespace PoshKentico.Business.Configuration.Sites
         }
 
         /// <summary>
-        /// Remove a culture to a site
+        /// Remove a culture to a site.
         /// </summary>
-        /// <param name="site">the site to remove culture to</param>
-        /// <param name="cultureCode">the culture code for the culture to remove from the site</param>
+        /// <param name="site">The site to remove culture to.</param>
+        /// <param name="cultureCode">The culture code for the culture to remove from the site.</param>
         private void RemoveSiteCulture(ISite site, string cultureCode)
         {
             this.SiteService.RemoveSiteCulture(site, cultureCode);

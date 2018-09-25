@@ -14,18 +14,13 @@ Sets a site.
 
 ### Object
 ```
-Set-CMSSite [-SiteToSet] <SiteInfo> [<CommonParameters>]
+Set-CMSSite [-SiteToSet] <SiteInfo> [-PassThru] [<CommonParameters>]
 ```
 
 ### Property
 ```
 Set-CMSSite [-DisplayName] <String> [-SiteName] <String> [-Status] <SiteStatusEnum> [-DomainName] <String>
- [<CommonParameters>]
-```
-
-### PassThru
-```
-Set-CMSSite [-PassThru] [<CommonParameters>]
+ [-PassThru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -139,7 +134,7 @@ Tell the cmdlet to return the site to update.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: PassThru
+Parameter Sets: (All)
 Aliases:
 
 Required: False
@@ -160,7 +155,8 @@ A reference to the site to update.
 
 ## OUTPUTS
 
-### CMS.SiteProvider.SiteInfo
+### CMS.SiteProvider.SiteInfo[]
+
 ## NOTES
 
 ## RELATED LINKS

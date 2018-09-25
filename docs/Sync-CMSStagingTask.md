@@ -23,7 +23,7 @@ Sync-CMSStagingTask [-ServerName] <String> [-SiteID] <Int32> [<CommonParameters>
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+Synchronize the staging tasks that target the given server.
 
 ## EXAMPLES
 
