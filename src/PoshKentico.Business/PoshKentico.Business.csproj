@@ -451,6 +451,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CmdletBusinessBase.cs" />
+    <Compile Include="Configuration\Roles\GetCmsRoleBusiness.cs" />
     <Compile Include="Configuration\Roles\NewCmsRoleBusiness.cs" />
     <Compile Include="Configuration\Roles\SetCmsRoleBusiness.cs" />
     <Compile Include="Configuration\Settings\GetCmsSettingValueBusiness.cs" />

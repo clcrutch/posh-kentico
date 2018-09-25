@@ -473,6 +473,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cmdlets\Configuration\Roles\GetCmsRoleCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Roles\NewCmsRoleCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Roles\SetCmsRoleCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Settings\GetCmsSettingValueCmdlet.cs" />

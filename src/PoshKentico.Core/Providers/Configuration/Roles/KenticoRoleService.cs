@@ -100,6 +100,12 @@ namespace PoshKentico.Core.Providers.Configuration.Roles
         }
 
         /// <inheritdoc/>
+        public IRole GetRole(int id)
+        {
+            return (RoleInfoProvider.GetRoleInfo(id) as RoleInfo)?.ActLike<IRole>();
+        }
+
+        /// <inheritdoc/>
         public void DeleteRole(string roleName, string siteID)
         {
             // Gets the role

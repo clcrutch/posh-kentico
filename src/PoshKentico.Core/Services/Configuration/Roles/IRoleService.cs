@@ -59,6 +59,13 @@ namespace PoshKentico.Core.Services.Configuration.Roles
         IRole GetRole(string roleName, string siteID);
 
         /// <summary>
+        /// Gets the <see cref="IRole"/> which matches the supplied role id.
+        /// </summary>
+        /// <param name="id">The ID of the role <see cref="IRole"/> to return.</param>
+        /// <returns>The <see cref="IRole"/> which matches the ID, else null.</returns>
+        IRole GetRole(int id);
+
+        /// <summary>
         /// Deletes the <see cref="IRole"/> which matches the supplied role name.
         /// </summary>
         /// <param name="roleName">The RoleName of the role <see cref="IRole"/> to delete. </param>
