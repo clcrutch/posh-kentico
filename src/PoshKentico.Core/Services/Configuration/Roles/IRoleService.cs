@@ -70,7 +70,7 @@ namespace PoshKentico.Core.Services.Configuration.Roles
         /// </summary>
         /// <param name="roleName">The RoleName of the role <see cref="IRole"/> to delete. </param>
         /// <param name="siteID">The SiteID of the role <see cref="IRole"/> to delete.</param>
-        void DeleteRole(string roleName, string siteID);
+        void DeleteRole(string roleName, int siteID);
         #endregion
     }
 }

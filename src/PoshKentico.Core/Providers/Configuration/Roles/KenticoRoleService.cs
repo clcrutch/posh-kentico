@@ -106,7 +106,7 @@ namespace PoshKentico.Core.Providers.Configuration.Roles
         }
 
         /// <inheritdoc/>
-        public void DeleteRole(string roleName, string siteID)
+        public void DeleteRole(string roleName, int siteID)
         {
             // Gets the role
             RoleInfo deleteRole = RoleInfoProvider.GetRoleInfo(roleName, siteID);

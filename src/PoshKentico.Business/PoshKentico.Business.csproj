@@ -453,6 +453,7 @@
     <Compile Include="CmdletBusinessBase.cs" />
     <Compile Include="Configuration\Roles\GetCmsRoleBusiness.cs" />
     <Compile Include="Configuration\Roles\NewCmsRoleBusiness.cs" />
+    <Compile Include="Configuration\Roles\RemoveCmsRoleBusiness.cs" />
     <Compile Include="Configuration\Roles\SetCmsRoleBusiness.cs" />
     <Compile Include="Configuration\Settings\GetCmsSettingValueBusiness.cs" />
     <Compile Include="Configuration\Settings\GetCmsWebConfigValueBusiness.cs" />
