@@ -20,8 +20,10 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using CMS.Membership;
+using CMS.SiteProvider;
 using ImpromptuInterface;
 using PoshKentico.Core.Services.Configuration.Roles;
+using PoshKentico.Core.Services.Configuration.Users;
 
 namespace PoshKentico.Core.Providers.Configuration.Roles
 {
@@ -115,6 +117,40 @@ namespace PoshKentico.Core.Providers.Configuration.Roles
             {
                 // Deletes the role
                 RoleInfoProvider.DeleteRoleInfo(deleteRole);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void AddUserToRole(string userName, string roleName, int siteID)
+        {
+            // Gets the user
+            UserInfo user = UserInfoProvider.GetUserInfo(userName);
+
+            // Gets the role
+            RoleInfo role = RoleInfoProvider.GetRoleInfo(roleName, siteID);
+            string siteName = SiteInfoProvider.GetSiteName(siteID);
+
+            if ((user != null) && (role != null))
+            {
+                // Adds the user to the role
+                UserInfoProvider.AddUserToRole(user.UserName, role.RoleName, siteName);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void RemoveUserFromRole(string userName, string roleName, int siteID)
+        {
+            // Gets the user
+            UserInfo user = UserInfoProvider.GetUserInfo(userName);
+
+            // Gets the role
+            RoleInfo role = RoleInfoProvider.GetRoleInfo(roleName, siteID);
+            string siteName = SiteInfoProvider.GetSiteName(siteID);
+
+            if ((user != null) && (role != null))
+            {
+                // Adds the user to the role
+                UserInfoProvider.RemoveUserFromRole(user.UserName, role.RoleName, siteName);
             }
         }
     }

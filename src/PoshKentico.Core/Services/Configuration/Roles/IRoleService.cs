@@ -16,6 +16,7 @@
 // </copyright>
 
 using System.Collections.Generic;
+using PoshKentico.Core.Services.Configuration.Users;
 
 namespace PoshKentico.Core.Services.Configuration.Roles
 {
@@ -71,6 +72,22 @@ namespace PoshKentico.Core.Services.Configuration.Roles
         /// <param name="roleName">The RoleName of the role <see cref="IRole"/> to delete. </param>
         /// <param name="siteID">The SiteID of the role <see cref="IRole"/> to delete.</param>
         void DeleteRole(string roleName, int siteID);
+
+        /// <summary>
+        /// Adds the User <see cref="IUser"/> to a Role <see cref="IRole"/>.
+        /// </summary>
+        /// <param name="userName">The user name of the user <see cref="IUser"/> to assign to a role.</param>
+        /// <param name="roleName">The role name of the role to add a user to.</param>
+        /// <param name="siteID">The SiteID of the role <see cref="IRole"/>.</param>
+        void AddUserToRole(string userName, string roleName, int siteID);
+
+        /// <summary>
+        /// Removes the User <see cref="IUser"/> from a Role <see cref="IRole"/>.
+        /// </summary>
+        /// <param name="userName">The user name of the user <see cref="IUser"/> to remove from a role.</param>
+        /// <param name="roleName">The role name of the role to remove a user from.</param>
+        /// <param name="siteID">The SiteID of the role <see cref="IRole"/>.</param>
+        void RemoveUserFromRole(string userName, string roleName, int siteID);
         #endregion
     }
 }
