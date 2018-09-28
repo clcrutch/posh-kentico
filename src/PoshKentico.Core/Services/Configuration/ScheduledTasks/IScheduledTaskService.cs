@@ -75,6 +75,13 @@ namespace PoshKentico.Core.Services.Configuration.ScheduledTasks
         /// <param name="scheduledTask">The <see cref="IScheduledTask"/> to remove from the system.</param>
         void Remove(IScheduledTask scheduledTask);
 
+        /// <summary>
+        /// Sets the <see cref="IScheduledTask"/> in the CMS system.
+        /// </summary>
+        /// <param name="scheduledTask">The <see cref="IScheduledTask"/> to set in the system.</param>
+        /// <param name="scheduledTaskInterval">The <see cref="IScheduledTaskInterval"/> for the scheduled task.</param>
+        void Set(IScheduledTask scheduledTask, IScheduledTaskInterval scheduledTaskInterval);
+
         #endregion
 
     }

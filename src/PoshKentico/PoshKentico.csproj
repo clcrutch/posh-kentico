@@ -480,6 +480,7 @@
     <Compile Include="Cmdlets\Configuration\ScheduledTasks\GetCmsScheduledTaskIntervalCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\ScheduledTasks\NewCmsScheduledTaskCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\ScheduledTasks\RemoveCmsScheduledTaskCmdlet.cs" />
+    <Compile Include="Cmdlets\Configuration\ScheduledTasks\SetCmsScheduledTaskCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\ScheduledTasks\StartCmsScheduledTaskCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Settings\GetCmsSettingValueCmdlet.cs" />
     <Compile Include="Cmdlets\Configuration\Settings\GetCmsWebConfigValueCmdlet.cs" />

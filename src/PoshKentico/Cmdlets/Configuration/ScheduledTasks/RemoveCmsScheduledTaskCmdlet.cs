@@ -66,7 +66,7 @@ namespace PoshKentico.Cmdlets.Configuration.ScheduledTasks
         #region Properties
 
         /// <summary>
-        /// <para type="description">The scheduled task to start.</para>
+        /// <para type="description">The scheduled task to remove.</para>
         /// </summary>
         [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0, ParameterSetName = SCHEDULEDTASK)]
         [Alias("Task", "TaskInfo")]

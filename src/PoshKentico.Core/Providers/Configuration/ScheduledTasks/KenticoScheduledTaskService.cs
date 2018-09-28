@@ -97,18 +97,7 @@ namespace PoshKentico.Core.Providers.Configuration.ScheduledTasks
         /// <inheritdoc />
         public IScheduledTask NewScheduledTask(IScheduledTask scheduledTask, IScheduledTaskInterval scheduledTaskInterval)
         {
-            var task = new TaskInfo
-            {
-                TaskAssemblyName = scheduledTask.TaskAssemblyName,
-                TaskClass = scheduledTask.TaskClass,
-                TaskData = scheduledTask.TaskData,
-                TaskDisplayName = scheduledTask.TaskDisplayName,
-                TaskEnabled = true,
-                TaskInterval = scheduledTask.TaskInterval ?? scheduledTaskInterval.Encode(),
-                TaskName = scheduledTask.TaskName,
-                TaskNextRunTime = scheduledTaskInterval.GetFirstRun(),
-                TaskSiteID = scheduledTask.TaskSiteID,
-            };
+            var task = this.CreateScheduledTask(scheduledTask, scheduledTaskInterval);
 
             TaskInfoProvider.SetTaskInfo(task);
 
@@ -118,6 +107,20 @@ namespace PoshKentico.Core.Providers.Configuration.ScheduledTasks
         /// <inheritdoc />
         public void Remove(IScheduledTask scheduledTask) =>
             TaskInfoProvider.DeleteTaskInfo(TaskInfoProvider.GetTaskInfo(scheduledTask.TaskID));
+
+        /// <inheritdoc />
+        public void Set(IScheduledTask scheduledTask, IScheduledTaskInterval scheduledTaskInterval)
+        {
+            var task = this.CreateScheduledTask(scheduledTask, scheduledTaskInterval);
+            task.TaskID = scheduledTask.TaskID;
+
+            if (scheduledTaskInterval != null)
+            {
+                task.TaskInterval = scheduledTaskInterval.Encode();
+            }
+
+            TaskInfoProvider.SetTaskInfo(task);
+        }
 
         private TaskInterval AppendScheduledTask(TaskInterval taskInterval, IScheduledTask scheduledTask)
         {
@@ -131,6 +134,20 @@ namespace PoshKentico.Core.Providers.Configuration.ScheduledTasks
 
             return result as TaskInterval;
         }
+
+        private TaskInfo CreateScheduledTask(IScheduledTask scheduledTask, IScheduledTaskInterval scheduledTaskInterval) =>
+            new TaskInfo
+            {
+                TaskAssemblyName = scheduledTask.TaskAssemblyName,
+                TaskClass = scheduledTask.TaskClass,
+                TaskData = scheduledTask.TaskData,
+                TaskDisplayName = scheduledTask.TaskDisplayName,
+                TaskEnabled = true,
+                TaskInterval = scheduledTask.TaskInterval ?? scheduledTaskInterval.Encode(),
+                TaskName = scheduledTask.TaskName,
+                TaskNextRunTime = scheduledTaskInterval.GetFirstRun(),
+                TaskSiteID = scheduledTask.TaskSiteID,
+            };
 
         #endregion
 

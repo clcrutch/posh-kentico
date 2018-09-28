@@ -80,7 +80,7 @@ namespace PoshKentico.Cmdlets.Configuration.ScheduledTasks
         public TaskInfo ScheduledTask { get; set; }
 
         /// <summary>
-        /// Gets or sets the Business layer for this web part. Populated by MEF.
+        /// Gets or sets the Business layer for this cmdlet. Populated by MEF.
         /// </summary>
         [Import]
         public StartCmsScheduledTaskBusiness StartBusinessLayer { get; set; }
