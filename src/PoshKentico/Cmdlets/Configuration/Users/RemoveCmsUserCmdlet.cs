@@ -55,6 +55,14 @@ namespace PoshKentico.Cmdlets.Configuration.Users
     ///     <para>Remove the specified user.</para>
     ///     <code>$user | Remove-CMSUser</code>
     /// </example>
+    /// <example>
+    ///     <para>Remove the specified users from a role.</para>
+    ///     <code>Remove-CMSUser -RoleName "roleName" -SiteID 4</code>
+    /// </example>
+    /// <example>
+    ///     <para>Remove the specified users from a role.</para>
+    ///     <code>$role | Remove-CMSUser</code>
+    /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Remove, "CMSUser", SupportsShouldProcess = true, ConfirmImpact = ConfirmImpact.High, DefaultParameterSetName = NONE)]

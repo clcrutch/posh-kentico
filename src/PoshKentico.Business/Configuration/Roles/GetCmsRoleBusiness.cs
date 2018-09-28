@@ -90,6 +90,16 @@ namespace PoshKentico.Business.Configuration.Roles
             }
         }
 
+        /// <summary>
+        /// Gets a list of all of the <see cref="IRole"/> from the specified user in the CMS System.
+        /// </summary>
+        /// <param name="userName">The user name of the user.</param>
+        /// <returns>A list of all of the <see cref="IRole"/> that belong to the user.</returns>
+        public IEnumerable<IRole> GetRolesFromUser(string userName)
+        {
+            return this.RoleService.GetRolesFromUser(userName);
+        }
+
         private static IEnumerable<IRole> GetRolesFromID(int siteID, IRole[] roles)
         {
             if (siteID == -1)

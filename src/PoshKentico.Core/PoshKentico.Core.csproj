@@ -466,6 +466,7 @@
     <Compile Include="Providers\General\KenticoSiteLocationCache.cs" />
     <Compile Include="Services\Configuration\Localization\ICulture.cs" />
     <Compile Include="Services\Configuration\Roles\IRoleService.cs" />
+    <Compile Include="Services\Configuration\Roles\IUserRole.cs" />
     <Compile Include="Services\Configuration\Settings\ISettingValueService.cs" />
     <Compile Include="Services\Configuration\Sites\ISite.cs" />
     <Compile Include="Services\Configuration\Sites\ISiteDomainAlias.cs" />

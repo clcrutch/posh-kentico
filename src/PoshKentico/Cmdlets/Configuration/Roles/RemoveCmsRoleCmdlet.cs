@@ -56,6 +56,14 @@ namespace PoshKentico.Cmdlets.Configuration.Roles
     ///     <code>Remove-CMSRole -ID 1,3</code>
     /// </example>
     /// <example>
+    ///     <para>Remove the specified roles from a user.</para>
+    ///     <code>Remove-CMSRole -UserName "userName"</code>
+    /// </example>
+    /// <example>
+    ///     <para>Remove the specified user.</para>
+    ///     <code>$user | Remove-CMSRole</code>
+    /// </example>
+    /// <example>
     ///     <para>Remove the specified role.</para>
     ///     <code>Remove-CMSRole -Role $role</code>
     /// </example>

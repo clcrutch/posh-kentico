@@ -38,6 +38,10 @@ namespace PoshKentico.Core.Providers.Configuration.Roles
                                             select Impromptu.ActLike<IRole>(c as RoleInfo)).ToArray();
 
         /// <inheritdoc/>
+        public IEnumerable<IUserRole> UserRoles => (from c in UserRoleInfoProvider.GetUserRoles()
+                                                    select Impromptu.ActLike<IUserRole>(c as UserRoleInfo)).ToArray();
+
+        /// <inheritdoc/>
         public IRole CreateRole(IRole role)
         {
             // Creates a new role object
@@ -94,9 +98,9 @@ namespace PoshKentico.Core.Providers.Configuration.Roles
         }
 
         /// <inheritdoc/>
-        public IRole GetRole(string roleName, string siteID)
+        public IRole GetRole(string roleName, string siteName)
         {
-            RoleInfo existingRole = RoleInfoProvider.GetRoleInfo(roleName, siteID);
+            RoleInfo existingRole = RoleInfoProvider.GetRoleInfo(roleName, siteName);
 
             return existingRole.ActLike<IRole>();
         }
@@ -152,6 +156,24 @@ namespace PoshKentico.Core.Providers.Configuration.Roles
                 // Adds the user to the role
                 UserInfoProvider.RemoveUserFromRole(user.UserName, role.RoleName, siteName);
             }
+        }
+
+        /// <inheritdoc/>
+        public IEnumerable<IRole> GetRolesFromUser(string userName)
+        {
+            // Gets the user
+            UserInfo user = UserInfoProvider.GetUserInfo(userName);
+
+            if (user != null)
+            {
+                // Gets the user's roles
+                var userRoleIDs = this.UserRoles.Where(x => x.UserID == user.UserID).Select(x => x.RoleID);
+                var roles = RoleInfoProvider.GetRoles().Where(x => userRoleIDs.Contains(x.RoleID));
+
+                return (from c in roles select Impromptu.ActLike<IRole>(c as RoleInfo)).ToArray();
+            }
+
+            return null;
         }
     }
 }

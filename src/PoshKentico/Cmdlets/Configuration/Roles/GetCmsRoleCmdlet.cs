@@ -56,6 +56,14 @@ namespace PoshKentico.Cmdlets.Configuration.Roles
     ///     <para>Get all roles with the specified IDs.</para>
     ///     <code>Get-CMSRole -ID 1,3</code>
     /// </example>
+    /// <example>
+    ///     <para>Get all roles with the specified user name.</para>
+    ///     <code>Get-CMSRole -UserName "Username"</code>
+    /// </example>
+    /// <example>
+    ///     <para>Get all roles with the specified user.</para>
+    ///     <code>$user | Get-CMSRole</code>
+    /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSRole", DefaultParameterSetName = NONE)]
@@ -70,7 +78,8 @@ namespace PoshKentico.Cmdlets.Configuration.Roles
         protected const string NONE = "None";
         private const string ROLENAME = "Role Name";
         private const string IDSETNAME = "ID";
-
+        private const string USERNAME = "User Name";
+        private const string USEROBJECT = "User";
         #endregion
 
         #region Properties
@@ -92,6 +101,18 @@ namespace PoshKentico.Cmdlets.Configuration.Roles
         /// </summary>
         [Parameter(Mandatory = true, Position = 0, ParameterSetName = IDSETNAME)]
         public int[] ID { get; set; }
+
+        /// <summary>
+        /// <para type="description">The display name of the role to retrive.</para>
+        /// </summary>
+        [Parameter(Mandatory = true, Position = 0, ParameterSetName = USERNAME)]
+        public string UserName { get; set; }
+
+        /// <summary>
+        /// <para type="description">The display name of the role to retrive.</para>
+        /// </summary>
+        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline =true, ParameterSetName = USEROBJECT)]
+        public UserInfo User { get; set; }
 
         /// <summary>
         /// <para type="description">If set, the match is exact, else the match performs a contains for display name and category name and starts with for path.</para>
@@ -122,6 +143,12 @@ namespace PoshKentico.Cmdlets.Configuration.Roles
                     break;
                 case IDSETNAME:
                     roles = this.BusinessLayer.GetRoles(this.ID);
+                    break;
+                case USERNAME:
+                    roles = this.BusinessLayer.GetRolesFromUser(this.UserName);
+                    break;
+                case USEROBJECT:
+                    roles = this.BusinessLayer.GetRolesFromUser(this.User.UserName);
                     break;
                 case NONE:
                     roles = this.BusinessLayer.GetRoles();

@@ -32,6 +32,11 @@ namespace PoshKentico.Core.Services.Configuration.Roles
         /// </summary>
         IEnumerable<IRole> Roles { get; }
 
+        /// <summary>
+        /// Gets a list of all of the <see cref="IUserRole"/> provided by the CMS System.
+        /// </summary>
+        IEnumerable<IUserRole> UserRoles { get; }
+
         #endregion
 
         #region Methods
@@ -55,9 +60,9 @@ namespace PoshKentico.Core.Services.Configuration.Roles
         /// Gets the <see cref="IRole"/> which matches the supplied role name.
         /// </summary>
         /// <param name="roleName">The RoleName of the role <see cref="IRole"/> to return. </param>
-        /// <param name="siteID">The SiteID of the role <see cref="IRole"/> to return.</param>
+        /// <param name="siteName">The siteName of the role <see cref="IRole"/> to return.</param>
         /// <returns>The <see cref="IRole"/> which matches the RoleName, else null.</returns>
-        IRole GetRole(string roleName, string siteID);
+        IRole GetRole(string roleName, string siteName);
 
         /// <summary>
         /// Gets the <see cref="IRole"/> which matches the supplied role id.
@@ -88,6 +93,13 @@ namespace PoshKentico.Core.Services.Configuration.Roles
         /// <param name="roleName">The role name of the role to remove a user from.</param>
         /// <param name="siteID">The SiteID of the role <see cref="IRole"/>.</param>
         void RemoveUserFromRole(string userName, string roleName, int siteID);
+
+        /// <summary>
+        /// Gets all roles <see cref="IRole"/> of a user <see cref="IUser"/>.
+        /// </summary>
+        /// <param name="userName">The user name of the user.</param>
+        /// <returns>A list of roles that belong to the specified user.</returns>
+        IEnumerable<IRole> GetRolesFromUser(string userName);
         #endregion
     }
 }

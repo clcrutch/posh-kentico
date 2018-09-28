@@ -86,6 +86,17 @@ namespace PoshKentico.Business.Configuration.Users
             }
         }
 
+        /// <summary>
+        /// Gets all users <see cref="IUser"/> from a specified role which match the specified criteria.
+        /// </summary>
+        /// <param name="roleName">The role name of the role.</param>
+        /// <param name="siteID">The SiteID of the role.</param>
+        /// <returns>A list of users that belong to the specified role.</returns>
+        public IEnumerable<IUser> GetUsersFromRole(string roleName, int siteID)
+        {
+            return this.UserService.GetUsersFromRole(roleName, siteID);
+        }
+
         #endregion
     }
 }

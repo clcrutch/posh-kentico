@@ -16,6 +16,7 @@
 // </copyright>
 
 using System.Collections.Generic;
+using PoshKentico.Core.Services.Configuration.Roles;
 using PoshKentico.Core.Services.Configuration.Sites;
 
 namespace PoshKentico.Core.Services.Configuration.Users
@@ -32,6 +33,10 @@ namespace PoshKentico.Core.Services.Configuration.Users
         /// </summary>
         IEnumerable<IUser> Users { get; }
 
+        /// <summary>
+        /// Gets a list of all of the <see cref="IUserRole"/> provided by the CMS System.
+        /// </summary>
+        IEnumerable<IUserRole> UserRoles { get; }
         #endregion
 
         #region Methods
@@ -64,6 +69,14 @@ namespace PoshKentico.Core.Services.Configuration.Users
         /// <param name="userName">The UserName of the user <see cref="IUser"/> to return. </param>
         /// <returns>The <see cref="IUser"/> which matches the UserName, else null.</returns>
         IUser GetUser(string userName);
+
+        /// <summary>
+        /// Gets all users <see cref="IUser"/> from a role <see cref="IRole"/>.
+        /// </summary>
+        /// <param name="roleName">The role name of the role.</param>
+        /// <param name="siteID">The SiteID of the role <see cref="IRole"/>.</param>
+        /// <returns>A list of users that belong to the specified role.</returns>
+        IEnumerable<IUser> GetUsersFromRole(string roleName, int siteID);
 
         /// <summary>
         /// Deletes the <see cref="IUser"/> which matches the supplied user name.
