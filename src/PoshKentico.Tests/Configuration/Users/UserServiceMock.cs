@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using FluentAssertions;
 using Moq;
+using PoshKentico.Core.Services.Configuration.Roles;
 using PoshKentico.Core.Services.Configuration.Users;
 
 namespace PoshKentico.Tests.Configuration.Users
@@ -28,6 +29,8 @@ namespace PoshKentico.Tests.Configuration.Users
         private IUser userMock;
 
         public IEnumerable<IUser> Users => throw new NotImplementedException();
+
+        public IEnumerable<IUserRole> UserRoles => throw new NotImplementedException();
 
         public void AddUserToSite(IUser user, string siteName)
         {
@@ -78,6 +81,11 @@ namespace PoshKentico.Tests.Configuration.Users
         }
 
         public IUser SetUser(IUser user, bool isReplace = true)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<IUser> GetUsersFromRole(string roleName, int siteID)
         {
             throw new NotImplementedException();
         }
