@@ -21,19 +21,36 @@ using CMS.Scheduler;
 using ImpromptuInterface;
 using PoshKentico.Business.Configuration.ScheduledTasks;
 using PoshKentico.Core.Services.Configuration.ScheduledTasks;
+
 using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.Configuration.ScheduledTasks
 {
+    /// <summary>
+    /// <para type="synopsis">Gets the interval for the supplied scheduled task.</para>
+    /// <para type="description">Gets the interval for the supplied scheduled task.  This command automatically initializes the connection to Kentico if not already initialized.</para>
+    /// <example>
+    ///     <para>Get the interval for a scheduled task.</para>
+    ///     <code>$scheduledTask | Get-CMSScheduledTaskInterval</code>
+    /// </example>
+    /// </summary>
     [Cmdlet(VerbsCommon.Get, "CMSScheduledTaskInterval")]
+    [OutputType(typeof(TaskInterval[]))]
+    [Alias("gsti")]
     public class GetCmsScheduledTaskIntervalCmdlet : MefCmdlet
     {
         #region Properties
 
+        /// <summary>
+        /// <para type="description">The scheduled task to get the interval for.</para>
+        /// </summary>
         [Parameter(ValueFromPipeline = true, Mandatory = true)]
         [Alias("Task", "TaskInfo")]
         public TaskInfo ScheduledTask { get; set; }
 
+        /// <summary>
+        ///  Gets or sets the Business Layer for adding culture to this site.  Populated by MEF.
+        /// </summary>
         [Import]
         public GetCmsScheduledTaskIntervalBusiness BusinessLayer { get; set; }
 
@@ -41,6 +58,7 @@ namespace PoshKentico.Cmdlets.Configuration.ScheduledTasks
 
         #region Methods
 
+        /// <inheritdoc />
         protected override void ProcessRecord()
         {
             this.WriteObject(this.BusinessLayer.GetScheduledTaskInterval(this.ScheduledTask.ActLike<IScheduledTask>()).UndoActLike());

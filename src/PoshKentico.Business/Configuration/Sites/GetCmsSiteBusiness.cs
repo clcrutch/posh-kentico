@@ -41,6 +41,11 @@ namespace PoshKentico.Business.Configuration.Sites
 
         #region Methods
 
+        /// <summary>
+        /// Returns the <see cref="ISite"/> for the specified <see cref="IScheduledTask"/>.
+        /// </summary>
+        /// <param name="scheduledTask">The <see cref="IScheduledTask"/> to get the <see cref="ISite"/> for.</param>
+        /// <returns>The <see cref="ISite"/> which is associated with the specified <see cref="IScheduledTask"/>.</returns>
         public ISite GetSite(IScheduledTask scheduledTask) =>
             this.SiteService.GetSite(scheduledTask);
 

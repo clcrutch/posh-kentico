@@ -26,7 +26,34 @@ using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.Configuration.ScheduledTasks
 {
-    [Cmdlet(VerbsCommon.Remove, "CMSScheduledTask")]
+    /// <summary>
+    /// <para type="synopsis">Removes the scheduled task for the provided input.</para>
+    /// <para type="description">Removes the scheduled tasks selected by the provided input.  This command automatically initializes the connection to Kentico if not already initialized.</para>
+    /// <para type="description"></para>
+    /// <para type="description">Without parameters, this command removes all scheduled tasks.</para>
+    /// <para type="description">With parameters, this command removes the scheduled tasks that match the criteria.</para>
+    /// <example>
+    ///     <para>Removes all of the scheduled tasks.</para>
+    ///     <code>Remove-CMSScheduledTask</code>
+    /// </example>
+    /// <example>
+    ///     <para>Removes all scheduled tasks with an assembly name that matches "test".</para>
+    ///     <code>Remove-CMSScheduledTask -AssemblyName *test*</code>
+    /// </example>
+    /// <example>
+    ///     <para>Removes all the scheduled tasks with a display name or name that matches "test".</para>
+    ///     <code>Remove-CMSScheduledTask -Name *test*</code>
+    /// </example>
+    /// <example>
+    ///     <para>Removes all the scheduled tasks that are associated with a site.</para>
+    ///     <code>$site | Remove-CMSScheduledTask</code>
+    /// </example>
+    /// <example>
+    ///     <para>Removes the specified scheduled task.</para>
+    ///     <code>$scheduledTask | Remove-CMSScheduleTask</code>
+    /// </example>
+    /// </summary>
+    [Cmdlet(VerbsCommon.Remove, "CMSScheduledTask", SupportsShouldProcess = true, ConfirmImpact = ConfirmImpact.High, DefaultParameterSetName = NONE)]
     [Alias("rmst")]
     public class RemoveCmsScheduledTaskCmdlet : GetCmsScheduledTaskCmdlet
     {

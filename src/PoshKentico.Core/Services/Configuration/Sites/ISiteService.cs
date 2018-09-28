@@ -64,6 +64,11 @@ namespace PoshKentico.Core.Services.Configuration.Sites
         /// <returns>The <see cref="ISite"/> which matches the site name, else null.</returns>
         ISite GetSite(string siteName);
 
+        /// <summary>
+        /// Gets the <see cref="ISite"/> from the <see cref="IScheduledTask"/>.
+        /// </summary>
+        /// <param name="scheduledTask">The <see cref="IScheduledTask"/> to get the <see cref="ISite"/> for.</param>
+        /// <returns>The <see cref="ISite"/> which is associated with the <see cref="IScheduledTask"/>.</returns>
         ISite GetSite(IScheduledTask scheduledTask);
 
         /// <summary>

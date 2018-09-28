@@ -24,7 +24,7 @@ using PoshKentico.Core.Services.Development.WebParts;
 namespace PoshKentico.Business.Development.WebParts
 {
     /// <summary>
-    /// Business layer fo the Get-CMSWebPart cmdlet.
+    /// Business layer of the Get-CMSWebPart cmdlet.
     /// </summary>
     [Export(typeof(GetCMSWebPartBusiness))]
     public class GetCMSWebPartBusiness : WebPartBusinessBase

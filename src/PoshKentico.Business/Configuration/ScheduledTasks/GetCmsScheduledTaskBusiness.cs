@@ -20,14 +20,21 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text.RegularExpressions;
 using PoshKentico.Core.Services.Configuration.ScheduledTasks;
+using PoshKentico.Core.Services.Configuration.Sites;
 
 namespace PoshKentico.Business.Configuration.ScheduledTasks
 {
+    /// <summary>
+    /// Business layer of the Get-CMSScheduledTask cmdlet.
+    /// </summary>
     [Export(typeof(GetCmsScheduledTaskBusiness))]
     public class GetCmsScheduledTaskBusiness : CmdletBusinessBase
     {
         #region Properties
 
+        /// <summary>
+        /// Gets or sets the scheduled task service.  Populated by MEF.
+        /// </summary>
         [Import]
         public IScheduledTaskService ScheduledTaskService { get; set; }
 
@@ -43,33 +50,52 @@ namespace PoshKentico.Business.Configuration.ScheduledTasks
             this.ScheduledTaskService.ScheduledTasks;
 
         /// <summary>
+        /// Gets a list of <see cref="IScheduledTask"/> for a particular <see cref="ISite"/> return by Kentico.
+        /// </summary>
+        /// <param name="site">The <see cref="ISite"/> to get the list of <see cref="IScheduledTask"/> for.</param>
+        /// <returns>A list of the <see cref="IScheduledTask"/> which are associated with a <see cref="ISite"/>.</returns>
+        public IEnumerable<IScheduledTask> GetScheduledTasks(ISite site) =>
+            (from s in this.ScheduledTaskService.ScheduledTasks
+             where s.TaskSiteID == site.SiteID
+             select s).ToArray();
+
+        /// <summary>
         /// Gets a list of <see cref="IScheduledTask"/> returned by Kentico whose assembly name matches the match string.
         /// </summary>
-        /// <param name="matchString"></param>
-        /// <param name="isRegex"></param>
-        /// <returns></returns>
-        public IEnumerable<IScheduledTask> GetScheduledTasksByAssemblyName(string matchString, bool isRegex)
-        {
-            var regex = this.GenerateRegex(matchString, isRegex);
+        /// <param name="matchString">The string which to match the <see cref="IScheduledTask"/> to.</param>
+        /// <param name="isRegex">Indicates whether <paramref name="matchString"/> is a regular expression.</param>
+        /// <returns>A list of <see cref="IScheduledTask"/> matching the <paramref name="matchString"/>.</returns>
+        public IEnumerable<IScheduledTask> GetScheduledTasksByAssemblyName(string matchString, bool isRegex) =>
+            this.GetScheduledTasksByAssemblyName(matchString, isRegex, this.ScheduledTaskService.ScheduledTasks);
 
-            var matched = from t in this.ScheduledTaskService.ScheduledTasks
-                          where regex.IsMatch(t.TaskAssemblyName)
-                          select t;
+        /// <summary>
+        /// Gets a list of <see cref="IScheduledTask"/> for a particular <see cref="ISite"/> returned by Kentico whose assembly matches the match string.
+        /// </summary>
+        /// <param name="matchString">The string which to match the <see cref="IScheduledTask"/> to.</param>
+        /// <param name="isRegex">Indicates whether <paramref name="matchString"/> is a regular expression.</param>
+        /// <param name="site">The <see cref="ISite"/> to get the list of <see cref="IScheduledTask"/> for.</param>
+        /// <returns>A list of <see cref="IScheduledTask"/> matching the <paramref name="matchString"/> and the <paramref name="site"/>.</returns>
+        public IEnumerable<IScheduledTask> GetScheduledTasksByAssemblyName(string matchString, bool isRegex, ISite site) =>
+            this.GetScheduledTasksByAssemblyName(matchString, isRegex, this.GetScheduledTasks(site));
 
-            return matched.ToArray();
-        }
+        /// <summary>
+        /// Gets a list of <see cref="IScheduledTask"/> returned by Kentico whose name or display name matches the match string.
+        /// </summary>
+        /// <param name="matchString">The string which to match the scheduled task to.</param>
+        /// <param name="isRegex">Indicates whether <paramref name="matchString"/> is a regular expression.</param>
+        /// <returns>A list of <see cref="IScheduledTask"/> matching the <paramref name="matchString"/>.</returns>
+        public IEnumerable<IScheduledTask> GetScheduledTasksByNameOrDisplayName(string matchString, bool isRegex) =>
+            this.GetScheduledTasksByNameOrDisplayName(matchString, isRegex, this.ScheduledTaskService.ScheduledTasks);
 
-        public IEnumerable<IScheduledTask> GetScheduledTasksByNameOrDisplayName(string matchString, bool isRegex)
-        {
-            var regex = this.GenerateRegex(matchString, isRegex);
-
-            var matched = from t in this.ScheduledTaskService.ScheduledTasks
-                          where regex.IsMatch(t.TaskDisplayName) ||
-                            regex.IsMatch(t.TaskName)
-                          select t;
-
-            return matched.ToArray();
-        }
+        /// <summary>
+        /// Gets a list of <see cref="IScheduledTask"/> for a particular <see cref="ISite"/> returned by Kentico whose name or display name matches the match string.
+        /// </summary>
+        /// <param name="matchString">The string which to match the <see cref="IScheduledTask"/> to.</param>
+        /// <param name="isRegex">Indicates whether <paramref name="matchString"/> is a regular expression.</param>
+        /// <param name="site">The <see cref="ISite"/> to get the list of <see cref="IScheduledTask"/> for.</param>
+        /// <returns>A list of <see cref="IScheduledTask"/> matching the <paramref name="matchString"/> and the <paramref name="site"/>.</returns>
+        public IEnumerable<IScheduledTask> GetScheduledTasksByNameOrDisplayName(string matchString, bool isRegex, ISite site) =>
+            this.GetScheduledTasksByNameOrDisplayName(matchString, isRegex, this.GetScheduledTasks(site));
 
         private Regex GenerateRegex(string matchString, bool isRegex)
         {
@@ -81,6 +107,29 @@ namespace PoshKentico.Business.Configuration.ScheduledTasks
             {
                 return new Regex($"^{matchString.Replace("*", ".*")}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             }
+        }
+
+        private IEnumerable<IScheduledTask> GetScheduledTasksByAssemblyName(string matchString, bool isRegex, IEnumerable<IScheduledTask> scheduledTasks)
+        {
+            var regex = this.GenerateRegex(matchString, isRegex);
+
+            var matched = from t in scheduledTasks
+                          where regex.IsMatch(t.TaskAssemblyName)
+                          select t;
+
+            return matched.ToArray();
+        }
+
+        private IEnumerable<IScheduledTask> GetScheduledTasksByNameOrDisplayName(string matchString, bool isRegex, IEnumerable<IScheduledTask> scheduledTasks)
+        {
+            var regex = this.GenerateRegex(matchString, isRegex);
+
+            var matched = from t in scheduledTasks
+                          where regex.IsMatch(t.TaskDisplayName) ||
+                            regex.IsMatch(t.TaskName)
+                          select t;
+
+            return matched.ToArray();
         }
 
         #endregion

@@ -51,6 +51,10 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     ///     <para>Get all the sites with the specified IDs.</para>
     ///     <code>Get-CMSSite -ID 5,304,5</code>
     /// </example>
+    /// <example>
+    ///     <para>Get the site for the specified task.</para>
+    ///     <code>$scheduledTask | Get-CMSSite</code>
+    /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSSite", DefaultParameterSetName = NONE)]
@@ -88,9 +92,12 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         [Parameter(Mandatory = true, Position = 0, ParameterSetName = IDSETNAME)]
         public int[] ID { get; set; }
 
+        /// <summary>
+        /// <para type="description">The task to get the site for.</para>
+        /// </summary>
         [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = TASK)]
-        [Alias("ScheduledTask", "Task")]
-        public TaskInfo TaskInfo { get; set; }
+        [Alias("Task", "TaskInfo")]
+        public TaskInfo ScheduledTask { get; set; }
 
         /// <summary>
         /// Gets or sets the Business layer for this site. Populated by MEF.
@@ -116,7 +123,7 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
                     sites = this.BusinessLayer.GetSites(this.ID);
                     break;
                 case TASK:
-                    sites = new ISite[] { this.BusinessLayer.GetSite(this.TaskInfo.ActLike<IScheduledTask>()).UndoActLike() };
+                    sites = new ISite[] { this.BusinessLayer.GetSite(this.ScheduledTask.ActLike<IScheduledTask>()).UndoActLike() };
                     break;
 
                 case NONE:

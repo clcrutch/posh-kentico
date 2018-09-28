@@ -20,11 +20,17 @@ using PoshKentico.Core.Services.Configuration.ScheduledTasks;
 
 namespace PoshKentico.Business.Configuration.ScheduledTasks
 {
+    /// <summary>
+    /// Business layer of the Start-CMSScheduledTask.
+    /// </summary>
     [Export(typeof(StartCmsScheduledTaskBusiness))]
     public class StartCmsScheduledTaskBusiness : CmdletBusinessBase
     {
         #region Properties
 
+        /// <summary>
+        /// Gets or sets the scheduled task service.  Populated by MEF.
+        /// </summary>
         [Import]
         public IScheduledTaskService ScheduledTaskService { get; set; }
 
@@ -32,6 +38,10 @@ namespace PoshKentico.Business.Configuration.ScheduledTasks
 
         #region Methods
 
+        /// <summary>
+        /// Executes the specified <see cref="IScheduledTask"/> within the current process.
+        /// </summary>
+        /// <param name="scheduledTask">The <see cref="IScheduledTask"/> to execute.</param>
         public void ExecuteTask(IScheduledTask scheduledTask) =>
             this.ScheduledTaskService.ExecuteScheduledTaskInNewAppDomain(scheduledTask);
 

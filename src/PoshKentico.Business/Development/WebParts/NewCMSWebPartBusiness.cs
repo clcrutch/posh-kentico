@@ -22,7 +22,7 @@ using PoshKentico.Core.Services.Development.WebParts;
 namespace PoshKentico.Business.Development.WebParts
 {
     /// <summary>
-    /// Business layer fo the New-CMSWebPart cmdlet.
+    /// Business layer of the New-CMSWebPart cmdlet.
     /// </summary>
     [Export(typeof(NewCMSWebPartBusiness))]
     public class NewCMSWebPartBusiness : WebPartBusinessBase

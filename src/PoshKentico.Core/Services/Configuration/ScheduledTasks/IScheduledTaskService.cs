@@ -66,7 +66,7 @@ namespace PoshKentico.Core.Services.Configuration.ScheduledTasks
         /// </summary>
         /// <param name="scheduledTask">The <see cref="IScheduledTask"/> to create in the system.</param>
         /// <param name="scheduledTaskInterval">The <see cref="IScheduledTaskInterval"/> for the new <see cref="IScheduledTask"/>.</param>
-        /// <returns></returns>
+        /// <returns>The newly created <see cref="IScheduledTask"/>.</returns>
         IScheduledTask NewScheduledTask(IScheduledTask scheduledTask, IScheduledTaskInterval scheduledTaskInterval);
 
         /// <summary>

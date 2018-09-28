@@ -21,16 +21,34 @@ using CMS.Scheduler;
 
 namespace PoshKentico.Core.Services.Configuration.ScheduledTasks
 {
+    /// <summary>
+    /// Extensions for scheduled task interval.
+    /// </summary>
     public static class IScheduledTaskIntervalExtensions
     {
         #region Methods
 
+        /// <summary>
+        /// Encodes the scheduled task interval into a string.
+        /// </summary>
+        /// <param name="interval">The interval to encode into a string.</param>
+        /// <returns>A <see cref="string"/> representation of the interval.</returns>
         public static string Encode(this IScheduledTaskInterval interval) =>
             SchedulingHelper.EncodeInterval(interval.ToTaskInterval());
 
+        /// <summary>
+        /// Gets the first run for the interval.
+        /// </summary>
+        /// <param name="interval">The interval to get the first run time for.</param>
+        /// <returns>The <see cref="DateTime"/> for the first run of the interval.</returns>
         public static DateTime GetFirstRun(this IScheduledTaskInterval interval) =>
             SchedulingHelper.GetFirstRunTime(interval.ToTaskInterval());
 
+        /// <summary>
+        /// Converts the <see cref="IScheduledTask"/> to a <see cref="TaskInterval"/>.
+        /// </summary>
+        /// <param name="interval">The interval to convert to <see cref="TaskInterval"/>.</param>
+        /// <returns><see cref="TaskInterval"/> representation of <see cref="IScheduledTaskInterval"/>.</returns>
         public static TaskInterval ToTaskInterval(this IScheduledTaskInterval interval) =>
             new TaskInterval
             {

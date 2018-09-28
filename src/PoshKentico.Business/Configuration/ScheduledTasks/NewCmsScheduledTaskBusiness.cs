@@ -22,11 +22,17 @@ using ISite = PoshKentico.Core.Services.Configuration.Sites.ISite;
 
 namespace PoshKentico.Business.Configuration.ScheduledTasks
 {
+    /// <summary>
+    /// Business layer of the New-CMSScheduledTask cmdlet.
+    /// </summary>
     [Export(typeof(NewCmsScheduledTaskBusiness))]
     public class NewCmsScheduledTaskBusiness : CmdletBusinessBase
     {
         #region Properties
 
+        /// <summary>
+        /// Gets or sets the scheduled task service.  Populated by MEF.
+        /// </summary>
         [Import]
         public IScheduledTaskService ScheduledTaskService { get; set; }
 
@@ -34,6 +40,17 @@ namespace PoshKentico.Business.Configuration.ScheduledTasks
 
         #region Methods
 
+        /// <summary>
+        /// Creates a new <see cref="IScheduledTask"/>.
+        /// </summary>
+        /// <param name="assemblyName">The assembly name for the new <see cref="IScheduledTask"/>.</param>
+        /// <param name="class">The class name for the new <see cref="IScheduledTask"/>.</param>
+        /// <param name="data">The data for the new <see cref="IScheduledTask"/>.</param>
+        /// <param name="displayName">The display name for the new <see cref="IScheduledTask"/>.</param>
+        /// <param name="interval">The <see cref="IScheduledTaskInterval"/> for the new <see cref="IScheduledTask"/>.</param>
+        /// <param name="name">The name for the new <see cref="IScheduledTask"/>.</param>
+        /// <param name="site">The <see cref="ISite"/> to associate the <see cref="IScheduledTask"/> with.</param>
+        /// <returns>The newly created <see cref="IScheduledTask"/>.</returns>
         public IScheduledTask New(string assemblyName, string @class, string data, string displayName, IScheduledTaskInterval interval, string name, ISite site)
         {
             var scheduledTask = new ScheduledTask

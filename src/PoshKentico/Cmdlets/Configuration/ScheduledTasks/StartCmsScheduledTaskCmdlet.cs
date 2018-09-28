@@ -26,6 +26,33 @@ using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.Configuration.ScheduledTasks
 {
+    /// <summary>
+    /// <para type="synopsis">Starts the scheduled task for the provided input.</para>
+    /// <para type="description">Starts the scheduled tasks selected by the provided input.  This command automatically initializes the connection to Kentico if not already initialized.</para>
+    /// <para type="description"></para>
+    /// <para type="description">Without parameters, this command starts all scheduled tasks.</para>
+    /// <para type="description">With parameters, this command starts the scheduled tasks that match the criteria.</para>
+    /// <example>
+    ///     <para>Starts all of the scheduled tasks.</para>
+    ///     <code>Start-CMSScheduledTask</code>
+    /// </example>
+    /// <example>
+    ///     <para>Starts all scheduled tasks with an assembly name that matches "test".</para>
+    ///     <code>Start-CMSScheduledTask -AssemblyName *test*</code>
+    /// </example>
+    /// <example>
+    ///     <para>Starts all the scheduled tasks with a display name or name that matches "test".</para>
+    ///     <code>Start-CMSScheduledTask -Name *test*</code>
+    /// </example>
+    /// <example>
+    ///     <para>Starts all the scheduled tasks that are associated with a site.</para>
+    ///     <code>$site | Start-CMSScheduledTask</code>
+    /// </example>
+    /// <example>
+    ///     <para>Starts the specified scheduled task.</para>
+    ///     <code>$scheduledTask | Start-CMSScheduleTask</code>
+    /// </example>
+    /// </summary>
     [Cmdlet(VerbsLifecycle.Start, "CMSScheduledTask", DefaultParameterSetName = NONE)]
     [OutputType(typeof(TaskInfo[]))]
     [Alias("sast")]

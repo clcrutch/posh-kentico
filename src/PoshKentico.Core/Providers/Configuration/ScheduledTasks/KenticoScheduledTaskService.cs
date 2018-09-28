@@ -29,6 +29,9 @@ using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.Core.Providers.Configuration.ScheduledTasks
 {
+    /// <summary>
+    /// Implementation of <see cref="IScheduledTaskService"/> for Kentico.
+    /// </summary>
     [Export(typeof(IScheduledTaskService))]
     public class KenticoScheduledTaskService : IScheduledTaskService
     {
@@ -40,6 +43,9 @@ namespace PoshKentico.Core.Providers.Configuration.ScheduledTasks
 
         #region Properties
 
+        /// <summary>
+        /// Gets or sets the CMS Application services.  Populated by MEF.
+        /// </summary>
         [Import]
         public ICmsApplicationService CmsApplicationService { get; set; }
 
@@ -52,6 +58,7 @@ namespace PoshKentico.Core.Providers.Configuration.ScheduledTasks
             (from t in TaskInfoProvider.GetTasks().Cast<TaskInfo>()
              select t.ActLike<IScheduledTask>()).ToArray();
 
+        /// <inheritdoc />
         public void ExecuteScheduledTask(IScheduledTask scheduledTask)
         {
             var originalDirectory = Environment.CurrentDirectory;
@@ -62,6 +69,7 @@ namespace PoshKentico.Core.Providers.Configuration.ScheduledTasks
             Environment.CurrentDirectory = originalDirectory;
         }
 
+        /// <inheritdoc />
         public void ExecuteScheduledTaskInNewAppDomain(IScheduledTask scheduledTask)
         {
             var domainInfo = new AppDomainSetup
@@ -78,12 +86,15 @@ namespace PoshKentico.Core.Providers.Configuration.ScheduledTasks
             AppDomain.Unload(appDomain);
         }
 
+        /// <inheritdoc />
         public IScheduledTask GetScheduledTask(int id) =>
             TaskInfoProvider.GetTaskInfo(id).ActLike<IScheduledTask>();
 
+        /// <inheritdoc />
         public IScheduledTaskInterval GetScheduledTaskInterval(IScheduledTask scheduledTask) =>
-            this.AppendScheduledTask(SchedulingHelper.DecodeInterval(scheduledTask.TaskInterval), TaskInfoProvider.GetTaskInfo(scheduledTask.TaskID)).ActLike<IScheduledTaskInterval>();
+            this.AppendScheduledTask(SchedulingHelper.DecodeInterval(scheduledTask.TaskInterval), scheduledTask).ActLike<IScheduledTaskInterval>();
 
+        /// <inheritdoc />
         public IScheduledTask NewScheduledTask(IScheduledTask scheduledTask, IScheduledTaskInterval scheduledTaskInterval)
         {
             var task = new TaskInfo
@@ -104,15 +115,16 @@ namespace PoshKentico.Core.Providers.Configuration.ScheduledTasks
             return task.ActLike<IScheduledTask>();
         }
 
+        /// <inheritdoc />
         public void Remove(IScheduledTask scheduledTask) =>
             TaskInfoProvider.DeleteTaskInfo(TaskInfoProvider.GetTaskInfo(scheduledTask.TaskID));
 
-        private TaskInterval AppendScheduledTask(TaskInterval taskInterval, TaskInfo taskInfo)
+        private TaskInterval AppendScheduledTask(TaskInterval taskInterval, IScheduledTask scheduledTask)
         {
             var options = new ProxyGenerationOptions();
-            options.AddMixinInstance(new TaskInfoHolder
+            options.AddMixinInstance(new ScheduledTaskHelper
             {
-                TaskInfo = taskInfo,
+                ScheduledTask = scheduledTask,
             });
 
             var result = this.proxyGenerator.CreateClassProxyWithTarget(taskInterval, options);

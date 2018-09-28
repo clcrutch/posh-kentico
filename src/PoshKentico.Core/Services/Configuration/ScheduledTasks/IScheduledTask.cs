@@ -17,24 +17,51 @@
 
 namespace PoshKentico.Core.Services.Configuration.ScheduledTasks
 {
+    /// <summary>
+    /// Represents a scheduled task.
+    /// </summary>
     public interface IScheduledTask
     {
         #region Properties
 
+        /// <summary>
+        /// Gets the assembly name for the task.
+        /// </summary>
         string TaskAssemblyName { get; }
 
+        /// <summary>
+        /// Gets the class for the task.
+        /// </summary>
         string TaskClass { get; }
 
+        /// <summary>
+        /// Gets the data for the task.
+        /// </summary>
         string TaskData { get; }
 
+        /// <summary>
+        /// Gets the display name for the task.
+        /// </summary>
         string TaskDisplayName { get; }
 
+        /// <summary>
+        /// Gets the interval for the task.
+        /// </summary>
         string TaskInterval { get; }
 
+        /// <summary>
+        /// Gets the ID for the task.
+        /// </summary>
         int TaskID { get; }
 
+        /// <summary>
+        /// Gets the name for the task.
+        /// </summary>
         string TaskName { get; }
 
+        /// <summary>
+        /// Gets the site for the task.
+        /// </summary>
         int TaskSiteID { get; }
 
         #endregion

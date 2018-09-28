@@ -43,7 +43,7 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
-    [Cmdlet("Remove", "CMSStagingTask")]
+    [Cmdlet("Remove", "CMSStagingTask", SupportsShouldProcess = true, ConfirmImpact = ConfirmImpact.High)]
     [Alias("removestaging")]
     public class RemoveCmsStagingTaskCmdlet : MefCmdlet
     {

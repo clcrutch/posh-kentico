@@ -20,11 +20,17 @@ using PoshKentico.Core.Services.Configuration.ScheduledTasks;
 
 namespace PoshKentico.Business.Configuration.ScheduledTasks
 {
+    /// <summary>
+    /// Business layer of the Remove-CMSScheduledTask cmdlet.
+    /// </summary>
     [Export(typeof(RemoveCmsScheduledTaskBusiness))]
     public class RemoveCmsScheduledTaskBusiness : CmdletBusinessBase
     {
         #region Properties
 
+        /// <summary>
+        /// Gets or sets the scheduled task service.  Populated by MEF.
+        /// </summary>
         [Import]
         public IScheduledTaskService ScheduledTaskService { get; set; }
 
@@ -32,6 +38,10 @@ namespace PoshKentico.Business.Configuration.ScheduledTasks
 
         #region Methods
 
+        /// <summary>
+        /// Remove the specified <see cref="IScheduledTask"/> from Kentico.
+        /// </summary>
+        /// <param name="scheduledTask">The <see cref="IScheduledTask"/> to remove from Kentico.</param>
         public void Remove(IScheduledTask scheduledTask)
         {
             if (this.ShouldProcess(scheduledTask.TaskName, "Remove the scheduled task from Kentico."))

@@ -27,6 +27,9 @@ namespace PoshKentico.Core.AppDomainProxies
     {
         #region Properties
 
+        /// <summary>
+        /// Gets or sets the scheduled task service.  Populated by MEF.
+        /// </summary>
         [Import]
         public IScheduledTaskService ScheduledTaskService { get; set; }
 
@@ -34,6 +37,10 @@ namespace PoshKentico.Core.AppDomainProxies
 
         #region Methods
 
+        /// <summary>
+        /// Executes the scheduled task within the current app domain.
+        /// </summary>
+        /// <param name="id">The ID to execute.</param>
         public void ExecuteScheduledTask(int id)
         {
             this.Initialize();

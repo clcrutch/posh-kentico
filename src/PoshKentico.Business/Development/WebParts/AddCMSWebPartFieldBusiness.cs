@@ -23,7 +23,7 @@ using PoshKentico.Core.Services.Development.WebParts;
 namespace PoshKentico.Business.Development.WebParts
 {
     /// <summary>
-    /// Business layer fo the Add-CMSWebPartField cmdlet.
+    /// Business layer of the Add-CMSWebPartField cmdlet.
     /// </summary>
     [Export(typeof(AddCMSWebPartFieldBusiness))]
     public class AddCMSWebPartFieldBusiness : WebPartBusinessBase

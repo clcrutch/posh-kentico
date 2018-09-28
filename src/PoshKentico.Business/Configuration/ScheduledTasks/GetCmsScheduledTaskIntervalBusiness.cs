@@ -20,12 +20,17 @@ using PoshKentico.Core.Services.Configuration.ScheduledTasks;
 
 namespace PoshKentico.Business.Configuration.ScheduledTasks
 {
+    /// <summary>
+    /// Business layer of the Get-CMSScheduledTaskInterval cmdlet.
+    /// </summary>
     [Export(typeof(GetCmsScheduledTaskIntervalBusiness))]
     public class GetCmsScheduledTaskIntervalBusiness
     {
-
         #region Properties
 
+        /// <summary>
+        /// Gets or sets the scheduled task service.  Populated by MEF.
+        /// </summary>
         [Import]
         public IScheduledTaskService ScheduledTaskService { get; set; }
 
@@ -33,6 +38,11 @@ namespace PoshKentico.Business.Configuration.ScheduledTasks
 
         #region Methods
 
+        /// <summary>
+        /// Gets the <see cref="IScheduledTaskInterval"/> for the specified <see cref="IScheduledTask"/>.
+        /// </summary>
+        /// <param name="scheduledTask">The <see cref="IScheduledTask"/> to get the <see cref="IScheduledTaskInterval"/> for.</param>
+        /// <returns>The <see cref="IScheduledTaskInterval"/> for the specified <see cref="IScheduledTask"/>.</returns>
         public IScheduledTaskInterval GetScheduledTaskInterval(IScheduledTask scheduledTask) =>
             this.ScheduledTaskService.GetScheduledTaskInterval(scheduledTask);
 

@@ -459,9 +459,9 @@
     <Compile Include="AppDomainProxies\ScheduledTaskProxy.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\Configuration\ScheduledTasks\ITaskInfoHolder.cs" />
+    <Compile Include="Providers\Configuration\ScheduledTasks\IScheduledTaskHelper.cs" />
     <Compile Include="Providers\Configuration\ScheduledTasks\KenticoScheduledTaskService.cs" />
-    <Compile Include="Providers\Configuration\ScheduledTasks\TaskInfoHolder.cs" />
+    <Compile Include="Providers\Configuration\ScheduledTasks\ScheduledTaskHelper.cs" />
     <Compile Include="Providers\Configuration\Settings\KenticoSettingValueService.cs" />
     <Compile Include="Providers\Configuration\Sites\KenticoSiteService.cs" />
     <Compile Include="Providers\Development\WebParts\IWebPartHolder.cs" />

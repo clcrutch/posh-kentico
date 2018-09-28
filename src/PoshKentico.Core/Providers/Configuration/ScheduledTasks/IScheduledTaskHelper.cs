@@ -1,4 +1,4 @@
-﻿// <copyright file="TaskInfoHolder.cs" company="Chris Crutchfield">
+﻿// <copyright file="IScheduledTaskHelper.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -16,11 +16,23 @@
 // </copyright>
 
 using CMS.Scheduler;
+using PoshKentico.Core.Services.Configuration.ScheduledTasks;
 
 namespace PoshKentico.Core.Providers.Configuration.ScheduledTasks
 {
-    internal class TaskInfoHolder : ITaskInfoHolder
+    /// <summary>
+    /// Used by Dynamic Proxy to add a place to set a <see cref="IScheduledTask"/>.
+    /// </summary>
+    internal interface IScheduledTaskHelper
     {
-        public TaskInfo TaskInfo { get; set; }
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the <see cref="IScheduledTask"/>.
+        /// </summary>
+        IScheduledTask ScheduledTask { get; set; }
+
+        #endregion
+
     }
 }
