@@ -27,7 +27,7 @@ namespace PoshKentico.Tests.Configuration.Users
     public class NewCmsUserTests
     {
         [Test]
-        public void NewCmsUser()
+        public void NewCmsUserTest()
         {
             var userServiceMock = new Mock<UserServiceMock>();
 

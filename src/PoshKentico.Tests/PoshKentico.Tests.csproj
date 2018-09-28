@@ -468,6 +468,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CmdletBusinessBaseTests.cs" />
+    <Compile Include="Configuration\Roles\NewCmsRoleTests.cs" />
     <Compile Include="Configuration\Settings\GetCmsSettingValueTests.cs" />
     <Compile Include="Configuration\Settings\GetCmsWebConfigValueTests.cs" />
     <Compile Include="Configuration\Settings\SetCmsSettingValueTests.cs" />

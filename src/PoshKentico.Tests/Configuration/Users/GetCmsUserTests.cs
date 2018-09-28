@@ -169,5 +169,25 @@ namespace PoshKentico.Tests.Configuration.Users
 
             businessLayer.GetUsers("NewUser", false).Should().NotBeNullOrEmpty().And.HaveCount(2);
         }
+
+        [Test]
+        public void GetCmsUser_FromRole()
+        {
+            var userServiceMock = new Mock<IUserService>();
+
+            var businessLayer = new GetCmsUserBusiness()
+            {
+                WriteDebug = Assert.NotNull,
+                WriteVerbose = Assert.NotNull,
+
+                UserService = userServiceMock.Object,
+            };
+
+            string roleName = "testRole";
+            int siteID = 2;
+
+            businessLayer.GetUsersFromRole(roleName, siteID);
+            userServiceMock.Verify(x => x.GetUsersFromRole(roleName, siteID));
+        }
     }
 }
