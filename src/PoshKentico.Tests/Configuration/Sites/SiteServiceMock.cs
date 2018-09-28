@@ -20,6 +20,7 @@ using System.Diagnostics.CodeAnalysis;
 using FluentAssertions;
 using Moq;
 using PoshKentico.Core.Services.Configuration.Localization;
+using PoshKentico.Core.Services.Configuration.ScheduledTasks;
 using PoshKentico.Core.Services.Configuration.Sites;
 
 namespace PoshKentico.Business.Configuration.Sites
@@ -110,6 +111,11 @@ namespace PoshKentico.Business.Configuration.Sites
         }
 
         public IEnumerable<ISiteDomainAlias> GetDomainAliases(ISite site)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ISite GetSite(IScheduledTask scheduledTask)
         {
             throw new System.NotImplementedException();
         }
