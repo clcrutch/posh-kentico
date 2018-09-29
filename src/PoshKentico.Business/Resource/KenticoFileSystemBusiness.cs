@@ -36,9 +36,5 @@ namespace PoshKentico.Business.Resource
         /// <inheritdoc />
         [Import(typeof(IFileSystemResourceService))]
         public override IResourceService ResourceService { get; set; }
-
-        /// <inheritdoc />
-        [Import(typeof(IFileSystemReaderWriterService))]
-        public override IResourceReaderWriterService ReaderWriterService { get; set; }
     }
 }

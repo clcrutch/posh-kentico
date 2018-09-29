@@ -42,11 +42,6 @@ namespace PoshKentico.Business
         public virtual IResourceService ResourceService { get; set; }
 
         /// <summary>
-        /// Gets or sets the resource resource reader/writer.
-        /// </summary>
-        public virtual IResourceReaderWriterService ReaderWriterService { get; set; }
-
-        /// <summary>
         /// Determines if the resource exists.
         /// </summary>
         /// <param name="path">The absolute path of the resource..</param>
@@ -64,7 +59,7 @@ namespace PoshKentico.Business
         /// <param name="newItemValue">New resource property values.</param>
         public virtual void CreateResource(string path, string itemTypeName, object newItemValue)
         {
-            if (this.ResourceService.IsContainer(path))
+            if (itemTypeName.Equals(ResourceType.Container.ToString(), StringComparison.OrdinalIgnoreCase))
             {
                 this.ResourceService.CreateContainer(path);
             }
@@ -89,10 +84,12 @@ namespace PoshKentico.Business
                     if (this.ResourceService.IsContainer(path))
                     {
                         this.ResourceService.DeleteContainer(path, recurse);
+                        return true;
                     }
                     else
                     {
                         this.ResourceService.DeleteItem(path);
+                        return true;
                     }
                 }
             }
@@ -103,7 +100,7 @@ namespace PoshKentico.Business
                 // log exception?
             }
 
-            return this.ResourceService.Exists(path);
+            return false;
         }
 
         /// <summary>
@@ -114,17 +111,12 @@ namespace PoshKentico.Business
         /// <returns>Returns the resource item <see cref="IResourceInfo"/>. </returns>
         public virtual IResourceInfo GetResource(string path, bool recurse = false)
         {
-            if (!this.ResourceService.IsContainer(path))
-            {
-                return this.ResourceService.GetItem(path);
-            }
-
-            if (recurse)
+            if (this.ResourceService.IsContainer(path))
             {
                 return this.ResourceService.GetContainer(path, recurse);
             }
 
-            return this.ResourceService.GetContainer(path, false);
+            return this.ResourceService.GetItem(path);
         }
 
         /// <summary>
@@ -133,9 +125,9 @@ namespace PoshKentico.Business
         /// <param name="path">The path to the resource.</param>
         /// <param name="recurse">If true and resource is a container, will retrieve all of its children.</param>
         /// <returns>Returns a list of <see cref="IResourceInfo"/>.</returns>
-        public virtual IEnumerable<IResourceInfo> GetAllResources(string path, bool recurse = false)
+        public virtual IEnumerable<IResourceInfo> GetChildren(string path, bool recurse = false)
         {
-            return this.ResourceService.GetAll(path, recurse);
+            return this.ResourceService.GetChildren(path, recurse);
         }
 
         /// <summary>
@@ -146,10 +138,18 @@ namespace PoshKentico.Business
         /// <returns>A dictionary containing the requested properties.</returns>
         public virtual Dictionary<string, object> GetProperty(string path, Collection<string> providerSpecificPickList)
         {
-            this.Initialize();
+            IResourceInfo resource = null;
 
-            var resource = this.ResourceService.IsContainer(path) ? this.ResourceService.GetContainer(path, false) : this.ResourceService.GetItem(path);
-            var properties = new Dictionary<string, object>
+            if (this.ResourceService.IsContainer(path))
+            {
+                resource = this.ResourceService.GetContainer(path, false);
+            }
+            else
+            {
+                resource = this.ResourceService.GetItem(path);
+            }
+
+            var properties = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
             {
                 { "IsContainer", resource.IsContainer },
                 { "ContainerPath", resource.ContainerPath },
@@ -158,10 +158,14 @@ namespace PoshKentico.Business
                 { "CreationTime", resource.CreationTime },
                 { "LastWriteTime", resource.LastWriteTime },
                 { "ResourceType", resource.ResourceType },
-                { "TotalContainers", resource.Children.Where(i => i.IsContainer).Count() },
-                { "TotalItems", resource.Children.Where(i => !i.IsContainer).Count() },
-                { "TotalResources", resource.Children.Count() },
             };
+
+            if (resource.ResourceType == ResourceType.Container)
+            {
+                properties.Add("TotalContainers", resource.Children.Where(i => i.IsContainer).Count());
+                properties.Add("TotalItems", resource.Children.Where(i => !i.IsContainer).Count());
+                properties.Add("TotalResources", resource.Children.Count());
+            }
 
             this.PurgeUnwantedProperties(providerSpecificPickList, properties);
 
@@ -184,18 +188,6 @@ namespace PoshKentico.Business
                     properties.Remove(itemToRemove.ToLowerInvariant());
                 }
             }
-        }
-
-        /// <summary>
-        /// Retrieves the <see cref="IResourceReaderWriterService"/>.
-        /// </summary>
-        /// <param name="path">The path to the resource.</param>
-        /// <returns>The service used to read and write to a resource.</returns>
-        public IResourceReaderWriterService GetReaderWriter(string path)
-        {
-            var instance = (IResourceReaderWriterService)Activator.CreateInstance(this.ReaderWriterService.GetType());
-            instance.Initialize(this.ResourceService, path);
-            return instance;
         }
 
         /// <summary>
@@ -238,7 +230,7 @@ namespace PoshKentico.Business
 
             var matchingItems = (from item in resource.Children
                                  where regex.IsMatch(item.Name)
-                                 select currentLocation + "/" + item.Name).ToArray();
+                                 select currentLocation + @"\" + item.Name).ToArray();
 
             return matchingItems.Any() ? matchingItems : null;
         }
@@ -281,20 +273,27 @@ namespace PoshKentico.Business
                 return;
             }
 
-            this.CopyItem(sourceResource, normalizedDestinationPath);
+            this.CopyItem(sourcePath, normalizedDestinationPath);
+        }
+
+        /// <summary>
+        /// Gets the reader writer.
+        /// </summary>
+        /// <param name="path">The path to the resource item.</param>
+        /// <returns>The <see cref="IResourceReaderWriter"/>.</returns>
+        public IResourceReaderWriter GetReaderWriter(string path)
+        {
+            return this.ResourceService.GetReaderWriter(path);
         }
 
         /// <summary>
         /// Copies a resource item.
         /// </summary>
-        /// <param name="sourceResource">The full path to the resource being copied.</param>
+        /// <param name="sourcePath">The full path to the resource being copied.</param>
         /// <param name="destinationPath">The destination where the resource item will be copied to.</param>
-        private void CopyItem(IResourceInfo sourceResource, string destinationPath)
+        private void CopyItem(string sourcePath, string destinationPath)
         {
-            var sourceReader = this.GetReaderWriter(sourceResource.Path);
-            var destinationWriter = this.GetReaderWriter(destinationPath);
-
-            destinationWriter.Write(sourceReader.Read());
+            this.ResourceService.CopyResourceItem(sourcePath, destinationPath);
         }
 
         /// <summary>
@@ -305,6 +304,14 @@ namespace PoshKentico.Business
         /// <param name="recurse">If true, will copy all of a containers child resources.</param>
         private void CopyContainer(IResourceInfo sourceResource, string destinationBasePath, bool recurse)
         {
+            if (!recurse)
+            {
+                foreach (var item in sourceResource.Children)
+                {
+                    item.Children = null;
+                }
+            }
+
             var children = sourceResource.Children.Flatten(i => i.Children)
                             .Select(i => new
                             {

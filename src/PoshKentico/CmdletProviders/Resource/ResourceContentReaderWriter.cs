@@ -30,16 +30,16 @@ namespace PoshKentico.CmdletProviders.Resource
     public class ResourceContentReaderWriter : IContentWriter, IContentReader
     {
         /// <summary>
-        /// <see cref="IResourceReaderWriterService"/>.
+        /// <see cref="IResourceReaderWriter"/>.
         /// </summary>
-        private IResourceReaderWriterService ReadWriteService { get; set; }
+        private IResourceReaderWriter ReadWriteService { get; set; }
 
 #pragma warning disable SA1201 // Elements should appear in the correct order
                               /// <summary>
                               /// Initializes a new instance of the <see cref="ResourceContentReaderWriter"/> class.
                               /// </summary>
-                              /// <param name="readWriteService">The <see cref="IResourceReaderWriterService"/>.</param>
-        public ResourceContentReaderWriter(IResourceReaderWriterService readWriteService)
+                              /// <param name="readWriteService">The <see cref="IResourceReaderWriter"/>.</param>
+        public ResourceContentReaderWriter(IResourceReaderWriter readWriteService)
 #pragma warning restore SA1201 // Elements should appear in the correct order
         {
             this.ReadWriteService = readWriteService;

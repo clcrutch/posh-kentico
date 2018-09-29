@@ -56,7 +56,7 @@ namespace PoshKentico.Core.Providers.Resource
         }
 
         /// <inheritdoc />
-        public IEnumerable<IResourceInfo> GetAll(string path, bool recurse)
+        public IEnumerable<IResourceInfo> GetChildren(string path, bool recurse)
         {
             return this.GetItems(path).Concat(this.GetContainers(path, recurse));
         }
@@ -119,7 +119,7 @@ namespace PoshKentico.Core.Providers.Resource
                 LastWriteTime = itemInfo.LastWriteTime,
                 ResourceType = ResourceType.Container,
                 IsContainer = true,
-                Children = recurse ? this.GetAll(itemInfo.FullName, true) : this.GetAll(itemInfo.FullName, false),
+                Children = recurse ? this.GetChildren(itemInfo.FullName, true) : this.GetChildren(itemInfo.FullName, false),
             }.ActLike<IResourceInfo>();
         }
 
@@ -214,6 +214,19 @@ namespace PoshKentico.Core.Providers.Resource
 
                 File.SetAttributes(path, FileInfo.New(path).Attributes & ~attributesToClear);
             }
+        }
+
+        /// <summary>
+        /// Retrieves the <see cref="IResourceReaderWriter"/>.
+        /// </summary>
+        /// <param name="path">The path to the resource.</param>
+        /// <returns>The service used to read and write to a resource.</returns>
+        public IResourceReaderWriter GetReaderWriter(string path)
+        {
+            var rw = new KenticoResourceReaderWriter();
+            rw.Initialize(this, path);
+
+            return rw;
         }
     }
 }

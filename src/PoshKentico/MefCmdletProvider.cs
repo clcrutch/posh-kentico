@@ -228,7 +228,7 @@ namespace PoshKentico
         {
             this.Initialize();
 
-            var resources = this.Business.GetAllResources(path, recurse);
+            var resources = this.Business.GetChildren(path, recurse);
 
             foreach (var child in recurse ? resources.Flatten(i => i.Children) : resources)
             {

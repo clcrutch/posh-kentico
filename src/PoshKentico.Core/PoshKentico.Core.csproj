@@ -462,7 +462,7 @@
     <Compile Include="Providers\Development\WebParts\KenticoWebPartService.cs" />
     <Compile Include="Providers\General\KenticoSiteLocationCache.cs" />
     <Compile Include="Providers\Resource\KenticoFileSystemResourceService.cs" />
-    <Compile Include="Providers\Resource\KenticoResourceReaderWriterService.cs" />
+    <Compile Include="Providers\Resource\KenticoResourceReaderWriter.cs" />
     <Compile Include="Services\Configuration\Localization\ICulture.cs" />
     <Compile Include="Services\Configuration\Settings\ISettingValueService.cs" />
     <Compile Include="Services\Configuration\Sites\ISite.cs" />
@@ -480,7 +480,7 @@
     <Compile Include="Services\Resource\IFileSystemReaderWriterService.cs" />
     <Compile Include="Services\Resource\IFileSystemResourceService.cs" />
     <Compile Include="Services\Resource\IResourceInfo.cs" />
-    <Compile Include="Services\Resource\IResourceReaderWriterService.cs" />
+    <Compile Include="Services\Resource\IResourceReaderWriter.cs" />
     <Compile Include="Services\Resource\IResourceService.cs" />
     <Compile Include="Services\Resource\Resource.cs" />
     <Compile Include="Services\Resource\ResourceType.cs" />
