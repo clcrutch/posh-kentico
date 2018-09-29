@@ -206,7 +206,6 @@ namespace PoshKentico.Tests.Resource
             result["Path"].As<string>().Should().BeEquivalentTo(fileMock.Object.Path);
             result["CreationTime"].As<DateTime>().Should().Be(fileMock.Object.CreationTime);
             result["LastWriteTime"].As<DateTime>().Should().Be(fileMock.Object.LastWriteTime);
-
             result.Should().NotContainKey("TotalContainers");
             result.Should().NotContainKey("TotalItems");
             result.Should().NotContainKey("TotalResources");
