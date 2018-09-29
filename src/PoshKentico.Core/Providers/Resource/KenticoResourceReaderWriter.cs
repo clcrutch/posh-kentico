@@ -1,4 +1,4 @@
-﻿// <copyright file="KenticoResourceReaderWriterService.cs" company="Chris Crutchfield">
+﻿// <copyright file="KenticoResourceReaderWriter.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -25,7 +25,7 @@ namespace PoshKentico.Core.Providers.Resource
     /// Implementation of <see cref="IFileSystemReaderWriterService"/> that uses Kentico.
     /// </summary>
     [Export(typeof(IFileSystemReaderWriterService))]
-    public class KenticoResourceReaderWriterService : IResourceReaderWriterService
+    public class KenticoResourceReaderWriter : IResourceReaderWriter
     {
         private bool isWriting;
 
@@ -64,7 +64,11 @@ namespace PoshKentico.Core.Providers.Resource
             return this.ResourceService.Write(this.Path, content, ref this.isWriting);
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Initializes the reader/writer.
+        /// </summary>
+        /// <param name="resourceService">The resource service.</param>
+        /// <param name="path">Path to the resource item.</param>
         public void Initialize(IResourceService resourceService, string path)
         {
             this.ResourceService = resourceService;

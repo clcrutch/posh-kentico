@@ -506,6 +506,7 @@
     <Compile Include="Configuration\Staging\SyncCmsStagingTaskTests.cs" />
     <Compile Include="General\InitializeCMSApplicationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resource\FileSystemProviderBusinessTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="packages.config" />

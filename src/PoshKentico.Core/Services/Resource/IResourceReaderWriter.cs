@@ -1,4 +1,4 @@
-﻿// <copyright file="IResourceReaderWriterService.cs" company="Chris Crutchfield">
+﻿// <copyright file="IResourceReaderWriter.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -27,10 +27,10 @@ namespace PoshKentico.Core.Services.Resource
     /// <summary>
     /// Service used to read from or write to a resource item.
     /// </summary>
-    public interface IResourceReaderWriterService
+    public interface IResourceReaderWriter
     {
         /// <summary>
-        /// Gets full path to a resource item.
+        /// Gets the full path to a resource item.
         /// </summary>
         string Path { get; }
 
@@ -43,13 +43,6 @@ namespace PoshKentico.Core.Services.Resource
         /// Disposes the reader/writer.
         /// </summary>
         void Dispose();
-
-        /// <summary>
-        /// Initializes the reader/wrtier.
-        /// </summary>
-        /// <param name="resourceService">Service used to do the actual reading and writting.</param>
-        /// <param name="path">Full path to the resource item.</param>
-        void Initialize(IResourceService resourceService, string path);
 
         /// <summary>
         /// Reads content from resource item.

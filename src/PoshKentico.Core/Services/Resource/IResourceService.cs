@@ -76,7 +76,7 @@ namespace PoshKentico.Core.Services.Resource
         /// Deletes the container.
         /// </summary>
         /// <param name="path">The full path of the container.</param>
-        /// <param name="recurse">If true, all children are deleted.</param>
+        /// <param name="recurse">If true, all children are deleted. If false, it will try to delete an empty directory.</param>
         void DeleteContainer(string path, bool recurse);
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace PoshKentico.Core.Services.Resource
         /// <param name="path">The full path of the resource.</param>
         /// <param name="recurse">If true, retrieves all child resources. If false, will only retrieve immediate children.</param>
         /// <returns>Returns the a list of <see cref="IResourceInfo"/>. </returns>
-        IEnumerable<IResourceInfo> GetAll(string path, bool recurse);
+        IEnumerable<IResourceInfo> GetChildren(string path, bool recurse);
 
         /// <summary>
         /// Writes content to a resource item.
@@ -159,5 +159,12 @@ namespace PoshKentico.Core.Services.Resource
         /// <param name="sourcePath">The source path.</param>
         /// <param name="destinationPath">The destination path.</param>
         void CopyResourceItem(string sourcePath, string destinationPath);
+
+        /// <summary>
+        /// Retrieves the <see cref="IResourceReaderWriter"/>.
+        /// </summary>
+        /// <param name="path">The path to the resource.</param>
+        /// <returns>The service used to read and write to a resource.</returns>
+        IResourceReaderWriter GetReaderWriter(string path);
     }
 }
