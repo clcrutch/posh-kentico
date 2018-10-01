@@ -15,10 +15,12 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Text;
 using CMS.IO;
 using ImpromptuInterface;
 using PoshKentico.Core.Services.Resource;
@@ -172,8 +174,11 @@ namespace PoshKentico.Core.Providers.Resource
             }
             else
             {
-                using (var stream = FileStream.New(path, FileMode.Append))
+                using (var stream = FileStream.New(path, FileMode.Append, FileAccess.Write))
                 {
+                    var newLine = Encoding.ASCII.GetBytes(Environment.NewLine);
+
+                    stream.Write(newLine, 0, newLine.Length);
                     stream.Write(bytes, 0, bytes.Length);
                 }
             }
