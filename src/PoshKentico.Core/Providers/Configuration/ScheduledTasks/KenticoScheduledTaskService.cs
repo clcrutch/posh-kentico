@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using Castle.DynamicProxy;
@@ -32,6 +33,7 @@ namespace PoshKentico.Core.Providers.Configuration.ScheduledTasks
     /// <summary>
     /// Implementation of <see cref="IScheduledTaskService"/> for Kentico.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     [Export(typeof(IScheduledTaskService))]
     public class KenticoScheduledTaskService : IScheduledTaskService
     {

@@ -15,6 +15,7 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System.Diagnostics.CodeAnalysis;
 using PoshKentico.Core.Services.Configuration.ScheduledTasks;
 
 namespace PoshKentico.Core.Providers.Configuration.ScheduledTasks
@@ -22,6 +23,7 @@ namespace PoshKentico.Core.Providers.Configuration.ScheduledTasks
     /// <summary>
     /// Used by Dynamic Proxy to add a place to set a <see cref="IScheduledTask"/>.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     internal class ScheduledTaskHelper : IScheduledTaskHelper
     {
         #region Properties

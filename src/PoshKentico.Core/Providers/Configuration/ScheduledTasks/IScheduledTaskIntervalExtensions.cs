@@ -16,6 +16,7 @@
 // </copyright>
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using CMS.Scheduler;
 using PoshKentico.Core.Services.Configuration.ScheduledTasks;
@@ -25,6 +26,7 @@ namespace PoshKentico.Core.Providers.Configuration.ScheduledTasks
     /// <summary>
     /// Extensions for scheduled task interval.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public static class IScheduledTaskIntervalExtensions
     {
         #region Methods
