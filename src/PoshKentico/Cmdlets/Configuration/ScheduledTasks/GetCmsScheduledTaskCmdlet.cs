@@ -17,6 +17,7 @@
 
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 using CMS.Scheduler;
 using CMS.SiteProvider;
@@ -53,6 +54,7 @@ namespace PoshKentico.Cmdlets.Configuration.ScheduledTasks
     /// </summary>
     [Cmdlet(VerbsCommon.Get, "CMSScheduledTask", DefaultParameterSetName = NONE)]
     [OutputType(typeof(TaskInfo[]))]
+    [ExcludeFromCodeCoverage]
     [Alias("gst")]
     public class GetCmsScheduledTaskCmdlet : MefCmdlet
     {

@@ -16,6 +16,7 @@
 // </copyright>
 
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 using CMS.Scheduler;
 using ImpromptuInterface;
@@ -54,6 +55,7 @@ namespace PoshKentico.Cmdlets.Configuration.ScheduledTasks
     /// </example>
     /// </summary>
     [Cmdlet(VerbsCommon.Remove, "CMSScheduledTask", SupportsShouldProcess = true, ConfirmImpact = ConfirmImpact.High, DefaultParameterSetName = NONE)]
+    [ExcludeFromCodeCoverage]
     [Alias("rmst")]
     public class RemoveCmsScheduledTaskCmdlet : GetCmsScheduledTaskCmdlet
     {

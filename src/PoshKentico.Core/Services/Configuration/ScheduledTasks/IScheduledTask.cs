@@ -15,6 +15,8 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System;
+
 namespace PoshKentico.Core.Services.Configuration.ScheduledTasks
 {
     /// <summary>
@@ -45,6 +47,11 @@ namespace PoshKentico.Core.Services.Configuration.ScheduledTasks
         string TaskDisplayName { get; }
 
         /// <summary>
+        /// Gets a value indicating whether the task is enabled.
+        /// </summary>
+        bool TaskEnabled { get; }
+
+        /// <summary>
         /// Gets the interval for the task.
         /// </summary>
         string TaskInterval { get; }
@@ -58,6 +65,11 @@ namespace PoshKentico.Core.Services.Configuration.ScheduledTasks
         /// Gets the name for the task.
         /// </summary>
         string TaskName { get; }
+
+        /// <summary>
+        /// Gets the next run time for the task.
+        /// </summary>
+        DateTime TaskNextRunTime { get; }
 
         /// <summary>
         /// Gets the site for the task.

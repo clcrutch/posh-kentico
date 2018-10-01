@@ -16,6 +16,7 @@
 // </copyright>
 
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 using CMS.Scheduler;
 using ImpromptuInterface;
@@ -40,6 +41,8 @@ namespace PoshKentico.Cmdlets.Configuration.ScheduledTasks
     /// </summary>
     [Cmdlet(VerbsCommon.Set, "CMSScheduledTask")]
     [OutputType(typeof(TaskInfo[]), ParameterSetName = new string[] { PASSTHRU })]
+    [ExcludeFromCodeCoverage]
+    [Alias("sst")]
     public class SetCmsScheduledTaskCmdlet : MefCmdlet
     {
         #region Constants
@@ -82,7 +85,7 @@ namespace PoshKentico.Cmdlets.Configuration.ScheduledTasks
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
-            this.BusinessLayer.Set(this.ScheduledTask.ActLike<IScheduledTask>(), this.Interval.ActLike<IScheduledTaskInterval>());
+            this.BusinessLayer.Set(this.ScheduledTask?.ActLike<IScheduledTask>(), this.Interval?.ActLike<IScheduledTaskInterval>());
 
             if (this.PassThru.ToBool())
             {

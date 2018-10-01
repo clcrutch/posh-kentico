@@ -16,6 +16,7 @@
 // </copyright>
 
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 using CMS.Scheduler;
 using CMS.SiteProvider;
@@ -49,6 +50,7 @@ namespace PoshKentico.Cmdlets.Configuration.ScheduledTasks
     /// </summary>
     [Cmdlet(VerbsCommon.New, "CMSScheduledTask")]
     [OutputType(typeof(TaskInfo[]))]
+    [ExcludeFromCodeCoverage]
     [Alias("nst")]
     public class NewCmsScheduledTaskCmdlet : MefCmdlet
     {

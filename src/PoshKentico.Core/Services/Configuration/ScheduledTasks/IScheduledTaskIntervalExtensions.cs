@@ -49,14 +49,21 @@ namespace PoshKentico.Core.Services.Configuration.ScheduledTasks
         /// </summary>
         /// <param name="interval">The interval to convert to <see cref="TaskInterval"/>.</param>
         /// <returns><see cref="TaskInterval"/> representation of <see cref="IScheduledTaskInterval"/>.</returns>
-        public static TaskInterval ToTaskInterval(this IScheduledTaskInterval interval) =>
-            new TaskInterval
+        public static TaskInterval ToTaskInterval(this IScheduledTaskInterval interval)
+        {
+            if (interval == null)
+            {
+                return null;
+            }
+
+            return new TaskInterval
             {
                 Days = interval.Days.ToList(),
                 Every = interval.Every,
                 Period = interval.Period,
                 StartTime = interval.StartTime,
             };
+        }
 
         #endregion
 

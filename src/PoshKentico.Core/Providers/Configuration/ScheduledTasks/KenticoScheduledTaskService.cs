@@ -119,6 +119,8 @@ namespace PoshKentico.Core.Providers.Configuration.ScheduledTasks
                 task.TaskInterval = scheduledTaskInterval.Encode();
             }
 
+            task.TaskEnabled = scheduledTask.TaskEnabled;
+
             TaskInfoProvider.SetTaskInfo(task);
         }
 
@@ -145,7 +147,7 @@ namespace PoshKentico.Core.Providers.Configuration.ScheduledTasks
                 TaskEnabled = true,
                 TaskInterval = scheduledTask.TaskInterval ?? scheduledTaskInterval.Encode(),
                 TaskName = scheduledTask.TaskName,
-                TaskNextRunTime = scheduledTaskInterval.GetFirstRun(),
+                TaskNextRunTime = scheduledTaskInterval?.GetFirstRun() ?? scheduledTask.TaskNextRunTime,
                 TaskSiteID = scheduledTask.TaskSiteID,
             };
 

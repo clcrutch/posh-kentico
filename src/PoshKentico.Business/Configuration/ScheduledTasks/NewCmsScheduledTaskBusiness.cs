@@ -15,6 +15,7 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System;
 using System.ComponentModel.Composition;
 using PoshKentico.Core.Services.Configuration.ScheduledTasks;
 
@@ -79,11 +80,15 @@ namespace PoshKentico.Business.Configuration.ScheduledTasks
 
             public string TaskDisplayName { get; set; }
 
+            public bool TaskEnabled { get; set; }
+
             public int TaskID { get; set; }
 
             public string TaskInterval { get; set; }
 
             public string TaskName { get; set; }
+
+            public DateTime TaskNextRunTime { get; set; }
 
             public int TaskSiteID { get; set; }
         }
