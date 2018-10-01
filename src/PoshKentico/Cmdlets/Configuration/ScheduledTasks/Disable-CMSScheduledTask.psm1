@@ -18,7 +18,6 @@ Tell the cmdlet to return the scheduled task.
 
 .EXAMPLE
 Disables all scheduled tasks.
-
 Disable-CMSScheduledTask
 
 .EXAMPLE
@@ -67,5 +66,3 @@ function Disable-CMSScheduledTask {
         }
     }
 }
-
-Export-ModuleMember -Function 'Disable-CMSScheduledTask'

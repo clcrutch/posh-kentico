@@ -18,7 +18,6 @@ Tell the cmdlet to return the scheduled task.
 
 .EXAMPLE
 Enables all scheduled tasks.
-
 Enable-CMSScheduledTask
 
 .EXAMPLE
