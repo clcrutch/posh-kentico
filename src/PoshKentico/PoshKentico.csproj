@@ -530,6 +530,12 @@
     <None Include="Cmdlets\Configuration\ScheduledTasks\Enable-CMSScheduledTask.psm1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="DSCResources\xScheduledTask\xScheduledTask.psm1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="DSCResources\xScheduledTask\xScheduledTask.schema.mof">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="DSCResources\xServer\xServer.psm1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

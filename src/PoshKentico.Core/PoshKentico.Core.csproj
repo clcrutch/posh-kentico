@@ -472,7 +472,7 @@
     <Compile Include="Providers\General\KenticoSiteLocationCache.cs" />
     <Compile Include="Services\Configuration\Localization\ICulture.cs" />
     <Compile Include="Services\Configuration\ScheduledTasks\IScheduledTask.cs" />
-    <Compile Include="Services\Configuration\ScheduledTasks\IScheduledTaskIntervalExtensions.cs" />
+    <Compile Include="Providers\Configuration\ScheduledTasks\IScheduledTaskIntervalExtensions.cs" />
     <Compile Include="Services\Configuration\ScheduledTasks\IScheduledTaskService.cs" />
     <Compile Include="Services\Configuration\ScheduledTasks\IScheduledTaskInterval.cs" />
     <Compile Include="Services\Configuration\Settings\ISettingValueService.cs" />
