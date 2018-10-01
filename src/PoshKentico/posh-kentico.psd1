@@ -39,7 +39,7 @@ PowerShellVersion = '5.0'
 # PowerShellHostVersion = ''
 
 # Minimum version of Microsoft .NET Framework required by this module
-DotNetFrameworkVersion = '4.5'
+DotNetFrameworkVersion = '4.6'
 
 # Minimum version of the common language runtime (CLR) required by this module
 CLRVersion = '4.0'
@@ -79,7 +79,11 @@ FormatsToProcess = @( `
 )
 
 # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
-# NestedModules = @()
+NestedModules = @( `
+	# Configuration/ScheduledTasks
+	"./Cmdlets/Configuration/ScheduledTasks/Disable-CMSScheduledTask.psm1", `
+	"./Cmdlets/Configuration/ScheduledTasks/Enable-CMSScheduledTask.psm1" `
+)
 
 # Functions to export from this module
 FunctionsToExport = '*'

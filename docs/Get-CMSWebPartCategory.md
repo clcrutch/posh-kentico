@@ -105,7 +105,7 @@ Accept wildcard characters: False
 ```
 
 ### -Recurse
-{{Fill Recurse Description}}
+Indiciates if the cmdlet should look recursively for web part categories.
 
 ```yaml
 Type: SwitchParameter

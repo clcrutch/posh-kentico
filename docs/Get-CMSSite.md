@@ -19,12 +19,17 @@ Get-CMSSite [<CommonParameters>]
 
 ### Dislpay Name
 ```
-Get-CMSSite [[-DisplayName] <String>] [-Exact] [<CommonParameters>]
+Get-CMSSite [-DisplayName] <String> [-Exact] [<CommonParameters>]
 ```
 
 ### ID
 ```
-Get-CMSSite [[-ID] <Int32[]>] [<CommonParameters>]
+Get-CMSSite [-ID] <Int32[]> [<CommonParameters>]
+```
+
+### Task
+```
+Get-CMSSite -ScheduledTask <TaskInfo> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -57,6 +62,11 @@ Get-CMSSite basic -Exact
 Get-CMSSite -ID 5,304,5
 ```
 
+### EXAMPLE 5
+```
+$scheduledTask | Get-CMSSite
+```
+
 ## PARAMETERS
 
 ### -DisplayName
@@ -67,7 +77,7 @@ Type: String
 Parameter Sets: Dislpay Name
 Aliases: SiteName, DomainName
 
-Required: False
+Required: True
 Position: 0
 Default value: None
 Accept pipeline input: True (ByValue)
@@ -97,10 +107,25 @@ Type: Int32[]
 Parameter Sets: ID
 Aliases:
 
-Required: False
+Required: True
 Position: 0
 Default value: None
 Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ScheduledTask
+The task to get the site for.
+
+```yaml
+Type: TaskInfo
+Parameter Sets: Task
+Aliases: Task, TaskInfo
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -112,6 +137,9 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ### System.String
 The display name of the site to retrive.
+
+### CMS.Scheduler.TaskInfo
+The task to get the site for.
 
 ## OUTPUTS
 

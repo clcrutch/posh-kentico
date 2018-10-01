@@ -14,17 +14,19 @@ Removes a domain alias to a specified site.
 
 ### Object
 ```
-Remove-CMSSiteDomainAlias [-SiteToRemove] <SiteInfo> [-AliasName] <String> [<CommonParameters>]
+Remove-CMSSiteDomainAlias [-SiteToRemove] <SiteInfo> [-AliasName] <String> [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ### Property
 ```
-Remove-CMSSiteDomainAlias [-SiteName] <String> [-Exact] [-AliasName] <String> [<CommonParameters>]
+Remove-CMSSiteDomainAlias [-SiteName] <String> [-Exact] [-AliasName] <String> [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ### ID
 ```
-Remove-CMSSiteDomainAlias [-ID] <Int32[]> [-AliasName] <String> [<CommonParameters>]
+Remove-CMSSiteDomainAlias [-ID] <Int32[]> [-AliasName] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -124,6 +126,37 @@ Aliases:
 
 Required: True
 Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
