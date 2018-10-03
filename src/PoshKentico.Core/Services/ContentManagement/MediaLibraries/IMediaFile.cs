@@ -71,5 +71,10 @@ namespace PoshKentico.Core.Services.ContentManagement.MediaLibraries
         /// Gets the media library id for the media file.
         /// </summary>
         int FileLibraryID { get; }
+
+        /// <summary>
+        /// Gets the file binary for the media file.
+        /// </summary>
+        byte[] FileBinary { get; }
     }
 }
