@@ -2,16 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\git\posh-kentico\src\PoshKentico\PoshKentico.xml</DocumentationFile>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <DocumentationFile>C:\git\posh-kentico\build\posh-kentico\PoshKentico.xml</DocumentationFile>
+    <OutputPath>C:\git\posh-kentico\build\posh-kentico</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
-    <DocumentationFile>C:\git\posh-kentico\src\PoshKentico\PoshKentico.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -39,6 +37,72 @@
   <ItemGroup>
     <ProjectReference Include="..\PoshKentico.Business\PoshKentico.Business.csproj" />
     <ProjectReference Include="..\PoshKentico.Core\PoshKentico.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="DSCResources\xServer\xServer.psm1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="DSCResources\xServer\xServer.schema.mof">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="DSCResources\xSettingValue\xSettingValue.psm1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="DSCResources\xSettingValue\xSettingValue.schema.mof">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="DSCResources\xSite\xSite.psm1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="DSCResources\xSite\xSite.schema.mof">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="DSCResources\xWebPartCategory\xWebPartCategory.psm1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="DSCResources\xWebPartCategory\xWebPartCategory.schema.mof">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="DSCResources\xWebPartField\xWebPartField.psm1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="DSCResources\xWebPartField\xWebPartField.schema.mof">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="DSCResources\xWebPart\xWebPart.psm1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="DSCResources\xWebPart\xWebPart.schema.mof">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="FormattingFiles\Configuration\Sites\CultureInfo.format.ps1xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="FormattingFiles\Configuration\Sites\SiteDomainAliasInfo.format.ps1xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="FormattingFiles\Configuration\Sites\SiteInfo.format.ps1xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="FormattingFiles\Configuration\Staging\ServerInfo.format.ps1xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="FormattingFiles\Development\WebParts\FormFieldInfo.format.ps1xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="FormattingFiles\Development\WebParts\WebPartCategoryInfo.format.ps1xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="FormattingFiles\Development\WebParts\WebPartInfo.format.ps1xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="posh-kentico.psd1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestScript.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
