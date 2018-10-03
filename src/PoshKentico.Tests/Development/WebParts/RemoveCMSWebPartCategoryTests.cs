@@ -87,7 +87,7 @@ namespace PoshKentico.Tests.Development.WebParts
             };
 
             Action action = () => businessLayer.RemoveWebPartCategory(webPartCategoryMock.Object, false);
-            action.ShouldThrow<Exception>();
+            action.Should().Throw<Exception>();
 
             webPartServiceMock
                 .Verify(x => x.GetWebParts(webPartCategoryMock.Object));
@@ -124,7 +124,7 @@ namespace PoshKentico.Tests.Development.WebParts
             };
 
             Action action = () => businessLayer.RemoveWebPartCategory(webPartCategoryMock.Object, true);
-            action.ShouldNotThrow<Exception>();
+            action.Should().NotThrow<Exception>();
             shouldProcessCalled.Should().BeTrue();
 
             webPartServiceMock
@@ -163,7 +163,7 @@ namespace PoshKentico.Tests.Development.WebParts
             };
 
             Action action = () => businessLayer.RemoveWebPartCategory(webPartCategoryMock.Object, false);
-            action.ShouldThrow<Exception>();
+            action.Should().Throw<Exception>();
 
             webPartServiceMock
                 .Verify(x => x.GetWebParts(webPartCategoryMock.Object));
@@ -203,7 +203,7 @@ namespace PoshKentico.Tests.Development.WebParts
             };
 
             Action action = () => businessLayer.RemoveWebPartCategory(webPartCategoryMock.Object, true);
-            action.ShouldNotThrow<Exception>();
+            action.Should().NotThrow<Exception>();
             shouldProcessCalled.Should().BeTrue();
 
             webPartServiceMock
