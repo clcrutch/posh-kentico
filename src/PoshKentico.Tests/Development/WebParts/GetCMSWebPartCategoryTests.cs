@@ -60,7 +60,7 @@ namespace PoshKentico.Tests.Development.WebParts
 
             results
                 .Single()
-                .ShouldBeEquivalentTo(webPartCategoryObj);
+                .Should().BeEquivalentTo(webPartCategoryObj);
         }
 
         [TestCase]
@@ -107,7 +107,7 @@ namespace PoshKentico.Tests.Development.WebParts
 
             results
                 .Single()
-                .ShouldBeEquivalentTo(webPartCategoryMock1.Object);
+                .Should().BeEquivalentTo(webPartCategoryMock1.Object);
 
             results = businessLayer.GetWebPartCategories("spla*", false, false);
             results
@@ -122,7 +122,7 @@ namespace PoshKentico.Tests.Development.WebParts
 
             results
                 .Single()
-                .ShouldBeEquivalentTo(webPartCategoryMock1.Object);
+                .Should().BeEquivalentTo(webPartCategoryMock1.Object);
 
             results = businessLayer.GetWebPartCategories("*cate", false, false);
             results
@@ -262,7 +262,7 @@ namespace PoshKentico.Tests.Development.WebParts
 
             results
                 .Single()
-                .ShouldBeEquivalentTo(webPartCategoryMock1.Object);
+                .Should().BeEquivalentTo(webPartCategoryMock1.Object);
 
             results = businessLayer.GetWebPartCategories("^y+ Name$", true, false);
             results
@@ -277,7 +277,7 @@ namespace PoshKentico.Tests.Development.WebParts
 
             results
                 .Single()
-                .ShouldBeEquivalentTo(webPartCategoryMock1.Object);
+                .Should().BeEquivalentTo(webPartCategoryMock1.Object);
 
             results = businessLayer.GetWebPartCategories("cate$", true, false);
             results

@@ -77,7 +77,7 @@ namespace PoshKentico.Tests.Development.WebParts
                 .Should()
                 .NotBeNull();
             results
-                .ShouldBeEquivalentTo(webPartCategoryMock1.Object);
+                .Should().BeEquivalentTo(webPartCategoryMock1.Object);
 
             passedCategory.CategoryName.Should().Be(name);
             passedCategory.CategoryPath.Should().Be(path);
@@ -134,7 +134,7 @@ namespace PoshKentico.Tests.Development.WebParts
                 .Should()
                 .NotBeNull();
             results
-                .ShouldBeEquivalentTo(webPartCategoryMock1.Object);
+                .Should().BeEquivalentTo(webPartCategoryMock1.Object);
 
             passedCategory.CategoryName.Should().Be(name);
             passedCategory.CategoryPath.Should().Be(path);

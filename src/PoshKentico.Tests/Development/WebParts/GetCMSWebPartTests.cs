@@ -79,7 +79,7 @@ namespace PoshKentico.Tests.Development.WebParts
                 .NotBeNull();
 
             result
-                .ShouldBeEquivalentTo(webPartObj);
+                .Should().BeEquivalentTo(webPartObj);
         }
 
         [TestCase]
@@ -132,7 +132,7 @@ namespace PoshKentico.Tests.Development.WebParts
                 .NotBeNull();
 
             result
-                .ShouldBeEquivalentTo(webPartObj);
+                .Should().BeEquivalentTo(webPartObj);
         }
 
         [TestCase]
@@ -161,7 +161,7 @@ namespace PoshKentico.Tests.Development.WebParts
                 .NotBeNull();
 
             result
-                .ShouldBeEquivalentTo(webPartObj);
+                .Should().BeEquivalentTo(webPartObj);
         }
 
         [TestCase]
@@ -197,7 +197,7 @@ namespace PoshKentico.Tests.Development.WebParts
 
             result
                 .Single()
-                .ShouldBeEquivalentTo(webPartObj);
+                .Should().BeEquivalentTo(webPartObj);
         }
 
         [TestCase]
@@ -234,7 +234,7 @@ namespace PoshKentico.Tests.Development.WebParts
                 .NotBeNullOrEmpty();
             results
                 .Single()
-                .ShouldBeEquivalentTo(webPartObj);
+                .Should().BeEquivalentTo(webPartObj);
 
             results = businessLayer.GetWebParts("Display*", false);
             results
@@ -248,7 +248,7 @@ namespace PoshKentico.Tests.Development.WebParts
                 .NotBeNullOrEmpty();
             results
                 .Single()
-                .ShouldBeEquivalentTo(webPartObj);
+                .Should().BeEquivalentTo(webPartObj);
 
             results = businessLayer.GetWebParts("test*", false);
             results
@@ -290,7 +290,7 @@ namespace PoshKentico.Tests.Development.WebParts
                 .NotBeNullOrEmpty();
             results
                 .Single()
-                .ShouldBeEquivalentTo(webPartObj);
+                .Should().BeEquivalentTo(webPartObj);
 
             results = businessLayer.GetWebParts("[a-z]NotDisplay(a)+", true);
             results
@@ -303,7 +303,7 @@ namespace PoshKentico.Tests.Development.WebParts
                 .Should()
                 .NotBeNullOrEmpty();
             results.Single()
-                .ShouldBeEquivalentTo(webPartObj);
+                .Should().BeEquivalentTo(webPartObj);
 
             results = businessLayer.GetWebParts("[a-z]nottest(s)+", true);
             results
@@ -350,7 +350,7 @@ namespace PoshKentico.Tests.Development.WebParts
 
             result
                 .Single()
-                .ShouldBeEquivalentTo(webPartObj);
+                .Should().BeEquivalentTo(webPartObj);
         }
 
         [TestCase]
@@ -402,7 +402,7 @@ namespace PoshKentico.Tests.Development.WebParts
 
             result
                 .Single()
-                .ShouldBeEquivalentTo(webPartObj);
+                .Should().BeEquivalentTo(webPartObj);
         }
 
         [TestCase]
@@ -680,7 +680,7 @@ namespace PoshKentico.Tests.Development.WebParts
                 .NotBeNullOrEmpty();
             results
                 .Single()
-                .ShouldBeEquivalentTo(webPartCategoryMock1.Object);
+                .Should().BeEquivalentTo(webPartCategoryMock1.Object);
         }
 
         [TestCase]
@@ -783,7 +783,7 @@ namespace PoshKentico.Tests.Development.WebParts
                 .Should()
                 .NotBeNull();
             results
-                .ShouldBeEquivalentTo(webPartCategoryMock1.Object);
+                .Should().BeEquivalentTo(webPartCategoryMock1.Object);
         }
     }
 }
