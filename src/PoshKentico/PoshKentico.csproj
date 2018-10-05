@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <DocumentationFile>C:\git\posh-kentico\build\posh-kentico\PoshKentico.xml</DocumentationFile>
-    <OutputPath>C:\git\posh-kentico\build\posh-kentico</OutputPath>
+    <DocumentationFile>..\..\build\posh-kentico\PoshKentico.xml</DocumentationFile>
+    <OutputPath>..\..\build\posh-kentico</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -104,5 +104,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+  <UsingTask TaskName="PoshKentico.MSBuild.CMSVirtualTask" AssemblyFile="$(ProjectDir)\..\PoshKentico.MSBuild\bin\$(Configuration)\net46\PoshKentico.MSBuild.dll" />
+  <Target Name="AfterBuild">
+    <CMSVirtualTask TargetDir="$(TargetDir)" />
+  </Target>
 
 </Project>
