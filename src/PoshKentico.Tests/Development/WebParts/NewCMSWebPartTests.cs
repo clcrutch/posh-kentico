@@ -97,7 +97,7 @@ namespace PoshKentico.Tests.Development.WebParts
                 .NotBeNull();
 
             results
-                .ShouldBeEquivalentTo(webPartMock.Object);
+                .Should().BeEquivalentTo(webPartMock.Object);
 
             businessLayerMock.Verify(x => x.CreateWebPart("WebPart", fileName, displayName, webPartCategoryMock.Object));
         }
@@ -147,7 +147,7 @@ namespace PoshKentico.Tests.Development.WebParts
                 .NotBeNull();
 
             results
-                .ShouldBeEquivalentTo(webPartMock.Object);
+                .Should().BeEquivalentTo(webPartMock.Object);
 
             passedWebPart.WebPartDisplayName.Should().Be(displayName);
             passedWebPart.WebPartFileName.Should().Be(fileName);
@@ -199,7 +199,7 @@ namespace PoshKentico.Tests.Development.WebParts
                 .NotBeNull();
 
             results
-                .ShouldBeEquivalentTo(webPartMock.Object);
+                .Should().BeEquivalentTo(webPartMock.Object);
 
             passedWebPart.WebPartDisplayName.Should().Be(name);
             passedWebPart.WebPartFileName.Should().Be(fileName);

@@ -1,4 +1,4 @@
-﻿// <copyright file="StopCmsSiteBusiness.cs" company="Chris Crutchfield">
+﻿// <copyright file="StopCMSSiteBusiness.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
