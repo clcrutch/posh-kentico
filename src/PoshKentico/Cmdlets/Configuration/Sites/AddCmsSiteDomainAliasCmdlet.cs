@@ -48,6 +48,7 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Add, "CMSSiteDomainAlias")]
+    [Alias("asda")]
     public class AddCmsSiteDomainAliasCmdlet : MefCmdlet
     {
         #region Constants

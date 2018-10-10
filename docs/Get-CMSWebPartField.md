@@ -98,7 +98,6 @@ The web part to get the fields for.
 ## OUTPUTS
 
 ### CMS.FormEngine.FormFieldInfo[]
-
 ## NOTES
 
 ## RELATED LINKS

@@ -283,6 +283,13 @@
             <param name="library">the interface <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>.</param>
             <returns>the media library info object.</returns>
         </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.SetFileBinary(CMS.MediaLibrary.MediaFileInfo)">
+            <summary>
+            Sets the media library file binary.
+            </summary>
+            <param name="file">the file to set the binary. </param>
+            <returns>the updated media library info object.</returns>
+        </member>
         <member name="T:PoshKentico.Core.Services.Configuration.Localization.ICulture">
             <summary>
             Represents a Culture Object.
@@ -678,6 +685,11 @@
             Gets the media library id for the media file.
             </summary>
         </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile.FileBinary">
+            <summary>
+            Gets the file binary for the media file.
+            </summary>
+        </member>
         <member name="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary">
             <summary>
             Represents a Media Library Object.
@@ -771,6 +783,7 @@
             <param name="librarySiteID">The site id of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>to retrive for creating the new folder.</param>
             <param name="libraryName">The name of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to retrive for creating the new folder.</param>
             <param name="folderName">The new folder name to create within the media library.</param>
+            <returns>The newly created folder name.</returns>
         </member>
         <member name="M:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.CreateMediaFile(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String)">
             <summary>

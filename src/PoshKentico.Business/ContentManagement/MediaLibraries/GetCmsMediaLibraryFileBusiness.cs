@@ -95,6 +95,13 @@ namespace PoshKentico.Business.ContentManagement.MediaLibraries
         /// <returns>A list of the <see cref="IMediaFile"/> which match the supplied IDs.</returns>
         public IEnumerable<IMediaFile> GetMediaFiles(params int[] ids)
         {
+            List<IMediaFile> filess = new List<IMediaFile>();
+            foreach (int id in ids)
+            {
+                var file = this.MediaLibraryService.GetMediaFile(id);
+                filess.Add(file);
+            }
+
             var files = from id in ids select this.MediaLibraryService.GetMediaFile(id);
 
             return (from file in files

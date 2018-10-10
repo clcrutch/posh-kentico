@@ -17,9 +17,12 @@
 
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Management.Automation;
 using CMS.MediaLibrary;
+using ImpromptuInterface;
 using PoshKentico.Business.ContentManagement.MediaLibraries;
+using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
 {
@@ -28,15 +31,17 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
     /// <para type="description">Creates a media library file based off of the provided input.</para>
     /// <example>
     ///     <para>Create a new media library file specifying the associated site id and library name for the library, and the new media file name.</para>
-    ///     <code>New-CMSMediaLibraryFile -SiteID 1 -LibraryName "Name" -LocalFilePath "C:\Files\images\Image.png" -FileName "Image" -FileTitle "File title" -FilePath "NewFolder/Image/" -FileDescription "Description"</code>
+    ///     <code>New-CMSMediaLibraryFile -SiteID 1 -LibraryName "Name" -LocalFile $file -FileName "Image" -FileTitle "File title" -FilePath "NewFolder/Image/" -FileDescription "Description"</code>
     /// </example>
     /// <example>
     ///     <para>Create a new media library file specifying the associated library $library and the new media file name.</para>
-    ///     <code>$library | New-CMSMediaLibraryFile -LocalFilePath "C:\Files\images\Image.png" -FileName "Image" -FileTitle "File title" -FilePath "NewFolder/Image/" -FileDescription "Description"</code>
+    ///     <code>$file | New-CMSMediaLibraryFile -Library $library -FileName "Image" -FileTitle "File title" -FilePath "NewFolder/Image/" -FileDescription "Description"</code>
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.New, "CMSMediaLibraryFile")]
+    [OutputType(typeof(MediaFileInfo))]
+    [Alias("nmlfil")]
     public class NewCmsMediaLibraryFileCmdlet : MefCmdlet
     {
         #region Constants
@@ -51,7 +56,7 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
         /// <summary>
         /// <para type="description">The associalted library for the new media file.</para>
         /// </summary>
-        [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0, ParameterSetName = OBJECTSET)]
+        [Parameter(Mandatory = true, Position = 0, ParameterSetName = OBJECTSET)]
         public MediaLibraryInfo Library { get; set; }
 
         /// <summary>
@@ -69,43 +74,37 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
         /// <summary>
         /// <para type="description">The file name for the new media file.</para>
         /// </summary>
-        [Parameter(Mandatory = true, Position = 2, ParameterSetName = PROPERTYSET)]
-        [Parameter(Mandatory = true, Position = 1, ParameterSetName = OBJECTSET)]
-        public string LocalFilePath { get; set; }
+        [Parameter(Mandatory = true, ValueFromPipeline = true)]
+        public FileInfo LocalFile { get; set; }
 
         /// <summary>
         /// <para type="description">The file name for the new media file.</para>
         /// </summary>
-        [Parameter(Mandatory = true, Position = 3, ParameterSetName = PROPERTYSET)]
-        [Parameter(Mandatory = true, Position = 2, ParameterSetName = OBJECTSET)]
+        [Parameter(Mandatory = true)]
         public string FileName { get; set; }
 
         /// <summary>
         /// <para type="description">The file title for the new media file.</para>
         /// </summary>
-        [Parameter(Mandatory = true, Position = 4, ParameterSetName = PROPERTYSET)]
-        [Parameter(Mandatory = true, Position = 3, ParameterSetName = OBJECTSET)]
+        [Parameter(Mandatory = true)]
         public string FileTitle { get; set; }
 
         /// <summary>
         /// <para type="description">The file path for the new media file.</para>
         /// </summary>
-        [Parameter(Mandatory = true, Position = 5, ParameterSetName = PROPERTYSET)]
-        [Parameter(Mandatory = true, Position = 4, ParameterSetName = OBJECTSET)]
+        [Parameter(Mandatory = true)]
         public string FilePath { get; set; }
 
         /// <summary>
         /// <para type="description">The file description for the new media file.</para>
         /// </summary>
-        [Parameter(Mandatory = false, Position = 6, ParameterSetName = PROPERTYSET)]
-        [Parameter(Mandatory = false, Position = 5, ParameterSetName = OBJECTSET)]
+        [Parameter(Mandatory = false)]
         public string FileDescription { get; set; }
 
         /// <summary>
         /// <para type="description">Tell the cmdlet to return the newly created library.</para>
         /// </summary>
-        [Parameter(Mandatory = false, ParameterSetName = OBJECTSET)]
-        [Parameter(Mandatory = false, ParameterSetName = PROPERTYSET)]
+        [Parameter(Mandatory = false)]
         public SwitchParameter PassThru { get; set; }
 
         /// <summary>
@@ -124,7 +123,12 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
             int siteID = this.ParameterSetName == PROPERTYSET ? this.SiteID : this.Library.LibrarySiteID;
             string libraryName = this.ParameterSetName == PROPERTYSET ? this.LibraryName : this.Library.LibraryName;
 
-            this.BusinessLayer.CreateMediaLibraryFile(siteID, libraryName, this.LocalFilePath, this.FileName, this.FileTitle, this.FileDescription, this.FilePath);
+            var mediaFile = this.BusinessLayer.CreateMediaLibraryFile(siteID, libraryName, this.LocalFile.FullName, this.FileName, this.FileTitle, this.FileDescription, this.FilePath);
+
+            if (this.PassThru.ToBool())
+            {
+                this.WriteObject(mediaFile.UndoActLike());
+            }
         }
 
         #endregion

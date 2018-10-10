@@ -24,6 +24,7 @@ using CMS.MediaLibrary;
 using ImpromptuInterface;
 using PoshKentico.Business.ContentManagement.MediaLibraries;
 using PoshKentico.Core.Services.ContentManagement.MediaLibraries;
+using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
 {
@@ -37,7 +38,7 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
     /// </example>
     /// <example>
     ///     <para>Get the list of library files specifying an existing library, and with '.png' file extension and  from folder "NewFolder". </para>
-    ///     <code>Get-CMSMediaLibraryFile -MediaLibrary $library -Extension ".png" -FilePath "NewFolder" -EXACT</code>
+    ///     <code>Get-CMSMediaLibraryFile -MediaLibrary $library -FilePath "NewFolder/Image.png" -EXACT</code>
     /// </example>
     /// <example>
     ///     <para>Get the list of library files specifying an existing library, and with '*.png*' file extension and  from folder "*NewFolder*".</para>
@@ -45,7 +46,7 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
     /// </example>
     /// <example>
     ///     <para>Get the list of library files specifying an existing library, and with '.png' file extension and  from folder "NewFolder". </para>
-    ///     <code>$library | Get-CMSMediaLibraryFile -Extension ".png" -FilePath "NewFolder" -EXACT</code>
+    ///     <code>$library | Get-CMSMediaLibraryFile -FilePath "NewFolder/Image.png" -EXACT</code>
     /// </example>
     /// <example>
     ///     <para>Get the list of library files specifying an existing library, and with '*.png*' file extension and  from folder "*NewFolder*".</para>
@@ -53,7 +54,7 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
     /// </example>
     /// <example>
     ///     <para>Get the list of library files specifying an existing library, and with '.png' file extension and  from folder "NewFolder". </para>
-    ///     <code>Get-CMSMediaLibraryFile -LibraryID 1 -Extension ".png" -FilePath "NewFolder" -EXACT</code>
+    ///     <code>Get-CMSMediaLibraryFile -LibraryID 1 -FilePath "NewFolder/Image.png" -EXACT</code>
     /// </example>
     ///  <example>
     ///     <para>Get all the library files with the specified IDs.</para>
@@ -63,6 +64,7 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSMediaLibraryFile", DefaultParameterSetName = NONE)]
     [OutputType(typeof(MediaFileInfo[]))]
+    [Alias("gmlfil")]
     public class GetCmsMediaLibraryFileCmdlet : MefCmdlet
     {
         #region Constants
@@ -79,7 +81,7 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
         /// <para type="description">The associalted library for the library files to retrieve.</para>
         /// </summary>
         [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0, ParameterSetName = OBJECTSET)]
-        public MediaLibraryInfo Library { get; set; }
+        public MediaLibraryInfo MediaLibrary { get; set; }
 
         /// <summary>
         /// <para type="description">The library ID of the library files to retrive.</para>
@@ -90,15 +92,13 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
         /// <summary>
         /// <para type="description">The file extension of the library files to retrive.</para>
         /// </summary>
-        [Parameter(Mandatory = false, Position = 1, ParameterSetName = PROPERTYSET)]
-        [Parameter(Mandatory = false, Position = 1, ParameterSetName = OBJECTSET)]
+        [Parameter(Mandatory = false)]
         public string Extension { get; set; }
 
         /// <summary>
         /// <para type="description">The file path of the library files to retrive.</para>
         /// </summary>
-        [Parameter(Mandatory = false, Position = 2, ParameterSetName = PROPERTYSET)]
-        [Parameter(Mandatory = false, Position = 2, ParameterSetName = OBJECTSET)]
+        [Parameter(Mandatory = false)]
         public string FilePath { get; set; }
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
             switch (this.ParameterSetName)
             {
                 case OBJECTSET:
-                    files = this.BusinessLayer.GetMediaFiles(this.Library.LibraryID, this.Extension, this.FilePath, this.Exact.ToBool());
+                    files = this.BusinessLayer.GetMediaFiles(this.MediaLibrary.LibraryID, this.Extension, this.FilePath, this.Exact.ToBool());
                     break;
                 case PROPERTYSET:
                     files = this.BusinessLayer.GetMediaFiles(this.LibraryID, this.Extension, this.FilePath, this.Exact.ToBool());

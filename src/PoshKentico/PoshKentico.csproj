@@ -40,6 +40,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="DSCResources\xMediaLibrary\xMediaLibrary.psm1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="DSCResources\xMediaLibrary\xMediaLibrary.schema.mof">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="DSCResources\xServer\xServer.psm1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

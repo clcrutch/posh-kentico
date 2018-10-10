@@ -23,6 +23,7 @@ using CMS.SiteProvider;
 using ImpromptuInterface;
 using PoshKentico.Business.ContentManagement.MediaLibraries;
 using PoshKentico.Core.Services.ContentManagement.MediaLibraries;
+using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
 {
@@ -31,11 +32,11 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
     /// <para type="description">Deletes a library.</para>
     /// <example>
     ///     <para>Deletes all libraries with a site ID 1 and display name "*tes*".</para>
-    ///     <code>Remove-CMSMediaLibrary -SiteID 1 -DisplayName tes</code>
+    ///     <code>Remove-CMSMediaLibrary -SiteID 1 -LibraryName tes</code>
     /// </example>
     /// <example>
     ///     <para>Deletes all libraries with a site ID 1 and display name "test"</para>
-    ///     <code>Remove-CMSMediaLibrary -SiteID 1 -DisplayName test -Exact</code>
+    ///     <code>Remove-CMSMediaLibrary -SiteID 1 -LibraryName test -Exact</code>
     /// </example>
     /// <example>
     ///     <para>Deletes a library.</para>
@@ -48,6 +49,7 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Remove, "CMSMediaLibrary", SupportsShouldProcess = true, ConfirmImpact = ConfirmImpact.High)]
+    [Alias("rmlib")]
     public class RemoveCmsMediaLibraryCmdlet : GetCmsMediaLibraryCmdlet
     {
         #region Constants

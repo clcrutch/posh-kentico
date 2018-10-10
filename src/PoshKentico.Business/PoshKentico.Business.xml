@@ -911,6 +911,7 @@
             <param name="siteID">the site id of the media library.</param>
             <param name="name">The name of the media library.</param>
             <param name="folder">The name of the newly created folder.</param>
+            <returns>The newly created folder name.</returns>
         </member>
         <member name="T:PoshKentico.Business.ContentManagement.MediaLibraries.RemoveCmsMediaLibraryBusiness">
             <summary>

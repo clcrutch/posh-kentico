@@ -20,6 +20,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 using CMS.MediaLibrary;
 using PoshKentico.Business.ContentManagement.MediaLibraries;
+using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
 {
@@ -37,6 +38,7 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Remove, "CMSMediaLibraryFolder")]
+    [Alias("rmlfol")]
     public class RemoveCmsMediaLibraryFolderCmdlet : MefCmdlet
     {
         #region Constants

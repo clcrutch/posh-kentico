@@ -5,53 +5,38 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-CMSWebPartField
+# Set-CMSMediaLibraryFile
 
 ## SYNOPSIS
-Sets a web part field.
+Sets a media file.
 
 ## SYNTAX
 
 ```
-Set-CMSWebPartField -Field <FormFieldInfo> [-PassThru] [<CommonParameters>]
+Set-CMSMediaLibraryFile [-PassThru] -MediaFile <MediaFileInfo> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Sets a web part field.
+Sets a media file based off of the provided input.
 
-This command automatically initializes the connection to Kentico if not already initialized.
+This cmdlet returns the updated library file when the -PassThru switch is used.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-$webPartField | Set-CMSWebPartField
+Set-CMSMediaLibraryFile -MediaFile $libraryFile
 ```
 
 ### EXAMPLE 2
 ```
-$webPartField | Set-CMSWebPartField -PassThru
+$libraryFile | Set-CMSMediaLibraryFile
 ```
 
 ## PARAMETERS
 
-### -Field
-The field to set in Kentico.
-
-```yaml
-Type: FormFieldInfo
-Parameter Sets: (All)
-Aliases: Property
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
 ### -PassThru
-Tell the cmdlet to return the web part.
+Tell the cmdlet to return the media library file.
 
 ```yaml
 Type: SwitchParameter
@@ -65,18 +50,33 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -MediaFile
+The media library file to set.
+
+```yaml
+Type: MediaFileInfo
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
 For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### CMS.FormEngine.FormFieldInfo
-The field to set in Kentico.
+### CMS.MediaLibrary.MediaFileInfo
+The media library file to set.
 
 ## OUTPUTS
 
-### CMS.FormEngine.FormFieldInfo
+### CMS.MediaLibrary.MediaFileInfo
 ## NOTES
 
 ## RELATED LINKS

@@ -22,6 +22,7 @@ using CMS.MediaLibrary;
 using ImpromptuInterface;
 using PoshKentico.Business.ContentManagement.MediaLibraries;
 using PoshKentico.Core.Services.ContentManagement.MediaLibraries;
+using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
 {
@@ -67,6 +68,7 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Remove, "CMSMediaLibraryFile", SupportsShouldProcess = true, ConfirmImpact = ConfirmImpact.High)]
+    [Alias("rmlfil")]
     public class RemoveCmsMediaLibraryFileCmdlet : GetCmsMediaLibraryFileCmdlet
     {
         #region Constants

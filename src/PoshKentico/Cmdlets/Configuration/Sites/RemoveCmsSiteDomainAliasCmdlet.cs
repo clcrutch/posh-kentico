@@ -48,6 +48,7 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Remove, "CMSSiteDomainAlias")]
+    [Alias("rsda")]
     public class RemoveCmsSiteDomainAliasCmdlet : MefCmdlet
     {
         #region Constants

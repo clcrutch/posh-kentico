@@ -5,55 +5,55 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-CMSSite
+# Set-CMSMediaLibrary
 
 ## SYNOPSIS
-Sets a site.
+Sets a library.
 
 ## SYNTAX
 
 ### Object
 ```
-Set-CMSSite [-SiteToSet] <SiteInfo> [-PassThru] [<CommonParameters>]
+Set-CMSMediaLibrary [-LibraryToSet] <MediaLibraryInfo> [-PassThru] [<CommonParameters>]
 ```
 
 ### Property
 ```
-Set-CMSSite [-DisplayName] <String> [-SiteName] <String> [-Status] <SiteStatusEnum> [-DomainName] <String>
- [-PassThru] [<CommonParameters>]
+Set-CMSMediaLibrary [-SiteID] <Int32> [-LibraryName] <String> [[-DisplayName] <String>]
+ [[-Description] <String>] [[-Folder] <String>] [-PassThru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Sets a new site based off of the provided input.
+Sets a library based off of the provided input.
 
-This cmdlet returns the site to update when the -PassThru switch is used.
+This cmdlet returns the updated library when the -PassThru switch is used.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Set-CMSSite -Site $site
+Set-CMSMediaLibrary -MediaLibrary $library
 ```
 
 ### EXAMPLE 2
 ```
-$site | Set-CMSSite
+$library | Set-CMSMediaLibrary
 ```
 
 ### EXAMPLE 3
 ```
-Set-CMSSite -DisplayName "My Test Name" -SiteName "My Site Name" -Status "Running or Stopped" -DomainName "My Domain Name"
+Set-CMSMediaLibrary -SiteID 1 -LibraryName "Name" -DisplayName "My Test Name" -Description "Library description" -Folder "Images"
 ```
 
 ## PARAMETERS
 
-### -SiteToSet
-A reference to the site to update.
+### -LibraryToSet
+A reference to the updated library.
 
 ```yaml
-Type: SiteInfo
+Type: MediaLibraryInfo
 Parameter Sets: Object
-Aliases: Site
+Aliases:
 
 Required: True
 Position: 0
@@ -62,27 +62,25 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -DisplayName
-The display name for the site to update.
-
-Site display name cannot be blank.
+### -SiteID
+The site id for the updated library.
 
 ```yaml
-Type: String
+Type: Int32
 Parameter Sets: Property
 Aliases:
 
 Required: True
 Position: 0
-Default value: None
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SiteName
-The site name for the site to update.
+### -LibraryName
+The library name for the updated library.
 
-Site name cannot be blank.
+The library name cannot be blank.
 
 ```yaml
 Type: String
@@ -96,41 +94,55 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Status
-The status for the site to update.
+### -DisplayName
+The display name for the updated library.
 
-Possible values: Running, Stopped
-
-```yaml
-Type: SiteStatusEnum
-Parameter Sets: Property
-Aliases:
-Accepted values: Running, Stopped
-
-Required: True
-Position: 2
-Default value: Running
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DomainName
-The domain name for the site to update.
+The Media Library display name cannot be blank.
 
 ```yaml
 Type: String
 Parameter Sets: Property
 Aliases:
 
-Required: True
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Description
+The library description for the updated library.
+
+```yaml
+Type: String
+Parameter Sets: Property
+Aliases:
+
+Required: False
 Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Folder
+The library folder for the updated library.
+
+```yaml
+Type: String
+Parameter Sets: Property
+Aliases:
+
+Required: False
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -PassThru
-Tell the cmdlet to return the site to update.
+Tell the cmdlet to return the updated library.
 
 ```yaml
 Type: SwitchParameter
@@ -150,12 +162,12 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## INPUTS
 
-### CMS.SiteProvider.SiteInfo
-A reference to the site to update.
+### CMS.MediaLibrary.MediaLibraryInfo
+A reference to the updated library.
 
 ## OUTPUTS
 
-### CMS.SiteProvider.SiteInfo[]
+### CMS.MediaLibrary.MediaLibraryInfo
 ## NOTES
 
 ## RELATED LINKS
