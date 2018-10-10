@@ -105,9 +105,10 @@
     </None>
   </ItemGroup>
 
-  <UsingTask TaskName="PoshKentico.MSBuild.CMSVirtualTask" AssemblyFile="$(ProjectDir)\..\PoshKentico.MSBuild\bin\$(Configuration)\net46\PoshKentico.MSBuild.dll" />
-  <Target Name="AfterBuild">
-    <CMSVirtualTask TargetDir="$(TargetDir)" />
+  <Target Name="MakeCMSMethodsVirtual" AfterTargets="CoreCompile">
+    <Exec Command="..\PoshKentico.CodeWeaving\bin\$(Configuration)\net461\PoshKentico.CodeWeaving.exe $(TargetDir)" ConsoleToMSBuild="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
+    </Exec>
   </Target>
 
 </Project>
