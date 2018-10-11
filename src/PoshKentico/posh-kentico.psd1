@@ -61,6 +61,10 @@ CLRVersion = '4.0'
 
 # Format files (.ps1xml) to be loaded when importing this module
 FormatsToProcess = @( `
+	#ContentManagement/MediaLibraries
+	"./FormattingFiles/ContentManagement/MediaLibraries/MediaLibraryInfo.format.ps1xml", `
+	"./FormattingFiles/ContentManagement/MediaLibraries/MediaFileInfo.format.ps1xml", `
+
 	# Configuration/Sites
     "./FormattingFiles/Configuration/Sites/CultureInfo.format.ps1xml", `
     "./FormattingFiles/Configuration/Sites/SiteDomainAliasInfo.format.ps1xml", `

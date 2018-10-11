@@ -209,7 +209,6 @@ The webpart to get the web part category for.
 ## OUTPUTS
 
 ### CMS.PortalEngine.WebPartCategoryInfo[]
-
 ## NOTES
 
 ## RELATED LINKS

@@ -785,6 +785,272 @@
             </summary>
             <param name="server">The <see cref="T:PoshKentico.Core.Services.Configuration.Staging.IServer"/> to sync.</param>
         </member>
+        <member name="T:PoshKentico.Business.ContentManagement.MediaLibraries.GetCmsMediaLibraryBusiness">
+            <summary>
+            Business Layer for Get-CMSMediaLibray cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.ContentManagement.MediaLibraries.GetCmsMediaLibraryBusiness.MediaLibraryService">
+            <summary>
+            Gets or sets a reference to the Media Library Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.GetCmsMediaLibraryBusiness.GetMediaLibraries">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> in the CMS System.
+            </summary>
+            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.GetCmsMediaLibraryBusiness.GetMediaLibraries(System.Int32,System.String,System.Boolean)">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> which match the specified criteria.
+            </summary>
+            <param name="siteID">The site id to match the libraries to.</param>
+            <param name="matchString">The string which to match the libraries to.</param>
+            <param name="exact">A boolean which indicates if the match should be exact.</param>
+            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> which match the specified criteria.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.GetCmsMediaLibraryBusiness.GetMediaLibraries(System.Int32[])">
+            <summary>
+            Gets a list of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> which match the supplied IDs.
+            </summary>
+            <param name="ids">The IDs of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to return.</param>
+            <returns>A list of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> which match the supplied IDs.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.ContentManagement.MediaLibraries.GetCmsMediaLibraryFileBusiness">
+            <summary>
+            Business Layer for Get-CMSMediaLibraryFile Cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.ContentManagement.MediaLibraries.GetCmsMediaLibraryFileBusiness.MediaLibraryService">
+            <summary>
+            Gets or sets a reference to the Media Library Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.GetCmsMediaLibraryFileBusiness.GetMediaFiles">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> in the CMS System.
+            </summary>
+            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.GetCmsMediaLibraryFileBusiness.GetMediaFiles(System.Int32,System.String,System.String,System.Boolean)">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> which match the specified criteria.
+            </summary>
+            <param name="libraryID">The library id to match the files to.</param>
+            <param name="extension">The file extension which to match the files to.</param>
+            <param name="filePath">The string which to match the files to.</param>
+            <param name="exact">A boolean which indicates if the match should be exact.</param>
+            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> which match the specified criteria.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.GetCmsMediaLibraryFileBusiness.GetMediaFiles(System.Int32[])">
+            <summary>
+            Gets a list of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> which match the supplied IDs.
+            </summary>
+            <param name="ids">The IDs of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> to return.</param>
+            <returns>A list of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> which match the supplied IDs.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.ContentManagement.MediaLibraries.NewCmsMediaLibraryBusiness">
+            <summary>
+            Business layer for the New-CMSMediaLibrary cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.ContentManagement.MediaLibraries.NewCmsMediaLibraryBusiness.MediaLibraryService">
+            <summary>
+            Gets or sets a reference to the Media Library Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.NewCmsMediaLibraryBusiness.CreateMediaLibrary(System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Creates a new Media Library in the CMS System.
+            </summary>
+            <param name="displayName">The display name of the media library.</param>
+            <param name="name">The name of the media library.</param>
+            <param name="description">the description of the media library.</param>
+            <param name="folder">the folder of the media library.</param>
+            <param name="siteID">the site id of the media library.</param>
+            <returns>The newly created Media Library.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.ContentManagement.MediaLibraries.NewCmsMediaLibraryFileBusiness">
+            <summary>
+            Business layer for the New-CMSMediaLibraryFile cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.ContentManagement.MediaLibraries.NewCmsMediaLibraryFileBusiness.MediaLibraryService">
+            <summary>
+            Gets or sets a reference to the Media Library Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.NewCmsMediaLibraryFileBusiness.CreateMediaLibraryFile(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates a media library file <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> within the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>.
+            </summary>
+            <param name="librarySiteID">The site id of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>to retrive for creating the new file.</param>
+            <param name="libraryName">The name of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to retrive for creating the new file.</param>
+            <param name = "localFilePath" >The local file path for the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.</param>
+            <param name="fileName">The file name for the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.</param>
+            <param name="fileTitle">The file title for the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.</param>
+            <param name="fileDesc">The file description for the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.</param>
+            <param name="filePath">The file path for the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.</param>
+            <returns>The newly created <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.ContentManagement.MediaLibraries.NewCmsMediaLibraryFolderBusiness">
+            <summary>
+            Business layer for the New-CMSMediaLibraryFolder cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.ContentManagement.MediaLibraries.NewCmsMediaLibraryFolderBusiness.MediaLibraryService">
+            <summary>
+            Gets or sets a reference to the Media Library Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.NewCmsMediaLibraryFolderBusiness.CreateMediaLibraryFolder(System.Int32,System.String,System.String)">
+            <summary>
+            Creates a new Media Library Folder in the CMS System.
+            </summary>
+            <param name="siteID">the site id of the media library.</param>
+            <param name="name">The name of the media library.</param>
+            <param name="folder">The name of the newly created folder.</param>
+            <returns>The newly created folder name.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.ContentManagement.MediaLibraries.RemoveCmsMediaLibraryBusiness">
+            <summary>
+            Business Layer for Remove-CMSMediaLibrary cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.ContentManagement.MediaLibraries.RemoveCmsMediaLibraryBusiness.MediaLibraryService">
+            <summary>
+            Gets or sets a reference to the Media Library Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.ContentManagement.MediaLibraries.RemoveCmsMediaLibraryBusiness.GetCmsMediaLibraryBusiness">
+            <summary>
+            Gets or sets a reference to the <see cref="P:PoshKentico.Business.ContentManagement.MediaLibraries.RemoveCmsMediaLibraryBusiness.GetCmsMediaLibraryBusiness"/> used to get the library to delete.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.RemoveCmsMediaLibraryBusiness.Remove(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary)">
+            <summary>
+            Deletes the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> in the CMS System.
+            </summary>
+            <param name="library">The <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to set.</param>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.RemoveCmsMediaLibraryBusiness.Remove(System.Int32[])">
+            <summary>
+            Deletes the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> in the CMS System.
+            </summary>
+            <param name="ids">The IDs of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to delete.</param>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.RemoveCmsMediaLibraryBusiness.Remove(System.Int32,System.String,System.Boolean)">
+            <summary>
+            Deletes the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> in the CMS System.
+            </summary>
+            <param name="siteID">The site id of the library to return.</param>
+            <param name="matchString">the string which to match the library to.</param>
+            <param name="exact">A boolean which indicates if the match should be exact.</param>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.RemoveCmsMediaLibraryBusiness.RemoveMediaLibrary(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary)">
+            <summary>
+            Deletes the specified <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> in the CMS System.
+            </summary>
+            <param name="library">The <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to set.</param>
+        </member>
+        <member name="T:PoshKentico.Business.ContentManagement.MediaLibraries.RemoveCmsMediaLibraryFileBusiness">
+            <summary>
+            Business Layer for Remove-CMSMediaLibraryFile cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.ContentManagement.MediaLibraries.RemoveCmsMediaLibraryFileBusiness.MediaLibraryService">
+            <summary>
+            Gets or sets a reference to the Media Library Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.RemoveCmsMediaLibraryFileBusiness.RemoveMediaFile(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile)">
+            <summary>
+            Deletes the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> in the CMS System.
+            </summary>
+            <param name="file">The <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> to set.</param>
+        </member>
+        <member name="T:PoshKentico.Business.ContentManagement.MediaLibraries.RemoveCmsMediaLibraryFolderBusiness">
+            <summary>
+            Business layer for the Remove-CMSMediaLibraryFolder cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.ContentManagement.MediaLibraries.RemoveCmsMediaLibraryFolderBusiness.MediaLibraryService">
+            <summary>
+            Gets or sets a reference to the Media Library Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.RemoveCmsMediaLibraryFolderBusiness.RemoveMediaLibraryFolder(System.Int32,System.String,System.String)">
+            <summary>
+            Removes a new Media Library Folder in the CMS System.
+            </summary>
+            <param name="siteID">the site id of the media library.</param>
+            <param name="name">The name of the media library.</param>
+            <param name="folder">The name of the newly created folder.</param>
+        </member>
+        <member name="T:PoshKentico.Business.ContentManagement.MediaLibraries.SetCmsMediaLibraryBusiness">
+            <summary>
+            Business Layer for Set-CMSMediaLibrary cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.ContentManagement.MediaLibraries.SetCmsMediaLibraryBusiness.MediaLibraryService">
+            <summary>
+            Gets or sets a reference to the Media Library Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.SetCmsMediaLibraryBusiness.Set(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary)">
+            <summary>
+            Sets the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> in the CMS System.
+            </summary>
+            <param name="library">The <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to set.</param>
+            <returns>The updated File.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.SetCmsMediaLibraryBusiness.Set(System.Int32,System.String,System.String,System.String,System.String)">
+            <summary>
+            Sets the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> in the CMS System.
+            </summary>
+            <param name="siteID">The site id of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>to retrive for updating the file. </param>
+            <param name="libraryName">The name of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to retrive for updating the file. </param>
+            <param name="displayName">the display name of the media file.</param>
+            <param name="description">the description of the media file.</param>
+            /// <param name="folder">the folder of the media file.</param>
+            <returns>The updated Media File.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.ContentManagement.MediaLibraries.SetCmsMediaLibraryFileBusiness">
+            <summary>
+            Business Layer of Set-CMSMediaLibraryFile Cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.ContentManagement.MediaLibraries.SetCmsMediaLibraryFileBusiness.MediaLibraryService">
+            <summary>
+            Gets or sets a reference to the Media Library Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.SetCmsMediaLibraryFileBusiness.Set(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile)">
+            <summary>
+            Sets the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> in the CMS System.
+            </summary>
+            <param name="file">The <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> to set.</param>
+            <returns>The updated File.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.ContentManagement.MediaLibraries.SetCmsMediaLibrarySecurityOptionBusiness">
+            <summary>
+            Business Layer of Set-CmsMediaLibrarySecurityOption cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.ContentManagement.MediaLibraries.SetCmsMediaLibrarySecurityOptionBusiness.MediaLibraryService">
+            <summary>
+            Gets or sets a reference to the Media Library Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.SetCmsMediaLibrarySecurityOptionBusiness.SetMediaLibrarySecurityOption(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary,PoshKentico.Core.Services.ContentManagement.MediaLibraries.SecurityPropertyEnum,CMS.Helpers.SecurityAccessEnum)">
+            <summary>
+            Sets the security options for a media library.
+            </summary>
+            <param name="library">The specified <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to look for setting the security option.</param>
+            <param name="option">The security option <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.SecurityPropertyEnum"/>.</param>
+            <param name="securityAccess">The security acess enum <see cref="T:CMS.Helpers.SecurityAccessEnum"/>.</param>
+        </member>
         <member name="T:PoshKentico.Business.Development.WebParts.AddCMSWebPartFieldBusiness">
             <summary>
             Business layer fo the Add-CMSWebPartField cmdlet.

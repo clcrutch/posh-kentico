@@ -226,6 +226,70 @@
             Gets or sets the connection string for the Kentico database.
             </summary>
         </member>
+        <member name="T:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService">
+            <summary>
+            Implementation of <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService"/> that uses Kentico.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.MediaLibraries">
+            <inheritdoc/>
+        </member>
+        <member name="P:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.MediaFiles">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.CreateMediaLibrary(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.CreateMediaFolder(System.Int32,System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.CreateMediaFile(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.GetMediaLibrary(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.GetMediaLibrary(System.Int32,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.GetMediaFile(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.GetMediaFile(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary,System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.UpdateMediaLibrary(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary,System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.UpdateMediaFile(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.DeleteMediaLibrary(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.DeleteMediaFile(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.DeleteMediaFolder(System.Int32,System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.SetMediaLibrarySecurityOption(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary,PoshKentico.Core.Services.ContentManagement.MediaLibraries.SecurityPropertyEnum,CMS.Helpers.SecurityAccessEnum)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.GetMediaLibrary(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary)">
+            <summary>
+            Gets the media library info object.
+            </summary>
+            <param name="library">the interface <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>.</param>
+            <returns>the media library info object.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.SetFileBinary(CMS.MediaLibrary.MediaFileInfo)">
+            <summary>
+            Sets the media library file binary.
+            </summary>
+            <param name="file">the file to set the binary. </param>
+            <returns>the updated media library info object.</returns>
+        </member>
         <member name="T:PoshKentico.Core.Services.Configuration.Localization.ICulture">
             <summary>
             Represents a Culture Object.
@@ -565,6 +629,259 @@
             Set a new role for running code without logging of staging tasks.
             </summary>
             <param name="role">The <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/>.</param>
+        </member>
+        <member name="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile">
+            <summary>
+            Represents a Media Library File Object.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile.FileName">
+            <summary>
+            Gets the media file name.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile.FileTitle">
+            <summary>
+            Gets the media file title.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile.FilePath">
+            <summary>
+            Gets the media file path.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile.FileDescription">
+            <summary>
+            Gets the media file description.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile.FileExtension">
+            <summary>
+            Gets the media file extention.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile.FileMimeType">
+            <summary>
+            Gets the mime type for the media file.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile.FileSize">
+            <summary>
+            Gets the file size for the media file.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile.FileID">
+            <summary>
+            Gets the file id for the media file.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile.FileSiteID">
+            <summary>
+            Gets the site id for the media file.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile.FileLibraryID">
+            <summary>
+            Gets the media library id for the media file.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile.FileBinary">
+            <summary>
+            Gets the file binary for the media file.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary">
+            <summary>
+            Represents a Media Library Object.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary.LibraryDisplayName">
+            <summary>
+            Gets the display name for the media library.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary.LibraryName">
+            <summary>
+            Gets the media library name.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary.LibraryDescription">
+            <summary>
+            Gets the media library description.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary.LibraryFolder">
+            <summary>
+            Gets the media library folder.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary.LibrarySiteID">
+            <summary>
+            Gets the site id for the media library.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary.LibraryID">
+            <summary>
+            Gets the library id for the media library.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService">
+            <summary>
+            Service for providing access to a CMS Media Library.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.MediaLibraries">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> provided by the CMS System.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.MediaFiles">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> provided by the CMS System.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.CreateMediaLibrary(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary)">
+            <summary>
+            Creates the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>.
+            </summary>
+            <param name="library">The <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to create.</param>
+            <returns>The newly created <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.GetMediaLibrary(System.Int32)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> which matches the supplied ID.
+            </summary>
+            <param name="id">The ID of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to return.</param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> which matches the ID, else null.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.GetMediaLibrary(System.Int32,System.String)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> which matches the supplied library name.
+            </summary>
+            <param name="librarySiteID">The site id of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>to return.</param>
+            <param name="libraryName">The name of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to return.</param>
+            <returns>the media library info object.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.UpdateMediaLibrary(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary,System.Boolean)">
+            <summary>
+            Updates the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>.
+            </summary>
+            <param name="library">The <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to update.</param>
+            <param name="isReplace">to indicate if replace the complete object or update only the properties.</param>
+            <returns>The updated library.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.DeleteMediaLibrary(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary)">
+            <summary>
+            Deletes the specified <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>.
+            </summary>
+            <param name="library">The <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to delete.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.CreateMediaFolder(System.Int32,System.String,System.String)">
+            <summary>
+            Creates a media library folder within the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>.
+            </summary>
+            <param name="librarySiteID">The site id of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>to retrive for creating the new folder.</param>
+            <param name="libraryName">The name of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to retrive for creating the new folder.</param>
+            <param name="folderName">The new folder name to create within the media library.</param>
+            <returns>The newly created folder name.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.CreateMediaFile(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates a media library file within the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>.
+            </summary>
+            <param name="librarySiteID">The site id of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>to retrive for creating the new file.</param>
+            <param name="libraryName">The name of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to retrive for creating the new file.</param>
+            <param name = "localFilePath" >The local file path for the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.</param>
+            <param name="fileName">The file name for the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.</param>
+            <param name="fileTitle">The file title for the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.</param>
+            <param name="fileDesc">The file description for the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.</param>
+            <param name="filePath">The file path for the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.</param>
+            <returns>The newly created <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.GetMediaFile(System.Int32)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> which matches the supplied ID.
+            </summary>
+            <param name="mediaFileId">The media file ID of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.</param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> which matches the ID, else null.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.GetMediaFile(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary,System.String,System.String)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> which matches the supplied library <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> and file path.
+            </summary>
+            <param name="library">The specified <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to look for the media file.</param>
+            <param name="folder">The folder of the media file.</param>
+            <param name="fileName">The file name of the media file.</param>
+            <returns>The list of <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> which matches the input, else null.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.UpdateMediaFile(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile)">
+            <summary>
+            Updates the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.
+            </summary>
+            <param name="file">The <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> to update.</param>
+            <returns>The updated media file.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.DeleteMediaFile(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile)">
+            <summary>
+            Deletes the specified <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.
+            </summary>
+            <param name="file">The <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> to delete.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.DeleteMediaFolder(System.Int32,System.String,System.String)">
+            <summary>
+            Deletes a media library folder within the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>.
+            </summary>
+            <param name="librarySiteID">The site id of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>to retrive for creating the new folder.</param>
+            <param name="libraryName">The name of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to retrive for creating the new folder.</param>
+            <param name="folderName">The new folder name to create within the media library.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.SetMediaLibrarySecurityOption(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary,PoshKentico.Core.Services.ContentManagement.MediaLibraries.SecurityPropertyEnum,CMS.Helpers.SecurityAccessEnum)">
+            <summary>
+            Sets the security options for a media library.
+            </summary>
+            <param name="library">The specified <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to look for setting the security option.</param>
+            <param name="option">The security option <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.SecurityPropertyEnum"/>.</param>
+            <param name="securityAccess">The security acess enum <see cref="T:CMS.Helpers.SecurityAccessEnum"/>.</param>
+        </member>
+        <member name="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.SecurityPropertyEnum">
+            <summary>
+            Types of the Security Option Properties for a Media Library.
+            </summary>
+        </member>
+        <member name="F:PoshKentico.Core.Services.ContentManagement.MediaLibraries.SecurityPropertyEnum.Access">
+            <summary>
+            Represents Access Property
+            </summary>
+        </member>
+        <member name="F:PoshKentico.Core.Services.ContentManagement.MediaLibraries.SecurityPropertyEnum.FileCreate">
+            <summary>
+            Represents FileCreate Property
+            </summary>
+        </member>
+        <member name="F:PoshKentico.Core.Services.ContentManagement.MediaLibraries.SecurityPropertyEnum.FolderCreate">
+            <summary>
+            Represents FolderCreate Property
+            </summary>
+        </member>
+        <member name="F:PoshKentico.Core.Services.ContentManagement.MediaLibraries.SecurityPropertyEnum.FileDelete">
+            <summary>
+            Represents FileDelete Property
+            </summary>
+        </member>
+        <member name="F:PoshKentico.Core.Services.ContentManagement.MediaLibraries.SecurityPropertyEnum.FolderDelete">
+            <summary>
+            Represents FolderDelete Property
+            </summary>
+        </member>
+        <member name="F:PoshKentico.Core.Services.ContentManagement.MediaLibraries.SecurityPropertyEnum.FileModify">
+            <summary>
+            Represents FileModify Property
+            </summary>
+        </member>
+        <member name="F:PoshKentico.Core.Services.ContentManagement.MediaLibraries.SecurityPropertyEnum.FolderModify">
+            <summary>
+            Represents FolderModify Property
+            </summary>
         </member>
         <member name="T:PoshKentico.Core.Services.Development.WebParts.IWebPart">
             <summary>

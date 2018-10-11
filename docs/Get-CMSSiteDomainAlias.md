@@ -81,7 +81,6 @@ A reference to the site.
 ## OUTPUTS
 
 ### CMS.SiteProvider.SiteDomainAliasInfo[]
-
 ## NOTES
 
 ## RELATED LINKS

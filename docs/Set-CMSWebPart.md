@@ -74,7 +74,6 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## OUTPUTS
 
 ### CMS.PortalEngine.WebPartInfo[]
-
 ## NOTES
 
 ## RELATED LINKS

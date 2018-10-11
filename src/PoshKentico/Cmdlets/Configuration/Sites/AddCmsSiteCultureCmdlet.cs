@@ -49,7 +49,7 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Add, "CMSSiteCulture")]
-    [Alias("acsite")]
+    [Alias("ascul")]
     public class AddCmsSiteCultureCmdlet : MefCmdlet
     {
         #region Constants
