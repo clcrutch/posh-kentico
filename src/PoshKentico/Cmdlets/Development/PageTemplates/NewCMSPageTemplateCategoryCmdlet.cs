@@ -42,7 +42,7 @@ namespace PoshKentico.Cmdlets.Development.PageTemplate
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.New, "CMSPageTemplateCategory")]
     [OutputType(typeof(PageTemplateCategoryInfo[]), ParameterSetName = new string[] { PASSTHRU })]
-    [Alias("nwpc")]
+    [Alias("nwptc")]
     public class NewCMSPageTemplateCategoryCmdlet : MefCmdlet
     {
         #region Constants

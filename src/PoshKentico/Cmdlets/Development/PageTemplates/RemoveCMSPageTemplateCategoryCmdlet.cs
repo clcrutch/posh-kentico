@@ -63,7 +63,7 @@ namespace PoshKentico.Cmdlets.Development.PageTemplates
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Remove, "CMSPageTemplateCategory", SupportsShouldProcess = true, ConfirmImpact = ConfirmImpact.High, DefaultParameterSetName = NONE)]
-    [Alias("rmwpc")]
+    [Alias("rmptc")]
     public class RemoveCMSPageTemplateCategoryCmdlet : GetCMSPageTemplateCategoryCmdletBase
     {
         #region Constants

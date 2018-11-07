@@ -52,7 +52,7 @@ namespace PoshKentico.Cmdlets.Development.PageTemplates
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.New, "CMSPageTemplate", DefaultParameterSetName = PATH)]
     [OutputType(typeof(PageTemplateInfo[]))]
-    [Alias("nwp")]
+    [Alias("nwpt")]
     public class NewCMSPageTemplateCmdlet : MefCmdlet
     {
         #region Constants
