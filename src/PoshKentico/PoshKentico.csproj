@@ -94,6 +94,12 @@
     <None Update="FormattingFiles\Configuration\Staging\ServerInfo.format.ps1xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="FormattingFiles\ContentManagement\MediaLibraries\MediaFileInfo.format.ps1xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="FormattingFiles\ContentManagement\MediaLibraries\MediaLibraryInfo.format.ps1xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="FormattingFiles\Development\WebParts\FormFieldInfo.format.ps1xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
