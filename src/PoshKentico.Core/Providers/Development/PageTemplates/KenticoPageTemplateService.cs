@@ -44,7 +44,8 @@ namespace PoshKentico.Core.Providers.Development.PageTemplates
         #region Properties
 
         /// <inheritdoc />
-        public IEnumerable<IPageTemplate> PageTemplates => Get();
+        public IEnumerable<IPageTemplate> PageTemplates => (from pt in PageTemplateInfoProvider.GetTemplates()
+                                                            select Impromptu.ActLike<IPageTemplate>(pt as PageTemplateInfo)).ToArray();
 
         /// <inheritdoc />
         public IEnumerable<IPageTemplateCategory> PageTemplateCategories => (from c in PageTemplateCategoryInfoProvider.GetPageTemplateCategories()
@@ -53,25 +54,6 @@ namespace PoshKentico.Core.Providers.Development.PageTemplates
         #endregion
 
         #region Methods
-
-        public IEnumerable<IPageTemplate> Get()
-        {
-            //PageTemplateInstance newPageTemplate = new PageTemplateInstance();
-            //newPageTemplate.PageTemplateType = "javascript";
-            //var items = PageTemplateInfoProvider.GetPageTemplates().ToList();
-
-            var item = PageTemplateInfoProvider.GetTemplates().ToList(); //.Where(i => i.CodeName == "Header_Placeholder_Footer");
-            var itemsss = Newtonsoft.Json.JsonConvert.SerializeObject(item);
-            var wps = PageTemplateInfoProvider.GetTemplates().ToList().Select(i => new
-            {
-                i.PageTemplateProperties,
-                form = new FormInfo(i.PageTemplateProperties),
-                pt = i,
-            }).ToList();
-
-            return (from pt in PageTemplateInfoProvider.GetTemplates()
-                    select Impromptu.ActLike<IPageTemplate>(pt as PageTemplateInfo)).ToArray();
-        }
 
         /// <inheritdoc />
         public IPageTemplateField AddField(IPageTemplateField field, IPageTemplate pageTemplate)
@@ -110,7 +92,7 @@ namespace PoshKentico.Core.Providers.Development.PageTemplates
 
             return category.ActLike<IPageTemplateCategory>();
         }
-        
+
         /// <inheritdoc />
         public IPageTemplate Create(IPageTemplate pageTemplate)
         {

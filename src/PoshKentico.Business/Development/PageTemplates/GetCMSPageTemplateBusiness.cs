@@ -117,7 +117,7 @@ namespace PoshKentico.Business.Development.PageTemplates
                     where ids.Contains(pt.CategoryID)
                     select pt).ToArray();
 
-            return items;   
+            return items;
         }
     }
 

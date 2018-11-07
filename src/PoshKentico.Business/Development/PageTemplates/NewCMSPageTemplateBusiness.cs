@@ -39,7 +39,6 @@ namespace PoshKentico.Business.Development.PageTemplates
         /// <param name="iconClass">Page template icon class defining the page template thumbnail.</param>
         /// <param name="css">Page template CSS.</param>
         /// <param name="isReusable">Gets or sets flag whether page template is reusable.</param>
-        /// <param name="allowRestore">Indicates if the object supports deleting to recycle bin.</param>
         /// <returns>The newly created <see cref="IPageTemplate"/>.</returns>
         public IPageTemplate CreatePageTemplate(string path, string fileName, string displayName, string layout, string iconClass, string css, bool isReusable)
         {
@@ -123,7 +122,6 @@ namespace PoshKentico.Business.Development.PageTemplates
             public string PageTemplateCSS { get; set; }
 
             public bool IsReusable { get; set; }
-
         }
 
         #endregion
