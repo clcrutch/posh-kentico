@@ -22,6 +22,7 @@ using CMS.Membership;
 using ImpromptuInterface;
 using PoshKentico.Business.Configuration.Staging;
 using PoshKentico.Core.Services.Configuration.Roles;
+using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.Configuration.Staging
 {
@@ -42,8 +43,9 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
-    [Cmdlet("Set", "CMSRoleLog")]
+    [Cmdlet(VerbsCommon.Set, "CMSRoleLog")]
     [OutputType(typeof(RoleInfo), ParameterSetName = new string[] { PASSTHRU })]
+    [Alias("srlog")]
     public class SetCmsRoleLogCmdlet : MefCmdlet
     {
         #region Constants

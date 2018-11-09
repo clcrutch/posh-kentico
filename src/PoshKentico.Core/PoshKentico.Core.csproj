@@ -15,6 +15,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\Development\PageTemplates\IPageTemplateWebPartInstance.cs" />
+    <Compile Remove="Services\Development\PageTemplates\IPageTemplateWebPartZoneInstance.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="stylecop.json" />
   </ItemGroup>
 
@@ -34,6 +39,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Web" />
   </ItemGroup>
 
 </Project>

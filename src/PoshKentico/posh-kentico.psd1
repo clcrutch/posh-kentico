@@ -54,13 +54,17 @@ CLRVersion = '4.0'
 # RequiredAssemblies = @()
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
-# ScriptsToProcess = @()
+ScriptsToProcess = @("./init.ps1")
 
 # Type files (.ps1xml) to be loaded when importing this module
 # TypesToProcess = @()
 
 # Format files (.ps1xml) to be loaded when importing this module
 FormatsToProcess = @( `
+	#ContentManagement/MediaLibraries
+	"./FormattingFiles/ContentManagement/MediaLibraries/MediaLibraryInfo.format.ps1xml", `
+	"./FormattingFiles/ContentManagement/MediaLibraries/MediaFileInfo.format.ps1xml", `
+
 	# Configuration/Sites
     "./FormattingFiles/Configuration/Sites/CultureInfo.format.ps1xml", `
     "./FormattingFiles/Configuration/Sites/SiteDomainAliasInfo.format.ps1xml", `
@@ -73,6 +77,10 @@ FormatsToProcess = @( `
 	"./FormattingFiles/Development/WebParts/FormFieldInfo.format.ps1xml", `
     "./FormattingFiles/Development/WebParts/WebPartCategoryInfo.format.ps1xml", `
 	"./FormattingFiles/Development/WebParts/WebPartInfo.format.ps1xml" `
+
+	# Development/PageTemplates
+	"./FormattingFiles/Development/PageTemplates/PageTemplateCategoryInfo.format.ps1xml", `	
+	"./FormattingFiles/Development/PageTemplates/PageTemplateInfo.format.ps1xml" `	
 )
 
 # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess

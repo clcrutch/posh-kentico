@@ -188,7 +188,6 @@ An object that represents the webpart category that contains the webparts.
 ## OUTPUTS
 
 ### CMS.PortalEngine.WebPartInfo[]
-
 ## NOTES
 
 ## RELATED LINKS

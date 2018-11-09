@@ -13,6 +13,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Cmdlets\Development\PageTemplates\AddCMSPageTemplateWebPartInstanceCmdlet.cs" />
+    <Compile Remove="Cmdlets\Development\PageTemplates\AddCmsPageTemplateWebPartZoneInstanceCmdlet.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="stylecop.json" />
   </ItemGroup>
 
@@ -35,11 +40,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PoshKentico.AssemblyBinding\PoshKentico.AssemblyBinding.csproj" />
     <ProjectReference Include="..\PoshKentico.Business\PoshKentico.Business.csproj" />
     <ProjectReference Include="..\PoshKentico.Core\PoshKentico.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="DSCResources\xMediaLibrary\xMediaLibrary.psm1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="DSCResources\xMediaLibrary\xMediaLibrary.schema.mof">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="DSCResources\xServer\xServer.psm1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -88,6 +100,18 @@
     <None Update="FormattingFiles\Configuration\Staging\ServerInfo.format.ps1xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="FormattingFiles\ContentManagement\MediaLibraries\MediaFileInfo.format.ps1xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="FormattingFiles\ContentManagement\MediaLibraries\MediaLibraryInfo.format.ps1xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="FormattingFiles\Development\PageTemplates\PageTemplateCategoryInfo.format.ps1xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="FormattingFiles\Development\PageTemplates\PageTemplateInfo.format.ps1xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="FormattingFiles\Development\WebParts\FormFieldInfo.format.ps1xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -95,6 +119,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="FormattingFiles\Development\WebParts\WebPartInfo.format.ps1xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="init.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="posh-kentico.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="posh-kentico.psd1">

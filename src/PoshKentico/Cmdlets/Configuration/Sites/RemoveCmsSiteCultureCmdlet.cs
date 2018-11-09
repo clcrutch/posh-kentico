@@ -48,7 +48,7 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Remove, "CMSSiteCulture")]
-    [Alias("rcsite")]
+    [Alias("rscul")]
     public class RemoveCmsSiteCultureCmdlet : MefCmdlet
     {
         #region Constants

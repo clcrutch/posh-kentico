@@ -12,22 +12,33 @@ namespace PoshKentico.CodeWeaving
 {
     class Program
     {
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
-            var container = GetContainer();
-
-            var buildPath = new DirectoryInfo(args[0]);
-            var assemblies = GetAssemblies(buildPath);
-
-            foreach (var assembly in assemblies)
+            try
             {
-                foreach (var weaver in container.Resolve<IEnumerable<IWeaver>>())
+                var container = GetContainer();
+
+                var buildPath = new DirectoryInfo(args[0]);
+                var assemblies = GetAssemblies(buildPath);
+
+                foreach (var assembly in assemblies)
                 {
-                    weaver.Execute(assembly);
+                    foreach (var weaver in container.Resolve<IEnumerable<IWeaver>>())
+                    {
+                        weaver.Execute(assembly);
+                    }
+
+                    Console.WriteLine($"Writing \"{assembly.Name.Name}\"...");
+                    assembly.Write();
                 }
 
-                Console.WriteLine($"Writing \"{assembly.Name.Name}\"...");
-                assembly.Write();
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(ex.ToString());
+
+                return 1;
             }
         }
 
