@@ -2,7 +2,9 @@
 
 $VerbosePreference = "Continue"
 $DebugPreference = "Continue"
-Import-Module ./posh-kentico.psd1
+
+$env:PSModulePath="$env:PSModulePath;..\"
+Import-Module posh-kentico
 
 Configuration KenticoTest
 {
