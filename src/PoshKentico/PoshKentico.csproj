@@ -13,6 +13,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Cmdlets\Development\PageTemplates\AddCMSPageTemplateWebPartInstanceCmdlet.cs" />
+    <Compile Remove="Cmdlets\Development\PageTemplates\AddCmsPageTemplateWebPartZoneInstanceCmdlet.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="stylecop.json" />
   </ItemGroup>
 
@@ -99,6 +104,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="FormattingFiles\ContentManagement\MediaLibraries\MediaLibraryInfo.format.ps1xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="FormattingFiles\Development\PageTemplates\PageTemplateCategoryInfo.format.ps1xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="FormattingFiles\Development\PageTemplates\PageTemplateInfo.format.ps1xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="FormattingFiles\Development\WebParts\FormFieldInfo.format.ps1xml">

@@ -77,6 +77,10 @@ FormatsToProcess = @( `
 	"./FormattingFiles/Development/WebParts/FormFieldInfo.format.ps1xml", `
     "./FormattingFiles/Development/WebParts/WebPartCategoryInfo.format.ps1xml", `
 	"./FormattingFiles/Development/WebParts/WebPartInfo.format.ps1xml" `
+
+	# Development/PageTemplates
+	"./FormattingFiles/Development/PageTemplates/PageTemplateCategoryInfo.format.ps1xml", `	
+	"./FormattingFiles/Development/PageTemplates/PageTemplateInfo.format.ps1xml" `	
 )
 
 # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
