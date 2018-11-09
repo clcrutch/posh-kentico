@@ -35,6 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PoshKentico.AssemblyBinding\PoshKentico.AssemblyBinding.csproj" />
     <ProjectReference Include="..\PoshKentico.Business\PoshKentico.Business.csproj" />
     <ProjectReference Include="..\PoshKentico.Core\PoshKentico.Core.csproj" />
   </ItemGroup>
@@ -107,6 +108,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="FormattingFiles\Development\WebParts\WebPartInfo.format.ps1xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="init.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="posh-kentico.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="posh-kentico.psd1">
