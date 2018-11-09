@@ -22,6 +22,7 @@ Configuration KenticoTest
 			DomainName = "localhost:743"
 			DisplayName = "KenticoTest"
 			Status = "Running"
+			DomainAlias = "127.0.0.1"
 			Ensure = "Present"
 		}
 
