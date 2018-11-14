@@ -3,7 +3,7 @@
 $VerbosePreference = "Continue"
 $DebugPreference = "Continue"
 
-$env:PSModulePath="$env:PSModulePath;..\"
+$env:PSModulePath="$env:PSModulePath;..\".ToLower().Replace("C:\Program Files\WindowsPowerShell\Modules", "")
 Import-Module posh-kentico
 
 Configuration KenticoTest
