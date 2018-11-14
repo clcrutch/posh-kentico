@@ -3,11 +3,10 @@
 $VerbosePreference = "Continue"
 $DebugPreference = "Continue"
 
-$env:PSModulePath="$env:PSModulePath;..\".ToLower().Replace("C:\Program Files\WindowsPowerShell\Modules", "")
 Import-Module posh-kentico
 
 Configuration KenticoTest
-{
+{	
 	Import-DscResource -Name xWebPartCategory
 	Import-DscResource -Name xWebPart
 	Import-DscResource -Name xSite
