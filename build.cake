@@ -48,9 +48,9 @@ Task("BuildPowerShellModule")
 	.IsDependentOn("BuildRootModule")
 	.Does(() =>
 {
-	Information("Setting module version number to " + version.SemVer1);
+	Information("Setting module version number to " + version.SimpleVersion.ToString());
 	// Update the Version Number
-	ReplaceRegexInFiles(moduleFile, "1\\.0", version.Version.ToString());
+	ReplaceRegexInFiles(moduleFile, "1\\.0", version.SimpleVersion.ToString());
 
     if (!version.PublicRelease)
     {
