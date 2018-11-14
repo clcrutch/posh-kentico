@@ -1,0 +1,1600 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PoshKentico.Core</name>
+    </assembly>
+    <members>
+        <member name="T:PoshKentico.Core.Providers.Configuration.Settings.KenticoSettingValueService">
+            <summary>
+            Implementation of <see cref="T:PoshKentico.Core.Services.Configuration.Settings.ISettingValueService"/> that uses Kentico.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Settings.KenticoSettingValueService.GetSettingValue(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Settings.KenticoSettingValueService.GetWebConfigValue(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Settings.KenticoSettingValueService.SetSettingValue(System.String,System.String,System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PoshKentico.Core.Providers.Configuration.Sites.KenticoSiteService">
+            <summary>
+            Implementation of <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISiteService"/> that uses Kentico.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Configuration.Sites.KenticoSiteService.Sites">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Sites.KenticoSiteService.Create(PoshKentico.Core.Services.Configuration.Sites.ISite)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Sites.KenticoSiteService.GetSite(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Sites.KenticoSiteService.GetSite(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Sites.KenticoSiteService.GetSite(PoshKentico.Core.Services.Configuration.Users.IUser)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Sites.KenticoSiteService.Delete(PoshKentico.Core.Services.Configuration.Sites.ISite)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Sites.KenticoSiteService.Update(PoshKentico.Core.Services.Configuration.Sites.ISite,System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Sites.KenticoSiteService.Start(PoshKentico.Core.Services.Configuration.Sites.ISite)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Sites.KenticoSiteService.Stop(PoshKentico.Core.Services.Configuration.Sites.ISite)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Sites.KenticoSiteService.AddSiteCulture(PoshKentico.Core.Services.Configuration.Sites.ISite,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Sites.KenticoSiteService.RemoveSiteCulture(PoshKentico.Core.Services.Configuration.Sites.ISite,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Sites.KenticoSiteService.GetSiteCultures(PoshKentico.Core.Services.Configuration.Sites.ISite)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Sites.KenticoSiteService.AddSiteDomainAlias(PoshKentico.Core.Services.Configuration.Sites.ISite,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Sites.KenticoSiteService.RemoveSiteDomainAlias(PoshKentico.Core.Services.Configuration.Sites.ISite,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Sites.KenticoSiteService.GetDomainAliases(PoshKentico.Core.Services.Configuration.Sites.ISite)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PoshKentico.Core.Providers.Configuration.Staging.KenticoStagingService">
+            <summary>
+            Implementation of <see cref="T:PoshKentico.Core.Services.Configuration.Staging.IStagingService"/> that uses Kentico.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Configuration.Staging.KenticoStagingService.Servers">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Staging.KenticoStagingService.Create(PoshKentico.Core.Services.Configuration.Staging.IServer)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Staging.KenticoStagingService.Delete(PoshKentico.Core.Services.Configuration.Staging.IServer)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Staging.KenticoStagingService.GetServer(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Staging.KenticoStagingService.GetServer(System.String,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Staging.KenticoStagingService.Update(PoshKentico.Core.Services.Configuration.Staging.IServer,System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Staging.KenticoStagingService.SynchronizeStagingTask(PoshKentico.Core.Services.Configuration.Staging.IServer)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Staging.KenticoStagingService.DeleteStagingTask(PoshKentico.Core.Services.Configuration.Staging.IServer)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Staging.KenticoStagingService.SetNoLoggingRole(PoshKentico.Core.Services.Configuration.Roles.IRole)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Staging.KenticoStagingService.SetLoggingRole(PoshKentico.Core.Services.Configuration.Roles.IRole,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService">
+            <summary>
+            Implementation of <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUserService"/> that uses Kentico.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.Users">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.CreateUser(PoshKentico.Core.Services.Configuration.Users.IUser)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.SetUser(PoshKentico.Core.Services.Configuration.Users.IUser,System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.GetUser(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.GetUser(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.DeleteUser(PoshKentico.Core.Services.Configuration.Users.IUser)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.AddUserToSite(PoshKentico.Core.Services.Configuration.Users.IUser,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.RemoveUserFromSite(PoshKentico.Core.Services.Configuration.Users.IUser,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PoshKentico.Core.Providers.Development.PageTemplates.IPageTemplateHolder">
+            <summary>
+            Used by Dynamic Proxy to add a place to set a <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/>.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.PageTemplates.IPageTemplateHolder.PageTemplate">
+            <summary>
+            Gets or sets a <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/> associated with the current object.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Providers.Development.PageTemplates.KenticoPageTemplateService">
+            <summary>
+            Implementation of <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateService"/> that uses Kentico.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.PageTemplates.KenticoPageTemplateService.PageTemplates">
+            <inheritdoc />
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.PageTemplates.KenticoPageTemplateService.PageTemplateCategories">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.PageTemplates.KenticoPageTemplateService.AddField(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateField,PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.PageTemplates.KenticoPageTemplateService.Create(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.PageTemplates.KenticoPageTemplateService.Create(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.PageTemplates.KenticoPageTemplateService.Delete(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.PageTemplates.KenticoPageTemplateService.Delete(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.PageTemplates.KenticoPageTemplateService.GetPageTemplateCategories(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.PageTemplates.KenticoPageTemplateService.GetPageTemplateCategory(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.PageTemplates.KenticoPageTemplateService.GetPageTemplateFields(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.PageTemplates.KenticoPageTemplateService.GetPageTemplates(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.PageTemplates.KenticoPageTemplateService.RemoveField(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateField)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.PageTemplates.KenticoPageTemplateService.Update(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.PageTemplates.KenticoPageTemplateService.Update(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.PageTemplates.KenticoPageTemplateService.Update(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateField)">
+            <inheritdoc />
+        </member>
+        <member name="T:PoshKentico.Core.Providers.Development.PageTemplates.PageTemplateHolder">
+            <summary>
+            Used by Dynamic Proxy to add a place to set a <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/>.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.PageTemplates.PageTemplateHolder.PageTemplate">
+            <inheritdoc />
+        </member>
+        <member name="T:PoshKentico.Core.Providers.Development.WebParts.IWebPartHolder">
+            <summary>
+            Used by Dynamic Proxy to add a place to set a <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.WebParts.IWebPartHolder.WebPart">
+            <summary>
+            Gets or sets a <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> associated with the current object.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService">
+            <summary>
+            Implementation of <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartService"/> that uses Kentico.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.WebParts">
+            <inheritdoc />
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.WebPartCategories">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.AddField(PoshKentico.Core.Services.Development.WebParts.IWebPartField,PoshKentico.Core.Services.Development.WebParts.IWebPart)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.Create(PoshKentico.Core.Services.Development.WebParts.IWebPartCategory)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.Create(PoshKentico.Core.Services.Development.WebParts.IWebPart)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.Delete(PoshKentico.Core.Services.Development.WebParts.IWebPartCategory)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.Delete(PoshKentico.Core.Services.Development.WebParts.IWebPart)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.GetWebPartCategories(PoshKentico.Core.Services.Development.WebParts.IWebPartCategory)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.GetWebPartCategory(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.GetWebPartFields(PoshKentico.Core.Services.Development.WebParts.IWebPart)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.GetWebParts(PoshKentico.Core.Services.Development.WebParts.IWebPartCategory)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.RemoveField(PoshKentico.Core.Services.Development.WebParts.IWebPartField)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.Update(PoshKentico.Core.Services.Development.WebParts.IWebPartCategory)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.Update(PoshKentico.Core.Services.Development.WebParts.IWebPart)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.Update(PoshKentico.Core.Services.Development.WebParts.IWebPartField)">
+            <inheritdoc />
+        </member>
+        <member name="T:PoshKentico.Core.Providers.Development.WebParts.WebPartHolder">
+            <summary>
+            Used by Dynamic Proxy to add a place to set a <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.WebParts.WebPartHolder.WebPart">
+            <inheritdoc />
+        </member>
+        <member name="T:PoshKentico.Core.Providers.General.KenticoCmsApplicationService">
+            <summary>
+            Implementation of <see cref="T:PoshKentico.Core.Services.General.ICmsApplicationService"/> that uses Kentico.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.General.KenticoCmsApplicationService.InitializationState">
+            <summary>
+            Gets the initialization state of the CMS Application.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.General.KenticoCmsApplicationService.FindSite(System.Action{System.String},System.Action{System.String})">
+             <summary>
+             This method requires administrator access.
+            
+             Finds a Kentico website by performing the following steps:
+             1. Get a list of all the sites from IIS
+             2. Get a list of all applications from the sites
+             3. Get a list of all the virtual directories from the applications
+             4. Continue processing virtual directory if a web.config file exits
+             5. Parse the document and find an "add" node with name="CMSConnectionString"
+             6. If the connection string is valid, then stop processing.  This is a Kentico site.
+             </summary>
+             <param name="writeDebug">A delegate for writing to the debug stream.</param>
+             <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
+             <returns>The directory and the connection string for the Kentico site.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.General.KenticoCmsApplicationService.Initialize(System.Boolean,System.Action{System.String},System.Action{System.String})">
+            <summary>
+            Initialize Kentico CMS Application using FindKenticoSite or a cached version to locate the site.
+            </summary>
+            <param name="useCached">Use the cached location for the Kentico Site.  When true and have already found Kentico in a previous run, this method does not require admin.</param>
+            <param name="writeDebug">A delegate for writing to the debug stream.</param>
+            <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.General.KenticoCmsApplicationService.Initialize(System.IO.DirectoryInfo,System.String,System.Action{System.String},System.Action{System.String})">
+            <summary>
+            Initialize Kentico CMS Application using the supplied parameters.
+            </summary>
+            <param name="siteLocation">The directory where the Kentico site resides.</param>
+            <param name="connectionString">The connection string to use for initializing the CMS Application.</param>
+            <param name="writeDebug">A delegate for writing to the debug stream.</param>
+            <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
+        </member>
+        <member name="T:PoshKentico.Core.Providers.General.KenticoSiteLocationCache">
+            <summary>
+            Model used for caching the Kentico site location.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.General.KenticoSiteLocationCache.SiteLocation">
+            <summary>
+            Gets or sets the file path for the Kentico site.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.General.KenticoSiteLocationCache.ConnectionString">
+            <summary>
+            Gets or sets the connection string for the Kentico database.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService">
+            <summary>
+            Implementation of <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService"/> that uses Kentico.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.MediaLibraries">
+            <inheritdoc/>
+        </member>
+        <member name="P:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.MediaFiles">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.CreateMediaLibrary(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.CreateMediaFolder(System.Int32,System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.CreateMediaFile(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.GetMediaLibrary(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.GetMediaLibrary(System.Int32,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.GetMediaFile(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.GetMediaFile(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary,System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.UpdateMediaLibrary(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary,System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.UpdateMediaFile(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.DeleteMediaLibrary(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.DeleteMediaFile(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.DeleteMediaFolder(System.Int32,System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.SetMediaLibrarySecurityOption(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary,PoshKentico.Core.Services.ContentManagement.MediaLibraries.SecurityPropertyEnum,CMS.Helpers.SecurityAccessEnum)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.GetMediaLibrary(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary)">
+            <summary>
+            Gets the media library info object.
+            </summary>
+            <param name="library">the interface <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>.</param>
+            <returns>the media library info object.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService.SetFileBinary(CMS.MediaLibrary.MediaFileInfo)">
+            <summary>
+            Sets the media library file binary.
+            </summary>
+            <param name="file">the file to set the binary. </param>
+            <returns>the updated media library info object.</returns>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Configuration.Localization.ICulture">
+            <summary>
+            Represents a Culture Object.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Localization.ICulture.CultureID">
+            <summary>
+            Gets culture ID.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Localization.ICulture.CultureName">
+            <summary>
+            Gets culture name.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Localization.ICulture.CultureCode">
+            <summary>
+            Gets culture code.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Configuration.Roles.IRole">
+            <summary>
+            Represents a Role Object.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Roles.IRole.RoleDisplayName">
+            <summary>
+            Gets the display name for the role.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Roles.IRole.RoleName">
+            <summary>
+            Gets the role name.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Roles.IRole.SiteID">
+            <summary>
+            Gets the site id.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Configuration.Settings.ISettingValueService">
+            <summary>
+            Service for providing values for the given setting key.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Settings.ISettingValueService.GetSettingValue(System.String,System.String)">
+            <summary>
+            Get the settings value based on the key.
+            </summary>
+            <param name="siteName">The site name of the setting.</param>
+            <param name="settingKey">The key of the setting.</param>
+            <returns>The value of the setting.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Settings.ISettingValueService.GetWebConfigValue(System.String,System.String)">
+            <summary>
+            Get the web.config value based on the key.
+            </summary>
+            <param name="appSettingKey">The key of the web.config setting.</param>
+            <param name="defaultValue">The default value to return if no key is matched.</param>
+            <returns>The value of the setting.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Settings.ISettingValueService.SetSettingValue(System.String,System.String,System.Object)">
+            <summary>
+            Set the settings value based on the key.
+            </summary>
+            <param name="siteName">The site name of the setting.</param>
+            /// <param name="settingKey">The key of the setting.</param>
+            <param name="newVal">The new value of the setting.</param>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Configuration.Sites.ISite">
+            <summary>
+            Represents a Site Object.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Sites.ISite.DisplayName">
+            <summary>
+            Gets the display name for the site.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Sites.ISite.SiteName">
+            <summary>
+            Gets the site name.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Sites.ISite.Status">
+            <summary>
+            Gets the site status.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Sites.ISite.DomainName">
+            <summary>
+            Gets the domain name for the site.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Sites.ISite.SiteID">
+            <summary>
+            Gets the id for the site.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Configuration.Sites.ISiteDomainAlias">
+            <summary>
+            Represents a Site Domain Alias Object.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Sites.ISiteDomainAlias.SiteDomainAliasID">
+            <summary>
+            Gets the site domain alias id.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Sites.ISiteDomainAlias.SiteDomainAliasName">
+            <summary>
+             Gets the site domain alias name.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Sites.ISiteDomainAlias.SiteID">
+            <summary>
+             Gets the site id.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Configuration.Sites.ISiteService">
+            <summary>
+            Service for providing access to a CMS sites.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Sites.ISiteService.Sites">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> provided by the CMS System.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Sites.ISiteService.Create(PoshKentico.Core.Services.Configuration.Sites.ISite)">
+            <summary>
+            Creates the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/>.
+            </summary>
+            <param name="site">The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to create.</param>
+            <returns>The newly created <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Sites.ISiteService.Delete(PoshKentico.Core.Services.Configuration.Sites.ISite)">
+            <summary>
+            Deletes the specified <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/>.
+            </summary>
+            <param name="site">The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to delete.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Sites.ISiteService.GetSite(System.Int32)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> which matches the supplied ID.
+            </summary>
+            <param name="id">The ID of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to return.</param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> which matches the ID, else null.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Sites.ISiteService.GetSite(System.String)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> which matches the supplied site name.
+            </summary>
+            <param name="siteName">The Site Name of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to return.</param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> which matches the site name, else null.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Sites.ISiteService.GetSite(PoshKentico.Core.Services.Configuration.Users.IUser)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> which matches the supplied user name.
+            </summary>
+            <param name="user">The user of the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser" />.</param>
+            <returns>The list of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/>  which the user is assigned.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Sites.ISiteService.Update(PoshKentico.Core.Services.Configuration.Sites.ISite,System.Boolean)">
+            <summary>
+            Updates the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/>.
+            </summary>
+            <param name="site">The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to update.</param>
+            <param name="isReplace">To indicate if replace the complete object or update only the properties.</param>
+            <returns>The updated site.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Sites.ISiteService.Start(PoshKentico.Core.Services.Configuration.Sites.ISite)">
+            <summary>
+            Starts the specified <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/>.
+            </summary>
+            <param name="site">The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to start.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Sites.ISiteService.Stop(PoshKentico.Core.Services.Configuration.Sites.ISite)">
+            <summary>
+            Stops the specified <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/>.
+            </summary>
+            <param name="site">The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to stop.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Sites.ISiteService.AddSiteCulture(PoshKentico.Core.Services.Configuration.Sites.ISite,System.String)">
+            <summary>
+            Assigns the culture to the site.
+            </summary>
+            <param name="site">the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to assign a culture to. </param>
+            <param name="cultureCode">the culture code of <see cref="T:PoshKentico.Core.Services.Configuration.Localization.ICulture"/>.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Sites.ISiteService.RemoveSiteCulture(PoshKentico.Core.Services.Configuration.Sites.ISite,System.String)">
+            <summary>
+            Removes the culture from the site.
+            </summary>
+            <param name="site">the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to remove a culture from. </param>
+            <param name="cultureCode">the culture code of <see cref="T:PoshKentico.Core.Services.Configuration.Localization.ICulture"/>. </param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Sites.ISiteService.GetSiteCultures(PoshKentico.Core.Services.Configuration.Sites.ISite)">
+            <summary>
+            Get the cultures of the specified site.
+            </summary>
+            <param name="site">the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to get a culture from. </param>
+            <returns>the list of <see cref="T:PoshKentico.Core.Services.Configuration.Localization.ICulture"/> that the site has.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Sites.ISiteService.AddSiteDomainAlias(PoshKentico.Core.Services.Configuration.Sites.ISite,System.String)">
+            <summary>
+            Adds the domain alias to the site.
+            </summary>
+            <param name="site">The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to assign a alias to.</param>
+            <param name="aliasName">The alias name of domain alias.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Sites.ISiteService.RemoveSiteDomainAlias(PoshKentico.Core.Services.Configuration.Sites.ISite,System.String)">
+            <summary>
+            Deletes the domain alias for the site.
+            </summary>
+            <param name="site">The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to delete the alias from.</param>
+            <param name="aliasName">The alias name of domain alias.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Sites.ISiteService.GetDomainAliases(PoshKentico.Core.Services.Configuration.Sites.ISite)">
+            <summary>
+            Gets all site domain aliases assigned to the selected site.
+            </summary>
+            <param name="site">The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to get the aliases from.</param>
+            <returns>The list of <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISiteDomainAlias"/> that the site has.</returns>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Configuration.Staging.IServer">
+            <summary>
+            Represents a Server Object.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Staging.IServer.ServerDisplayName">
+            <summary>
+            Gets the display name for the server.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Staging.IServer.ServerName">
+            <summary>
+            Gets the server name.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Staging.IServer.ServerURL">
+            <summary>
+            Gets the server Url.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Staging.IServer.ServerEnabled">
+            <summary>
+            Gets a value indicating whether the server is in enabled status.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Staging.IServer.ServerAuthentication">
+            <summary>
+            Gets server authentication Enum.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Staging.IServer.ServerID">
+            <summary>
+            Gets the server ID for the server.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Staging.IServer.ServerSiteID">
+            <summary>
+            Gets the server site ID for the server.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Staging.IServer.ServerUsername">
+            <summary>
+            Gets the Server user name.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Staging.IServer.ServerPassword">
+            <summary>
+            Gets the Server password.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Configuration.Staging.IStagingService">
+            <summary>
+            Service for providing access to a CMS staging servers.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Staging.IStagingService.Servers">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Staging.IServer"/> provided by the CMS System.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Staging.IStagingService.Create(PoshKentico.Core.Services.Configuration.Staging.IServer)">
+            <summary>
+            Creates the <see cref="T:PoshKentico.Core.Services.Configuration.Staging.IServer"/>.
+            </summary>
+            <param name="server">The <see cref="T:PoshKentico.Core.Services.Configuration.Staging.IServer"/> to create.</param>
+            <returns>The newly created <see cref="T:PoshKentico.Core.Services.Configuration.Staging.IServer"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Staging.IStagingService.GetServer(System.Int32)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Configuration.Staging.IServer"/> which matches the supplied ID.
+            </summary>
+            <param name="id">The ID of the <see cref="T:PoshKentico.Core.Services.Configuration.Staging.IServer"/> to return.</param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.Configuration.Staging.IServer"/> which matches the ID, else null.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Staging.IStagingService.GetServer(System.String,System.Int32)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Configuration.Staging.IServer"/> which matches the supplied server name.
+            </summary>
+            <param name="serverName">The Server Name of the <see cref="T:PoshKentico.Core.Services.Configuration.Staging.IServer"/> to return.</param>
+            <param name="serverSiteId">The Server site id of the <see cref="T:PoshKentico.Core.Services.Configuration.Staging.IServer"/>to return.</param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.Configuration.Staging.IServer"/> which matches the server name, else null.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Staging.IStagingService.Update(PoshKentico.Core.Services.Configuration.Staging.IServer,System.Boolean)">
+            <summary>
+            Updates the <see cref="T:PoshKentico.Core.Services.Configuration.Staging.IServer"/>.
+            </summary>
+            <param name="server">The <see cref="T:PoshKentico.Core.Services.Configuration.Staging.IServer"/> to update.</param>
+            <param name="isReplace">To indicate if replace the complete object or update only the properties.</param>
+            <returns>The updated server.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Staging.IStagingService.Delete(PoshKentico.Core.Services.Configuration.Staging.IServer)">
+            <summary>
+            Deletes the specified <see cref="T:PoshKentico.Core.Services.Configuration.Staging.IServer"/>.
+            </summary>
+            <param name="server">The <see cref="T:PoshKentico.Core.Services.Configuration.Staging.IServer"/> to delete.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Staging.IStagingService.SynchronizeStagingTask(PoshKentico.Core.Services.Configuration.Staging.IServer)">
+            <summary>
+            Synchronize staging tasks at specified <see cref="T:PoshKentico.Core.Services.Configuration.Staging.IServer"/>.
+            </summary>
+            <param name="server">The <see cref="T:PoshKentico.Core.Services.Configuration.Staging.IServer"/> to synchronize the tasks.</param>
+            <returns>The error message.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Staging.IStagingService.DeleteStagingTask(PoshKentico.Core.Services.Configuration.Staging.IServer)">
+            <summary>
+            Delete staging tasks at specified <see cref="T:PoshKentico.Core.Services.Configuration.Staging.IServer"/>.
+            </summary>
+            <param name="server">The <see cref="T:PoshKentico.Core.Services.Configuration.Staging.IServer"/> to delete the tasks.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Staging.IStagingService.SetLoggingRole(PoshKentico.Core.Services.Configuration.Roles.IRole,System.String)">
+            <summary>
+            Set a new role for logging staging tasks under specific task groups.
+            </summary>
+            <param name="role">The <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/>.</param>
+            <param name="taskGroupName">The task group code name.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Staging.IStagingService.SetNoLoggingRole(PoshKentico.Core.Services.Configuration.Roles.IRole)">
+            <summary>
+            Set a new role for running code without logging of staging tasks.
+            </summary>
+            <param name="role">The <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/>.</param>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Configuration.Users.IUser">
+            <summary>
+            Represents a User Object.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Users.IUser.FullName">
+            <summary>
+            Gets the full name for the user.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Users.IUser.UserName">
+            <summary>
+            Gets the user name for the user.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Users.IUser.Email">
+            <summary>
+            Gets the email for the user.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Users.IUser.PreferredCultureCode">
+            <summary>
+            Gets the preferred culture code for the user.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Users.IUser.SiteIndependentPrivilegeLevel">
+            <summary>
+            Gets the site independent privilege level for the user.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Configuration.Users.IUserService">
+            <summary>
+            Service for providing access to a CMS Users.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Users.IUserService.Users">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> provided by the CMS System.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Users.IUserService.CreateUser(PoshKentico.Core.Services.Configuration.Users.IUser)">
+            <summary>
+            Creates the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/>.
+            </summary>
+            <param name="user">The <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to create.</param>
+            <returns>The newly created <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Users.IUserService.SetUser(PoshKentico.Core.Services.Configuration.Users.IUser,System.Boolean)">
+            <summary>
+            Sets the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/>.
+            </summary>
+            <param name="user">The <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to create.</param>
+            <param name="isReplace">To indicate if replace the complete object or update only the properties.</param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which matches the ID, else null.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Users.IUserService.GetUser(System.Int32)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which matches the supplied ID.
+            </summary>
+            <param name="id">The ID of the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to return.</param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which matches the ID, else null.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Users.IUserService.GetUser(System.String)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which matches the supplied user name.
+            </summary>
+            <param name="userName">The UserName of the user <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to return. </param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which matches the UserName, else null.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Users.IUserService.DeleteUser(PoshKentico.Core.Services.Configuration.Users.IUser)">
+            <summary>
+            Deletes the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which matches the supplied user name.
+            </summary>
+            <param name="user">The user <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to delete.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Users.IUserService.AddUserToSite(PoshKentico.Core.Services.Configuration.Users.IUser,System.String)">
+            <summary>
+            Assigns a user to a site.
+            </summary>
+            <param name="user">The user <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to assign to a site. </param>
+            <param name="siteName">The site name of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to assign the user to. </param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Users.IUserService.RemoveUserFromSite(PoshKentico.Core.Services.Configuration.Users.IUser,System.String)">
+            <summary>
+            Removes a user from a site.
+            </summary>
+            <param name="user">The user <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to remove from a site. </param>
+            <param name="siteName">The site name of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to remove the user from. </param>
+        </member>
+        <member name="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile">
+            <summary>
+            Represents a Media Library File Object.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile.FileName">
+            <summary>
+            Gets the media file name.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile.FileTitle">
+            <summary>
+            Gets the media file title.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile.FilePath">
+            <summary>
+            Gets the media file path.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile.FileDescription">
+            <summary>
+            Gets the media file description.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile.FileExtension">
+            <summary>
+            Gets the media file extention.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile.FileMimeType">
+            <summary>
+            Gets the mime type for the media file.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile.FileSize">
+            <summary>
+            Gets the file size for the media file.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile.FileID">
+            <summary>
+            Gets the file id for the media file.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile.FileSiteID">
+            <summary>
+            Gets the site id for the media file.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile.FileLibraryID">
+            <summary>
+            Gets the media library id for the media file.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile.FileBinary">
+            <summary>
+            Gets the file binary for the media file.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary">
+            <summary>
+            Represents a Media Library Object.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary.LibraryDisplayName">
+            <summary>
+            Gets the display name for the media library.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary.LibraryName">
+            <summary>
+            Gets the media library name.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary.LibraryDescription">
+            <summary>
+            Gets the media library description.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary.LibraryFolder">
+            <summary>
+            Gets the media library folder.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary.LibrarySiteID">
+            <summary>
+            Gets the site id for the media library.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary.LibraryID">
+            <summary>
+            Gets the library id for the media library.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService">
+            <summary>
+            Service for providing access to a CMS Media Library.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.MediaLibraries">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> provided by the CMS System.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.MediaFiles">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> provided by the CMS System.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.CreateMediaLibrary(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary)">
+            <summary>
+            Creates the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>.
+            </summary>
+            <param name="library">The <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to create.</param>
+            <returns>The newly created <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.GetMediaLibrary(System.Int32)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> which matches the supplied ID.
+            </summary>
+            <param name="id">The ID of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to return.</param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> which matches the ID, else null.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.GetMediaLibrary(System.Int32,System.String)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> which matches the supplied library name.
+            </summary>
+            <param name="librarySiteID">The site id of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>to return.</param>
+            <param name="libraryName">The name of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to return.</param>
+            <returns>the media library info object.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.UpdateMediaLibrary(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary,System.Boolean)">
+            <summary>
+            Updates the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>.
+            </summary>
+            <param name="library">The <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to update.</param>
+            <param name="isReplace">to indicate if replace the complete object or update only the properties.</param>
+            <returns>The updated library.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.DeleteMediaLibrary(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary)">
+            <summary>
+            Deletes the specified <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>.
+            </summary>
+            <param name="library">The <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to delete.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.CreateMediaFolder(System.Int32,System.String,System.String)">
+            <summary>
+            Creates a media library folder within the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>.
+            </summary>
+            <param name="librarySiteID">The site id of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>to retrive for creating the new folder.</param>
+            <param name="libraryName">The name of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to retrive for creating the new folder.</param>
+            <param name="folderName">The new folder name to create within the media library.</param>
+            <returns>The newly created folder name.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.CreateMediaFile(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates a media library file within the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>.
+            </summary>
+            <param name="librarySiteID">The site id of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>to retrive for creating the new file.</param>
+            <param name="libraryName">The name of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to retrive for creating the new file.</param>
+            <param name = "localFilePath" >The local file path for the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.</param>
+            <param name="fileName">The file name for the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.</param>
+            <param name="fileTitle">The file title for the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.</param>
+            <param name="fileDesc">The file description for the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.</param>
+            <param name="filePath">The file path for the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.</param>
+            <returns>The newly created <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.GetMediaFile(System.Int32)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> which matches the supplied ID.
+            </summary>
+            <param name="mediaFileId">The media file ID of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.</param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> which matches the ID, else null.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.GetMediaFile(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary,System.String,System.String)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> which matches the supplied library <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> and file path.
+            </summary>
+            <param name="library">The specified <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to look for the media file.</param>
+            <param name="folder">The folder of the media file.</param>
+            <param name="fileName">The file name of the media file.</param>
+            <returns>The list of <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> which matches the input, else null.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.UpdateMediaFile(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile)">
+            <summary>
+            Updates the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.
+            </summary>
+            <param name="file">The <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> to update.</param>
+            <returns>The updated media file.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.DeleteMediaFile(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile)">
+            <summary>
+            Deletes the specified <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.
+            </summary>
+            <param name="file">The <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> to delete.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.DeleteMediaFolder(System.Int32,System.String,System.String)">
+            <summary>
+            Deletes a media library folder within the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>.
+            </summary>
+            <param name="librarySiteID">The site id of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>to retrive for creating the new folder.</param>
+            <param name="libraryName">The name of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to retrive for creating the new folder.</param>
+            <param name="folderName">The new folder name to create within the media library.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibraryService.SetMediaLibrarySecurityOption(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary,PoshKentico.Core.Services.ContentManagement.MediaLibraries.SecurityPropertyEnum,CMS.Helpers.SecurityAccessEnum)">
+            <summary>
+            Sets the security options for a media library.
+            </summary>
+            <param name="library">The specified <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to look for setting the security option.</param>
+            <param name="option">The security option <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.SecurityPropertyEnum"/>.</param>
+            <param name="securityAccess">The security acess enum <see cref="T:CMS.Helpers.SecurityAccessEnum"/>.</param>
+        </member>
+        <member name="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.SecurityPropertyEnum">
+            <summary>
+            Types of the Security Option Properties for a Media Library.
+            </summary>
+        </member>
+        <member name="F:PoshKentico.Core.Services.ContentManagement.MediaLibraries.SecurityPropertyEnum.Access">
+            <summary>
+            Represents Access Property
+            </summary>
+        </member>
+        <member name="F:PoshKentico.Core.Services.ContentManagement.MediaLibraries.SecurityPropertyEnum.FileCreate">
+            <summary>
+            Represents FileCreate Property
+            </summary>
+        </member>
+        <member name="F:PoshKentico.Core.Services.ContentManagement.MediaLibraries.SecurityPropertyEnum.FolderCreate">
+            <summary>
+            Represents FolderCreate Property
+            </summary>
+        </member>
+        <member name="F:PoshKentico.Core.Services.ContentManagement.MediaLibraries.SecurityPropertyEnum.FileDelete">
+            <summary>
+            Represents FileDelete Property
+            </summary>
+        </member>
+        <member name="F:PoshKentico.Core.Services.ContentManagement.MediaLibraries.SecurityPropertyEnum.FolderDelete">
+            <summary>
+            Represents FolderDelete Property
+            </summary>
+        </member>
+        <member name="F:PoshKentico.Core.Services.ContentManagement.MediaLibraries.SecurityPropertyEnum.FileModify">
+            <summary>
+            Represents FileModify Property
+            </summary>
+        </member>
+        <member name="F:PoshKentico.Core.Services.ContentManagement.MediaLibraries.SecurityPropertyEnum.FolderModify">
+            <summary>
+            Represents FolderModify Property
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate">
+            <summary>
+            Represents a Page Template.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.CategoryID">
+            <summary>
+            Gets the ID for the page template category this paeg template belongs to.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.PageTemplateSiteID">
+            <summary>
+            Gets the page template site ID.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.PageTemplateID">
+            <summary>
+            Gets the ID for the current page template.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.DisplayName">
+            <summary>
+            Gets the display name for the current page template.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.FileName">
+            <summary>
+            Gets the file name for the current page template.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.Description">
+            <summary>
+            Gets the page template description.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.PageTemplates">
+            <summary>
+            Gets the page template PageTemplates.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.CodeName">
+            <summary>
+            Gets the code name for the current page template.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.PageTemplateProperties">
+            <summary>
+            Gets or sets the properties for the current page template.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.PageTemplateLayout">
+            <summary>
+            Gets page template layout.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.PageTemplateIconClass">
+            <summary>
+            Gets page template icon class defining the page template thumbnail.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.PageTemplateCSS">
+            <summary>
+            Gets page template CSS.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.IsReusable">
+            <summary>
+            Gets a value indicating whether the page template is reusable.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory">
+            <summary>
+            Represents a Page Template Category.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory.DisplayName">
+            <summary>
+            Gets the display name for the PageTemplate category.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory.CategoryId">
+            <summary>
+            Gets the ID for the PageTemplate category.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory.CategoryGUID">
+            <summary>
+            Gets the GUID for the PageTemplate category.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory.CategoryImagePath">
+            <summary>
+            Gets the image path for the PageTemplate category.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory.CategoryName">
+            <summary>
+            Gets the name for the PageTemplate category.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory.ParentId">
+            <summary>
+            Gets the parent ID for the PageTemplate category.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory.CategoryPath">
+            <summary>
+            Gets the path for the PageTemplate category.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateField">
+            <summary>
+            Represents a Web Part field.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateField.AllowEmpty">
+            <summary>
+            Gets a value indicating whether the current field is allowed to be empty.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateField.Caption">
+            <summary>
+            Gets the caption for the current field.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateField.DataType">
+            <summary>
+            Gets the data type for the current field.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateField.DefaultValue">
+            <summary>
+            Gets the default value for the current field.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateField.Name">
+            <summary>
+            Gets the name for the current field.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateField.Size">
+            <summary>
+            Gets the size for the current field.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateField.PageTemplate">
+            <summary>
+            Gets or sets the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/> associated with the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateField"/>.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateService">
+            <summary>
+            Service for providing access to a CMS pagetemplates.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateService.PageTemplates">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/> provided by the CMS System.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateService.PageTemplateCategories">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/> provided by the CMS System.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateService.AddField(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateField,PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate)">
+            <summary>
+            Adds a field to a <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/>.
+            </summary>
+            <param name="field">The <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateField"/> to add.</param>
+            <param name="pageTemplate">The <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/> to attach the field to.</param>
+            <returns>The newly created <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateField"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateService.Create(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory)">
+            <summary>
+            Creates the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/>.
+            </summary>
+            <param name="pageTemplateCategory">The <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/> to create.</param>
+            <returns>The newly created <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateService.Create(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate)">
+            <summary>
+            Creates the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/>.
+            </summary>
+            <param name="pageTemplate">The <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/> to create.</param>
+            <returns>The newly created <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateService.Delete(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory)">
+            <summary>
+            Deletes the specified <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/>.
+            </summary>
+            <param name="pageTemplateCategory">The <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/> to delete.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateService.Delete(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate)">
+            <summary>
+            Deletes the specified <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/>.
+            </summary>
+            <param name="pageTemplate">The <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/> to delete.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateService.GetPageTemplateCategories(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory)">
+            <summary>
+            Gets a list of <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/> that have <paramref name="parentPageTemplateCategory"/> as the parent.
+            </summary>
+            <param name="parentPageTemplateCategory">The parent <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/> to the desired page template categories.</param>
+            <returns>A list of <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/> that have <paramref name="parentPageTemplateCategory"/> as the parent.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateService.GetPageTemplateCategory(System.Int32)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/> which matches the supplied ID.
+            </summary>
+            <param name="id">The ID of the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/> to return.</param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/> which matches the ID, else null.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateService.GetPageTemplateFields(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateField"/> associated with the supplied <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/>.
+            </summary>
+            <param name="pageTemplate">The <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/> to get the list of fields for.</param>
+            <returns>A list of the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateField"/> that is associated with the supplied <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateService.GetPageTemplates(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory)">
+            <summary>
+            Gets a list of <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/> which have <paramref name="pageTemplateCategory"/> as their parent category.
+            </summary>
+            <param name="pageTemplateCategory">The <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/> which is the category for the desired list of <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/>.</param>
+            <returns>A list of <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/> which are related to <paramref name="pageTemplateCategory"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateService.RemoveField(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateField)">
+            <summary>
+            Removes a <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateField"/> from a <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/>.
+            </summary>
+            <param name="field">The <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateField"/> to remove.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateService.Update(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory)">
+            <summary>
+            Updates the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/>.
+            </summary>
+            <param name="pageTemplateCategory">The <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/> to update.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateService.Update(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate)">
+            <summary>
+            Updates the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/>.
+            </summary>
+            <param name="pageTemplate">The <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/> to update.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateService.Update(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateField)">
+            <summary>
+            Updates the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateField"/>.
+            </summary>
+            <param name="field">The <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateField"/> to update.</param>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Development.WebParts.IWebPart">
+            <summary>
+            Represents a Web Part.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPart.WebPartCategoryID">
+            <summary>
+            Gets the ID for the web part category this web part belongs to.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPart.WebPartDisplayName">
+            <summary>
+            Gets the display name for the current web part.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPart.WebPartFileName">
+            <summary>
+            Gets the file name for the current web part.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPart.WebPartID">
+            <summary>
+            Gets the ID for the current web part.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPart.WebPartName">
+            <summary>
+            Gets the code name for the current web part.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPart.WebPartProperties">
+            <summary>
+            Gets or sets the properties for the current web part.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory">
+            <summary>
+            Represents a WebPart Category.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory.CategoryDisplayName">
+            <summary>
+            Gets the display name for the WebPart category.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory.CategoryID">
+            <summary>
+            Gets the ID for the WebPart category.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory.CategoryImagePath">
+            <summary>
+            Gets the image path for the WebPart category.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory.CategoryName">
+            <summary>
+            Gets the name for the WebPart category.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory.CategoryParentID">
+            <summary>
+            Gets the parent ID for the WebPart category.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory.CategoryPath">
+            <summary>
+            Gets the path for the WebPart category.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField">
+            <summary>
+            Represents a Web Part field.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartField.AllowEmpty">
+            <summary>
+            Gets a value indicating whether the current field is allowed to be empty.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartField.Caption">
+            <summary>
+            Gets the caption for the current field.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartField.DataType">
+            <summary>
+            Gets the data type for the current field.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartField.DefaultValue">
+            <summary>
+            Gets the default value for the current field.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartField.Name">
+            <summary>
+            Gets the name for the current field.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartField.Size">
+            <summary>
+            Gets the size for the current field.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartField.WebPart">
+            <summary>
+            Gets or sets the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> associated with the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/>.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Development.WebParts.IWebPartService">
+            <summary>
+            Service for providing access to a CMS webparts.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartService.WebParts">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> provided by the CMS System.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartService.WebPartCategories">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> provided by the CMS System.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.AddField(PoshKentico.Core.Services.Development.WebParts.IWebPartField,PoshKentico.Core.Services.Development.WebParts.IWebPart)">
+            <summary>
+            Adds a field to a <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.
+            </summary>
+            <param name="field">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/> to add.</param>
+            <param name="webPart">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> to attach the field to.</param>
+            <returns>The newly created <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.Create(PoshKentico.Core.Services.Development.WebParts.IWebPartCategory)">
+            <summary>
+            Creates the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/>.
+            </summary>
+            <param name="webPartCategory">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> to create.</param>
+            <returns>The newly created <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.Create(PoshKentico.Core.Services.Development.WebParts.IWebPart)">
+            <summary>
+            Creates the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.
+            </summary>
+            <param name="webPart">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> to create.</param>
+            <returns>The newly created <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.Delete(PoshKentico.Core.Services.Development.WebParts.IWebPartCategory)">
+            <summary>
+            Deletes the specified <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/>.
+            </summary>
+            <param name="webPartCategory">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> to delete.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.Delete(PoshKentico.Core.Services.Development.WebParts.IWebPart)">
+            <summary>
+            Deletes the specified <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.
+            </summary>
+            <param name="webPart">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> to delete.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.GetWebPartCategories(PoshKentico.Core.Services.Development.WebParts.IWebPartCategory)">
+            <summary>
+            Gets a list of <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> that have <paramref name="parentWebPartCategory"/> as the parent.
+            </summary>
+            <param name="parentWebPartCategory">The parent <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> to the desired web part categories.</param>
+            <returns>A list of <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> that have <paramref name="parentWebPartCategory"/> as the parent.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.GetWebPartCategory(System.Int32)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> which matches the supplied ID.
+            </summary>
+            <param name="id">The ID of the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> to return.</param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> which matches the ID, else null.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.GetWebPartFields(PoshKentico.Core.Services.Development.WebParts.IWebPart)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/> associated with the supplied <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.
+            </summary>
+            <param name="webPart">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> to get the list of fields for.</param>
+            <returns>A list of the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/> that is associated with the supplied <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.GetWebParts(PoshKentico.Core.Services.Development.WebParts.IWebPartCategory)">
+            <summary>
+            Gets a list of <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> which have <paramref name="webPartCategory"/> as their parent category.
+            </summary>
+            <param name="webPartCategory">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> which is the category for the desired list of <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/>.</param>
+            <returns>A list of <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> which are related to <paramref name="webPartCategory"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.RemoveField(PoshKentico.Core.Services.Development.WebParts.IWebPartField)">
+            <summary>
+            Removes a <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/> from a <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.
+            </summary>
+            <param name="field">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/> to remove.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.Update(PoshKentico.Core.Services.Development.WebParts.IWebPartCategory)">
+            <summary>
+            Updates the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/>.
+            </summary>
+            <param name="webPartCategory">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> to update.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.Update(PoshKentico.Core.Services.Development.WebParts.IWebPart)">
+            <summary>
+            Updates the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.
+            </summary>
+            <param name="webPart">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> to update.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.Update(PoshKentico.Core.Services.Development.WebParts.IWebPartField)">
+            <summary>
+            Updates the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/>.
+            </summary>
+            <param name="field">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/> to update.</param>
+        </member>
+        <member name="T:PoshKentico.Core.Services.General.ICmsApplicationService">
+            <summary>
+            Service for providing access to a CMS application.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.General.ICmsApplicationService.InitializationState">
+            <summary>
+            Gets the initialization state of the CMS Application.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Services.General.ICmsApplicationService.FindSite(System.Action{System.String},System.Action{System.String})">
+            <summary>
+            Locates the CMS Site.
+            </summary>
+            <param name="writeDebug">A delegate for writing to the debug stream.</param>
+            <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
+            <returns>The directory and the connection string for the CMS site.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.General.ICmsApplicationService.Initialize(System.Boolean,System.Action{System.String},System.Action{System.String})">
+            <summary>
+            Locates and performs the necessary initialization for the CMS site.
+            </summary>
+            <param name="useCached">Use the cached location for the CMS application.  When true and have already found Kentico in a previous run, this method does not require admin.</param>
+            <param name="writeDebug">A delegate for writing to the debug stream.</param>
+            <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.General.ICmsApplicationService.Initialize(System.IO.DirectoryInfo,System.String,System.Action{System.String},System.Action{System.String})">
+            <summary>
+            Performs the necessary initialization for the provided CMS site.
+            </summary>
+            <param name="siteLocation">The directory where the CMS site resides.</param>
+            <param name="connectionString">The connection string to use for initializing the CMS Application.</param>
+            <param name="writeDebug">A delegate for writing to the debug stream.</param>
+            <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
+        </member>
+        <member name="T:PoshKentico.Core.Services.General.InitializationState">
+            <summary>
+            Represents the initialization state of a CMS application.
+            </summary>
+        </member>
+        <member name="F:PoshKentico.Core.Services.General.InitializationState.Uninitialized">
+            <summary>
+            Initialization has not yet occurred.
+            </summary>
+        </member>
+        <member name="F:PoshKentico.Core.Services.General.InitializationState.Error">
+            <summary>
+            An error occurred during initialization.
+            </summary>
+        </member>
+        <member name="F:PoshKentico.Core.Services.General.InitializationState.Initialized">
+            <summary>
+            Initialization was successful.
+            </summary>
+        </member>
+    </members>
+</doc>

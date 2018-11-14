@@ -43,7 +43,7 @@ namespace PoshKentico.Core.Configuration.ContentManagement.MediaLibraries
 
         /// <inheritdoc/>
         public IEnumerable<IMediaFile> MediaFiles => (from f in MediaFileInfoProvider.GetMediaFiles()
-                                                      select Impromptu.ActLike<IMediaFile>(f as MediaFileInfo)).ToArray();
+                                                      select Impromptu.ActLike<IMediaFile>(SetFileBinary(f))).ToArray();
 
         #endregion
 
@@ -96,7 +96,6 @@ namespace PoshKentico.Core.Configuration.ContentManagement.MediaLibraries
             {
                 // Prepares a CMS.IO.FileInfo object representing the local file
                 CMS.IO.FileInfo file = CMS.IO.FileInfo.New(localFilePath);
-
                 if (file != null)
                 {
                     // Creates a new media library file object
@@ -140,7 +139,9 @@ namespace PoshKentico.Core.Configuration.ContentManagement.MediaLibraries
         /// <inheritdoc/>
         public IMediaFile GetMediaFile(int mediaFileId)
         {
-            return (MediaFileInfoProvider.GetMediaFileInfo(mediaFileId) as MediaFileInfo)?.ActLike<IMediaFile>();
+            MediaFileInfo file = MediaFileInfoProvider.GetMediaFileInfo(mediaFileId);
+            file = SetFileBinary(file);
+            return file?.ActLike<IMediaFile>();
         }
 
         /// <inheritdoc/>
@@ -149,7 +150,7 @@ namespace PoshKentico.Core.Configuration.ContentManagement.MediaLibraries
             MediaFileInfo mediaFile = null;
 
             // Gets the media library
-            var existingLibrary = this.GetMediaLibrary(library);
+            var existingLibrary = GetMediaLibrary(library);
 
             if (existingLibrary != null)
             {
@@ -163,7 +164,7 @@ namespace PoshKentico.Core.Configuration.ContentManagement.MediaLibraries
         /// <inheritdoc/>
         public IMediaLibrary UpdateMediaLibrary(IMediaLibrary library, bool isReplace = true)
         {
-            var updateLibrary = this.GetMediaLibrary(library);
+            var updateLibrary = GetMediaLibrary(library);
             if (updateLibrary != null)
             {
                 if (isReplace)
@@ -204,7 +205,7 @@ namespace PoshKentico.Core.Configuration.ContentManagement.MediaLibraries
         public void DeleteMediaLibrary(IMediaLibrary library)
         {
             // Gets the media library
-            var deleteLibrary = this.GetMediaLibrary(library);
+            var deleteLibrary = GetMediaLibrary(library);
 
             if (deleteLibrary != null)
             {
@@ -245,7 +246,7 @@ namespace PoshKentico.Core.Configuration.ContentManagement.MediaLibraries
         public void SetMediaLibrarySecurityOption(IMediaLibrary library, SecurityPropertyEnum option, SecurityAccessEnum securityAccess)
         {
             // Gets the media library
-            var existingLibrary = this.GetMediaLibrary(library);
+            var existingLibrary = GetMediaLibrary(library);
 
             if (existingLibrary != null)
             {
@@ -265,10 +266,30 @@ namespace PoshKentico.Core.Configuration.ContentManagement.MediaLibraries
         /// </summary>
         /// <param name="library">the interface <see cref="IMediaLibrary"/>.</param>
         /// <returns>the media library info object.</returns>
-        private MediaLibraryInfo GetMediaLibrary(IMediaLibrary library)
+        private static MediaLibraryInfo GetMediaLibrary(IMediaLibrary library)
         {
             string siteName = SiteInfoProvider.GetSiteName(library.LibrarySiteID);
             return MediaLibraryInfoProvider.GetMediaLibraryInfo(library.LibraryName, siteName);
+        }
+
+        /// <summary>
+        /// Sets the media library file binary.
+        /// </summary>
+        /// <param name="file">the file to set the binary. </param>
+        /// <returns>the updated media library info object.</returns>
+        private static MediaFileInfo SetFileBinary(MediaFileInfo file)
+        {
+            if (file != null)
+            {
+                var siteName = SiteInfoProvider.GetSiteName(file.FileSiteID);
+                var path = $"{CMS.Base.SystemContext.WebApplicationPhysicalPath}\\{siteName}\\media\\Images\\{file.FilePath}";
+                if (CMS.IO.File.Exists(path))
+                {
+                    file.FileBinary = CMS.IO.File.ReadAllBytes(path);
+                }
+            }
+
+            return file;
         }
         #endregion
 

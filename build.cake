@@ -1,12 +1,14 @@
 #tool nuget:?package=NUnit.ConsoleRunner&version=3.4.0
-#addin "Cake.FileHelpers"
+
+#addin Cake.GitVersioning
+#addin Cake.FileHelpers
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
 //////////////////////////////////////////////////////////////////////
 
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
-var version = Argument("module_version", "1.0");
+//var version = Argument("module_version", "1.0");
 
 //////////////////////////////////////////////////////////////////////
 // PREPARATION
@@ -14,6 +16,8 @@ var version = Argument("module_version", "1.0");
 
 // Define directories.
 var buildDir = Directory("./build") + Directory("posh-kentico");
+
+var version = GitVersioningGetVersion();
 
 // Define Files
 var moduleFile = buildDir + File("posh-kentico.psd1");
@@ -28,38 +32,32 @@ Task("Clean")
     CleanDirectory(buildDir);
 });
 
-Task("Restore-NuGet-Packages")
+Task("BuildRootModule")
     .IsDependentOn("Clean")
     .Does(() =>
 {
-    NuGetRestore("./src/posh-kentico.sln");
-});
+    var settings = new DotNetCoreBuildSettings
+    {
+        Configuration = configuration
+    };
 
-Task("BuildRootModule")
-    .IsDependentOn("Restore-NuGet-Packages")
-    .Does(() =>
-{
-    if(IsRunningOnWindows())
-    {
-      // Use MSBuild
-      MSBuild("./src/posh-kentico.sln", settings =>
-        settings.SetConfiguration(configuration));
-    }
-    else
-    {
-      // Use XBuild
-      XBuild("./src/posh-kentico.sln", settings =>
-        settings.SetConfiguration(configuration));
-    }
+    DotNetCoreBuild("./src/posh-kentico.sln", settings);
 });
 
 Task("BuildPowerShellModule")
 	.IsDependentOn("BuildRootModule")
 	.Does(() =>
 {
-	Information("Setting module version number to " + version);
+	Information("Setting module version number to " + version.SimpleVersion.ToString());
 	// Update the Version Number
-	ReplaceRegexInFiles(moduleFile, "1\\.0", version);
+	ReplaceRegexInFiles(moduleFile, "1\\.0", version.SimpleVersion.ToString());
+
+    if (!version.PublicRelease)
+    {
+        Information("Test: " + version.PrereleaseVersion);
+
+        ReplaceRegexInFiles(moduleFile, "# Prerelease = ''", version.PrereleaseVersion);
+    }
 });
 
 Task("Build")

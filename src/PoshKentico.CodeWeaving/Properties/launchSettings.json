@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PoshKentico.CodeWeaving": {
+      "commandName": "Project",
+      "commandLineArgs": "..\\..\\..\\..\\..\\build\\posh-kentico"
+    }
+  }
+}
