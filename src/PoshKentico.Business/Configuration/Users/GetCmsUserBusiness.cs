@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Text.RegularExpressions;
 using PoshKentico.Core.Services.Configuration.Users;
 
 namespace PoshKentico.Business.Configuration.Users
@@ -68,22 +69,26 @@ namespace PoshKentico.Business.Configuration.Users
         /// Gets a list of all of the <see cref="IUser"/> which match the specified criteria.
         /// </summary>
         /// <param name="userName">The user name which to match the users to.</param>
-        /// <param name="exact">A boolean which indicates if the match should be exact.</param>
+        /// <param name="isRegex">A boolean which indicates if the match should be exact.</param>
         /// <returns>A list of all of the <see cref="IUser"/> which match the specified criteria.</returns>
-        public IEnumerable<IUser> GetUsers(string userName, bool exact)
+        public IEnumerable<IUser> GetUsers(string userName, bool isRegex)
         {
-            if (exact)
+            Regex regex = null;
+
+            if (isRegex)
             {
-                return (from c in this.UserService.Users
-                        where c.UserName.ToLowerInvariant().Equals(userName, StringComparison.InvariantCultureIgnoreCase)
-                        select c).ToArray();
+                regex = new Regex(userName, RegexOptions.Compiled | RegexOptions.IgnoreCase);
             }
             else
             {
-                return (from c in this.UserService.Users
-                        where c.UserName.ToLowerInvariant().Contains(userName.ToLowerInvariant())
-                        select c).ToArray();
+                regex = new Regex($"^{userName.Replace("*", ".*")}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             }
+
+            var matched = from f in this.UserService.Users
+                          where regex.IsMatch(f.UserName)
+                          select f;
+
+            return matched.ToArray();
         }
 
         #endregion

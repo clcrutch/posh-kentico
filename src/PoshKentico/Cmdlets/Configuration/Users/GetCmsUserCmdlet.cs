@@ -85,7 +85,8 @@ namespace PoshKentico.Cmdlets.Configuration.Users
         /// <para type="description">If set, the match is exact, else the match performs a contains for display name and category name and starts with for path.</para>
         /// </summary>
         [Parameter(Mandatory = false)]
-        public SwitchParameter Exact { get; set; }
+        [Alias("Regex")]
+        public SwitchParameter RegularExpression { get; set; }
 
         /// <summary>
         /// Gets or sets the Business layer for this user. Populated by MEF.
@@ -105,7 +106,7 @@ namespace PoshKentico.Cmdlets.Configuration.Users
             switch (this.ParameterSetName)
             {
                 case USERNAME:
-                    users = this.BusinessLayer.GetUsers(this.UserName, this.Exact.ToBool());
+                    users = this.BusinessLayer.GetUsers(this.UserName, this.RegularExpression.ToBool());
                     break;
                 case IDSETNAME:
                     users = this.BusinessLayer.GetUsers(this.ID);
