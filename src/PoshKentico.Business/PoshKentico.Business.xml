@@ -837,7 +837,7 @@
             Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which match the specified criteria.
             </summary>
             <param name="userName">The user name which to match the users to.</param>
-            <param name="exact">A boolean which indicates if the match should be exact.</param>
+            <param name="isRegex">A boolean which indicates if the match should be exact.</param>
             <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which match the specified criteria.</returns>
         </member>
         <member name="T:PoshKentico.Business.Configuration.Users.NewCmsUserBusiness">
