@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PoshKentico.CodeWeaving</name>
+    </assembly>
+    <members>
+        <member name="T:PoshKentico.CodeWeaving.AssemblyResolver">
+            <summary>
+            Assembly resolver which allows the user to dispose of the cached references.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.CodeWeaving.AssemblyResolver.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PoshKentico.CodeWeaving.AssemblyResolver"/> class.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.CodeWeaving.AssemblyResolver.Resolve(Mono.Cecil.AssemblyNameReference)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.CodeWeaving.AssemblyResolver.Dispose(System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PoshKentico.CodeWeaving.Program">
+            <summary>
+            Entry point for the application.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.CodeWeaving.Weavers.IWeaver">
+            <summary>
+            Represents a assembly code weaver.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.CodeWeaving.Weavers.IWeaver.Execute(Mono.Cecil.AssemblyDefinition)">
+            <summary>
+            Executes the weaver against the specified <see cref="T:Mono.Cecil.AssemblyDefinition"/>.
+            </summary>
+            <param name="assemblyDefinition">The <see cref="T:Mono.Cecil.AssemblyDefinition"/> to execute the weaver against.</param>
+        </member>
+        <member name="T:PoshKentico.CodeWeaving.Weavers.PublicPropertiesVirtualWeaver">
+            <summary>
+            Weaver wich makes public properties virtual.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.CodeWeaving.Weavers.PublicPropertiesVirtualWeaver.Execute(Mono.Cecil.AssemblyDefinition)">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>
