@@ -15,6 +15,7 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System.Diagnostics.CodeAnalysis;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
@@ -22,6 +23,7 @@ using PoshKentico.Business.ContentManagement.MediaLibraries;
 
 namespace PoshKentico.Tests.ContentManagement.MediaLibraries
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     public class NewCmsMediaLibraryTests
     {

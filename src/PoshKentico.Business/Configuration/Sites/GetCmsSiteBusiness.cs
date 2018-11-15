@@ -19,7 +19,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using CMS.Membership;
 using PoshKentico.Core.Services.Configuration.Sites;
+using PoshKentico.Core.Services.Configuration.Users;
 
 namespace PoshKentico.Business.Configuration.Sites
 {
@@ -89,6 +91,16 @@ namespace PoshKentico.Business.Configuration.Sites
             return (from site in sites
                     where site != null
                     select site).ToArray();
+        }
+
+        /// <summary>
+        /// Gets a list of the <see cref="ISite"/> which assigned to the supplied user.
+        /// </summary>
+        /// <param name="user">The user <see cref="IUser"/> which assigned to the site.</param>
+        /// <returns>A list of the <see cref="ISite"/> to which the user is assigned.</returns>
+        public IEnumerable<ISite> GetSites(IUser user)
+        {
+            return this.SiteService.GetSite(user);
         }
 
         #endregion

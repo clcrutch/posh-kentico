@@ -17,6 +17,7 @@
 
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using CMS.Base;
 using CMS.Membership;
@@ -30,6 +31,7 @@ namespace PoshKentico.Core.Providers.Configuration.Staging
     /// <summary>
     /// Implementation of <see cref="IStagingService"/> that uses Kentico.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     [Export(typeof(IStagingService))]
     public class KenticoStagingService : IStagingService
     {

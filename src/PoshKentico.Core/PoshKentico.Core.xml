@@ -35,6 +35,9 @@
         <member name="M:PoshKentico.Core.Providers.Configuration.Sites.KenticoSiteService.GetSite(System.String)">
             <inheritdoc/>
         </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Sites.KenticoSiteService.GetSite(PoshKentico.Core.Services.Configuration.Users.IUser)">
+            <inheritdoc/>
+        </member>
         <member name="M:PoshKentico.Core.Providers.Configuration.Sites.KenticoSiteService.Delete(PoshKentico.Core.Services.Configuration.Sites.ISite)">
             <inheritdoc/>
         </member>
@@ -98,6 +101,35 @@
             <inheritdoc/>
         </member>
         <member name="M:PoshKentico.Core.Providers.Configuration.Staging.KenticoStagingService.SetLoggingRole(PoshKentico.Core.Services.Configuration.Roles.IRole,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService">
+            <summary>
+            Implementation of <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUserService"/> that uses Kentico.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.Users">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.CreateUser(PoshKentico.Core.Services.Configuration.Users.IUser)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.SetUser(PoshKentico.Core.Services.Configuration.Users.IUser,System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.GetUser(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.GetUser(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.DeleteUser(PoshKentico.Core.Services.Configuration.Users.IUser)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.AddUserToSite(PoshKentico.Core.Services.Configuration.Users.IUser,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.RemoveUserFromSite(PoshKentico.Core.Services.Configuration.Users.IUser,System.String)">
             <inheritdoc/>
         </member>
         <member name="T:PoshKentico.Core.Providers.Development.PageTemplates.IPageTemplateHolder">
@@ -514,6 +546,13 @@
             <param name="siteName">The Site Name of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to return.</param>
             <returns>The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> which matches the site name, else null.</returns>
         </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Sites.ISiteService.GetSite(PoshKentico.Core.Services.Configuration.Users.IUser)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> which matches the supplied user name.
+            </summary>
+            <param name="user">The user of the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser" />.</param>
+            <returns>The list of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/>  which the user is assigned.</returns>
+        </member>
         <member name="M:PoshKentico.Core.Services.Configuration.Sites.ISiteService.Update(PoshKentico.Core.Services.Configuration.Sites.ISite,System.Boolean)">
             <summary>
             Updates the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/>.
@@ -697,6 +736,95 @@
             Set a new role for running code without logging of staging tasks.
             </summary>
             <param name="role">The <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/>.</param>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Configuration.Users.IUser">
+            <summary>
+            Represents a User Object.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Users.IUser.FullName">
+            <summary>
+            Gets the full name for the user.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Users.IUser.UserName">
+            <summary>
+            Gets the user name for the user.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Users.IUser.Email">
+            <summary>
+            Gets the email for the user.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Users.IUser.PreferredCultureCode">
+            <summary>
+            Gets the preferred culture code for the user.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Users.IUser.SiteIndependentPrivilegeLevel">
+            <summary>
+            Gets the site independent privilege level for the user.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Configuration.Users.IUserService">
+            <summary>
+            Service for providing access to a CMS Users.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Users.IUserService.Users">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> provided by the CMS System.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Users.IUserService.CreateUser(PoshKentico.Core.Services.Configuration.Users.IUser)">
+            <summary>
+            Creates the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/>.
+            </summary>
+            <param name="user">The <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to create.</param>
+            <returns>The newly created <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Users.IUserService.SetUser(PoshKentico.Core.Services.Configuration.Users.IUser,System.Boolean)">
+            <summary>
+            Sets the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/>.
+            </summary>
+            <param name="user">The <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to create.</param>
+            <param name="isReplace">To indicate if replace the complete object or update only the properties.</param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which matches the ID, else null.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Users.IUserService.GetUser(System.Int32)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which matches the supplied ID.
+            </summary>
+            <param name="id">The ID of the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to return.</param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which matches the ID, else null.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Users.IUserService.GetUser(System.String)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which matches the supplied user name.
+            </summary>
+            <param name="userName">The UserName of the user <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to return. </param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which matches the UserName, else null.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Users.IUserService.DeleteUser(PoshKentico.Core.Services.Configuration.Users.IUser)">
+            <summary>
+            Deletes the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which matches the supplied user name.
+            </summary>
+            <param name="user">The user <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to delete.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Users.IUserService.AddUserToSite(PoshKentico.Core.Services.Configuration.Users.IUser,System.String)">
+            <summary>
+            Assigns a user to a site.
+            </summary>
+            <param name="user">The user <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to assign to a site. </param>
+            <param name="siteName">The site name of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to assign the user to. </param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Users.IUserService.RemoveUserFromSite(PoshKentico.Core.Services.Configuration.Users.IUser,System.String)">
+            <summary>
+            Removes a user from a site.
+            </summary>
+            <param name="user">The user <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to remove from a site. </param>
+            <param name="siteName">The site name of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to remove the user from. </param>
         </member>
         <member name="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile">
             <summary>

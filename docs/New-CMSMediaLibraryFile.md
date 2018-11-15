@@ -187,6 +187,7 @@ The file name for the new media file.
 
 ## OUTPUTS
 
+### CMS.MediaLibrary.MediaFileInfo
 ## NOTES
 
 ## RELATED LINKS

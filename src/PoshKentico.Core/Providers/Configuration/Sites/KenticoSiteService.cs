@@ -20,10 +20,12 @@ using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using CMS.Localization;
+using CMS.Membership;
 using CMS.SiteProvider;
 using ImpromptuInterface;
 using PoshKentico.Core.Services.Configuration.Localization;
 using PoshKentico.Core.Services.Configuration.Sites;
+using PoshKentico.Core.Services.Configuration.Users;
 
 namespace PoshKentico.Core.Providers.Configuration.Sites
 {
@@ -70,6 +72,25 @@ namespace PoshKentico.Core.Providers.Configuration.Sites
         public ISite GetSite(string siteName)
         {
             return (SiteInfoProvider.GetSiteInfo(siteName) as SiteInfo)?.ActLike<ISite>();
+        }
+
+        /// <inheritdoc/>
+        public IEnumerable<ISite> GetSite(IUser user)
+        {
+            // Gets the user
+            UserInfo existingUser = UserInfoProvider.GetUserInfo(user.UserName);
+
+            if (existingUser != null)
+            {
+                // Gets the sites to which the user is assigned
+                var userSiteIDs = UserSiteInfoProvider.GetUserSites().Column("SiteID").WhereEquals("UserID", existingUser.UserID);
+                var sites = SiteInfoProvider.GetSites().WhereIn("SiteID", userSiteIDs);
+
+                // Loops through the sites
+                return (from c in sites select Impromptu.ActLike<ISite>(c as SiteInfo)).ToArray();
+            }
+
+            return null;
         }
 
         /// <inheritdoc/>

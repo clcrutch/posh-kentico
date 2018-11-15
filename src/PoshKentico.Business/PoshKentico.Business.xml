@@ -229,6 +229,13 @@
             <param name="ids">The IDs of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to return.</param>
             <returns>A list of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> which match the supplied IDs.</returns>
         </member>
+        <member name="M:PoshKentico.Business.Configuration.Sites.GetCmsSiteBusiness.GetSites(PoshKentico.Core.Services.Configuration.Users.IUser)">
+            <summary>
+            Gets a list of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> which assigned to the supplied user.
+            </summary>
+            <param name="user">The user <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which assigned to the site.</param>
+            <returns>A list of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to which the user is assigned.</returns>
+        </member>
         <member name="T:PoshKentico.Business.Configuration.Sites.GetCmsSiteCultureBusiness">
             <summary>
             Business layer for the Get-CMSSiteCulture cmdlet.
@@ -784,6 +791,136 @@
             Sync the specified <see cref="T:PoshKentico.Core.Services.Configuration.Staging.IServer"/> related staging tasks in the CMS System.
             </summary>
             <param name="server">The <see cref="T:PoshKentico.Core.Services.Configuration.Staging.IServer"/> to sync.</param>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.Users.AddCmsUserToSiteBusiness">
+            <summary>
+            Business Layer for Set-CMSUserToSite cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.Users.AddCmsUserToSiteBusiness.UserService">
+            <summary>
+            Gets or sets a reference to the User Service. Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Users.AddCmsUserToSiteBusiness.AddUserToSite(PoshKentico.Core.Services.Configuration.Users.IUser,System.String)">
+            <summary>
+            Adds a user <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to the specified site<see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
+            </summary>
+            <param name="user">The user to add to a site.</param>
+            <param name="siteName">The site name to add a user to.</param>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.Users.GetCmsUserBusiness">
+            <summary>
+            Business Layer of the Get-CMSUser cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.Users.GetCmsUserBusiness.UserService">
+            <summary>
+            Gets or sets a reference to the User Service. Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Users.GetCmsUserBusiness.GetUsers">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> in the CMS System.
+            </summary>
+            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Users.GetCmsUserBusiness.GetUsers(System.Int32[])">
+            <summary>
+            Gets a list of the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which match the supplied IDs.
+            </summary>
+            <param name="ids">The IDs of the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to return.</param>
+            <returns>A list of the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which match the supplied IDs.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Users.GetCmsUserBusiness.GetUsers(System.String,System.Boolean)">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which match the specified criteria.
+            </summary>
+            <param name="userName">The user name which to match the users to.</param>
+            <param name="isRegex">A boolean which indicates if the match should be exact.</param>
+            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which match the specified criteria.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.Users.NewCmsUserBusiness">
+            <summary>
+            Business Layer for the New-CMSUser cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.Users.NewCmsUserBusiness.UserService">
+            <summary>
+            Gets or sets a reference to the User Service. Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Users.NewCmsUserBusiness.CreateUser(System.String,System.String,System.String,System.String,CMS.Base.UserPrivilegeLevelEnum)">
+            <summary>
+            Creates a new <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> in the CMS System.
+            </summary>
+            <param name="userName">The User Name for the new User.</param>
+            <param name="fullName">The Full Name for the new User.</param>
+            <param name="email">The Email for the new User.</param>
+            <param name="preferredCultureCode">The Preferred Culture Code for the new User.</param>
+            <param name="privilegeLevel">The User Privilege Level for the new User.</param>
+            <returns>The newly created <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/>.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.Users.RemoveCmsUserBusiness">
+            <summary>
+            Business Layer for the Remove-CMSUser cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.Users.RemoveCmsUserBusiness.UserService">
+            <summary>
+            Gets or sets a reference to the User Service. Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Users.RemoveCmsUserBusiness.RemoveUsers(PoshKentico.Core.Services.Configuration.Users.IUser)">
+            <summary>
+            Removes a the specified user <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> in the CMS System.
+            </summary>
+            <param name="user">The <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to remove.</param>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.Users.RemoveCmsUserFromSiteBusiness">
+            <summary>
+            Business Layer for Remove-CMSUserFromSite cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.Users.RemoveCmsUserFromSiteBusiness.UserService">
+            <summary>
+            Gets or sets a reference to the User Service. Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Users.RemoveCmsUserFromSiteBusiness.RemoveUserFromSite(PoshKentico.Core.Services.Configuration.Users.IUser,System.String)">
+            <summary>
+            Removes a user <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> frpm the specified site<see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
+            </summary>
+            <param name="user">The user to Remove from a site.</param>
+            <param name="siteName">The site name to Remove a user from.</param>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.Users.SetCmsUserBusiness">
+            <summary>
+            Business Layer for the Set-CMSUser cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.Users.SetCmsUserBusiness.UserService">
+            <summary>
+            Gets or sets a reference to the User Service. Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Users.SetCmsUserBusiness.Set(PoshKentico.Core.Services.Configuration.Users.IUser)">
+            <summary>
+            Sets the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> in the CMS System.
+            </summary>
+            <param name="user">The <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to set.</param>
+            <returns>The updated user.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Users.SetCmsUserBusiness.Set(System.String,System.String,System.String,System.String,CMS.Base.UserPrivilegeLevelEnum)">
+            <summary>
+            Creates a new <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> in the CMS System.
+            </summary>
+            <param name="userName">The User Name for the new User.</param>
+            <param name="fullName">The Full Name for the new User.</param>
+            <param name="email">The Email for the new User.</param>
+            <param name="preferredCultureCode">The Preferred Culture Code for the new User.</param>
+            <param name="privilegeLevel">The User Privilege Level for the new User.</param>
+            <returns>The newly created <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/>.</returns>
         </member>
         <member name="T:PoshKentico.Business.ContentManagement.MediaLibraries.GetCmsMediaLibraryBusiness">
             <summary>
