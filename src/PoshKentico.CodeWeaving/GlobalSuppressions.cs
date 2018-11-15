@@ -1,4 +1,4 @@
-﻿// <copyright file="IWeaver.cs" company="Chris Crutchfield">
+﻿// <copyright file="GlobalSuppressions.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -15,19 +15,10 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using Mono.Cecil;
+// This file is used by Code Analysis to maintain SuppressMessage
+// attributes that are applied to this project.
+// Project-level suppressions either have no target or are given
+// a specific target and scoped to a namespace, type, member, etc.
+using System.Diagnostics.CodeAnalysis;
 
-namespace PoshKentico.CodeWeaving.Weavers
-{
-    /// <summary>
-    /// Represents a assembly code weaver.
-    /// </summary>
-    internal interface IWeaver
-    {
-        /// <summary>
-        /// Executes the weaver against the specified <see cref="AssemblyDefinition"/>.
-        /// </summary>
-        /// <param name="assemblyDefinition">The <see cref="AssemblyDefinition"/> to execute the weaver against.</param>
-        void Execute(AssemblyDefinition assemblyDefinition);
-    }
-}
+[assembly: SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1124:DoNotUseRegions", Justification = "Reviewed.")]
