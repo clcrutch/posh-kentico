@@ -15,6 +15,7 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System.Diagnostics.CodeAnalysis;
 using CMS.SiteProvider;
 using FluentAssertions;
 using Moq;
@@ -22,6 +23,7 @@ using NUnit.Framework;
 
 namespace PoshKentico.Business.Configuration.Sites
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     public class NewCmsSiteBusinessTests
     {

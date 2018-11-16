@@ -15,6 +15,7 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System.Diagnostics.CodeAnalysis;
 using CMS.Base;
 using FluentAssertions;
 using Moq;
@@ -24,6 +25,7 @@ using PoshKentico.Core.Services.Configuration.Users;
 
 namespace PoshKentico.Tests.Configuration.Users
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     public class SetCmsUserTests
     {

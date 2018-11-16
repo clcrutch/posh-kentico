@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using CMS.Helpers;
 using CMS.MediaLibrary;
@@ -30,6 +31,7 @@ namespace PoshKentico.Core.Configuration.ContentManagement.MediaLibraries
     /// <summary>
     /// Implementation of <see cref="IMediaLibraryService"/> that uses Kentico.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     [Export(typeof(IMediaLibraryService))]
     public class KenticoMediaLibraryService : IMediaLibraryService
     {

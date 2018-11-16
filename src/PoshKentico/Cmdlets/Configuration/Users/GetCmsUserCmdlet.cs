@@ -23,6 +23,7 @@ using CMS.Membership;
 using ImpromptuInterface;
 using PoshKentico.Business.Configuration.Users;
 using PoshKentico.Core.Services.Configuration.Users;
+using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.Configuration.Users
 {
@@ -56,6 +57,7 @@ namespace PoshKentico.Cmdlets.Configuration.Users
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSUser", DefaultParameterSetName = NONE)]
     [OutputType(typeof(UserInfo[]))]
+    [Alias("guser")]
     public class GetCmsUserCmdlet : MefCmdlet
     {
         #region Constants
@@ -107,7 +109,8 @@ namespace PoshKentico.Cmdlets.Configuration.Users
         /// <para type="description">If set, the match is exact, else the match performs a contains for display name and category name and starts with for path.</para>
         /// </summary>
         [Parameter(Mandatory = false)]
-        public SwitchParameter Exact { get; set; }
+        [Alias("Regex")]
+        public SwitchParameter RegularExpression { get; set; }
 
         /// <summary>
         /// Gets or sets the Business layer for this user. Populated by MEF.
@@ -127,7 +130,7 @@ namespace PoshKentico.Cmdlets.Configuration.Users
             switch (this.ParameterSetName)
             {
                 case USERNAME:
-                    users = this.BusinessLayer.GetUsers(this.UserName, this.Exact.ToBool());
+                    users = this.BusinessLayer.GetUsers(this.UserName, this.RegularExpression.ToBool());
                     break;
                 case IDSETNAME:
                     users = this.BusinessLayer.GetUsers(this.ID);

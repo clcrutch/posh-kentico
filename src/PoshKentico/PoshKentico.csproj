@@ -37,6 +37,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="System.Security.Principal.Windows" Version="4.5.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -88,9 +89,6 @@
     <None Update="DSCResources\xWebPart\xWebPart.schema.mof">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="FormattingFiles\Configuration\Roles\RoleInfo.format.ps1xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="FormattingFiles\Configuration\Sites\CultureInfo.format.ps1xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -134,9 +132,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="posh-kentico.psd1">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="PSCmdlets.psm1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="TestScript.ps1">

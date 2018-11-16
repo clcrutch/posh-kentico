@@ -27,6 +27,11 @@ Get-CMSSite [[-DisplayName] <String>] [-Exact] [<CommonParameters>]
 Get-CMSSite [[-ID] <Int32[]>] [<CommonParameters>]
 ```
 
+### User
+```
+Get-CMSSite [[-User] <UserInfo>] [<CommonParameters>]
+```
+
 ## DESCRIPTION
 Gets the sites selected by the provided input.
 This command automatically initializes the connection to Kentico if not already initialized.
@@ -55,6 +60,11 @@ Get-CMSSite basic -Exact
 ### EXAMPLE 4
 ```
 Get-CMSSite -ID 5,304,5
+```
+
+### EXAMPLE 5
+```
+Get-CMSSite -User $user
 ```
 
 ## PARAMETERS
@@ -104,6 +114,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -User
+The user that the sites are assigned to.
+
+```yaml
+Type: UserInfo
+Parameter Sets: User
+Aliases:
+
+Required: False
+Position: 0
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
 For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -112,6 +137,9 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ### System.String
 The display name of the site to retrive.
+
+### CMS.Membership.UserInfo
+The user that the sites are assigned to.
 
 ## OUTPUTS
 

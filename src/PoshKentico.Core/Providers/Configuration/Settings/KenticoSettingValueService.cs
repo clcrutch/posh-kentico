@@ -16,6 +16,7 @@
 // </copyright>
 
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using CMS.Base;
 using CMS.DataEngine;
 using CMS.Helpers;
@@ -26,6 +27,7 @@ namespace PoshKentico.Core.Providers.Configuration.Settings
     /// <summary>
     /// Implementation of <see cref="ISettingValueService"/> that uses Kentico.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     [Export(typeof(ISettingValueService))]
     public class KenticoSettingValueService : ISettingValueService
     {

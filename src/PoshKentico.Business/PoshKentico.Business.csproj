@@ -11,7 +11,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
-    <DocumentationFile>C:\git\posh-kentico\src\PoshKentico.Business\PoshKentico.Business.xml</DocumentationFile>
+    <DocumentationFile>..\PoshKentico.Business\PoshKentico.Business.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -36,6 +36,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="System.Security.Principal.Windows" Version="4.5.1" />
   </ItemGroup>
 
   <ItemGroup>

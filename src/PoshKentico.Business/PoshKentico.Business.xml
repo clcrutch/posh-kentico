@@ -40,106 +40,6 @@
             Initializes the current business layer.
             </summary>
         </member>
-        <member name="T:PoshKentico.Business.Configuration.Roles.GetCmsRoleBusiness">
-            <summary>
-            Business Layer of Get-CMSRole cmdlet.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Business.Configuration.Roles.GetCmsRoleBusiness.RoleService">
-            <summary>
-            Gets or sets a reference to the Role Service. Populated by MEF.
-            </summary>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Roles.GetCmsRoleBusiness.GetRoles">
-            <summary>
-            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> in the CMS System.
-            </summary>
-            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/>.</returns>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Roles.GetCmsRoleBusiness.GetRoles(System.Int32[])">
-            <summary>
-            Gets a list of the <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> which match the supplied IDs.
-            </summary>
-            <param name="ids">The IDs of the <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> to return.</param>
-            <returns>A list of the <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> which match the supplied IDs.</returns>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Roles.GetCmsRoleBusiness.GetRoles(System.String,System.Int32,System.Boolean)">
-            <summary>
-            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> which match the specified criteria.
-            </summary>
-            <param name="roleName">The role name which to match the roles to.</param>
-            <param name="siteID">The site id which to match the roles to.</param>
-            <param name="exact">A boolean which indicates if the match should be exact.</param>
-            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> which match the specified criteria.</returns>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Roles.GetCmsRoleBusiness.GetRolesFromUser(System.String)">
-            <summary>
-            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> from the specified user in the CMS System.
-            </summary>
-            <param name="userName">The user name of the user.</param>
-            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> that belong to the user.</returns>
-        </member>
-        <member name="T:PoshKentico.Business.Configuration.Roles.NewCmsRoleBusiness">
-            <summary>
-            Business Layer of New-CMSRole cmdlet.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Business.Configuration.Roles.NewCmsRoleBusiness.RoleService">
-            <summary>
-            Gets or sets a reference to the Role Service. Populated by MEF.
-            </summary>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Roles.NewCmsRoleBusiness.CreateRole(System.String,System.String,System.Int32)">
-            <summary>
-            Creates a new <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> in the CMS System.
-            </summary>
-            <param name="roleDisplayName">The Display Name for the new Role.</param>
-            <param name="roleName">The Role Name for the new Role.</param>
-            <param name="siteID">The Site ID for the new Role.</param>
-            <returns>The newly created <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/>.</returns>
-        </member>
-        <member name="T:PoshKentico.Business.Configuration.Roles.RemoveCmsRoleBusiness">
-            <summary>
-            Business Layer for the Remove-CMSRole cmdlet.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Business.Configuration.Roles.RemoveCmsRoleBusiness.RoleService">
-            <summary>
-            Gets or sets a reference to the Role Service. Populated by MEF.
-            </summary>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Roles.RemoveCmsRoleBusiness.RemoveRoles(PoshKentico.Core.Services.Configuration.Roles.IRole)">
-            <summary>
-            Removes a the specified role <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> in the CMS System.
-            </summary>
-            <param name="role">The <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> to remove.</param>
-        </member>
-        <member name="T:PoshKentico.Business.Configuration.Roles.SetCmsRoleBusiness">
-            <summary>
-            Business Layer of Set-CMSRole cmdlet.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Business.Configuration.Roles.SetCmsRoleBusiness.RoleService">
-            <summary>
-            Gets or sets a reference to the Role Service. Populated by MEF.
-            </summary>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Roles.SetCmsRoleBusiness.Set(PoshKentico.Core.Services.Configuration.Roles.IRole)">
-            <summary>
-            Sets the <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> in the CMS System.
-            </summary>
-            <param name="role">The <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> to set.</param>
-            <returns>The updated role.</returns>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Roles.SetCmsRoleBusiness.Set(System.String,System.String,System.Int32)">
-            <summary>
-            Creates a new <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> in the CMS System.
-            </summary>
-            <param name="roleDisplayName">The Display Name for the new Role.</param>
-            <param name="roleName">The Role Name for the new Role.</param>
-            <param name="siteID">The Site ID for the new Role.</param>
-            <returns>The newly created <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/>.</returns>
-        </member>
         <member name="T:PoshKentico.Business.Configuration.Settings.GetCmsSettingValueBusiness">
             <summary>
             Business layer for the Set-CMSSettingValue cmdlet.
@@ -937,16 +837,8 @@
             Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which match the specified criteria.
             </summary>
             <param name="userName">The user name which to match the users to.</param>
-            <param name="exact">A boolean which indicates if the match should be exact.</param>
+            <param name="isRegex">A boolean which indicates if the match should be exact.</param>
             <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which match the specified criteria.</returns>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Users.GetCmsUserBusiness.GetUsersFromRole(System.String,System.Int32)">
-            <summary>
-            Gets all users <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> from a specified role which match the specified criteria.
-            </summary>
-            <param name="roleName">The role name of the role.</param>
-            <param name="siteID">The SiteID of the role.</param>
-            <returns>A list of users that belong to the specified role.</returns>
         </member>
         <member name="T:PoshKentico.Business.Configuration.Users.NewCmsUserBusiness">
             <summary>
@@ -1028,7 +920,7 @@
             <param name="email">The Email for the new User.</param>
             <param name="preferredCultureCode">The Preferred Culture Code for the new User.</param>
             <param name="privilegeLevel">The User Privilege Level for the new User.</param>
-            <returns>The newly updated <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/>.</returns>
+            <returns>The newly created <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/>.</returns>
         </member>
         <member name="T:PoshKentico.Business.ContentManagement.MediaLibraries.GetCmsMediaLibraryBusiness">
             <summary>

@@ -16,6 +16,7 @@
 // </copyright>
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
@@ -24,6 +25,7 @@ using PoshKentico.Core.Services.Configuration.Users;
 
 namespace PoshKentico.Tests.Configuration.Users
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     public class GetCmsUserTests
     {
@@ -139,6 +141,7 @@ namespace PoshKentico.Tests.Configuration.Users
             };
 
             businessLayer.GetUsers("NewUser1", true).Should().NotBeNullOrEmpty().And.HaveCount(1);
+            businessLayer.GetUsers("NewUser", true).Should().NotBeNullOrEmpty().And.HaveCount(2);
         }
 
         [Test]
@@ -167,7 +170,8 @@ namespace PoshKentico.Tests.Configuration.Users
                 UserService = userServiceMock.Object,
             };
 
-            businessLayer.GetUsers("NewUser", false).Should().NotBeNullOrEmpty().And.HaveCount(2);
+            businessLayer.GetUsers("NewUser1", false).Should().NotBeNullOrEmpty().And.HaveCount(1);
+            businessLayer.GetUsers("NewUser", false).Should().BeEmpty();
         }
 
         [Test]
