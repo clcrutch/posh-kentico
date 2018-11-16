@@ -70,7 +70,7 @@ namespace PoshKentico.Tests.Development.WebParts
                 .Should()
                 .NotBeNull();
 
-            result.ShouldBeEquivalentTo(webPartCategoryMock.Object);
+            result.Should().BeEquivalentTo(webPartCategoryMock.Object);
         }
     }
 }

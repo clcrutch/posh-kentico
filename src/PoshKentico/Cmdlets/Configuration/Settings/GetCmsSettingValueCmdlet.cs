@@ -22,6 +22,7 @@ using CMS.SiteProvider;
 using ImpromptuInterface;
 using PoshKentico.Business.Configuration.Settings;
 using PoshKentico.Core.Services.Configuration.Sites;
+using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.Configuration.Settings
 {
@@ -39,6 +40,7 @@ namespace PoshKentico.Cmdlets.Configuration.Settings
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSSettingValue", DefaultParameterSetName = NONE)]
+    [Alias("gsval")]
     public class GetCmsSettingValueCmdlet : MefCmdlet
     {
         #region Constants

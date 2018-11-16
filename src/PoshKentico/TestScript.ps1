@@ -2,10 +2,11 @@
 
 $VerbosePreference = "Continue"
 $DebugPreference = "Continue"
+
 Import-Module ./PSCmdlets.psm1
 
 Configuration KenticoTest
-{
+{	
 	Import-DscResource -Name xWebPartCategory
 	Import-DscResource -Name xWebPart
 	Import-DscResource -Name xSite
@@ -22,6 +23,7 @@ Configuration KenticoTest
 			DomainName = "localhost:743"
 			DisplayName = "KenticoTest"
 			Status = "Running"
+			DomainAlias = "127.0.0.1"
 			Ensure = "Present"
 		}
 

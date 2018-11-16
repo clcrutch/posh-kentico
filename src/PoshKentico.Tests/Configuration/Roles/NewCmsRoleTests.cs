@@ -52,8 +52,6 @@ namespace PoshKentico.Tests.Configuration.Roles
 
             result.Should().NotBeNull();
 
-            result.ShouldBeEquivalentTo(roleMock1.Object);
-
             passedRole.RoleDisplayName.Should().Be(displayName);
             passedRole.RoleName.Should().Be(roleName);
             passedRole.SiteID.Should().Be(siteID);

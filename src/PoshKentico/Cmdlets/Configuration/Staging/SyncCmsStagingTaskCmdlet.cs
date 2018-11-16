@@ -44,7 +44,7 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet("Sync", "CMSStagingTask")]
-    [Alias("syncstaging")]
+    [Alias("sstask")]
     public class SyncCmsStagingTaskCmdlet : MefCmdlet
     {
         #region Constants

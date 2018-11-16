@@ -19,6 +19,7 @@ using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 using PoshKentico.Business.Configuration.Settings;
+using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.Configuration.Settings
 {
@@ -36,6 +37,7 @@ namespace PoshKentico.Cmdlets.Configuration.Settings
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSWebConfigValue")]
+    [Alias("gwcval")]
     public class GetCmsWebConfigValueCmdlet : MefCmdlet
     {
         #region Properties

@@ -83,7 +83,8 @@ namespace PoshKentico.Core.Services.ContentManagement.MediaLibraries
         /// <param name="librarySiteID">The site id of the <see cref="IMediaLibrary"/>to retrive for creating the new folder.</param>
         /// <param name="libraryName">The name of the <see cref="IMediaLibrary"/> to retrive for creating the new folder.</param>
         /// <param name="folderName">The new folder name to create within the media library.</param>
-        void CreateMediaFolder(int librarySiteID, string libraryName, string folderName);
+        /// <returns>The newly created folder name.</returns>
+        string CreateMediaFolder(int librarySiteID, string libraryName, string folderName);
 
         /// <summary>
         /// Creates a media library file within the <see cref="IMediaLibrary"/>.
