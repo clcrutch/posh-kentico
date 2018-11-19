@@ -1,5 +1,5 @@
 ---
-external help file: posh-kentico.dll-Help.xml
+external help file: PoshKentico.dll-Help.xml
 Module Name: posh-kentico
 online version:
 schema: 2.0.0
@@ -8,7 +8,7 @@ schema: 2.0.0
 # Initialize-CMSApplication
 
 ## SYNOPSIS
-Initializes a connection to the Kentico CMS Server.
+{{Fill in the Synopsis}}
 
 ## SYNTAX
 
@@ -29,48 +29,21 @@ Initialize-CMSApplication [-DatabaseServer] <String> [-Database] <String> [-Time
 ```
 
 ## DESCRIPTION
-The Initialize-CMSApplication cmdlet initializes a connection to the Kentico CMS server.
-
-If this cmdlet is run without parameters, then it requires administrator permissions to find the Kentico site.
-
-It does so by performing the following steps:
-
-1.
-Get a list of all the sites from IIS.
-
-2.
-Get a list of all applications from the sites.
-
-3.
-Get a list of all the virtual directories from the applications.
-
-4.
-Continue processing virtual directory if a web.config file exits.
-
-5.
-Parse the document and find an "add" node with name="CMSConnectionString".
-
-6.
-If the connection string is valid, then stop processing.
+{{Fill in the Description}}
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-Initialize-CMSApplication
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-### EXAMPLE 2
-```
-Initialize-CMSApplication -DatabaseServer KenticoServer -Database Kentico -WebRoot C:\kentico
-```
+{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -Cached
-Use the previous successful site and connection string information found.
-
-If none, then this is the same as supplying no parameters.
+{{Fill Cached Description}}
 
 ```yaml
 Type: SwitchParameter
@@ -79,13 +52,13 @@ Aliases: UseCached
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -ConnectionString
-The connection string for the database connection.
+{{Fill ConnectionString Description}}
 
 ```yaml
 Type: String
@@ -99,23 +72,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -DatabaseServer
-The database server to use for generating the connection string.
-
-```yaml
-Type: String
-Parameter Sets: ServerAndDatabase
-Aliases: SQLServer
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Database
-The database to use for generating the connection string.
+{{Fill Database Description}}
 
 ```yaml
 Type: String
@@ -129,8 +87,23 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -DatabaseServer
+{{Fill DatabaseServer Description}}
+
+```yaml
+Type: String
+Parameter Sets: ServerAndDatabase
+Aliases: SQLServer
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Timeout
-The timeout to use for generating the connection string.
+{{Fill Timeout Description}}
 
 ```yaml
 Type: Int32
@@ -139,13 +112,13 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: 60
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -WebRoot
-The root directory for the Kentico site.
+{{Fill WebRoot Description}}
 
 ```yaml
 Type: String
@@ -165,8 +138,11 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## INPUTS
 
+### None
+
 ## OUTPUTS
 
+### System.Object
 ## NOTES
 
 ## RELATED LINKS

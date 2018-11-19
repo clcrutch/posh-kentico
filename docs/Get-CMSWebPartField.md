@@ -1,5 +1,5 @@
 ---
-external help file: posh-kentico.dll-Help.xml
+external help file: PoshKentico.dll-Help.xml
 Module Name: posh-kentico
 online version:
 schema: 2.0.0
@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CMSWebPartField
 
 ## SYNOPSIS
-Gets the web part fields selected by the provided input.
+{{Fill in the Synopsis}}
 
 ## SYNTAX
 
@@ -23,26 +23,21 @@ Get-CMSWebPartField [-Name] <String> [-RegularExpression] -WebPart <WebPartInfo>
 ```
 
 ## DESCRIPTION
-Gets the web part fields selected by the provided input.
-
-This command automatically initializes the connection to Kentico if not already initialized.
+{{Fill in the Description}}
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-$webPart | Get-CMSWebPartField
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-### EXAMPLE 2
-```
-$webPart | Get-CMSWebPartField -Name Test*
-```
+{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -Name
-The name for the field to search for.
+{{Fill Name Description}}
 
 ```yaml
 Type: String
@@ -57,7 +52,7 @@ Accept wildcard characters: False
 ```
 
 ### -RegularExpression
-Indicates if the CategoryName supplied is a regular expression.
+{{Fill RegularExpression Description}}
 
 ```yaml
 Type: SwitchParameter
@@ -66,13 +61,13 @@ Aliases: Regex
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -WebPart
-The web part to get the fields for.
+{{Fill WebPart Description}}
 
 ```yaml
 Type: WebPartInfo
@@ -93,11 +88,11 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## INPUTS
 
 ### CMS.PortalEngine.WebPartInfo
-The web part to get the fields for.
 
 ## OUTPUTS
 
 ### CMS.FormEngine.FormFieldInfo[]
+
 ## NOTES
 
 ## RELATED LINKS

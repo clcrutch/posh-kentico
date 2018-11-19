@@ -1,5 +1,5 @@
 ---
-external help file: posh-kentico.dll-Help.xml
+external help file: PoshKentico.dll-Help.xml
 Module Name: posh-kentico
 online version:
 schema: 2.0.0
@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CMSServer
 
 ## SYNOPSIS
-Gets the servers selected by the provided input.
+{{Fill in the Synopsis}}
 
 ## SYNTAX
 
@@ -33,74 +33,21 @@ Get-CMSServer [[-ID] <Int32[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Gets the servers selected by the provided input.
-This command automatically initializes the connection to Kentico if not already initialized.
-
-Without parameters, this command returns all servers.
-
-With parameters, this command returns the servers that match the criteria.
+{{Fill in the Description}}
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-Get-CMSServer
-```
-
-### EXAMPLE 2
-```
-Get-CMSServer bas
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-### EXAMPLE 3
-```
-Get-CMSServer -SiteID 5 -ServerName "bas"
-```
-
-### EXAMPLE 4
-```
-$site | Get-CMSServer bas
-```
-
-### EXAMPLE 5
-```
-Get-CMSServer basic -Exact
-```
-
-### EXAMPLE 6
-```
-Get-CMSServer 5 basic -Exact
-```
-
-### EXAMPLE 7
-```
-$site | Get-CMSServer basic -Exact
-```
-
-### EXAMPLE 8
-```
-Get-CMSServer -ID 5,304,5
-```
+{{ Add example description here }}
 
 ## PARAMETERS
 
-### -SiteID
-The server site id for the server to update.
-
-```yaml
-Type: Int32
-Parameter Sets: Dislpay Name
-Aliases:
-
-Required: False
-Position: 0
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -DisplayName
-The display name of the server to retrive.
+{{Fill DisplayName Description}}
 
 ```yaml
 Type: String
@@ -115,7 +62,7 @@ Accept wildcard characters: False
 ```
 
 ### -Exact
-If set, the match is exact, else the match performs a contains for display name and category name and starts with for path.
+{{Fill Exact Description}}
 
 ```yaml
 Type: SwitchParameter
@@ -124,13 +71,28 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ID
+{{Fill ID Description}}
+
+```yaml
+Type: Int32[]
+Parameter Sets: ID
+Aliases:
+
+Required: False
+Position: 0
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -Site
-The associalted site for the server to retrieve.
+{{Fill Site Description}}
 
 ```yaml
 Type: SiteInfo
@@ -144,12 +106,12 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -ID
-The IDs of the server to retrieve.
+### -SiteID
+{{Fill SiteID Description}}
 
 ```yaml
-Type: Int32[]
-Parameter Sets: ID
+Type: Int32
+Parameter Sets: Dislpay Name
 Aliases:
 
 Required: False
@@ -166,11 +128,11 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## INPUTS
 
 ### CMS.SiteProvider.SiteInfo
-The associalted site for the server to retrieve.
 
 ## OUTPUTS
 
 ### CMS.Synchronization.ServerInfo[]
+
 ## NOTES
 
 ## RELATED LINKS

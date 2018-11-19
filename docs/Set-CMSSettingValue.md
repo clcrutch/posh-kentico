@@ -1,5 +1,5 @@
 ---
-external help file: posh-kentico.dll-Help.xml
+external help file: PoshKentico.dll-Help.xml
 Module Name: posh-kentico
 online version:
 schema: 2.0.0
@@ -8,7 +8,7 @@ schema: 2.0.0
 # Set-CMSSettingValue
 
 ## SYNOPSIS
-Sets the setting values by the provided setting key.
+{{Fill in the Synopsis}}
 
 ## SYNTAX
 
@@ -28,24 +28,36 @@ Set-CMSSettingValue [[-SiteName] <String>] [-Key] <String> [-Value] <Object> [<C
 ```
 
 ## DESCRIPTION
-Sets the setting values by the provided setting key.
+{{Fill in the Description}}
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-$site | Set-CMSSettingValue -Key "my key" -Value "new val"
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-### EXAMPLE 2
-```
-Set-CMSSettingValue -SiteName "my site" -Key "my key" -Value "new val"
-```
+{{ Add example description here }}
 
 ## PARAMETERS
 
+### -Key
+{{Fill Key Description}}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Site
-A reference to the site to set setting for.
+{{Fill Site Description}}
 
 ```yaml
 Type: SiteInfo
@@ -60,7 +72,7 @@ Accept wildcard characters: False
 ```
 
 ### -SiteName
-The site name of the site to set setting for.
+{{Fill SiteName Description}}
 
 ```yaml
 Type: String
@@ -74,23 +86,8 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Key
-The key of the setting to set value for.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Value
-The new value of the setting to set value for.
+{{Fill Value Description}}
 
 ```yaml
 Type: Object
@@ -111,13 +108,12 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## INPUTS
 
 ### CMS.SiteProvider.SiteInfo
-A reference to the site to set setting for.
 
 ### System.String
-The site name of the site to set setting for.
 
 ## OUTPUTS
 
+### System.Object
 ## NOTES
 
 ## RELATED LINKS
