@@ -1,5 +1,5 @@
 ---
-external help file: posh-kentico.dll-Help.xml
+external help file: PoshKentico.dll-Help.xml
 Module Name: posh-kentico
 online version:
 schema: 2.0.0
@@ -8,7 +8,7 @@ schema: 2.0.0
 # Set-CMSSite
 
 ## SYNOPSIS
-Sets a site.
+{{Fill in the Synopsis}}
 
 ## SYNTAX
 
@@ -24,48 +24,21 @@ Set-CMSSite [-DisplayName] <String> [-SiteName] <String> [-Status] <SiteStatusEn
 ```
 
 ## DESCRIPTION
-Sets a new site based off of the provided input.
-
-This cmdlet returns the site to update when the -PassThru switch is used.
+{{Fill in the Description}}
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-Set-CMSSite -Site $site
-```
-
-### EXAMPLE 2
-```
-$site | Set-CMSSite
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-### EXAMPLE 3
-```
-Set-CMSSite -DisplayName "My Test Name" -SiteName "My Site Name" -Status "Running or Stopped" -DomainName "My Domain Name"
-```
+{{ Add example description here }}
 
 ## PARAMETERS
 
-### -SiteToSet
-A reference to the site to update.
-
-```yaml
-Type: SiteInfo
-Parameter Sets: Object
-Aliases: Site
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
 ### -DisplayName
-The display name for the site to update.
-
-Site display name cannot be blank.
+{{Fill DisplayName Description}}
 
 ```yaml
 Type: String
@@ -75,47 +48,12 @@ Aliases:
 Required: True
 Position: 0
 Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SiteName
-The site name for the site to update.
-
-Site name cannot be blank.
-
-```yaml
-Type: String
-Parameter Sets: Property
-Aliases:
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Status
-The status for the site to update.
-
-Possible values: Running, Stopped
-
-```yaml
-Type: SiteStatusEnum
-Parameter Sets: Property
-Aliases:
-Accepted values: Running, Stopped
-
-Required: True
-Position: 2
-Default value: Running
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -DomainName
-The domain name for the site to update.
+{{Fill DomainName Description}}
 
 ```yaml
 Type: String
@@ -130,7 +68,7 @@ Accept wildcard characters: False
 ```
 
 ### -PassThru
-Tell the cmdlet to return the site to update.
+{{Fill PassThru Description}}
 
 ```yaml
 Type: SwitchParameter
@@ -139,7 +77,53 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SiteName
+{{Fill SiteName Description}}
+
+```yaml
+Type: String
+Parameter Sets: Property
+Aliases:
+
+Required: True
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SiteToSet
+{{Fill SiteToSet Description}}
+
+```yaml
+Type: SiteInfo
+Parameter Sets: Object
+Aliases: Site
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -Status
+{{Fill Status Description}}
+
+```yaml
+Type: SiteStatusEnum
+Parameter Sets: Property
+Aliases:
+Accepted values: Running, Stopped
+
+Required: True
+Position: 2
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -151,11 +135,11 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## INPUTS
 
 ### CMS.SiteProvider.SiteInfo
-A reference to the site to update.
 
 ## OUTPUTS
 
 ### CMS.SiteProvider.SiteInfo[]
+
 ## NOTES
 
 ## RELATED LINKS

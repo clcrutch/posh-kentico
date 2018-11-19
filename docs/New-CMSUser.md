@@ -1,5 +1,5 @@
 ---
-external help file: posh-kentico.dll-Help.xml
+external help file: PoshKentico.dll-Help.xml
 Module Name: posh-kentico
 online version:
 schema: 2.0.0
@@ -8,7 +8,7 @@ schema: 2.0.0
 # New-CMSUser
 
 ## SYNOPSIS
-Creates a new user.
+{{Fill in the Synopsis}}
 
 ## SYNTAX
 
@@ -18,58 +18,21 @@ New-CMSUser [-UserName] <String> [[-FullName] <String>] [[-Email] <String>] [[-P
 ```
 
 ## DESCRIPTION
-Creates a new user based off of the provided input.
-
-This cmdlet returns the newly created user when the -PassThru switch is used.
+{{Fill in the Description}}
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-New-CMSUser -UserName "NewUser"
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-### EXAMPLE 2
-```
-New-CMSUser -UserName "NewUser" -FullName "New user" -Email "new.user@domain.com" -PreferredCultureCode "en-us" -SiteIndependentPrivilegeLevel UserPrivilegeLevelEnum.Editor
-```
+{{ Add example description here }}
 
 ## PARAMETERS
 
-### -UserName
-The User name for the newly created user.
-
-User name cannot be blank.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -FullName
-The full name for the newly created user.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Email
-The email for the newly created user.
+{{Fill Email Description}}
 
 ```yaml
 Type: String
@@ -83,8 +46,38 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -FullName
+{{Fill FullName Description}}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -PassThru
+{{Fill PassThru Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -PreferredCultureCode
-The preferred culture code for the newly created user.
+{{Fill PreferredCultureCode Description}}
 
 ```yaml
 Type: String
@@ -99,9 +92,7 @@ Accept wildcard characters: False
 ```
 
 ### -SiteIndependentPrivilegeLevel
-The preferred culture code for the newly created user.
-
-Possible values: None, Editor, Admin, GlobalAdmin
+{{Fill SiteIndependentPrivilegeLevel Description}}
 
 ```yaml
 Type: UserPrivilegeLevelEnum
@@ -116,17 +107,17 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -PassThru
-Tell the cmdlet to return the newly created user.
+### -UserName
+{{Fill UserName Description}}
 
 ```yaml
-Type: SwitchParameter
+Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: False
-Position: Named
-Default value: False
+Required: True
+Position: 0
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -137,9 +128,12 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## INPUTS
 
+### None
+
 ## OUTPUTS
 
 ### CMS.Membership.UserInfo
+
 ## NOTES
 
 ## RELATED LINKS

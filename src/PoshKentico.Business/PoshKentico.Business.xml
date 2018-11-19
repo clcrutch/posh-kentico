@@ -40,6 +40,138 @@
             Initializes the current business layer.
             </summary>
         </member>
+        <member name="T:PoshKentico.Business.CmdletProviderBusinessBase">
+            <summary>
+            Base class for cmdlet business providers.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.CmdletProviderBusinessBase.ResourceService">
+            <summary>
+            Gets or sets the resource service.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.Exists(System.String)">
+            <summary>
+            Determines if the resource exists.
+            </summary>
+            <param name="path">The absolute path of the resource..</param>
+            <returns>If the resource exists.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.CreateResource(System.String,System.String,System.Object)">
+            <summary>
+            Creates the resource.
+            </summary>
+            <param name="path">The resource path.</param>
+            <param name="itemTypeName">The type of resource.</param>
+            <param name="newItemValue">New resource property values.</param>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.Delete(System.String,System.Boolean)">
+            <summary>
+            Deletes a resource.
+            </summary>
+            <param name="path">The full path of the resource to be deleted.</param>
+            <param name="recurse">If true, will delete all resources in a container.</param>
+            <returns>If resource was deleted.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.GetResource(System.String,System.Boolean)">
+            <summary>
+            Gets the resource.
+            </summary>
+            <param name="path">The full path of the resource.</param>
+            <param name="recurse">If true, retrieves all containers. If false, will only retrieve immediate containers.</param>
+            <returns>Returns the resource item <see cref="T:PoshKentico.Core.Services.Resource.IResourceInfo"/>. </returns>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.GetChildren(System.String,System.Boolean)">
+            <summary>
+            Retrieves resource items and containers.
+            </summary>
+            <param name="path">The path to the resource.</param>
+            <param name="recurse">If true and resource is a container, will retrieve all of its children.</param>
+            <returns>Returns a list of <see cref="T:PoshKentico.Core.Services.Resource.IResourceInfo"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.GetProperty(System.String,System.Collections.ObjectModel.Collection{System.String})">
+            <summary>
+            Gets the specified properties from the resource.
+            </summary>
+            <param name="path">The path to the resource.</param>
+            <param name="providerSpecificPickList">List of properties to retrieve.</param>
+            <returns>A dictionary containing the requested properties.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.PurgeUnwantedProperties(System.Collections.ObjectModel.Collection{System.String},System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Removes properties not specified from the provided dictionary.
+            </summary>
+            <param name = "providerSpecificPickList" > List of properties to keep in the dictionary.</param>
+            <param name = "properties" > Dictionary which contains properties and values.</param>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.SetProperty(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Sets the specified properties on the resource.
+            </summary>
+            <param name="path">The path to the resource.</param>
+            <param name="propertyValue">A dictionary containing the properties and their respective values.</param>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.ExpandPath(System.String,System.String)">
+            <summary>
+            Resolves the wildcard characters in a path, and displays the path contents.
+            </summary>
+            <param name="path">The path with wildcard characters.</param>
+            <param name="currentLocation">The current directory.</param>
+            <returns>List of resource paths.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.NormalizeRelativePath(System.String,System.String)">
+            <summary>
+            Normalizes the path that was passed in and returns the normalized path as a relative path to the basePath that was passed.
+            </summary>
+            <param name="path">The full path of the resource.</param>
+            <param name="basePath">The path that the return value should be relative to.</param>
+            <returns>A normalized path that is relative to the basePath that was passed.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.IsContainer(System.String)">
+            <summary>
+            Is the resource a container.
+            </summary>
+            <param name="path">Full path of the rosource.</param>
+            <returns>If the requested path is a container.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.CopyItem(System.String,System.String,System.Boolean)">
+            <summary>
+            Copies either a resource or a resource item.
+            </summary>
+            <param name="sourcePath">The full path to the resource being copied.</param>
+            <param name="destinationPath">The destination where the resource will be copied to.</param>
+            <param name="recurse">If true, will copy all of a containers child resources.</param>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.GetReaderWriter(System.String)">
+            <summary>
+            Gets the reader writer.
+            </summary>
+            <param name="path">The path to the resource item.</param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.Resource.IResourceReaderWriter"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.CopyItem(System.String,System.String)">
+            <summary>
+            Copies a resource item.
+            </summary>
+            <param name="sourcePath">The full path to the resource being copied.</param>
+            <param name="destinationPath">The destination where the resource item will be copied to.</param>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.CopyContainer(PoshKentico.Core.Services.Resource.IResourceInfo,System.String,System.Boolean)">
+            <summary>
+            Copies a resource container.
+            </summary>
+            <param name="sourceResource">The full path to the resource being copied.</param>
+            <param name="destinationBasePath">The destination where the resource item will be copied to.</param>
+            <param name="recurse">If true, will copy all of a containers child resources.</param>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.NormalizeDestinationPath(System.String,System.String)">
+            <summary>
+            Normalizes the path that was passed in and returns the normalized path as a relative path to the basePath that was passed.
+            </summary>
+            <param name="sourcePath">The full path of the resource.</param>
+            <param name="destinationPath">The path that the return value should be relative to.</param>
+            <returns>A normalized path that is relative to the basePath that was passed.</returns>
+        </member>
         <member name="T:PoshKentico.Business.Configuration.Settings.GetCmsSettingValueBusiness">
             <summary>
             Business layer for the Set-CMSSettingValue cmdlet.
@@ -1754,6 +1886,14 @@
             <param name="database">The name of the Kentico database.</param>
             <param name="timeout">The timeout for connecting to the Kentico database.</param>
             <param name="webRoot">The root directory for the Kentico site.</param>
+        </member>
+        <member name="T:PoshKentico.Business.Resource.KenticoFileSystemBusiness">
+            <summary>
+            Business layer for NavigationCmdletProvider.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Resource.KenticoFileSystemBusiness.ResourceService">
+            <inheritdoc />
         </member>
     </members>
 </doc>

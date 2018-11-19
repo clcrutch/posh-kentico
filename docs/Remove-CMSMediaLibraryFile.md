@@ -1,5 +1,5 @@
 ---
-external help file: posh-kentico.dll-Help.xml
+external help file: PoshKentico.dll-Help.xml
 Module Name: posh-kentico
 online version:
 schema: 2.0.0
@@ -8,7 +8,7 @@ schema: 2.0.0
 # Remove-CMSMediaLibraryFile
 
 ## SYNOPSIS
-Removes a list of library files.
+{{Fill in the Synopsis}}
 
 ## SYNTAX
 
@@ -37,104 +37,51 @@ Remove-CMSMediaLibraryFile [-Extension <String>] [-FilePath <String>] [-ID] <Int
 ```
 
 ## DESCRIPTION
-Removes a list of library files based off of the provided input.
+{{Fill in the Description}}
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-$libraryFile | Remove-CMSMediaLibraryFile
-```
-
-### EXAMPLE 2
-```
-Remove-CMSMediaLibraryFile -MediaFile $libraryFile
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-### EXAMPLE 3
-```
-Remove-CMSMediaLibraryFile -MediaLibrary $library -Extension ".png" -FilePath "NewFolder"
-```
-
-### EXAMPLE 4
-```
-Remove-CMSMediaLibraryFile -MediaLibrary $library -Extension ".png" -FilePath "NewFolder" -EXACT
-```
-
-### EXAMPLE 5
-```
-$library | Remove-CMSMediaLibraryFile -Extension ".png" -FilePath "NewFolder"
-```
-
-### EXAMPLE 6
-```
-$library | Remove-CMSMediaLibraryFile -Extension ".png" -FilePath "NewFolder" -EXACT
-```
-
-### EXAMPLE 7
-```
-Remove-CMSMediaLibraryFile -LibraryID 1 -Extension ".png" -FilePath "NewFolder"
-```
-
-### EXAMPLE 8
-```
-Remove-CMSMediaLibraryFile -LibraryID 1 -Extension ".png" -FilePath "NewFolder" -EXACT
-```
-
-### EXAMPLE 9
-```
-Remove-CMSMediaLibraryFile -ID 1,3
-```
+{{ Add example description here }}
 
 ## PARAMETERS
 
-### -MediaFile
-The field to remove from Kentico.
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: MediaFileInfo
-Parameter Sets: Media File
-Aliases:
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
 
-Required: True
+Required: False
 Position: Named
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -MediaLibrary
-The associalted library for the library files to retrieve.
+### -Exact
+{{Fill Exact Description}}
 
 ```yaml
-Type: MediaLibraryInfo
-Parameter Sets: Object
+Type: SwitchParameter
+Parameter Sets: Object, Property
 Aliases:
 
-Required: True
-Position: 0
+Required: False
+Position: Named
 Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -LibraryID
-The library ID of the library files to retrive.
-
-```yaml
-Type: Int32
-Parameter Sets: Property
-Aliases:
-
-Required: True
-Position: 0
-Default value: 0
-Accept pipeline input: True (ByValue)
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -Extension
-The file extension of the library files to retrive.
+{{Fill Extension Description}}
 
 ```yaml
 Type: String
@@ -149,7 +96,7 @@ Accept wildcard characters: False
 ```
 
 ### -FilePath
-The file path of the library files to retrive.
+{{Fill FilePath Description}}
 
 ```yaml
 Type: String
@@ -163,23 +110,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Exact
-If set, the match is exact, else the match performs a contains for file extension and file path.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: Object, Property
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -ID
-The IDs of the library file to retrieve.
+{{Fill ID Description}}
 
 ```yaml
 Type: Int32[]
@@ -193,18 +125,48 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -LibraryID
+{{Fill LibraryID Description}}
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
+Type: Int32
+Parameter Sets: Property
+Aliases:
 
-Required: False
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -MediaFile
+{{Fill MediaFile Description}}
+
+```yaml
+Type: MediaFileInfo
+Parameter Sets: Media File
+Aliases:
+
+Required: True
 Position: Named
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -MediaLibrary
+{{Fill MediaLibrary Description}}
+
+```yaml
+Type: MediaLibraryInfo
+Parameter Sets: Object
+Aliases:
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -231,17 +193,14 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## INPUTS
 
 ### CMS.MediaLibrary.MediaFileInfo
-The field to remove from Kentico.
 
 ### CMS.MediaLibrary.MediaLibraryInfo
-The associalted library for the library files to retrieve.
 
 ### System.Int32
-The library ID of the library files to retrive.
 
 ## OUTPUTS
 
-### CMS.MediaLibrary.MediaFileInfo[]
+### System.Object
 ## NOTES
 
 ## RELATED LINKS

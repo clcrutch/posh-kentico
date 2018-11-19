@@ -1,5 +1,5 @@
 ---
-external help file: posh-kentico.dll-Help.xml
+external help file: PoshKentico.dll-Help.xml
 Module Name: posh-kentico
 online version:
 schema: 2.0.0
@@ -8,7 +8,7 @@ schema: 2.0.0
 # New-CMSWebPartCategory
 
 ## SYNOPSIS
-Creates a new web part category.
+{{Fill in the Synopsis}}
 
 ## SYNTAX
 
@@ -18,30 +18,21 @@ New-CMSWebPartCategory [[-DisplayName] <String>] [-Path] <String> [-ImagePath <S
 ```
 
 ## DESCRIPTION
-Creates a new web part category based off of the provided input.
-
-This cmdlet returns the newly created web part category when the -PassThru switch is used.
-
-This command automatically initializes the connection to Kentico if not already initialized.
+{{Fill in the Description}}
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-New-CMSWebPartCategory -Path /Test/Test1
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-### EXAMPLE 2
-```
-New-CMSWebPartCategory -Path /Test/Test1 -DisplayName "My Test Category"
-```
+{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -DisplayName
-The display name for the newly created web part category.
-
-If null, then the name portion of the path is used for the display name.
+{{Fill DisplayName Description}}
 
 ```yaml
 Type: String
@@ -55,23 +46,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Path
-The path to create the new web part category at.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -ImagePath
-The path for the icon for the newly created web part category.
+{{Fill ImagePath Description}}
 
 ```yaml
 Type: String
@@ -86,7 +62,7 @@ Accept wildcard characters: False
 ```
 
 ### -PassThru
-Tell the cmdlet to return the newly created web part category.
+{{Fill PassThru Description}}
 
 ```yaml
 Type: SwitchParameter
@@ -95,7 +71,22 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Path
+{{Fill Path Description}}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 0
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -106,9 +97,12 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## INPUTS
 
+### None
+
 ## OUTPUTS
 
 ### CMS.PortalEngine.WebPartCategoryInfo[]
+
 ## NOTES
 
 ## RELATED LINKS

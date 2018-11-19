@@ -1,5 +1,5 @@
 ---
-external help file: posh-kentico.dll-Help.xml
+external help file: PoshKentico.dll-Help.xml
 Module Name: posh-kentico
 online version:
 schema: 2.0.0
@@ -8,7 +8,7 @@ schema: 2.0.0
 # Set-CMSWebPart
 
 ## SYNOPSIS
-Sets a web part.
+{{Fill in the Synopsis}}
 
 ## SYNTAX
 
@@ -17,26 +17,21 @@ Set-CMSWebPart [-PassThru] -WebPart <WebPartInfo> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Sets a web part.
-
-This command automatically initializes the connection to Kentico if not already initialized.
+{{Fill in the Description}}
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-$webPart | Set-CMSWebPart
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-### EXAMPLE 2
-```
-$webPart | Set-CMSWebPart -PassThru
-```
+{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -PassThru
-Tell the cmdlet to return the web part.
+{{Fill PassThru Description}}
 
 ```yaml
 Type: SwitchParameter
@@ -45,13 +40,13 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -WebPart
-The web part to set.
+{{Fill WebPart Description}}
 
 ```yaml
 Type: WebPartInfo
@@ -71,9 +66,12 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## INPUTS
 
+### None
+
 ## OUTPUTS
 
 ### CMS.PortalEngine.WebPartInfo[]
+
 ## NOTES
 
 ## RELATED LINKS

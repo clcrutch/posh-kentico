@@ -1,5 +1,5 @@
 ---
-external help file: posh-kentico.dll-Help.xml
+external help file: PoshKentico.dll-Help.xml
 Module Name: posh-kentico
 online version:
 schema: 2.0.0
@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CMSSiteDomainAlias
 
 ## SYNOPSIS
-Gets the domain aliases of the specified site.
+{{Fill in the Synopsis}}
 
 ## SYNTAX
 
@@ -23,24 +23,21 @@ Get-CMSSiteDomainAlias [-SiteToWork] <SiteInfo> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Gets the domain aliases of the specified site based off of the provided input.
+{{Fill in the Description}}
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-Get-CMSSiteDomainAlias -SiteName "basic"
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-### EXAMPLE 2
-```
-$site | Get-CMSSiteDomainAlias
-```
+{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -SiteName
-The site name for the site.
+{{Fill SiteName Description}}
 
 ```yaml
 Type: String
@@ -55,7 +52,7 @@ Accept wildcard characters: False
 ```
 
 ### -SiteToWork
-A reference to the site.
+{{Fill SiteToWork Description}}
 
 ```yaml
 Type: SiteInfo
@@ -76,11 +73,11 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## INPUTS
 
 ### CMS.SiteProvider.SiteInfo
-A reference to the site.
 
 ## OUTPUTS
 
 ### CMS.SiteProvider.SiteDomainAliasInfo[]
+
 ## NOTES
 
 ## RELATED LINKS

@@ -1,5 +1,5 @@
 ---
-external help file: posh-kentico.dll-Help.xml
+external help file: PoshKentico.dll-Help.xml
 Module Name: posh-kentico
 online version:
 schema: 2.0.0
@@ -8,7 +8,7 @@ schema: 2.0.0
 # New-CMSMediaLibraryFile
 
 ## SYNOPSIS
-Creates a media library file.
+{{Fill in the Synopsis}}
 
 ## SYNTAX
 
@@ -25,99 +25,36 @@ New-CMSMediaLibraryFile [-SiteID] <Int32> [-LibraryName] <String> -LocalFile <Fi
 ```
 
 ## DESCRIPTION
-Creates a media library file based off of the provided input.
+{{Fill in the Description}}
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-New-CMSMediaLibraryFile -SiteID 1 -LibraryName "Name" -LocalFile $file -FileName "Image" -FileTitle "File title" -FilePath "NewFolder/Image/" -FileDescription "Description"
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-### EXAMPLE 2
-```
-$file | New-CMSMediaLibraryFile -Library $library -FileName "Image" -FileTitle "File title" -FilePath "NewFolder/Image/" -FileDescription "Description"
-```
+{{ Add example description here }}
 
 ## PARAMETERS
 
-### -Library
-The associalted library for the new media file.
-
-```yaml
-Type: MediaLibraryInfo
-Parameter Sets: Object
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SiteID
-The associalted library site id for the new media file.
-
-```yaml
-Type: Int32
-Parameter Sets: Property
-Aliases:
-
-Required: True
-Position: 0
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -LibraryName
-The library name for the new media file.
+### -FileDescription
+{{Fill FileDescription Description}}
 
 ```yaml
 Type: String
-Parameter Sets: Property
-Aliases:
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -LocalFile
-The file name for the new media file.
-
-```yaml
-Type: FileInfo
 Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -FileName
-The file name for the new media file.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -FileTitle
-The file title for the new media file.
+{{Fill FileName Description}}
 
 ```yaml
 Type: String
@@ -132,7 +69,7 @@ Accept wildcard characters: False
 ```
 
 ### -FilePath
-The file path for the new media file.
+{{Fill FilePath Description}}
 
 ```yaml
 Type: String
@@ -146,11 +83,71 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -FileDescription
-The file description for the new media file.
+### -FileTitle
+{{Fill FileTitle Description}}
 
 ```yaml
 Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Library
+{{Fill Library Description}}
+
+```yaml
+Type: MediaLibraryInfo
+Parameter Sets: Object
+Aliases:
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -LibraryName
+{{Fill LibraryName Description}}
+
+```yaml
+Type: String
+Parameter Sets: Property
+Aliases:
+
+Required: True
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -LocalFile
+{{Fill LocalFile Description}}
+
+```yaml
+Type: FileInfo
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -PassThru
+{{Fill PassThru Description}}
+
+```yaml
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -161,17 +158,17 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -PassThru
-Tell the cmdlet to return the newly created library.
+### -SiteID
+{{Fill SiteID Description}}
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
+Type: Int32
+Parameter Sets: Property
 Aliases:
 
-Required: False
-Position: Named
-Default value: False
+Required: True
+Position: 0
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -183,11 +180,11 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## INPUTS
 
 ### System.IO.FileInfo
-The file name for the new media file.
 
 ## OUTPUTS
 
 ### CMS.MediaLibrary.MediaFileInfo
+
 ## NOTES
 
 ## RELATED LINKS
