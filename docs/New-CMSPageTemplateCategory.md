@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-CMSWebPartCategory
+# New-CMSPageTemplateCategory
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -13,7 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Set-CMSWebPartCategory [-PassThru] [-WebPartCategory] <WebPartCategoryInfo> [<CommonParameters>]
+New-CMSPageTemplateCategory [[-CodeName] <String>] [[-DisplayName] <String>] [-Path] <String>
+ [-ImagePath <String>] [-PassThru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,6 +31,51 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
+### -CodeName
+{{Fill CodeName Description}}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DisplayName
+{{Fill DisplayName Description}}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ImagePath
+{{Fill ImagePath Description}}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: IconPath
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -PassThru
 {{Fill PassThru Description}}
 
@@ -45,18 +91,18 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -WebPartCategory
-{{Fill WebPartCategory Description}}
+### -Path
+{{Fill Path Description}}
 
 ```yaml
-Type: WebPartCategoryInfo
+Type: String
 Parameter Sets: (All)
-Aliases: Category
+Aliases:
 
 Required: True
 Position: 0
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -66,11 +112,11 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## INPUTS
 
-### CMS.PortalEngine.WebPartCategoryInfo
+### None
 
 ## OUTPUTS
 
-### CMS.PortalEngine.WebPartCategoryInfo[]
+### CMS.PortalEngine.PageTemplateCategoryInfo[]
 
 ## NOTES
 

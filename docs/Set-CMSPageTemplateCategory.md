@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-CMSWebPartCategory
+# Set-CMSPageTemplateCategory
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Set-CMSWebPartCategory [-PassThru] [-WebPartCategory] <WebPartCategoryInfo> [<CommonParameters>]
+Set-CMSPageTemplateCategory [-PassThru] [-PageTemplateCategory] <PageTemplateCategoryInfo> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,6 +30,21 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
+### -PageTemplateCategory
+{{Fill PageTemplateCategory Description}}
+
+```yaml
+Type: PageTemplateCategoryInfo
+Parameter Sets: (All)
+Aliases: Category
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
 ### -PassThru
 {{Fill PassThru Description}}
 
@@ -45,32 +60,17 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -WebPartCategory
-{{Fill WebPartCategory Description}}
-
-```yaml
-Type: WebPartCategoryInfo
-Parameter Sets: (All)
-Aliases: Category
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
 For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### CMS.PortalEngine.WebPartCategoryInfo
+### CMS.PortalEngine.PageTemplateCategoryInfo
 
 ## OUTPUTS
 
-### CMS.PortalEngine.WebPartCategoryInfo[]
+### CMS.PortalEngine.PageTemplateCategoryInfo[]
 
 ## NOTES
 

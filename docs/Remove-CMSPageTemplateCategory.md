@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Remove-CMSWebPartCategory
+# Remove-CMSPageTemplateCategory
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -14,33 +14,34 @@ schema: 2.0.0
 
 ### None (Default)
 ```
-Remove-CMSWebPartCategory [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-CMSPageTemplateCategory [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
-### WebPartCategory
+### PageTemplateCategory
 ```
-Remove-CMSWebPartCategory -WebPartCategory <WebPartCategoryInfo> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-CMSPageTemplateCategory -PageTemplateCategory <PageTemplateCategoryInfo> [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ### Category Name
 ```
-Remove-CMSWebPartCategory [-CategoryName] <String> [-Recurse] [-RegularExpression] [-WhatIf] [-Confirm]
+Remove-CMSPageTemplateCategory [-CategoryName] <String> [-Recurse] [-RegularExpression] [-WhatIf] [-Confirm]
  [<CommonParameters>]
 ```
 
 ### Path
 ```
-Remove-CMSWebPartCategory -CategoryPath <String> [-Recurse] [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-CMSPageTemplateCategory -CategoryPath <String> [-Recurse] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### ID
 ```
-Remove-CMSWebPartCategory [-ID] <Int32[]> [-Recurse] [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-CMSPageTemplateCategory [-ID] <Int32[]> [-Recurse] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
-### Web Part
+### Page Template
 ```
-Remove-CMSWebPartCategory -WebPart <WebPartInfo> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-CMSPageTemplateCategory -PageTemplate <PageTemplateInfo> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -111,9 +112,39 @@ Parameter Sets: ID
 Aliases:
 
 Required: True
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -PageTemplate
+{{Fill PageTemplate Description}}
+
+```yaml
+Type: PageTemplateInfo
+Parameter Sets: Page Template
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -PageTemplateCategory
+{{Fill PageTemplateCategory Description}}
+
+```yaml
+Type: PageTemplateCategoryInfo
+Parameter Sets: PageTemplateCategory
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -126,7 +157,7 @@ Parameter Sets: Category Name, Path, ID
 Aliases:
 
 Required: False
-Position: Named
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -141,39 +172,9 @@ Parameter Sets: Category Name
 Aliases: Regex
 
 Required: False
-Position: Named
+Position: 3
 Default value: None
 Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -WebPart
-{{Fill WebPart Description}}
-
-```yaml
-Type: WebPartInfo
-Parameter Sets: Web Part
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -WebPartCategory
-{{Fill WebPartCategory Description}}
-
-```yaml
-Type: WebPartCategoryInfo
-Parameter Sets: WebPartCategory
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -199,9 +200,9 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## INPUTS
 
-### CMS.PortalEngine.WebPartCategoryInfo
+### CMS.PortalEngine.PageTemplateCategoryInfo
 
-### CMS.PortalEngine.WebPartInfo
+### CMS.PortalEngine.PageTemplateInfo
 
 ## OUTPUTS
 

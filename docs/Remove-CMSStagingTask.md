@@ -1,5 +1,5 @@
 ---
-external help file: posh-kentico.dll-Help.xml
+external help file: PoshKentico.dll-Help.xml
 Module Name: posh-kentico
 online version:
 schema: 2.0.0
@@ -8,7 +8,7 @@ schema: 2.0.0
 # Remove-CMSStagingTask
 
 ## SYNOPSIS
-Remove the staging tasks that target the given server.
+{{Fill in the Synopsis}}
 
 ## SYNTAX
 
@@ -23,44 +23,21 @@ Remove-CMSStagingTask [-ServerName] <String> [-SiteID] <Int32> [<CommonParameter
 ```
 
 ## DESCRIPTION
-Removes the staging tasks that target the given server.
+{{Fill in the Description}}
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-Remove-CMSStagingTask -Server $server
-```
-
-### EXAMPLE 2
-```
-$server | Remove-CMSStagingTask
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-### EXAMPLE 3
-```
-Remove-CMSStagingTask -ServerName "Server Name to Find" -SiteID "Site Id to Find"
-```
+{{ Add example description here }}
 
 ## PARAMETERS
 
-### -ServerToRemove
-A reference to the server to remove all related staging tasks.
-
-```yaml
-Type: ServerInfo
-Parameter Sets: Object
-Aliases: Server
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
 ### -ServerName
-The server name for the server to remove all related staging tasks.
+{{Fill ServerName Description}}
 
 ```yaml
 Type: String
@@ -74,8 +51,23 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ServerToRemove
+{{Fill ServerToRemove Description}}
+
+```yaml
+Type: ServerInfo
+Parameter Sets: Object
+Aliases: Server
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
 ### -SiteID
-The server site id for the server to remove all related staging tasks.
+{{Fill SiteID Description}}
 
 ```yaml
 Type: Int32
@@ -84,7 +76,7 @@ Aliases:
 
 Required: True
 Position: 1
-Default value: 0
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -96,10 +88,10 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## INPUTS
 
 ### CMS.Synchronization.ServerInfo
-A reference to the server to remove all related staging tasks.
 
 ## OUTPUTS
 
+### System.Object
 ## NOTES
 
 ## RELATED LINKS

@@ -1,5 +1,5 @@
 ---
-external help file: posh-kentico.dll-Help.xml
+external help file: PoshKentico.dll-Help.xml
 Module Name: posh-kentico
 online version:
 schema: 2.0.0
@@ -8,7 +8,7 @@ schema: 2.0.0
 # Remove-CMSSiteCulture
 
 ## SYNOPSIS
-Removes a culture to a specified site.
+{{Fill in the Synopsis}}
 
 ## SYNTAX
 
@@ -29,34 +29,66 @@ Remove-CMSSiteCulture [-SiteName] <String> [-ID] <Int32[]> [-CultureCode] <Strin
 ```
 
 ## DESCRIPTION
-Removes a culture to a specified site based off of the provided input.
+{{Fill in the Description}}
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-Remove-CMSSiteCulture -SiteName "*bas*" -CultureCode "cul"
-```
-
-### EXAMPLE 2
-```
-Remove-CMSSiteCulture -SiteName "basic" -EXACT -CultureCode "cul"
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-### EXAMPLE 3
-```
-$site | Remove-CMSSiteCulture
-```
-
-### EXAMPLE 4
-```
-Remove-CMSSiteCulture -ID 1,2,3
-```
+{{ Add example description here }}
 
 ## PARAMETERS
 
+### -CultureCode
+{{Fill CultureCode Description}}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Exact
+{{Fill Exact Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: Property
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ID
+{{Fill ID Description}}
+
+```yaml
+Type: Int32[]
+Parameter Sets: ID
+Aliases:
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -SiteName
-The site name for the site.
+{{Fill SiteName Description}}
 
 ```yaml
 Type: String
@@ -71,7 +103,7 @@ Accept wildcard characters: False
 ```
 
 ### -SiteToRemove
-A reference to the site.
+{{Fill SiteToRemove Description}}
 
 ```yaml
 Type: SiteInfo
@@ -85,51 +117,6 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Exact
-If set, the match is exact, else the match performs a contains for site name.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: Property
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ID
-The IDs of the site.
-
-```yaml
-Type: Int32[]
-Parameter Sets: ID
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -CultureCode
-The IDs of the site.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
 For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -137,10 +124,10 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## INPUTS
 
 ### CMS.SiteProvider.SiteInfo
-A reference to the site.
 
 ## OUTPUTS
 
+### System.Object
 ## NOTES
 
 ## RELATED LINKS

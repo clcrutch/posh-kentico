@@ -1,5 +1,5 @@
 ---
-external help file: posh-kentico.dll-Help.xml
+external help file: PoshKentico.dll-Help.xml
 Module Name: posh-kentico
 online version:
 schema: 2.0.0
@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CMSUser
 
 ## SYNOPSIS
-Gets the users selected by the provided input.
+{{Fill in the Synopsis}}
 
 ## SYNTAX
 
@@ -28,54 +28,36 @@ Get-CMSUser [[-ID] <Int32[]>] [-Exact] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Gets the users selected by the provided input.
-This command automatically initializes the connection to Kentico if not already initialized.
-
-Without parameters, this command returns all users.
-
-With parameters, this command returns the users that match the criteria.
+{{Fill in the Description}}
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-Get-CMSUser
-```
-
-### EXAMPLE 2
-```
-Get-CMSUser user
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-### EXAMPLE 3
-```
-Get-CMSUser -UserName "NewUser" -Exact
-```
-
-### EXAMPLE 4
-```
-Get-CMSUser -ID 1,3
-```
+{{ Add example description here }}
 
 ## PARAMETERS
 
-### -UserName
-The display name of the user to retrive.
+### -Exact
+{{Fill Exact Description}}
 
 ```yaml
-Type: String
-Parameter Sets: User Name
+Type: SwitchParameter
+Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 0
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -ID
-The IDs of the user to retrieve.
+{{Fill ID Description}}
 
 ```yaml
 Type: Int32[]
@@ -89,17 +71,17 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Exact
-If set, the match is exact, else the match performs a contains for display name and category name and starts with for path.
+### -UserName
+{{Fill UserName Description}}
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
+Type: String
+Parameter Sets: User Name
 Aliases:
 
 Required: False
-Position: Named
-Default value: False
+Position: 0
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -110,9 +92,12 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## INPUTS
 
+### None
+
 ## OUTPUTS
 
 ### CMS.Membership.UserInfo[]
+
 ## NOTES
 
 ## RELATED LINKS

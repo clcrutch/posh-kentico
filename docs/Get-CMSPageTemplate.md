@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Initialize-CMSApplication
+# Get-CMSPageTemplate
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -14,18 +14,27 @@ schema: 2.0.0
 
 ### None (Default)
 ```
-Initialize-CMSApplication [-Cached] [<CommonParameters>]
+Get-CMSPageTemplate [<CommonParameters>]
 ```
 
-### ConnectionString
+### Category Name
 ```
-Initialize-CMSApplication [-ConnectionString] <String> [-WebRoot] <String> [<CommonParameters>]
+Get-CMSPageTemplate -CategoryName <String> [-RegularExpression] [<CommonParameters>]
 ```
 
-### ServerAndDatabase
+### Name
 ```
-Initialize-CMSApplication [-DatabaseServer] <String> [-Database] <String> [-Timeout <Int32>]
- [-WebRoot] <String> [<CommonParameters>]
+Get-CMSPageTemplate [-RegularExpression] [-PageTemplateName] <String> [<CommonParameters>]
+```
+
+### Path
+```
+Get-CMSPageTemplate -PageTemplatePath <String> [<CommonParameters>]
+```
+
+### Category
+```
+Get-CMSPageTemplate [-PageTemplateCategory] <PageTemplateCategoryInfo> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -42,91 +51,76 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -Cached
-{{Fill Cached Description}}
+### -CategoryName
+{{Fill CategoryName Description}}
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: None
-Aliases: UseCached
+Type: String
+Parameter Sets: Category Name
+Aliases: Category
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ConnectionString
-{{Fill ConnectionString Description}}
+### -PageTemplateCategory
+{{Fill PageTemplateCategory Description}}
 
 ```yaml
-Type: String
-Parameter Sets: ConnectionString
+Type: PageTemplateCategoryInfo
+Parameter Sets: Category
 Aliases:
 
 Required: True
 Position: 0
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Database
-{{Fill Database Description}}
+### -PageTemplateName
+{{Fill PageTemplateName Description}}
 
 ```yaml
 Type: String
-Parameter Sets: ServerAndDatabase
-Aliases:
+Parameter Sets: Name
+Aliases: Name
 
 Required: True
 Position: 1
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -DatabaseServer
-{{Fill DatabaseServer Description}}
+### -PageTemplatePath
+{{Fill PageTemplatePath Description}}
 
 ```yaml
 Type: String
-Parameter Sets: ServerAndDatabase
-Aliases: SQLServer
+Parameter Sets: Path
+Aliases: Path
 
 Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Timeout
-{{Fill Timeout Description}}
-
-```yaml
-Type: Int32
-Parameter Sets: ServerAndDatabase
-Aliases:
-
-Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -WebRoot
-{{Fill WebRoot Description}}
+### -RegularExpression
+{{Fill RegularExpression Description}}
 
 ```yaml
-Type: String
-Parameter Sets: ConnectionString, ServerAndDatabase
-Aliases: KenticoRoot
+Type: SwitchParameter
+Parameter Sets: Category Name, Name
+Aliases: Regex
 
-Required: True
-Position: 2
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -138,11 +132,14 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## INPUTS
 
-### None
+### System.String
+
+### CMS.PortalEngine.PageTemplateCategoryInfo
 
 ## OUTPUTS
 
-### System.Object
+### CMS.PortalEngine.PageTemplateInfo[]
+
 ## NOTES
 
 ## RELATED LINKS

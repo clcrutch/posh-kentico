@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Remove-CMSWebPartCategory
+# Get-CMSPageTemplateCategory
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -14,33 +14,33 @@ schema: 2.0.0
 
 ### None (Default)
 ```
-Remove-CMSWebPartCategory [-WhatIf] [-Confirm] [<CommonParameters>]
+Get-CMSPageTemplateCategory [<CommonParameters>]
 ```
 
-### WebPartCategory
+### Parent Category
 ```
-Remove-CMSWebPartCategory -WebPartCategory <WebPartCategoryInfo> [-WhatIf] [-Confirm] [<CommonParameters>]
+Get-CMSPageTemplateCategory -ParentPageTemplateCategory <PageTemplateCategoryInfo> [-Recurse]
+ [<CommonParameters>]
 ```
 
 ### Category Name
 ```
-Remove-CMSWebPartCategory [-CategoryName] <String> [-Recurse] [-RegularExpression] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+Get-CMSPageTemplateCategory [-CategoryName] <String> [-RegularExpression] [<CommonParameters>]
 ```
 
 ### Path
 ```
-Remove-CMSWebPartCategory -CategoryPath <String> [-Recurse] [-WhatIf] [-Confirm] [<CommonParameters>]
+Get-CMSPageTemplateCategory -CategoryPath <String> [<CommonParameters>]
 ```
 
 ### ID
 ```
-Remove-CMSWebPartCategory [-ID] <Int32[]> [-Recurse] [-WhatIf] [-Confirm] [<CommonParameters>]
+Get-CMSPageTemplateCategory [-ID] <Int32[]> [<CommonParameters>]
 ```
 
-### Web Part
+### Page Template
 ```
-Remove-CMSWebPartCategory -WebPart <WebPartInfo> [-WhatIf] [-Confirm] [<CommonParameters>]
+Get-CMSPageTemplateCategory -PageTemplate <PageTemplateInfo> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -87,21 +87,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -ID
 {{Fill ID Description}}
 
@@ -111,9 +96,39 @@ Parameter Sets: ID
 Aliases:
 
 Required: True
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -PageTemplate
+{{Fill PageTemplate Description}}
+
+```yaml
+Type: PageTemplateInfo
+Parameter Sets: Page Template
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -ParentPageTemplateCategory
+{{Fill ParentPageTemplateCategory Description}}
+
+```yaml
+Type: PageTemplateCategoryInfo
+Parameter Sets: Parent Category
+Aliases: Parent, ParentCategory
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -122,7 +137,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: Category Name, Path, ID
+Parameter Sets: Parent Category
 Aliases:
 
 Required: False
@@ -141,53 +156,7 @@ Parameter Sets: Category Name
 Aliases: Regex
 
 Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -WebPart
-{{Fill WebPart Description}}
-
-```yaml
-Type: WebPartInfo
-Parameter Sets: Web Part
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -WebPartCategory
-{{Fill WebPartCategory Description}}
-
-```yaml
-Type: WebPartCategoryInfo
-Parameter Sets: WebPartCategory
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -WhatIf
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: wi
-
-Required: False
-Position: Named
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -199,13 +168,14 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## INPUTS
 
-### CMS.PortalEngine.WebPartCategoryInfo
+### CMS.PortalEngine.PageTemplateCategoryInfo
 
-### CMS.PortalEngine.WebPartInfo
+### CMS.PortalEngine.PageTemplateInfo
 
 ## OUTPUTS
 
-### System.Object
+### CMS.PortalEngine.PageTemplateCategoryInfo[]
+
 ## NOTES
 
 ## RELATED LINKS

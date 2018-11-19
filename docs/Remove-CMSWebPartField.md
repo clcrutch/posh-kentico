@@ -1,5 +1,5 @@
 ---
-external help file: posh-kentico.dll-Help.xml
+external help file: PoshKentico.dll-Help.xml
 Module Name: posh-kentico
 online version:
 schema: 2.0.0
@@ -8,7 +8,7 @@ schema: 2.0.0
 # Remove-CMSWebPartField
 
 ## SYNOPSIS
-Remove the web part fields selected by the provided input.
+{{Fill in the Synopsis}}
 
 ## SYNTAX
 
@@ -29,31 +29,36 @@ Remove-CMSWebPartField -WebPart <WebPartInfo> [-WhatIf] [-Confirm] [<CommonParam
 ```
 
 ## DESCRIPTION
-Remove the web part fields selected by the provided input.
-
-This command automatically initializes the connection to Kentico if not already initialized.
+{{Fill in the Description}}
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-$webPart | Remove-CMSWebPartField
-```
-
-### EXAMPLE 2
-```
-$webPart | Remove-CMSWebPartField -Name Test*
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-### EXAMPLE 3
-```
-$webPartField | Remove-WebPartField
-```
+{{ Add example description here }}
 
 ## PARAMETERS
 
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Field
-The field to remove from Kentico.
+{{Fill Field Description}}
 
 ```yaml
 Type: FormFieldInfo
@@ -68,7 +73,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-The name for the field to search for.
+{{Fill Name Description}}
 
 ```yaml
 Type: String
@@ -83,7 +88,7 @@ Accept wildcard characters: False
 ```
 
 ### -RegularExpression
-Indicates if the CategoryName supplied is a regular expression.
+{{Fill RegularExpression Description}}
 
 ```yaml
 Type: SwitchParameter
@@ -92,13 +97,13 @@ Aliases: Regex
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -WebPart
-The web part to get the fields for.
+{{Fill WebPart Description}}
 
 ```yaml
 Type: WebPartInfo
@@ -109,21 +114,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -150,14 +140,12 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## INPUTS
 
 ### CMS.FormEngine.FormFieldInfo
-The field to remove from Kentico.
 
 ### CMS.PortalEngine.WebPartInfo
-The web part to get the fields for.
 
 ## OUTPUTS
 
-### CMS.FormEngine.FormFieldInfo[]
+### System.Object
 ## NOTES
 
 ## RELATED LINKS

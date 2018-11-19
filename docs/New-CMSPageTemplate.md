@@ -5,25 +5,24 @@ online version:
 schema: 2.0.0
 ---
 
-# New-CMSServer
+# New-CMSPageTemplate
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
 
 ## SYNTAX
 
-### Object
+### Path (Default)
 ```
-New-CMSServer [-Site] <SiteInfo> [-DisplayName] <String> [[-ServerName] <String>] [-URL] <String>
- [[-Authentication] <ServerAuthenticationEnum>] [[-Enabled] <Boolean>] [[-UserName] <String>]
- [[-Password] <String>] [-PassThru] [<CommonParameters>]
+New-CMSPageTemplate [[-Layout] <String>] [[-IconClass] <String>] [[-CSS] <String>] [[-IsReusable] <Boolean>]
+ [-DisplayName] <String> [-FileName] <String> [-Path] <String> [-PassThru] [<CommonParameters>]
 ```
 
-### Property
+### Category
 ```
-New-CMSServer [-SiteID] <Int32> [-DisplayName] <String> [[-ServerName] <String>] [-URL] <String>
- [[-Authentication] <ServerAuthenticationEnum>] [[-Enabled] <Boolean>] [[-UserName] <String>]
- [[-Password] <String>] [-PassThru] [<CommonParameters>]
+New-CMSPageTemplate [[-Layout] <String>] [[-IconClass] <String>] [[-CSS] <String>] [[-IsReusable] <Boolean>]
+ [-DisplayName] <String> [-FileName] <String> [-Name] <String> [-PassThru]
+ -PageTemplateCategory <PageTemplateCategoryInfo> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -40,14 +39,13 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -Authentication
-{{Fill Authentication Description}}
+### -CSS
+{{Fill CSS Description}}
 
 ```yaml
-Type: ServerAuthenticationEnum
+Type: String
 Parameter Sets: (All)
 Aliases:
-Accepted values: UserName, X509
 
 Required: False
 Position: 4
@@ -65,17 +63,32 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -FileName
+{{Fill FileName Description}}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: File
+
+Required: True
 Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Enabled
-{{Fill Enabled Description}}
+### -IconClass
+{{Fill IconClass Description}}
 
 ```yaml
-Type: Boolean
+Type: String
 Parameter Sets: (All)
 Aliases:
 
@@ -83,6 +96,66 @@ Required: False
 Position: 5
 Default value: None
 Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -IsReusable
+{{Fill IsReusable Description}}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Layout
+{{Fill Layout Description}}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 6
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Name
+{{Fill Name Description}}
+
+```yaml
+Type: String
+Parameter Sets: Category
+Aliases: CodeName
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -PageTemplateCategory
+{{Fill PageTemplateCategory Description}}
+
+```yaml
+Type: PageTemplateCategoryInfo
+Parameter Sets: Category
+Aliases: Category, Parent
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -101,91 +174,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Password
-{{Fill Password Description}}
+### -Path
+{{Fill Path Description}}
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 7
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ServerName
-{{Fill ServerName Description}}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Site
-{{Fill Site Description}}
-
-```yaml
-Type: SiteInfo
-Parameter Sets: Object
+Parameter Sets: Path
 Aliases:
 
 Required: True
 Position: 0
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -SiteID
-{{Fill SiteID Description}}
-
-```yaml
-Type: Int32
-Parameter Sets: Property
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -URL
-{{Fill URL Description}}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -UserName
-{{Fill UserName Description}}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 6
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -197,11 +195,11 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## INPUTS
 
-### CMS.SiteProvider.SiteInfo
+### CMS.PortalEngine.PageTemplateCategoryInfo
 
 ## OUTPUTS
 
-### CMS.Synchronization.ServerInfo
+### CMS.PortalEngine.PageTemplateInfo[]
 
 ## NOTES
 
