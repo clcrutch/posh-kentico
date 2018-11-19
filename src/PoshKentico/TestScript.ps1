@@ -2,15 +2,17 @@
 
 $VerbosePreference = "Continue"
 $DebugPreference = "Continue"
+
 Import-Module posh-kentico
 
 Configuration KenticoTest
-{
+{	
 	Import-DscResource -Name xWebPartCategory
 	Import-DscResource -Name xWebPart
 	Import-DscResource -Name xSite
 	Import-DscResource -Name xServer
 	Import-DscResource -Name xSettingValue
+	Import-DscResource -Name xMediaLibrary
 
 	Node localhost
 	{
@@ -21,6 +23,7 @@ Configuration KenticoTest
 			DomainName = "localhost:743"
 			DisplayName = "KenticoTest"
 			Status = "Running"
+			DomainAlias = "127.0.0.1"
 			Ensure = "Present"
 		}
 
@@ -42,6 +45,16 @@ Configuration KenticoTest
 			Key = "CMSSchedulerTasksEnabled"
 			Value = "60"
 			SiteName = "Kenticotest"
+		}
+
+		xMediaLibrary TestMediaLibrary
+		{
+			LibraryName = "NewLibrary"
+			LibraryDisplayName = "New Library"
+			LibrarySiteName = "Kenticotest"
+			LibraryFolder = "New library"
+			LibraryDescription = "This media library was created through the DSC."
+			Ensure = "Present"
 		}
 	}
 }

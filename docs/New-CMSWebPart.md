@@ -156,7 +156,6 @@ The webpart category to add the webpart under.
 ## OUTPUTS
 
 ### CMS.PortalEngine.WebPartInfo[]
-
 ## NOTES
 
 ## RELATED LINKS

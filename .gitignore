@@ -261,3 +261,4 @@ paket-files/
 /build
 
 Temp/
+.localhistory/

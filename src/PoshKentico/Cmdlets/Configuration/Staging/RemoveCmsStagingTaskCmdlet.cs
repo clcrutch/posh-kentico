@@ -44,7 +44,7 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet("Remove", "CMSStagingTask")]
-    [Alias("removestaging")]
+    [Alias("rmstask")]
     public class RemoveCmsStagingTaskCmdlet : MefCmdlet
     {
         #region Constants

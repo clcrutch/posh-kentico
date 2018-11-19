@@ -9,7 +9,7 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-RootModule = './posh-kentico.dll'
+RootModule = './PoshKentico.dll'
 
 # Version number of this module.
 ModuleVersion = '1.0'
@@ -54,25 +54,36 @@ CLRVersion = '4.0'
 # RequiredAssemblies = @()
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
-# ScriptsToProcess = @()
+ScriptsToProcess = @("./init.ps1")
 
 # Type files (.ps1xml) to be loaded when importing this module
 # TypesToProcess = @()
 
 # Format files (.ps1xml) to be loaded when importing this module
 FormatsToProcess = @( `
+	# ContentManagement/MediaLibraries
+	"./FormattingFiles/ContentManagement/MediaLibraries/MediaLibraryInfo.format.ps1xml", `
+	"./FormattingFiles/ContentManagement/MediaLibraries/MediaFileInfo.format.ps1xml", `
+
 	# Configuration/Sites
     "./FormattingFiles/Configuration/Sites/CultureInfo.format.ps1xml", `
     "./FormattingFiles/Configuration/Sites/SiteDomainAliasInfo.format.ps1xml", `
     "./FormattingFiles/Configuration/Sites/SiteInfo.format.ps1xml", `
 
     # Configuration/Staging
-	"./FormattingFiles/Configuration/Staging/ServerInfo.format.ps1xml" `
+	"./FormattingFiles/Configuration/Staging/ServerInfo.format.ps1xml", `
+
+	# Configuration/Users
+	"./FormattingFiles/Configuration/Users/UserInfo.format.ps1xml", `
 
 	# Development/WebParts
 	"./FormattingFiles/Development/WebParts/FormFieldInfo.format.ps1xml", `
     "./FormattingFiles/Development/WebParts/WebPartCategoryInfo.format.ps1xml", `
 	"./FormattingFiles/Development/WebParts/WebPartInfo.format.ps1xml" `
+
+	# Development/PageTemplates
+	"./FormattingFiles/Development/PageTemplates/PageTemplateCategoryInfo.format.ps1xml", `	
+	"./FormattingFiles/Development/PageTemplates/PageTemplateInfo.format.ps1xml" `	
 )
 
 # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
@@ -103,6 +114,8 @@ AliasesToExport = '*'
 PrivateData = @{
 
     PSData = @{
+		# Prerelease tags have to be added here.
+		# Prerelease = ''
 
         # Tags applied to this module. These help with module discovery in online galleries.
         Tags = @("Kentico", "CMS")

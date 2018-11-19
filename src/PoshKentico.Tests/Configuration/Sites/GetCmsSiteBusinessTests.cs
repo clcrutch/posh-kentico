@@ -16,6 +16,7 @@
 // </copyright>
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
@@ -23,6 +24,7 @@ using PoshKentico.Core.Services.Configuration.Sites;
 
 namespace PoshKentico.Business.Configuration.Sites
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     public class GetCmsSiteBusinessTests
     {
