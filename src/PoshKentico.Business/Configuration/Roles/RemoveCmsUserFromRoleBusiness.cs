@@ -1,4 +1,4 @@
-﻿// <copyright file="AddCmsUserToRoleBusiness.cs" company="Chris Crutchfield">
+﻿// <copyright file="RemoveCmsUserFromRoleBusiness.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -23,10 +23,10 @@ using PoshKentico.Core.Services.Configuration.Users;
 namespace PoshKentico.Business.Configuration.Roles
 {
     /// <summary>
-    /// Business Layer for the Add-CMSUserToRole cmdlet.
+    /// Business Layer for the Remove-CMSUserFromRole cmdlet.
     /// </summary>
-    [Export(typeof(AddCmsUserToRoleBusiness))]
-    public class AddCmsUserToRoleBusiness : CmdletBusinessBase
+    [Export(typeof(RemoveCmsUserFromRoleBusiness))]
+    public class RemoveCmsUserFromRoleBusiness : CmdletBusinessBase
     {
         #region Properties
 
@@ -45,13 +45,13 @@ namespace PoshKentico.Business.Configuration.Roles
         /// </summary>
         /// <param name="userName">The user name of the user to add to the specified role.</param>
         /// <param name="role">The role to add a user to.</param>
-        public void AddUserToRole(string userName, IRole role)
+        public void RemoveUserFromRole(string userName, IRole role)
         {
             var user = new
             {
                 UserName = userName,
             };
-            this.RoleService.AddUserToRole(user.ActLike<IUser>(), role);
+            this.RoleService.RemoveUserFromRole(user.ActLike<IUser>(), role);
         }
         #endregion
     }

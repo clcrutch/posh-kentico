@@ -1,4 +1,4 @@
-﻿// <copyright file="IRole.cs" company="Chris Crutchfield">
+﻿// <copyright file="IResource.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -15,29 +15,29 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-namespace PoshKentico.Core.Services.Configuration.Roles
+namespace PoshKentico.Core.Services.Development.Modules
 {
     /// <summary>
-    /// Represents a Role Object.
+    /// Represents a ResourceInfo Object.
     /// </summary>
-    public interface IRole
+    public interface IResource
     {
         #region Properties
 
         /// <summary>
-        /// Gets the display name for the role.
+        /// Gets the resource name for the module.
         /// </summary>
-        string RoleDisplayName { get; }
+        string ResourceName { get; }
 
         /// <summary>
-        /// Gets the role name.
+        /// Gets the permission names.
         /// </summary>
-        string RoleName { get; }
+        string[] PermissionNames { get; }
 
         /// <summary>
-        /// Gets the site id.
+        /// Gets the class name.
         /// </summary>
-        int SiteID { get; }
+        string ClassName { get; }
         #endregion
     }
 }

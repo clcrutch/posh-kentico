@@ -172,6 +172,43 @@
             <param name="destinationPath">The path that the return value should be relative to.</param>
             <returns>A normalized path that is relative to the basePath that was passed.</returns>
         </member>
+        <member name="T:PoshKentico.Business.Configuration.Roles.AddCmsPermissionToRoleBusiness">
+            <summary>
+            Business Layer of Add-CmsPermissionToRole cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.Roles.AddCmsPermissionToRoleBusiness.RoleService">
+            <summary>
+            Gets or sets a reference to the Role Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Roles.AddCmsPermissionToRoleBusiness.AddPermissionToRole(PoshKentico.Core.Services.Configuration.Roles.IRole,System.String[],System.String,System.String)">
+            <summary>
+            Add a module permission to a role.
+            </summary>
+            <param name="role">The role to add a module permission to.</param>
+            <param name="permissionNames">The permission names of the module <see cref="T:PoshKentico.Core.Services.Development.Modules.IResource"/>.</param>
+            <param name="resourceName">The resource name of the module <see cref="T:PoshKentico.Core.Services.Development.Modules.IResource"/>.</param>
+            <param name="className">The class name of the module <see cref="T:PoshKentico.Core.Services.Development.Modules.IResource"/>.</param>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.Roles.AddCmsUIElementToRoleBusiness">
+            <summary>
+            Business Layer of Add-CmsUIElementToRole cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.Roles.AddCmsUIElementToRoleBusiness.RoleService">
+            <summary>
+            Gets or sets a reference to the Role Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Roles.AddCmsUIElementToRoleBusiness.AddUiElementToRole(PoshKentico.Core.Services.Configuration.Roles.IRole,System.String,System.String)">
+            <summary>
+            Add an UI element to a role.
+            </summary>
+            <param name="role">The role to add an UI element to.</param>
+            <param name="resourceName">The resource name related to the UI element <see cref="T:PoshKentico.Core.Services.Development.Modules.IUIElement"/>.</param>
+            <param name="elementName">The element name of the ui element <see cref="T:PoshKentico.Core.Services.Development.Modules.IUIElement"/>.</param>
+        </member>
         <member name="T:PoshKentico.Business.Configuration.Roles.AddCmsUserToRoleBusiness">
             <summary>
             Business Layer for the Add-CMSUserToRole cmdlet.
@@ -268,6 +305,25 @@
             <param name="siteID">The Site ID for the new Role.</param>
             <returns>The newly created <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/>.</returns>
         </member>
+        <member name="T:PoshKentico.Business.Configuration.Roles.RemoveCmsPermissionFromRoleBusiness">
+            <summary>
+            Business Layer of Remove-CmsPermissionFromRole cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.Roles.RemoveCmsPermissionFromRoleBusiness.RoleService">
+            <summary>
+            Gets or sets a reference to the Role Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Roles.RemoveCmsPermissionFromRoleBusiness.RemovePermissionFromRole(PoshKentico.Core.Services.Configuration.Roles.IRole,System.String[],System.String,System.String)">
+            <summary>
+            Remove a module permission to a role.
+            </summary>
+            <param name="role">The role to remove a module permission from.</param>
+            <param name="permissionNames">The permission names of the module <see cref="T:PoshKentico.Core.Services.Development.Modules.IResource"/>.</param>
+            <param name="resourceName">The resource name of the module <see cref="T:PoshKentico.Core.Services.Development.Modules.IResource"/>.</param>
+            <param name="className">The class name of the module <see cref="T:PoshKentico.Core.Services.Development.Modules.IResource"/>.</param>
+        </member>
         <member name="T:PoshKentico.Business.Configuration.Roles.RemoveCmsRoleBusiness">
             <summary>
             Business Layer for the Remove-CMSRole cmdlet.
@@ -283,6 +339,41 @@
             Removes a the specified role <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> in the CMS System.
             </summary>
             <param name="role">The <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> to remove.</param>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.Roles.RemoveCmsUIElementFromRoleBusiness">
+            <summary>
+            Business Layer of Remove-CmsUIElementFromRole cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.Roles.RemoveCmsUIElementFromRoleBusiness.RoleService">
+            <summary>
+            Gets or sets a reference to the Role Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Roles.RemoveCmsUIElementFromRoleBusiness.RemoveUiElementFromRole(PoshKentico.Core.Services.Configuration.Roles.IRole,System.String,System.String)">
+            <summary>
+            Remove an UI element from a role.
+            </summary>
+            <param name="role">The role to remove an UI element from.</param>
+            <param name="resourceName">The resource name related to the UI element <see cref="T:PoshKentico.Core.Services.Development.Modules.IUIElement"/>.</param>
+            <param name="elementName">The element name of the ui element <see cref="T:PoshKentico.Core.Services.Development.Modules.IUIElement"/>.</param>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.Roles.RemoveCmsUserFromRoleBusiness">
+            <summary>
+            Business Layer for the Remove-CMSUserFromRole cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.Roles.RemoveCmsUserFromRoleBusiness.RoleService">
+            <summary>
+            Gets or sets a reference to the Role Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Roles.RemoveCmsUserFromRoleBusiness.RemoveUserFromRole(System.String,PoshKentico.Core.Services.Configuration.Roles.IRole)">
+            <summary>
+            Add a user to a role.
+            </summary>
+            <param name="userName">The user name of the user to add to the specified role.</param>
+            <param name="role">The role to add a user to.</param>
         </member>
         <member name="T:PoshKentico.Business.Configuration.Roles.SetCmsRoleBusiness">
             <summary>
