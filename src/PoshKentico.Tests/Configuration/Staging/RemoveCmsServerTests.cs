@@ -64,6 +64,5 @@ namespace PoshKentico.Tests.Configuration.Staging
             serverServiceMock.Verify(x => x.Delete(serverMock2.Object));
             serverServiceMock.Verify(x => x.Delete(serverMock3.Object));
         }
-
     }
 }
