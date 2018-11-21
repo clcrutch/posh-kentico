@@ -60,7 +60,7 @@ namespace PoshKentico.Core.Services.Configuration.Roles
         /// Gets the <see cref="IRole"/> which matches the supplied role name.
         /// </summary>
         /// <param name="roleName">The RoleName of the role <see cref="IRole"/> to return. </param>
-        /// <param name="siteName">The siteName of the role <see cref="IRole"/> to return.</param>
+        /// <param name="siteName">The SiteName of the site for the role <see cref="IRole"/> to return.</param>
         /// <returns>The <see cref="IRole"/> which matches the RoleName, else null.</returns>
         IRole GetRole(string roleName, string siteName);
 
@@ -74,32 +74,45 @@ namespace PoshKentico.Core.Services.Configuration.Roles
         /// <summary>
         /// Deletes the <see cref="IRole"/> which matches the supplied role name.
         /// </summary>
-        /// <param name="roleName">The RoleName of the role <see cref="IRole"/> to delete. </param>
-        /// <param name="siteID">The SiteID of the role <see cref="IRole"/> to delete.</param>
-        void DeleteRole(string roleName, int siteID);
+        /// <param name="role">The role <see cref="IRole"/> to delete. </param>
+        void DeleteRole(IRole role);
 
         /// <summary>
         /// Adds the User <see cref="IUser"/> to a Role <see cref="IRole"/>.
         /// </summary>
-        /// <param name="userName">The user name of the user <see cref="IUser"/> to assign to a role.</param>
-        /// <param name="roleName">The role name of the role to add a user to.</param>
-        /// <param name="siteID">The SiteID of the role <see cref="IRole"/>.</param>
-        void AddUserToRole(string userName, string roleName, int siteID);
+        /// <param name="user">The user <see cref="IUser"/> to assign to a role.</param>
+        /// <param name="role">The role <see cref="IRole"/> to add a user to.</param>
+        void AddUserToRole(IUser user, IRole role);
 
         /// <summary>
         /// Removes the User <see cref="IUser"/> from a Role <see cref="IRole"/>.
         /// </summary>
-        /// <param name="userName">The user name of the user <see cref="IUser"/> to remove from a role.</param>
-        /// <param name="roleName">The role name of the role to remove a user from.</param>
-        /// <param name="siteID">The SiteID of the role <see cref="IRole"/>.</param>
-        void RemoveUserFromRole(string userName, string roleName, int siteID);
+        /// <param name="user">The user <see cref="IUser"/> to remove from a role.</param>
+        /// <param name="role">The role <see cref="IRole"/> to remove a user from.</param>
+        void RemoveUserFromRole(IUser user, IRole role);
+
+        ///// <summary>
+        ///// Removes the User <see cref="IUser"/> from a Role <see cref="IRole"/>.
+        ///// </summary>
+        ///// <param name="userName">The UserName of the user <see cref="IUser"/> to remove from a role.</param>
+        ///// <param name="roleName">The RoleName of the role <see cref="IRole"/> to remove a user from.</param>
+        ///// <param name="siteName">The SiteName of the site for the role <see cref="IRole"/> to remove a user from.</param>
+        // void RemoveUserFromRole(string userName, string roleName, string siteName);
+
+        ///// <summary>
+        ///// Removes the User <see cref="IUser"/> from a Role <see cref="IRole"/>.
+        ///// </summary>
+        ///// <param name="userName">The UserName of the user <see cref="IUser"/> to remove from a role.</param>
+        ///// <param name="roleName">The RoleName of the role <see cref="IRole"/> to remove a user from.</param>
+        ///// <param name="siteID">The SiteID of the role <see cref="IRole"/> to remove a user from.</param>
+        // void RemoveUserFromRole(string userName, string roleName, int siteID);
 
         /// <summary>
         /// Gets all roles <see cref="IRole"/> of a user <see cref="IUser"/>.
         /// </summary>
-        /// <param name="userName">The user name of the user.</param>
+        /// <param name="user">The user to retrive roles from.</param>
         /// <returns>A list of roles that belong to the specified user.</returns>
-        IEnumerable<IRole> GetRolesFromUser(string userName);
+        IEnumerable<IRole> GetRolesFromUser(IUser user);
         #endregion
     }
 }

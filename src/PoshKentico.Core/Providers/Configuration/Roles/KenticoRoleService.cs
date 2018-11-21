@@ -71,28 +71,29 @@ namespace PoshKentico.Core.Providers.Configuration.Roles
         /// <inheritdoc/>
         public IRole SetRole(IRole role, bool isReplace = true)
         {
-            RoleInfo existingRole = RoleInfoProvider.GetRoleInfo(role.RoleName, role.SiteID);
+            RoleInfo existingRole = null;
 
-            if (existingRole != null)
+            if (isReplace)
             {
-                // Updates the role's properties
-                if (isReplace)
-                {
-                    existingRole = role.UndoActLike();
-                }
-                else
-                {
-                    existingRole.RoleDisplayName = role.RoleDisplayName ?? existingRole.RoleDisplayName;
-                }
-
-                // Saves the changes to the database
-                RoleInfoProvider.SetRoleInfo(existingRole);
+                existingRole = role.UndoActLike();
             }
             else
             {
-                // A role with the specified name not exists on the site
-                throw new Exception(string.Format("A role with the role name {0} does not exist on the specified site with site ID {1}", role.RoleName, role.SiteID));
+                existingRole = RoleInfoProvider.GetRoleInfo(role.RoleName, role.SiteID);
+                if (existingRole != null)
+                {
+                    // Updates the role's properties
+                    existingRole.RoleDisplayName = role.RoleDisplayName ?? existingRole.RoleDisplayName;
+                }
+                else
+                {
+                    // A role with the specified name not exist on the site
+                    throw new Exception(string.Format("A role with the role name {0} does not exist on the specified site with site ID {1}", role.RoleName, role.SiteID));
+                }
             }
+
+            // Saves the changes to the database
+            RoleInfoProvider.SetRoleInfo(existingRole);
 
             return existingRole.ActLike<IRole>();
         }
@@ -112,59 +113,76 @@ namespace PoshKentico.Core.Providers.Configuration.Roles
         }
 
         /// <inheritdoc/>
-        public void DeleteRole(string roleName, int siteID)
+        public void DeleteRole(IRole role)
         {
             // Gets the role
-            RoleInfo deleteRole = RoleInfoProvider.GetRoleInfo(roleName, siteID);
+            RoleInfo deleteRole = RoleInfoProvider.GetRoleInfo(role.RoleName, role.SiteID);
 
             if (deleteRole != null)
             {
                 // Deletes the role
                 RoleInfoProvider.DeleteRoleInfo(deleteRole);
             }
+            else
+            {
+                // A role with the specified name not exists on the site
+                throw new Exception(string.Format("A role with the role name {0} does not exist on the specified site with site ID {1}", role.RoleName, role.SiteID));
+            }
         }
 
         /// <inheritdoc/>
-        public void AddUserToRole(string userName, string roleName, int siteID)
+        public void AddUserToRole(IUser user, IRole role)
         {
             // Gets the user
-            UserInfo user = UserInfoProvider.GetUserInfo(userName);
+            UserInfo userInfo = UserInfoProvider.GetUserInfo(user.UserName);
 
             // Gets the role
-            RoleInfo role = RoleInfoProvider.GetRoleInfo(roleName, siteID);
-            string siteName = SiteInfoProvider.GetSiteName(siteID);
+            RoleInfo roleInfo = RoleInfoProvider.GetRoleInfo((int)role.RoleID);
 
-            if ((user != null) && (role != null))
+            if ((userInfo != null) && (roleInfo != null))
             {
+                string siteName = SiteInfoProvider.GetSiteName(role.SiteID);
+
                 // Adds the user to the role
                 UserInfoProvider.AddUserToRole(user.UserName, role.RoleName, siteName);
             }
-        }
-
-        /// <inheritdoc/>
-        public void RemoveUserFromRole(string userName, string roleName, int siteID)
-        {
-            // Gets the user
-            UserInfo user = UserInfoProvider.GetUserInfo(userName);
-
-            // Gets the role
-            RoleInfo role = RoleInfoProvider.GetRoleInfo(roleName, siteID);
-            string siteName = SiteInfoProvider.GetSiteName(siteID);
-
-            if ((user != null) && (role != null))
+            else
             {
-                // Adds the user to the role
-                UserInfoProvider.RemoveUserFromRole(user.UserName, role.RoleName, siteName);
+                // A user with the specified user name not exist or role does not exist.
+                throw new Exception(string.Format("A user with the user name {0} does not exist", user.UserName));
             }
         }
 
         /// <inheritdoc/>
-        public IEnumerable<IRole> GetRolesFromUser(string userName)
+        public void RemoveUserFromRole(IUser user, IRole role)
         {
             // Gets the user
-            UserInfo user = UserInfoProvider.GetUserInfo(userName);
+            UserInfo userInfo = UserInfoProvider.GetUserInfo(user.UserName);
 
-            if (user != null)
+            // Gets the role
+            RoleInfo roleInfo = RoleInfoProvider.GetRoleInfo((int)role.RoleID);
+
+            if ((userInfo != null) && (roleInfo != null))
+            {
+                string siteName = SiteInfoProvider.GetSiteName(role.SiteID);
+
+                // Adds the user to the role
+                UserInfoProvider.RemoveUserFromRole(user.UserName, role.RoleName, siteName);
+            }
+            else
+            {
+                // A user with the specified user name not exist or role does not exist.
+                throw new Exception(string.Format("A user with the user name {0} does not exist", user.UserName));
+            }
+        }
+
+        /// <inheritdoc/>
+        public IEnumerable<IRole> GetRolesFromUser(IUser user)
+        {
+            // Gets the user
+            UserInfo userInfo = UserInfoProvider.GetUserInfo(user.UserName);
+
+            if (userInfo != null)
             {
                 // Gets the user's roles
                 var userRoleIDs = this.UserRoles.Where(x => x.UserID == user.UserID).Select(x => x.RoleID);
@@ -172,8 +190,11 @@ namespace PoshKentico.Core.Providers.Configuration.Roles
 
                 return (from c in roles select Impromptu.ActLike<IRole>(c as RoleInfo)).ToArray();
             }
-
-            return null;
+            else
+            {
+                // A user with the specified user name not exist or role does not exist.
+                throw new Exception(string.Format("A user with the user name {0} does not exist", user.UserName));
+            }
         }
     }
 }

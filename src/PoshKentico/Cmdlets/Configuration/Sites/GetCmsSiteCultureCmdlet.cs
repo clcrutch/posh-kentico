@@ -32,71 +32,57 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// <para type="synopsis">Gets the cultures of the specified site.</para>
     /// <para type="description">Gets the cultures of the specified site based off of the provided input.</para>
     /// <example>
-    ///     <para>Gets the cultures of a site specifying the site name "basic".</para>
-    ///     <code>Get-CMSSiteCulture -SiteName "basic" </code>
+    ///     <para>Get all the sites.</para>
+    ///     <code>Get-CMSSiteCulture</code>
     /// </example>
     /// <example>
-    ///     <para>Gets the cultures of a site passing the site to the cmdlet.</para>
-    ///     <code>$site | Get-CMSSiteCulture</code>
+    ///     <para>Get all sites with a display name "basic", site name "basic", or a domain name "basic".</para>
+    ///     <code>Get-CMSSiteCulture basic</code>
+    /// </example>
+    /// <example>
+    ///     <para>Get all sites with a display name "basic", site name "basic", or domain name "basic"</para>
+    ///     <code>Get-CMSSiteCulture *basic* -RegularExpression</code>
+    /// </example>
+    /// <example>
+    ///     <para>Get all the sites with the specified IDs.</para>
+    ///     <code>Get-CMSSiteCulture -SiteIds 5,304,5</code>
+    /// </example>
+    /// <example>
+    ///     <para>Get all the sites with the specified user.</para>
+    ///     <code>Get-CMSSiteCulture -User $user</code>
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
-    [Cmdlet(VerbsCommon.Get, "CMSSiteCulture")]
+    [Cmdlet(VerbsCommon.Get, "CMSSiteCulture", DefaultParameterSetName = NONE)]
     [OutputType(typeof(CMS.Localization.CultureInfo[]))]
     [Alias("gscul")]
-    public class GetCmsSiteCultureCmdlet : MefCmdlet
+    public class GetCmsSiteCultureCmdlet : GetCmsSiteCmdlet
     {
-        #region Constants
-
-        private const string OBJECTSET = "Object";
-        private const string SITENAMESET = "Property";
-        private const string IDSETNAME = "ID";
-
-        #endregion
-
         #region Properties
-
-        /// <summary>
-        /// <para type="description">The site name for the site.</para>
-        /// </summary>
-        [Parameter(Mandatory = true, Position = 0, ParameterSetName = SITENAMESET)]
-        public string SiteName { get; set; }
-
-        /// <summary>
-        /// <para type="description">A reference to the site.</para>
-        /// </summary>
-        [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0, ParameterSetName = OBJECTSET)]
-        [Alias("Site")]
-        public SiteInfo SiteToWork { get; set; }
 
         /// <summary>
         ///  Gets or sets the Business Layer for adding culture to this site.  Populated by MEF.
         /// </summary>
         [Import]
-        public GetCmsSiteCultureBusiness BusinessLayer { get; set; }
+        public GetCmsSiteCultureBusiness GetBusinessLayer { get; set; }
 
         #endregion
 
         #region Methods
 
         /// <inheritdoc />
-        protected override void ProcessRecord()
+        protected override void ActOnObject(ISite site)
         {
-            IEnumerable<ICulture> cultures = null;
-
-            switch (this.ParameterSetName)
+            if (site == null)
             {
-                case OBJECTSET:
-                    cultures = this.BusinessLayer.GetCultures(this.SiteToWork.ActLike<ISite>());
-                    break;
-                case SITENAMESET:
-                    cultures = this.BusinessLayer.GetCultures(this.SiteName);
-                    break;
+                return;
             }
 
-            foreach (var culture in cultures)
+            var cultures = this.GetBusinessLayer.GetCultures(site);
+
+            foreach (var cul in cultures)
             {
-                this.WriteObject(culture.UndoActLike());
+                this.WriteObject(cul.UndoActLike());
             }
         }
 

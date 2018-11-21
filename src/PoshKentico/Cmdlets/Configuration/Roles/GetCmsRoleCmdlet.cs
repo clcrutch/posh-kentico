@@ -23,12 +23,13 @@ using CMS.Membership;
 using ImpromptuInterface;
 using PoshKentico.Business.Configuration.Roles;
 using PoshKentico.Core.Services.Configuration.Roles;
+using PoshKentico.Core.Services.Configuration.Users;
+using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.Configuration.Roles
 {
     /// <summary>
     /// <para type="synopsis">Gets the roles selected by the provided input.</para>
-    /// <para type="description">Gets the roles selected by the provided input.  This command automatically initializes the connection to Kentico if not already initialized.</para>
     /// <para type="description"></para>
     /// <para type="description">Without parameters, this command returns all roles.</para>
     /// <para type="description">With parameters, this command returns the roles that match the criteria.</para>
@@ -37,24 +38,24 @@ namespace PoshKentico.Cmdlets.Configuration.Roles
     ///     <code>Get-CMSRole</code>
     /// </example>
     /// <example>
-    ///     <para>Get all roles with a role name "*role*".</para>
+    ///     <para>Get all roles with a role name "role".</para>
     ///     <code>Get-CMSRole -RoleName "role" </code>
     /// </example>
     /// <example>
-    ///     <para>Get all roles with  role name "NewRole".</para>
-    ///     <code>Get-CMSRole -RoleName "NewRole" -Exact</code>
+    ///     <para>Get all roles with  role name "*role*".</para>
+    ///     <code>Get-CMSRole -RoleName "role" -RegularExpression</code>
     /// </example>
     /// <example>
-    ///     <para>Get all roles with  role name "NewRole", site is 2.</para>
-    ///     <code>Get-CMSRole -RoleName "NewRole" -SiteID 2</code>
+    ///     <para>Get all roles with  role name "role", site is 2.</para>
+    ///     <code>Get-CMSRole -RoleName "role" -SiteID 2</code>
     /// </example>
     /// <example>
-    ///     <para>Get all roles with  role name "NewRole", site is 2.</para>
-    ///     <code>Get-CMSRole -RoleName "NewRole" -SiteID 2 -Exact</code>
+    ///     <para>Get all roles with  role name "role", site is 2.</para>
+    ///     <code>Get-CMSRole -RoleName "role" -SiteID 2 -RegularExpression</code>
     /// </example>
     /// <example>
     ///     <para>Get all roles with the specified IDs.</para>
-    ///     <code>Get-CMSRole -ID 1,3</code>
+    ///     <code>Get-CMSRole -RoleIds 1,3</code>
     /// </example>
     /// <example>
     ///     <para>Get all roles with the specified user name.</para>
@@ -76,49 +77,66 @@ namespace PoshKentico.Cmdlets.Configuration.Roles
         /// Represents no parameters.
         /// </summary>
         protected const string NONE = "None";
-        private const string ROLENAME = "Role Name";
-        private const string IDSETNAME = "ID";
-        private const string USERNAME = "User Name";
-        private const string USEROBJECT = "User";
+
+        /// <summary>
+        /// Represents role name is used in parameter.
+        /// </summary>
+        protected const string ROLENAME = "Role Name";
+
+        /// <summary>
+        /// Represents role id is used in parameter.
+        /// </summary>
+        protected const string IDSETNAME = "ID";
+
+        /// <summary>
+        /// Represents user name is used in parameter.
+        /// </summary>
+        protected const string USERNAME = "User Name";
+
+        /// <summary>
+        /// Represents user object is used in parameter.
+        /// </summary>
+        protected const string USEROBJECT = "User";
         #endregion
 
         #region Properties
 
         /// <summary>
-        /// <para type="description">The display name of the role to retrive.</para>
+        /// <para type="description">The role name of the role to retrive.</para>
         /// </summary>
         [Parameter(Mandatory = true, Position = 0, ParameterSetName = ROLENAME)]
         public string RoleName { get; set; }
 
         /// <summary>
-        /// <para type="description">The display name of the role to retrive.</para>
+        /// <para type="description">The site name of the role to retrive.</para>
         /// </summary>
-        [Parameter(Mandatory = false, Position = 0, ParameterSetName = ROLENAME)]
-        public int? SiteID { get; set; }
+        [Parameter(Mandatory = false, Position = 1, ParameterSetName = ROLENAME)]
+        public string SiteName { get; set; }
 
         /// <summary>
         /// <para type="description">The IDs of the role to retrieve.</para>
         /// </summary>
         [Parameter(Mandatory = true, Position = 0, ParameterSetName = IDSETNAME)]
-        public int[] ID { get; set; }
+        public int[] RoleIds { get; set; }
 
         /// <summary>
-        /// <para type="description">The display name of the role to retrive.</para>
+        /// <para type="description">The user name of the user to retrive roles from.</para>
         /// </summary>
         [Parameter(Mandatory = true, Position = 0, ParameterSetName = USERNAME)]
         public string UserName { get; set; }
 
         /// <summary>
-        /// <para type="description">The display name of the role to retrive.</para>
+        /// <para type="description">The user to retrive roles from.</para>
         /// </summary>
         [Parameter(Mandatory = true, Position = 0, ValueFromPipeline =true, ParameterSetName = USEROBJECT)]
         public UserInfo User { get; set; }
 
         /// <summary>
-        /// <para type="description">If set, the match is exact, else the match performs a contains for display name and category name and starts with for path.</para>
+        /// <para type="description">If set, do a regex match, else the exact match.</para>
         /// </summary>
         [Parameter(Mandatory = false)]
-        public SwitchParameter Exact { get; set; }
+        [Alias("Regex")]
+        public SwitchParameter RegularExpression { get; set; }
 
         /// <summary>
         /// Gets or sets the Business layer for this role. Populated by MEF.
@@ -138,17 +156,16 @@ namespace PoshKentico.Cmdlets.Configuration.Roles
             switch (this.ParameterSetName)
             {
                 case ROLENAME:
-                    this.SiteID = this.SiteID == null ? -1 : this.SiteID;
-                    roles = this.BusinessLayer.GetRoles(this.RoleName, (int)this.SiteID, this.Exact.ToBool());
+                    roles = this.BusinessLayer.GetRoles(this.RoleName, this.SiteName, this.RegularExpression.ToBool());
                     break;
                 case IDSETNAME:
-                    roles = this.BusinessLayer.GetRoles(this.ID);
+                    roles = this.BusinessLayer.GetRoles(this.RoleIds);
                     break;
                 case USERNAME:
                     roles = this.BusinessLayer.GetRolesFromUser(this.UserName);
                     break;
                 case USEROBJECT:
-                    roles = this.BusinessLayer.GetRolesFromUser(this.User.UserName);
+                    roles = this.BusinessLayer.GetRolesFromUser(this.User.ActLike<IUser>());
                     break;
                 case NONE:
                     roles = this.BusinessLayer.GetRoles();

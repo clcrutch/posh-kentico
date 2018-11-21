@@ -19,7 +19,13 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Text.RegularExpressions;
+using CMS.SiteProvider;
+using ImpromptuInterface;
+using PoshKentico.Business.Configuration.Sites;
 using PoshKentico.Core.Services.Configuration.Roles;
+using PoshKentico.Core.Services.Configuration.Sites;
+using PoshKentico.Core.Services.Configuration.Users;
 
 namespace PoshKentico.Business.Configuration.Roles
 {
@@ -36,6 +42,12 @@ namespace PoshKentico.Business.Configuration.Roles
         /// </summary>
         [Import]
         public IRoleService RoleService { get; set; }
+
+        /// <summary>
+        /// Gets or sets a reference to the Site Business.
+        /// </summary>
+        [Import]
+        public GetCmsSiteBusiness SiteService { get; set; }
 
         #endregion
 
@@ -68,50 +80,90 @@ namespace PoshKentico.Business.Configuration.Roles
         /// Gets a list of all of the <see cref="IRole"/> which match the specified criteria.
         /// </summary>
         /// <param name="roleName">The role name which to match the roles to.</param>
-        /// <param name="siteID">The site id which to match the roles to.</param>
-        /// <param name="exact">A boolean which indicates if the match should be exact.</param>
+        /// <param name="siteName">The site name of the site which to match the roles to. If no site match, return roles that not assigne to any site.</param>
+        /// <param name="isRegex">A boolean which indicates if the match should be regex.</param>
         /// <returns>A list of all of the <see cref="IRole"/> which match the specified criteria.</returns>
-        public IEnumerable<IRole> GetRoles(string roleName, int siteID, bool exact)
+        public IEnumerable<IRole> GetRoles(string roleName, string siteName, bool isRegex)
         {
-            if (exact)
+            List<IRole> roles = new List<IRole>();
+            if (!string.IsNullOrEmpty(siteName))
             {
-                var roles = (from c in this.RoleService.Roles
-                             where c.RoleName.ToLowerInvariant().Equals(roleName, StringComparison.InvariantCultureIgnoreCase)
-                             select c).ToArray();
-                return GetRolesFromID(siteID, roles);
+                var sites = this.SiteService.GetSites(siteName, isRegex);
+                foreach (var site in sites)
+                {
+                    roles.AddRange(this.GetRoles(roleName, isRegex, site.SiteID));
+                }
             }
             else
             {
-                var roles = (from c in this.RoleService.Roles
-                             where c.RoleName.ToLowerInvariant().Contains(roleName.ToLowerInvariant())
-                             select c).ToArray();
+                roles.AddRange(this.GetRoles(roleName, isRegex));
+            }
 
-                return GetRolesFromID(siteID, roles);
+            return roles;
+        }
+
+        /// <summary>
+        /// Gets a list of all of the <see cref="IRole"/> which match the specified criteria.
+        /// </summary>
+        /// <param name="roleName">The role name which to match the roles to.</param>
+        /// <param name="isRegex">A boolean which indicates if the match should be regex.</param>
+        /// <param name="siteID">The site id which to match the roles to. If no site match, return roles that not assigne to any site.</param>
+        /// <returns>A list of all of the <see cref="IRole"/> which match the specified criteria.</returns>
+        public IEnumerable<IRole> GetRoles(string roleName, bool isRegex, int siteID = 0)
+        {
+            Regex regex = null;
+
+            if (isRegex)
+            {
+                regex = new Regex(roleName, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            }
+            else
+            {
+                regex = new Regex($"^{roleName.Replace("*", ".*")}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            }
+
+            if (siteID != 0)
+            {
+                var matched = from f in this.RoleService.Roles
+                          where regex.IsMatch(f.RoleName) && f.SiteID == siteID
+                          select f;
+
+                return matched.ToArray();
+            }
+            else
+            {
+                var matched = from f in this.RoleService.Roles
+                          where regex.IsMatch(f.RoleName)
+                          select f;
+
+                return matched.ToArray();
             }
         }
 
         /// <summary>
         /// Gets a list of all of the <see cref="IRole"/> from the specified user in the CMS System.
         /// </summary>
-        /// <param name="userName">The user name of the user.</param>
+        /// <param name="userName">The user to retrive all users from.</param>
         /// <returns>A list of all of the <see cref="IRole"/> that belong to the user.</returns>
         public IEnumerable<IRole> GetRolesFromUser(string userName)
         {
-            return this.RoleService.GetRolesFromUser(userName);
+            var user = new
+            {
+                UserName = userName,
+            };
+
+            return this.RoleService.GetRolesFromUser(user.ActLike<IUser>());
         }
 
-        private static IEnumerable<IRole> GetRolesFromID(int siteID, IRole[] roles)
+        /// <summary>
+        /// Gets a list of all of the <see cref="IRole"/> from the specified user in the CMS System.
+        /// </summary>
+        /// <param name="user">The user to retrive all users from.</param>
+        /// <returns>A list of all of the <see cref="IRole"/> that belong to the user.</returns>
+        public IEnumerable<IRole> GetRolesFromUser(IUser user)
         {
-            if (siteID == -1)
-            {
-                return roles;
-            }
-            else
-            {
-                return roles.Select(x => x).Where(x => x.SiteID == siteID);
-            }
+            return this.RoleService.GetRolesFromUser(user);
         }
-
         #endregion
 
     }

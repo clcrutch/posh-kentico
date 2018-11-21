@@ -33,34 +33,20 @@ namespace PoshKentico.Tests.Configuration.Staging
         {
             var serverServiceMock = new Mock<IStagingService>();
 
-            var servers = new List<IServer>();
             var serverMock1 = new Mock<IServer>();
             serverMock1.SetupGet(x => x.ServerDisplayName).Returns("My Server1");
             serverMock1.SetupGet(x => x.ServerName).Returns("MyServer1");
             serverMock1.SetupGet(x => x.ServerSiteID).Returns(9);
-            servers.Add(serverMock1.Object);
 
             var serverMock2 = new Mock<IServer>();
             serverMock2.SetupGet(x => x.ServerDisplayName).Returns("your server2");
             serverMock2.SetupGet(x => x.ServerName).Returns("yourserver2");
             serverMock2.SetupGet(x => x.ServerSiteID).Returns(12);
-            servers.Add(serverMock2.Object);
 
             var serverMock3 = new Mock<IServer>();
             serverMock3.SetupGet(x => x.ServerDisplayName).Returns("your server3");
             serverMock3.SetupGet(x => x.ServerName).Returns("yourserver3");
             serverMock3.SetupGet(x => x.ServerSiteID).Returns(12);
-            servers.Add(serverMock3.Object);
-
-            serverServiceMock.SetupGet(x => x.Servers).Returns(servers);
-
-            var getBusinessLayer = new GetCmsServerBusiness()
-            {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-
-                StagingService = serverServiceMock.Object,
-            };
 
             var businessLayer = new RemoveCmsServerBusiness()
             {
@@ -69,165 +55,15 @@ namespace PoshKentico.Tests.Configuration.Staging
                 ShouldProcess = (x, y) => true,
 
                 StagingService = serverServiceMock.Object,
-                GetCmsServerBusiness = getBusinessLayer,
             };
 
             businessLayer.Remove(serverMock1.Object);
-
+            businessLayer.Remove(serverMock2.Object);
+            businessLayer.Remove(serverMock3.Object);
             serverServiceMock.Verify(x => x.Delete(serverMock1.Object));
-        }
-
-        [TestCase]
-        public void RemoveServerTest_MatchString_ExactFalse()
-        {
-            var serverServiceMock = new Mock<IStagingService>();
-
-            var servers = new List<IServer>();
-            var serverMock1 = new Mock<IServer>();
-            serverMock1.SetupGet(x => x.ServerDisplayName).Returns("My Server1");
-            serverMock1.SetupGet(x => x.ServerName).Returns("MyServer1");
-            serverMock1.SetupGet(x => x.ServerSiteID).Returns(9);
-            servers.Add(serverMock1.Object);
-
-            var serverMock2 = new Mock<IServer>();
-            serverMock2.SetupGet(x => x.ServerDisplayName).Returns("your server2");
-            serverMock2.SetupGet(x => x.ServerName).Returns("yourserver2");
-            serverMock2.SetupGet(x => x.ServerSiteID).Returns(12);
-            servers.Add(serverMock2.Object);
-
-            var serverMock3 = new Mock<IServer>();
-            serverMock3.SetupGet(x => x.ServerDisplayName).Returns("your server3");
-            serverMock3.SetupGet(x => x.ServerName).Returns("yourserver3");
-            serverMock3.SetupGet(x => x.ServerSiteID).Returns(12);
-            servers.Add(serverMock3.Object);
-
-            serverServiceMock.SetupGet(x => x.Servers).Returns(servers);
-
-            var getBusinessLayer = new GetCmsServerBusiness()
-            {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-
-                StagingService = serverServiceMock.Object,
-            };
-
-            var businessLayer = new RemoveCmsServerBusiness()
-            {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-                ShouldProcess = (x, y) => true,
-
-                StagingService = serverServiceMock.Object,
-                GetCmsServerBusiness = getBusinessLayer,
-            };
-
-            businessLayer.Remove(12, "server", false);
-
             serverServiceMock.Verify(x => x.Delete(serverMock2.Object));
             serverServiceMock.Verify(x => x.Delete(serverMock3.Object));
         }
 
-        [TestCase]
-        public void RemoveServerTest_MatchString_ExactTrue()
-        {
-            var serverServiceMock = new Mock<IStagingService>();
-
-            var servers = new List<IServer>();
-            var serverMock1 = new Mock<IServer>();
-            serverMock1.SetupGet(x => x.ServerDisplayName).Returns("My Server1");
-            serverMock1.SetupGet(x => x.ServerName).Returns("MyServer1");
-            serverMock1.SetupGet(x => x.ServerSiteID).Returns(9);
-            servers.Add(serverMock1.Object);
-
-            var serverMock2 = new Mock<IServer>();
-            serverMock2.SetupGet(x => x.ServerDisplayName).Returns("your server2");
-            serverMock2.SetupGet(x => x.ServerName).Returns("yourserver2");
-            serverMock2.SetupGet(x => x.ServerSiteID).Returns(12);
-            servers.Add(serverMock2.Object);
-
-            var serverMock3 = new Mock<IServer>();
-            serverMock3.SetupGet(x => x.ServerDisplayName).Returns("your server3");
-            serverMock3.SetupGet(x => x.ServerName).Returns("yourserver3");
-            serverMock3.SetupGet(x => x.ServerSiteID).Returns(12);
-            servers.Add(serverMock3.Object);
-
-            serverServiceMock.SetupGet(x => x.Servers).Returns(servers);
-
-            var getBusinessLayer = new GetCmsServerBusiness()
-            {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-
-                StagingService = serverServiceMock.Object,
-            };
-
-            var businessLayer = new RemoveCmsServerBusiness()
-            {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-                ShouldProcess = (x, y) => true,
-
-                StagingService = serverServiceMock.Object,
-                GetCmsServerBusiness = getBusinessLayer,
-            };
-
-            businessLayer.Remove(12, "yourserver2", true);
-
-            serverServiceMock.Verify(x => x.Delete(serverMock2.Object));
-        }
-
-        [TestCase]
-        public void RemoveServerTest_Ids()
-        {
-            var serverServiceMock = new Mock<IStagingService>();
-
-            var servers = new List<IServer>();
-            var serverMock1 = new Mock<IServer>();
-            serverMock1.SetupGet(x => x.ServerDisplayName).Returns("My Server1");
-            serverMock1.SetupGet(x => x.ServerName).Returns("MyServer1");
-            serverMock1.SetupGet(x => x.ServerSiteID).Returns(9);
-            servers.Add(serverMock1.Object);
-
-            var serverMock2 = new Mock<IServer>();
-            serverMock2.SetupGet(x => x.ServerDisplayName).Returns("your server2");
-            serverMock2.SetupGet(x => x.ServerName).Returns("yourserver2");
-            serverMock2.SetupGet(x => x.ServerSiteID).Returns(12);
-            servers.Add(serverMock2.Object);
-
-            var serverMock3 = new Mock<IServer>();
-            serverMock3.SetupGet(x => x.ServerDisplayName).Returns("your server3");
-            serverMock3.SetupGet(x => x.ServerName).Returns("yourserver3");
-            serverMock3.SetupGet(x => x.ServerSiteID).Returns(12);
-            servers.Add(serverMock3.Object);
-
-            serverServiceMock.Setup(x => x.GetServer(1)).Returns(serverMock1.Object);
-            serverServiceMock.Setup(x => x.GetServer(2)).Returns(serverMock2.Object);
-            serverServiceMock.Setup(x => x.GetServer(3)).Returns(serverMock3.Object);
-
-            serverServiceMock.SetupGet(x => x.Servers).Returns(servers);
-
-            var getBusinessLayer = new GetCmsServerBusiness()
-            {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-
-                StagingService = serverServiceMock.Object,
-            };
-
-            var businessLayer = new RemoveCmsServerBusiness()
-            {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-                ShouldProcess = (x, y) => true,
-
-                StagingService = serverServiceMock.Object,
-                GetCmsServerBusiness = getBusinessLayer,
-            };
-
-            businessLayer.Remove(2, 1);
-
-            serverServiceMock.Verify(x => x.Delete(serverMock2.Object));
-            serverServiceMock.Verify(x => x.Delete(serverMock1.Object));
-        }
     }
 }

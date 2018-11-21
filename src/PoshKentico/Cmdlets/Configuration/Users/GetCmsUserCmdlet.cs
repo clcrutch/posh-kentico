@@ -106,7 +106,7 @@ namespace PoshKentico.Cmdlets.Configuration.Users
         public RoleInfo Role { get; set; }
 
         /// <summary>
-        /// <para type="description">If set, the match is exact, else the match performs a contains for display name and category name and starts with for path.</para>
+        /// <para type="description">If set, do a regex match, else the exact match.</para>
         /// </summary>
         [Parameter(Mandatory = false)]
         [Alias("Regex")]

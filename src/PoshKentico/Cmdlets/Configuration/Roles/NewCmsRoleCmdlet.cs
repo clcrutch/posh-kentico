@@ -60,7 +60,7 @@ namespace PoshKentico.Cmdlets.Configuration.Roles
         public string RoleName { get; set; }
 
         /// <summary>
-        /// <para type="description">The email for the newly created role.</para>
+        /// <para type="description">The site id for the newly created role.</para>
         /// </summary>
         [Parameter(Mandatory = false, Position = 2)]
         public int SiteID { get; set; }

@@ -63,27 +63,27 @@ namespace PoshKentico.Cmdlets.Configuration.Roles
         public RoleInfo Role { get; set; }
 
         /// <summary>
-        /// <para type="description">The Role name for the newly created role.</para>
+        /// <para type="description">The role name for the role.</para>
         /// <para type="description">Role name cannot be blank.</para>
         /// </summary>
         [Parameter(Mandatory = true, Position = 0, ParameterSetName = PROPERTYSET)]
         public string RoleName { get; set; }
 
         /// <summary>
-        /// <para type="description">The email for the newly created role.</para>
+        /// <para type="description">The Site ID for the role.</para>
         /// </summary>
         [Parameter(Mandatory = true, Position = 1, ParameterSetName = PROPERTYSET)]
         public int SiteID { get; set; }
 
         /// <summary>
-        /// <para type="description">The display name for the newly created role.</para>
+        /// <para type="description">The display name for the role.</para>
         /// <para type="description">Role display name cannot be blank.</para>
         /// </summary>
         [Parameter(Mandatory = false, Position = 2, ParameterSetName = PROPERTYSET)]
         public string DisplayName { get; set; }
 
         /// <summary>
-        /// <para type="description">Tell the cmdlet to return the newly created role.</para>
+        /// <para type="description">Tell the cmdlet to return the role.</para>
         /// </summary>
         [Parameter(Mandatory = false)]
         public SwitchParameter PassThru { get; set; }

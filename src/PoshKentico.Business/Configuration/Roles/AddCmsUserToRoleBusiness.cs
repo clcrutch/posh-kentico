@@ -1,4 +1,4 @@
-﻿// <copyright file="RemoveCmsRoleBusiness.cs" company="Chris Crutchfield">
+﻿// <copyright file="AddCmsUserToRoleBusiness.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -16,20 +16,23 @@
 // </copyright>
 
 using System.ComponentModel.Composition;
+using CMS.SiteProvider;
+using ImpromptuInterface;
 using PoshKentico.Core.Services.Configuration.Roles;
+using PoshKentico.Core.Services.Configuration.Users;
 
 namespace PoshKentico.Business.Configuration.Roles
 {
     /// <summary>
-    /// Business Layer for the Remove-CMSRole cmdlet.
+    /// Business Layer for the Add-CMSUserToRole cmdlet.
     /// </summary>
-    [Export(typeof(RemoveCmsRoleBusiness))]
-    public class RemoveCmsRoleBusiness : CmdletBusinessBase
+    [Export(typeof(AddCmsUserToRoleBusiness))]
+    public class AddCmsUserToRoleBusiness : CmdletBusinessBase
     {
         #region Properties
 
         /// <summary>
-        /// Gets or sets a reference to the Role Service. Populated by MEF.
+        /// Gets or sets a reference to the Role Service.  Populated by MEF.
         /// </summary>
         [Import]
         public IRoleService RoleService { get; set; }
@@ -39,17 +42,18 @@ namespace PoshKentico.Business.Configuration.Roles
         #region Methods
 
         /// <summary>
-        /// Removes a the specified role <see cref="IRole"/> in the CMS System.
+        /// Add a user to a role.
         /// </summary>
-        /// <param name="role">The <see cref="IRole"/> to remove.</param>
-        public void RemoveRole(IRole role)
+        /// <param name="userName">The user name of the user to add to the specified role.</param>
+        /// <param name="role">The role to add a user to.</param>
+        public void AddUserToRole(string userName, IRole role)
         {
-            if (this.ShouldProcess(role.RoleName, "Remove the role from Kentico."))
+            var user = new
             {
-                this.RoleService.DeleteRole(role);
-            }
+                UserName = userName,
+            };
+            this.RoleService.AddUserToRole(user.ActLike<IUser>(), role);
         }
-
         #endregion
     }
 }

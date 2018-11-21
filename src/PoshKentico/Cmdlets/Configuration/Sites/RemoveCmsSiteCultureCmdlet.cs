@@ -27,77 +27,60 @@ using AliasAttribute = System.Management.Automation.AliasAttribute;
 namespace PoshKentico.Cmdlets.Configuration.Sites
 {
     /// <summary>
-    /// <para type="synopsis">Removes a culture to a specified site.</para>
-    /// <para type="description">Removes a culture to a specified site based off of the provided input.</para>
+    /// <para type="synopsis">Removes site cultures from specified sites.</para>
+    /// <para type="description">Removes site cultures from specified sites based off of the provided input.</para>
     /// <example>
-    ///     <para>Remove a culture with culture code "cul" from a specified site specifying the site name "*bas*", display name "*bas*", or a domain name "*bas*".</para>
-    ///     <code>Remove-CMSSiteCulture -SiteName "*bas*" -CultureCode "cul"</code>
+    ///     <para>Remove cultures with culture code "en-US, en-AU" from specified sites specifying the site name "basic", display name "basic", or a domain name "basic".</para>
+    ///     <code>Remove-CMSSiteCulture -SiteName "basic" -CultureCodes "en-US, en-AU"</code>
     /// </example>
     /// <example>
-    ///     <para>Remove a culture with culture code "cul" from a specified site specifying the site name "basic", display name "basic", or a domain name "basic".</para>
-    ///     <code>Remove-CMSSiteCulture -SiteName "basic" -EXACT -CultureCode "cul"</code>
+    ///     <para>Remove cultures with culture code "en-US, en-AU" from specified sites specifying the site name "basic", display name "basic", or a domain name "basic".</para>
+    ///     <code>Remove-CMSSiteCulture -SiteName "*basic*"  -CultureCodes "en-US, en-AU" -RegularExpression</code>
     /// </example>
     /// <example>
-    ///     <para>Remove a culture with culture code "cul" from a site.</para>
-    ///     <code>$site | Remove-CMSSiteCulture</code>
+    ///     <para>Remove cultures with culture code "en-US, en-AU" to a specified site.</para>
+    ///     <code>$site | Remove-CMSSiteCulture -CultureCodes "en-US, en-AU"</code>
     /// </example>
     /// <example>
-    ///     <para>Remove a culture with culture code "cul" with the specified IDs.</para>
-    ///     <code>Remove-CMSSiteCulture -ID 1,2,3</code>
+    ///     <para>Remove cultures with culture code "en-US, en-AU" with the specified site IDs.</para>
+    ///     <code>Remove-CMSSiteCulture -SiteIds 1,2,3 -CultureCodes "en-US, en-AU"</code>
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Remove, "CMSSiteCulture")]
     [Alias("rscul")]
-    public class RemoveCmsSiteCultureCmdlet : MefCmdlet
+    public class RemoveCmsSiteCultureCmdlet : GetCmsSiteCmdlet
     {
         #region Constants
 
-        private const string OBJECTSET = "Object";
-        private const string SITENAMESET = "Property";
-        private const string IDSETNAME = "ID";
+        private const string SITEOBJECTSET = "Object";
 
         #endregion
 
         #region Properties
 
         /// <summary>
-        /// <para type="description">The site name for the site.</para>
-        /// </summary>
-        [Parameter(Mandatory = true, Position = 0)]
-        public string SiteName { get; set; }
-
-        /// <summary>
         /// <para type="description">A reference to the site.</para>
         /// </summary>
-        [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0, ParameterSetName = OBJECTSET)]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0, ParameterSetName = SITEOBJECTSET)]
         [Alias("Site")]
         public SiteInfo SiteToRemove { get; set; }
 
         /// <summary>
-        /// <para type="description">If set, the match is exact, else the match performs a contains for site name.</para>
-        /// <para type="description"></para>
-        /// </summary>
-        [Parameter(ParameterSetName = SITENAMESET)]
-        public SwitchParameter Exact { get; set; }
-
-        /// <summary>
         /// <para type="description">The IDs of the site.</para>
         /// </summary>
-        [Parameter(Mandatory = true, Position = 0, ParameterSetName = IDSETNAME)]
-        public int[] ID { get; set; }
+        [Parameter(Mandatory = true, Position = 1, ParameterSetName = NONE)]
+        [Parameter(Mandatory = true, Position = 1, ParameterSetName = DISPLAYNAME)]
+        [Parameter(Mandatory = true, Position = 1, ParameterSetName = IDSETNAME)]
+        [Parameter(Mandatory = true, Position = 1, ParameterSetName = USEROBJECT)]
+        [Parameter(Mandatory = true, Position = 1, ParameterSetName = SITEOBJECTSET)]
+        public string[] CultureCodes { get; set; }
 
         /// <summary>
-        /// <para type="description">The IDs of the site.</para>
-        /// </summary>
-        [Parameter(Mandatory = true, Position = 1)]
-        public string CultureCode { get; set; }
-
-        /// <summary>
-        ///  Gets or sets the Business Layer for adding culture to this site.  Populated by MEF.
+        ///  Gets or sets the Business Layer for Removeing culture to this site.  Populated by MEF.
         /// </summary>
         [Import]
-        public RemoveCmsSiteCultureBusiness BusinessLayer { get; set; }
+        public RemoveCmsSiteCultureBusiness RemoveBusinessLayer { get; set; }
 
         #endregion
 
@@ -106,17 +89,27 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
-            switch (this.ParameterSetName)
+            if (this.ParameterSetName == SITEOBJECTSET)
             {
-                case OBJECTSET:
-                    this.BusinessLayer.RemoveCulture(this.SiteToRemove.ActLike<ISite>(), this.CultureCode);
-                    break;
-                case SITENAMESET:
-                    this.BusinessLayer.RemoveCulture(this.SiteName, this.Exact.ToBool(), this.CultureCode);
-                    break;
-                case IDSETNAME:
-                    this.BusinessLayer.RemoveCulture(this.ID, this.CultureCode);
-                    break;
+                this.ActOnObject(this.SiteToRemove.ActLike<ISite>());
+            }
+            else
+            {
+                base.ProcessRecord();
+            }
+        }
+
+        /// <inheritdoc />
+        protected override void ActOnObject(ISite site)
+        {
+            if (site == null)
+            {
+                return;
+            }
+
+            foreach (string code in this.CultureCodes)
+            {
+                this.RemoveBusinessLayer.RemoveCulture(site, code);
             }
         }
 

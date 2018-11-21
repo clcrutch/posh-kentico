@@ -40,28 +40,28 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
     ///     <code>Get-CMSServer</code>
     /// </example>
     /// <example>
-    ///     <para>Get all servers with a display name "*bas*", or server name "*bas*".</para>
-    ///     <code>Get-CMSServer bas</code>
+    ///     <para>Get all servers with a display name "basic", or server name "basic".</para>
+    ///     <code>Get-CMSServer basic</code>
     /// </example>
     /// <example>
-    ///     <para>Get all servers with a site id 5,  and a display name "*bas*" or server name "*bas*".</para>
-    ///     <code>Get-CMSServer -SiteID 5 -ServerName "bas"</code>
-    /// </example>
-    /// <example>
-    ///     <para>Get all servers associalted with site $site with a display name "*bas*", or server name "*bas*"</para>
-    ///     <code>$site | Get-CMSServer bas</code>
-    /// </example>
-    /// <example>
-    ///     <para>Get all servers with a display name "basic", or server name "basic"</para>
-    ///     <code>Get-CMSServer basic -Exact</code>
-    /// </example>
-    /// <example>
-    ///     <para>Get all servers with a site id 5, and a display name "basic" or server name "basic"</para>
-    ///     <code>Get-CMSServer 5 basic -Exact</code>
+    ///     <para>Get all servers with a site id 5,  and a display name "basic" or server name "basic".</para>
+    ///     <code>Get-CMSServer -SiteID 5 -ServerName "basic"</code>
     /// </example>
     /// <example>
     ///     <para>Get all servers associalted with site $site with a display name "basic", or server name "basic"</para>
-    ///     <code>$site | Get-CMSServer basic -Exact</code>
+    ///     <code>$site | Get-CMSServer basic</code>
+    /// </example>
+    /// <example>
+    ///     <para>Get all servers with a display name "*basic*", or server name "*basic*"</para>
+    ///     <code>Get-CMSServer *basic* -RegularExpression</code>
+    /// </example>
+    /// <example>
+    ///     <para>Get all servers with a site id 5, and a display name "*basic*" or server name "*basic*"</para>
+    ///     <code>Get-CMSServer 5 *basic* -RegularExpression</code>
+    /// </example>
+    /// <example>
+    ///     <para>Get all servers associalted with site $site with a display name "*basic*", or server name "*basic*"</para>
+    ///     <code>$site | Get-CMSServer *basic* -RegularExpression</code>
     /// </example>
     /// <example>
     ///     <para>Get all the servers with the specified IDs.</para>
@@ -76,10 +76,25 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
     {
         #region Constants
 
-        private const string NONE = "None";
-        private const string OBJECTSET = "Object";
-        private const string DISPLAYNAME = "Dislpay Name";
-        private const string IDSETNAME = "ID";
+        /// <summary>
+        /// Represents no parameters.
+        /// </summary>
+        protected const string NONE = "None";
+
+        /// <summary>
+        /// Represents site object is used in parameter.
+        /// </summary>
+        protected const string OBJECTSET = "Object";
+
+        /// <summary>
+        /// Represents server name or display name is used in parameter.
+        /// </summary>
+        protected const string DISPLAYNAME = "Dislpay Name";
+
+        /// <summary>
+        /// Represents server id is used in parameter.
+        /// </summary>
+        protected const string IDSETNAME = "ID";
 
         #endregion
         #region Properties
@@ -99,11 +114,12 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
         public string DisplayName { get; set; }
 
         /// <summary>
-        /// <para type="description">If set, the match is exact, else the match performs a contains for display name and category name and starts with for path.</para>
+        /// <para type="description">If set, do a regex match, else the exact match.</para>
         /// </summary>
         [Parameter(ParameterSetName = DISPLAYNAME)]
         [Parameter(ParameterSetName = OBJECTSET)]
-        public SwitchParameter Exact { get; set; }
+        [Alias("Regex")]
+        public SwitchParameter RegularExpression { get; set; }
 
         /// <summary>
         /// <para type="description">The associalted site for the server to retrieve.</para>
@@ -135,10 +151,10 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
             switch (this.ParameterSetName)
             {
                 case DISPLAYNAME:
-                    servers = this.BusinessLayer.GetServers(this.SiteID, this.DisplayName, this.Exact.ToBool());
+                    servers = this.BusinessLayer.GetServers(this.SiteID, this.DisplayName, this.RegularExpression.ToBool());
                     break;
                 case OBJECTSET:
-                    servers = this.BusinessLayer.GetServers(this.Site.ActLike<ISite>(), this.DisplayName, this.Exact.ToBool());
+                    servers = this.BusinessLayer.GetServers(this.Site.ActLike<ISite>(), this.DisplayName, this.RegularExpression.ToBool());
                     break;
                 case IDSETNAME:
                     servers = this.BusinessLayer.GetServers(this.ID);
@@ -150,8 +166,17 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
 
             foreach (var server in servers)
             {
-                this.WriteObject(server.UndoActLike());
+                this.ActOnObject(server);
             }
+        }
+
+        /// <summary>
+        /// When overridden in a child class, operates on the specified action.
+        /// </summary>
+        /// <param name="server">The server to operate on.</param>
+        protected virtual void ActOnObject(IServer server)
+        {
+            this.WriteObject(server.UndoActLike());
         }
 
         #endregion

@@ -53,12 +53,12 @@ function Get-TargetResource
 									ServerUsername = $null;
 									ServerPassword = $null;
 								}
-	$site = Get-CMSSite -SiteName $ServerSiteName -Exact
+	$site = Get-CMSSite -SiteName $ServerSiteName
 
 	if ($site -ne $null)
 	{
         Write-Verbose -Message "The Site with SiteName $($ServerSiteName) exist"
-		$Server = Get-CMSServer -SiteID $site.SiteID -ServerName $ServerName -Exact
+		$Server = Get-CMSServer -SiteID $site.SiteID -ServerName $ServerName
 		
 		if ($Server -ne $null)
 		{
@@ -128,12 +128,12 @@ function Set-TargetResource
     <# Else, if Ensure is set to "Present" and the server does exist, then update its properties to match the values provided in the non-mandatory parameter values #>
     <# Else, if Ensure is set to "Absent" and the server does not exist, then do nothing #>
     <# Else, if Ensure is set to "Absent" and the server does exist, then delete the server #>
-	$site = Get-CMSSite -SiteName $ServerSiteName -Exact
+	$site = Get-CMSSite -SiteName $ServerSiteName
 
 	if ($site -ne $null)
 	{
         Write-Verbose -Message "The Site with SiteName $($ServerSiteName) exist"
-	    $server = Get-CMSServer -SiteID $site.SiteID -ServerName $ServerName -Exact
+	    $server = Get-CMSServer -SiteID $site.SiteID -ServerName $ServerName
 
 	    if ($Ensure -eq "Present")
         {
@@ -153,7 +153,7 @@ function Set-TargetResource
             if ($server -ne $null)
             {
                 Write-Verbose -Message "Deleting the server $($ServerName)"
-                Remove-CMSServer -SiteID $site.SiteID -ServerName $ServerName -Exact
+                Remove-CMSServer -SiteID $site.SiteID -ServerName $ServerName
             }
         }
     }
@@ -206,13 +206,13 @@ function Test-TargetResource
 	Write-Verbose "Use this cmdlet to deliver information about command processing."
 
 	Write-Debug "Use this cmdlet to write debug information while troubleshooting."
-	$site = Get-CMSSite -SiteName $ServerSiteName -Exact
+	$site = Get-CMSSite -SiteName $ServerSiteName
 
 	if ($site -ne $null)
 	{
 		Write-Verbose -Message "The Site with SiteName $($ServerSiteName) exist"
 
-	    $server = Get-CMSServer -SiteID $site.SiteID -ServerName $ServerName -Exact
+	    $server = Get-CMSServer -SiteID $site.SiteID -ServerName $ServerName
 
         if ($Ensure -eq "Present")
         {

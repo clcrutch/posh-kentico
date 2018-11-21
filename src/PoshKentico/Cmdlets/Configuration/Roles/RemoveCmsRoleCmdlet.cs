@@ -36,24 +36,32 @@ namespace PoshKentico.Cmdlets.Configuration.Roles
     ///     <code>Remove-CMSRole</code>
     /// </example>
     /// <example>
-    ///     <para>Remove all roles with a role name "*role*".</para>
+    ///     <para>Remove all roles with a role name "role".</para>
     ///     <code>Remove-CMSRole -RoleName "role" </code>
     /// </example>
     /// <example>
-    ///     <para>Remove all roles with  role name "NewRole".</para>
-    ///     <code>Remove-CMSRole -RoleName "NewRole" -Exact</code>
+    ///     <para>Remove all roles with  role name "*role*".</para>
+    ///     <code>Remove-CMSRole -RoleName "*role*" -RegularExpression</code>
     /// </example>
     /// <example>
-    ///     <para>Remove all roles with  role name "NewRole", site is 2.</para>
-    ///     <code>Remove-CMSRole -RoleName "NewRole" -SiteID 2</code>
+    ///     <para>Remove all roles with  role name "role", site name "SiteName".</para>
+    ///     <code>Remove-CMSRole -RoleName "role" -SiteName "SiteName"</code>
     /// </example>
     /// <example>
-    ///     <para>Remove all roles with  role name "NewRole", site is 2.</para>
-    ///     <code>Remove-CMSRole -RoleName "NewRole" -SiteID 2 -Exact</code>
+    ///     <para>Remove all roles with  role name "*role*", site name "*SiteName*".</para>
+    ///     <code>Remove-CMSRole -RoleName "role" -SiteName "SiteName" -RegularExpression</code>
+    /// </example>
+    /// <example>
+    ///     <para>Remove all roles with  role name "role", site id "2".</para>
+    ///     <code>Remove-CMSRole -RoleName "role" -SiteID 2</code>
+    /// </example>
+    /// <example>
+    ///     <para>Remove all roles with  role name "role", site id "2".</para>
+    ///     <code>Remove-CMSRole -RoleName "*role*" -SiteID 2 -RegularExpression</code>
     /// </example>
     /// <example>
     ///     <para>Remove all roles with the specified IDs.</para>
-    ///     <code>Remove-CMSRole -ID 1,3</code>
+    ///     <code>Remove-CMSRole -RoleIds 1,3</code>
     /// </example>
     /// <example>
     ///     <para>Remove the specified roles from a user.</para>
@@ -85,13 +93,13 @@ namespace PoshKentico.Cmdlets.Configuration.Roles
         #region Properties
 
         /// <summary>
-        /// <para type="description">The display name of the role to retrive.</para>
+        /// <para type="description">The the role to remove.</para>
         /// </summary>
         [Parameter(ValueFromPipeline = true, Mandatory = true, ParameterSetName = ROLEOBJECT)]
         public RoleInfo Role { get; set; }
 
         /// <summary>
-        /// Gets or sets the Business layer for this role. Populated by MEF.
+        /// Gets or sets the Business layer for removing the role. Populated by MEF.
         /// </summary>
         [Import]
         public RemoveCmsRoleBusiness RemoveBusinessLayer { get; set; }
@@ -120,7 +128,7 @@ namespace PoshKentico.Cmdlets.Configuration.Roles
                 return;
             }
 
-            this.RemoveBusinessLayer.RemoveRoles(role);
+            this.RemoveBusinessLayer.RemoveRole(role);
         }
 
         #endregion

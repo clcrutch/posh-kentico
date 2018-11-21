@@ -16,6 +16,7 @@
 // </copyright>
 
 using System.ComponentModel.Composition;
+using CMS.SiteProvider;
 using ImpromptuInterface;
 using PoshKentico.Core.Services.Configuration.Roles;
 
@@ -40,7 +41,7 @@ namespace PoshKentico.Business.Configuration.Roles
         #region
 
         /// <summary>
-        /// Sets the <see cref="IRole"/> in the CMS System.
+        /// Sets the role <see cref="IRole"/> in the CMS System.
         /// </summary>
         /// <param name="role">The <see cref="IRole"/> to set.</param>
         /// <returns>The updated role.</returns>
@@ -50,7 +51,7 @@ namespace PoshKentico.Business.Configuration.Roles
         }
 
         /// <summary>
-        /// Creates a new <see cref="IRole"/> in the CMS System.
+        /// Sets the role <see cref="IRole"/> in the CMS System.
         /// </summary>
         /// <param name="roleDisplayName">The Display Name for the new Role.</param>
         /// <param name="roleName">The Role Name for the new Role.</param>

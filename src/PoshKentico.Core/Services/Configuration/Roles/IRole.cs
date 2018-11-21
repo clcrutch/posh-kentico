@@ -38,6 +38,11 @@ namespace PoshKentico.Core.Services.Configuration.Roles
         /// Gets the site id.
         /// </summary>
         int SiteID { get; }
+
+        /// <summary>
+        /// Gets the role id.
+        /// </summary>
+        int? RoleID { get; }
         #endregion
     }
 }

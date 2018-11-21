@@ -34,29 +34,15 @@ namespace PoshKentico.Tests.Configuration.Sites
             var siteServiceMock = new Mock<ISiteService>();
             string aliasName = "172.0.0.1";
 
-            var sites = new List<ISite>();
             var siteMock1 = new Mock<ISite>();
             siteMock1.SetupGet(x => x.DisplayName).Returns("My Site1");
             siteMock1.SetupGet(x => x.SiteName).Returns("MySite1");
             siteMock1.SetupGet(x => x.DomainName).Returns("localhost1");
-            sites.Add(siteMock1.Object);
 
             var siteMock2 = new Mock<ISite>();
             siteMock2.SetupGet(x => x.DisplayName).Returns("your site2");
             siteMock2.SetupGet(x => x.SiteName).Returns("yoursite2");
             siteMock2.SetupGet(x => x.DomainName).Returns("localhost2");
-            sites.Add(siteMock2.Object);
-
-            siteServiceMock.SetupGet(x => x.Sites).Returns(sites);
-
-            var getBusinessLayer = new GetCmsSiteBusiness()
-            {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-
-                SiteService = siteServiceMock.Object,
-            };
-
             var businessLayer = new AddCmsSiteDomainAliasBusiness()
             {
                 WriteDebug = Assert.NotNull,
@@ -64,149 +50,11 @@ namespace PoshKentico.Tests.Configuration.Sites
                 ShouldProcess = (x, y) => true,
 
                 SiteService = siteServiceMock.Object,
-                GetCmsSiteBusiness = getBusinessLayer,
             };
 
             businessLayer.AddDomainAlias(siteMock1.Object, aliasName);
 
             siteServiceMock.Verify(x => x.AddSiteDomainAlias(siteMock1.Object, aliasName));
-        }
-
-        [TestCase]
-        public void AddSiteDomainAliasTest_MatchString_ExactFalse()
-        {
-            var siteServiceMock = new Mock<ISiteService>();
-            string aliasName = "172.0.0.1";
-
-            var sites = new List<ISite>();
-            var siteMock1 = new Mock<ISite>();
-            siteMock1.SetupGet(x => x.DisplayName).Returns("My Site1");
-            siteMock1.SetupGet(x => x.SiteName).Returns("MySite1");
-            siteMock1.SetupGet(x => x.DomainName).Returns("localhost1");
-            sites.Add(siteMock1.Object);
-
-            var siteMock2 = new Mock<ISite>();
-            siteMock2.SetupGet(x => x.DisplayName).Returns("your site2");
-            siteMock2.SetupGet(x => x.SiteName).Returns("yoursite2");
-            siteMock2.SetupGet(x => x.DomainName).Returns("localhost2");
-            sites.Add(siteMock2.Object);
-
-            siteServiceMock.SetupGet(x => x.Sites).Returns(sites);
-
-            var getBusinessLayer = new GetCmsSiteBusiness()
-            {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-
-                SiteService = siteServiceMock.Object,
-            };
-
-            var businessLayer = new AddCmsSiteDomainAliasBusiness()
-            {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-
-                SiteService = siteServiceMock.Object,
-                GetCmsSiteBusiness = getBusinessLayer,
-            };
-
-            businessLayer.AddDomainAlias("site", false, aliasName);
-
-            siteServiceMock.Verify(x => x.AddSiteDomainAlias(siteMock1.Object, aliasName));
-            siteServiceMock.Verify(x => x.AddSiteDomainAlias(siteMock2.Object, aliasName));
-        }
-
-        [TestCase]
-        public void AddSiteDomainAliasTest_MatchString_ExactTrue()
-        {
-            var siteServiceMock = new Mock<ISiteService>();
-            string aliasName = "172.0.0.1";
-
-            var sites = new List<ISite>();
-            var siteMock1 = new Mock<ISite>();
-            siteMock1.SetupGet(x => x.DisplayName).Returns("My Site1");
-            siteMock1.SetupGet(x => x.SiteName).Returns("MySite1");
-            siteMock1.SetupGet(x => x.DomainName).Returns("localhost1");
-            sites.Add(siteMock1.Object);
-
-            var siteMock2 = new Mock<ISite>();
-            siteMock2.SetupGet(x => x.DisplayName).Returns("your site2");
-            siteMock2.SetupGet(x => x.SiteName).Returns("yoursite2");
-            siteMock2.SetupGet(x => x.DomainName).Returns("localhost2");
-            sites.Add(siteMock2.Object);
-
-            siteServiceMock.SetupGet(x => x.Sites).Returns(sites);
-
-            var getBusinessLayer = new GetCmsSiteBusiness()
-            {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-
-                SiteService = siteServiceMock.Object,
-            };
-
-            var businessLayer = new AddCmsSiteDomainAliasBusiness()
-            {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-                ShouldProcess = (x, y) => true,
-
-                SiteService = siteServiceMock.Object,
-                GetCmsSiteBusiness = getBusinessLayer,
-            };
-
-            businessLayer.AddDomainAlias("yoursite2", true, aliasName);
-
-            siteServiceMock.Verify(x => x.AddSiteDomainAlias(siteMock2.Object, aliasName));
-        }
-
-        [TestCase]
-        public void AddSiteDomainAliasTest_Ids()
-        {
-            var siteServiceMock = new Mock<ISiteService>();
-            string aliasName = "172.0.0.1";
-
-            var sites = new List<ISite>();
-            var siteMock1 = new Mock<ISite>();
-            siteMock1.SetupGet(x => x.DisplayName).Returns("My Site1");
-            siteMock1.SetupGet(x => x.SiteName).Returns("MySite1");
-            siteMock1.SetupGet(x => x.DomainName).Returns("localhost1");
-            sites.Add(siteMock1.Object);
-
-            var siteMock2 = new Mock<ISite>();
-            siteMock2.SetupGet(x => x.DisplayName).Returns("your site2");
-            siteMock2.SetupGet(x => x.SiteName).Returns("yoursite2");
-            siteMock2.SetupGet(x => x.DomainName).Returns("localhost2");
-            sites.Add(siteMock2.Object);
-
-            siteServiceMock.Setup(x => x.GetSite(1)).Returns(siteMock1.Object);
-            siteServiceMock.Setup(x => x.GetSite(2)).Returns(siteMock2.Object);
-
-            siteServiceMock.SetupGet(x => x.Sites).Returns(sites);
-
-            var getBusinessLayer = new GetCmsSiteBusiness()
-            {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-
-                SiteService = siteServiceMock.Object,
-            };
-
-            var businessLayer = new AddCmsSiteDomainAliasBusiness()
-            {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-                ShouldProcess = (x, y) => true,
-
-                SiteService = siteServiceMock.Object,
-                GetCmsSiteBusiness = getBusinessLayer,
-            };
-
-            int[] ids = new int[] { 2, 3 };
-
-            businessLayer.AddDomainAlias(ids, aliasName);
-
-            siteServiceMock.Verify(x => x.AddSiteDomainAlias(siteMock2.Object, aliasName));
         }
     }
 }
