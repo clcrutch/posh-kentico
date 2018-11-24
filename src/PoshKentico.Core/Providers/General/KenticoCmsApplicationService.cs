@@ -36,6 +36,12 @@ namespace PoshKentico.Core.Providers.General
     [Export(typeof(ICmsApplicationService))]
     public class KenticoCmsApplicationService : ICmsApplicationService
     {
+        #region Variables
+
+        private static bool powershellInitialized = false;
+
+        #endregion
+
         #region Properties
 
         /// <summary>
@@ -53,6 +59,9 @@ namespace PoshKentico.Core.Providers.General
                 return InitializationState.Uninitialized;
             }
         }
+
+        [Import]
+        public ICmsDatabaseService CmsDatabaseService { get; set; }
 
         #endregion
 
@@ -180,14 +189,25 @@ namespace PoshKentico.Core.Providers.General
                 return;
             }
 
-            DataConnectionFactory.ConnectionString = connectionString;
+            if (!powershellInitialized)
+            {
+                this.CmsDatabaseService.ConnectionString = connectionString;
 
-            // This is how Kentico recommends working with their API.
+                // This is how Kentico recommends working with their API.
 #pragma warning disable CS0618 // Type or member is obsolete
-            AppDomain.CurrentDomain.AppendPrivatePath(Path.GetDirectoryName(typeof(KenticoCmsApplicationService).Assembly.Location));
+                AppDomain.CurrentDomain.AppendPrivatePath(Path.GetDirectoryName(typeof(KenticoCmsApplicationService).Assembly.Location));
 #pragma warning restore CS0618 // Type or member is obsolete
 
-            SystemContext.WebApplicationPhysicalPath = siteLocation.FullName;
+                SystemContext.WebApplicationPhysicalPath = siteLocation.FullName;
+
+                powershellInitialized = true;
+            }
+
+            // We cannot setup the application unless the database is setup.
+            if (!this.CmsDatabaseService.IsDatabaseInstalled())
+            {
+                return;
+            }
 
             if (!CMSApplication.Init())
             {
