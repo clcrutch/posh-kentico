@@ -17,6 +17,7 @@
 
 using System.Collections.Generic;
 using PoshKentico.Core.Services.Configuration.Localization;
+using PoshKentico.Core.Services.Configuration.Users;
 
 namespace PoshKentico.Core.Services.Configuration.Sites
 {
@@ -62,6 +63,13 @@ namespace PoshKentico.Core.Services.Configuration.Sites
         /// <param name="siteName">The Site Name of the <see cref="ISite"/> to return.</param>
         /// <returns>The <see cref="ISite"/> which matches the site name, else null.</returns>
         ISite GetSite(string siteName);
+
+        /// <summary>
+        /// Gets the <see cref="ISite"/> which matches the supplied user name.
+        /// </summary>
+        /// <param name="user">The user of the <see cref="IUser" />.</param>
+        /// <returns>The list of the <see cref="ISite"/>  which the user is assigned.</returns>
+        IEnumerable<ISite> GetSite(IUser user);
 
         /// <summary>
         /// Updates the <see cref="ISite"/>.

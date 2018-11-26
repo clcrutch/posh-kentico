@@ -61,7 +61,7 @@ ScriptsToProcess = @("./init.ps1")
 
 # Format files (.ps1xml) to be loaded when importing this module
 FormatsToProcess = @( `
-	#ContentManagement/MediaLibraries
+	# ContentManagement/MediaLibraries
 	"./FormattingFiles/ContentManagement/MediaLibraries/MediaLibraryInfo.format.ps1xml", `
 	"./FormattingFiles/ContentManagement/MediaLibraries/MediaFileInfo.format.ps1xml", `
 
@@ -71,7 +71,10 @@ FormatsToProcess = @( `
     "./FormattingFiles/Configuration/Sites/SiteInfo.format.ps1xml", `
 
     # Configuration/Staging
-	"./FormattingFiles/Configuration/Staging/ServerInfo.format.ps1xml" `
+	"./FormattingFiles/Configuration/Staging/ServerInfo.format.ps1xml", `
+
+	# Configuration/Users
+	"./FormattingFiles/Configuration/Users/UserInfo.format.ps1xml", `
 
 	# Development/WebParts
 	"./FormattingFiles/Development/WebParts/FormFieldInfo.format.ps1xml", `

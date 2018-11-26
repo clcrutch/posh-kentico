@@ -1,5 +1,5 @@
 ---
-external help file: posh-kentico.dll-Help.xml
+external help file: PoshKentico.dll-Help.xml
 Module Name: posh-kentico
 online version:
 schema: 2.0.0
@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CMSSite
 
 ## SYNOPSIS
-Gets the sites selected by the provided input.
+{{Fill in the Synopsis}}
 
 ## SYNTAX
 
@@ -27,40 +27,27 @@ Get-CMSSite [[-DisplayName] <String>] [-Exact] [<CommonParameters>]
 Get-CMSSite [[-ID] <Int32[]>] [<CommonParameters>]
 ```
 
+### User
+```
+Get-CMSSite [[-User] <UserInfo>] [<CommonParameters>]
+```
+
 ## DESCRIPTION
-Gets the sites selected by the provided input.
-This command automatically initializes the connection to Kentico if not already initialized.
-
-Without parameters, this command returns all sites.
-
-With parameters, this command returns the sites that match the criteria.
+{{Fill in the Description}}
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-Get-CMSSite
-```
-
-### EXAMPLE 2
-```
-Get-CMSSite bas
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-### EXAMPLE 3
-```
-Get-CMSSite basic -Exact
-```
-
-### EXAMPLE 4
-```
-Get-CMSSite -ID 5,304,5
-```
+{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -DisplayName
-The display name of the site to retrive.
+{{Fill DisplayName Description}}
 
 ```yaml
 Type: String
@@ -75,7 +62,7 @@ Accept wildcard characters: False
 ```
 
 ### -Exact
-If set, the match is exact, else the match performs a contains for display name and category name and starts with for path.
+{{Fill Exact Description}}
 
 ```yaml
 Type: SwitchParameter
@@ -84,13 +71,13 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -ID
-The IDs of the site to retrieve.
+{{Fill ID Description}}
 
 ```yaml
 Type: Int32[]
@@ -104,6 +91,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -User
+{{Fill User Description}}
+
+```yaml
+Type: UserInfo
+Parameter Sets: User
+Aliases:
+
+Required: False
+Position: 0
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
 For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -111,11 +113,13 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## INPUTS
 
 ### System.String
-The display name of the site to retrive.
+
+### CMS.Membership.UserInfo
 
 ## OUTPUTS
 
 ### CMS.SiteProvider.SiteInfo[]
+
 ## NOTES
 
 ## RELATED LINKS

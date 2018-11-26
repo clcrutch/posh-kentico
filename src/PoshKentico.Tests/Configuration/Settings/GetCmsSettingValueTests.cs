@@ -15,6 +15,7 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System.Diagnostics.CodeAnalysis;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
@@ -24,6 +25,7 @@ using PoshKentico.Core.Services.Configuration.Sites;
 
 namespace PoshKentico.Tests.Configuration.Settings
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     public class GetCmsSettingValueTests
     {

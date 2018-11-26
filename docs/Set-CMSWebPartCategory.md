@@ -1,5 +1,5 @@
 ---
-external help file: posh-kentico.dll-Help.xml
+external help file: PoshKentico.dll-Help.xml
 Module Name: posh-kentico
 online version:
 schema: 2.0.0
@@ -8,7 +8,7 @@ schema: 2.0.0
 # Set-CMSWebPartCategory
 
 ## SYNOPSIS
-Sets a web part category.
+{{Fill in the Synopsis}}
 
 ## SYNTAX
 
@@ -17,26 +17,21 @@ Set-CMSWebPartCategory [-PassThru] [-WebPartCategory] <WebPartCategoryInfo> [<Co
 ```
 
 ## DESCRIPTION
-Sets a web part category.
-
-This command automatically initializes the connection to Kentico if not already initialized.
+{{Fill in the Description}}
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-$webPartCategory | Set-CMSWebPartCategory
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-### EXAMPLE 2
-```
-$webPartCategory | Set-CMSWebPartCategory -PassThru
-```
+{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -PassThru
-Tell the cmdlet to return the web part category.
+{{Fill PassThru Description}}
 
 ```yaml
 Type: SwitchParameter
@@ -45,13 +40,13 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -WebPartCategory
-A reference to the WebPart category to update.
+{{Fill WebPartCategory Description}}
 
 ```yaml
 Type: WebPartCategoryInfo
@@ -72,11 +67,11 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## INPUTS
 
 ### CMS.PortalEngine.WebPartCategoryInfo
-A reference to the WebPart category to update.
 
 ## OUTPUTS
 
 ### CMS.PortalEngine.WebPartCategoryInfo[]
+
 ## NOTES
 
 ## RELATED LINKS

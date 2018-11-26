@@ -1,5 +1,5 @@
 ---
-external help file: posh-kentico.dll-Help.xml
+external help file: PoshKentico.dll-Help.xml
 Module Name: posh-kentico
 online version:
 schema: 2.0.0
@@ -8,7 +8,7 @@ schema: 2.0.0
 # New-CMSSite
 
 ## SYNOPSIS
-Creates a new site.
+{{Fill in the Synopsis}}
 
 ## SYNTAX
 
@@ -18,28 +18,21 @@ New-CMSSite [-DisplayName] <String> [[-SiteName] <String>] [[-Status] <SiteStatu
 ```
 
 ## DESCRIPTION
-Creates a new site based off of the provided input.
-
-This cmdlet returns the newly created site when the -PassThru switch is used.
+{{Fill in the Description}}
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-New-CMSSite -DisplayName "My Test Name" -DomainName "My Domain Name"
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-### EXAMPLE 2
-```
-New-CMSSite -DisplayName "My Test Name" -SiteName "My Site Name" -Status "Running or Stopped" -DomainName "My Domain Name"
-```
+{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -DisplayName
-The display name for the newly created site.
-
-Site display name cannot be blank.
+{{Fill DisplayName Description}}
 
 ```yaml
 Type: String
@@ -53,43 +46,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SiteName
-The site name for the newly created site.
-
-If null, then the display name is used for the site name.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Status
-The status for the newly created site.
-
-Possible values: Running, Stopped
-
-```yaml
-Type: SiteStatusEnum
-Parameter Sets: (All)
-Aliases:
-Accepted values: Running, Stopped
-
-Required: False
-Position: 2
-Default value: Running
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -DomainName
-The domain name for the newly created site.
+{{Fill DomainName Description}}
 
 ```yaml
 Type: String
@@ -104,7 +62,7 @@ Accept wildcard characters: False
 ```
 
 ### -PassThru
-Tell the cmdlet to return the newly created site.
+{{Fill PassThru Description}}
 
 ```yaml
 Type: SwitchParameter
@@ -113,7 +71,38 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SiteName
+{{Fill SiteName Description}}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Status
+{{Fill Status Description}}
+
+```yaml
+Type: SiteStatusEnum
+Parameter Sets: (All)
+Aliases:
+Accepted values: Running, Stopped
+
+Required: False
+Position: 2
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -124,9 +113,12 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## INPUTS
 
+### None
+
 ## OUTPUTS
 
 ### CMS.SiteProvider.SiteInfo[]
+
 ## NOTES
 
 ## RELATED LINKS

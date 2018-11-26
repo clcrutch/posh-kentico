@@ -15,6 +15,7 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System.Diagnostics.CodeAnalysis;
 using CMS.Synchronization;
 using FluentAssertions;
 using Moq;
@@ -23,6 +24,7 @@ using PoshKentico.Tests.Configuration.Staging;
 
 namespace PoshKentico.Business.Configuration.Staging
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     public class NewCmsServerTests
     {

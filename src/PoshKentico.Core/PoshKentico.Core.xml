@@ -4,6 +4,20 @@
         <name>PoshKentico.Core</name>
     </assembly>
     <members>
+        <member name="T:PoshKentico.Core.Extensions.EnumerableExtensions">
+            <summary>
+            Resource extensions.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Extensions.EnumerableExtensions.Flatten``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Collections.Generic.IEnumerable{``0}})">
+            <summary>
+            Flattens a collection of collections into a single collection.
+            </summary>
+            <typeparam name="T">The type of collection.</typeparam>
+            <param name="items">The collection the extension is applied on.</param>
+            <param name="flattenItems">The collection to be flattened.</param>
+            <returns>A flattened collection. </returns>
+        </member>
         <member name="T:PoshKentico.Core.Providers.Configuration.Settings.KenticoSettingValueService">
             <summary>
             Implementation of <see cref="T:PoshKentico.Core.Services.Configuration.Settings.ISettingValueService"/> that uses Kentico.
@@ -33,6 +47,9 @@
             <inheritdoc/>
         </member>
         <member name="M:PoshKentico.Core.Providers.Configuration.Sites.KenticoSiteService.GetSite(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Sites.KenticoSiteService.GetSite(PoshKentico.Core.Services.Configuration.Users.IUser)">
             <inheritdoc/>
         </member>
         <member name="M:PoshKentico.Core.Providers.Configuration.Sites.KenticoSiteService.Delete(PoshKentico.Core.Services.Configuration.Sites.ISite)">
@@ -98,6 +115,35 @@
             <inheritdoc/>
         </member>
         <member name="M:PoshKentico.Core.Providers.Configuration.Staging.KenticoStagingService.SetLoggingRole(PoshKentico.Core.Services.Configuration.Roles.IRole,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService">
+            <summary>
+            Implementation of <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUserService"/> that uses Kentico.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.Users">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.CreateUser(PoshKentico.Core.Services.Configuration.Users.IUser)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.SetUser(PoshKentico.Core.Services.Configuration.Users.IUser,System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.GetUser(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.GetUser(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.DeleteUser(PoshKentico.Core.Services.Configuration.Users.IUser)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.AddUserToSite(PoshKentico.Core.Services.Configuration.Users.IUser,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.RemoveUserFromSite(PoshKentico.Core.Services.Configuration.Users.IUser,System.String)">
             <inheritdoc/>
         </member>
         <member name="T:PoshKentico.Core.Providers.Development.PageTemplates.IPageTemplateHolder">
@@ -293,6 +339,99 @@
             <summary>
             Gets or sets the connection string for the Kentico database.
             </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Providers.Resource.KenticoFileSystemResourceService">
+            <summary>
+            Implementation of <see cref="T:PoshKentico.Core.Services.Resource.IFileSystemResourceService"/> that uses Kentico.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Resource.KenticoFileSystemResourceService.IsContainer(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Resource.KenticoFileSystemResourceService.Exists(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Resource.KenticoFileSystemResourceService.IsAbsolutePath(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Resource.KenticoFileSystemResourceService.GetName(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Resource.KenticoFileSystemResourceService.GetChildren(System.String,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Resource.KenticoFileSystemResourceService.GetItems(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Resource.KenticoFileSystemResourceService.GetItem(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Resource.KenticoFileSystemResourceService.GetContainers(System.String,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Resource.KenticoFileSystemResourceService.GetContainer(System.String,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Resource.KenticoFileSystemResourceService.CreateContainer(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Resource.KenticoFileSystemResourceService.CreateItem(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Resource.KenticoFileSystemResourceService.DeleteContainer(System.String,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Resource.KenticoFileSystemResourceService.DeleteItem(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Resource.KenticoFileSystemResourceService.JoinPath(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Resource.KenticoFileSystemResourceService.CopyResourceItem(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Resource.KenticoFileSystemResourceService.Write(System.String,System.Collections.IList,System.Boolean@)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Resource.KenticoFileSystemResourceService.Read(System.String,System.Boolean@)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Resource.KenticoFileSystemResourceService.ClearAttributes(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Resource.KenticoFileSystemResourceService.GetReaderWriter(System.String)">
+            <summary>
+            Retrieves the <see cref="T:PoshKentico.Core.Services.Resource.IResourceReaderWriter"/>.
+            </summary>
+            <param name="path">The path to the resource.</param>
+            <returns>The service used to read and write to a resource.</returns>
+        </member>
+        <member name="T:PoshKentico.Core.Providers.Resource.KenticoResourceReaderWriter">
+            <summary>
+            Implementation of <see cref="T:PoshKentico.Core.Services.Resource.IFileSystemReaderWriterService"/> that uses Kentico.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Resource.KenticoResourceReaderWriter.Path">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Resource.KenticoResourceReaderWriter.Close">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Resource.KenticoResourceReaderWriter.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Resource.KenticoResourceReaderWriter.Read">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Resource.KenticoResourceReaderWriter.Write(System.Collections.IList)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Resource.KenticoResourceReaderWriter.Initialize(PoshKentico.Core.Services.Resource.IResourceService,System.String)">
+            <summary>
+            Initializes the reader/writer.
+            </summary>
+            <param name="resourceService">The resource service.</param>
+            <param name="path">Path to the resource item.</param>
         </member>
         <member name="T:PoshKentico.Core.Configuration.ContentManagement.MediaLibraries.KenticoMediaLibraryService">
             <summary>
@@ -514,6 +653,13 @@
             <param name="siteName">The Site Name of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to return.</param>
             <returns>The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> which matches the site name, else null.</returns>
         </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Sites.ISiteService.GetSite(PoshKentico.Core.Services.Configuration.Users.IUser)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> which matches the supplied user name.
+            </summary>
+            <param name="user">The user of the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser" />.</param>
+            <returns>The list of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/>  which the user is assigned.</returns>
+        </member>
         <member name="M:PoshKentico.Core.Services.Configuration.Sites.ISiteService.Update(PoshKentico.Core.Services.Configuration.Sites.ISite,System.Boolean)">
             <summary>
             Updates the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/>.
@@ -697,6 +843,95 @@
             Set a new role for running code without logging of staging tasks.
             </summary>
             <param name="role">The <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/>.</param>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Configuration.Users.IUser">
+            <summary>
+            Represents a User Object.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Users.IUser.FullName">
+            <summary>
+            Gets the full name for the user.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Users.IUser.UserName">
+            <summary>
+            Gets the user name for the user.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Users.IUser.Email">
+            <summary>
+            Gets the email for the user.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Users.IUser.PreferredCultureCode">
+            <summary>
+            Gets the preferred culture code for the user.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Users.IUser.SiteIndependentPrivilegeLevel">
+            <summary>
+            Gets the site independent privilege level for the user.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Configuration.Users.IUserService">
+            <summary>
+            Service for providing access to a CMS Users.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Users.IUserService.Users">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> provided by the CMS System.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Users.IUserService.CreateUser(PoshKentico.Core.Services.Configuration.Users.IUser)">
+            <summary>
+            Creates the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/>.
+            </summary>
+            <param name="user">The <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to create.</param>
+            <returns>The newly created <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Users.IUserService.SetUser(PoshKentico.Core.Services.Configuration.Users.IUser,System.Boolean)">
+            <summary>
+            Sets the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/>.
+            </summary>
+            <param name="user">The <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to create.</param>
+            <param name="isReplace">To indicate if replace the complete object or update only the properties.</param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which matches the ID, else null.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Users.IUserService.GetUser(System.Int32)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which matches the supplied ID.
+            </summary>
+            <param name="id">The ID of the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to return.</param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which matches the ID, else null.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Users.IUserService.GetUser(System.String)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which matches the supplied user name.
+            </summary>
+            <param name="userName">The UserName of the user <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to return. </param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which matches the UserName, else null.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Users.IUserService.DeleteUser(PoshKentico.Core.Services.Configuration.Users.IUser)">
+            <summary>
+            Deletes the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which matches the supplied user name.
+            </summary>
+            <param name="user">The user <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to delete.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Users.IUserService.AddUserToSite(PoshKentico.Core.Services.Configuration.Users.IUser,System.String)">
+            <summary>
+            Assigns a user to a site.
+            </summary>
+            <param name="user">The user <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to assign to a site. </param>
+            <param name="siteName">The site name of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to assign the user to. </param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Users.IUserService.RemoveUserFromSite(PoshKentico.Core.Services.Configuration.Users.IUser,System.String)">
+            <summary>
+            Removes a user from a site.
+            </summary>
+            <param name="user">The user <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to remove from a site. </param>
+            <param name="siteName">The site name of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to remove the user from. </param>
         </member>
         <member name="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile">
             <summary>
@@ -1466,6 +1701,280 @@
         <member name="F:PoshKentico.Core.Services.General.InitializationState.Initialized">
             <summary>
             Initialization was successful.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Resource.IFileSystemReaderWriterService">
+            <summary>
+            Service that reads and writes to a file.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Resource.IFileSystemResourceService">
+            <summary>
+            Service that provides access to a file system.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Resource.IResourceInfo">
+            <summary>
+            Represents a <see cref="T:PoshKentico.Core.Services.Resource.Resource"/>.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Resource.IResourceInfo.IsContainer">
+            <summary>
+            Gets or sets a value indicating whether the resource is a container.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Resource.IResourceInfo.ContainerPath">
+            <summary>
+            Gets or sets the full path to the container this resource resides in.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Resource.IResourceInfo.Name">
+            <summary>
+            Gets or sets the name of the container.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Resource.IResourceInfo.Path">
+            <summary>
+            Gets or sets the full path to this resource.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Resource.IResourceInfo.CreationTime">
+            <summary>
+            Gets or sets the date this resource was creatd.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Resource.IResourceInfo.LastWriteTime">
+            <summary>
+            Gets or sets the last time this resource was written to.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Resource.IResourceInfo.ResourceType">
+            <summary>
+            Gets or sets the <see cref="P:PoshKentico.Core.Services.Resource.IResourceInfo.ResourceType"/>.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Resource.IResourceInfo.Children">
+            <summary>
+            Gets or sets the child resources. Only applicable if the resource is a container.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Resource.IResourceReaderWriter">
+            <summary>
+            Service used to read from or write to a resource item.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Resource.IResourceReaderWriter.Path">
+            <summary>
+            Gets the full path to a resource item.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Resource.IResourceReaderWriter.Close">
+            <summary>
+            Closes the reader/writer.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Resource.IResourceReaderWriter.Dispose">
+            <summary>
+            Disposes the reader/writer.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Resource.IResourceReaderWriter.Read">
+            <summary>
+            Reads content from resource item.
+            </summary>
+            <returns>Items read from the resource item.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Resource.IResourceReaderWriter.Write(System.Collections.IList)">
+            <summary>
+            Writes content to a resource item.
+            </summary>
+            <param name="content">Content to be written..</param>
+            <returns>Items written to the resource item.</returns>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Resource.IResourceService">
+            <summary>
+            Service used to access CMS resources.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Resource.IResourceService.IsContainer(System.String)">
+            <summary>
+            Determines if this resource is a container.
+            </summary>
+            <param name="path">The absolute path of the resource.</param>
+            <returns>If resource is a container.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Resource.IResourceService.Exists(System.String)">
+            <summary>
+            Determines if the resource exists.
+            </summary>
+            <param name="path">The absolute path of the resource.</param>
+            <returns>If the resource exists.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Resource.IResourceService.IsAbsolutePath(System.String)">
+            <summary>
+            Determines if the path is absolute.
+            </summary>
+            <param name="path">The relative or absolulte path of the resource.</param>
+            <returns>If path is absolute.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Resource.IResourceService.GetName(System.String)">
+            <summary>
+            Gets the name of the resource.
+            </summary>
+            <param name="path">The full path of the resource.</param>
+            <returns>Resource name.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Resource.IResourceService.JoinPath(System.String,System.String)">
+            <summary>
+            Joins two paths together.
+            </summary>
+            <param name="path">The former path of a resource.</param>
+            <param name="partialPath">The latter path of a resource.</param>
+            <returns>Returns the joint path.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Resource.IResourceService.ClearAttributes(System.String)">
+            <summary>
+            Clears attributes assigned to a resource. If given resource were a file, it would try to remove attributes like Hidden and ReadOnly..
+            </summary>
+            <param name="path">The full path of the resource.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Resource.IResourceService.DeleteContainer(System.String,System.Boolean)">
+            <summary>
+            Deletes the container.
+            </summary>
+            <param name="path">The full path of the container.</param>
+            <param name="recurse">If true, all children are deleted. If false, it will try to delete an empty directory.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Resource.IResourceService.DeleteItem(System.String)">
+            <summary>
+            Deletes the resource item.
+            </summary>
+            <param name="path">The full path of the resource item.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Resource.IResourceService.GetItems(System.String)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Resource.IResourceInfo"/> items.
+            </summary>
+            <param name="path">The full path of the container.</param>
+            <returns>Retrieves a list of <see cref="T:PoshKentico.Core.Services.Resource.IResourceInfo"/> items.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Resource.IResourceService.GetItem(System.String)">
+            <summary>
+            Gets a single <see cref="T:PoshKentico.Core.Services.Resource.IResourceInfo"/>.
+            </summary>
+            <param name="path">The full path of the resource item.</param>
+            <returns>Returns the resource item <see cref="T:PoshKentico.Core.Services.Resource.IResourceInfo"/>. </returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Resource.IResourceService.GetContainers(System.String,System.Boolean)">
+            <summary>
+            Gets a list of containers.
+            </summary>
+            <param name="path">The full path of the container.</param>
+            <param name="recurse">If true, retrieves all containers. If false, will only retrieve immediate containers.</param>
+            <returns>Returns a list of <see cref="T:PoshKentico.Core.Services.Resource.IResourceInfo"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Resource.IResourceService.GetContainer(System.String,System.Boolean)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Resource.IResourceInfo"/>.
+            </summary>
+            <param name="path">The full path of the container.</param>
+            <param name="recurse">If true, retrieves all child resources. If false, will only retrieve immediate children.</param>
+            <returns>Returns the container <see cref="T:PoshKentico.Core.Services.Resource.IResourceInfo"/>. </returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Resource.IResourceService.GetChildren(System.String,System.Boolean)">
+            <summary>
+            Returns a list of <see cref="T:PoshKentico.Core.Services.Resource.IResourceInfo"/>.
+            </summary>
+            <param name="path">The full path of the resource.</param>
+            <param name="recurse">If true, retrieves all child resources. If false, will only retrieve immediate children.</param>
+            <returns>Returns the a list of <see cref="T:PoshKentico.Core.Services.Resource.IResourceInfo"/>. </returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Resource.IResourceService.Write(System.String,System.Collections.IList,System.Boolean@)">
+            <summary>
+            Writes content to a resource item.
+            </summary>
+            <param name="path">The full path of the resource item.</param>
+            <param name="content"><see cref="T:System.Byte"/>Data that will be written to a resource.</param>
+            <param name="isWriting">Is currently writting?.</param>
+            <returns>What was written of the resource.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Resource.IResourceService.Read(System.String,System.Boolean@)">
+            <summary>
+            Reads the content from a resource.
+            </summary>
+            <param name="path">The full path of the resource item.</param>
+            <param name="finishedReading">Has it been read?.</param>
+            <returns>Returns what was read from the resource.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Resource.IResourceService.CreateItem(System.String,System.String)">
+            <summary>
+            Creates the resource item.
+            </summary>
+            <param name="path">The full path of the resource item.</param>
+            <param name="content">The content to be written.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Resource.IResourceService.CreateContainer(System.String)">
+            <summary>
+            Creates a container.
+            </summary>
+            <param name="path">The full path of the container.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Resource.IResourceService.CopyResourceItem(System.String,System.String)">
+            <summary>
+            Copies the resource from one path to another.
+            </summary>
+            <param name="sourcePath">The source path.</param>
+            <param name="destinationPath">The destination path.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Resource.IResourceService.GetReaderWriter(System.String)">
+            <summary>
+            Retrieves the <see cref="T:PoshKentico.Core.Services.Resource.IResourceReaderWriter"/>.
+            </summary>
+            <param name="path">The path to the resource.</param>
+            <returns>The service used to read and write to a resource.</returns>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Resource.Resource">
+            <summary>
+            The concreate implementation of <see cref="T:PoshKentico.Core.Services.Resource.IResourceInfo"/>.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Resource.Resource.IsContainer">
+            <inheritdoc />
+        </member>
+        <member name="P:PoshKentico.Core.Services.Resource.Resource.ContainerPath">
+            <inheritdoc />
+        </member>
+        <member name="P:PoshKentico.Core.Services.Resource.Resource.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:PoshKentico.Core.Services.Resource.Resource.Path">
+            <inheritdoc />
+        </member>
+        <member name="P:PoshKentico.Core.Services.Resource.Resource.CreationTime">
+            <inheritdoc />
+        </member>
+        <member name="P:PoshKentico.Core.Services.Resource.Resource.LastWriteTime">
+            <inheritdoc />
+        </member>
+        <member name="P:PoshKentico.Core.Services.Resource.Resource.ResourceType">
+            <inheritdoc />
+        </member>
+        <member name="P:PoshKentico.Core.Services.Resource.Resource.Children">
+            <inheritdoc />
+        </member>
+        <member name="T:PoshKentico.Core.Services.Resource.ResourceType">
+            <summary>
+            Identified <see cref="T:PoshKentico.Core.Services.Resource.IResourceInfo"/> as a Container or Item.
+            </summary>
+        </member>
+        <member name="F:PoshKentico.Core.Services.Resource.ResourceType.Item">
+            <summary>
+            Items are considered the smallest unit in your drive. Think of an item like a file in a file system.
+            </summary>
+        </member>
+        <member name="F:PoshKentico.Core.Services.Resource.ResourceType.Container">
+            <summary>
+            A container can store a collection of items and containers. Think of containers like a folder in a file sytstem.
             </summary>
         </member>
     </members>

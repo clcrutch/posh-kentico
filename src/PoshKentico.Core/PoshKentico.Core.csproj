@@ -5,13 +5,14 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\git\posh-kentico\src\PoshKentico.Core\PoshKentico.Core.xml</DocumentationFile>
+    <DocumentationFile>PoshKentico.Core.xml</DocumentationFile>
+    <OutputPath></OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
-    <DocumentationFile>C:\git\posh-kentico\src\PoshKentico.Core\PoshKentico.Core.xml</DocumentationFile>
+    <DocumentationFile>..\PoshKentico.Core\PoshKentico.Core.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -39,6 +40,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="System.Security.Principal.Windows" Version="4.5.1" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,5 +1,5 @@
 ---
-external help file: posh-kentico.dll-Help.xml
+external help file: PoshKentico.dll-Help.xml
 Module Name: posh-kentico
 online version:
 schema: 2.0.0
@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CMSWebPartCategory
 
 ## SYNOPSIS
-Gets the web part categories selected by the provided input.
+{{Fill in the Synopsis}}
 
 ## SYNTAX
 
@@ -43,54 +43,66 @@ Get-CMSWebPartCategory -WebPart <WebPartInfo> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Gets the web part categories selected by the provided input.
-This command automatically initializes the connection to Kentico if not already initialized.
-
-Without parameters, this command returns all webpart categories.
-
-With parameters, this command returns the webpart categories that match the criteria.
+{{Fill in the Description}}
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-Get-CMSWebPartCategory
-```
-
-### EXAMPLE 2
-```
-Get-CMSWebPartCategory *bas*
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-### EXAMPLE 3
-```
-Get-CMSWebPartCategory basic
-```
-
-### EXAMPLE 4
-```
-Get-CMSWebPartCategory -ID 5,304,5
-```
-
-### EXAMPLE 5
-```
-Get-CMSWebPartCategory basic -Recurse
-```
-
-### EXAMPLE 6
-```
-$webPart | Get-WebPartCategory
-```
-
-### EXAMPLE 7
-```
-$webPartCategory | Get-WebPartCategory
-```
+{{ Add example description here }}
 
 ## PARAMETERS
 
+### -CategoryName
+{{Fill CategoryName Description}}
+
+```yaml
+Type: String
+Parameter Sets: Category Name
+Aliases: DisplayName, Name
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -CategoryPath
+{{Fill CategoryPath Description}}
+
+```yaml
+Type: String
+Parameter Sets: Path
+Aliases: Path
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ID
+{{Fill ID Description}}
+
+```yaml
+Type: Int32[]
+Parameter Sets: ID
+Aliases:
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -ParentWebPartCategory
-The webpart category that contains the webpart categories.
+{{Fill ParentWebPartCategory Description}}
 
 ```yaml
 Type: WebPartCategoryInfo
@@ -114,58 +126,13 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -CategoryName
-The category name or display name the webpart category.
-
-```yaml
-Type: String
-Parameter Sets: Category Name
-Aliases: DisplayName, Name
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -CategoryPath
-The path to get the web part category at.
-
-```yaml
-Type: String
-Parameter Sets: Path
-Aliases: Path
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ID
-The IDs of the web part category to retrieve.
-
-```yaml
-Type: Int32[]
-Parameter Sets: ID
-Aliases:
-
-Required: True
-Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -RegularExpression
-Indicates if the CategoryName supplied is a regular expression.
+{{Fill RegularExpression Description}}
 
 ```yaml
 Type: SwitchParameter
@@ -174,13 +141,13 @@ Aliases: Regex
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -WebPart
-The webpart to get the web part category for.
+{{Fill WebPart Description}}
 
 ```yaml
 Type: WebPartInfo
@@ -201,14 +168,13 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## INPUTS
 
 ### CMS.PortalEngine.WebPartCategoryInfo
-The webpart category that contains the webpart categories.
 
 ### CMS.PortalEngine.WebPartInfo
-The webpart to get the web part category for.
 
 ## OUTPUTS
 
 ### CMS.PortalEngine.WebPartCategoryInfo[]
+
 ## NOTES
 
 ## RELATED LINKS

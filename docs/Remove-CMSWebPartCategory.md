@@ -1,5 +1,5 @@
 ---
-external help file: posh-kentico.dll-Help.xml
+external help file: PoshKentico.dll-Help.xml
 Module Name: posh-kentico
 online version:
 schema: 2.0.0
@@ -8,7 +8,7 @@ schema: 2.0.0
 # Remove-CMSWebPartCategory
 
 ## SYNOPSIS
-Deletes the web part categories selected by the provided input.
+{{Fill in the Synopsis}}
 
 ## SYNTAX
 
@@ -44,68 +44,21 @@ Remove-CMSWebPartCategory -WebPart <WebPartInfo> [-WhatIf] [-Confirm] [<CommonPa
 ```
 
 ## DESCRIPTION
-Deletes the web part categories selected by the provided input.
-
-This command automatically initializes the connection to Kentico if not already initialized.
-
-This command deletes the webpart categories that match the criteria.
+{{Fill in the Description}}
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-Remove-CMSWebPartCategory
-```
-
-### EXAMPLE 2
-```
-Remove-CMSWebPartCategory *bas*
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-### EXAMPLE 3
-```
-Remove-CMSWebPartCategory basic
-```
-
-### EXAMPLE 4
-```
-Remove-CMSWebPartCategory -ID 5,304,5
-```
-
-### EXAMPLE 5
-```
-Remove-CMSWebPartCategory basic -Recurse
-```
-
-### EXAMPLE 6
-```
-$webPart | Remove-WebPartCategory
-```
-
-### EXAMPLE 7
-```
-$webPartCategory | Remove-WebPartCategory
-```
+{{ Add example description here }}
 
 ## PARAMETERS
 
-### -WebPartCategory
-The web part category to remove from the system.
-
-```yaml
-Type: WebPartCategoryInfo
-Parameter Sets: WebPartCategory
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
 ### -CategoryName
-The category name or display name the webpart category.
+{{Fill CategoryName Description}}
 
 ```yaml
 Type: String
@@ -120,7 +73,7 @@ Accept wildcard characters: False
 ```
 
 ### -CategoryPath
-The path to get the web part category at.
+{{Fill CategoryPath Description}}
 
 ```yaml
 Type: String
@@ -131,66 +84,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ID
-The IDs of the web part category to retrieve.
-
-```yaml
-Type: Int32[]
-Parameter Sets: ID
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Recurse
-Indiciates if the cmdlet should look recursively for web part categories.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: Category Name, Path, ID
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -RegularExpression
-Indicates if the CategoryName supplied is a regular expression.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: Category Name
-Aliases: Regex
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -WebPart
-The webpart to get the web part category for.
-
-```yaml
-Type: WebPartInfo
-Parameter Sets: Web Part
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -206,6 +99,81 @@ Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ID
+{{Fill ID Description}}
+
+```yaml
+Type: Int32[]
+Parameter Sets: ID
+Aliases:
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Recurse
+{{Fill Recurse Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: Category Name, Path, ID
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -RegularExpression
+{{Fill RegularExpression Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: Category Name
+Aliases: Regex
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WebPart
+{{Fill WebPart Description}}
+
+```yaml
+Type: WebPartInfo
+Parameter Sets: Web Part
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -WebPartCategory
+{{Fill WebPartCategory Description}}
+
+```yaml
+Type: WebPartCategoryInfo
+Parameter Sets: WebPartCategory
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -232,13 +200,12 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## INPUTS
 
 ### CMS.PortalEngine.WebPartCategoryInfo
-The web part category to remove from the system.
 
 ### CMS.PortalEngine.WebPartInfo
-The webpart to get the web part category for.
 
 ## OUTPUTS
 
+### System.Object
 ## NOTES
 
 ## RELATED LINKS

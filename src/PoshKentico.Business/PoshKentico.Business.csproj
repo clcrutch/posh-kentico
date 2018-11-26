@@ -5,13 +5,13 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\git\posh-kentico\src\PoshKentico.Business\PoshKentico.Business.xml</DocumentationFile>
+    <DocumentationFile>PoshKentico.Business.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
-    <DocumentationFile>C:\git\posh-kentico\src\PoshKentico.Business\PoshKentico.Business.xml</DocumentationFile>
+    <DocumentationFile>..\PoshKentico.Business\PoshKentico.Business.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -32,14 +32,16 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="PowerShellStandard.Library" Version="5.1.0-preview-06" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta009">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="System.Security.Principal.Windows" Version="4.5.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PoshKentico.Core\PoshKentico.Core.csproj" />
   </ItemGroup>
-
+  
 </Project>

@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using CMS.Helpers;
 using FluentAssertions;
 using Moq;
@@ -24,6 +25,7 @@ using PoshKentico.Core.Services.ContentManagement.MediaLibraries;
 
 namespace PoshKentico.Tests.ContentManagement.MediaLibraries
 {
+    [ExcludeFromCodeCoverage]
     public class MediaLibraryServiceMock : IMediaLibraryService
     {
         private IMediaLibrary libraryMock;

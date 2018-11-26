@@ -1,5 +1,5 @@
 ---
-external help file: posh-kentico.dll-Help.xml
+external help file: PoshKentico.dll-Help.xml
 Module Name: posh-kentico
 online version:
 schema: 2.0.0
@@ -8,7 +8,7 @@ schema: 2.0.0
 # Add-CMSWebPartField
 
 ## SYNOPSIS
-Adds a field to a web part.
+{{Fill in the Synopsis}}
 
 ## SYNTAX
 
@@ -18,23 +18,21 @@ Add-CMSWebPartField [[-Caption] <String>] [-DataType] <FieldDataType> [[-Default
 ```
 
 ## DESCRIPTION
-Adds a field to the web part and then immediately saves the additional field in Kentico.
-
-This cmdlet returns the newly created web part field when the -PassThru switch is used.
-
-This command automatically initializes the connection to Kentico if not already initialized.
+{{Fill in the Description}}
 
 ## EXAMPLES
 
-### EXAMPLE 1
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
-$webPart | Add-CMSWebPartField -DataType Text -Name TestProp -required -size 150 -defaultvalue TestValue
-```
+
+{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -Caption
-The caption for the new field.
+{{Fill Caption Description}}
 
 ```yaml
 Type: String
@@ -49,9 +47,7 @@ Accept wildcard characters: False
 ```
 
 ### -DataType
-The data type for the new field.
-
-Possible values: Text
+{{Fill DataType Description}}
 
 ```yaml
 Type: FieldDataType
@@ -61,13 +57,13 @@ Accepted values: Text
 
 Required: True
 Position: 0
-Default value: Text
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -DefaultValue
-The default value for the new field.
+{{Fill DefaultValue Description}}
 
 ```yaml
 Type: Object
@@ -82,7 +78,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-The default value for the new field.
+{{Fill Name Description}}
 
 ```yaml
 Type: String
@@ -97,7 +93,7 @@ Accept wildcard characters: False
 ```
 
 ### -PassThru
-Tell the cmdlet to return the newly created web part field.
+{{Fill PassThru Description}}
 
 ```yaml
 Type: SwitchParameter
@@ -106,13 +102,13 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -Required
-Indicates if a value is required for the field.
+{{Fill Required Description}}
 
 ```yaml
 Type: SwitchParameter
@@ -121,13 +117,13 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -Size
-The size to make the new field.
+{{Fill Size Description}}
 
 ```yaml
 Type: Int32
@@ -136,13 +132,13 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: 0
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -WebPart
-The web part to add the field to.
+{{Fill WebPart Description}}
 
 ```yaml
 Type: WebPartInfo
@@ -163,11 +159,11 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## INPUTS
 
 ### CMS.PortalEngine.WebPartInfo
-The web part to add the field to.
 
 ## OUTPUTS
 
 ### CMS.FormEngine.FormInfo
+
 ## NOTES
 
 ## RELATED LINKS

@@ -1,5 +1,5 @@
 ---
-external help file: posh-kentico.dll-Help.xml
+external help file: PoshKentico.dll-Help.xml
 Module Name: posh-kentico
 online version:
 schema: 2.0.0
@@ -8,7 +8,7 @@ schema: 2.0.0
 # Set-CMSServer
 
 ## SYNOPSIS
-Sets a server.
+{{Fill in the Synopsis}}
 
 ## SYNTAX
 
@@ -25,81 +25,37 @@ Set-CMSServer [-ServerName] <String> [-SiteID] <Int32> [[-DisplayName] <String>]
 ```
 
 ## DESCRIPTION
-Sets a new server based off of the provided input.
-
-This cmdlet returns the server to update when the -PassThru switch is used.
+{{Fill in the Description}}
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-Set-CMSServer -Server $server
-```
-
-### EXAMPLE 2
-```
-$server | Set-CMSServer
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-### EXAMPLE 3
-```
-Set-CMSServer -ServerName "Server Name to find" -SiteID "Site ID to find" -DisplayName "New Display Name" -URL "New URL"
-                -Authentication "UserName or X509" -Enabled "True or False" -UserName "New User Name" -Password "New Password"
-```
+{{ Add example description here }}
 
 ## PARAMETERS
 
-### -ServerToSet
-A reference to the server to update.
+### -Authentication
+{{Fill Authentication Description}}
 
 ```yaml
-Type: ServerInfo
-Parameter Sets: Object
-Aliases: Server
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -ServerName
-The server name for the server to update.
-
-If null, then the display name is used for the server name.
-
-```yaml
-Type: String
+Type: ServerAuthenticationEnum
 Parameter Sets: Property
 Aliases:
+Accepted values: UserName, X509
 
-Required: True
-Position: 0
+Required: False
+Position: 4
 Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SiteID
-The server site id for the server to update.
-
-```yaml
-Type: Int32
-Parameter Sets: Property
-Aliases:
-
-Required: True
-Position: 1
-Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -DisplayName
-The display name for the server to update.
-
-Server display name cannot be blank.
+{{Fill DisplayName Description}}
 
 ```yaml
 Type: String
@@ -113,41 +69,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -URL
-The server url for the server to update.
-
-```yaml
-Type: String
-Parameter Sets: Property
-Aliases:
-
-Required: False
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Authentication
-The authentication for the server to update.
-
-Possible values: UserName, X509
-
-```yaml
-Type: ServerAuthenticationEnum
-Parameter Sets: Property
-Aliases:
-Accepted values: UserName, X509
-
-Required: False
-Position: 4
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Enabled
-The enabled status for the server to update.
+{{Fill Enabled Description}}
 
 ```yaml
 Type: Boolean
@@ -161,23 +84,23 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -UserName
-The user name for the server to update.
+### -PassThru
+{{Fill PassThru Description}}
 
 ```yaml
-Type: String
-Parameter Sets: Property
+Type: SwitchParameter
+Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 6
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -Password
-The password for the server to update.
+{{Fill Password Description}}
 
 ```yaml
 Type: String
@@ -191,17 +114,77 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -PassThru
-Tell the cmdlet to return the server to update.
+### -ServerName
+{{Fill ServerName Description}}
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
+Type: String
+Parameter Sets: Property
+Aliases:
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ServerToSet
+{{Fill ServerToSet Description}}
+
+```yaml
+Type: ServerInfo
+Parameter Sets: Object
+Aliases: Server
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -SiteID
+{{Fill SiteID Description}}
+
+```yaml
+Type: Int32
+Parameter Sets: Property
+Aliases:
+
+Required: True
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -URL
+{{Fill URL Description}}
+
+```yaml
+Type: String
+Parameter Sets: Property
 Aliases:
 
 Required: False
-Position: Named
-Default value: False
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -UserName
+{{Fill UserName Description}}
+
+```yaml
+Type: String
+Parameter Sets: Property
+Aliases:
+
+Required: False
+Position: 6
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -213,11 +196,11 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## INPUTS
 
 ### CMS.Synchronization.ServerInfo
-A reference to the server to update.
 
 ## OUTPUTS
 
 ### CMS.Synchronization.ServerInfo
+
 ## NOTES
 
 ## RELATED LINKS

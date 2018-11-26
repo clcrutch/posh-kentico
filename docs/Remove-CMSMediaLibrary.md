@@ -1,5 +1,5 @@
 ---
-external help file: posh-kentico.dll-Help.xml
+external help file: PoshKentico.dll-Help.xml
 Module Name: posh-kentico
 online version:
 schema: 2.0.0
@@ -8,7 +8,7 @@ schema: 2.0.0
 # Remove-CMSMediaLibrary
 
 ## SYNOPSIS
-Deletes a library.
+{{Fill in the Synopsis}}
 
 ## SYNTAX
 
@@ -34,34 +34,81 @@ Remove-CMSMediaLibrary [-ID] <Int32[]> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Deletes a library.
+{{Fill in the Description}}
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-Remove-CMSMediaLibrary -SiteID 1 -LibraryName tes
-```
-
-### EXAMPLE 2
-```
-Remove-CMSMediaLibrary -SiteID 1 -LibraryName test -Exact
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-### EXAMPLE 3
-```
-$library | Remove-CMSMediaLibrary
-```
-
-### EXAMPLE 4
-```
-Remove-CMSMediaLibrary -ID 1,2,3
-```
+{{ Add example description here }}
 
 ## PARAMETERS
 
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Exact
+{{Fill Exact Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: Library Name
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ID
+{{Fill ID Description}}
+
+```yaml
+Type: Int32[]
+Parameter Sets: ID
+Aliases:
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -LibraryName
+{{Fill LibraryName Description}}
+
+```yaml
+Type: String
+Parameter Sets: Library Name
+Aliases:
+
+Required: True
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -MediaLibrary
-The associalted site for the library to retrieve.
+{{Fill MediaLibrary Description}}
 
 ```yaml
 Type: MediaLibraryInfo
@@ -76,7 +123,7 @@ Accept wildcard characters: False
 ```
 
 ### -Site
-The associalted site for the server to retrieve.
+{{Fill Site Description}}
 
 ```yaml
 Type: SiteInfo
@@ -91,7 +138,7 @@ Accept wildcard characters: False
 ```
 
 ### -SiteID
-The site name of the library to retrive.
+{{Fill SiteID Description}}
 
 ```yaml
 Type: Int32
@@ -100,68 +147,8 @@ Aliases:
 
 Required: True
 Position: 0
-Default value: 0
+Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -LibraryName
-The library name of the library to retrive.
-
-```yaml
-Type: String
-Parameter Sets: Library Name
-Aliases:
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Exact
-If set, the match is exact,else the match performs a contains for library name and category name and starts with for path.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: Library Name
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ID
-The IDs of the library to retrieve.
-
-```yaml
-Type: Int32[]
-Parameter Sets: ID
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -188,17 +175,14 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## INPUTS
 
 ### CMS.MediaLibrary.MediaLibraryInfo
-The associalted site for the library to retrieve.
 
 ### CMS.SiteProvider.SiteInfo
-The associalted site for the server to retrieve.
 
 ### System.Int32
-The site name of the library to retrive.
 
 ## OUTPUTS
 
-### CMS.MediaLibrary.MediaLibraryInfo[]
+### System.Object
 ## NOTES
 
 ## RELATED LINKS

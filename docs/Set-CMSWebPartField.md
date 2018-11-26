@@ -1,5 +1,5 @@
 ---
-external help file: posh-kentico.dll-Help.xml
+external help file: PoshKentico.dll-Help.xml
 Module Name: posh-kentico
 online version:
 schema: 2.0.0
@@ -8,7 +8,7 @@ schema: 2.0.0
 # Set-CMSWebPartField
 
 ## SYNOPSIS
-Sets a web part field.
+{{Fill in the Synopsis}}
 
 ## SYNTAX
 
@@ -17,26 +17,21 @@ Set-CMSWebPartField -Field <FormFieldInfo> [-PassThru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Sets a web part field.
-
-This command automatically initializes the connection to Kentico if not already initialized.
+{{Fill in the Description}}
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-$webPartField | Set-CMSWebPartField
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-### EXAMPLE 2
-```
-$webPartField | Set-CMSWebPartField -PassThru
-```
+{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -Field
-The field to set in Kentico.
+{{Fill Field Description}}
 
 ```yaml
 Type: FormFieldInfo
@@ -51,7 +46,7 @@ Accept wildcard characters: False
 ```
 
 ### -PassThru
-Tell the cmdlet to return the web part.
+{{Fill PassThru Description}}
 
 ```yaml
 Type: SwitchParameter
@@ -60,7 +55,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -72,11 +67,11 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## INPUTS
 
 ### CMS.FormEngine.FormFieldInfo
-The field to set in Kentico.
 
 ## OUTPUTS
 
 ### CMS.FormEngine.FormFieldInfo
+
 ## NOTES
 
 ## RELATED LINKS

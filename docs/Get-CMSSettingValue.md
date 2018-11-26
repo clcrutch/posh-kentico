@@ -1,5 +1,5 @@
 ---
-external help file: posh-kentico.dll-Help.xml
+external help file: PoshKentico.dll-Help.xml
 Module Name: posh-kentico
 online version:
 schema: 2.0.0
@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CMSSettingValue
 
 ## SYNOPSIS
-Gets the setting values by the provided setting key.
+{{Fill in the Synopsis}}
 
 ## SYNTAX
 
@@ -28,24 +28,36 @@ Get-CMSSettingValue [-SiteName] <String> [-Key] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Gets the setting values by the provided setting key.
+{{Fill in the Description}}
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-$site | Get-CMSSettingValue -Key "my key"
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-### EXAMPLE 2
-```
-Get-CMSSettingValue -SiteName "my site" -Key "my key"
-```
+{{ Add example description here }}
 
 ## PARAMETERS
 
+### -Key
+{{Fill Key Description}}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Site
-A reference to the site to get setting from.
+{{Fill Site Description}}
 
 ```yaml
 Type: SiteInfo
@@ -60,7 +72,7 @@ Accept wildcard characters: False
 ```
 
 ### -SiteName
-The site name of the site to get setting from.
+{{Fill SiteName Description}}
 
 ```yaml
 Type: String
@@ -74,21 +86,6 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Key
-The key of the setting to get value from.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
 For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -96,13 +93,12 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## INPUTS
 
 ### CMS.SiteProvider.SiteInfo
-A reference to the site to get setting from.
 
 ### System.String
-The site name of the site to get setting from.
 
 ## OUTPUTS
 
+### System.Object
 ## NOTES
 
 ## RELATED LINKS

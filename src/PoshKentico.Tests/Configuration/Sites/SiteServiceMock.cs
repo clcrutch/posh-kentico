@@ -21,6 +21,7 @@ using FluentAssertions;
 using Moq;
 using PoshKentico.Core.Services.Configuration.Localization;
 using PoshKentico.Core.Services.Configuration.Sites;
+using PoshKentico.Core.Services.Configuration.Users;
 
 namespace PoshKentico.Business.Configuration.Sites
 {
@@ -110,6 +111,11 @@ namespace PoshKentico.Business.Configuration.Sites
         }
 
         public IEnumerable<ISiteDomainAlias> GetDomainAliases(ISite site)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IEnumerable<ISite> GetSite(IUser user)
         {
             throw new System.NotImplementedException();
         }
