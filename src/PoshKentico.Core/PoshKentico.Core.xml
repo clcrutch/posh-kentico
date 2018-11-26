@@ -1547,6 +1547,31 @@
             Gets or sets the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> associated with the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/>.
             </summary>
         </member>
+        <member name="T:PoshKentico.Core.Services.Development.WebParts.IWebPartInstance">
+            <summary>
+            Represents a Web Part Instance.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartInstance.ControlID">
+            <summary>
+            Gets the control id.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartInstance.WebPartType">
+            <summary>
+            Gets the webpartype.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartInstance.IsWidget">
+            <summary>
+            Gets a value indicating whether the webpartinstance is a widget.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartInstance.Properties">
+            <summary>
+            Gets the webpart instance properties.
+            </summary>
+        </member>
         <member name="T:PoshKentico.Core.Services.Development.WebParts.IWebPartService">
             <summary>
             Service for providing access to a CMS webparts.
@@ -1647,6 +1672,26 @@
             Updates the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/>.
             </summary>
             <param name="field">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/> to update.</param>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Development.WebParts.IWebPartZoneInstance">
+            <summary>
+            Represents a Web Part field.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartZoneInstance.ZoneID">
+            <summary>
+            Gets the zone id.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartZoneInstance.Properties">
+            <summary>
+            Gets or sets the properties associated with the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartZoneInstance"/>.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartZoneInstance.WebParts">
+            <summary>
+            Gets or sets the Web parts collection within the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartZoneInstance"/>.
+            </summary>
         </member>
         <member name="T:PoshKentico.Core.Services.General.ICmsApplicationService">
             <summary>

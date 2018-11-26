@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using PoshKentico.Core.Services.Development.PageTemplates;
+using PoshKentico.Core.Services.Development.WebParts;
 
 namespace PoshKentico.Business.Development.PageTemplates
 {
