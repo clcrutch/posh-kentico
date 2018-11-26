@@ -9,6 +9,8 @@ namespace PoshKentico.Core.Services.General
 {
     public interface ICmsDatabaseService
     {
+        Version Version { get; }
+
         string ConnectionString { get; set; }
 
         bool Exists { get; }

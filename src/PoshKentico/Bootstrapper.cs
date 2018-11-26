@@ -87,7 +87,10 @@ namespace PoshKentico
             PassThruOutputService.ShouldProcessFunction = cmdlet.ShouldProcess;
 
             PassThruOutputService.WriteDebugAction = cmdlet.WriteDebug;
+            PassThruOutputService.WriteErrorAction = cmdlet.WriteError;
+            PassThruOutputService.WriteProgressAction = cmdlet.WriteProgress;
             PassThruOutputService.WriteVerboseAction = cmdlet.WriteVerbose;
+            PassThruOutputService.WriteWarningAction = cmdlet.WriteWarning;
 
             foreach (var prop in businessLayerProps)
             {

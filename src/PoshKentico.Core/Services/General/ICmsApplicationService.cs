@@ -32,6 +32,8 @@ namespace PoshKentico.Core.Services.General
         /// </summary>
         InitializationState InitializationState { get; }
 
+        Version Version { get; }
+
         #endregion
 
         #region Methods

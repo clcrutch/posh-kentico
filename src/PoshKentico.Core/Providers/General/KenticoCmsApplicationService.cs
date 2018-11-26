@@ -66,6 +66,9 @@ namespace PoshKentico.Core.Providers.General
         [Import]
         public IOutputService OutputService { get; set; }
 
+        public Version Version =>
+            CMSVersion.Version;
+
         #endregion
 
         #region Methods
