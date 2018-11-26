@@ -15,6 +15,7 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using PoshKentico.Core.Services.Development.PageTemplates;
@@ -122,6 +123,8 @@ namespace PoshKentico.Business.Development.PageTemplates
             public string PageTemplateCSS { get; set; }
 
             public bool IsReusable { get; set; }
+
+            public List<IWebPartZoneInstance> WebPartZones { get; set; }
         }
 
         #endregion
