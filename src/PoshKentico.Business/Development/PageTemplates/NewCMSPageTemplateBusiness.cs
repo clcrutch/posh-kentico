@@ -103,7 +103,7 @@ namespace PoshKentico.Business.Development.PageTemplates
 
             public int PageTemplateSiteID { get; set; }
 
-            public int PageTemplateID { get; set; }
+            public int PageTemplateId { get; set; }
 
             public string DisplayName { get; set; }
 

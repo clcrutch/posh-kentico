@@ -1201,7 +1201,7 @@
             Gets the page template site ID.
             </summary>
         </member>
-        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.PageTemplateID">
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.PageTemplateId">
             <summary>
             Gets the ID for the current page template.
             </summary>

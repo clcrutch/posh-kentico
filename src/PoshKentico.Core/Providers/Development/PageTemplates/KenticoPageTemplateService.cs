@@ -121,7 +121,7 @@ namespace PoshKentico.Core.Providers.Development.PageTemplates
 
         /// <inheritdoc />
         public void Delete(IPageTemplate pageTemplate) =>
-            PageTemplateInfoProvider.DeletePageTemplate(pageTemplate.PageTemplateID);
+            PageTemplateInfoProvider.DeletePageTemplate(pageTemplate.PageTemplateId);
 
         /// <inheritdoc />
         public IEnumerable<IPageTemplateCategory> GetPageTemplateCategories(IPageTemplateCategory parentPageTemplateCategory) =>
@@ -176,7 +176,7 @@ namespace PoshKentico.Core.Providers.Development.PageTemplates
         /// <inheritdoc />
         public void Update(IPageTemplate pageTemplate)
         {
-            var pageTemplateInfo = PageTemplateInfoProvider.GetPageTemplateInfo(pageTemplate.PageTemplateID);
+            var pageTemplateInfo = PageTemplateInfoProvider.GetPageTemplateInfo(pageTemplate.PageTemplateId);
 
             if (pageTemplateInfo == null)
             {
@@ -228,7 +228,7 @@ namespace PoshKentico.Core.Providers.Development.PageTemplates
 
         private void SaveFormUpdates(IPageTemplate pageTemplate)
         {
-            var pageTemplateInfo = PageTemplateInfoProvider.GetPageTemplateInfo(pageTemplate.PageTemplateID);
+            var pageTemplateInfo = PageTemplateInfoProvider.GetPageTemplateInfo(pageTemplate.PageTemplateId);
 
             if (pageTemplateInfo == null)
             {

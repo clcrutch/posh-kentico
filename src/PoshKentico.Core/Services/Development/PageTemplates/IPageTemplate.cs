@@ -41,7 +41,7 @@ namespace PoshKentico.Core.Services.Development.PageTemplates
         /// <summary>
         /// Gets the ID for the current page template.
         /// </summary>
-        int PageTemplateID { get; }
+        int PageTemplateId { get; }
 
         /// <summary>
         /// Gets the display name for the current page template.
