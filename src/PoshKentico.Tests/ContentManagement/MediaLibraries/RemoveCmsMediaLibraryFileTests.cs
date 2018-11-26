@@ -20,7 +20,9 @@ using System.Diagnostics.CodeAnalysis;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.ContentManagement.MediaLibraries;
+using PoshKentico.Core.Providers.General;
 using PoshKentico.Core.Services.ContentManagement.MediaLibraries;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests.ContentManagement.MediaLibraries
 {
@@ -59,11 +61,12 @@ namespace PoshKentico.Tests.ContentManagement.MediaLibraries
             libraryServiceMock.SetupGet(x => x.MediaLibraries).Returns(libraries);
             libraryServiceMock.SetupGet(x => x.MediaFiles).Returns(new IMediaFile[] { fileMock1.Object, fileMock2.Object });
 
+            var outputService = OutputServiceHelper.GetPassThruOutputService();
+            PassThruOutputService.ShouldProcessFunction = (x, y) => true;
+
             var businessLayer = new RemoveCmsMediaLibraryFileBusiness
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-                ShouldProcess = (x, y) => true,
+                OutputService = outputService,
 
                 MediaLibraryService = libraryServiceMock.Object,
             };

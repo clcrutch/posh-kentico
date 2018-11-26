@@ -84,7 +84,7 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <param name="site">The <see cref="ISite"/> to set.</param>
         private void RemoveSite(ISite site)
         {
-            if (this.ShouldProcess(site.SiteName, "delete"))
+            if (this.OutputService.ShouldProcess(site.SiteName, "delete"))
             {
                 this.SiteService.Delete(site);
             }

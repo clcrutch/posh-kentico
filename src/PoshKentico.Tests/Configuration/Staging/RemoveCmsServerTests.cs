@@ -20,7 +20,9 @@ using System.Diagnostics.CodeAnalysis;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Configuration.Staging;
+using PoshKentico.Core.Providers.General;
 using PoshKentico.Core.Services.Configuration.Staging;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests.Configuration.Staging
 {
@@ -54,19 +56,19 @@ namespace PoshKentico.Tests.Configuration.Staging
 
             serverServiceMock.SetupGet(x => x.Servers).Returns(servers);
 
+            var outputService = OutputServiceHelper.GetPassThruOutputService();
+            PassThruOutputService.ShouldProcessFunction = (x, y) => true;
+
             var getBusinessLayer = new GetCmsServerBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = outputService,
 
                 StagingService = serverServiceMock.Object,
             };
 
             var businessLayer = new RemoveCmsServerBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-                ShouldProcess = (x, y) => true,
+                OutputService = outputService,
 
                 StagingService = serverServiceMock.Object,
                 GetCmsServerBusiness = getBusinessLayer,
@@ -103,19 +105,19 @@ namespace PoshKentico.Tests.Configuration.Staging
 
             serverServiceMock.SetupGet(x => x.Servers).Returns(servers);
 
+            var outputService = OutputServiceHelper.GetPassThruOutputService();
+            PassThruOutputService.ShouldProcessFunction = (x, y) => true;
+
             var getBusinessLayer = new GetCmsServerBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = outputService,
 
                 StagingService = serverServiceMock.Object,
             };
 
             var businessLayer = new RemoveCmsServerBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-                ShouldProcess = (x, y) => true,
+                OutputService = outputService,
 
                 StagingService = serverServiceMock.Object,
                 GetCmsServerBusiness = getBusinessLayer,
@@ -153,19 +155,19 @@ namespace PoshKentico.Tests.Configuration.Staging
 
             serverServiceMock.SetupGet(x => x.Servers).Returns(servers);
 
+            var outputService = OutputServiceHelper.GetPassThruOutputService();
+            PassThruOutputService.ShouldProcessFunction = (x, y) => true;
+
             var getBusinessLayer = new GetCmsServerBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = outputService,
 
                 StagingService = serverServiceMock.Object,
             };
 
             var businessLayer = new RemoveCmsServerBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-                ShouldProcess = (x, y) => true,
+                OutputService = outputService,
 
                 StagingService = serverServiceMock.Object,
                 GetCmsServerBusiness = getBusinessLayer,
@@ -206,19 +208,19 @@ namespace PoshKentico.Tests.Configuration.Staging
 
             serverServiceMock.SetupGet(x => x.Servers).Returns(servers);
 
+            var outputService = OutputServiceHelper.GetPassThruOutputService();
+            PassThruOutputService.ShouldProcessFunction = (x, y) => true;
+
             var getBusinessLayer = new GetCmsServerBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = outputService,
 
                 StagingService = serverServiceMock.Object,
             };
 
             var businessLayer = new RemoveCmsServerBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-                ShouldProcess = (x, y) => true,
+                OutputService = outputService,
 
                 StagingService = serverServiceMock.Object,
                 GetCmsServerBusiness = getBusinessLayer,

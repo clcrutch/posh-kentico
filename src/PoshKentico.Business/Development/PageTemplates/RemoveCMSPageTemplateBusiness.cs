@@ -34,7 +34,7 @@ namespace PoshKentico.Business.Development.PageTemplates
         /// <param name="pageTemplate">The <see cref="IPageTemplate"/> to remove.</param>
         public void RemovePageTemplate(IPageTemplate pageTemplate)
         {
-            if (this.ShouldProcess(pageTemplate.CodeName, "Remove the page template from Kentico."))
+            if (this.OutputService.ShouldProcess(pageTemplate.CodeName, "Remove the page template from Kentico."))
             {
                 this.PageTemplateService.Delete(pageTemplate);
             }

@@ -21,6 +21,7 @@ using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Development.WebParts;
 using PoshKentico.Core.Services.Development.WebParts;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests.Development.WebParts
 {
@@ -39,8 +40,7 @@ namespace PoshKentico.Tests.Development.WebParts
             var businessLayer = new GetCMSWebPartFieldBusiness
             {
                 WebPartService = webPartServiceMock.Object,
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
             };
 
             businessLayer.GetWebPartFields(webPartMock.Object);
@@ -79,8 +79,7 @@ namespace PoshKentico.Tests.Development.WebParts
             var businessLayer = new GetCMSWebPartFieldBusiness
             {
                 WebPartService = webPartServiceMock.Object,
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
             };
 
             // Get the results
@@ -137,8 +136,7 @@ namespace PoshKentico.Tests.Development.WebParts
             var businessLayer = new GetCMSWebPartFieldBusiness
             {
                 WebPartService = webPartServiceMock.Object,
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
             };
 
             // Get the results

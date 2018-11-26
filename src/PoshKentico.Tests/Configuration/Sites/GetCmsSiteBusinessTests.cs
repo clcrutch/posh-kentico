@@ -21,6 +21,7 @@ using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Core.Services.Configuration.Sites;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Business.Configuration.Sites
 {
@@ -35,8 +36,7 @@ namespace PoshKentico.Business.Configuration.Sites
 
             var businessLayer = new GetCmsSiteBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 SiteService = siteServiceMock.Object,
             };
@@ -66,8 +66,7 @@ namespace PoshKentico.Business.Configuration.Sites
 
             var businessLayer = new GetCmsSiteBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 SiteService = siteServiceMock.Object,
             };
@@ -99,8 +98,7 @@ namespace PoshKentico.Business.Configuration.Sites
 
             var businessLayer = new GetCmsSiteBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 SiteService = siteServiceMock.Object,
             };
@@ -136,8 +134,7 @@ namespace PoshKentico.Business.Configuration.Sites
 
             var businessLayer = new GetCmsSiteBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 SiteService = siteServiceMock.Object,
             };
@@ -172,8 +169,7 @@ namespace PoshKentico.Business.Configuration.Sites
 
             var businessLayer = new GetCmsSiteBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 SiteService = siteServiceMock.Object,
             };

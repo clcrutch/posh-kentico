@@ -44,7 +44,7 @@ namespace PoshKentico.Business.Development.PageTemplates
                 {
                     foreach (var pageTemplate in pageTemplates)
                     {
-                        if (this.ShouldProcess(pageTemplate.DisplayName, "Remove the page template from Kentico."))
+                        if (this.OutputService.ShouldProcess(pageTemplate.DisplayName, "Remove the page template from Kentico."))
                         {
                             this.PageTemplateService.Delete(pageTemplate);
                         }
@@ -72,7 +72,7 @@ namespace PoshKentico.Business.Development.PageTemplates
                 }
             }
 
-            if (this.ShouldProcess(pageTemplateCategory.DisplayName, "Remove the page template category from Kentico."))
+            if (this.OutputService.ShouldProcess(pageTemplateCategory.DisplayName, "Remove the page template category from Kentico."))
             {
                 this.PageTemplateService.Delete(pageTemplateCategory);
             }

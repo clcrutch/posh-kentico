@@ -21,6 +21,7 @@ using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Development.WebParts;
 using PoshKentico.Core.Services.Development.WebParts;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests.Development.WebParts
 {
@@ -135,9 +136,8 @@ namespace PoshKentico.Tests.Development.WebParts
 
             var businessLayer = new NewCMSWebPartBusiness
             {
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
                 WebPartService = webPartServiceMock.Object,
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
             };
 
             var results = businessLayer.CreateWebPart(name, fileName, displayName, webPartCategoryMock.Object);
@@ -187,9 +187,8 @@ namespace PoshKentico.Tests.Development.WebParts
 
             var businessLayer = new NewCMSWebPartBusiness
             {
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
                 WebPartService = webPartServiceMock.Object,
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
             };
 
             var results = businessLayer.CreateWebPart(name, fileName, null, webPartCategoryMock.Object);

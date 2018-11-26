@@ -292,7 +292,7 @@
             Gets the initialization state of the CMS Application.
             </summary>
         </member>
-        <member name="M:PoshKentico.Core.Providers.General.KenticoCmsApplicationService.FindSite(System.Action{System.String},System.Action{System.String})">
+        <member name="M:PoshKentico.Core.Providers.General.KenticoCmsApplicationService.FindSite">
              <summary>
              This method requires administrator access.
             
@@ -308,7 +308,7 @@
              <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
              <returns>The directory and the connection string for the Kentico site.</returns>
         </member>
-        <member name="M:PoshKentico.Core.Providers.General.KenticoCmsApplicationService.Initialize(System.Boolean,System.Action{System.String},System.Action{System.String})">
+        <member name="M:PoshKentico.Core.Providers.General.KenticoCmsApplicationService.Initialize(System.Boolean)">
             <summary>
             Initialize Kentico CMS Application using FindKenticoSite or a cached version to locate the site.
             </summary>
@@ -316,7 +316,7 @@
             <param name="writeDebug">A delegate for writing to the debug stream.</param>
             <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
         </member>
-        <member name="M:PoshKentico.Core.Providers.General.KenticoCmsApplicationService.Initialize(System.IO.DirectoryInfo,System.String,System.Action{System.String},System.Action{System.String})">
+        <member name="M:PoshKentico.Core.Providers.General.KenticoCmsApplicationService.Initialize(System.IO.DirectoryInfo,System.String)">
             <summary>
             Initialize Kentico CMS Application using the supplied parameters.
             </summary>
@@ -1658,30 +1658,24 @@
             Gets the initialization state of the CMS Application.
             </summary>
         </member>
-        <member name="M:PoshKentico.Core.Services.General.ICmsApplicationService.FindSite(System.Action{System.String},System.Action{System.String})">
+        <member name="M:PoshKentico.Core.Services.General.ICmsApplicationService.FindSite">
             <summary>
             Locates the CMS Site.
             </summary>
-            <param name="writeDebug">A delegate for writing to the debug stream.</param>
-            <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
             <returns>The directory and the connection string for the CMS site.</returns>
         </member>
-        <member name="M:PoshKentico.Core.Services.General.ICmsApplicationService.Initialize(System.Boolean,System.Action{System.String},System.Action{System.String})">
+        <member name="M:PoshKentico.Core.Services.General.ICmsApplicationService.Initialize(System.Boolean)">
             <summary>
             Locates and performs the necessary initialization for the CMS site.
             </summary>
             <param name="useCached">Use the cached location for the CMS application.  When true and have already found Kentico in a previous run, this method does not require admin.</param>
-            <param name="writeDebug">A delegate for writing to the debug stream.</param>
-            <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
         </member>
-        <member name="M:PoshKentico.Core.Services.General.ICmsApplicationService.Initialize(System.IO.DirectoryInfo,System.String,System.Action{System.String},System.Action{System.String})">
+        <member name="M:PoshKentico.Core.Services.General.ICmsApplicationService.Initialize(System.IO.DirectoryInfo,System.String)">
             <summary>
             Performs the necessary initialization for the provided CMS site.
             </summary>
             <param name="siteLocation">The directory where the CMS site resides.</param>
             <param name="connectionString">The connection string to use for initializing the CMS Application.</param>
-            <param name="writeDebug">A delegate for writing to the debug stream.</param>
-            <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
         </member>
         <member name="T:PoshKentico.Core.Services.General.InitializationState">
             <summary>

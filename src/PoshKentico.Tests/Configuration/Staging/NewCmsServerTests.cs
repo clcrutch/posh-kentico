@@ -21,6 +21,7 @@ using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Tests.Configuration.Staging;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Business.Configuration.Staging
 {
@@ -35,8 +36,7 @@ namespace PoshKentico.Business.Configuration.Staging
 
             var businessLayer = new NewCmsServerBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 StagingService = serviceServiceMock.Object,
             };
@@ -55,8 +55,7 @@ namespace PoshKentico.Business.Configuration.Staging
 
             var businessLayer = new NewCmsServerBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 StagingService = serviceServiceMock.Object,
             };
