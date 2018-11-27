@@ -21,7 +21,9 @@ using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Development.WebParts;
+using PoshKentico.Core.Providers.General;
 using PoshKentico.Core.Services.Development.WebParts;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests.Development.WebParts
 {
@@ -38,17 +40,18 @@ namespace PoshKentico.Tests.Development.WebParts
 
             var webPartServiceMock = new Mock<IWebPartService>();
 
+            var outputService = OutputServiceHelper.GetPassThruOutputService();
+            PassThruOutputService.ShouldProcessFunction = (x, y) =>
+            {
+                shouldProcessCalled = true;
+
+                return true;
+            };
+
             var businessLayer = new RemoveCMSWebPartCategoryBusiness
             {
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
                 WebPartService = webPartServiceMock.Object,
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-                ShouldProcess = (x, y) =>
-                {
-                    shouldProcessCalled = true;
-
-                    return true;
-                },
             };
 
             businessLayer.RemoveWebPartCategory(webPartCategoryMock.Object, false);
@@ -81,9 +84,8 @@ namespace PoshKentico.Tests.Development.WebParts
 
             var businessLayer = new RemoveCMSWebPartCategoryBusiness
             {
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
                 WebPartService = webPartServiceMock.Object,
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
             };
 
             Action action = () => businessLayer.RemoveWebPartCategory(webPartCategoryMock.Object, false);
@@ -110,17 +112,18 @@ namespace PoshKentico.Tests.Development.WebParts
                 .Setup(x => x.GetWebParts(webPartCategoryMock.Object))
                 .Returns(new IWebPart[] { webPartMock.Object });
 
+            var outputService = OutputServiceHelper.GetPassThruOutputService();
+            PassThruOutputService.ShouldProcessFunction = (x, y) =>
+            {
+                shouldProcessCalled = true;
+
+                return true;
+            };
+
             var businessLayer = new RemoveCMSWebPartCategoryBusiness
             {
+                OutputService = outputService,
                 WebPartService = webPartServiceMock.Object,
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-                ShouldProcess = (x, y) =>
-                {
-                    shouldProcessCalled = true;
-
-                    return true;
-                },
             };
 
             Action action = () => businessLayer.RemoveWebPartCategory(webPartCategoryMock.Object, true);
@@ -157,9 +160,8 @@ namespace PoshKentico.Tests.Development.WebParts
 
             var businessLayer = new RemoveCMSWebPartCategoryBusiness
             {
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
                 WebPartService = webPartServiceMock.Object,
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
             };
 
             Action action = () => businessLayer.RemoveWebPartCategory(webPartCategoryMock.Object, false);
@@ -189,17 +191,18 @@ namespace PoshKentico.Tests.Development.WebParts
                 .Setup(x => x.GetWebPartCategories(webPartCategoryMock.Object))
                 .Returns(new IWebPartCategory[] { webPartCategoryChildMock.Object });
 
+            var outputService = OutputServiceHelper.GetPassThruOutputService();
+            PassThruOutputService.ShouldProcessFunction = (x, y) =>
+            {
+                shouldProcessCalled = true;
+
+                return true;
+            };
+
             var businessLayer = new RemoveCMSWebPartCategoryBusiness
             {
+                OutputService = outputService,
                 WebPartService = webPartServiceMock.Object,
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-                ShouldProcess = (x, y) =>
-                {
-                    shouldProcessCalled = true;
-
-                    return true;
-                },
             };
 
             Action action = () => businessLayer.RemoveWebPartCategory(webPartCategoryMock.Object, true);

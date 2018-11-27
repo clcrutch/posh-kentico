@@ -21,7 +21,9 @@ using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.General;
+using PoshKentico.Core.Providers.General;
 using PoshKentico.Core.Services.General;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests.General
 {
@@ -36,17 +38,15 @@ namespace PoshKentico.Tests.General
 
             var businessLayer = new InitializeCMSApplicationBusiness
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-
                 CmsApplicationService = applicationServiceMock.Object,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
             };
 
             var webRoot = new DirectoryInfo("C:\\Kentico\\WebRoot");
 
             businessLayer.Initialize("myConnectionString", webRoot);
 
-            applicationServiceMock.Verify(x => x.Initialize(webRoot, "myConnectionString", Assert.NotNull, Assert.NotNull));
+            applicationServiceMock.Verify(x => x.Initialize(webRoot, "myConnectionString"));
         }
 
         [TestCase(false)]
@@ -57,15 +57,13 @@ namespace PoshKentico.Tests.General
 
             var businessLayer = new InitializeCMSApplicationBusiness
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-
                 CmsApplicationService = applicationServiceMock.Object,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
             };
 
             businessLayer.Initialize(cacheUsed);
 
-            applicationServiceMock.Verify(x => x.Initialize(cacheUsed, Assert.NotNull, Assert.NotNull));
+            applicationServiceMock.Verify(x => x.Initialize(cacheUsed));
         }
 
         [TestCase]
@@ -75,17 +73,15 @@ namespace PoshKentico.Tests.General
 
             var businessLayer = new InitializeCMSApplicationBusiness
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-
                 CmsApplicationService = applicationServiceMock.Object,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
             };
 
             var webRoot = new DirectoryInfo("C:\\Kentico\\WebRoot");
 
             businessLayer.Initialize("databaseServer", "database", 103, webRoot);
 
-            applicationServiceMock.Verify(x => x.Initialize(webRoot, $"Data Source=databaseServer;Initial Catalog=database;Integrated Security=True;Persist Security Info=False;Connect Timeout=103;Encrypt=False;Current Language=English", Assert.NotNull, Assert.NotNull));
+            applicationServiceMock.Verify(x => x.Initialize(webRoot, $"Data Source=databaseServer;Initial Catalog=database;Integrated Security=True;Persist Security Info=False;Connect Timeout=103;Encrypt=False;Current Language=English"));
         }
 
         [TestCase]
@@ -96,12 +92,13 @@ namespace PoshKentico.Tests.General
                 .Setup(x => x.InitializationState)
                 .Returns(InitializationState.Initialized);
 
+            var outputService = OutputServiceHelper.GetPassThruOutputService();
+            PassThruOutputService.WriteVerboseAction = x => x.Should().Be("Kentico is already initialized.  Skipping...");
+
             var businessLayer = new InitializeCMSApplicationBusiness
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = x => x.Should().Be("Kentico is already initialized.  Skipping..."),
-
                 CmsApplicationService = applicationServiceMock.Object,
+                OutputService = outputService,
             };
 
             businessLayer.Initialize(null, null);
@@ -115,12 +112,13 @@ namespace PoshKentico.Tests.General
                 .Setup(x => x.InitializationState)
                 .Returns(InitializationState.Initialized);
 
+            var outputService = OutputServiceHelper.GetPassThruOutputService();
+            PassThruOutputService.WriteVerboseAction = x => x.Should().Be("Kentico is already initialized.  Skipping...");
+
             var businessLayer = new InitializeCMSApplicationBusiness
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = x => x.Should().Be("Kentico is already initialized.  Skipping..."),
-
                 CmsApplicationService = applicationServiceMock.Object,
+                OutputService = outputService,
             };
 
             businessLayer.Initialize(true);

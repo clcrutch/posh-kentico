@@ -21,6 +21,7 @@ using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Configuration.Settings;
 using PoshKentico.Core.Services.Configuration.Settings;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests.Configuration.Settings
 {
@@ -35,9 +36,7 @@ namespace PoshKentico.Tests.Configuration.Settings
 
             var businessLayer = new GetCmsWebConfigValueBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
                 SettingValueService = settingValueService.Object,
             };
 

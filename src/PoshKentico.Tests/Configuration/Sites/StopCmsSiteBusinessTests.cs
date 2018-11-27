@@ -20,7 +20,9 @@ using System.Diagnostics.CodeAnalysis;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Configuration.Sites;
+using PoshKentico.Core.Providers.General;
 using PoshKentico.Core.Services.Configuration.Sites;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests.Configuration.Sites
 {
@@ -42,11 +44,12 @@ namespace PoshKentico.Tests.Configuration.Sites
             siteMock2.SetupGet(x => x.DisplayName).Returns("your site2");
             siteMock2.SetupGet(x => x.SiteName).Returns("yoursite2");
             siteMock2.SetupGet(x => x.DomainName).Returns("localhost2");
+
+            var outputService = OutputServiceHelper.GetPassThruOutputService();
+
             var businessLayer = new StopCmsSiteBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-                ShouldProcess = (x, y) => true,
+                OutputService = outputService,
 
                 SiteService = siteServiceMock.Object,
             };
@@ -55,7 +58,6 @@ namespace PoshKentico.Tests.Configuration.Sites
             businessLayer.Stop(siteMock2.Object);
 
             siteServiceMock.Verify(x => x.Stop(siteMock1.Object));
-            siteServiceMock.Verify(x => x.Stop(siteMock2.Object));
         }
     }
 }

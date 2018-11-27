@@ -15,12 +15,13 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.ContentManagement.MediaLibraries;
+using PoshKentico.Core.Providers.General;
 using PoshKentico.Core.Services.ContentManagement.MediaLibraries;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests.ContentManagement.MediaLibraries
 {
@@ -39,10 +40,12 @@ namespace PoshKentico.Tests.ContentManagement.MediaLibraries
             libraryMock1.SetupGet(x => x.LibraryFolder).Returns("images1");
             libraryMock1.SetupGet(x => x.LibrarySiteID).Returns(1);
 
+            var outputService = OutputServiceHelper.GetPassThruOutputService();
+            PassThruOutputService.ShouldProcessFunction = (x, y) => true;
+
             var businessLayer = new RemoveCmsMediaLibraryFolderBusiness
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = outputService,
 
                 MediaLibraryService = libraryServiceMock.Object,
             };

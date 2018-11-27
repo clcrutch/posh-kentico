@@ -20,6 +20,7 @@ using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Configuration.Sites;
 using PoshKentico.Core.Services.Configuration.Sites;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests.Configuration.Sites
 {
@@ -39,16 +40,14 @@ namespace PoshKentico.Tests.Configuration.Sites
 
             var getBusinessLayer = new GetCmsSiteBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 SiteService = siteServiceMock.Object,
             };
 
             var businessLayer = new GetCmsSiteCultureBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 SiteService = siteServiceMock.Object,
             };
@@ -72,16 +71,14 @@ namespace PoshKentico.Tests.Configuration.Sites
 
             var getBusinessLayer = new GetCmsSiteBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 SiteService = siteServiceMock.Object,
             };
 
             var businessLayer = new GetCmsSiteCultureBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 SiteService = siteServiceMock.Object,
             };

@@ -20,21 +20,6 @@
             Gets or sets a reference to the CMS Application Service.  Populated by MEF.
             </summary>
         </member>
-        <member name="P:PoshKentico.Business.CmdletBusinessBase.WriteDebug">
-            <summary>
-            Gets or sets a delegate for writing to the debug stream.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Business.CmdletBusinessBase.WriteVerbose">
-            <summary>
-            Gets or sets a delegate for writing to the verbose stream.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Business.CmdletBusinessBase.ShouldProcess">
-            <summary>
-            Gets or sets a delegate for checking if the cmdlet should continue processing.
-            </summary>
-        </member>
         <member name="M:PoshKentico.Business.CmdletBusinessBase.Initialize">
             <summary>
             Initializes the current business layer.

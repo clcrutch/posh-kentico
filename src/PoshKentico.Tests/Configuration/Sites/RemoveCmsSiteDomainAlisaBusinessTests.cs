@@ -20,7 +20,9 @@ using System.Diagnostics.CodeAnalysis;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Configuration.Sites;
+using PoshKentico.Core.Providers.General;
 using PoshKentico.Core.Services.Configuration.Sites;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests.Configuration.Sites
 {
@@ -29,7 +31,7 @@ namespace PoshKentico.Tests.Configuration.Sites
     public class RemoveCmsSiteDomainAlisaBusinessTests
     {
         [TestCase]
-        public void RemoveSiteDomainAliasTest_MatchString_ExactFalse()
+        public void RemoveSiteDomainAliasTest()
         {
             var siteServiceMock = new Mock<ISiteService>();
             string[] aliasNames = new string[] { "172.0.0.1, localhost" };
@@ -44,22 +46,19 @@ namespace PoshKentico.Tests.Configuration.Sites
             siteMock2.SetupGet(x => x.SiteName).Returns("yoursite2");
             siteMock2.SetupGet(x => x.DomainName).Returns("localhost2");
 
+            var outputService = OutputServiceHelper.GetPassThruOutputService();
+
             var businessLayer = new RemoveCmsSiteDomainAliasBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = outputService,
 
                 SiteService = siteServiceMock.Object,
             };
 
-            foreach (string alias in aliasNames)
-            {
-                businessLayer.RemoveDomainAlias(siteMock1.Object, alias);
-                businessLayer.RemoveDomainAlias(siteMock2.Object, alias);
+            businessLayer.RemoveDomainAlias(siteMock1.Object, aliasName);
 
-                siteServiceMock.Verify(x => x.RemoveSiteDomainAlias(siteMock1.Object, alias));
-                siteServiceMock.Verify(x => x.RemoveSiteDomainAlias(siteMock2.Object, alias));
-            }
+            siteServiceMock.Verify(x => x.RemoveSiteDomainAlias(siteMock1.Object, aliasName));
         }
+
     }
 }

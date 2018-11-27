@@ -22,6 +22,7 @@ using NUnit.Framework;
 using PoshKentico.Business.Configuration.Settings;
 using PoshKentico.Core.Services.Configuration.Settings;
 using PoshKentico.Core.Services.Configuration.Sites;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests.Configuration.Settings
 {
@@ -36,9 +37,7 @@ namespace PoshKentico.Tests.Configuration.Settings
 
             var businessLayer = new GetCmsSettingValueBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
                 SettingValueService = settingValueService.Object,
             };
 
@@ -58,9 +57,7 @@ namespace PoshKentico.Tests.Configuration.Settings
 
             var businessLayer = new GetCmsSettingValueBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
                 SettingValueService = settingValueService.Object,
             };
 
@@ -79,9 +76,7 @@ namespace PoshKentico.Tests.Configuration.Settings
 
             var businessLayer = new GetCmsSettingValueBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
                 SettingValueService = settingValueService.Object,
             };
 

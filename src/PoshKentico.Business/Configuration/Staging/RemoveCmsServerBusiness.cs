@@ -85,7 +85,7 @@ namespace PoshKentico.Business.Configuration.Staging
         /// <param name="server">The <see cref="IServer"/> to delete.</param>
         private void RemoveServer(IServer server)
         {
-            if (this.ShouldProcess(server.ServerName, "delete"))
+            if (this.OutputService.ShouldProcess(server.ServerName, "delete"))
             {
                 this.StagingService.Delete(server);
             }

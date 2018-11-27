@@ -22,6 +22,7 @@ using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Development.WebParts;
 using PoshKentico.Core.Services.Development.WebParts;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests.Development.WebParts
 {
@@ -65,12 +66,7 @@ namespace PoshKentico.Tests.Development.WebParts
                 .Returns(new IWebPart[] { webPartObj });
 
             // Setup business layer
-            var businessLayer = new GetCMSWebPartBusiness
-            {
-                WebPartService = webPartServiceMock.Object,
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-            };
+            var businessLayer = this.GetBusinessLayer(webPartServiceMock.Object);
 
             var result = businessLayer.GetWebPart("/Category/WebPart");
 
@@ -118,12 +114,7 @@ namespace PoshKentico.Tests.Development.WebParts
                 .Returns(new IWebPart[] { webPartObj });
 
             // Setup business layer
-            var businessLayer = new GetCMSWebPartBusiness
-            {
-                WebPartService = webPartServiceMock.Object,
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-            };
+            var businessLayer = this.GetBusinessLayer(webPartServiceMock.Object);
 
             var result = businessLayer.GetWebPart("/WebPart");
 
@@ -149,11 +140,7 @@ namespace PoshKentico.Tests.Development.WebParts
                 .Returns(webPartObj);
 
             // Setup business layer
-            var businessLayer = new GetCMSWebPartBusiness
-            {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-            };
+            var businessLayer = this.GetBusinessLayer(null);
             var result = businessLayer.GetWebPart(webPartFieldMock.Object);
 
             result
@@ -178,12 +165,7 @@ namespace PoshKentico.Tests.Development.WebParts
                 .Returns(new IWebPart[] { webPartObj });
 
             // Setup business layer
-            var businessLayer = new GetCMSWebPartBusiness
-            {
-                WebPartService = webPartServiceMock.Object,
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-            };
+            var businessLayer = this.GetBusinessLayer(webPartServiceMock.Object);
             var result = businessLayer.GetWebParts();
 
             result
@@ -220,12 +202,7 @@ namespace PoshKentico.Tests.Development.WebParts
                 .Returns(new IWebPart[] { webPartObj });
 
             // Setup business layer
-            var businessLayer = new GetCMSWebPartBusiness
-            {
-                WebPartService = webPartServiceMock.Object,
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-            };
+            var businessLayer = this.GetBusinessLayer(webPartServiceMock.Object);
 
             // Test Display Name
             var results = businessLayer.GetWebParts("*Display*", false);
@@ -276,12 +253,7 @@ namespace PoshKentico.Tests.Development.WebParts
                 .Returns(new IWebPart[] { webPartObj });
 
             // Setup business layer
-            var businessLayer = new GetCMSWebPartBusiness
-            {
-                WebPartService = webPartServiceMock.Object,
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-            };
+            var businessLayer = this.GetBusinessLayer(webPartServiceMock.Object);
 
             // Test Display name
             var results = businessLayer.GetWebParts("[a-z]Display(a)+", true);
@@ -335,12 +307,7 @@ namespace PoshKentico.Tests.Development.WebParts
                 .Returns(new IWebPart[] { webPartObj });
 
             // Setup business layer
-            var businessLayer = new GetCMSWebPartBusiness
-            {
-                WebPartService = webPartServiceMock.Object,
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-            };
+            var businessLayer = this.GetBusinessLayer(webPartServiceMock.Object);
 
             var result = businessLayer.GetWebPartsByCategory(webPartCategoryObj);
 
@@ -386,13 +353,8 @@ namespace PoshKentico.Tests.Development.WebParts
                 .Returns(new IWebPartCategory[] { webPartCategoryObj });
 
             // Setup business layer
-            var businessLayer = new GetCMSWebPartBusiness
-            {
-                GetCMSWebPartCategoryBusiness = categoryBusinessLayerMock.Object,
-                WebPartService = webPartServiceMock.Object,
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-            };
+            var businessLayer = this.GetBusinessLayer(webPartServiceMock.Object);
+            businessLayer.GetCMSWebPartCategoryBusiness = categoryBusinessLayerMock.Object;
 
             var result = businessLayer.GetWebPartsByCategories("*cate*", false);
 
@@ -440,12 +402,7 @@ namespace PoshKentico.Tests.Development.WebParts
                 .Setup(x => x.GetWebPartCategory(17))
                 .Returns(webPartCategoryMock3.Object);
 
-            var businessLayer = new GetCMSWebPartCategoryBusiness
-            {
-                WebPartService = webPartServiceMock.Object,
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-            };
+            var businessLayer = this.GetCategoryBusinessLayer(webPartServiceMock.Object);
 
             var results = businessLayer.GetWebPartCategories(new int[] { 15, 16, 18 }, false);
             results
@@ -497,12 +454,7 @@ namespace PoshKentico.Tests.Development.WebParts
                 .Setup(x => x.GetWebPartCategories(webPartCategoryMock2.Object))
                 .Returns(new IWebPartCategory[] { webPartCategoryMock3.Object });
 
-            var businessLayer = new GetCMSWebPartCategoryBusiness
-            {
-                WebPartService = webPartServiceMock.Object,
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-            };
+            var businessLayer = this.GetCategoryBusinessLayer(webPartServiceMock.Object);
 
             var results = businessLayer.GetWebPartCategories(new int[] { 15, 16, 18 }, true);
             results
@@ -622,12 +574,7 @@ namespace PoshKentico.Tests.Development.WebParts
                 .Returns(new IWebPartCategory[] { webPartCategoryMock4.Object });
 
             // Setup business layer
-            var businessLayer = new GetCMSWebPartCategoryBusiness
-            {
-                WebPartService = webPartServiceMock.Object,
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-            };
+            var businessLayer = this.GetCategoryBusinessLayer(webPartServiceMock.Object);
 
             // Test business layer
             var results = businessLayer.GetWebPartCategories(webPartCategoryMock2.Object, true);
@@ -666,12 +613,7 @@ namespace PoshKentico.Tests.Development.WebParts
                 });
 
             // Setup business layer
-            var businessLayer = new GetCMSWebPartCategoryBusiness
-            {
-                WebPartService = webPartServiceMock.Object,
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-            };
+            var businessLayer = this.GetCategoryBusinessLayer(webPartServiceMock.Object);
 
             // Test business layer
             var results = businessLayer.GetWebPartCategories("/Category1", false);
@@ -710,12 +652,7 @@ namespace PoshKentico.Tests.Development.WebParts
                 .Returns(new IWebPartCategory[] { webPartCategoryMock2.Object });
 
             // Setup business layer
-            var businessLayer = new GetCMSWebPartCategoryBusiness
-            {
-                WebPartService = webPartServiceMock.Object,
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-            };
+            var businessLayer = this.GetCategoryBusinessLayer(webPartServiceMock.Object);
 
             // Test business layer
             var results = businessLayer.GetWebPartCategories("/Category1", true);
@@ -770,12 +707,7 @@ namespace PoshKentico.Tests.Development.WebParts
                 });
 
             // Setup business layer
-            var businessLayer = new GetCMSWebPartCategoryBusiness
-            {
-                WebPartService = webPartServiceMock.Object,
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-            };
+            var businessLayer = this.GetCategoryBusinessLayer(webPartServiceMock.Object);
 
             // Test business layer
             var results = businessLayer.GetWebPartCategory(webPartMock.Object);
@@ -785,5 +717,20 @@ namespace PoshKentico.Tests.Development.WebParts
             results
                 .Should().BeEquivalentTo(webPartCategoryMock1.Object);
         }
+
+        private GetCMSWebPartBusiness GetBusinessLayer(IWebPartService webPartService) =>
+            new GetCMSWebPartBusiness
+            {
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
+                GetCMSWebPartCategoryBusiness = this.GetCategoryBusinessLayer(webPartService),
+                WebPartService = webPartService,
+            };
+
+        private GetCMSWebPartCategoryBusiness GetCategoryBusinessLayer(IWebPartService webPartService) =>
+            new GetCMSWebPartCategoryBusiness
+            {
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
+                WebPartService = webPartService,
+            };
     }
 }
