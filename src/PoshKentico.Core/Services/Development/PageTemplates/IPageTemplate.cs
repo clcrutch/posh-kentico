@@ -101,7 +101,7 @@ namespace PoshKentico.Core.Services.Development.PageTemplates
         bool IsReusable { get; }
 
         /// <summary>
-        /// Gets or sets web part zones contained within the Page template.
+        /// Gets web part zones contained within the Page template.
         /// </summary>
         List<IWebPartZoneInstance> WebPartZones { get; }
 
