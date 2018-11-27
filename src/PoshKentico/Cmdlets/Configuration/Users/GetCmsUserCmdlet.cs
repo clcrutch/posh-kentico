@@ -49,6 +49,10 @@ namespace PoshKentico.Cmdlets.Configuration.Users
     ///     <para>Get all users with the specified IDs.</para>
     ///     <code>Get-CMSUser -ID 1,3</code>
     /// </example>
+    /// <example>
+    ///     <para>Get all users with the specified role.</para>
+    ///     <code>Get-CMSUser -RoleName "roleName" -SiteID 2</code>
+    /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSUser", DefaultParameterSetName = NONE)]
@@ -64,6 +68,8 @@ namespace PoshKentico.Cmdlets.Configuration.Users
         protected const string NONE = "None";
         private const string USERNAME = "User Name";
         private const string IDSETNAME = "ID";
+        private const string ROLENAME = "Role Name";
+        private const string ROLEOBJECT = "Role";
 
         #endregion
 
@@ -72,17 +78,35 @@ namespace PoshKentico.Cmdlets.Configuration.Users
         /// <summary>
         /// <para type="description">The display name of the user to retrive.</para>
         /// </summary>
-        [Parameter(Mandatory = false, Position = 0, ParameterSetName = USERNAME)]
+        [Parameter(Mandatory = true, Position = 0, ParameterSetName = USERNAME)]
         public string UserName { get; set; }
 
         /// <summary>
         /// <para type="description">The IDs of the user to retrieve.</para>
         /// </summary>
-        [Parameter(Mandatory = false, Position = 0, ParameterSetName = IDSETNAME)]
+        [Parameter(Mandatory = true, Position = 0, ParameterSetName = IDSETNAME)]
         public int[] ID { get; set; }
 
         /// <summary>
-        /// <para type="description">If set, the match is exact, else the match performs a contains for display name and category name and starts with for path.</para>
+        /// <para type="description">The role name of the role which all users belong to.</para>
+        /// </summary>
+        [Parameter(Mandatory = true, Position = 0, ParameterSetName = ROLENAME)]
+        public string RoleName { get; set; }
+
+        /// <summary>
+        /// <para type="description">The IDs of the user to retrieve.</para>
+        /// </summary>
+        [Parameter(Mandatory = true, Position = 1, ParameterSetName = ROLENAME)]
+        public int SiteID { get; set; }
+
+        /// <summary>
+        /// <para type="description">The IDs of the user to retrieve.</para>
+        /// </summary>
+        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline =true, ParameterSetName = ROLEOBJECT)]
+        public RoleInfo Role { get; set; }
+
+        /// <summary>
+        /// <para type="description">If set, do a regex match, else the exact match.</para>
         /// </summary>
         [Parameter(Mandatory = false)]
         [Alias("Regex")]
@@ -110,6 +134,12 @@ namespace PoshKentico.Cmdlets.Configuration.Users
                     break;
                 case IDSETNAME:
                     users = this.BusinessLayer.GetUsers(this.ID);
+                    break;
+                case ROLENAME:
+                    users = this.BusinessLayer.GetUsersFromRole(this.RoleName, this.SiteID);
+                    break;
+                case ROLEOBJECT:
+                    users = this.BusinessLayer.GetUsersFromRole(this.Role.RoleName, this.Role.SiteID);
                     break;
                 case NONE:
                     users = this.BusinessLayer.GetUsers();

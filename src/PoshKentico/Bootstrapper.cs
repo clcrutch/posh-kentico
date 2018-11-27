@@ -60,6 +60,9 @@ namespace PoshKentico
             }
         }
 
+        /// <summary>
+        /// Gets or sets the output service.
+        /// </summary>
         [Import]
         public IOutputService OutputService { get; set; }
 

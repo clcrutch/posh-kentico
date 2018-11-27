@@ -30,12 +30,12 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// <para type="synopsis">Stops a site.</para>
     /// <para type="description">Stops a site.</para>
     /// <example>
-    ///     <para>Stops a site contains a site name "*bas*", display name "*bas*", or a domain name "bas*".</para>
+    ///     <para>Stops a site contains a site name "basic", display name "basic", or a domain name "basic".</para>
     ///     <code>Stop-CMSSite -SiteName "bas"</code>
     /// </example>
     /// <example>
-    ///     <para>Stops a site with a site name "basic", display name "basic", or a domain name "basic".</para>
-    ///     <code>Stop-CMSSite -Site "basic" -EXACT</code>
+    ///     <para>Stops a site with a site name "*bas*", display name "*bas*", or a domain name "bas*".</para>
+    ///     <code>Stop-CMSSite -Site "*bas*" -RegularExpression</code>
     /// </example>
     /// <example>
     ///     <para>Stops a site.</para>
@@ -43,19 +43,17 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// </example>
     /// <example>
     ///     <para>Stops all the sites with the specified IDs.</para>
-    ///     <code>Stop-CMSSite -ID 1,2,3</code>
+    ///     <code>Stop-CMSSite -SiteIds 1,2,3</code>
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet("Stop", "CMSSite")]
     [Alias("stopsite")]
-    public class StopCmsSiteCmdlet : MefCmdlet
+    public class StopCmsSiteCmdlet : GetCmsSiteCmdlet
     {
         #region Constants
 
-        private const string OBJECTSET = "Object";
-        private const string PROPERTYSET = "Property";
-        private const string IDSETNAME = "ID";
+        private const string SITEOBJECTSET = "Object";
 
         #endregion
 
@@ -64,34 +62,15 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         /// <summary>
         /// <para type="description">A reference to the site to stop.</para>
         /// </summary>
-        [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0, ParameterSetName = OBJECTSET)]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0, ParameterSetName = SITEOBJECTSET)]
         [Alias("Site")]
-        public SiteInfo SiteToStart { get; set; }
-
-        /// <summary>
-        /// <para type="description">The site name for the site to stop.</para>
-        /// <para type="description">Site name cannot be blank.</para>
-        /// </summary>
-        [Parameter(Mandatory = true, Position = 0, ParameterSetName = PROPERTYSET)]
-        public string SiteName { get; set; }
-
-        /// <summary>
-        /// <para type="description">If set, the match is exact, else the match performs a contains for site name.</para>
-        /// </summary>
-        [Parameter(ParameterSetName = PROPERTYSET)]
-        public SwitchParameter Exact { get; set; }
-
-        /// <summary>
-        /// <para type="description">The IDs of the web part category to stop.</para>
-        /// </summary>
-        [Parameter(Mandatory = true, Position = 0, ParameterSetName = IDSETNAME)]
-        public int[] ID { get; set; }
+        public SiteInfo SiteToStop { get; set; }
 
         /// <summary>
         ///  Gets or sets the Business Layer for this site.  Populated by MEF.
         /// </summary>
         [Import]
-        public StopCmsSiteBusiness BusinessLayer { get; set; }
+        public StopCmsSiteBusiness StopBusinessLayer { get; set; }
 
         #endregion
 
@@ -100,18 +79,25 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
-            switch (this.ParameterSetName)
+            if (this.ParameterSetName == SITEOBJECTSET)
             {
-                case OBJECTSET:
-                    this.BusinessLayer.Stop(this.SiteToStart.ActLike<ISite>());
-                    break;
-                case PROPERTYSET:
-                    this.BusinessLayer.Stop(this.SiteName, this.Exact);
-                    break;
-                case IDSETNAME:
-                    this.BusinessLayer.Stop(this.ID);
-                    break;
+                this.ActOnObject(this.SiteToStop.ActLike<ISite>());
             }
+            else
+            {
+                base.ProcessRecord();
+            }
+        }
+
+        /// <inheritdoc />
+        protected override void ActOnObject(ISite site)
+        {
+            if (site == null)
+            {
+                return;
+            }
+
+            this.StopBusinessLayer.Stop(site);
         }
 
         #endregion

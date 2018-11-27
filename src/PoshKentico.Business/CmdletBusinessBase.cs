@@ -53,6 +53,9 @@ namespace PoshKentico.Business
         [Import]
         public ICmsApplicationService CmsApplicationService { get; set; }
 
+        /// <summary>
+        ///  Gets or sets the output service.
+        /// </summary>
         [Import]
         public IOutputService OutputService { get; set; }
 

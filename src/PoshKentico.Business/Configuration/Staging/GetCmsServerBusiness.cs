@@ -70,13 +70,13 @@ namespace PoshKentico.Business.Configuration.Staging
         /// </summary>
         /// <param name="site">The associated site of the servers.</param>
         /// /// <param name="matchString">The string which to match the servers to.</param>
-        /// <param name="exact">A boolean which indicates if the match should be exact.</param>
+        /// <param name="isRegex">A boolean which indicates if the match should be regex.</param>
         /// <returns>A list of all of the <see cref="IServer"/> which match the specified criteria.</returns>
-        public IEnumerable<IServer> GetServers(ISite site, string matchString, bool exact)
+        public IEnumerable<IServer> GetServers(ISite site, string matchString, bool isRegex)
         {
             if (site == null)
             {
-                if (exact)
+                if (isRegex)
                 {
                     return this.GetServerExact(matchString);
                 }
@@ -87,7 +87,7 @@ namespace PoshKentico.Business.Configuration.Staging
             }
             else
             {
-                if (exact)
+                if (isRegex)
                 {
                     return this.GetServerExact(site.SiteID, matchString);
                 }
@@ -103,13 +103,13 @@ namespace PoshKentico.Business.Configuration.Staging
         /// </summary>
         /// <param name="siteId">The associated site id of the servers.</param>
         /// /// <param name="matchString">The string which to match the servers to.</param>
-        /// <param name="exact">A boolean which indicates if the match should be exact.</param>
+        /// <param name="isRegex">A boolean which indicates if the match should be isRegex.</param>
         /// <returns>A list of all of the <see cref="IServer"/> which match the specified criteria.</returns>
-        public IEnumerable<IServer> GetServers(int siteId, string matchString, bool exact)
+        public IEnumerable<IServer> GetServers(int siteId, string matchString, bool isRegex)
         {
             if (siteId == -1)
             {
-                if (exact)
+                if (isRegex)
                 {
                     return this.GetServerExact(matchString);
                 }
@@ -120,7 +120,7 @@ namespace PoshKentico.Business.Configuration.Staging
             }
             else
             {
-                if (exact)
+                if (isRegex)
                 {
                     return this.GetServerExact(siteId, matchString);
                 }

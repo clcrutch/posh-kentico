@@ -12,15 +12,15 @@ schema: 2.0.0
 
 ## SYNTAX
 
-### Dislpay Name
-```
-Remove-CMSServer [[-SiteID] <Int32>] [[-DisplayName] <String>] [-Exact] [-WhatIf] [-Confirm]
- [<CommonParameters>]
-```
-
 ### Object
 ```
-Remove-CMSServer [[-Site] <SiteInfo>] [[-DisplayName] <String>] [-Exact] [-WhatIf] [-Confirm]
+Remove-CMSServer [-ServerToRemove] <ServerInfo> [[-DisplayName] <String>] [-RegularExpression]
+ [[-Site] <SiteInfo>] [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+
+### Dislpay Name
+```
+Remove-CMSServer [[-SiteID] <Int32>] [[-DisplayName] <String>] [-RegularExpression] [-WhatIf] [-Confirm]
  [<CommonParameters>]
 ```
 
@@ -63,26 +63,11 @@ Accept wildcard characters: False
 
 ```yaml
 Type: String
-Parameter Sets: Dislpay Name, Object
+Parameter Sets: Object, Dislpay Name
 Aliases: ServerName
 
 Required: False
 Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Exact
-{{Fill Exact Description}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: Dislpay Name, Object
-Aliases:
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -100,6 +85,36 @@ Required: False
 Position: 0
 Default value: None
 Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -RegularExpression
+{{Fill RegularExpression Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: Object, Dislpay Name
+Aliases: Regex
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ServerToRemove
+{{Fill ServerToRemove Description}}
+
+```yaml
+Type: ServerInfo
+Parameter Sets: Object
+Aliases: Server
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -154,6 +169,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
+
+### CMS.Synchronization.ServerInfo
 
 ### CMS.SiteProvider.SiteInfo
 

@@ -60,14 +60,20 @@ namespace PoshKentico.Core.Providers.General
             }
         }
 
+        /// <summary>
+        /// Gets or sets the database service.
+        /// </summary>
         [Import]
         public ICmsDatabaseService CmsDatabaseService { get; set; }
 
+        /// <summary>
+        /// Gets or sets the output service.
+        /// </summary>
         [Import]
         public IOutputService OutputService { get; set; }
 
-        public Version Version =>
-            CMSVersion.Version;
+        /// <inheritdoc/>
+        public Version Version => CMSVersion.Version;
 
         #endregion
 
@@ -84,8 +90,6 @@ namespace PoshKentico.Core.Providers.General
         /// 5. Parse the document and find an "add" node with name="CMSConnectionString"
         /// 6. If the connection string is valid, then stop processing.  This is a Kentico site.
         /// </summary>
-        /// <param name="writeDebug">A delegate for writing to the debug stream.</param>
-        /// <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
         /// <returns>The directory and the connection string for the Kentico site.</returns>
         public (DirectoryInfo siteLocation, string connectionString) FindSite()
         {
@@ -147,8 +151,6 @@ namespace PoshKentico.Core.Providers.General
         /// Initialize Kentico CMS Application using FindKenticoSite or a cached version to locate the site.
         /// </summary>
         /// <param name="useCached">Use the cached location for the Kentico Site.  When true and have already found Kentico in a previous run, this method does not require admin.</param>
-        /// <param name="writeDebug">A delegate for writing to the debug stream.</param>
-        /// <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
         public void Initialize(bool useCached)
         {
             // We don't need to do anything if the application is already initialized.
@@ -189,8 +191,6 @@ namespace PoshKentico.Core.Providers.General
         /// </summary>
         /// <param name="siteLocation">The directory where the Kentico site resides.</param>
         /// <param name="connectionString">The connection string to use for initializing the CMS Application.</param>
-        /// <param name="writeDebug">A delegate for writing to the debug stream.</param>
-        /// <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
         public void Initialize(DirectoryInfo siteLocation, string connectionString)
         {
             // We don't need to do anything if the application is already initialized.

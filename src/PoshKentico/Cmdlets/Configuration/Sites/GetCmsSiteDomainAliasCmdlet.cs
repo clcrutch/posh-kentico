@@ -31,74 +31,59 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// <para type="synopsis">Gets the domain aliases of the specified site.</para>
     /// <para type="description">Gets the domain aliases of the specified site based off of the provided input.</para>
     /// <example>
-    ///     <para>Gets the domain aliases of a site specifying the site name "basic".</para>
-    ///     <code>Get-CMSSiteDomainAlias -SiteName "basic" </code>
+    ///     <para>Get all the sites.</para>
+    ///     <code>Get-CMSSiteDomainAlias</code>
     /// </example>
     /// <example>
-    ///     <para>Gets the domain aliases of a site passing the site to the cmdlet.</para>
-    ///     <code>$site | Get-CMSSiteDomainAlias</code>
+    ///     <para>Get all sites with a display name "basic", site name "basic", or a domain name "basic".</para>
+    ///     <code>Get-CMSSiteDomainAlias basic</code>
+    /// </example>
+    /// <example>
+    ///     <para>Get all sites with a display name "basic", site name "basic", or domain name "basic"</para>
+    ///     <code>Get-CMSSiteDomainAlias *basic* -RegularExpression</code>
+    /// </example>
+    /// <example>
+    ///     <para>Get all the sites with the specified IDs.</para>
+    ///     <code>Get-CMSSiteDomainAlias -SiteIds 5,304,5</code>
+    /// </example>
+    /// <example>
+    ///     <para>Get all the sites with the specified user.</para>
+    ///     <code>Get-CMSSiteDomainAlias -User $user</code>
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
-    [Cmdlet(VerbsCommon.Get, "CMSSiteDomainAlias")]
+    [Cmdlet(VerbsCommon.Get, "CMSSiteDomainAlias", DefaultParameterSetName = NONE)]
     [OutputType(typeof(SiteDomainAliasInfo[]))]
     [Alias("gsda")]
-    public class GetCmsSiteDomainAliasCmdlet : MefCmdlet
+    public class GetCmsSiteDomainAliasCmdlet : GetCmsSiteCmdlet
     {
-        #region Constants
-
-        private const string OBJECTSET = "Object";
-        private const string SITENAMESET = "Property";
-        private const string IDSETNAME = "ID";
-
-        #endregion
-
         #region Properties
-
-        /// <summary>
-        /// <para type="description">The site name for the site.</para>
-        /// </summary>
-        [Parameter(Mandatory = true, Position = 0, ParameterSetName = SITENAMESET)]
-        public string SiteName { get; set; }
-
-        /// <summary>
-        /// <para type="description">A reference to the site.</para>
-        /// </summary>
-        [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0, ParameterSetName = OBJECTSET)]
-        [Alias("Site")]
-        public SiteInfo SiteToWork { get; set; }
 
         /// <summary>
         ///  Gets or sets the Business Layer for adding culture to this site.  Populated by MEF.
         /// </summary>
         [Import]
-        public GetCmsSiteDomainAliasBusiness BusinessLayer { get; set; }
+        public GetCmsSiteDomainAliasBusiness GetBusinessLayer { get; set; }
 
         #endregion
 
         #region Methods
 
         /// <inheritdoc />
-        protected override void ProcessRecord()
+        protected override void ActOnObject(ISite site)
         {
-            IEnumerable<ISiteDomainAlias> domainAliases = null;
-
-            switch (this.ParameterSetName)
+            if (site == null)
             {
-                case OBJECTSET:
-                    domainAliases = this.BusinessLayer.GetDomainAliases(this.SiteToWork.ActLike<ISite>());
-                    break;
-                case SITENAMESET:
-                    domainAliases = this.BusinessLayer.GetDomainAliases(this.SiteName);
-                    break;
+                return;
             }
+
+            var domainAliases = this.GetBusinessLayer.GetDomainAliases(site);
 
             foreach (var alias in domainAliases)
             {
                 this.WriteObject(alias.UndoActLike());
             }
         }
-
         #endregion
 
     }

@@ -34,11 +34,6 @@ namespace PoshKentico.Business.Configuration.Sites
         [Import]
         public ISiteService SiteService { get; set; }
 
-        /// <summary>
-        /// Gets or sets a reference to the <see cref="GetCmsSiteBusiness"/> used to get the site to add domain alias to.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public GetCmsSiteBusiness GetCmsSiteBusiness { get; set; }
         #endregion
 
         #region Methods
@@ -49,43 +44,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <param name="site">The site to add domain alias to.</param>
         /// <param name="aliasName">The domain alias code for the domain alias to add to the site.</param>
         public void RemoveDomainAlias(ISite site, string aliasName)
-        {
-            this.RemoveSiteDomainAlias(site, aliasName);
-        }
-
-        /// <summary>
-        /// Removes the domain alias to a <see cref="ISite"/> in the CMS System.
-        /// </summary>
-        /// <param name="matchString">the string which to match the site to.</param>
-        /// <param name="exact">A boolean which indicates if the match should be exact.</param>
-        /// <param name="aliasName">The domain alias code for the domain alias to add to the site.</param>
-        public void RemoveDomainAlias(string matchString, bool exact, string aliasName)
-        {
-            foreach (var site in this.GetCmsSiteBusiness.GetSites(matchString, exact))
-            {
-                this.RemoveSiteDomainAlias(site, aliasName);
-            }
-        }
-
-        /// <summary>
-        /// Removes the domain alias to a <see cref="ISite"/> in the CMS System.
-        /// </summary>
-        /// <param name="ids">The IDs of the <see cref="ISite"/> to add domain alias to.</param>
-        /// <param name="aliasName">The domain alias code for the domain alias to add to the site.</param>
-        public void RemoveDomainAlias(int[] ids, string aliasName)
-        {
-            foreach (var site in this.GetCmsSiteBusiness.GetSites(ids))
-            {
-                this.RemoveSiteDomainAlias(site, aliasName);
-            }
-        }
-
-        /// <summary>
-        /// Remove a domain alias to a site.
-        /// </summary>
-        /// <param name="site">The site to add domain alias to.</param>
-        /// <param name="aliasName">The domain alias code for the domain alias to add to the site.</param>
-        private void RemoveSiteDomainAlias(ISite site, string aliasName)
         {
             this.SiteService.RemoveSiteDomainAlias(site, aliasName);
         }

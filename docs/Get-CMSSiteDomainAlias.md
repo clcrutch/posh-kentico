@@ -12,14 +12,24 @@ schema: 2.0.0
 
 ## SYNTAX
 
-### Property
+### None (Default)
 ```
-Get-CMSSiteDomainAlias [-SiteName] <String> [<CommonParameters>]
+Get-CMSSiteDomainAlias [<CommonParameters>]
 ```
 
-### Object
+### Dislpay Name
 ```
-Get-CMSSiteDomainAlias [-SiteToWork] <SiteInfo> [<CommonParameters>]
+Get-CMSSiteDomainAlias [[-DisplayName] <String>] [-RegularExpression] [<CommonParameters>]
+```
+
+### ID
+```
+Get-CMSSiteDomainAlias [[-SiteIds] <Int32[]>] [<CommonParameters>]
+```
+
+### User
+```
+Get-CMSSiteDomainAlias [[-User] <UserInfo>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -36,30 +46,60 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -SiteName
-{{Fill SiteName Description}}
+### -DisplayName
+{{Fill DisplayName Description}}
 
 ```yaml
 Type: String
-Parameter Sets: Property
-Aliases:
+Parameter Sets: Dislpay Name
+Aliases: SiteName, DomainName
 
-Required: True
+Required: False
 Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SiteToWork
-{{Fill SiteToWork Description}}
+### -RegularExpression
+{{Fill RegularExpression Description}}
 
 ```yaml
-Type: SiteInfo
-Parameter Sets: Object
-Aliases: Site
+Type: SwitchParameter
+Parameter Sets: Dislpay Name
+Aliases: Regex
 
-Required: True
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SiteIds
+{{Fill SiteIds Description}}
+
+```yaml
+Type: Int32[]
+Parameter Sets: ID
+Aliases:
+
+Required: False
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -User
+{{Fill User Description}}
+
+```yaml
+Type: UserInfo
+Parameter Sets: User
+Aliases:
+
+Required: False
 Position: 0
 Default value: None
 Accept pipeline input: True (ByValue)
@@ -72,7 +112,7 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## INPUTS
 
-### CMS.SiteProvider.SiteInfo
+### CMS.Membership.UserInfo
 
 ## OUTPUTS
 

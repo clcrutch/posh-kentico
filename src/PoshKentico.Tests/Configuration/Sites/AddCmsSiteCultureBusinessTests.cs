@@ -20,7 +20,6 @@ using System.Diagnostics.CodeAnalysis;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Configuration.Sites;
-using PoshKentico.Core.Providers.General;
 using PoshKentico.Core.Services.Configuration.Sites;
 using PoshKentico.Tests.Helpers;
 
@@ -36,171 +35,28 @@ namespace PoshKentico.Tests.Configuration.Sites
             var siteServiceMock = new Mock<ISiteService>();
             string cultureCode = "ar-sa";
 
-            var sites = new List<ISite>();
             var siteMock1 = new Mock<ISite>();
             siteMock1.SetupGet(x => x.DisplayName).Returns("My Site1");
             siteMock1.SetupGet(x => x.SiteName).Returns("MySite1");
             siteMock1.SetupGet(x => x.DomainName).Returns("localhost1");
-            sites.Add(siteMock1.Object);
 
             var siteMock2 = new Mock<ISite>();
             siteMock2.SetupGet(x => x.DisplayName).Returns("your site2");
             siteMock2.SetupGet(x => x.SiteName).Returns("yoursite2");
             siteMock2.SetupGet(x => x.DomainName).Returns("localhost2");
-            sites.Add(siteMock2.Object);
-
-            siteServiceMock.SetupGet(x => x.Sites).Returns(sites);
 
             var outputService = OutputServiceHelper.GetPassThruOutputService();
-            PassThruOutputService.ShouldProcessFunction = (x, y) => true;
-
-            var getBusinessLayer = new GetCmsSiteBusiness()
-            {
-                OutputService = outputService,
-
-                SiteService = siteServiceMock.Object,
-            };
 
             var businessLayer = new AddCmsSiteCultureBusiness()
             {
                 OutputService = outputService,
 
                 SiteService = siteServiceMock.Object,
-                GetCmsSiteBusiness = getBusinessLayer,
             };
 
             businessLayer.AddCulture(siteMock1.Object, cultureCode);
 
             siteServiceMock.Verify(x => x.AddSiteCulture(siteMock1.Object, cultureCode));
-        }
-
-        [TestCase]
-        public void AddSiteCultureTest_MatchString_ExactFalse()
-        {
-            var siteServiceMock = new Mock<ISiteService>();
-            string cultureCode = "ar-sa";
-
-            var sites = new List<ISite>();
-            var siteMock1 = new Mock<ISite>();
-            siteMock1.SetupGet(x => x.DisplayName).Returns("My Site1");
-            siteMock1.SetupGet(x => x.SiteName).Returns("MySite1");
-            siteMock1.SetupGet(x => x.DomainName).Returns("localhost1");
-            sites.Add(siteMock1.Object);
-
-            var siteMock2 = new Mock<ISite>();
-            siteMock2.SetupGet(x => x.DisplayName).Returns("your site2");
-            siteMock2.SetupGet(x => x.SiteName).Returns("yoursite2");
-            siteMock2.SetupGet(x => x.DomainName).Returns("localhost2");
-            sites.Add(siteMock2.Object);
-
-            siteServiceMock.SetupGet(x => x.Sites).Returns(sites);
-
-            var getBusinessLayer = new GetCmsSiteBusiness()
-            {
-                OutputService = OutputServiceHelper.GetPassThruOutputService(),
-                SiteService = siteServiceMock.Object,
-            };
-
-            var businessLayer = new AddCmsSiteCultureBusiness()
-            {
-                OutputService = OutputServiceHelper.GetPassThruOutputService(),
-                SiteService = siteServiceMock.Object,
-                GetCmsSiteBusiness = getBusinessLayer,
-            };
-
-            businessLayer.AddCulture("site", false, cultureCode);
-
-            siteServiceMock.Verify(x => x.AddSiteCulture(siteMock1.Object, cultureCode));
-            siteServiceMock.Verify(x => x.AddSiteCulture(siteMock2.Object, cultureCode));
-        }
-
-        [TestCase]
-        public void AddSiteCultureTest_MatchString_ExactTrue()
-        {
-            var siteServiceMock = new Mock<ISiteService>();
-            string cultureCode = "ar-sa";
-
-            var sites = new List<ISite>();
-            var siteMock1 = new Mock<ISite>();
-            siteMock1.SetupGet(x => x.DisplayName).Returns("My Site1");
-            siteMock1.SetupGet(x => x.SiteName).Returns("MySite1");
-            siteMock1.SetupGet(x => x.DomainName).Returns("localhost1");
-            sites.Add(siteMock1.Object);
-
-            var siteMock2 = new Mock<ISite>();
-            siteMock2.SetupGet(x => x.DisplayName).Returns("your site2");
-            siteMock2.SetupGet(x => x.SiteName).Returns("yoursite2");
-            siteMock2.SetupGet(x => x.DomainName).Returns("localhost2");
-            sites.Add(siteMock2.Object);
-
-            siteServiceMock.SetupGet(x => x.Sites).Returns(sites);
-
-            var outputService = OutputServiceHelper.GetPassThruOutputService();
-            PassThruOutputService.ShouldProcessFunction = (x, y) => true;
-
-            var getBusinessLayer = new GetCmsSiteBusiness()
-            {
-                OutputService = outputService,
-                SiteService = siteServiceMock.Object,
-            };
-
-            var businessLayer = new AddCmsSiteCultureBusiness()
-            {
-                OutputService = outputService,
-                SiteService = siteServiceMock.Object,
-                GetCmsSiteBusiness = getBusinessLayer,
-            };
-
-            businessLayer.AddCulture("yoursite2", true, cultureCode);
-
-            siteServiceMock.Verify(x => x.AddSiteCulture(siteMock2.Object, cultureCode));
-        }
-
-        [TestCase]
-        public void AddSiteCultureTest_Ids()
-        {
-            var siteServiceMock = new Mock<ISiteService>();
-            string cultureCode = "ar-sa";
-
-            var sites = new List<ISite>();
-            var siteMock1 = new Mock<ISite>();
-            siteMock1.SetupGet(x => x.DisplayName).Returns("My Site1");
-            siteMock1.SetupGet(x => x.SiteName).Returns("MySite1");
-            siteMock1.SetupGet(x => x.DomainName).Returns("localhost1");
-            sites.Add(siteMock1.Object);
-
-            var siteMock2 = new Mock<ISite>();
-            siteMock2.SetupGet(x => x.DisplayName).Returns("your site2");
-            siteMock2.SetupGet(x => x.SiteName).Returns("yoursite2");
-            siteMock2.SetupGet(x => x.DomainName).Returns("localhost2");
-            sites.Add(siteMock2.Object);
-
-            siteServiceMock.Setup(x => x.GetSite(1)).Returns(siteMock1.Object);
-            siteServiceMock.Setup(x => x.GetSite(2)).Returns(siteMock2.Object);
-
-            siteServiceMock.SetupGet(x => x.Sites).Returns(sites);
-
-            var outputService = OutputServiceHelper.GetPassThruOutputService();
-            PassThruOutputService.ShouldProcessFunction = (x, y) => true;
-
-            var getBusinessLayer = new GetCmsSiteBusiness()
-            {
-                OutputService = outputService,
-                SiteService = siteServiceMock.Object,
-            };
-
-            var businessLayer = new AddCmsSiteCultureBusiness()
-            {
-                OutputService = outputService,
-                SiteService = siteServiceMock.Object,
-                GetCmsSiteBusiness = getBusinessLayer,
-            };
-
-            int[] ids = new int[] { 2, 3 };
-
-            businessLayer.AddCulture(ids, cultureCode);
-
-            siteServiceMock.Verify(x => x.AddSiteCulture(siteMock2.Object, cultureCode));
         }
     }
 }
