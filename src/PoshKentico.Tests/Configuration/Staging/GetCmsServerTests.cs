@@ -22,6 +22,7 @@ using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Configuration.Staging;
 using PoshKentico.Core.Services.Configuration.Staging;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests.Configuration.Staging
 {
@@ -36,8 +37,7 @@ namespace PoshKentico.Tests.Configuration.Staging
 
             var businessLayer = new GetCmsServerBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 StagingService = stagingServiceMock.Object,
             };
@@ -67,8 +67,7 @@ namespace PoshKentico.Tests.Configuration.Staging
 
             var businessLayer = new GetCmsServerBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 StagingService = serverServiceMock.Object,
             };
@@ -106,8 +105,7 @@ namespace PoshKentico.Tests.Configuration.Staging
 
             var businessLayer = new GetCmsServerBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 StagingService = serverServiceMock.Object,
             };
@@ -149,8 +147,7 @@ namespace PoshKentico.Tests.Configuration.Staging
 
             var businessLayer = new GetCmsServerBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 StagingService = serverServiceMock.Object,
             };
@@ -192,8 +189,7 @@ namespace PoshKentico.Tests.Configuration.Staging
 
             var businessLayer = new GetCmsServerBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 StagingService = serverServiceMock.Object,
             };

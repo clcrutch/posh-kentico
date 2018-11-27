@@ -1,4 +1,4 @@
-﻿// <copyright file="RemoveCMSWebPartFieldBusiness.cs" company="Chris Crutchfield">
+﻿// <copyright file="InitializeCMSDatabaseCmdlet.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -16,31 +16,27 @@
 // </copyright>
 
 using System.ComponentModel.Composition;
-using PoshKentico.Core.Services.Development.WebParts;
+using System.Management.Automation;
+using PoshKentico.Business.General;
 
-namespace PoshKentico.Business.Development.WebParts
+namespace PoshKentico.Cmdlets.General
 {
     /// <summary>
-    /// Business layer for the Remove-CMSWebPartField cmdlet.
+    ///  Initialize-CMSDatabase Cmdlet for initializing the database for CMS Application.
     /// </summary>
-    [Export(typeof(RemoveCMSWebPartFieldBusiness))]
-    public class RemoveCMSWebPartFieldBusiness : WebPartBusinessBase
+    [Cmdlet(VerbsData.Initialize, "CMSDatabase")]
+    public class InitializeCMSDatabaseCmdlet : MefCmdlet
     {
-        #region Methods
-
         /// <summary>
-        /// Removes an <see cref="IWebPartField"/> from Kentico.
+        /// Gets or sets the business layer for initializing the database for CMS Application.
         /// </summary>
-        /// <param name="field">The <see cref="IWebPartField"/> to remove.</param>
-        public void RemoveField(IWebPartField field)
+        [Import]
+        public InitializeCMSDatabaseBusiness BusinessLayer { get; set; }
+
+        /// <inheritdoc/>
+        protected override void ProcessRecord()
         {
-            if (this.OutputService.ShouldProcess(field.Name, $"Remove the field from web part named '{field.WebPart.WebPartName}'."))
-            {
-                this.WebPartService.RemoveField(field);
-            }
+            this.BusinessLayer.InstallSqlDatabase();
         }
-
-        #endregion
-
     }
 }

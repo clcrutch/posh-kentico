@@ -20,7 +20,9 @@ using System.Diagnostics.CodeAnalysis;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Configuration.Staging;
+using PoshKentico.Core.Providers.General;
 using PoshKentico.Core.Services.Configuration.Staging;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests.Configuration.Staging
 {
@@ -48,12 +50,12 @@ namespace PoshKentico.Tests.Configuration.Staging
             serverMock3.SetupGet(x => x.ServerName).Returns("yourserver3");
             serverMock3.SetupGet(x => x.ServerSiteID).Returns(12);
 
+            var outputService = OutputServiceHelper.GetPassThruOutputService();
+            PassThruOutputService.ShouldProcessFunction = (x, y) => true;
+
             var businessLayer = new RemoveCmsServerBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-                ShouldProcess = (x, y) => true,
-
+                OutputService = outputService,
                 StagingService = serverServiceMock.Object,
             };
 

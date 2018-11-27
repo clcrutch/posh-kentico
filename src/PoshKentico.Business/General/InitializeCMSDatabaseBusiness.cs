@@ -1,4 +1,4 @@
-﻿// <copyright file="RemoveCmsUserBusiness.cs" company="Chris Crutchfield">
+﻿// <copyright file="InitializeCMSDatabaseBusiness.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -15,41 +15,38 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System;
 using System.ComponentModel.Composition;
-using PoshKentico.Core.Services.Configuration.Users;
+using PoshKentico.Core.Services.General;
 
-namespace PoshKentico.Business.Configuration.Users
+namespace PoshKentico.Business.General
 {
     /// <summary>
-    /// Business Layer for the Remove-CMSUser cmdlet.
+    /// Business Layer for initializing the database for CMS Application.
     /// </summary>
-    [Export(typeof(RemoveCmsUserBusiness))]
-    public class RemoveCmsUserBusiness : CmdletBusinessBase
+    [Export(typeof(InitializeCMSDatabaseBusiness))]
+    public class InitializeCMSDatabaseBusiness : CmdletBusinessBase
     {
-        #region Properties
-
         /// <summary>
-        /// Gets or sets a reference to the User Service. Populated by MEF.
+        /// Gets or sets the database service.
         /// </summary>
         [Import]
-        public IUserService UserService { get; set; }
-
-        #endregion
-
-        #region Methods
+        public ICmsDatabaseService CmsDatabaseService { get; set; }
 
         /// <summary>
-        /// Removes a the specified user <see cref="IUser"/> in the CMS System.
+        /// Installs the sql database.
         /// </summary>
-        /// <param name="user">The <see cref="IUser"/> to remove.</param>
-        public void RemoveUsers(IUser user)
+        public void InstallSqlDatabase()
         {
-            if (this.OutputService.ShouldProcess(user.UserName, "Remove the user from Kentico."))
+            if (!this.CmsDatabaseService.Exists)
             {
-                this.UserService.DeleteUser(user);
+                throw new Exception("The specified database does not exist.  Please check the connection string and try again.");
+            }
+
+            if (!this.CmsDatabaseService.IsDatabaseInstalled())
+            {
+                this.CmsDatabaseService.InstallSqlDatabase();
             }
         }
-
-        #endregion
     }
 }

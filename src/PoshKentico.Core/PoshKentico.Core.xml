@@ -333,7 +333,20 @@
             Gets the initialization state of the CMS Application.
             </summary>
         </member>
-        <member name="M:PoshKentico.Core.Providers.General.KenticoCmsApplicationService.FindSite(System.Action{System.String},System.Action{System.String})">
+        <member name="P:PoshKentico.Core.Providers.General.KenticoCmsApplicationService.CmsDatabaseService">
+            <summary>
+            Gets or sets the database service.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.General.KenticoCmsApplicationService.OutputService">
+            <summary>
+            Gets or sets the output service.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.General.KenticoCmsApplicationService.Version">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.General.KenticoCmsApplicationService.FindSite">
              <summary>
              This method requires administrator access.
             
@@ -345,26 +358,53 @@
              5. Parse the document and find an "add" node with name="CMSConnectionString"
              6. If the connection string is valid, then stop processing.  This is a Kentico site.
              </summary>
-             <param name="writeDebug">A delegate for writing to the debug stream.</param>
-             <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
              <returns>The directory and the connection string for the Kentico site.</returns>
         </member>
-        <member name="M:PoshKentico.Core.Providers.General.KenticoCmsApplicationService.Initialize(System.Boolean,System.Action{System.String},System.Action{System.String})">
+        <member name="M:PoshKentico.Core.Providers.General.KenticoCmsApplicationService.Initialize(System.Boolean)">
             <summary>
             Initialize Kentico CMS Application using FindKenticoSite or a cached version to locate the site.
             </summary>
             <param name="useCached">Use the cached location for the Kentico Site.  When true and have already found Kentico in a previous run, this method does not require admin.</param>
-            <param name="writeDebug">A delegate for writing to the debug stream.</param>
-            <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
         </member>
-        <member name="M:PoshKentico.Core.Providers.General.KenticoCmsApplicationService.Initialize(System.IO.DirectoryInfo,System.String,System.Action{System.String},System.Action{System.String})">
+        <member name="M:PoshKentico.Core.Providers.General.KenticoCmsApplicationService.Initialize(System.IO.DirectoryInfo,System.String)">
             <summary>
             Initialize Kentico CMS Application using the supplied parameters.
             </summary>
             <param name="siteLocation">The directory where the Kentico site resides.</param>
             <param name="connectionString">The connection string to use for initializing the CMS Application.</param>
-            <param name="writeDebug">A delegate for writing to the debug stream.</param>
-            <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
+        </member>
+        <member name="T:PoshKentico.Core.Providers.General.KenticoCmsDatabaseService">
+            <summary>
+            Implementation of <see cref="T:PoshKentico.Core.Services.General.ICmsDatabaseService"/>.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.General.KenticoCmsDatabaseService.CmsApplicationService">
+            <summary>
+            Gets or sets the application service.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.General.KenticoCmsDatabaseService.OutputService">
+            <summary>
+            Gets or sets the output service.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.General.KenticoCmsDatabaseService.Version">
+            <inheritdoc/>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.General.KenticoCmsDatabaseService.ConnectionString">
+            <inheritdoc/>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.General.KenticoCmsDatabaseService.Exists">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.General.KenticoCmsDatabaseService.ExecuteQuery(System.String,CMS.DataEngine.QueryDataParameters)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.General.KenticoCmsDatabaseService.InstallSqlDatabase">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.General.KenticoCmsDatabaseService.IsDatabaseInstalled">
+            <inheritdoc/>
         </member>
         <member name="T:PoshKentico.Core.Providers.General.KenticoSiteLocationCache">
             <summary>
@@ -380,6 +420,59 @@
             <summary>
             Gets or sets the connection string for the Kentico database.
             </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Providers.General.PassThruOutputService">
+            <summary>
+            Implementation of <see cref="T:PoshKentico.Core.Services.General.IOutputService"/>.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.General.PassThruOutputService.ShouldProcessFunction">
+            <summary>
+            Sets a delegate for checking if the cmdlet should continue processing.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.General.PassThruOutputService.WriteErrorAction">
+            <summary>
+             Sets a delegate for writing to the error stream.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.General.PassThruOutputService.WriteDebugAction">
+            <summary>
+             Sets a delegate for writing to the debug stream.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.General.PassThruOutputService.WriteProgressAction">
+            <summary>
+             Sets a delegate for writing to the progress stream.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.General.PassThruOutputService.WriteVerboseAction">
+            <summary>
+             Sets a delegate for writing to the verbose stream.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.General.PassThruOutputService.WriteWarningAction">
+            <summary>
+             Sets a delegate for writing to the warning stream.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.General.PassThruOutputService.ShouldProcess(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.General.PassThruOutputService.WriteDebug(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.General.PassThruOutputService.WriteError(System.Management.Automation.ErrorRecord)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.General.PassThruOutputService.WriteProgress(System.Management.Automation.ProgressRecord)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.General.PassThruOutputService.WriteVerbose(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.General.PassThruOutputService.WriteWarning(System.String)">
+            <inheritdoc/>
         </member>
         <member name="T:PoshKentico.Core.Providers.Resource.KenticoFileSystemResourceService">
             <summary>
@@ -1809,30 +1902,67 @@
             Gets the initialization state of the CMS Application.
             </summary>
         </member>
-        <member name="M:PoshKentico.Core.Services.General.ICmsApplicationService.FindSite(System.Action{System.String},System.Action{System.String})">
+        <member name="P:PoshKentico.Core.Services.General.ICmsApplicationService.Version">
+            <summary>
+            Gets the version of the CMS Application.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Services.General.ICmsApplicationService.FindSite">
             <summary>
             Locates the CMS Site.
             </summary>
-            <param name="writeDebug">A delegate for writing to the debug stream.</param>
-            <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
             <returns>The directory and the connection string for the CMS site.</returns>
         </member>
-        <member name="M:PoshKentico.Core.Services.General.ICmsApplicationService.Initialize(System.Boolean,System.Action{System.String},System.Action{System.String})">
+        <member name="M:PoshKentico.Core.Services.General.ICmsApplicationService.Initialize(System.Boolean)">
             <summary>
             Locates and performs the necessary initialization for the CMS site.
             </summary>
             <param name="useCached">Use the cached location for the CMS application.  When true and have already found Kentico in a previous run, this method does not require admin.</param>
-            <param name="writeDebug">A delegate for writing to the debug stream.</param>
-            <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
         </member>
-        <member name="M:PoshKentico.Core.Services.General.ICmsApplicationService.Initialize(System.IO.DirectoryInfo,System.String,System.Action{System.String},System.Action{System.String})">
+        <member name="M:PoshKentico.Core.Services.General.ICmsApplicationService.Initialize(System.IO.DirectoryInfo,System.String)">
             <summary>
             Performs the necessary initialization for the provided CMS site.
             </summary>
             <param name="siteLocation">The directory where the CMS site resides.</param>
             <param name="connectionString">The connection string to use for initializing the CMS Application.</param>
-            <param name="writeDebug">A delegate for writing to the debug stream.</param>
-            <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
+        </member>
+        <member name="T:PoshKentico.Core.Services.General.ICmsDatabaseService">
+            <summary>
+            Service for providing database to a CMS application.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.General.ICmsDatabaseService.Version">
+            <summary>
+            Gets the version of the database that the application uses.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.General.ICmsDatabaseService.ConnectionString">
+            <summary>
+            Gets or sets the connection string for connecting to a database.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.General.ICmsDatabaseService.Exists">
+            <summary>
+            Gets a value indicating whether checks if the database exists, returns true if database exists.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Services.General.ICmsDatabaseService.ExecuteQuery(System.String,CMS.DataEngine.QueryDataParameters)">
+            <summary>
+            Executes the query provided in the params.
+            </summary>
+            <param name="queryText">The query text to execute.</param>
+            <param name="parameters">The parameters for the query.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.General.ICmsDatabaseService.InstallSqlDatabase">
+            <summary>
+            Installs sql database.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Services.General.ICmsDatabaseService.IsDatabaseInstalled">
+            <summary>
+            Checks if the database is installed.
+            </summary>
+            <returns>True if the database is installed, otherwise false.</returns>
         </member>
         <member name="T:PoshKentico.Core.Services.General.InitializationState">
             <summary>
@@ -1853,6 +1983,49 @@
             <summary>
             Initialization was successful.
             </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Services.General.IOutputService">
+            <summary>
+            Service for providing output message to a CMS application.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Services.General.IOutputService.ShouldProcess(System.String,System.String)">
+            <summary>
+            Checks if the cmdlet should continue processing.
+            </summary>
+            <param name="target">The target cmllet.</param>
+            <param name="action">The action.</param>
+            <returns>If the check returns true, then continue to process the cmdlet.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.General.IOutputService.WriteError(System.Management.Automation.ErrorRecord)">
+            <summary>
+            Writes the error message.
+            </summary>
+            <param name="errorRecord">The error record.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.General.IOutputService.WriteDebug(System.String)">
+            <summary>
+            Writes the debug message.
+            </summary>
+            <param name="message">The debug message.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.General.IOutputService.WriteProgress(System.Management.Automation.ProgressRecord)">
+            <summary>
+            Writes the progress message.
+            </summary>
+            <param name="progressRecord">The progress record.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.General.IOutputService.WriteVerbose(System.String)">
+            <summary>
+            Writes the verbose message.
+            </summary>
+            <param name="message">The verbose message.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.General.IOutputService.WriteWarning(System.String)">
+            <summary>
+            Writes the warning message.
+            </summary>
+            <param name="message">The warning message.</param>
         </member>
         <member name="T:PoshKentico.Core.Services.Resource.IFileSystemReaderWriterService">
             <summary>

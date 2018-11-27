@@ -21,7 +21,9 @@ using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Configuration.Users;
+using PoshKentico.Core.Providers.General;
 using PoshKentico.Core.Services.Configuration.Users;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests.Configuration.Users
 {
@@ -38,17 +40,18 @@ namespace PoshKentico.Tests.Configuration.Users
             var userMock1 = new Mock<IUser>();
             var userMock2 = new Mock<IUser>();
 
+            var outputService = OutputServiceHelper.GetPassThruOutputService();
+            PassThruOutputService.ShouldProcessFunction = (x, y) =>
+            {
+                shouldProcessCalled = true;
+                return true;
+            };
+
             var businessLayer = new RemoveCmsUserBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = outputService,
 
                 UserService = userServiceMock.Object,
-                ShouldProcess = (x, y) =>
-                {
-                    shouldProcessCalled = true;
-                    return true;
-                },
             };
 
             businessLayer.RemoveUsers(userMock1.Object);

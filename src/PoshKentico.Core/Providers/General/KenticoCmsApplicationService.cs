@@ -36,6 +36,12 @@ namespace PoshKentico.Core.Providers.General
     [Export(typeof(ICmsApplicationService))]
     public class KenticoCmsApplicationService : ICmsApplicationService
     {
+        #region Variables
+
+        private static bool locallyInitialized = false;
+
+        #endregion
+
         #region Properties
 
         /// <summary>
@@ -54,6 +60,21 @@ namespace PoshKentico.Core.Providers.General
             }
         }
 
+        /// <summary>
+        /// Gets or sets the database service.
+        /// </summary>
+        [Import]
+        public ICmsDatabaseService CmsDatabaseService { get; set; }
+
+        /// <summary>
+        /// Gets or sets the output service.
+        /// </summary>
+        [Import]
+        public IOutputService OutputService { get; set; }
+
+        /// <inheritdoc/>
+        public Version Version => CMSVersion.Version;
+
         #endregion
 
         #region Methods
@@ -69,10 +90,8 @@ namespace PoshKentico.Core.Providers.General
         /// 5. Parse the document and find an "add" node with name="CMSConnectionString"
         /// 6. If the connection string is valid, then stop processing.  This is a Kentico site.
         /// </summary>
-        /// <param name="writeDebug">A delegate for writing to the debug stream.</param>
-        /// <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
         /// <returns>The directory and the connection string for the Kentico site.</returns>
-        public (DirectoryInfo siteLocation, string connectionString) FindSite(Action<string> writeDebug = null, Action<string> writeVerbose = null)
+        public (DirectoryInfo siteLocation, string connectionString) FindSite()
         {
             var serverManager = new ServerManager();
 
@@ -85,11 +104,11 @@ namespace PoshKentico.Core.Providers.General
             string connectionString = null;
             foreach (var directoryInfo in directoryInfos)
             {
-                writeDebug?.Invoke($"Searching for \"web.config\" in {directoryInfo.FullName}.");
+                this.OutputService.WriteDebug($"Searching for \"web.config\" in {directoryInfo.FullName}.");
 
                 if (!directoryInfo.Exists)
                 {
-                    writeDebug?.Invoke($"Directory {directoryInfo.FullName} does not exist. Skipping.");
+                    this.OutputService.WriteDebug($"Directory {directoryInfo.FullName} does not exist. Skipping.");
 
                     continue;
                 }
@@ -100,14 +119,14 @@ namespace PoshKentico.Core.Providers.General
                 // If we somehow can't find it, continue.
                 if (webConfigDirectoryInfo == null)
                 {
-                    writeDebug?.Invoke("No \"web.config\" found. Skipping.");
+                    this.OutputService.WriteDebug("No \"web.config\" found. Skipping.");
                     continue;
                 }
 
                 // Parse the document
                 var webConfigXDocument = XDocument.Load(webConfigDirectoryInfo.FullName);
 
-                writeDebug?.Invoke("Searching for \"CMSConnectionString\" in \"web.config\".");
+                this.OutputService.WriteDebug("Searching for \"CMSConnectionString\" in \"web.config\".");
 
                 // Find the connection string.
                 connectionString = (from d in webConfigXDocument.Descendants("add")
@@ -117,12 +136,12 @@ namespace PoshKentico.Core.Providers.General
                 // If we found one, we can exit.
                 if (!string.IsNullOrEmpty(connectionString))
                 {
-                    writeVerbose?.Invoke($"Selecting \"{directoryInfo.FullName}\" as Kentico site.");
+                    this.OutputService.WriteVerbose($"Selecting \"{directoryInfo.FullName}\" as Kentico site.");
 
                     return (directoryInfo, connectionString);
                 }
 
-                writeDebug?.Invoke("No connection string found.  Skipping.");
+                this.OutputService.WriteDebug("No connection string found.  Skipping.");
             }
 
             return (null, null);
@@ -132,9 +151,7 @@ namespace PoshKentico.Core.Providers.General
         /// Initialize Kentico CMS Application using FindKenticoSite or a cached version to locate the site.
         /// </summary>
         /// <param name="useCached">Use the cached location for the Kentico Site.  When true and have already found Kentico in a previous run, this method does not require admin.</param>
-        /// <param name="writeDebug">A delegate for writing to the debug stream.</param>
-        /// <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
-        public void Initialize(bool useCached, Action<string> writeDebug = null, Action<string> writeVerbose = null)
+        public void Initialize(bool useCached)
         {
             // We don't need to do anything if the application is already initialized.
             if (this.InitializationState != InitializationState.Uninitialized)
@@ -146,12 +163,14 @@ namespace PoshKentico.Core.Providers.General
             {
                 var cache = this.GetCache();
 
-                this.Initialize(new DirectoryInfo(cache.SiteLocation), cache.ConnectionString, writeDebug, writeVerbose);
+                this.Initialize(
+                    new DirectoryInfo(cache.SiteLocation),
+                    cache.ConnectionString);
             }
             else
             {
                 // Search for the Kentico site in IIS.
-                var (siteLocation, connectionString) = this.FindSite(writeDebug, writeVerbose);
+                var (siteLocation, connectionString) = this.FindSite();
 
                 if (string.IsNullOrWhiteSpace(connectionString) || siteLocation == null)
                 {
@@ -161,7 +180,9 @@ namespace PoshKentico.Core.Providers.General
                 var cache = this.GetCache();
                 this.CacheSiteLocation(siteLocation, connectionString);
 
-                this.Initialize(siteLocation, connectionString, writeDebug, writeVerbose);
+                this.Initialize(
+                    siteLocation,
+                    connectionString);
             }
         }
 
@@ -170,9 +191,7 @@ namespace PoshKentico.Core.Providers.General
         /// </summary>
         /// <param name="siteLocation">The directory where the Kentico site resides.</param>
         /// <param name="connectionString">The connection string to use for initializing the CMS Application.</param>
-        /// <param name="writeDebug">A delegate for writing to the debug stream.</param>
-        /// <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
-        public void Initialize(DirectoryInfo siteLocation, string connectionString, Action<string> writeDebug = null, Action<string> writeVerbose = null)
+        public void Initialize(DirectoryInfo siteLocation, string connectionString)
         {
             // We don't need to do anything if the application is already initialized.
             if (this.InitializationState != InitializationState.Uninitialized)
@@ -180,14 +199,25 @@ namespace PoshKentico.Core.Providers.General
                 return;
             }
 
-            DataConnectionFactory.ConnectionString = connectionString;
+            if (!locallyInitialized)
+            {
+                this.CmsDatabaseService.ConnectionString = connectionString;
 
-            // This is how Kentico recommends working with their API.
+                // This is how Kentico recommends working with their API.
 #pragma warning disable CS0618 // Type or member is obsolete
-            AppDomain.CurrentDomain.AppendPrivatePath(Path.GetDirectoryName(typeof(KenticoCmsApplicationService).Assembly.Location));
+                AppDomain.CurrentDomain.AppendPrivatePath(Path.GetDirectoryName(typeof(KenticoCmsApplicationService).Assembly.Location));
 #pragma warning restore CS0618 // Type or member is obsolete
 
-            SystemContext.WebApplicationPhysicalPath = siteLocation.FullName;
+                SystemContext.WebApplicationPhysicalPath = siteLocation.FullName;
+
+                locallyInitialized = true;
+            }
+
+            // We cannot setup the application unless the database is setup.
+            if (!this.CmsDatabaseService.IsDatabaseInstalled())
+            {
+                return;
+            }
 
             if (!CMSApplication.Init())
             {

@@ -12,6 +12,11 @@
     <WarningsAsErrors />
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="Cmdlets\Development\PageTemplates\AddCMSPageTemplateWebPartInstanceCmdlet.cs" />
     <Compile Remove="Cmdlets\Development\PageTemplates\AddCmsPageTemplateWebPartZoneInstanceCmdlet.cs" />

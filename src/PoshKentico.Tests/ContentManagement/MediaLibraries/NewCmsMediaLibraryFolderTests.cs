@@ -21,6 +21,7 @@ using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.ContentManagement.MediaLibraries;
 using PoshKentico.Core.Services.ContentManagement.MediaLibraries;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests.ContentManagement.MediaLibraries
 {
@@ -50,8 +51,7 @@ namespace PoshKentico.Tests.ContentManagement.MediaLibraries
 
             var businessLayer = new NewCmsMediaLibraryFolderBusiness
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 MediaLibraryService = libraryServiceMock.Object,
             };
