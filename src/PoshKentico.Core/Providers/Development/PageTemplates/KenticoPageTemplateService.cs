@@ -101,11 +101,14 @@ namespace PoshKentico.Core.Providers.Development.PageTemplates
                 CategoryID = pageTemplate.CategoryID,
                 FileName = pageTemplate.FileName,
                 DisplayName = pageTemplate.DisplayName,
+                ShowAsMasterTemplate = pageTemplate.ShowAsMasterTemplate,
+                PageTemplateForAllPages = pageTemplate.PageTemplateForAllPages,
                 CodeName = pageTemplate.CodeName,
                 PageTemplateLayout = pageTemplate.PageTemplateLayout,
                 PageTemplateIconClass = pageTemplate.PageTemplateIconClass,
                 PageTemplateCSS = pageTemplate.PageTemplateCSS,
                 IsReusable = pageTemplate.IsReusable,
+                PageTemplateLayoutType = pageTemplate.PageTemplateLayoutType,
 
                 PageTemplateProperties = FormInfo.GetEmptyFormDocument().OuterXml,
             };

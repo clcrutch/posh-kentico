@@ -1221,6 +1221,16 @@
             Gets the page template description.
             </summary>
         </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.ShowAsMasterTemplate">
+            <summary>
+            Gets or sets a value indicating whether to show page template as master template.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.PageTemplateForAllPages">
+            <summary>
+            Gets or sets a value indicating whether page template is for all pages.
+            </summary>
+        </member>
         <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.PageTemplates">
             <summary>
             Gets the page template PageTemplates.
@@ -1238,7 +1248,7 @@
         </member>
         <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.PageTemplateLayout">
             <summary>
-            Gets page template layout.
+            Gets or sets page template layout.
             </summary>
         </member>
         <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.PageTemplateIconClass">
@@ -1254,6 +1264,16 @@
         <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.IsReusable">
             <summary>
             Gets a value indicating whether the page template is reusable.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.WebPartZones">
+            <summary>
+            Gets or sets web part zones contained within the Page template.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.PageTemplateLayoutType">
+            <summary>
+            Gets or sets the page template layout type.
             </summary>
         </member>
         <member name="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory">
@@ -1569,7 +1589,7 @@
         </member>
         <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartInstance.Properties">
             <summary>
-            Gets the webpart instance properties.
+            Gets or sets the webpart instance properties.
             </summary>
         </member>
         <member name="T:PoshKentico.Core.Services.Development.WebParts.IWebPartService">

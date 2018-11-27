@@ -45,7 +45,7 @@ namespace PoshKentico.Core.Services.Development.WebParts
         bool IsWidget { get; }
 
         /// <summary>
-        /// Gets the webpart instance properties.
+        /// Gets or sets the webpart instance properties.
         /// </summary>
         Hashtable Properties { get; }
     }

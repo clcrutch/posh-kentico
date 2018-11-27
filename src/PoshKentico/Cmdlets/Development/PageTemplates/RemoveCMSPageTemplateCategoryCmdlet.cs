@@ -111,7 +111,7 @@ namespace PoshKentico.Cmdlets.Development.PageTemplates
                 return;
             }
 
-            this.RemoveBusinessLayer.RemovePageTemplateCategory(pageTemplateCategory, this.Recurse.ToBool());
+            this.RemoveBusinessLayer.RemovePageTemplateCategory(pageTemplateCategory);
         }
 
         #endregion

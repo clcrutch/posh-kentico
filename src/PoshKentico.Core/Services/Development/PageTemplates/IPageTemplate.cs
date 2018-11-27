@@ -15,6 +15,7 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using PoshKentico.Core.Services.Development.WebParts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,6 +60,16 @@ namespace PoshKentico.Core.Services.Development.PageTemplates
         string Description { get; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether to show page template as master template.
+        /// </summary>
+        bool ShowAsMasterTemplate { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether page template is for all pages.
+        /// </summary>
+        bool PageTemplateForAllPages { get; set; }
+
+        /// <summary>
         /// Gets the page template PageTemplates.
         /// </summary>
         string PageTemplates { get; }
@@ -74,9 +85,9 @@ namespace PoshKentico.Core.Services.Development.PageTemplates
         string PageTemplateProperties { get; set; }
 
         /// <summary>
-        /// Gets page template layout.
+        /// Gets or sets page template layout.
         /// </summary>
-        string PageTemplateLayout { get; }
+        string PageTemplateLayout { get; set; }
 
         /// <summary>
         /// Gets page template icon class defining the page template thumbnail.
@@ -92,5 +103,15 @@ namespace PoshKentico.Core.Services.Development.PageTemplates
         /// Gets a value indicating whether the page template is reusable.
         /// </summary>
         bool IsReusable { get; }
+
+        /// <summary>
+        /// Gets or sets web part zones contained within the Page template.
+        /// </summary>
+        List<IWebPartZoneInstance> WebPartZones { get; }
+
+        /// <summary>
+        /// Gets or sets the page template layout type.
+        /// </summary>
+        CMS.DataEngine.LayoutTypeEnum PageTemplateLayoutType { get; set;  }
     }
 }

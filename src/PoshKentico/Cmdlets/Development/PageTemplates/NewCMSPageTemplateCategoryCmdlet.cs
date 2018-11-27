@@ -62,7 +62,6 @@ namespace PoshKentico.Cmdlets.Development.PageTemplate
 
         /// <summary>
         /// <para type="description">The display name for the newly created page template category.</para>
-        /// <para type="description">If null, then the name portion of the path is used for the display name.</para>
         /// </summary>
         [Parameter(Mandatory = false, Position = 1)]
         public string DisplayName { get; set; }

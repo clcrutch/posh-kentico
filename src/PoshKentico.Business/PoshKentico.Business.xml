@@ -1420,26 +1420,34 @@
             Business layer fo the New-CMSPageTemplate cmdlet.
             </summary>
         </member>
-        <member name="M:PoshKentico.Business.Development.PageTemplates.NewCMSPageTemplateBusiness.CreatePageTemplate(System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean)">
+        <member name="M:PoshKentico.Business.Development.PageTemplates.NewCMSPageTemplateBusiness.CreatePageTemplate(System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,CMS.DataEngine.LayoutTypeEnum,System.String,System.String,System.String,System.Boolean)">
             <summary>
             Creates a <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/> at the specified path.
             </summary>
             <param name="path">The path to create the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/> at.</param>
             <param name="fileName">The file name for the underlying class file.</param>
             <param name="displayName">The display name for the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/>.</param>
+            <param name="description">The description name for the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/>.</param>
+            <param name="showAsMasterTemplate">Indicates whether to show page template as master template.</param>
+            <param name="pageTemplateForAllPages">Indicates whether page template is for all pages.</param>
+            <param name="layoutType">Page template layout type.</param>
             <param name="layout">Page template layout.</param>
             <param name="iconClass">Page template icon class defining the page template thumbnail.</param>
             <param name="css">Page template CSS.</param>
             <param name="isReusable">Gets or sets flag whether page template is reusable.</param>
             <returns>The newly created <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/>.</returns>
         </member>
-        <member name="M:PoshKentico.Business.Development.PageTemplates.NewCMSPageTemplateBusiness.CreatePageTemplate(System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean,PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory)">
+        <member name="M:PoshKentico.Business.Development.PageTemplates.NewCMSPageTemplateBusiness.CreatePageTemplate(System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,CMS.DataEngine.LayoutTypeEnum,System.String,System.String,System.String,System.Boolean,PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory)">
             <summary>
             Creates a <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/> with the specified name under the specified <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/>.
             </summary>
             <param name="name">The name for the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/>.</param>
             <param name="fileName">The file name for the underlying class file.</param>
             <param name="displayName">The display name for the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/>.</param>
+            <param name="description">The description name for the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/>.</param>
+            <param name="showAsMasterTemplate">Indicates whether to show page template as master template.</param>
+            <param name="pageTemplateForAllPages">Indicates whether page template is for all pages.</param>
+            <param name="layoutType">Page template layout type.</param>
             <param name="layout">Page template layout.</param>
             <param name="iconClass">Page template icon class defining the page template thumbnail.</param>
             <param name="css">Page template CSS.</param>
@@ -1500,12 +1508,11 @@
             Business layer for the Remove-CMSPageTemplateCategory cmdlet.
             </summary>
         </member>
-        <member name="M:PoshKentico.Business.Development.PageTemplates.RemoveCMSPageTemplateCategoryBusiness.RemovePageTemplateCategory(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory,System.Boolean)">
+        <member name="M:PoshKentico.Business.Development.PageTemplates.RemoveCMSPageTemplateCategoryBusiness.RemovePageTemplateCategory(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory)">
             <summary>
             Deletes the specified <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/>.  Throws exceptions if there are children.
             </summary>
             <param name="pageTemplateCategory">The PageTemplate category to delete.</param>
-            <param name="recurse">Indicates whether PageTemplate categories and page templates should be removed recursively.</param>
         </member>
         <member name="T:PoshKentico.Business.Development.PageTemplates.SetCMSPageTemplateBusiness">
             <summary>
