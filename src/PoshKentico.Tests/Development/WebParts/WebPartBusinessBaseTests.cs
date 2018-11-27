@@ -22,6 +22,7 @@ using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Development.WebParts;
 using PoshKentico.Core.Services.Development.WebParts;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests.Development.WebParts
 {
@@ -55,12 +56,8 @@ namespace PoshKentico.Tests.Development.WebParts
             businessMock
                 .Setup(x => x.WebPartService)
                 .Returns(webPartServiceMock.Object);
-            businessMock
-                .Setup(x => x.WriteDebug)
-                .Returns(Assert.NotNull);
-            businessMock
-                .Setup(x => x.WriteVerbose)
-                .Returns(Assert.NotNull);
+
+            businessMock.Object.OutputService = OutputServiceHelper.GetPassThruOutputService();
 
             // We need to use reflection b/c the method is protected.
             var getCategoryFromPathMethod = typeof(WebPartBusinessBase).GetMethod("GetCategoryFromPath", BindingFlags.NonPublic | BindingFlags.Instance);

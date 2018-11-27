@@ -20,7 +20,9 @@ using System.Diagnostics.CodeAnalysis;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Configuration.Sites;
+using PoshKentico.Core.Providers.General;
 using PoshKentico.Core.Services.Configuration.Sites;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests.Configuration.Sites
 {
@@ -49,18 +51,19 @@ namespace PoshKentico.Tests.Configuration.Sites
 
             siteServiceMock.SetupGet(x => x.Sites).Returns(sites);
 
+            var outputService = OutputServiceHelper.GetPassThruOutputService();
+            PassThruOutputService.ShouldProcessFunction = (x, y) => true;
+
             var getBusinessLayer = new GetCmsSiteBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = outputService,
 
                 SiteService = siteServiceMock.Object,
             };
 
             var businessLayer = new RemoveCmsSiteDomainAliasBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = outputService,
 
                 SiteService = siteServiceMock.Object,
                 GetCmsSiteBusiness = getBusinessLayer,
@@ -92,18 +95,19 @@ namespace PoshKentico.Tests.Configuration.Sites
 
             siteServiceMock.SetupGet(x => x.Sites).Returns(sites);
 
+            var outputService = OutputServiceHelper.GetPassThruOutputService();
+            PassThruOutputService.ShouldProcessFunction = (x, y) => true;
+
             var getBusinessLayer = new GetCmsSiteBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = outputService,
 
                 SiteService = siteServiceMock.Object,
             };
 
             var businessLayer = new RemoveCmsSiteDomainAliasBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = outputService,
 
                 SiteService = siteServiceMock.Object,
                 GetCmsSiteBusiness = getBusinessLayer,
@@ -136,18 +140,19 @@ namespace PoshKentico.Tests.Configuration.Sites
 
             siteServiceMock.SetupGet(x => x.Sites).Returns(sites);
 
+            var outputService = OutputServiceHelper.GetPassThruOutputService();
+            PassThruOutputService.ShouldProcessFunction = (x, y) => true;
+
             var getBusinessLayer = new GetCmsSiteBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = outputService,
 
                 SiteService = siteServiceMock.Object,
             };
 
             var businessLayer = new RemoveCmsSiteDomainAliasBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = outputService,
 
                 SiteService = siteServiceMock.Object,
                 GetCmsSiteBusiness = getBusinessLayer,
@@ -182,18 +187,19 @@ namespace PoshKentico.Tests.Configuration.Sites
 
             siteServiceMock.SetupGet(x => x.Sites).Returns(sites);
 
+            var outputService = OutputServiceHelper.GetPassThruOutputService();
+            PassThruOutputService.ShouldProcessFunction = (x, y) => true;
+
             var getBusinessLayer = new GetCmsSiteBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = outputService,
 
                 SiteService = siteServiceMock.Object,
             };
 
             var businessLayer = new RemoveCmsSiteDomainAliasBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = outputService,
 
                 SiteService = siteServiceMock.Object,
                 GetCmsSiteBusiness = getBusinessLayer,

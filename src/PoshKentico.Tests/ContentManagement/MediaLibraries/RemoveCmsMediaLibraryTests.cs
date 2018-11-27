@@ -20,7 +20,9 @@ using System.Diagnostics.CodeAnalysis;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.ContentManagement.MediaLibraries;
+using PoshKentico.Core.Providers.General;
 using PoshKentico.Core.Services.ContentManagement.MediaLibraries;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests.ContentManagement.MediaLibraries
 {
@@ -50,19 +52,19 @@ namespace PoshKentico.Tests.ContentManagement.MediaLibraries
 
             libraryServiceMock.SetupGet(x => x.MediaLibraries).Returns(libraries);
 
+            var outputService = OutputServiceHelper.GetPassThruOutputService();
+            PassThruOutputService.ShouldProcessFunction = (x, y) => true;
+
             var getBusinessLayer = new GetCmsMediaLibraryBusiness
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = outputService,
 
                 MediaLibraryService = libraryServiceMock.Object,
             };
 
             var businessLayer = new RemoveCmsMediaLibraryBusiness
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-                ShouldProcess = (x, y) => true,
+                OutputService = outputService,
 
                 MediaLibraryService = libraryServiceMock.Object,
                 GetCmsMediaLibraryBusiness = getBusinessLayer,
@@ -99,19 +101,19 @@ namespace PoshKentico.Tests.ContentManagement.MediaLibraries
 
             libraryServiceMock.SetupGet(x => x.MediaLibraries).Returns(libraries);
 
+            var outputService = OutputServiceHelper.GetPassThruOutputService();
+            PassThruOutputService.ShouldProcessFunction = (x, y) => true;
+
             var getBusinessLayer = new GetCmsMediaLibraryBusiness
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = outputService,
 
                 MediaLibraryService = libraryServiceMock.Object,
             };
 
             var businessLayer = new RemoveCmsMediaLibraryBusiness
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-                ShouldProcess = (x, y) => true,
+                OutputService = outputService,
 
                 MediaLibraryService = libraryServiceMock.Object,
                 GetCmsMediaLibraryBusiness = getBusinessLayer,
@@ -144,19 +146,19 @@ namespace PoshKentico.Tests.ContentManagement.MediaLibraries
 
             libraryServiceMock.SetupGet(x => x.MediaLibraries).Returns(libraries);
 
+            var outputService = OutputServiceHelper.GetPassThruOutputService();
+            PassThruOutputService.ShouldProcessFunction = (x, y) => true;
+
             var getBusinessLayer = new GetCmsMediaLibraryBusiness
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = outputService,
 
                 MediaLibraryService = libraryServiceMock.Object,
             };
 
             var businessLayer = new RemoveCmsMediaLibraryBusiness
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-                ShouldProcess = (x, y) => true,
+                OutputService = outputService,
 
                 MediaLibraryService = libraryServiceMock.Object,
                 GetCmsMediaLibraryBusiness = getBusinessLayer,
@@ -191,19 +193,19 @@ namespace PoshKentico.Tests.ContentManagement.MediaLibraries
             libraryServiceMock.Setup(x => x.GetMediaLibrary(1)).Returns(libraryMock1.Object);
             libraryServiceMock.Setup(x => x.GetMediaLibrary(2)).Returns(libraryMock2.Object);
 
+            var outputService = OutputServiceHelper.GetPassThruOutputService();
+            PassThruOutputService.ShouldProcessFunction = (x, y) => true;
+
             var getBusinessLayer = new GetCmsMediaLibraryBusiness
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = outputService,
 
                 MediaLibraryService = libraryServiceMock.Object,
             };
 
             var businessLayer = new RemoveCmsMediaLibraryBusiness
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-                ShouldProcess = (x, y) => true,
+                OutputService = outputService,
 
                 MediaLibraryService = libraryServiceMock.Object,
                 GetCmsMediaLibraryBusiness = getBusinessLayer,

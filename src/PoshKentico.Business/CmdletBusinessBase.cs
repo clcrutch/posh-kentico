@@ -53,20 +53,8 @@ namespace PoshKentico.Business
         [Import]
         public ICmsApplicationService CmsApplicationService { get; set; }
 
-        /// <summary>
-        /// Gets or sets a delegate for writing to the debug stream.
-        /// </summary>
-        public virtual Action<string> WriteDebug { get; set; }
-
-        /// <summary>
-        /// Gets or sets a delegate for writing to the verbose stream.
-        /// </summary>
-        public virtual Action<string> WriteVerbose { get; set; }
-
-        /// <summary>
-        /// Gets or sets a delegate for checking if the cmdlet should continue processing.
-        /// </summary>
-        public virtual Func<string, string, bool> ShouldProcess { get; set; }
+        [Import]
+        public IOutputService OutputService { get; set; }
 
         #endregion
 
@@ -79,7 +67,7 @@ namespace PoshKentico.Business
         {
             if (this.initCmsApplication)
             {
-                this.CmsApplicationService.Initialize(true, this.WriteDebug, this.WriteVerbose);
+                this.CmsApplicationService.Initialize(true);
             }
         }
 

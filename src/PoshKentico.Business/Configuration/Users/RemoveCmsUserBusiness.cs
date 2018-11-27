@@ -44,7 +44,7 @@ namespace PoshKentico.Business.Configuration.Users
         /// <param name="user">The <see cref="IUser"/> to remove.</param>
         public void RemoveUsers(IUser user)
         {
-            if (this.ShouldProcess(user.UserName, "Remove the user from Kentico."))
+            if (this.OutputService.ShouldProcess(user.UserName, "Remove the user from Kentico."))
             {
                 this.UserService.DeleteUser(user);
             }

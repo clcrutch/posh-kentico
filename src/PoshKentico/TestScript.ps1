@@ -5,7 +5,7 @@ $DebugPreference = "Continue"
 
 Import-Module posh-kentico
 
-Configuration KenticoTest
+<#Configuration KenticoTest
 {	
 	Import-DscResource -Name xWebPartCategory
 	Import-DscResource -Name xWebPart
@@ -61,4 +61,4 @@ Configuration KenticoTest
 
 KenticoTest -OutputPath .\Temp
 
-Start-DscConfiguration -Wait -Force -Path .\Temp
+Start-DscConfiguration -Wait -Force -Path .\Temp#>

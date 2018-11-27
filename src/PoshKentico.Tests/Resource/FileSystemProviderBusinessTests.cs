@@ -20,16 +20,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using PoshKentico.Business;
 using PoshKentico.Business.Resource;
-using PoshKentico.Core.Extensions;
-using PoshKentico.Core.Providers.Resource;
 using PoshKentico.Core.Services.Resource;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests.Resource
 {
@@ -53,8 +49,7 @@ namespace PoshKentico.Tests.Resource
 
             var businessLayer = new KenticoFileSystemBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
                 ResourceService = service.Object,
             };
 
@@ -419,8 +414,7 @@ namespace PoshKentico.Tests.Resource
         {
             this.businessLayer = new KenticoFileSystemBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
                 ResourceService = this.resourceService.Object,
             };
         }

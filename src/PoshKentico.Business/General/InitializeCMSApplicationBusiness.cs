@@ -51,12 +51,12 @@ namespace PoshKentico.Business.General
         {
             if (this.CmsApplicationService.InitializationState == InitializationState.Initialized)
             {
-                this.WriteVerbose("Kentico is already initialized.  Skipping...");
+                this.OutputService.WriteVerbose("Kentico is already initialized.  Skipping...");
 
                 return;
             }
 
-            this.CmsApplicationService.Initialize(webRoot, connectionString, this.WriteDebug, this.WriteVerbose);
+            this.CmsApplicationService.Initialize(webRoot, connectionString);
         }
 
         /// <summary>
@@ -67,12 +67,12 @@ namespace PoshKentico.Business.General
         {
             if (this.CmsApplicationService.InitializationState == InitializationState.Initialized)
             {
-                this.WriteVerbose("Kentico is already initialized.  Skipping...");
+                this.OutputService.WriteVerbose("Kentico is already initialized.  Skipping...");
 
                 return;
             }
 
-            this.CmsApplicationService.Initialize(useCached, this.WriteVerbose, this.WriteDebug);
+            this.CmsApplicationService.Initialize(useCached);
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace PoshKentico.Business.General
         public void Initialize(string databaseServer, string database, int timeout, DirectoryInfo webRoot)
         {
             var connectionString = $"Data Source={databaseServer};Initial Catalog={database};Integrated Security=True;Persist Security Info=False;Connect Timeout={timeout};Encrypt=False;Current Language=English";
-            this.WriteDebug("Setting connection string to \"{connectionString}\".");
+            this.OutputService.WriteDebug("Setting connection string to \"{connectionString}\".");
 
             this.Initialize(connectionString, webRoot);
         }

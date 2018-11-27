@@ -25,6 +25,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using PoshKentico.Business;
+using PoshKentico.Core.Providers.General;
+using PoshKentico.Core.Services.General;
 using PoshKentico.Extensions;
 
 namespace PoshKentico
@@ -35,15 +37,13 @@ namespace PoshKentico
     public sealed class Bootstrapper
     {
 #pragma warning disable SA1311 // Static readonly fields should begin with upper-case letter
-                              /// <summary>
-                              /// The instance.
-                              /// </summary>
+        /// <summary>
+        /// The instance.
+        /// </summary>
         private static readonly Bootstrapper instance = new Bootstrapper();
 #pragma warning restore SA1311 // Static readonly fields should begin with upper-case letter
 
-        static Bootstrapper()
-        {
-        }
+        private bool bootstrapperInitialized = false;
 
         private Bootstrapper()
         {
@@ -60,6 +60,9 @@ namespace PoshKentico
             }
         }
 
+        [Import]
+        public IOutputService OutputService { get; set; }
+
         /// <summary>
         /// Cmdlet initialization logic.
         /// </summary>
@@ -68,18 +71,30 @@ namespace PoshKentico
         {
             MefHost.Initialize();
 
+            if (this.bootstrapperInitialized)
+            {
+                MefHost.Container.ComposeParts(this);
+
+                this.bootstrapperInitialized = true;
+            }
+
             MefHost.Container.ComposeParts(cmdlet);
 
             var businessLayerProps = (from p in cmdlet.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public)
                                       where p.PropertyType.InheritsFrom(typeof(CmdletBusinessBase))
                                       select p).ToArray();
 
+            PassThruOutputService.ShouldProcessFunction = cmdlet.ShouldProcess;
+
+            PassThruOutputService.WriteDebugAction = cmdlet.WriteDebug;
+            PassThruOutputService.WriteErrorAction = cmdlet.WriteError;
+            PassThruOutputService.WriteProgressAction = cmdlet.WriteProgress;
+            PassThruOutputService.WriteVerboseAction = cmdlet.WriteVerbose;
+            PassThruOutputService.WriteWarningAction = cmdlet.WriteWarning;
+
             foreach (var prop in businessLayerProps)
             {
                 var instance = (CmdletBusinessBase)prop.GetValue(cmdlet);
-                instance.WriteDebug = cmdlet.WriteDebug;
-                instance.WriteVerbose = cmdlet.WriteVerbose;
-                instance.ShouldProcess = cmdlet.ShouldProcess;
 
                 instance.Initialize();
             }
