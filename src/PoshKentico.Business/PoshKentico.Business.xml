@@ -20,19 +20,9 @@
             Gets or sets a reference to the CMS Application Service.  Populated by MEF.
             </summary>
         </member>
-        <member name="P:PoshKentico.Business.CmdletBusinessBase.WriteDebug">
+        <member name="P:PoshKentico.Business.CmdletBusinessBase.OutputService">
             <summary>
-            Gets or sets a delegate for writing to the debug stream.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Business.CmdletBusinessBase.WriteVerbose">
-            <summary>
-            Gets or sets a delegate for writing to the verbose stream.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Business.CmdletBusinessBase.ShouldProcess">
-            <summary>
-            Gets or sets a delegate for checking if the cmdlet should continue processing.
+             Gets or sets the output service.
             </summary>
         </member>
         <member name="M:PoshKentico.Business.CmdletBusinessBase.Initialize">
@@ -635,33 +625,9 @@
             Gets or sets a reference to the Site Service.  Populated by MEF.
             </summary>
         </member>
-        <member name="P:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteBusiness.GetCmsSiteBusiness">
-            <summary>
-            Gets or sets a reference to the <see cref="P:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteBusiness.GetCmsSiteBusiness"/> used to get the site to delete.  Populated by MEF.
-            </summary>
-        </member>
         <member name="M:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteBusiness.Remove(PoshKentico.Core.Services.Configuration.Sites.ISite)">
             <summary>
             Deletes the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
-            </summary>
-            <param name="site">The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to set.</param>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteBusiness.Remove(System.Int32[])">
-            <summary>
-            Deletes the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
-            </summary>
-            <param name="ids">The IDs of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to delete.</param>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteBusiness.Remove(System.String,System.Boolean)">
-            <summary>
-            Deletes the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
-            </summary>
-            <param name="matchString">the string which to match the site to.</param>
-            <param name="exact">A boolean which indicates if the match should be exact.</param>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteBusiness.RemoveSite(PoshKentico.Core.Services.Configuration.Sites.ISite)">
-            <summary>
-            Deletes the specified <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
             </summary>
             <param name="site">The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to set.</param>
         </member>
@@ -675,39 +641,12 @@
             Gets or sets a reference to the Site Service.  Populated by MEF.
             </summary>
         </member>
-        <member name="P:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteCultureBusiness.GetCmsSiteBusiness">
-            <summary>
-            Gets or sets a reference to the <see cref="P:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteCultureBusiness.GetCmsSiteBusiness"/> used to get the site to remove culture from.  Populated by MEF.
-            </summary>
-        </member>
         <member name="M:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteCultureBusiness.RemoveCulture(PoshKentico.Core.Services.Configuration.Sites.ISite,System.String)">
             <summary>
             Remove a culture to a site.
             </summary>
             <param name="site">The site to remove culture to.</param>
             <param name="cultureCode">The culture code for the culture to remove to the site.</param>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteCultureBusiness.RemoveCulture(System.String,System.Boolean,System.String)">
-            <summary>
-            Remove the culture to a <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
-            </summary>
-            <param name="matchString">The string which to match the site to.</param>
-            <param name="exact">A boolean which indicates if the match should be exact.</param>
-            <param name="cultureCode">The culture code for the culture to remove to the site.</param>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteCultureBusiness.RemoveCulture(System.Int32[],System.String)">
-            <summary>
-            Remove the culture to a <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
-            </summary>
-            <param name="ids">The IDs of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to remove culture to.</param>
-            <param name="cultureCode">The culture code for the culture to remove from the site.</param>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteCultureBusiness.RemoveSiteCulture(PoshKentico.Core.Services.Configuration.Sites.ISite,System.String)">
-            <summary>
-            Remove a culture to a site.
-            </summary>
-            <param name="site">The site to remove culture to.</param>
-            <param name="cultureCode">The culture code for the culture to remove from the site.</param>
         </member>
         <member name="T:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteDomainAliasBusiness">
             <summary>
@@ -719,34 +658,7 @@
             Gets or sets a reference to the Site Service.  Populated by MEF.
             </summary>
         </member>
-        <member name="P:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteDomainAliasBusiness.GetCmsSiteBusiness">
-            <summary>
-            Gets or sets a reference to the <see cref="P:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteDomainAliasBusiness.GetCmsSiteBusiness"/> used to get the site to add domain alias to.  Populated by MEF.
-            </summary>
-        </member>
         <member name="M:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteDomainAliasBusiness.RemoveDomainAlias(PoshKentico.Core.Services.Configuration.Sites.ISite,System.String)">
-            <summary>
-            Remove a domain alias to a site.
-            </summary>
-            <param name="site">The site to add domain alias to.</param>
-            <param name="aliasName">The domain alias code for the domain alias to add to the site.</param>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteDomainAliasBusiness.RemoveDomainAlias(System.String,System.Boolean,System.String)">
-            <summary>
-            Removes the domain alias to a <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
-            </summary>
-            <param name="matchString">the string which to match the site to.</param>
-            <param name="exact">A boolean which indicates if the match should be exact.</param>
-            <param name="aliasName">The domain alias code for the domain alias to add to the site.</param>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteDomainAliasBusiness.RemoveDomainAlias(System.Int32[],System.String)">
-            <summary>
-            Removes the domain alias to a <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
-            </summary>
-            <param name="ids">The IDs of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to add domain alias to.</param>
-            <param name="aliasName">The domain alias code for the domain alias to add to the site.</param>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteDomainAliasBusiness.RemoveSiteDomainAlias(PoshKentico.Core.Services.Configuration.Sites.ISite,System.String)">
             <summary>
             Remove a domain alias to a site.
             </summary>
@@ -2021,6 +1933,21 @@
             <param name="database">The name of the Kentico database.</param>
             <param name="timeout">The timeout for connecting to the Kentico database.</param>
             <param name="webRoot">The root directory for the Kentico site.</param>
+        </member>
+        <member name="T:PoshKentico.Business.General.InitializeCMSDatabaseBusiness">
+            <summary>
+            Business Layer for initializing the database for CMS Application.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.General.InitializeCMSDatabaseBusiness.CmsDatabaseService">
+            <summary>
+            Gets or sets the database service.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.General.InitializeCMSDatabaseBusiness.InstallSqlDatabase">
+            <summary>
+            Installs the sql database.
+            </summary>
         </member>
         <member name="T:PoshKentico.Business.Resource.KenticoFileSystemBusiness">
             <summary>

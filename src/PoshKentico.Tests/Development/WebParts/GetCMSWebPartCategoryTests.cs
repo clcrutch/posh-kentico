@@ -22,6 +22,7 @@ using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Development.WebParts;
 using PoshKentico.Core.Services.Development.WebParts;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests.Development.WebParts
 {
@@ -48,8 +49,7 @@ namespace PoshKentico.Tests.Development.WebParts
             var businessLayer = new GetCMSWebPartCategoryBusiness
             {
                 WebPartService = webPartServiceMock.Object,
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
             };
 
             var results = businessLayer.GetWebPartCategories();
@@ -95,8 +95,7 @@ namespace PoshKentico.Tests.Development.WebParts
             var businessLayer = new GetCMSWebPartCategoryBusiness
             {
                 WebPartService = webPartServiceMock.Object,
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
             };
 
             // Test Display Name
@@ -165,8 +164,7 @@ namespace PoshKentico.Tests.Development.WebParts
             var businessLayer = new GetCMSWebPartCategoryBusiness
             {
                 WebPartService = webPartServiceMock.Object,
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
             };
 
             // Test Display Name
@@ -250,8 +248,7 @@ namespace PoshKentico.Tests.Development.WebParts
             var businessLayer = new GetCMSWebPartCategoryBusiness
             {
                 WebPartService = webPartServiceMock.Object,
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
             };
 
             // Test Display Name
@@ -320,8 +317,7 @@ namespace PoshKentico.Tests.Development.WebParts
             var businessLayer = new GetCMSWebPartCategoryBusiness
             {
                 WebPartService = webPartServiceMock.Object,
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
             };
 
             // Test Display Name

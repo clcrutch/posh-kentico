@@ -44,7 +44,7 @@ namespace PoshKentico.Business.ContentManagement.MediaLibraries
         /// <param name="file">The <see cref="IMediaFile"/> to set.</param>
         public void RemoveMediaFile(IMediaFile file)
         {
-            if (this.ShouldProcess(file.FileName, "delete"))
+            if (this.OutputService.ShouldProcess(file.FileName, "delete"))
             {
                 this.MediaLibraryService.DeleteMediaFile(file);
             }

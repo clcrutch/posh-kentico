@@ -22,6 +22,7 @@ using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Configuration.Users;
 using PoshKentico.Core.Services.Configuration.Users;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests.Configuration.Users
 {
@@ -36,8 +37,7 @@ namespace PoshKentico.Tests.Configuration.Users
 
             var businessLayer = new GetCmsUserBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 UserService = userServiceMock.Object,
             };
@@ -67,8 +67,7 @@ namespace PoshKentico.Tests.Configuration.Users
 
             var businessLayer = new GetCmsUserBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 UserService = userServiceMock.Object,
             };
@@ -97,8 +96,7 @@ namespace PoshKentico.Tests.Configuration.Users
 
             var businessLayer = new GetCmsUserBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 UserService = userServiceMock.Object,
             };
@@ -134,8 +132,7 @@ namespace PoshKentico.Tests.Configuration.Users
 
             var businessLayer = new GetCmsUserBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 UserService = userServiceMock.Object,
             };
@@ -164,8 +161,7 @@ namespace PoshKentico.Tests.Configuration.Users
 
             var businessLayer = new GetCmsUserBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 UserService = userServiceMock.Object,
             };
@@ -181,8 +177,7 @@ namespace PoshKentico.Tests.Configuration.Users
 
             var businessLayer = new GetCmsUserBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 UserService = userServiceMock.Object,
             };

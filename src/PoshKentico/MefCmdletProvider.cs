@@ -319,7 +319,7 @@ namespace PoshKentico
         {
             Bootstrapper.Instance.Initialize(this);
 
-            this.CmsApplicationService.Initialize(true, this.WriteVerbose, this.WriteDebug);
+            this.CmsApplicationService.Initialize(true);
             this.Business.Initialize();
         }
     }

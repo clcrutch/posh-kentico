@@ -20,6 +20,7 @@ using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Configuration.Roles;
 using PoshKentico.Core.Services.Configuration.Roles;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests.Configuration.Roles
 {
@@ -42,8 +43,7 @@ namespace PoshKentico.Tests.Configuration.Roles
 
             var businessLayer = new NewCmsRoleBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 RoleService = roleServiceMock.Object,
             };

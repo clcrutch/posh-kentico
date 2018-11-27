@@ -85,7 +85,7 @@ namespace PoshKentico.Business.ContentManagement.MediaLibraries
         /// <param name="library">The <see cref="IMediaLibrary"/> to set.</param>
         private void RemoveMediaLibrary(IMediaLibrary library)
         {
-            if (this.ShouldProcess(library.LibraryName, "delete"))
+            if (this.OutputService.ShouldProcess(library.LibraryName, "delete"))
             {
                 this.MediaLibraryService.DeleteMediaLibrary(library);
             }

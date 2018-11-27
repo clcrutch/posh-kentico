@@ -20,6 +20,7 @@ using Moq;
 using NUnit.Framework;
 using PoshKentico.Business;
 using PoshKentico.Core.Services.General;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests
 {
@@ -39,13 +40,8 @@ namespace PoshKentico.Tests
             {
                 CallBase = true,
             };
-            mockBusiness
-                .Setup(x => x.WriteDebug)
-                .Returns(Assert.NotNull);
-            mockBusiness
-                .Setup(x => x.WriteVerbose)
-                .Returns(Assert.NotNull);
             var businessObj = mockBusiness.Object;
+            businessObj.OutputService = OutputServiceHelper.GetPassThruOutputService();
 
             businessObj.CmsApplicationService = cmsApplicationServiceMock.Object;
             businessObj.Initialize();
@@ -53,7 +49,7 @@ namespace PoshKentico.Tests
             // Verify the necessary methods were called.
             if (shouldInitApplication)
             {
-                cmsApplicationServiceMock.Verify(x => x.Initialize(true, businessObj.WriteDebug, businessObj.WriteVerbose));
+                cmsApplicationServiceMock.Verify(x => x.Initialize(true));
             }
         }
     }

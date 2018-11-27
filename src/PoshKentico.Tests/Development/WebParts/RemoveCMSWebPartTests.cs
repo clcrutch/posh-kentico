@@ -20,7 +20,9 @@ using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Development.WebParts;
+using PoshKentico.Core.Providers.General;
 using PoshKentico.Core.Services.Development.WebParts;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests.Development.WebParts
 {
@@ -37,17 +39,18 @@ namespace PoshKentico.Tests.Development.WebParts
 
             var webPartServiceMock = new Mock<IWebPartService>();
 
+            var outputService = OutputServiceHelper.GetPassThruOutputService();
+            PassThruOutputService.ShouldProcessFunction = (x, y) =>
+            {
+                shouldProcessCalled = true;
+
+                return true;
+            };
+
             var businessLayer = new RemoveCMSWebPartBusiness
             {
+                OutputService = outputService,
                 WebPartService = webPartServiceMock.Object,
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-                ShouldProcess = (x, y) =>
-                {
-                    shouldProcessCalled = true;
-
-                    return true;
-                },
             };
 
             businessLayer.RemoveWebPart(webPartMock.Object);

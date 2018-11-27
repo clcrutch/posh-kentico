@@ -44,7 +44,7 @@ namespace PoshKentico.Business.Development.WebParts
                 {
                     foreach (var webpart in webParts)
                     {
-                        if (this.ShouldProcess(webpart.WebPartDisplayName, "Remove the web part from Kentico."))
+                        if (this.OutputService.ShouldProcess(webpart.WebPartDisplayName, "Remove the web part from Kentico."))
                         {
                             this.WebPartService.Delete(webpart);
                         }
@@ -72,7 +72,7 @@ namespace PoshKentico.Business.Development.WebParts
                 }
             }
 
-            if (this.ShouldProcess(webPartCategory.CategoryDisplayName, "Remove the web part category from Kentico."))
+            if (this.OutputService.ShouldProcess(webPartCategory.CategoryDisplayName, "Remove the web part category from Kentico."))
             {
                 this.WebPartService.Delete(webPartCategory);
             }

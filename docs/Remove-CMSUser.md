@@ -14,22 +14,33 @@ schema: 2.0.0
 
 ### None (Default)
 ```
-Remove-CMSUser [-Exact] [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-CMSUser [-RegularExpression] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### User
 ```
-Remove-CMSUser -User <UserInfo> [-Exact] [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-CMSUser -User <UserInfo> [-RegularExpression] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### User Name
 ```
-Remove-CMSUser [[-UserName] <String>] [-Exact] [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-CMSUser [-UserName] <String> [-RegularExpression] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### ID
 ```
-Remove-CMSUser [[-ID] <Int32[]>] [-Exact] [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-CMSUser [-ID] <Int32[]> [-RegularExpression] [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+
+### Role Name
+```
+Remove-CMSUser [-RoleName] <String> [-SiteID] <Int32> [-RegularExpression] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
+```
+
+### Role
+```
+Remove-CMSUser [-Role] <RoleInfo> [-RegularExpression] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -61,21 +72,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Exact
-{{Fill Exact Description}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -ID
 {{Fill ID Description}}
 
@@ -84,8 +80,68 @@ Type: Int32[]
 Parameter Sets: ID
 Aliases:
 
-Required: False
+Required: True
 Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -RegularExpression
+{{Fill RegularExpression Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: Regex
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Role
+{{Fill Role Description}}
+
+```yaml
+Type: RoleInfo
+Parameter Sets: Role
+Aliases:
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -RoleName
+{{Fill RoleName Description}}
+
+```yaml
+Type: String
+Parameter Sets: Role Name
+Aliases:
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SiteID
+{{Fill SiteID Description}}
+
+```yaml
+Type: Int32
+Parameter Sets: Role Name
+Aliases:
+
+Required: True
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -114,7 +170,7 @@ Type: String
 Parameter Sets: User Name
 Aliases:
 
-Required: False
+Required: True
 Position: 0
 Default value: None
 Accept pipeline input: False
@@ -144,6 +200,8 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## INPUTS
 
 ### CMS.Membership.UserInfo
+
+### CMS.Membership.RoleInfo
 
 ## OUTPUTS
 

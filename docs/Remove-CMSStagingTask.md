@@ -12,14 +12,24 @@ schema: 2.0.0
 
 ## SYNTAX
 
-### Object
+### Server Object
 ```
 Remove-CMSStagingTask [-ServerToRemove] <ServerInfo> [<CommonParameters>]
 ```
 
-### Property
+### Dislpay Name
 ```
-Remove-CMSStagingTask [-ServerName] <String> [-SiteID] <Int32> [<CommonParameters>]
+Remove-CMSStagingTask [[-SiteID] <Int32>] [[-DisplayName] <String>] [-RegularExpression] [<CommonParameters>]
+```
+
+### Object
+```
+Remove-CMSStagingTask [[-DisplayName] <String>] [-RegularExpression] [[-Site] <SiteInfo>] [<CommonParameters>]
+```
+
+### ID
+```
+Remove-CMSStagingTask [[-ID] <Int32[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -36,16 +46,46 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -ServerName
-{{Fill ServerName Description}}
+### -DisplayName
+{{Fill DisplayName Description}}
 
 ```yaml
 Type: String
-Parameter Sets: Property
+Parameter Sets: Dislpay Name, Object
+Aliases: ServerName
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ID
+{{Fill ID Description}}
+
+```yaml
+Type: Int32[]
+Parameter Sets: ID
 Aliases:
 
-Required: True
+Required: False
 Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -RegularExpression
+{{Fill RegularExpression Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: Dislpay Name, Object
+Aliases: Regex
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -56,10 +96,25 @@ Accept wildcard characters: False
 
 ```yaml
 Type: ServerInfo
-Parameter Sets: Object
+Parameter Sets: Server Object
 Aliases: Server
 
 Required: True
+Position: 0
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -Site
+{{Fill Site Description}}
+
+```yaml
+Type: SiteInfo
+Parameter Sets: Object
+Aliases:
+
+Required: False
 Position: 0
 Default value: None
 Accept pipeline input: True (ByValue)
@@ -71,11 +126,11 @@ Accept wildcard characters: False
 
 ```yaml
 Type: Int32
-Parameter Sets: Property
+Parameter Sets: Dislpay Name
 Aliases:
 
-Required: True
-Position: 1
+Required: False
+Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -88,6 +143,8 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## INPUTS
 
 ### CMS.Synchronization.ServerInfo
+
+### CMS.SiteProvider.SiteInfo
 
 ## OUTPUTS
 

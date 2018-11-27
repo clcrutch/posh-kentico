@@ -44,7 +44,7 @@ namespace PoshKentico.Business.Configuration.Roles
         /// <param name="role">The <see cref="IRole"/> to remove.</param>
         public void RemoveRole(IRole role)
         {
-            if (this.ShouldProcess(role.RoleName, "Remove the role from Kentico."))
+            if (this.OutputService.ShouldProcess(role.RoleName, "Remove the role from Kentico."))
             {
                 this.RoleService.DeleteRole(role);
             }

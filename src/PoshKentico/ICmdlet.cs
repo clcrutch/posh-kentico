@@ -15,12 +15,7 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PoshKentico.Core.Services.General;
+using System.Management.Automation;
 
 namespace PoshKentico
 {
@@ -30,16 +25,34 @@ namespace PoshKentico
     public interface ICmdlet
     {
         /// <summary>
-        /// Writesa debug log entry.
+        /// Writes a debug log entry.
         /// </summary>
         /// <param name="text">The entry to log.</param>
         void WriteDebug(string text);
+
+        /// <summary>
+        /// Writes a debug error entry.
+        /// </summary>
+        /// <param name="errorRecord">The error to log.</param>
+        void WriteError(ErrorRecord errorRecord);
+
+        /// <summary>
+        /// Writes a progress log entry.
+        /// </summary>
+        /// <param name="progressRecord">The progress to log.</param>
+        void WriteProgress(ProgressRecord progressRecord);
 
         /// <summary>
         /// Writes a verbose log entry.
         /// </summary>
         /// <param name="text">The entry to log.</param>
         void WriteVerbose(string text);
+
+        /// <summary>
+        /// Writes a warning log entry.
+        /// </summary>
+        /// <param name="text">The warning to log.</param>
+        void WriteWarning(string text);
 
         /// <summary>
         /// Confirms the operation with the user, sending the name of the resource to be changed and the action to be performed to the user for confirmation before the operation is performed.
