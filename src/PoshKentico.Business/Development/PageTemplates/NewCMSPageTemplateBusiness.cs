@@ -143,7 +143,7 @@ namespace PoshKentico.Business.Development.PageTemplates
 
             public LayoutTypeEnum PageTemplateLayoutType { get; set; }
 
-            public List<IWebPartZoneInstance> WebPartZones { get; set; }
+            public List<IWebPartZoneInstance> WebPartZones { get; }
         }
 
         #endregion
