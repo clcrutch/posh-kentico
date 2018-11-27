@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Add-CMSSiteCulture
+# Get-CMSRole
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -14,28 +14,27 @@ schema: 2.0.0
 
 ### None (Default)
 ```
-Add-CMSSiteCulture [-CultureCodes] <String[]> [<CommonParameters>]
+Get-CMSRole [-RegularExpression] [<CommonParameters>]
 ```
 
-### Object
+### Role Name
 ```
-Add-CMSSiteCulture [-SiteToAdd] <SiteInfo> [-CultureCodes] <String[]> [<CommonParameters>]
-```
-
-### Dislpay Name
-```
-Add-CMSSiteCulture [-CultureCodes] <String[]> [[-DisplayName] <String>] [-RegularExpression]
- [<CommonParameters>]
+Get-CMSRole [-RoleName] <String> [[-SiteName] <String>] [-RegularExpression] [<CommonParameters>]
 ```
 
 ### ID
 ```
-Add-CMSSiteCulture [-CultureCodes] <String[]> [[-SiteIds] <Int32[]>] [<CommonParameters>]
+Get-CMSRole [-RoleIds] <Int32[]> [-RegularExpression] [<CommonParameters>]
+```
+
+### User Name
+```
+Get-CMSRole [-UserName] <String> [-RegularExpression] [<CommonParameters>]
 ```
 
 ### User
 ```
-Add-CMSSiteCulture [-CultureCodes] <String[]> [[-User] <UserInfo>] [<CommonParameters>]
+Get-CMSRole [-User] <UserInfo> [-RegularExpression] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -52,42 +51,12 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -CultureCodes
-{{Fill CultureCodes Description}}
-
-```yaml
-Type: String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DisplayName
-{{Fill DisplayName Description}}
-
-```yaml
-Type: String
-Parameter Sets: Dislpay Name
-Aliases: SiteName, DomainName
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -RegularExpression
 {{Fill RegularExpression Description}}
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: Dislpay Name
+Parameter Sets: (All)
 Aliases: Regex
 
 Required: False
@@ -97,33 +66,48 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SiteIds
-{{Fill SiteIds Description}}
+### -RoleIds
+{{Fill RoleIds Description}}
 
 ```yaml
 Type: Int32[]
 Parameter Sets: ID
 Aliases:
 
-Required: False
+Required: True
 Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SiteToAdd
-{{Fill SiteToAdd Description}}
+### -RoleName
+{{Fill RoleName Description}}
 
 ```yaml
-Type: SiteInfo
-Parameter Sets: Object
-Aliases: actosite
+Type: String
+Parameter Sets: Role Name
+Aliases:
 
 Required: True
 Position: 0
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SiteName
+{{Fill SiteName Description}}
+
+```yaml
+Type: String
+Parameter Sets: Role Name
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -135,10 +119,25 @@ Type: UserInfo
 Parameter Sets: User
 Aliases:
 
-Required: False
+Required: True
 Position: 0
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -UserName
+{{Fill UserName Description}}
+
+```yaml
+Type: String
+Parameter Sets: User Name
+Aliases:
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -148,13 +147,12 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## INPUTS
 
-### CMS.SiteProvider.SiteInfo
-
 ### CMS.Membership.UserInfo
 
 ## OUTPUTS
 
-### System.Object
+### CMS.Membership.RoleInfo[]
+
 ## NOTES
 
 ## RELATED LINKS

@@ -5,36 +5,47 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-CMSUser
+# Remove-CmsUiElementFromRole
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
 
 ## SYNTAX
 
-### None (Default)
+### None
 ```
-Get-CMSUser [-RegularExpression] [<CommonParameters>]
-```
-
-### User Name
-```
-Get-CMSUser [-UserName] <String> [-RegularExpression] [<CommonParameters>]
-```
-
-### ID
-```
-Get-CMSUser [-ID] <Int32[]> [-RegularExpression] [<CommonParameters>]
+Remove-CmsUiElementFromRole -ElementName <String> -ResourceName <String> [-RegularExpression]
+ [<CommonParameters>]
 ```
 
 ### Role Name
 ```
-Get-CMSUser [-RoleName] <String> [-SiteID] <Int32> [-RegularExpression] [<CommonParameters>]
+Remove-CmsUiElementFromRole -ElementName <String> -ResourceName <String> [-RoleName] <String>
+ [[-SiteName] <String>] [-RegularExpression] [<CommonParameters>]
 ```
 
-### Role
+### ID
 ```
-Get-CMSUser [-Role] <RoleInfo> [-RegularExpression] [<CommonParameters>]
+Remove-CmsUiElementFromRole -ElementName <String> -ResourceName <String> [-RoleIds] <Int32[]>
+ [-RegularExpression] [<CommonParameters>]
+```
+
+### User Name
+```
+Remove-CmsUiElementFromRole -ElementName <String> -ResourceName <String> [-UserName] <String>
+ [-RegularExpression] [<CommonParameters>]
+```
+
+### User
+```
+Remove-CmsUiElementFromRole -ElementName <String> -ResourceName <String> [-User] <UserInfo>
+ [-RegularExpression] [<CommonParameters>]
+```
+
+### ROLE
+```
+Remove-CmsUiElementFromRole -ElementName <String> -ResourceName <String> [-Role] <RoleInfo>
+ [-RegularExpression] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -51,16 +62,16 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -ID
-{{Fill ID Description}}
+### -ElementName
+{{Fill ElementName Description}}
 
 ```yaml
-Type: Int32[]
-Parameter Sets: ID
+Type: String
+Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 0
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -81,18 +92,48 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ResourceName
+{{Fill ResourceName Description}}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Role
 {{Fill Role Description}}
 
 ```yaml
 Type: RoleInfo
-Parameter Sets: Role
+Parameter Sets: ROLE
+Aliases:
+
+Required: True
+Position: 1
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -RoleIds
+{{Fill RoleIds Description}}
+
+```yaml
+Type: Int32[]
+Parameter Sets: ID
 Aliases:
 
 Required: True
 Position: 0
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -111,18 +152,33 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SiteID
-{{Fill SiteID Description}}
+### -SiteName
+{{Fill SiteName Description}}
 
 ```yaml
-Type: Int32
+Type: String
 Parameter Sets: Role Name
 Aliases:
 
-Required: True
+Required: False
 Position: 1
 Default value: None
 Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -User
+{{Fill User Description}}
+
+```yaml
+Type: UserInfo
+Parameter Sets: User
+Aliases:
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -149,10 +205,11 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ### CMS.Membership.RoleInfo
 
+### CMS.Membership.UserInfo
+
 ## OUTPUTS
 
-### CMS.Membership.UserInfo[]
-
+### System.Object
 ## NOTES
 
 ## RELATED LINKS

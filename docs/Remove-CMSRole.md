@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-CMSUser
+# Remove-CMSRole
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -14,27 +14,33 @@ schema: 2.0.0
 
 ### None (Default)
 ```
-Get-CMSUser [-RegularExpression] [<CommonParameters>]
-```
-
-### User Name
-```
-Get-CMSUser [-UserName] <String> [-RegularExpression] [<CommonParameters>]
-```
-
-### ID
-```
-Get-CMSUser [-ID] <Int32[]> [-RegularExpression] [<CommonParameters>]
-```
-
-### Role Name
-```
-Get-CMSUser [-RoleName] <String> [-SiteID] <Int32> [-RegularExpression] [<CommonParameters>]
+Remove-CMSRole [-RegularExpression] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### Role
 ```
-Get-CMSUser [-Role] <RoleInfo> [-RegularExpression] [<CommonParameters>]
+Remove-CMSRole -Role <RoleInfo> [-RegularExpression] [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+
+### Role Name
+```
+Remove-CMSRole [-RoleName] <String> [[-SiteName] <String>] [-RegularExpression] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
+```
+
+### ID
+```
+Remove-CMSRole [-RoleIds] <Int32[]> [-RegularExpression] [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+
+### User Name
+```
+Remove-CMSRole [-UserName] <String> [-RegularExpression] [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+
+### User
+```
+Remove-CMSRole [-User] <UserInfo> [-RegularExpression] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -51,16 +57,16 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -ID
-{{Fill ID Description}}
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: Int32[]
-Parameter Sets: ID
-Aliases:
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
 
-Required: True
-Position: 0
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -90,9 +96,24 @@ Parameter Sets: Role
 Aliases:
 
 Required: True
-Position: 0
+Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -RoleIds
+{{Fill RoleIds Description}}
+
+```yaml
+Type: Int32[]
+Parameter Sets: ID
+Aliases:
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -111,18 +132,33 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SiteID
-{{Fill SiteID Description}}
+### -SiteName
+{{Fill SiteName Description}}
 
 ```yaml
-Type: Int32
+Type: String
 Parameter Sets: Role Name
 Aliases:
 
-Required: True
+Required: False
 Position: 1
 Default value: None
 Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -User
+{{Fill User Description}}
+
+```yaml
+Type: UserInfo
+Parameter Sets: User
+Aliases:
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -141,6 +177,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -WhatIf
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
 For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -149,10 +201,11 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ### CMS.Membership.RoleInfo
 
+### CMS.Membership.UserInfo
+
 ## OUTPUTS
 
-### CMS.Membership.UserInfo[]
-
+### System.Object
 ## NOTES
 
 ## RELATED LINKS

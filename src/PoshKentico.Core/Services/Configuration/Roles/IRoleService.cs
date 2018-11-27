@@ -91,22 +91,6 @@ namespace PoshKentico.Core.Services.Configuration.Roles
         /// <param name="role">The role <see cref="IRole"/> to remove a user from.</param>
         void RemoveUserFromRole(IUser user, IRole role);
 
-        ///// <summary>
-        ///// Removes the User <see cref="IUser"/> from a Role <see cref="IRole"/>.
-        ///// </summary>
-        ///// <param name="userName">The UserName of the user <see cref="IUser"/> to remove from a role.</param>
-        ///// <param name="roleName">The RoleName of the role <see cref="IRole"/> to remove a user from.</param>
-        ///// <param name="siteName">The SiteName of the site for the role <see cref="IRole"/> to remove a user from.</param>
-        // void RemoveUserFromRole(string userName, string roleName, string siteName);
-
-        ///// <summary>
-        ///// Removes the User <see cref="IUser"/> from a Role <see cref="IRole"/>.
-        ///// </summary>
-        ///// <param name="userName">The UserName of the user <see cref="IUser"/> to remove from a role.</param>
-        ///// <param name="roleName">The RoleName of the role <see cref="IRole"/> to remove a user from.</param>
-        ///// <param name="siteID">The SiteID of the role <see cref="IRole"/> to remove a user from.</param>
-        // void RemoveUserFromRole(string userName, string roleName, int siteID);
-
         /// <summary>
         /// Gets all roles <see cref="IRole"/> of a user <see cref="IUser"/>.
         /// </summary>

@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Stop-CMSSite
+# Set-CMSRole
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -14,22 +14,12 @@ schema: 2.0.0
 
 ### Object
 ```
-Stop-CMSSite [-SiteToStop] <SiteInfo> [<CommonParameters>]
+Set-CMSRole [-Role] <RoleInfo> [-PassThru] [<CommonParameters>]
 ```
 
-### Dislpay Name
+### Property
 ```
-Stop-CMSSite [[-DisplayName] <String>] [-RegularExpression] [<CommonParameters>]
-```
-
-### ID
-```
-Stop-CMSSite [[-SiteIds] <Int32[]>] [<CommonParameters>]
-```
-
-### User
-```
-Stop-CMSSite [[-User] <UserInfo>] [<CommonParameters>]
+Set-CMSRole [-RoleName] <String> [-SiteID] <Int32> [[-DisplayName] <String>] [-PassThru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -51,23 +41,23 @@ PS C:\> {{ Add example code here }}
 
 ```yaml
 Type: String
-Parameter Sets: Dislpay Name
-Aliases: SiteName, DomainName
+Parameter Sets: Property
+Aliases:
 
 Required: False
-Position: 0
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -RegularExpression
-{{Fill RegularExpression Description}}
+### -PassThru
+{{Fill PassThru Description}}
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: Dislpay Name
-Aliases: Regex
+Parameter Sets: (All)
+Aliases:
 
 Required: False
 Position: Named
@@ -76,28 +66,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SiteIds
-{{Fill SiteIds Description}}
+### -Role
+{{Fill Role Description}}
 
 ```yaml
-Type: Int32[]
-Parameter Sets: ID
-Aliases:
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SiteToStop
-{{Fill SiteToStop Description}}
-
-```yaml
-Type: SiteInfo
+Type: RoleInfo
 Parameter Sets: Object
-Aliases: Site
+Aliases:
 
 Required: True
 Position: 0
@@ -106,18 +81,33 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -User
-{{Fill User Description}}
+### -RoleName
+{{Fill RoleName Description}}
 
 ```yaml
-Type: UserInfo
-Parameter Sets: User
+Type: String
+Parameter Sets: Property
 Aliases:
 
-Required: False
+Required: True
 Position: 0
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SiteID
+{{Fill SiteID Description}}
+
+```yaml
+Type: Int32
+Parameter Sets: Property
+Aliases:
+
+Required: True
+Position: 1
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -127,13 +117,12 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## INPUTS
 
-### CMS.SiteProvider.SiteInfo
-
-### CMS.Membership.UserInfo
+### CMS.Membership.RoleInfo
 
 ## OUTPUTS
 
-### System.Object
+### CMS.Membership.RoleInfo
+
 ## NOTES
 
 ## RELATED LINKS

@@ -5,31 +5,15 @@ online version:
 schema: 2.0.0
 ---
 
-# Stop-CMSSite
+# New-CMSRole
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
 
 ## SYNTAX
 
-### Object
 ```
-Stop-CMSSite [-SiteToStop] <SiteInfo> [<CommonParameters>]
-```
-
-### Dislpay Name
-```
-Stop-CMSSite [[-DisplayName] <String>] [-RegularExpression] [<CommonParameters>]
-```
-
-### ID
-```
-Stop-CMSSite [[-SiteIds] <Int32[]>] [<CommonParameters>]
-```
-
-### User
-```
-Stop-CMSSite [[-User] <UserInfo>] [<CommonParameters>]
+New-CMSRole [-DisplayName] <String> [[-RoleName] <String>] [[-SiteID] <Int32>] [-PassThru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -51,23 +35,23 @@ PS C:\> {{ Add example code here }}
 
 ```yaml
 Type: String
-Parameter Sets: Dislpay Name
-Aliases: SiteName, DomainName
+Parameter Sets: (All)
+Aliases:
 
-Required: False
+Required: True
 Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -RegularExpression
-{{Fill RegularExpression Description}}
+### -PassThru
+{{Fill PassThru Description}}
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: Dislpay Name
-Aliases: Regex
+Parameter Sets: (All)
+Aliases:
 
 Required: False
 Position: Named
@@ -76,48 +60,33 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SiteIds
-{{Fill SiteIds Description}}
+### -RoleName
+{{Fill RoleName Description}}
 
 ```yaml
-Type: Int32[]
-Parameter Sets: ID
+Type: String
+Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SiteToStop
-{{Fill SiteToStop Description}}
+### -SiteID
+{{Fill SiteID Description}}
 
 ```yaml
-Type: SiteInfo
-Parameter Sets: Object
-Aliases: Site
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -User
-{{Fill User Description}}
-
-```yaml
-Type: UserInfo
-Parameter Sets: User
+Type: Int32
+Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 0
+Position: 2
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -127,13 +96,12 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## INPUTS
 
-### CMS.SiteProvider.SiteInfo
-
-### CMS.Membership.UserInfo
+### None
 
 ## OUTPUTS
 
-### System.Object
+### CMS.Membership.RoleInfo
+
 ## NOTES
 
 ## RELATED LINKS
