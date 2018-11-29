@@ -127,6 +127,13 @@ namespace PoshKentico.Core.Services.Configuration.Roles
         /// <param name="role">The role <see cref="IRole"/> to remove an element from.</param>
         void RemoveUiElementFromRole(IUIElement element, IRole role);
 
+        /// <summary>
+        /// Gets a UI element.
+        /// </summary>
+        /// <param name="resourceName">The correspondent resource name for <see cref="IUIElement"/>.</param>
+        /// <param name="elementName">The element name for <see cref="IUIElement"/>.</param>
+        /// <returns>The UI Element found from the correspondent resource name and element name.</returns>
+        IUIElement GetUiElement(string resourceName, string elementName);
         #endregion
     }
 }

@@ -237,7 +237,7 @@ namespace PoshKentico.Core.Providers.Configuration.Roles
             foreach (var permission in module.PermissionNames)
             {
                 // Gets the module permission
-                PermissionNameInfo permissionInfo = PermissionNameInfoProvider.GetPermissionNameInfo("Read", "CMS.Content", null);
+                PermissionNameInfo permissionInfo = PermissionNameInfoProvider.GetPermissionNameInfo(permission, module.ResourceName, module.ClassName);
 
                 // Gets the role
                 RoleInfo roleInfo = RoleInfoProvider.GetRoleInfo(role.RoleName, role.SiteID);
@@ -315,6 +315,13 @@ namespace PoshKentico.Core.Providers.Configuration.Roles
                 // not exist
                 throw new Exception(string.Format("The role or UI element does not exist"));
             }
+        }
+
+        /// <inheritdoc/>
+        public IUIElement GetUiElement(string resourceName, string elementName)
+        {
+            UIElementInfo elementInfo = UIElementInfoProvider.GetUIElementInfo(resourceName, elementName);
+            return elementInfo.ActLike<IUIElement>();
         }
     }
 }

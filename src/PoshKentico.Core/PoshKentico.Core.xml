@@ -65,6 +65,9 @@
         <member name="M:PoshKentico.Core.Providers.Configuration.Roles.KenticoRoleService.RemoveUiElementFromRole(PoshKentico.Core.Services.Development.Modules.IUIElement,PoshKentico.Core.Services.Configuration.Roles.IRole)">
             <inheritdoc/>
         </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Roles.KenticoRoleService.GetUiElement(System.String,System.String)">
+            <inheritdoc/>
+        </member>
         <member name="T:PoshKentico.Core.Providers.Configuration.Settings.KenticoSettingValueService">
             <summary>
             Implementation of <see cref="T:PoshKentico.Core.Services.Configuration.Settings.ISettingValueService"/> that uses Kentico.
@@ -782,6 +785,14 @@
             </summary>
             <param name="element">The UI element <see cref="T:PoshKentico.Core.Services.Development.Modules.IUIElement"/> to remove from a role.</param>
             <param name="role">The role <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> to remove an element from.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Roles.IRoleService.GetUiElement(System.String,System.String)">
+            <summary>
+            Gets a UI element.
+            </summary>
+            <param name="resourceName">The correspondent resource name for <see cref="T:PoshKentico.Core.Services.Development.Modules.IUIElement"/>.</param>
+            <param name="elementName">The element name for <see cref="T:PoshKentico.Core.Services.Development.Modules.IUIElement"/>.</param>
+            <returns>The UI Element found from the correspondent resource name and element name.</returns>
         </member>
         <member name="T:PoshKentico.Core.Services.Configuration.Roles.IUserRole">
             <summary>

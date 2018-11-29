@@ -49,7 +49,7 @@ namespace PoshKentico.Business.Configuration.Roles
         /// <param name="elementName">The element name of the ui element <see cref="IUIElement"/>.</param>
         public void AddUiElementToRole(IRole role, string resourceName, string elementName)
         {
-            UIElementInfo elementInfo = UIElementInfoProvider.GetUIElementInfo(resourceName, elementName);
+            var elementInfo = this.RoleService.GetUiElement(resourceName, elementName);
             if (elementInfo != null)
             {
                 var element = new
