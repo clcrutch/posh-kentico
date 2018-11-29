@@ -110,13 +110,13 @@ namespace PoshKentico.Cmdlets.Development.PageTemplates
             switch (this.ParameterSetName)
             {
                 case CATEGORYNAME:
-                    categories = this.BusinessLayer.GetPageTemplateCategories(this.CategoryName, this.RegularExpression.ToBool(), this.Recurse.ToBool());
+                    categories = this.BusinessLayer.GetPageTemplateCategories(this.CategoryName, this.RegularExpression.ToBool(), false);
                     break;
                 case IDSETNAME:
-                    categories = this.BusinessLayer.GetPageTemplateCategories(this.ID, this.Recurse.ToBool());
+                    categories = this.BusinessLayer.GetPageTemplateCategories(this.ID, false);
                     break;
                 case PATH:
-                    categories = this.BusinessLayer.GetPageTemplateCategories(this.CategoryPath, this.Recurse.ToBool());
+                    categories = this.BusinessLayer.GetPageTemplateCategories(this.CategoryPath, false);
                     break;
                 case PAGETEMPLATE:
                     categories = new IPageTemplateCategory[]

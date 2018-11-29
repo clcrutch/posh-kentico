@@ -18,11 +18,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Cmdlets\Development\PageTemplates\AddCMSPageTemplateWebPartInstanceCmdlet.cs" />
-    <Compile Remove="Cmdlets\Development\PageTemplates\AddCmsPageTemplateWebPartZoneInstanceCmdlet.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="stylecop.json" />
   </ItemGroup>
 
