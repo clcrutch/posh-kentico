@@ -1512,7 +1512,7 @@
         </member>
         <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.WebPartZones">
             <summary>
-            Gets or sets web part zones contained within the Page template.
+            Gets web part zones contained within the Page template.
             </summary>
         </member>
         <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.PageTemplateLayoutType">
@@ -1833,7 +1833,7 @@
         </member>
         <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartInstance.Properties">
             <summary>
-            Gets or sets the webpart instance properties.
+            Gets the webpart instance properties.
             </summary>
         </member>
         <member name="T:PoshKentico.Core.Services.Development.WebParts.IWebPartService">

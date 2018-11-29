@@ -42,17 +42,11 @@ namespace PoshKentico.Business.Development.PageTemplates
             {
                 foreach (var pageTemplate in pageTemplates)
                 {
-                    if (this.ShouldProcess(pageTemplate.DisplayName, "Remove the page template from Kentico."))
-                    {
-                        this.PageTemplateService.Delete(pageTemplate);
-                    }
+                    this.PageTemplateService.Delete(pageTemplate);
                 }
             }
 
-            if (this.ShouldProcess(pageTemplateCategory.DisplayName, "Remove the page template category from Kentico."))
-            {
-                this.PageTemplateService.Delete(pageTemplateCategory);
-            }
+            this.PageTemplateService.Delete(pageTemplateCategory);
         }
 
         #endregion
