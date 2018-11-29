@@ -17,14 +17,19 @@ schema: 2.0.0
 Remove-CMSSite [-SiteToRemove] <SiteInfo> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
-### Property
+### Dislpay Name
 ```
-Remove-CMSSite [-SiteName] <String> [-Exact] [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-CMSSite [[-DisplayName] <String>] [-RegularExpression] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### ID
 ```
-Remove-CMSSite [-ID] <Int32[]> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-CMSSite [[-SiteIds] <Int32[]>] [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+
+### User
+```
+Remove-CMSSite [[-User] <UserInfo>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -56,13 +61,28 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Exact
-{{Fill Exact Description}}
+### -DisplayName
+{{Fill DisplayName Description}}
+
+```yaml
+Type: String
+Parameter Sets: Dislpay Name
+Aliases: SiteName, DomainName
+
+Required: False
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -RegularExpression
+{{Fill RegularExpression Description}}
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: Property
-Aliases:
+Parameter Sets: Dislpay Name
+Aliases: Regex
 
 Required: False
 Position: Named
@@ -71,33 +91,18 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ID
-{{Fill ID Description}}
+### -SiteIds
+{{Fill SiteIds Description}}
 
 ```yaml
 Type: Int32[]
 Parameter Sets: ID
 Aliases:
 
-Required: True
+Required: False
 Position: 0
 Default value: None
 Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SiteName
-{{Fill SiteName Description}}
-
-```yaml
-Type: String
-Parameter Sets: Property
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -110,6 +115,21 @@ Parameter Sets: Object
 Aliases: Site
 
 Required: True
+Position: 0
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -User
+{{Fill User Description}}
+
+```yaml
+Type: UserInfo
+Parameter Sets: User
+Aliases:
+
+Required: False
 Position: 0
 Default value: None
 Accept pipeline input: True (ByValue)
@@ -140,7 +160,7 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ### CMS.SiteProvider.SiteInfo
 
-### System.String
+### CMS.Membership.UserInfo
 
 ## OUTPUTS
 

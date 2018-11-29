@@ -25,13 +25,21 @@ namespace PoshKentico
     public interface ICmdlet
     {
         /// <summary>
-        /// Writesa debug log entry.
+        /// Writes a debug log entry.
         /// </summary>
         /// <param name="text">The entry to log.</param>
         void WriteDebug(string text);
 
+        /// <summary>
+        /// Writes a debug error entry.
+        /// </summary>
+        /// <param name="errorRecord">The error to log.</param>
         void WriteError(ErrorRecord errorRecord);
 
+        /// <summary>
+        /// Writes a progress log entry.
+        /// </summary>
+        /// <param name="progressRecord">The progress to log.</param>
         void WriteProgress(ProgressRecord progressRecord);
 
         /// <summary>
@@ -40,6 +48,10 @@ namespace PoshKentico
         /// <param name="text">The entry to log.</param>
         void WriteVerbose(string text);
 
+        /// <summary>
+        /// Writes a warning log entry.
+        /// </summary>
+        /// <param name="text">The warning to log.</param>
         void WriteWarning(string text);
 
         /// <summary>

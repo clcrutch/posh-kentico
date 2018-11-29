@@ -32,6 +32,9 @@ namespace PoshKentico.Core.Services.General
         /// </summary>
         InitializationState InitializationState { get; }
 
+        /// <summary>
+        /// Gets the version of the CMS Application.
+        /// </summary>
         Version Version { get; }
 
         #endregion

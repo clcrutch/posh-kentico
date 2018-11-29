@@ -40,12 +40,12 @@ function Get-TargetResource
 									LibraryFolder = $null;
 									LibraryDescription = $null;
 								}
-	$site = Get-CMSSite -SiteName $LibrarySiteName -Exact
+	$site = Get-CMSSite -SiteName $LibrarySiteName
 
 	if ($site -ne $null)
 	{
         Write-Verbose -Message "The Site with SiteName $($LibrarySiteName) exist"
-		$library = Get-CMSMediaLibrary -SiteID $site.SiteID -LibraryName $LibraryName -Exact
+		$library = Get-CMSMediaLibrary -SiteID $site.SiteID -LibraryName $LibraryName
 		
 		if ($library -ne $null)
 		{
@@ -102,12 +102,12 @@ function Set-TargetResource
     <# Else, if Ensure is set to "Present" and the library does exist, then update its properties to match the values provided in the non-mandatory parameter values #>
     <# Else, if Ensure is set to "Absent" and the library does not exist, then do nothing #>
     <# Else, if Ensure is set to "Absent" and the library does exist, then delete the library #>
-	$site = Get-CMSSite -SiteName $LibrarySiteName -Exact
+	$site = Get-CMSSite -SiteName $LibrarySiteName
 
 	if ($site -ne $null)
 	{
         Write-Verbose -Message "The Site with SiteName $($LibrarySiteName) exist"
-	    $library = Get-CMSMediaLibrary -SiteID $site.SiteID -LibraryName $LibraryName -Exact
+	    $library = Get-CMSMediaLibrary -SiteID $site.SiteID -LibraryName $LibraryName
 
 	    if ($Ensure -eq "Present")
         {
@@ -127,7 +127,7 @@ function Set-TargetResource
             if ($library -ne $null)
             {
                 Write-Verbose -Message "Deleting the library $($LibraryName)"
-                Remove-CMSMediaLibrary -SiteID $site.SiteID -LibraryName $LibraryName -Exact
+                Remove-CMSMediaLibrary -SiteID $site.SiteID -LibraryName $LibraryName
             }
         }
     }
@@ -170,13 +170,13 @@ function Test-TargetResource
 	Write-Verbose "Use this cmdlet to deliver information about command processing."
 
 	Write-Debug "Use this cmdlet to write debug information while troubleshooting."
-	$site = Get-CMSSite -SiteName $LibrarySiteName -Exact
+	$site = Get-CMSSite -SiteName $LibrarySiteName
 
 	if ($site -ne $null)
 	{
 		Write-Verbose -Message "The Site with SiteName $($LibrarySiteName) exist"
 
-	    $library = Get-CMSMediaLibrary -SiteID $site.SiteID -LibraryName $LibraryName -Exact
+	    $library = Get-CMSMediaLibrary -SiteID $site.SiteID -LibraryName $LibraryName
 
         if ($Ensure -eq "Present")
         {

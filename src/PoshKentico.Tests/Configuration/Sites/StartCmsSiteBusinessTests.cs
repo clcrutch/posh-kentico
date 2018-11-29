@@ -20,7 +20,6 @@ using System.Diagnostics.CodeAnalysis;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Configuration.Sites;
-using PoshKentico.Core.Providers.General;
 using PoshKentico.Core.Services.Configuration.Sites;
 using PoshKentico.Tests.Helpers;
 
@@ -31,177 +30,31 @@ namespace PoshKentico.Tests.Configuration.Sites
     public class StartCmsSiteBusinessTests
     {
         [TestCase]
-        public void StartSiteTest_Object()
+        public void StartSiteTest()
         {
             var siteServiceMock = new Mock<ISiteService>();
 
-            var sites = new List<ISite>();
             var siteMock1 = new Mock<ISite>();
             siteMock1.SetupGet(x => x.DisplayName).Returns("My Site1");
             siteMock1.SetupGet(x => x.SiteName).Returns("MySite1");
             siteMock1.SetupGet(x => x.DomainName).Returns("localhost1");
-            sites.Add(siteMock1.Object);
 
             var siteMock2 = new Mock<ISite>();
             siteMock2.SetupGet(x => x.DisplayName).Returns("your site2");
             siteMock2.SetupGet(x => x.SiteName).Returns("yoursite2");
             siteMock2.SetupGet(x => x.DomainName).Returns("localhost2");
-            sites.Add(siteMock2.Object);
-
-            var outputService = OutputServiceHelper.GetPassThruOutputService();
-            PassThruOutputService.ShouldProcessFunction = (x, y) => true;
-
-            siteServiceMock.SetupGet(x => x.Sites).Returns(sites);
-
-            var getBusinessLayer = new GetCmsSiteBusiness()
-            {
-                OutputService = outputService,
-
-                SiteService = siteServiceMock.Object,
-            };
 
             var businessLayer = new StartCmsSiteBusiness()
             {
-                OutputService = outputService,
-
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
                 SiteService = siteServiceMock.Object,
-                GetCmsSiteBusiness = getBusinessLayer,
             };
 
             businessLayer.Start(siteMock1.Object);
 
             siteServiceMock.Verify(x => x.Start(siteMock1.Object));
-        }
 
-        [TestCase]
-        public void StartSiteTest_MatchString_ExactFalse()
-        {
-            var siteServiceMock = new Mock<ISiteService>();
-
-            var sites = new List<ISite>();
-            var siteMock1 = new Mock<ISite>();
-            siteMock1.SetupGet(x => x.DisplayName).Returns("My Site1");
-            siteMock1.SetupGet(x => x.SiteName).Returns("MySite1");
-            siteMock1.SetupGet(x => x.DomainName).Returns("localhost1");
-            sites.Add(siteMock1.Object);
-
-            var siteMock2 = new Mock<ISite>();
-            siteMock2.SetupGet(x => x.DisplayName).Returns("your site2");
-            siteMock2.SetupGet(x => x.SiteName).Returns("yoursite2");
-            siteMock2.SetupGet(x => x.DomainName).Returns("localhost2");
-            sites.Add(siteMock2.Object);
-
-            siteServiceMock.SetupGet(x => x.Sites).Returns(sites);
-
-            var outputService = OutputServiceHelper.GetPassThruOutputService();
-            PassThruOutputService.ShouldProcessFunction = (x, y) => true;
-
-            var getBusinessLayer = new GetCmsSiteBusiness()
-            {
-                OutputService = outputService,
-
-                SiteService = siteServiceMock.Object,
-            };
-
-            var businessLayer = new StartCmsSiteBusiness()
-            {
-                OutputService = outputService,
-
-                SiteService = siteServiceMock.Object,
-                GetCmsSiteBusiness = getBusinessLayer,
-            };
-
-            businessLayer.Start("site", false);
-
-            siteServiceMock.Verify(x => x.Start(siteMock1.Object));
-            siteServiceMock.Verify(x => x.Start(siteMock2.Object));
-        }
-
-        [TestCase]
-        public void StartSiteTest_MatchString_ExactTrue()
-        {
-            var siteServiceMock = new Mock<ISiteService>();
-
-            var sites = new List<ISite>();
-            var siteMock1 = new Mock<ISite>();
-            siteMock1.SetupGet(x => x.DisplayName).Returns("My Site1");
-            siteMock1.SetupGet(x => x.SiteName).Returns("MySite1");
-            siteMock1.SetupGet(x => x.DomainName).Returns("localhost1");
-            sites.Add(siteMock1.Object);
-
-            var siteMock2 = new Mock<ISite>();
-            siteMock2.SetupGet(x => x.DisplayName).Returns("your site2");
-            siteMock2.SetupGet(x => x.SiteName).Returns("yoursite2");
-            siteMock2.SetupGet(x => x.DomainName).Returns("localhost2");
-            sites.Add(siteMock2.Object);
-
-            siteServiceMock.SetupGet(x => x.Sites).Returns(sites);
-
-            var outputService = OutputServiceHelper.GetPassThruOutputService();
-            PassThruOutputService.ShouldProcessFunction = (x, y) => true;
-
-            var getBusinessLayer = new GetCmsSiteBusiness()
-            {
-                OutputService = outputService,
-
-                SiteService = siteServiceMock.Object,
-            };
-
-            var businessLayer = new StartCmsSiteBusiness()
-            {
-                OutputService = outputService,
-
-                SiteService = siteServiceMock.Object,
-                GetCmsSiteBusiness = getBusinessLayer,
-            };
-
-            businessLayer.Start("yoursite2", true);
-
-            siteServiceMock.Verify(x => x.Start(siteMock2.Object));
-        }
-
-        [TestCase]
-        public void StartSiteTest_Ids()
-        {
-            var siteServiceMock = new Mock<ISiteService>();
-
-            var sites = new List<ISite>();
-            var siteMock1 = new Mock<ISite>();
-            siteMock1.SetupGet(x => x.DisplayName).Returns("My Site1");
-            siteMock1.SetupGet(x => x.SiteName).Returns("MySite1");
-            siteMock1.SetupGet(x => x.DomainName).Returns("localhost1");
-            sites.Add(siteMock1.Object);
-
-            var siteMock2 = new Mock<ISite>();
-            siteMock2.SetupGet(x => x.DisplayName).Returns("your site2");
-            siteMock2.SetupGet(x => x.SiteName).Returns("yoursite2");
-            siteMock2.SetupGet(x => x.DomainName).Returns("localhost2");
-            sites.Add(siteMock2.Object);
-
-            siteServiceMock.Setup(x => x.GetSite(1)).Returns(siteMock1.Object);
-            siteServiceMock.Setup(x => x.GetSite(2)).Returns(siteMock2.Object);
-
-            siteServiceMock.SetupGet(x => x.Sites).Returns(sites);
-
-            var outputService = OutputServiceHelper.GetPassThruOutputService();
-            PassThruOutputService.ShouldProcessFunction = (x, y) => true;
-
-            var getBusinessLayer = new GetCmsSiteBusiness()
-            {
-                OutputService = outputService,
-
-                SiteService = siteServiceMock.Object,
-            };
-
-            var businessLayer = new StartCmsSiteBusiness()
-            {
-                OutputService = outputService,
-
-                SiteService = siteServiceMock.Object,
-                GetCmsSiteBusiness = getBusinessLayer,
-            };
-
-            businessLayer.Start(2, 3);
+            businessLayer.Start(siteMock2.Object);
 
             siteServiceMock.Verify(x => x.Start(siteMock2.Object));
         }

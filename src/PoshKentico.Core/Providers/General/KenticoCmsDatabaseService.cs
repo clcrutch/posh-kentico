@@ -1,19 +1,31 @@
-﻿using CMS.CMSImportExport;
-using CMS.DataEngine;
-using CMS.Membership;
-using PoshKentico.Core.Services.General;
+﻿// <copyright file="KenticoCmsDatabaseService.cs" company="Chris Crutchfield">
+// Copyright (C) 2017  Chris Crutchfield
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+// </copyright>
+
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.IO;
-using System.IO.Compression;
-using System.Linq;
 using System.Management.Automation;
-using System.Text;
-using System.Threading.Tasks;
+using CMS.DataEngine;
+using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.Core.Providers.General
 {
+    /// <summary>
+    /// Implementation of <see cref="ICmsDatabaseService"/>.
+    /// </summary>
     [Export(typeof(ICmsDatabaseService))]
     public class KenticoCmsDatabaseService : ICmsDatabaseService
     {
@@ -22,12 +34,19 @@ namespace PoshKentico.Core.Providers.General
 
         private int currentActivityCount = 0;
 
+        /// <summary>
+        /// Gets or sets the application service.
+        /// </summary>
         [Import]
         public ICmsApplicationService CmsApplicationService { get; set; }
 
+        /// <summary>
+        /// Gets or sets the output service.
+        /// </summary>
         [Import]
         public IOutputService OutputService { get; set; }
 
+        /// <inheritdoc/>
         public Version Version
         {
             get
@@ -43,6 +62,7 @@ namespace PoshKentico.Core.Providers.General
             }
         }
 
+        /// <inheritdoc/>
         public string ConnectionString
         {
             get
@@ -57,11 +77,14 @@ namespace PoshKentico.Core.Providers.General
             }
         }
 
+        /// <inheritdoc/>
         public bool Exists => DatabaseHelper.DatabaseExists(this.ConnectionString);
 
+        /// <inheritdoc/>
         public void ExecuteQuery(string queryText, QueryDataParameters parameters) =>
             ConnectionHelper.ExecuteNonQuery(queryText, parameters, QueryTypeEnum.SQLQuery);
 
+        /// <inheritdoc/>
         public void InstallSqlDatabase()
         {
             this.currentActivityCount = 0;
@@ -73,7 +96,7 @@ namespace PoshKentico.Core.Providers.General
             };
             this.OutputService.WriteProgress(progressRecord);
 
-            bool success = SqlInstallationHelper.InstallDatabase(this.ConnectionString, SqlInstallationHelper.GetSQLInstallPath(), "", "", this.Log);
+            bool success = SqlInstallationHelper.InstallDatabase(this.ConnectionString, SqlInstallationHelper.GetSQLInstallPath(), string.Empty, string.Empty, this.Log);
 
             progressRecord = new ProgressRecord(Math.Abs(ACTIVITY.GetHashCode()), ACTIVITY, "Finished")
             {
@@ -83,6 +106,7 @@ namespace PoshKentico.Core.Providers.General
             this.OutputService.WriteProgress(progressRecord);
         }
 
+        /// <inheritdoc/>
         public bool IsDatabaseInstalled() =>
             this.Version != null;
 
