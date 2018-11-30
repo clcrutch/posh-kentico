@@ -18,6 +18,7 @@
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
+using CMS.DataEngine;
 using CMS.PortalEngine;
 using ImpromptuInterface;
 using PoshKentico.Business.Development.PageTemplates;
@@ -64,41 +65,65 @@ namespace PoshKentico.Cmdlets.Development.PageTemplates
         #region Properties
 
         /// <summary>
-        /// <para type="description">Page template layout.</para>
+        /// <para type="description">Show as master template..</para>
         /// </summary>
-        [Parameter(Mandatory = false, Position = 6)]
-        public string Layout { get; set; }
+        [Parameter(Mandatory = false)]
+        public bool ShowAsMasterTemplate { get; set; }
+
+        /// <summary>
+        /// <para type="description">Page template for all pages.</para>
+        /// </summary>
+        [Parameter(Mandatory = false)]
+        public bool PageTemplateForAllPages { get; set; }
 
         /// <summary>
         /// <para type="description">Page template icon class defining the page template thumbnail.</para>
         /// </summary>
-        [Parameter(Mandatory = false, Position = 5)]
+        [Parameter(Mandatory = false)]
         public string IconClass { get; set; }
 
         /// <summary>
         /// <para type="description">Page template CSS.</para>
         /// </summary>
-        [Parameter(Mandatory = false, Position = 4)]
+        [Parameter(Mandatory = false)]
         public string CSS { get; set; }
 
         /// <summary>
         /// <para type="description">Gets or sets flag whether page template is reusable.</para>
         /// </summary>
-        [Parameter(Mandatory = false, Position = 3)]
+        [Parameter(Mandatory = false)]
         public bool IsReusable { get; set; }
 
         /// <summary>
-        /// <para type="description">The display name for the newly created pagetemplate.</para>
+        /// <para type="description">The description for the newly created pagetemplate.</para>
         /// </summary>
-        [Parameter(Mandatory = true, Position = 2)]
-        public string DisplayName { get; set; }
+        [Parameter(Mandatory = false)]
+        public string Description { get; set; }
 
         /// <summary>
         /// <para type="description">The file name for the pagetemplate code behind.</para>
         /// </summary>
-        [Parameter(Mandatory = true, Position = 1)]
+        [Parameter(Mandatory = false)]
         [Alias("File")]
         public string FileName { get; set; }
+
+        /// <summary>
+        /// <para type="description">Page template layout.</para>
+        /// </summary>
+        [Parameter(Mandatory = false)]
+        public string Layout { get; set; }
+
+        /// <summary>
+        /// <para type="description">Page template layout type.</para>
+        /// </summary>
+        [Parameter(Mandatory = true, Position = 2)]
+        public LayoutTypeEnum LayoutType { get; set; }
+
+        /// <summary>
+        /// <para type="description">The display name for the newly created pagetemplate.</para>
+        /// </summary>
+        [Parameter(Mandatory = true, Position = 1)]
+        public string DisplayName { get; set; }
 
         /// <summary>
         /// <para type="description">The Code Name for the pagetemplate.</para>
@@ -143,10 +168,10 @@ namespace PoshKentico.Cmdlets.Development.PageTemplates
             switch (this.ParameterSetName)
             {
                 case PATH:
-                    pageTemplate = this.BusinessLayer.CreatePageTemplate(this.Path, this.FileName, this.DisplayName, this.Layout, this.IconClass, this.CSS, this.IsReusable);
+                    pageTemplate = this.BusinessLayer.CreatePageTemplate(this.Path, this.FileName ?? string.Empty, this.DisplayName, this.Description, this.ShowAsMasterTemplate, this.PageTemplateForAllPages, this.LayoutType, this.Layout, this.IconClass, this.CSS, this.IsReusable);
                     break;
                 case CATEGORY:
-                    pageTemplate = this.BusinessLayer.CreatePageTemplate(this.Name, this.FileName, this.DisplayName, this.Layout, this.IconClass, this.CSS, this.IsReusable, this.PageTemplateCategory.ActLike<IPageTemplateCategory>());
+                    pageTemplate = this.BusinessLayer.CreatePageTemplate(this.Name, this.FileName ?? string.Empty, this.DisplayName, this.Description, this.ShowAsMasterTemplate, this.PageTemplateForAllPages, this.LayoutType, this.Layout, this.IconClass, this.CSS, this.IsReusable, this.PageTemplateCategory.ActLike<IPageTemplateCategory>());
                     break;
             }
 

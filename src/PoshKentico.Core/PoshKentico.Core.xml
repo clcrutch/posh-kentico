@@ -1526,7 +1526,7 @@
             Gets the page template site ID.
             </summary>
         </member>
-        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.PageTemplateID">
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.PageTemplateId">
             <summary>
             Gets the ID for the current page template.
             </summary>
@@ -1546,6 +1546,16 @@
             Gets the page template description.
             </summary>
         </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.ShowAsMasterTemplate">
+            <summary>
+            Gets or sets a value indicating whether to show page template as master template.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.PageTemplateForAllPages">
+            <summary>
+            Gets or sets a value indicating whether page template is for all pages.
+            </summary>
+        </member>
         <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.PageTemplates">
             <summary>
             Gets the page template PageTemplates.
@@ -1563,7 +1573,7 @@
         </member>
         <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.PageTemplateLayout">
             <summary>
-            Gets page template layout.
+            Gets or sets page template layout.
             </summary>
         </member>
         <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.PageTemplateIconClass">
@@ -1579,6 +1589,16 @@
         <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.IsReusable">
             <summary>
             Gets a value indicating whether the page template is reusable.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.WebPartZones">
+            <summary>
+            Gets web part zones contained within the Page template.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.PageTemplateLayoutType">
+            <summary>
+            Gets or sets the page template layout type.
             </summary>
         </member>
         <member name="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory">
@@ -1872,6 +1892,31 @@
             Gets or sets the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> associated with the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/>.
             </summary>
         </member>
+        <member name="T:PoshKentico.Core.Services.Development.WebParts.IWebPartInstance">
+            <summary>
+            Represents a Web Part Instance.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartInstance.ControlID">
+            <summary>
+            Gets the control id.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartInstance.WebPartType">
+            <summary>
+            Gets the webpartype.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartInstance.IsWidget">
+            <summary>
+            Gets a value indicating whether the webpartinstance is a widget.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartInstance.Properties">
+            <summary>
+            Gets the webpart instance properties.
+            </summary>
+        </member>
         <member name="T:PoshKentico.Core.Services.Development.WebParts.IWebPartService">
             <summary>
             Service for providing access to a CMS webparts.
@@ -1972,6 +2017,26 @@
             Updates the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/>.
             </summary>
             <param name="field">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/> to update.</param>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Development.WebParts.IWebPartZoneInstance">
+            <summary>
+            Represents a Web Part field.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartZoneInstance.ZoneID">
+            <summary>
+            Gets the zone id.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartZoneInstance.Properties">
+            <summary>
+            Gets or sets the properties associated with the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartZoneInstance"/>.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartZoneInstance.WebParts">
+            <summary>
+            Gets or sets the Web parts collection within the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartZoneInstance"/>.
+            </summary>
         </member>
         <member name="T:PoshKentico.Core.Services.General.ICmsApplicationService">
             <summary>
