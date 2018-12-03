@@ -392,17 +392,17 @@
         </member>
         <member name="T:PoshKentico.Core.Providers.General.KenticoCmsDatabaseService">
             <summary>
-            Implementation of a Kentico Database Service.
+            Implementation of <see cref="T:PoshKentico.Core.Services.General.ICmsDatabaseService"/>.
             </summary>
         </member>
         <member name="P:PoshKentico.Core.Providers.General.KenticoCmsDatabaseService.CmsApplicationService">
             <summary>
-            Gets or sets the <see cref="T:PoshKentico.Core.Services.General.ICmsApplicationService"/>. Set by MEF.
+            Gets or sets the <see cref="T:PoshKentico.Core.Services.General.ICmsApplicationService"/>. Populated by MEF.
             </summary>
         </member>
         <member name="P:PoshKentico.Core.Providers.General.KenticoCmsDatabaseService.OutputService">
             <summary>
-            Gets or sets the <see cref="T:PoshKentico.Core.Services.General.IOutputService"/>. Set by MEF.
+            Gets or sets the <see cref="T:PoshKentico.Core.Services.General.IOutputService"/>. Populated by MEF.
             </summary>
         </member>
         <member name="P:PoshKentico.Core.Providers.General.KenticoCmsDatabaseService.Version">
@@ -2108,6 +2108,11 @@
             </summary>
             <param name="siteLocation">The directory where the CMS site resides.</param>
             <param name="connectionString">The connection string to use for initializing the CMS Application.</param>
+        </member>
+        <member name="T:PoshKentico.Core.Services.General.ICmsDatabaseService">
+            <summary>
+            Represents the connection to the CMS database.
+            </summary>
         </member>
         <member name="P:PoshKentico.Core.Services.General.ICmsDatabaseService.Version">
             <summary>

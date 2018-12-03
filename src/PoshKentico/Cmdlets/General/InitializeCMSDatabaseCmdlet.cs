@@ -40,7 +40,7 @@ namespace PoshKentico.Cmdlets.General
         /// </summary>
         [Import]
         public InitializeCMSDatabaseBusiness BusinessLayer { get; set; }
-        
+
         #endregion
 
         #region Methods

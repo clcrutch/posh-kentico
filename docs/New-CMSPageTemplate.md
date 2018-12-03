@@ -14,14 +14,17 @@ schema: 2.0.0
 
 ### Path (Default)
 ```
-New-CMSPageTemplate [[-Layout] <String>] [[-IconClass] <String>] [[-CSS] <String>] [[-IsReusable] <Boolean>]
- [-DisplayName] <String> [-FileName] <String> [-Path] <String> [-PassThru] [<CommonParameters>]
+New-CMSPageTemplate [-ShowAsMasterTemplate <Boolean>] [-PageTemplateForAllPages <Boolean>]
+ [-IconClass <String>] [-CSS <String>] [-IsReusable <Boolean>] [-Description <String>] [-FileName <String>]
+ [-Layout <String>] [-LayoutType] <LayoutTypeEnum> [-DisplayName] <String> [-Path] <String> [-PassThru]
+ [<CommonParameters>]
 ```
 
 ### Category
 ```
-New-CMSPageTemplate [[-Layout] <String>] [[-IconClass] <String>] [[-CSS] <String>] [[-IsReusable] <Boolean>]
- [-DisplayName] <String> [-FileName] <String> [-Name] <String> [-PassThru]
+New-CMSPageTemplate [-ShowAsMasterTemplate <Boolean>] [-PageTemplateForAllPages <Boolean>]
+ [-IconClass <String>] [-CSS <String>] [-IsReusable <Boolean>] [-Description <String>] [-FileName <String>]
+ [-Layout <String>] [-LayoutType] <LayoutTypeEnum> [-DisplayName] <String> [-Name] <String> [-PassThru]
  -PageTemplateCategory <PageTemplateCategoryInfo> [<CommonParameters>]
 ```
 
@@ -48,7 +51,22 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 4
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Description
+{{Fill Description Description}}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -63,7 +81,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 2
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -77,8 +95,8 @@ Type: String
 Parameter Sets: (All)
 Aliases: File
 
-Required: True
-Position: 1
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -93,7 +111,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 5
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -108,7 +126,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -123,7 +141,23 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 6
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -LayoutType
+{{Fill LayoutType Description}}
+
+```yaml
+Type: LayoutTypeEnum
+Parameter Sets: (All)
+Aliases:
+Accepted values: Ascx, Html
+
+Required: True
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -159,6 +193,21 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
+### -PageTemplateForAllPages
+{{Fill PageTemplateForAllPages Description}}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -PassThru
 {{Fill PassThru Description}}
 
@@ -184,6 +233,21 @@ Aliases:
 
 Required: True
 Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ShowAsMasterTemplate
+{{Fill ShowAsMasterTemplate Description}}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

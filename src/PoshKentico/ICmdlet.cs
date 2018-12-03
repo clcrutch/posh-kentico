@@ -25,6 +25,14 @@ namespace PoshKentico
     public interface ICmdlet
     {
         /// <summary>
+        /// Confirms the operation with the user, sending the name of the resource to be changed and the action to be performed to the user for confirmation before the operation is performed.
+        /// </summary>
+        /// <param name="target">Name of the target resource being acted upon. This will potentially be displayed to the user.</param>
+        /// <param name="action">Name of the action which is being performed. This will potentially be displayed to the user. (default is Cmdlet name).</param>
+        /// <returns>If ShouldProcess returns true, the operation should be performed. If ShouldProcess returns false, the operation should not be performed, and the Cmdlet should move on to the next target resource.</returns>
+        bool ShouldProcess(string target, string action);
+
+        /// <summary>
         /// Writes a debug log entry.
         /// </summary>
         /// <param name="text">The entry to log.</param>

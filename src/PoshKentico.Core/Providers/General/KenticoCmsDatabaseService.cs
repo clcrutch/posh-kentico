@@ -46,6 +46,7 @@ namespace PoshKentico.Core.Providers.General
 
         /// <summary>
         /// Gets or sets the <see cref="ICmsApplicationService"/>. Populated by MEF.
+        /// </summary>
         [Import]
         public ICmsApplicationService CmsApplicationService { get; set; }
 
