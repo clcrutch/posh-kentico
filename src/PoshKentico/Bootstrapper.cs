@@ -15,18 +15,11 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
-using System.Management.Automation;
-using System.Management.Automation.Provider;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using PoshKentico.Business;
 using PoshKentico.Core.Providers.General;
-using PoshKentico.Core.Services.General;
 using PoshKentico.Extensions;
 
 namespace PoshKentico
@@ -36,6 +29,8 @@ namespace PoshKentico
     /// </summary>
     public sealed class Bootstrapper
     {
+        #region Variables
+
 #pragma warning disable SA1311 // Static readonly fields should begin with upper-case letter
         /// <summary>
         /// The instance.
@@ -43,11 +38,17 @@ namespace PoshKentico
         private static readonly Bootstrapper instance = new Bootstrapper();
 #pragma warning restore SA1311 // Static readonly fields should begin with upper-case letter
 
-        private bool bootstrapperInitialized = false;
+        #endregion
+
+        #region Constructors
 
         private Bootstrapper()
         {
         }
+
+        #endregion
+
+        #region Properties
 
         /// <summary>
         /// The instance.
@@ -60,8 +61,9 @@ namespace PoshKentico
             }
         }
 
-        [Import]
-        public IOutputService OutputService { get; set; }
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// Cmdlet initialization logic.
@@ -70,13 +72,6 @@ namespace PoshKentico
         public void Initialize(ICmdlet cmdlet)
         {
             MefHost.Initialize();
-
-            if (this.bootstrapperInitialized)
-            {
-                MefHost.Container.ComposeParts(this);
-
-                this.bootstrapperInitialized = true;
-            }
 
             MefHost.Container.ComposeParts(cmdlet);
 
@@ -99,5 +94,8 @@ namespace PoshKentico
                 instance.Initialize();
             }
         }
+
+        #endregion
+
     }
 }

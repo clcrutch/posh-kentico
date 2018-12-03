@@ -20,10 +20,12 @@ using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Xml.Linq;
 using CMS.Base;
 using CMS.DataEngine;
 using Microsoft.Web.Administration;
+using Mono.Cecil;
 using Newtonsoft.Json;
 using PoshKentico.Core.Services.General;
 
@@ -39,6 +41,9 @@ namespace PoshKentico.Core.Providers.General
         #region Variables
 
         private static bool locallyInitialized = false;
+
+        private DirectoryInfo siteLocation;
+        private Version version;
 
         #endregion
 
@@ -60,14 +65,43 @@ namespace PoshKentico.Core.Providers.General
             }
         }
 
+        /// <summary>
+        /// Gets or sets the <see cref="ICmsDatabaseService"/>.  Set by MEF.
+        /// </summary>
         [Import]
         public ICmsDatabaseService CmsDatabaseService { get; set; }
 
+        /// <summary>
+        /// Gets or Sets the <see cref="IOutputService"/>.  Set by MEF.
+        /// </summary>
         [Import]
         public IOutputService OutputService { get; set; }
 
-        public Version Version =>
-            CMSVersion.Version;
+        /// <summary>
+        /// Gets the version of the current Kentico application.
+        /// </summary>
+        public Version Version
+        {
+            get
+            {
+                if (this.version == null)
+                {
+                    var dllLocation = Path.Combine(this.siteLocation.FullName, "bin", "CMS.Base.dll");
+
+                    if (File.Exists(dllLocation))
+                    {
+                        var assembly = AssemblyDefinition.ReadAssembly(dllLocation);
+
+                        var versionAttribute = assembly.CustomAttributes.First(x => x.AttributeType.Name == nameof(AssemblyInformationalVersionAttribute));
+                        var versionString = (string)versionAttribute.ConstructorArguments.First().Value;
+
+                        Version.TryParse(versionString, out this.version);
+                    }
+                }
+
+                return this.version;
+            }
+        }
 
         #endregion
 
@@ -84,8 +118,6 @@ namespace PoshKentico.Core.Providers.General
         /// 5. Parse the document and find an "add" node with name="CMSConnectionString"
         /// 6. If the connection string is valid, then stop processing.  This is a Kentico site.
         /// </summary>
-        /// <param name="writeDebug">A delegate for writing to the debug stream.</param>
-        /// <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
         /// <returns>The directory and the connection string for the Kentico site.</returns>
         public (DirectoryInfo siteLocation, string connectionString) FindSite()
         {
@@ -147,8 +179,6 @@ namespace PoshKentico.Core.Providers.General
         /// Initialize Kentico CMS Application using FindKenticoSite or a cached version to locate the site.
         /// </summary>
         /// <param name="useCached">Use the cached location for the Kentico Site.  When true and have already found Kentico in a previous run, this method does not require admin.</param>
-        /// <param name="writeDebug">A delegate for writing to the debug stream.</param>
-        /// <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
         public void Initialize(bool useCached)
         {
             // We don't need to do anything if the application is already initialized.
@@ -189,8 +219,6 @@ namespace PoshKentico.Core.Providers.General
         /// </summary>
         /// <param name="siteLocation">The directory where the Kentico site resides.</param>
         /// <param name="connectionString">The connection string to use for initializing the CMS Application.</param>
-        /// <param name="writeDebug">A delegate for writing to the debug stream.</param>
-        /// <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
         public void Initialize(DirectoryInfo siteLocation, string connectionString)
         {
             // We don't need to do anything if the application is already initialized.
@@ -209,6 +237,7 @@ namespace PoshKentico.Core.Providers.General
 #pragma warning restore CS0618 // Type or member is obsolete
 
                 SystemContext.WebApplicationPhysicalPath = siteLocation.FullName;
+                this.siteLocation = siteLocation;
 
                 locallyInitialized = true;
             }

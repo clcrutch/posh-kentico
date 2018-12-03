@@ -20,6 +20,11 @@
             Gets or sets a reference to the CMS Application Service.  Populated by MEF.
             </summary>
         </member>
+        <member name="P:PoshKentico.Business.CmdletBusinessBase.OutputService">
+            <summary>
+            Gets or sets a reference to the <see cref="T:PoshKentico.Core.Services.General.IOutputService"/>.  Populated by MEF.
+            </summary>
+        </member>
         <member name="M:PoshKentico.Business.CmdletBusinessBase.Initialize">
             <summary>
             Initializes the current business layer.
@@ -1839,6 +1844,17 @@
             <param name="path">The path to look for the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/>.</param>
             <returns>Returns the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> that reprsents the supplied path.</returns>
         </member>
+        <member name="T:PoshKentico.Business.General.GetCMSApplicationVersionBusiness">
+            <summary>
+            Business layer for the Get-CMSApplicationVersion cmdlet.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.General.GetCMSApplicationVersionBusiness.GetVersion">
+            <summary>
+            Gets the version of the CMS application.
+            </summary>
+            <returns>The version of the CMS application.</returns>
+        </member>
         <member name="T:PoshKentico.Business.General.InitializeCMSApplicationBusiness">
             <summary>
             Business layer for the Initialize-CMSApplication cmdlet.
@@ -1871,6 +1887,21 @@
             <param name="database">The name of the Kentico database.</param>
             <param name="timeout">The timeout for connecting to the Kentico database.</param>
             <param name="webRoot">The root directory for the Kentico site.</param>
+        </member>
+        <member name="T:PoshKentico.Business.General.InitializeCMSDatabaseBusiness">
+            <summary>
+            Business layer for the Initialize-CMSDatabase cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.General.InitializeCMSDatabaseBusiness.CmsDatabaseService">
+            <summary>
+            Gets or sets the <see cref="T:PoshKentico.Core.Services.General.ICmsDatabaseService"/>.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.General.InitializeCMSDatabaseBusiness.InstallSqlDatabase">
+            <summary>
+            Checks if the database exists and is configured.  Installs it if it does not.
+            </summary>
         </member>
         <member name="T:PoshKentico.Business.Resource.KenticoFileSystemBusiness">
             <summary>

@@ -1,4 +1,4 @@
-﻿// <copyright file="InitializeCMSDatabaseCmdlet.cs" company="Chris Crutchfield">
+﻿// <copyright file="GetCMSApplicationVersionCmdlet.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -15,23 +15,30 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System;
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 using PoshKentico.Business.General;
+
+using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.General
 {
     /// <summary>
-    /// <para type="synopsis">Installs or updates the CMS database for the initialized CMS application.</para>
-    /// <para type="description">Installs or updates the CMS databse for the initalized CMS application.</para>
+    /// <para type="synopsis">Gets the version of the initialized CMS application.</para>
+    /// <para type="description">Gets the version of the initialized CMS application.</para>
     /// <para type="description">This command automatically initializes the connection to Kentico if not already initialized.</para>
     /// <example>
-    ///     <para>Install the Kentico database.</para>
-    ///     <code>Initialize-CMSDatabase</code>
+    ///     <para>Get the version of the currently initialized CMS application.</para>
+    ///     <code>Get-CMSApplicationVersion</code>
     /// </example>
     /// </summary>
-    [Cmdlet(VerbsData.Initialize, "CMSDatabase")]
-    public class InitializeCMSDatabaseCmdlet : MefCmdlet
+    [ExcludeFromCodeCoverage]
+    [Cmdlet(VerbsCommon.Get, "CMSApplicationVersion")]
+    [OutputType(typeof(Version))]
+    [Alias("gav")]
+    public class GetCMSApplicationVersionCmdlet : MefCmdlet
     {
         #region Properties
 
@@ -39,7 +46,7 @@ namespace PoshKentico.Cmdlets.General
         /// Gets or sets the Business layer for this web part. Populated by MEF.
         /// </summary>
         [Import]
-        public InitializeCMSDatabaseBusiness BusinessLayer { get; set; }
+        public GetCMSApplicationVersionBusiness BusinessLayer { get; set; }
 
         #endregion
 
@@ -48,7 +55,7 @@ namespace PoshKentico.Cmdlets.General
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
-            this.BusinessLayer.InstallSqlDatabase();
+            this.WriteObject(this.BusinessLayer.GetVersion());
         }
 
         #endregion

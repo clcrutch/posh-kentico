@@ -1,4 +1,4 @@
-﻿// <copyright file="OutputServiceHelper.cs" company="Chris Crutchfield">
+﻿// <copyright file="GetCMSApplicationVersionBusiness.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -15,27 +15,27 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using NUnit.Framework;
-using PoshKentico.Core.Providers.General;
-using PoshKentico.Core.Services.General;
+using System;
+using System.ComponentModel.Composition;
 
-namespace PoshKentico.Tests.Helpers
+namespace PoshKentico.Business.General
 {
     /// <summary>
-    /// Helper to setup methods for unit testing.
+    /// Business layer for the Get-CMSApplicationVersion cmdlet.
     /// </summary>
-    internal static class OutputServiceHelper
+    [Export(typeof(GetCMSApplicationVersionBusiness))]
+    public class GetCMSApplicationVersionBusiness : CmdletBusinessBase
     {
-        /// <summary>
-        /// Sets up the <see cref="IOutputService"/> for unit testing.
-        /// </summary>
-        /// <returns>An instance of the <see cref="PassThruOutputService"/> setup.</returns>
-        public static PassThruOutputService GetPassThruOutputService()
-        {
-            PassThruOutputService.WriteDebugAction = Assert.NotNull;
-            PassThruOutputService.WriteVerboseAction = Assert.NotNull;
+        #region Methods
 
-            return new PassThruOutputService();
-        }
+        /// <summary>
+        /// Gets the version of the CMS application.
+        /// </summary>
+        /// <returns>The version of the CMS application.</returns>
+        public Version GetVersion() =>
+            this.CmsApplicationService.Version;
+
+        #endregion
+
     }
 }

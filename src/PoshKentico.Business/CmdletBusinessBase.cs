@@ -53,6 +53,9 @@ namespace PoshKentico.Business
         [Import]
         public ICmsApplicationService CmsApplicationService { get; set; }
 
+        /// <summary>
+        /// Gets or sets a reference to the <see cref="IOutputService"/>.  Populated by MEF.
+        /// </summary>
         [Import]
         public IOutputService OutputService { get; set; }
 

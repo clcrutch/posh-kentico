@@ -25,13 +25,29 @@ namespace PoshKentico
     public interface ICmdlet
     {
         /// <summary>
-        /// Writesa debug log entry.
+        /// Confirms the operation with the user, sending the name of the resource to be changed and the action to be performed to the user for confirmation before the operation is performed.
+        /// </summary>
+        /// <param name="target">Name of the target resource being acted upon. This will potentially be displayed to the user.</param>
+        /// <param name="action">Name of the action which is being performed. This will potentially be displayed to the user. (default is Cmdlet name).</param>
+        /// <returns>If ShouldProcess returns true, the operation should be performed. If ShouldProcess returns false, the operation should not be performed, and the Cmdlet should move on to the next target resource.</returns>
+        bool ShouldProcess(string target, string action);
+
+        /// <summary>
+        /// Display debug information.
         /// </summary>
         /// <param name="text">The entry to log.</param>
         void WriteDebug(string text);
 
+        /// <summary>
+        /// Writes the specified error to the error pipe.
+        /// </summary>
+        /// <param name="errorRecord">The error to write to the pipeline.</param>
         void WriteError(ErrorRecord errorRecord);
 
+        /// <summary>
+        /// Display progress information.
+        /// </summary>
+        /// <param name="progressRecord">progress information.</param>
         void WriteProgress(ProgressRecord progressRecord);
 
         /// <summary>
@@ -40,14 +56,10 @@ namespace PoshKentico
         /// <param name="text">The entry to log.</param>
         void WriteVerbose(string text);
 
-        void WriteWarning(string text);
-
         /// <summary>
-        /// Confirms the operation with the user, sending the name of the resource to be changed and the action to be performed to the user for confirmation before the operation is performed.
+        /// Display warning information.
         /// </summary>
-        /// <param name="target">Name of the target resource being acted upon. This will potentially be displayed to the user.</param>
-        /// <param name="action">Name of the action which is being performed. This will potentially be displayed to the user. (default is Cmdlet name).</param>
-        /// <returns>If ShouldProcess returns true, the operation should be performed. If ShouldProcess returns false, the operation should not be performed, and the Cmdlet should move on to the next target resource.</returns>
-        bool ShouldProcess(string target, string action);
+        /// <param name="text">warning output.</param>
+        void WriteWarning(string text);
     }
 }

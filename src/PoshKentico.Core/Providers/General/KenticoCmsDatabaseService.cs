@@ -1,33 +1,64 @@
-﻿using CMS.CMSImportExport;
-using CMS.DataEngine;
-using CMS.Membership;
-using PoshKentico.Core.Services.General;
+﻿// <copyright file="KenticoCmsDatabaseService.cs" company="Chris Crutchfield">
+// Copyright (C) 2017  Chris Crutchfield
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+// </copyright>
+
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.IO;
-using System.IO.Compression;
-using System.Linq;
 using System.Management.Automation;
-using System.Text;
-using System.Threading.Tasks;
+using CMS.DataEngine;
+using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.Core.Providers.General
 {
+    /// <summary>
+    /// Implementation of a Kentico Database Service.
+    /// </summary>
     [Export(typeof(ICmsDatabaseService))]
     public class KenticoCmsDatabaseService : ICmsDatabaseService
     {
+        #region Constants
+
         private const string ACTIVITY = "Creating Database";
         private const int ACTIVITYCOUNT = 533;
 
+        #endregion
+
+        #region Variables
+
         private int currentActivityCount = 0;
 
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the <see cref="ICmsApplicationService"/>. Set by MEF.
+        /// </summary>
         [Import]
         public ICmsApplicationService CmsApplicationService { get; set; }
 
+        /// <summary>
+        /// Gets or sets the <see cref="IOutputService"/>. Set by MEF.
+        /// </summary>
         [Import]
         public IOutputService OutputService { get; set; }
 
+        /// <summary>
+        /// Gets the version from the database.
+        /// </summary>
         public Version Version
         {
             get
@@ -43,6 +74,9 @@ namespace PoshKentico.Core.Providers.General
             }
         }
 
+        /// <summary>
+        /// Gets or sets the connection string for the Kentico database.
+        /// </summary>
         public string ConnectionString
         {
             get
@@ -57,11 +91,26 @@ namespace PoshKentico.Core.Providers.General
             }
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the database exists.
+        /// </summary>
         public bool Exists => DatabaseHelper.DatabaseExists(this.ConnectionString);
 
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Executes a query against the Kentico database.
+        /// </summary>
+        /// <param name="queryText">The text of the query to execute.</param>
+        /// <param name="parameters">The parameters to use when executing the query.</param>
         public void ExecuteQuery(string queryText, QueryDataParameters parameters) =>
             ConnectionHelper.ExecuteNonQuery(queryText, parameters, QueryTypeEnum.SQLQuery);
 
+        /// <summary>
+        /// Installs the Kentico SQL database.
+        /// </summary>
         public void InstallSqlDatabase()
         {
             this.currentActivityCount = 0;
@@ -73,7 +122,12 @@ namespace PoshKentico.Core.Providers.General
             };
             this.OutputService.WriteProgress(progressRecord);
 
-            bool success = SqlInstallationHelper.InstallDatabase(this.ConnectionString, SqlInstallationHelper.GetSQLInstallPath(), "", "", this.Log);
+            bool success = SqlInstallationHelper.InstallDatabase(
+                this.ConnectionString,
+                SqlInstallationHelper.GetSQLInstallPath(),
+                "An error occurred inserting the objects into the database.",
+                "An error occurred.",
+                this.Log);
 
             progressRecord = new ProgressRecord(Math.Abs(ACTIVITY.GetHashCode()), ACTIVITY, "Finished")
             {
@@ -83,8 +137,13 @@ namespace PoshKentico.Core.Providers.General
             this.OutputService.WriteProgress(progressRecord);
         }
 
+        /// <summary>
+        /// Gets a value indicating if the database is installed and up to date.
+        /// </summary>
+        /// <returns>A value indicating if the database is installed and up to date.</returns>
         public bool IsDatabaseInstalled() =>
-            this.Version != null;
+            this.Version != null &&
+            this.Version == this.CmsApplicationService.Version;
 
         private void Log(string message, MessageTypeEnum type)
         {
@@ -109,5 +168,8 @@ namespace PoshKentico.Core.Providers.General
                     throw new Exception(message);
             }
         }
+
+        #endregion
+
     }
 }
