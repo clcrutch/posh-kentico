@@ -20,10 +20,12 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using CMS.Membership;
+using CMS.Modules;
 using CMS.SiteProvider;
 using ImpromptuInterface;
 using PoshKentico.Core.Services.Configuration.Roles;
 using PoshKentico.Core.Services.Configuration.Users;
+using PoshKentico.Core.Services.Development.Modules;
 
 namespace PoshKentico.Core.Providers.Configuration.Roles
 {
@@ -137,7 +139,7 @@ namespace PoshKentico.Core.Providers.Configuration.Roles
             UserInfo userInfo = UserInfoProvider.GetUserInfo(user.UserName);
 
             // Gets the role
-            RoleInfo roleInfo = RoleInfoProvider.GetRoleInfo((int)role.RoleID);
+            RoleInfo roleInfo = RoleInfoProvider.GetRoleInfo(role.RoleName, role.SiteID);
 
             if ((userInfo != null) && (roleInfo != null))
             {
@@ -160,7 +162,7 @@ namespace PoshKentico.Core.Providers.Configuration.Roles
             UserInfo userInfo = UserInfoProvider.GetUserInfo(user.UserName);
 
             // Gets the role
-            RoleInfo roleInfo = RoleInfoProvider.GetRoleInfo((int)role.RoleID);
+            RoleInfo roleInfo = RoleInfoProvider.GetRoleInfo(role.RoleName, role.SiteID);
 
             if ((userInfo != null) && (roleInfo != null))
             {
@@ -195,6 +197,131 @@ namespace PoshKentico.Core.Providers.Configuration.Roles
                 // A user with the specified user name not exist or role does not exist.
                 throw new Exception(string.Format("A user with the user name {0} does not exist", user.UserName));
             }
+        }
+
+        /// <inheritdoc/>
+        public void AddModulePermissionToRole(IResource module, IRole role)
+        {
+            foreach (var permission in module.PermissionNames)
+            {
+                // Gets the module permission
+                PermissionNameInfo permissionInfo = PermissionNameInfoProvider.GetPermissionNameInfo(permission, module.ResourceName, module.ClassName);
+
+                // Gets the role
+                RoleInfo roleInfo = RoleInfoProvider.GetRoleInfo(role.RoleName, role.SiteID);
+
+                if ((permissionInfo != null) && (roleInfo != null))
+                {
+                    // Creates an object representing the role-permission relationship
+                    RolePermissionInfo newRolePermission = new RolePermissionInfo
+                    {
+                        // Assigns the permission to the role
+                        PermissionID = permissionInfo.PermissionId,
+                        RoleID = roleInfo.RoleID,
+                    };
+
+                    // Saves the role-permission relationship into the database
+                    RolePermissionInfoProvider.SetRolePermissionInfo(newRolePermission);
+                }
+                else
+                {
+                    // not exist
+                    throw new Exception(string.Format("The role or permission does not exist"));
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        public void RemoveModulePermissionFromRole(IResource module, IRole role)
+        {
+            foreach (var permission in module.PermissionNames)
+            {
+                // Gets the module permission
+                PermissionNameInfo permissionInfo = PermissionNameInfoProvider.GetPermissionNameInfo(permission, module.ResourceName, module.ClassName);
+
+                // Gets the role
+                RoleInfo roleInfo = RoleInfoProvider.GetRoleInfo(role.RoleName, role.SiteID);
+
+                if ((permissionInfo != null) && (roleInfo != null))
+                {
+                    // Gets the object representing the role-permission relationship
+                    RolePermissionInfo deleteRolePermission = RolePermissionInfoProvider.GetRolePermissionInfo(roleInfo.RoleID, permissionInfo.PermissionId);
+
+                    if (deleteRolePermission != null)
+                    {
+                        // Removes the permission from the role
+                        RolePermissionInfoProvider.DeleteRolePermissionInfo(deleteRolePermission);
+                    }
+                }
+                else
+                {
+                    // not exist
+                    throw new Exception(string.Format("The role or permission does not exist"));
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        public void AddUiElementToRole(IUIElement element, IRole role)
+        {
+            // Gets the role
+            RoleInfo roleInfo = RoleInfoProvider.GetRoleInfo(role.RoleName, role.SiteID);
+
+            // Gets the UI element (the element representing the Design tab in the Pages application in this case)
+            UIElementInfo elementInfo = UIElementInfoProvider.GetUIElementInfo(element.ElementResourceID, element.ElementName);
+
+            if ((roleInfo != null) && (elementInfo != null))
+            {
+                // Creates an object representing the role-UI element relationship
+                RoleUIElementInfo newRoleElement = new RoleUIElementInfo
+                {
+                    // Assigns the UI element to the role
+                    RoleID = roleInfo.RoleID,
+                    ElementID = elementInfo.ElementID,
+                };
+
+                // Saves the new relationship to the database
+                RoleUIElementInfoProvider.SetRoleUIElementInfo(newRoleElement);
+            }
+            else
+            {
+                // not exist
+                throw new Exception(string.Format("The role or UI element does not exist"));
+            }
+        }
+
+        /// <inheritdoc/>
+        public void RemoveUiElementFromRole(IUIElement element, IRole role)
+        {
+            // Gets the role
+            RoleInfo roleInfo = RoleInfoProvider.GetRoleInfo(role.RoleName, role.SiteID);
+
+            // Gets the UI element (the element representing the Design tab in the Pages application in this case)
+            UIElementInfo elementInfo = UIElementInfoProvider.GetUIElementInfo(element.ElementResourceID, element.ElementName);
+
+            if ((roleInfo != null) && (elementInfo != null))
+            {
+                // Gets the object representing the relationship between the role and the UI element
+                RoleUIElementInfo deleteRoleElement = RoleUIElementInfoProvider.GetRoleUIElementInfo(roleInfo.RoleID, elementInfo.ElementID);
+
+                if (deleteRoleElement != null)
+                {
+                    // Removes the UI element from the role
+                    RoleUIElementInfoProvider.DeleteRoleUIElementInfo(deleteRoleElement);
+                }
+            }
+            else
+            {
+                // not exist
+                throw new Exception(string.Format("The role or UI element does not exist"));
+            }
+        }
+
+        /// <inheritdoc/>
+        public IUIElement GetUiElement(string resourceName, string elementName)
+        {
+            UIElementInfo elementInfo = UIElementInfoProvider.GetUIElementInfo(resourceName, elementName);
+            return elementInfo.ActLike<IUIElement>();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿// <copyright file="IRole.cs" company="Chris Crutchfield">
+﻿// <copyright file="IUIElement.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -15,29 +15,24 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-namespace PoshKentico.Core.Services.Configuration.Roles
+namespace PoshKentico.Core.Services.Development.Modules
 {
     /// <summary>
-    /// Represents a Role Object.
+    /// Represents a UIElementInfo Object.
     /// </summary>
-    public interface IRole
+    public interface IUIElement
     {
         #region Properties
 
         /// <summary>
-        /// Gets the display name for the role.
+        /// Gets the element resource id.
         /// </summary>
-        string RoleDisplayName { get; }
+        int ElementResourceID { get; }
 
         /// <summary>
-        /// Gets the role name.
+        /// Gets the element name.
         /// </summary>
-        string RoleName { get; }
-
-        /// <summary>
-        /// Gets the site id.
-        /// </summary>
-        int SiteID { get; }
+        string ElementName { get; }
         #endregion
     }
 }

@@ -1,4 +1,4 @@
-﻿// <copyright file="AddCmsUserToRoleBusiness.cs" company="Chris Crutchfield">
+﻿// <copyright file="RemoveCmsUIElementFromRoleBusiness.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -16,17 +16,18 @@
 // </copyright>
 
 using System.ComponentModel.Composition;
+using CMS.Modules;
 using ImpromptuInterface;
 using PoshKentico.Core.Services.Configuration.Roles;
-using PoshKentico.Core.Services.Configuration.Users;
+using PoshKentico.Core.Services.Development.Modules;
 
 namespace PoshKentico.Business.Configuration.Roles
 {
     /// <summary>
-    /// Business Layer for the Add-CMSUserToRole cmdlet.
+    /// Business Layer of Remove-CmsUIElementFromRole cmdlet.
     /// </summary>
-    [Export(typeof(AddCmsUserToRoleBusiness))]
-    public class AddCmsUserToRoleBusiness : CmdletBusinessBase
+    [Export(typeof(RemoveCmsUIElementFromRoleBusiness))]
+    public class RemoveCmsUIElementFromRoleBusiness : CmdletBusinessBase
     {
         #region Properties
 
@@ -41,18 +42,25 @@ namespace PoshKentico.Business.Configuration.Roles
         #region Methods
 
         /// <summary>
-        /// Add a user to a role.
+        /// Remove an UI element from a role.
         /// </summary>
-        /// <param name="userName">The user name of the user to add to the specified role.</param>
-        /// <param name="role">The role to add a user to.</param>
-        public void AddUserToRole(string userName, IRole role)
+        /// <param name="role">The role to remove an UI element from.</param>
+        /// <param name="resourceName">The resource name related to the UI element <see cref="IUIElement"/>.</param>
+        /// <param name="elementName">The element name of the ui element <see cref="IUIElement"/>.</param>
+        public void RemoveUiElementFromRole(IRole role, string resourceName, string elementName)
         {
-            var user = new
+            var elementInfo = this.RoleService.GetUiElement(resourceName, elementName);
+            if (elementInfo != null)
             {
-                UserName = userName,
-            };
-            this.RoleService.AddUserToRole(user.ActLike<IUser>(), role);
+                var element = new
+                {
+                    ElementName = elementName,
+                    elementInfo.ElementResourceID,
+                };
+                this.RoleService.RemoveUiElementFromRole(element.ActLike<IUIElement>(), role);
+            }
         }
         #endregion
+
     }
 }

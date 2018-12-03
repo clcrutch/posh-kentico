@@ -1,4 +1,4 @@
-﻿// <copyright file="NewCmsRoleTests.cs" company="Chris Crutchfield">
+﻿// <copyright file="AddCmsUserToRoleTests.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -16,47 +16,40 @@
 // </copyright>
 
 using System.Diagnostics.CodeAnalysis;
-using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Configuration.Roles;
 using PoshKentico.Core.Services.Configuration.Roles;
+using PoshKentico.Core.Services.Configuration.Users;
 using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests.Configuration.Roles
 {
     [ExcludeFromCodeCoverage]
     [TestFixture]
-    public class NewCmsRoleTests
+    public class AddCmsUserToRoleTests
     {
         [Test]
-        public void NewCmsRoleTest()
+        public void AddCmsPermissionToRoleTest()
         {
-            string displayName = "My Role1";
-            string roleName = "MyRole1";
-            int siteID = 0;
-
-            var roleMock1 = new Mock<IRole>();
-            roleMock1.Setup(x => x.RoleDisplayName).Returns(displayName);
-
-            IRole passedRole = null;
             var roleServiceMock = new Mock<IRoleService>();
-            roleServiceMock.Setup(x => x.CreateRole(It.IsAny<IRole>())).Callback<IRole>(x => passedRole = x).Returns(roleMock1.Object);
 
-            var businessLayer = new NewCmsRoleBusiness()
+            var businessLayer = new AddCmsUserToRoleBusiness
             {
                 OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 RoleService = roleServiceMock.Object,
             };
 
-            var result = businessLayer.CreateRole(displayName, roleName, siteID);
+            var roleMock1 = new Mock<IRole>();
+            roleMock1.SetupGet(x => x.RoleName).Returns("My Role1");
+            roleMock1.SetupGet(x => x.SiteID).Returns(1);
 
-            result.Should().NotBeNull();
+            string userName = "test";
 
-            passedRole.RoleDisplayName.Should().Be(displayName);
-            passedRole.RoleName.Should().Be(roleName);
-            passedRole.SiteID.Should().Be(siteID);
+            businessLayer.AddUserToRole(userName, roleMock1.Object);
+
+            roleServiceMock.Verify(x => x.AddUserToRole(It.IsAny<IUser>(), roleMock1.Object));
         }
     }
 }

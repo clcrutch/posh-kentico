@@ -1,4 +1,4 @@
-﻿// <copyright file="AddCmsUserToRoleBusiness.cs" company="Chris Crutchfield">
+﻿// <copyright file="RemoveCmsPermissionFromRoleBusiness.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -18,15 +18,15 @@
 using System.ComponentModel.Composition;
 using ImpromptuInterface;
 using PoshKentico.Core.Services.Configuration.Roles;
-using PoshKentico.Core.Services.Configuration.Users;
+using PoshKentico.Core.Services.Development.Modules;
 
 namespace PoshKentico.Business.Configuration.Roles
 {
     /// <summary>
-    /// Business Layer for the Add-CMSUserToRole cmdlet.
+    /// Business Layer of Remove-CmsPermissionFromRole cmdlet.
     /// </summary>
-    [Export(typeof(AddCmsUserToRoleBusiness))]
-    public class AddCmsUserToRoleBusiness : CmdletBusinessBase
+    [Export(typeof(RemoveCmsPermissionFromRoleBusiness))]
+    public class RemoveCmsPermissionFromRoleBusiness : CmdletBusinessBase
     {
         #region Properties
 
@@ -41,17 +41,21 @@ namespace PoshKentico.Business.Configuration.Roles
         #region Methods
 
         /// <summary>
-        /// Add a user to a role.
+        /// Remove a module permission to a role.
         /// </summary>
-        /// <param name="userName">The user name of the user to add to the specified role.</param>
-        /// <param name="role">The role to add a user to.</param>
-        public void AddUserToRole(string userName, IRole role)
+        /// <param name="role">The role to remove a module permission from.</param>
+        /// <param name="permissionNames">The permission names of the module <see cref="IResource"/>.</param>
+        /// <param name="resourceName">The resource name of the module <see cref="IResource"/>.</param>
+        /// <param name="className">The class name of the module <see cref="IResource"/>.</param>
+        public void RemovePermissionFromRole(IRole role, string[] permissionNames, string resourceName, string className = null)
         {
-            var user = new
+            var module = new
             {
-                UserName = userName,
+                PermissionNames = permissionNames,
+                ResourceName = resourceName,
+                ClassName = className,
             };
-            this.RoleService.AddUserToRole(user.ActLike<IUser>(), role);
+            this.RoleService.RemoveModulePermissionFromRole(module.ActLike<IResource>(), role);
         }
         #endregion
     }

@@ -1,4 +1,4 @@
-﻿// <copyright file="AddCmsUserToRoleCmdlet.cs" company="Chris Crutchfield">
+﻿// <copyright file="RemoveCmsUserFromRoleCmdlet.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -27,41 +27,42 @@ using AliasAttribute = System.Management.Automation.AliasAttribute;
 namespace PoshKentico.Cmdlets.Configuration.Roles
 {
     /// <summary>
-    /// <para type="synopsis">Adds a user to specified roles.</para>
-    /// <para type="description">Adds a user to specified roles based off of the provided input.</para>
+    /// <para type="synopsis">Removes a user to a specified role.</para>
+    /// <para type="description">Removes a user to a specified role based off of the provided input.</para>
+    /// <para type="description">This cmdlet returns the newly modified role when the -PassThru switch is used.</para>
     /// <example>
-    ///     <para>Add a user with username "Username" to all roles with role name "role".</para>
-    ///     <code>Add-CMSUserToRole -UserNameToAdd "Username" -RoleName "Rolename"</code>
+    ///     <para>Remove a user with username "Username" to all roles with a role name "role".</para>
+    ///     <code>Remove-CMSUserFromRole -UserNameToRemove "Username" -RoleName "Rolename"</code>
     /// </example>
     /// <example>
-    ///     <para>Add a user with username "Username" to all roles with role name "*role*".</para>
-    ///     <code>Add-CMSUserToRole -UserNameToAdd "Username" -RoleName "role" -RegularExpression</code>
+    ///     <para>Remove a user with username "Username" to all roles with  role name "*role*".</para>
+    ///     <code>Remove-CMSUserFromRole -UserNameToRemove "Username" -RoleName "role" -RegularExpression</code>
     /// </example>
     /// <example>
-    ///     <para>Add a user with username "Username" to all roles with role name "role", site is 2.</para>
-    ///     <code>Add-CMSUserToRole -UserNameToAdd "Username" -RoleName "role" -SiteID 2</code>
+    ///     <para>Remove a user with username "Username" to all roles with  role name "role", site is 2.</para>
+    ///     <code>Remove-CMSUserFromRole -UserNameToRemove "Username" -RoleName "role" -SiteID 2</code>
     /// </example>
     ///  <example>
-    ///     <para>Add a user with username "Username" to all roles with role name "*role*", site is 2.</para>
-    ///     <code>Add-CMSUserToRole -UserNameToAdd "Username" -RoleName "role" -SiteID 2 -RegularExpression</code>
+    ///     <para>Remove a user with username "Username" to all roles with  role name "*role*", site is 2.</para>
+    ///     <code>Remove-CMSUserFromRole -UserNameToRemove "Username" -RoleName "role" -SiteID 2 -RegularExpression</code>
     /// </example>
     /// <example>
-    ///     <para>Add a user with username "Username" with the specified role IDs.</para>
-    ///     <code>Add-CMSUserToRole -UserNameToAdd "Username" -RoleIds 1,2,3</code>
+    ///     <para>Remove a user with username "Username" with the specified role IDs.</para>
+    ///     <code>Remove-CMSUserFromRole -UserNameToRemove "Username" -RoleIds 1,2,3</code>
     /// </example>
     /// <example>
-    ///     <para>Add a user with username "Username" with the specified role IDs.</para>
-    ///     <code>Add-CMSUserToRole -UserNameToAdd "Username" -UserName "Username"</code>
+    ///     <para>Remove a user with username "Username" with the specified role IDs.</para>
+    ///     <code>Remove-CMSUserFromRole -UserNameToRemove "Username" -UserName "Username"</code>
     /// </example>
     ///  <example>
-    ///     <para>Add a user with username "Username" to all roles with a role name "role".</para>
-    ///     <code>$role | Add-CMSUserToRole -UserNameToAdd "Username"</code>
+    ///     <para>Remove a user with username "Username" to all roles with a role name "role".</para>
+    ///     <code>$role | Remove-CMSUserFromRole -UserNameToRemove "Username"</code>
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
-    [Cmdlet(VerbsCommon.Add, "CmsUserToRole")]
-    [Alias("autorole")]
-    public class AddCmsUserToRoleCmdlet : GetCmsRoleCmdlet
+    [Cmdlet(VerbsCommon.Remove, "CmsUserToRole")]
+    [Alias("rufrole")]
+    public class RemoveCmsUserFromRoleCmdlet : GetCmsRoleCmdlet
     {
         #region Constants
 
@@ -80,7 +81,7 @@ namespace PoshKentico.Cmdlets.Configuration.Roles
         [Parameter(Mandatory = true, Position = 0, ParameterSetName = USERNAME)]
         [Parameter(Mandatory = true, Position = 0, ParameterSetName = USEROBJECT)]
         [Parameter(Mandatory = true, Position = 0, ParameterSetName = ROLEOBJECT)]
-        public string UserNameToAdd { get; set; }
+        public string UserNameToRemove { get; set; }
 
         /// <summary>
         /// <para type="description">The role to add a user to.</para>
@@ -92,7 +93,7 @@ namespace PoshKentico.Cmdlets.Configuration.Roles
         /// Gets or sets the Business layer for this role. Populated by MEF.
         /// </summary>
         [Import]
-        public AddCmsUserToRoleBusiness AddBusinessLayer { get; set; }
+        public RemoveCmsUserFromRoleBusiness RemoveBusinessLayer { get; set; }
         #endregion
 
         #region Methods
@@ -118,7 +119,7 @@ namespace PoshKentico.Cmdlets.Configuration.Roles
                 return;
             }
 
-            this.AddBusinessLayer.AddUserToRole(this.UserNameToAdd, role);
+            this.RemoveBusinessLayer.RemoveUserFromRole(this.UserNameToRemove, role);
         }
         #endregion
 
