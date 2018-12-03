@@ -27,35 +27,33 @@ using AliasAttribute = System.Management.Automation.AliasAttribute;
 namespace PoshKentico.Cmdlets.Configuration.Sites
 {
     /// <summary>
-    /// <para type="synopsis">Adds a domain alias to a specified site.</para>
-    /// <para type="description">Adds a domain alias to a specified site based off of the provided input.</para>
+    /// <para type="synopsis">Adds domain aliases to a specified site.</para>
+    /// <para type="description">Adds domain aliases to a specified site based off of the provided input.</para>
     /// <example>
-    ///     <para>Add a domain alias with alias name "alias" to a specified site specifying the site name "*bas*", display name "*bas*", or a domain name "*bas*".</para>
-    ///     <code>Add-CMSSiteDomainAlias -SiteName "*bas*" -AliasName "alias"</code>
+    ///     <para>Add domain aliases with alias name "alias" to a specified site specifying the site name "*bas*", display name "*bas*", or a domain name "*bas*".</para>
+    ///     <code>Add-CMSSiteDomainAlias -SiteName "*bas*" -AliasNames "alias"</code>
     /// </example>
     /// <example>
-    ///     <para>Add a domain alias with alias name "alias" to a specified site specifying the site name "basic", display name "basic", or a domain name "basic".</para>
-    ///     <code>Add-CMSSiteDomainAlias -SiteName "basic" -EXACT -AliasName "alias"</code>
+    ///     <para>Add domain aliases with alias name "alias" to a specified site specifying the site name "basic", display name "basic", or a domain name "basic".</para>
+    ///     <code>Add-CMSSiteDomainAlias -SiteName "basic" -AliasNames "alias" -RegularExpression </code>
     /// </example>
     /// <example>
-    ///     <para>Add a domain alias with alias name "alias" to a site.</para>
-    ///     <code>$site | Add-CMSSiteDomainAlias -AliasName "alias"</code>
+    ///     <para>Add domain aliases with alias name "alias" to a site.</para>
+    ///     <code>$site | Add-CMSSiteDomainAlias -AliasNames "alias"</code>
     /// </example>
     /// <example>
-    ///     <para>Add a domain alias with alias name "alias" with the specified site IDs.</para>
-    ///     <code>Add-CMSSiteDomainAlias -ID 1,2,3 -AliasName "alias"</code>
+    ///     <para>Add domain aliases with alias name "alias" with the specified site IDs.</para>
+    ///     <code>Add-CMSSiteDomainAlias -SiteIds 1,2,3 -AliasNames "alias"</code>
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
-    [Cmdlet(VerbsCommon.Add, "CMSSiteDomainAlias")]
-    [Alias("asda")]
-    public class AddCmsSiteDomainAliasCmdlet : MefCmdlet
+    [Cmdlet(VerbsCommon.Add, "CMSSiteDomainAlias", DefaultParameterSetName = NONE)]
+    [Alias("aatosite")]
+    public class AddCmsSiteDomainAliasCmdlet : GetCmsSiteCmdlet
     {
         #region Constants
 
-        private const string OBJECTSET = "Object";
-        private const string SITENAMESET = "Property";
-        private const string IDSETNAME = "ID";
+        private const string SITEOBJECTSET = "Object";
 
         #endregion
 
@@ -64,39 +62,25 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         /// <summary>
         /// <para type="description">A reference to the site.</para>
         /// </summary>
-        [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0, ParameterSetName = OBJECTSET)]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0, ParameterSetName = SITEOBJECTSET)]
         [Alias("Site")]
         public SiteInfo SiteToAdd { get; set; }
 
         /// <summary>
-        /// <para type="description">The site name for the site.</para>
+        /// <para type="description">The alias to add to the site.</para>
         /// </summary>
-        [Parameter(Mandatory = true, Position = 0, ParameterSetName = SITENAMESET)]
-        public string SiteName { get; set; }
-
-        /// <summary>
-        /// <para type="description">If set, the match is exact, else the match performs a contains for site name.</para>
-        /// </summary>
-        [Parameter(ParameterSetName = SITENAMESET)]
-        public SwitchParameter Exact { get; set; }
-
-        /// <summary>
-        /// <para type="description">The IDs of the site.</para>
-        /// </summary>
-        [Parameter(Mandatory = true, Position = 0, ParameterSetName = IDSETNAME)]
-        public int[] ID { get; set; }
-
-        /// <summary>
-        /// <para type="description">The IDs of the site.</para>
-        /// </summary>
-        [Parameter(Mandatory = true, Position = 1)]
-        public string AliasName { get; set; }
+        [Parameter(Mandatory = true, Position = 1, ParameterSetName = NONE)]
+        [Parameter(Mandatory = true, Position = 1, ParameterSetName = DISPLAYNAME)]
+        [Parameter(Mandatory = true, Position = 1, ParameterSetName = IDSETNAME)]
+        [Parameter(Mandatory = true, Position = 1, ParameterSetName = USEROBJECT)]
+        [Parameter(Mandatory = true, Position = 1, ParameterSetName = SITEOBJECTSET)]
+        public string[] AliasNames { get; set; }
 
         /// <summary>
         ///  Gets or sets the Business Layer for adding domain alias to this site.  Populated by MEF.
         /// </summary>
         [Import]
-        public AddCmsSiteDomainAliasBusiness BusinessLayer { get; set; }
+        public AddCmsSiteDomainAliasBusiness AddBusinessLayer { get; set; }
 
         #endregion
 
@@ -105,20 +89,29 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
-            switch (this.ParameterSetName)
+            if (this.ParameterSetName == SITEOBJECTSET)
             {
-                case OBJECTSET:
-                    this.BusinessLayer.AddDomainAlias(this.SiteToAdd.ActLike<ISite>(), this.AliasName);
-                    break;
-                case SITENAMESET:
-                    this.BusinessLayer.AddDomainAlias(this.SiteName, this.Exact.ToBool(), this.AliasName);
-                    break;
-                case IDSETNAME:
-                    this.BusinessLayer.AddDomainAlias(this.ID, this.AliasName);
-                    break;
+                this.ActOnObject(this.SiteToAdd.ActLike<ISite>());
+            }
+            else
+            {
+                base.ProcessRecord();
             }
         }
 
+        /// <inheritdoc />
+        protected override void ActOnObject(ISite site)
+        {
+            if (site == null)
+            {
+                return;
+            }
+
+            foreach (string alias in this.AliasNames)
+            {
+                this.AddBusinessLayer.AddDomainAlias(site, alias);
+            }
+        }
         #endregion
 
     }

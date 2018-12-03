@@ -77,7 +77,7 @@ namespace PoshKentico.Business.Configuration.Sites
         }
 
         [TestCase]
-        public void GetSiteTest_MatchString_ExactFalse()
+        public void GetSiteTest_MatchString_IsRegexTrue()
         {
             var siteServiceMock = new Mock<ISiteService>();
 
@@ -103,17 +103,17 @@ namespace PoshKentico.Business.Configuration.Sites
                 SiteService = siteServiceMock.Object,
             };
 
-            businessLayer.GetSites("site", false).Should().NotBeNullOrEmpty().And.HaveCount(2);
+            businessLayer.GetSites("site", true).Should().NotBeNullOrEmpty().And.HaveCount(2);
 
-            businessLayer.GetSites("my", false).Should().NotBeNullOrEmpty().And.HaveCount(1);
+            businessLayer.GetSites("my", true).Should().NotBeNullOrEmpty().And.HaveCount(1);
 
-            businessLayer.GetSites("your", false).Should().NotBeNullOrEmpty().And.HaveCount(1);
+            businessLayer.GetSites("your", true).Should().NotBeNullOrEmpty().And.HaveCount(1);
 
             siteServiceMock.VerifyGet(x => x.Sites);
         }
 
         [TestCase]
-        public void GetSiteTest_MatchString_ExactTrue()
+        public void GetSiteTest_MatchString_IsRegexFalse()
         {
             var siteServiceMock = new Mock<ISiteService>();
 
@@ -139,9 +139,9 @@ namespace PoshKentico.Business.Configuration.Sites
                 SiteService = siteServiceMock.Object,
             };
 
-            businessLayer.GetSites("site", true).Should().BeEmpty();
+            businessLayer.GetSites("site", false).Should().BeEmpty();
 
-            businessLayer.GetSites("your site2", true).Should().NotBeNullOrEmpty().And.HaveCount(1);
+            businessLayer.GetSites("your site2", false).Should().NotBeNullOrEmpty().And.HaveCount(1);
 
             siteServiceMock.VerifyGet(x => x.Sites);
         }

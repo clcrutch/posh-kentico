@@ -27,6 +27,11 @@ namespace PoshKentico.Core.Services.Configuration.Users
         #region Properties
 
         /// <summary>
+        /// Gets the user id for the user.
+        /// </summary>
+        int UserID { get; }
+
+        /// <summary>
         /// Gets the full name for the user.
         /// </summary>
         string FullName { get; }

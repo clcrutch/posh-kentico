@@ -24,7 +24,7 @@ using PoshKentico.Core.Services.General;
 namespace PoshKentico.Core.Providers.General
 {
     /// <summary>
-    /// Implementation of a Kentico Database Service.
+    /// Implementation of <see cref="ICmsDatabaseService"/>.
     /// </summary>
     [Export(typeof(ICmsDatabaseService))]
     public class KenticoCmsDatabaseService : ICmsDatabaseService
@@ -45,13 +45,12 @@ namespace PoshKentico.Core.Providers.General
         #region Properties
 
         /// <summary>
-        /// Gets or sets the <see cref="ICmsApplicationService"/>. Set by MEF.
-        /// </summary>
+        /// Gets or sets the <see cref="ICmsApplicationService"/>. Populated by MEF.
         [Import]
         public ICmsApplicationService CmsApplicationService { get; set; }
 
         /// <summary>
-        /// Gets or sets the <see cref="IOutputService"/>. Set by MEF.
+        /// Gets or sets the <see cref="IOutputService"/>. Populated by MEF.
         /// </summary>
         [Import]
         public IOutputService OutputService { get; set; }

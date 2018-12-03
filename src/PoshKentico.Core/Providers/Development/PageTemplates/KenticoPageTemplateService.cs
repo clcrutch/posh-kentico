@@ -101,11 +101,14 @@ namespace PoshKentico.Core.Providers.Development.PageTemplates
                 CategoryID = pageTemplate.CategoryID,
                 FileName = pageTemplate.FileName,
                 DisplayName = pageTemplate.DisplayName,
+                ShowAsMasterTemplate = pageTemplate.ShowAsMasterTemplate,
+                PageTemplateForAllPages = pageTemplate.PageTemplateForAllPages,
                 CodeName = pageTemplate.CodeName,
                 PageTemplateLayout = pageTemplate.PageTemplateLayout,
                 PageTemplateIconClass = pageTemplate.PageTemplateIconClass,
                 PageTemplateCSS = pageTemplate.PageTemplateCSS,
                 IsReusable = pageTemplate.IsReusable,
+                PageTemplateLayoutType = pageTemplate.PageTemplateLayoutType,
 
                 PageTemplateProperties = FormInfo.GetEmptyFormDocument().OuterXml,
             };
@@ -121,7 +124,7 @@ namespace PoshKentico.Core.Providers.Development.PageTemplates
 
         /// <inheritdoc />
         public void Delete(IPageTemplate pageTemplate) =>
-            PageTemplateInfoProvider.DeletePageTemplate(pageTemplate.PageTemplateID);
+            PageTemplateInfoProvider.DeletePageTemplate(pageTemplate.PageTemplateId);
 
         /// <inheritdoc />
         public IEnumerable<IPageTemplateCategory> GetPageTemplateCategories(IPageTemplateCategory parentPageTemplateCategory) =>
@@ -176,7 +179,7 @@ namespace PoshKentico.Core.Providers.Development.PageTemplates
         /// <inheritdoc />
         public void Update(IPageTemplate pageTemplate)
         {
-            var pageTemplateInfo = PageTemplateInfoProvider.GetPageTemplateInfo(pageTemplate.PageTemplateID);
+            var pageTemplateInfo = PageTemplateInfoProvider.GetPageTemplateInfo(pageTemplate.PageTemplateId);
 
             if (pageTemplateInfo == null)
             {
@@ -228,7 +231,7 @@ namespace PoshKentico.Core.Providers.Development.PageTemplates
 
         private void SaveFormUpdates(IPageTemplate pageTemplate)
         {
-            var pageTemplateInfo = PageTemplateInfoProvider.GetPageTemplateInfo(pageTemplate.PageTemplateID);
+            var pageTemplateInfo = PageTemplateInfoProvider.GetPageTemplateInfo(pageTemplate.PageTemplateId);
 
             if (pageTemplateInfo == null)
             {

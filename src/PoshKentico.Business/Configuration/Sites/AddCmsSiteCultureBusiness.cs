@@ -34,12 +34,6 @@ namespace PoshKentico.Business.Configuration.Sites
         /// </summary>
         [Import]
         public ISiteService SiteService { get; set; }
-
-        /// <summary>
-        /// Gets or sets a reference to the <see cref="GetCmsSiteBusiness"/> used to get the site to add culture to.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public GetCmsSiteBusiness GetCmsSiteBusiness { get; set; }
         #endregion
 
         #region Methods
@@ -51,45 +45,9 @@ namespace PoshKentico.Business.Configuration.Sites
         /// <param name="cultureCode">The culture code for the culture to add to the site.</param>
         public void AddCulture(ISite site, string cultureCode)
         {
-            this.AddSiteCulture(site, cultureCode);
-        }
-
-        /// <summary>
-        /// Adds the culture to a <see cref="ISite"/> in the CMS System.
-        /// </summary>
-        /// <param name="matchString">the string which to match the site to.</param>
-        /// <param name="exact">A boolean which indicates if the match should be exact.</param>
-        /// <param name="cultureCode">The culture code for the culture to add to the site.</param>
-        public void AddCulture(string matchString, bool exact, string cultureCode)
-        {
-            foreach (var site in this.GetCmsSiteBusiness.GetSites(matchString, exact))
-            {
-                this.AddSiteCulture(site, cultureCode);
-            }
-        }
-
-        /// <summary>
-        /// Adds the culture to a <see cref="ISite"/> in the CMS System.
-        /// </summary>
-        /// <param name="ids">The IDs of the <see cref="ISite"/> to add culture to.</param>
-        /// <param name="cultureCode">The culture code for the culture to add to the site.</param>
-        public void AddCulture(int[] ids, string cultureCode)
-        {
-            foreach (var site in this.GetCmsSiteBusiness.GetSites(ids))
-            {
-                this.AddSiteCulture(site, cultureCode);
-            }
-        }
-
-        /// <summary>
-        /// Add a culture to a site.
-        /// </summary>
-        /// <param name="site">The site to add culture to.</param>
-        /// <param name="cultureCode">The culture code for the culture to add to the site.</param>
-        private void AddSiteCulture(ISite site, string cultureCode)
-        {
             this.SiteService.AddSiteCulture(site, cultureCode);
         }
+
         #endregion
 
     }

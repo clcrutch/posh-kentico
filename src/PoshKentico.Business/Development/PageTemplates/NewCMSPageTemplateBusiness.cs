@@ -15,9 +15,12 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
+using CMS.DataEngine;
 using PoshKentico.Core.Services.Development.PageTemplates;
+using PoshKentico.Core.Services.Development.WebParts;
 
 namespace PoshKentico.Business.Development.PageTemplates
 {
@@ -35,12 +38,16 @@ namespace PoshKentico.Business.Development.PageTemplates
         /// <param name="path">The path to create the <see cref="IPageTemplate"/> at.</param>
         /// <param name="fileName">The file name for the underlying class file.</param>
         /// <param name="displayName">The display name for the <see cref="IPageTemplate"/>.</param>
+        /// <param name="description">The description name for the <see cref="IPageTemplate"/>.</param>
+        /// <param name="showAsMasterTemplate">Indicates whether to show page template as master template.</param>
+        /// <param name="pageTemplateForAllPages">Indicates whether page template is for all pages.</param>
+        /// <param name="layoutType">Page template layout type.</param>
         /// <param name="layout">Page template layout.</param>
         /// <param name="iconClass">Page template icon class defining the page template thumbnail.</param>
         /// <param name="css">Page template CSS.</param>
         /// <param name="isReusable">Gets or sets flag whether page template is reusable.</param>
         /// <returns>The newly created <see cref="IPageTemplate"/>.</returns>
-        public IPageTemplate CreatePageTemplate(string path, string fileName, string displayName, string layout, string iconClass, string css, bool isReusable)
+        public IPageTemplate CreatePageTemplate(string path, string fileName, string displayName, string description, bool showAsMasterTemplate, bool pageTemplateForAllPages, LayoutTypeEnum layoutType, string layout, string iconClass, string css, bool isReusable)
         {
             var name = path.Substring(path.LastIndexOf('/') + 1);
             var basePath = path.Substring(0, path.LastIndexOf('/'));
@@ -52,7 +59,7 @@ namespace PoshKentico.Business.Development.PageTemplates
 
             var parent = this.GetCategoryFromPath(basePath);
 
-            return this.CreatePageTemplate(name, fileName, displayName, layout, iconClass, css, isReusable, parent);
+            return this.CreatePageTemplate(name, fileName, displayName, description, showAsMasterTemplate, pageTemplateForAllPages, layoutType, layout, iconClass, css, isReusable, parent);
         }
 
         /// <summary>
@@ -61,13 +68,17 @@ namespace PoshKentico.Business.Development.PageTemplates
         /// <param name="name">The name for the <see cref="IPageTemplate"/>.</param>
         /// <param name="fileName">The file name for the underlying class file.</param>
         /// <param name="displayName">The display name for the <see cref="IPageTemplate"/>.</param>
+        /// <param name="description">The description name for the <see cref="IPageTemplate"/>.</param>
+        /// <param name="showAsMasterTemplate">Indicates whether to show page template as master template.</param>
+        /// <param name="pageTemplateForAllPages">Indicates whether page template is for all pages.</param>
+        /// <param name="layoutType">Page template layout type.</param>
         /// <param name="layout">Page template layout.</param>
         /// <param name="iconClass">Page template icon class defining the page template thumbnail.</param>
         /// <param name="css">Page template CSS.</param>
         /// <param name="isReusable">Gets or sets flag whether page template is reusable.</param>
         /// <param name="pageTemplateCategory">The <see cref="IPageTemplateCategory"/> to create the <see cref="IPageTemplate"/> under.</param>
         /// <returns>The newly created <see cref="IPageTemplate"/>.</returns>
-        public virtual IPageTemplate CreatePageTemplate(string name, string fileName, string displayName, string layout, string iconClass, string css, bool isReusable, IPageTemplateCategory pageTemplateCategory)
+        public virtual IPageTemplate CreatePageTemplate(string name, string fileName, string displayName, string description, bool showAsMasterTemplate, bool pageTemplateForAllPages, LayoutTypeEnum layoutType, string layout, string iconClass, string css, bool isReusable, IPageTemplateCategory pageTemplateCategory)
         {
             if (string.IsNullOrEmpty(displayName))
             {
@@ -79,11 +90,14 @@ namespace PoshKentico.Business.Development.PageTemplates
                 DisplayName = displayName,
                 FileName = fileName,
                 CodeName = name,
+                ShowAsMasterTemplate = showAsMasterTemplate,
+                PageTemplateForAllPages = pageTemplateForAllPages,
+                Description = description,
                 PageTemplateLayout = layout,
+                PageTemplateLayoutType = layoutType,
                 PageTemplateIconClass = iconClass,
                 PageTemplateCSS = css,
                 IsReusable = isReusable,
-
                 CategoryID = pageTemplateCategory.CategoryId,
             };
 
@@ -101,7 +115,7 @@ namespace PoshKentico.Business.Development.PageTemplates
 
             public int PageTemplateSiteID { get; set; }
 
-            public int PageTemplateID { get; set; }
+            public int PageTemplateId { get; set; }
 
             public string DisplayName { get; set; }
 
@@ -109,19 +123,27 @@ namespace PoshKentico.Business.Development.PageTemplates
 
             public string Description { get; set; }
 
+            public bool ShowAsMasterTemplate { get; set; }
+
+            public bool PageTemplateForAllPages { get; set; }
+
             public string PageTemplates { get; set; }
 
             public string CodeName { get; set; }
 
             public string PageTemplateProperties { get; set; }
 
-            public string PageTemplateLayout { get; set; }
-
             public string PageTemplateIconClass { get; set; }
 
             public string PageTemplateCSS { get; set; }
 
             public bool IsReusable { get; set; }
+
+            public string PageTemplateLayout { get; set; }
+
+            public LayoutTypeEnum PageTemplateLayoutType { get; set; }
+
+            public List<IWebPartZoneInstance> WebPartZones { get; }
         }
 
         #endregion

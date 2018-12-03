@@ -35,7 +35,7 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// </example>
     /// <example>
     ///     <para>Starts a site with a site name "basic", display name "basic", or a domain name "basic".</para>
-    ///     <code>Start-CMSSite -Site "basic" -EXACT</code>
+    ///     <code>Start-CMSSite -Site "basic" -RegularExpression</code>
     /// </example>
     /// <example>
     ///     <para>Starts a site.</para>
@@ -43,19 +43,17 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// </example>
     /// <example>
     ///     <para>Starts all the sites with the specified IDs.</para>
-    ///     <code>Start-CMSSite -ID 1,2,3</code>
+    ///     <code>Start-CMSSite -SiteIds 1,2,3</code>
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet("Start", "CMSSite")]
     [Alias("startsite")]
-    public class StartCmsSiteCmdlet : MefCmdlet
+    public class StartCmsSiteCmdlet : GetCmsSiteCmdlet
     {
         #region Constants
 
-        private const string OBJECTSET = "Object";
-        private const string PROPERTYSET = "Property";
-        private const string IDSETNAME = "ID";
+        private const string SITEOBJECTSET = "Object";
 
         #endregion
 
@@ -64,34 +62,15 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         /// <summary>
         /// <para type="description">A reference to the site to start.</para>
         /// </summary>
-        [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0, ParameterSetName = OBJECTSET)]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0, ParameterSetName = SITEOBJECTSET)]
         [Alias("Site")]
         public SiteInfo SiteToStart { get; set; }
-
-        /// <summary>
-        /// <para type="description">The site name for the site to start.</para>
-        /// <para type="description">Site name cannot be blank.</para>
-        /// </summary>
-        [Parameter(Mandatory = true, Position = 0, ParameterSetName = PROPERTYSET)]
-        public string SiteName { get; set; }
-
-        /// <summary>
-        /// <para type="description">If set, the match is exact, else the match performs a contains for site name.</para>
-        /// </summary>
-        [Parameter(ParameterSetName = PROPERTYSET)]
-        public SwitchParameter Exact { get; set; }
-
-        /// <summary>
-        /// <para type="description">The IDs of the web part category to start.</para>
-        /// </summary>
-        [Parameter(Mandatory = true, Position = 0, ParameterSetName = IDSETNAME)]
-        public int[] ID { get; set; }
 
         /// <summary>
         ///  Gets or sets the Business Layer for this site.  Populated by MEF.
         /// </summary>
         [Import]
-        public StartCmsSiteBusiness BusinessLayer { get; set; }
+        public StartCmsSiteBusiness StartBusinessLayer { get; set; }
 
         #endregion
 
@@ -100,18 +79,25 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
-            switch (this.ParameterSetName)
+            if (this.ParameterSetName == SITEOBJECTSET)
             {
-                case OBJECTSET:
-                    this.BusinessLayer.Start(this.SiteToStart.ActLike<ISite>());
-                    break;
-                case PROPERTYSET:
-                    this.BusinessLayer.Start(this.SiteName, this.Exact);
-                    break;
-                case IDSETNAME:
-                    this.BusinessLayer.Start(this.ID);
-                    break;
+                this.ActOnObject(this.SiteToStart.ActLike<ISite>());
             }
+            else
+            {
+                base.ProcessRecord();
+            }
+        }
+
+        /// <inheritdoc />
+        protected override void ActOnObject(ISite site)
+        {
+            if (site == null)
+            {
+                return;
+            }
+
+            this.StartBusinessLayer.Start(site);
         }
 
         #endregion

@@ -31,7 +31,6 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
     /// <summary>
     /// <para type="synopsis">Gets a list of library files.</para>
     /// <para type="description">Gets a list of library files based off of the provided input.</para>
-    /// <para type="description">This cmdlet returns the library files when the -PassThru switch is used.</para>
     /// <example>
     ///     <para>Get the list of library files specifying an existing library, and with '*.png*' file extension and  from folder "*NewFolder*".</para>
     ///     <code>Get-CMSMediaLibraryFile -MediaLibrary $library -Extension ".png" -FilePath "NewFolder"</code>

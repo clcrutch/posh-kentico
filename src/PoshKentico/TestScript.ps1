@@ -3,9 +3,9 @@
 $VerbosePreference = "Continue"
 $DebugPreference = "Continue"
 
-Import-Module posh-kentico
+Import-Module ./PSCmdlets.psm1
 
-<#Configuration KenticoTest
+Configuration KenticoTest
 {	
 	Import-DscResource -Name xWebPartCategory
 	Import-DscResource -Name xWebPart
@@ -61,4 +61,4 @@ Import-Module posh-kentico
 
 KenticoTest -OutputPath .\Temp
 
-Start-DscConfiguration -Wait -Force -Path .\Temp#>
+Start-DscConfiguration -Wait -Force -Path .\Temp

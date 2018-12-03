@@ -18,6 +18,56 @@
             <param name="flattenItems">The collection to be flattened.</param>
             <returns>A flattened collection. </returns>
         </member>
+        <member name="T:PoshKentico.Core.Providers.Configuration.Roles.KenticoRoleService">
+            <summary>
+            Implementation of <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRoleService"/> that uses Kentico.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Configuration.Roles.KenticoRoleService.Roles">
+            <inheritdoc/>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Configuration.Roles.KenticoRoleService.UserRoles">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Roles.KenticoRoleService.CreateRole(PoshKentico.Core.Services.Configuration.Roles.IRole)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Roles.KenticoRoleService.SetRole(PoshKentico.Core.Services.Configuration.Roles.IRole,System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Roles.KenticoRoleService.GetRole(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Roles.KenticoRoleService.GetRole(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Roles.KenticoRoleService.DeleteRole(PoshKentico.Core.Services.Configuration.Roles.IRole)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Roles.KenticoRoleService.AddUserToRole(PoshKentico.Core.Services.Configuration.Users.IUser,PoshKentico.Core.Services.Configuration.Roles.IRole)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Roles.KenticoRoleService.RemoveUserFromRole(PoshKentico.Core.Services.Configuration.Users.IUser,PoshKentico.Core.Services.Configuration.Roles.IRole)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Roles.KenticoRoleService.GetRolesFromUser(PoshKentico.Core.Services.Configuration.Users.IUser)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Roles.KenticoRoleService.AddModulePermissionToRole(PoshKentico.Core.Services.Development.Modules.IResource,PoshKentico.Core.Services.Configuration.Roles.IRole)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Roles.KenticoRoleService.RemoveModulePermissionFromRole(PoshKentico.Core.Services.Development.Modules.IResource,PoshKentico.Core.Services.Configuration.Roles.IRole)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Roles.KenticoRoleService.AddUiElementToRole(PoshKentico.Core.Services.Development.Modules.IUIElement,PoshKentico.Core.Services.Configuration.Roles.IRole)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Roles.KenticoRoleService.RemoveUiElementFromRole(PoshKentico.Core.Services.Development.Modules.IUIElement,PoshKentico.Core.Services.Configuration.Roles.IRole)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Roles.KenticoRoleService.GetUiElement(System.String,System.String)">
+            <inheritdoc/>
+        </member>
         <member name="T:PoshKentico.Core.Providers.Configuration.Settings.KenticoSettingValueService">
             <summary>
             Implementation of <see cref="T:PoshKentico.Core.Services.Configuration.Settings.ISettingValueService"/> that uses Kentico.
@@ -125,6 +175,9 @@
         <member name="P:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.Users">
             <inheritdoc/>
         </member>
+        <member name="P:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.UserRoles">
+            <inheritdoc/>
+        </member>
         <member name="M:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.CreateUser(PoshKentico.Core.Services.Configuration.Users.IUser)">
             <inheritdoc/>
         </member>
@@ -135,6 +188,9 @@
             <inheritdoc/>
         </member>
         <member name="M:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.GetUser(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.GetUsersFromRole(System.String,System.Int32)">
             <inheritdoc/>
         </member>
         <member name="M:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.DeleteUser(PoshKentico.Core.Services.Configuration.Users.IUser)">
@@ -667,6 +723,129 @@
             Gets the site id.
             </summary>
         </member>
+        <member name="T:PoshKentico.Core.Services.Configuration.Roles.IRoleService">
+            <summary>
+            Service for providing access to a CMS Roles.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Roles.IRoleService.Roles">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> provided by the CMS System.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Roles.IRoleService.UserRoles">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IUserRole"/> provided by the CMS System.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Roles.IRoleService.CreateRole(PoshKentico.Core.Services.Configuration.Roles.IRole)">
+            <summary>
+            Creates the role.
+            </summary>
+            <param name="role">The <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> to create.</param>
+            <returns>The newly created role.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Roles.IRoleService.SetRole(PoshKentico.Core.Services.Configuration.Roles.IRole,System.Boolean)">
+            <summary>
+            Sets the <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/>.
+            </summary>
+            <param name="role">The <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> to update to.</param>
+            <param name="isReplace">To indicate if replace the complete object or update only the properties.</param>
+            <returns>The updated <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Roles.IRoleService.GetRole(System.String,System.String)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> which matches the supplied role name.
+            </summary>
+            <param name="roleName">The RoleName of the role <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> to return. </param>
+            <param name="siteName">The SiteName of the site for the role <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> to return.</param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> which matches the RoleName, else null.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Roles.IRoleService.GetRole(System.Int32)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> which matches the supplied role id.
+            </summary>
+            <param name="id">The ID of the role <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> to return.</param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> which matches the ID, else null.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Roles.IRoleService.DeleteRole(PoshKentico.Core.Services.Configuration.Roles.IRole)">
+            <summary>
+            Deletes the <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> which matches the supplied role name.
+            </summary>
+            <param name="role">The role <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> to delete. </param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Roles.IRoleService.AddUserToRole(PoshKentico.Core.Services.Configuration.Users.IUser,PoshKentico.Core.Services.Configuration.Roles.IRole)">
+            <summary>
+            Adds the User <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to a Role <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/>.
+            </summary>
+            <param name="user">The user <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to assign to a role.</param>
+            <param name="role">The role <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> to add a user to.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Roles.IRoleService.RemoveUserFromRole(PoshKentico.Core.Services.Configuration.Users.IUser,PoshKentico.Core.Services.Configuration.Roles.IRole)">
+            <summary>
+            Removes the User <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> from a Role <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/>.
+            </summary>
+            <param name="user">The user <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to remove from a role.</param>
+            <param name="role">The role <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> to remove a user from.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Roles.IRoleService.GetRolesFromUser(PoshKentico.Core.Services.Configuration.Users.IUser)">
+            <summary>
+            Gets all roles <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> of a user <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/>.
+            </summary>
+            <param name="user">The user to retrive roles from.</param>
+            <returns>A list of roles that belong to the specified user.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Roles.IRoleService.AddModulePermissionToRole(PoshKentico.Core.Services.Development.Modules.IResource,PoshKentico.Core.Services.Configuration.Roles.IRole)">
+            <summary>
+            Assigns a module permission to a role <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/>.
+            </summary>
+            <param name="module">The module <see cref="T:PoshKentico.Core.Services.Development.Modules.IResource"/> to add to the role.</param>
+            <param name="role">The role <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> to add a module to.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Roles.IRoleService.RemoveModulePermissionFromRole(PoshKentico.Core.Services.Development.Modules.IResource,PoshKentico.Core.Services.Configuration.Roles.IRole)">
+            <summary>
+            Removes a module permission from a role.
+            </summary>
+            <param name="module">The module <see cref="T:PoshKentico.Core.Services.Development.Modules.IResource"/> to remove from a role.</param>
+            <param name="role">The role <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> to remove a module from.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Roles.IRoleService.AddUiElementToRole(PoshKentico.Core.Services.Development.Modules.IUIElement,PoshKentico.Core.Services.Configuration.Roles.IRole)">
+            <summary>
+            Assigns a UI element to a role.
+            </summary>
+            <param name="element">The UI element <see cref="T:PoshKentico.Core.Services.Development.Modules.IUIElement"/> to add to a role.</param>
+            <param name="role">The role <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> to add an element to.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Roles.IRoleService.RemoveUiElementFromRole(PoshKentico.Core.Services.Development.Modules.IUIElement,PoshKentico.Core.Services.Configuration.Roles.IRole)">
+            <summary>
+            Removes a module permission from a role.
+            </summary>
+            <param name="element">The UI element <see cref="T:PoshKentico.Core.Services.Development.Modules.IUIElement"/> to remove from a role.</param>
+            <param name="role">The role <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> to remove an element from.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Roles.IRoleService.GetUiElement(System.String,System.String)">
+            <summary>
+            Gets a UI element.
+            </summary>
+            <param name="resourceName">The correspondent resource name for <see cref="T:PoshKentico.Core.Services.Development.Modules.IUIElement"/>.</param>
+            <param name="elementName">The element name for <see cref="T:PoshKentico.Core.Services.Development.Modules.IUIElement"/>.</param>
+            <returns>The UI Element found from the correspondent resource name and element name.</returns>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Configuration.Roles.IUserRole">
+            <summary>
+            Represents a UserRole Object.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Roles.IUserRole.UserID">
+            <summary>
+            Gets the User ID for the UserRole.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Roles.IUserRole.RoleID">
+            <summary>
+            Gets the User ID for the UserRole.
+            </summary>
+        </member>
         <member name="T:PoshKentico.Core.Services.Configuration.Settings.ISettingValueService">
             <summary>
             Service for providing values for the given setting key.
@@ -979,6 +1158,11 @@
             Represents a User Object.
             </summary>
         </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Users.IUser.UserID">
+            <summary>
+            Gets the user id for the user.
+            </summary>
+        </member>
         <member name="P:PoshKentico.Core.Services.Configuration.Users.IUser.FullName">
             <summary>
             Gets the full name for the user.
@@ -1014,6 +1198,11 @@
             Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> provided by the CMS System.
             </summary>
         </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.Users.IUserService.UserRoles">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IUserRole"/> provided by the CMS System.
+            </summary>
+        </member>
         <member name="M:PoshKentico.Core.Services.Configuration.Users.IUserService.CreateUser(PoshKentico.Core.Services.Configuration.Users.IUser)">
             <summary>
             Creates the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/>.
@@ -1025,9 +1214,9 @@
             <summary>
             Sets the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/>.
             </summary>
-            <param name="user">The <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to create.</param>
+            <param name="user">The <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to update to.</param>
             <param name="isReplace">To indicate if replace the complete object or update only the properties.</param>
-            <returns>The <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which matches the ID, else null.</returns>
+            <returns>The updated <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/>.</returns>
         </member>
         <member name="M:PoshKentico.Core.Services.Configuration.Users.IUserService.GetUser(System.Int32)">
             <summary>
@@ -1042,6 +1231,14 @@
             </summary>
             <param name="userName">The UserName of the user <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to return. </param>
             <returns>The <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which matches the UserName, else null.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Users.IUserService.GetUsersFromRole(System.String,System.Int32)">
+            <summary>
+            Gets all users <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> from a role <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/>.
+            </summary>
+            <param name="roleName">The role name of the role.</param>
+            <param name="siteID">The SiteID of the role <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/>.</param>
+            <returns>A list of users that belong to the specified role.</returns>
         </member>
         <member name="M:PoshKentico.Core.Services.Configuration.Users.IUserService.DeleteUser(PoshKentico.Core.Services.Configuration.Users.IUser)">
             <summary>
@@ -1316,6 +1513,41 @@
             Represents FolderModify Property
             </summary>
         </member>
+        <member name="T:PoshKentico.Core.Services.Development.Modules.IResource">
+            <summary>
+            Represents a ResourceInfo Object.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.Modules.IResource.ResourceName">
+            <summary>
+            Gets the resource name for the module.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.Modules.IResource.PermissionNames">
+            <summary>
+            Gets the permission names.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.Modules.IResource.ClassName">
+            <summary>
+            Gets the class name.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Development.Modules.IUIElement">
+            <summary>
+            Represents a UIElementInfo Object.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.Modules.IUIElement.ElementResourceID">
+            <summary>
+            Gets the element resource id.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.Modules.IUIElement.ElementName">
+            <summary>
+            Gets the element name.
+            </summary>
+        </member>
         <member name="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate">
             <summary>
             Represents a Page Template.
@@ -1331,7 +1563,7 @@
             Gets the page template site ID.
             </summary>
         </member>
-        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.PageTemplateID">
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.PageTemplateId">
             <summary>
             Gets the ID for the current page template.
             </summary>
@@ -1351,6 +1583,16 @@
             Gets the page template description.
             </summary>
         </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.ShowAsMasterTemplate">
+            <summary>
+            Gets or sets a value indicating whether to show page template as master template.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.PageTemplateForAllPages">
+            <summary>
+            Gets or sets a value indicating whether page template is for all pages.
+            </summary>
+        </member>
         <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.PageTemplates">
             <summary>
             Gets the page template PageTemplates.
@@ -1368,7 +1610,7 @@
         </member>
         <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.PageTemplateLayout">
             <summary>
-            Gets page template layout.
+            Gets or sets page template layout.
             </summary>
         </member>
         <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.PageTemplateIconClass">
@@ -1384,6 +1626,16 @@
         <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.IsReusable">
             <summary>
             Gets a value indicating whether the page template is reusable.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.WebPartZones">
+            <summary>
+            Gets web part zones contained within the Page template.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate.PageTemplateLayoutType">
+            <summary>
+            Gets or sets the page template layout type.
             </summary>
         </member>
         <member name="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory">
@@ -1677,6 +1929,31 @@
             Gets or sets the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> associated with the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/>.
             </summary>
         </member>
+        <member name="T:PoshKentico.Core.Services.Development.WebParts.IWebPartInstance">
+            <summary>
+            Represents a Web Part Instance.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartInstance.ControlID">
+            <summary>
+            Gets the control id.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartInstance.WebPartType">
+            <summary>
+            Gets the webpartype.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartInstance.IsWidget">
+            <summary>
+            Gets a value indicating whether the webpartinstance is a widget.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartInstance.Properties">
+            <summary>
+            Gets the webpart instance properties.
+            </summary>
+        </member>
         <member name="T:PoshKentico.Core.Services.Development.WebParts.IWebPartService">
             <summary>
             Service for providing access to a CMS webparts.
@@ -1777,6 +2054,26 @@
             Updates the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/>.
             </summary>
             <param name="field">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/> to update.</param>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Development.WebParts.IWebPartZoneInstance">
+            <summary>
+            Represents a Web Part field.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartZoneInstance.ZoneID">
+            <summary>
+            Gets the zone id.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartZoneInstance.Properties">
+            <summary>
+            Gets or sets the properties associated with the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartZoneInstance"/>.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartZoneInstance.WebParts">
+            <summary>
+            Gets or sets the Web parts collection within the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartZoneInstance"/>.
+            </summary>
         </member>
         <member name="T:PoshKentico.Core.Services.General.ICmsApplicationService">
             <summary>

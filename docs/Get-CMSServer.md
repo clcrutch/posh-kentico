@@ -19,12 +19,12 @@ Get-CMSServer [<CommonParameters>]
 
 ### Dislpay Name
 ```
-Get-CMSServer [[-SiteID] <Int32>] [[-DisplayName] <String>] [-Exact] [<CommonParameters>]
+Get-CMSServer [[-SiteID] <Int32>] [[-DisplayName] <String>] [-RegularExpression] [<CommonParameters>]
 ```
 
 ### Object
 ```
-Get-CMSServer [[-DisplayName] <String>] [-Exact] [[-Site] <SiteInfo>] [<CommonParameters>]
+Get-CMSServer [[-DisplayName] <String>] [-RegularExpression] [[-Site] <SiteInfo>] [<CommonParameters>]
 ```
 
 ### ID
@@ -61,21 +61,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Exact
-{{Fill Exact Description}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: Dislpay Name, Object
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -ID
 {{Fill ID Description}}
 
@@ -86,6 +71,21 @@ Aliases:
 
 Required: False
 Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -RegularExpression
+{{Fill RegularExpression Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: Dislpay Name, Object
+Aliases: Regex
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

@@ -30,12 +30,12 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// <para type="synopsis">Deletes a site.</para>
     /// <para type="description">Deletes a site.</para>
     /// <example>
-    ///     <para>Deletes all sites contains a site name "*bas*", display name "*bas*", or a domain name "*bas*".</para>
-    ///     <code>Remove-CMSSite -SiteName "bas"</code>
+    ///     <para>Deletes all sites contains a site name "basic", display name "basic", or a domain name "basic".</para>
+    ///     <code>Remove-CMSSite -SiteName "basic"</code>
     /// </example>
     /// <example>
-    ///     <para>Deletes all sites with a site name "basic", display name "basic", or a domain name "basic".</para>
-    ///     <code>Remove-CMSSite -SiteName "basic" -Exact</code>
+    ///     <para>Deletes all sites with a site name "*basic*", display name "*basic*", or a domain name "*basic*".</para>
+    ///     <code>Remove-CMSSite -SiteName "*basic*" -RegularExpression</code>
     /// </example>
     /// <example>
     ///     <para>Deletes a site.</para>
@@ -43,19 +43,17 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// </example>
     /// <example>
     ///     <para>Delete all the sites with the specified IDs.</para>
-    ///     <code>Remove-CMSSite -ID 1,2,3</code>
+    ///     <code>Remove-CMSSite -SiteIds 1,2,3</code>
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Remove, "CMSSite", SupportsShouldProcess = true, ConfirmImpact = ConfirmImpact.High)]
     [Alias("rsite")]
-    public class RemoveCmsSiteCmdlet : MefCmdlet
+    public class RemoveCmsSiteCmdlet : GetCmsSiteCmdlet
     {
         #region Constants
 
-        private const string OBJECTSET = "Object";
-        private const string SITENAMESET = "Property";
-        private const string IDSETNAME = "ID";
+        private const string SITEOBJECTSET = "Object";
 
         #endregion
 
@@ -64,34 +62,15 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         /// <summary>
         /// <para type="description">A reference to the site to remove.</para>
         /// </summary>
-        [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0, ParameterSetName = OBJECTSET)]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0, ParameterSetName = SITEOBJECTSET)]
         [Alias("Site")]
         public SiteInfo SiteToRemove { get; set; }
-
-        /// <summary>
-        /// <para type="description">The site name for the site to remove.</para>
-        /// <para type="description">Site name cannot be blank.</para>
-        /// </summary>
-        [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0, ParameterSetName = SITENAMESET)]
-        public string SiteName { get; set; }
-
-        /// <summary>
-        /// <para type="description">If set, the match is exact, else the match performs a contains for site name.</para>
-        /// </summary>
-        [Parameter(ParameterSetName = SITENAMESET)]
-        public SwitchParameter Exact { get; set; }
-
-        /// <summary>
-        /// <para type="description">The IDs of the web part category to delete.</para>
-        /// </summary>
-        [Parameter(Mandatory = true, Position = 0, ParameterSetName = IDSETNAME)]
-        public int[] ID { get; set; }
 
         /// <summary>
         ///  Gets or sets the Business Layer for this site.  Populated by MEF.
         /// </summary>
         [Import]
-        public RemoveCmsSiteBusiness BusinessLayer { get; set; }
+        public RemoveCmsSiteBusiness RemoveBusinessLayer { get; set; }
 
         #endregion
 
@@ -100,20 +79,26 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
-            switch (this.ParameterSetName)
+            if (this.ParameterSetName == SITEOBJECTSET)
             {
-                case OBJECTSET:
-                    this.BusinessLayer.Remove(this.SiteToRemove.ActLike<ISite>());
-                    break;
-                case SITENAMESET:
-                    this.BusinessLayer.Remove(this.SiteName, this.Exact.ToBool());
-                    break;
-                case IDSETNAME:
-                    this.BusinessLayer.Remove(this.ID);
-                    break;
+                this.ActOnObject(this.SiteToRemove.ActLike<ISite>());
+            }
+            else
+            {
+                base.ProcessRecord();
             }
         }
 
+        /// <inheritdoc />
+        protected override void ActOnObject(ISite site)
+        {
+            if (site == null)
+            {
+                return;
+            }
+
+            this.RemoveBusinessLayer.Remove(site);
+        }
         #endregion
 
     }

@@ -14,18 +14,28 @@ schema: 2.0.0
 
 ### Object
 ```
-Remove-CMSSiteCulture [-SiteName] <String> [-SiteToRemove] <SiteInfo> [-CultureCode] <String>
- [<CommonParameters>]
+Remove-CMSSiteCulture [-SiteToRemove] <SiteInfo> [-CultureCodes] <String[]> [<CommonParameters>]
 ```
 
-### Property
+### None
 ```
-Remove-CMSSiteCulture [-SiteName] <String> [-Exact] [-CultureCode] <String> [<CommonParameters>]
+Remove-CMSSiteCulture [-CultureCodes] <String[]> [<CommonParameters>]
+```
+
+### Dislpay Name
+```
+Remove-CMSSiteCulture [-CultureCodes] <String[]> [[-DisplayName] <String>] [-RegularExpression]
+ [<CommonParameters>]
 ```
 
 ### ID
 ```
-Remove-CMSSiteCulture [-SiteName] <String> [-ID] <Int32[]> [-CultureCode] <String> [<CommonParameters>]
+Remove-CMSSiteCulture [-CultureCodes] <String[]> [[-SiteIds] <Int32[]>] [<CommonParameters>]
+```
+
+### User
+```
+Remove-CMSSiteCulture [-CultureCodes] <String[]> [[-User] <UserInfo>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -42,11 +52,11 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -CultureCode
-{{Fill CultureCode Description}}
+### -CultureCodes
+{{Fill CultureCodes Description}}
 
 ```yaml
-Type: String
+Type: String[]
 Parameter Sets: (All)
 Aliases:
 
@@ -57,13 +67,28 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Exact
-{{Fill Exact Description}}
+### -DisplayName
+{{Fill DisplayName Description}}
+
+```yaml
+Type: String
+Parameter Sets: Dislpay Name
+Aliases: SiteName, DomainName
+
+Required: False
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -RegularExpression
+{{Fill RegularExpression Description}}
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: Property
-Aliases:
+Parameter Sets: Dislpay Name
+Aliases: Regex
 
 Required: False
 Position: Named
@@ -72,30 +97,15 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ID
-{{Fill ID Description}}
+### -SiteIds
+{{Fill SiteIds Description}}
 
 ```yaml
 Type: Int32[]
 Parameter Sets: ID
 Aliases:
 
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SiteName
-{{Fill SiteName Description}}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
+Required: False
 Position: 0
 Default value: None
 Accept pipeline input: False
@@ -117,6 +127,21 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
+### -User
+{{Fill User Description}}
+
+```yaml
+Type: UserInfo
+Parameter Sets: User
+Aliases:
+
+Required: False
+Position: 0
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
 For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -124,6 +149,8 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## INPUTS
 
 ### CMS.SiteProvider.SiteInfo
+
+### CMS.Membership.UserInfo
 
 ## OUTPUTS
 

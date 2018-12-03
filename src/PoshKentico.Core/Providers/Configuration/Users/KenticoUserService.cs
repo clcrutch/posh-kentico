@@ -23,6 +23,7 @@ using System.Linq;
 using CMS.Base;
 using CMS.Membership;
 using ImpromptuInterface;
+using PoshKentico.Core.Services.Configuration.Roles;
 using PoshKentico.Core.Services.Configuration.Users;
 
 namespace PoshKentico.Core.Providers.Configuration.Users
@@ -37,6 +38,10 @@ namespace PoshKentico.Core.Providers.Configuration.Users
         /// <inheritdoc/>
         public IEnumerable<IUser> Users => (from c in UserInfoProvider.GetUsers()
                                                 select Impromptu.ActLike<IUser>(c as UserInfo)).ToArray();
+
+        /// <inheritdoc/>
+        public IEnumerable<IUserRole> UserRoles => (from c in UserRoleInfoProvider.GetUserRoles()
+                                                    select Impromptu.ActLike<IUserRole>(c as UserRoleInfo)).ToArray();
 
         /// <inheritdoc/>
         public IUser CreateUser(IUser user)
@@ -95,6 +100,24 @@ namespace PoshKentico.Core.Providers.Configuration.Users
         public IUser GetUser(string userName)
         {
             return (UserInfoProvider.GetUserInfo(userName) as UserInfo)?.ActLike<IUser>();
+        }
+
+        /// <inheritdoc/>
+        public IEnumerable<IUser> GetUsersFromRole(string roleName, int siteID)
+        {
+            // Gets the role from the current site
+            RoleInfo role = RoleInfoProvider.GetRoleInfo(roleName, siteID);
+
+            if (role != null)
+            {
+                // Gets the user's roles
+                var userRoleIDs = this.UserRoles.Where(x => x.RoleID == role.RoleID).Select(x => x.UserID);
+                var users = UserInfoProvider.GetUsers().Where(x => userRoleIDs.Contains(x.UserID));
+
+                return (from c in users select Impromptu.ActLike<IUser>(c as UserInfo)).ToArray();
+            }
+
+            return null;
         }
 
         /// <inheritdoc/>

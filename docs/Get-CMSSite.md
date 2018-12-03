@@ -19,12 +19,12 @@ Get-CMSSite [<CommonParameters>]
 
 ### Dislpay Name
 ```
-Get-CMSSite [[-DisplayName] <String>] [-Exact] [<CommonParameters>]
+Get-CMSSite [[-DisplayName] <String>] [-RegularExpression] [<CommonParameters>]
 ```
 
 ### ID
 ```
-Get-CMSSite [[-ID] <Int32[]>] [<CommonParameters>]
+Get-CMSSite [[-SiteIds] <Int32[]>] [<CommonParameters>]
 ```
 
 ### User
@@ -57,17 +57,17 @@ Aliases: SiteName, DomainName
 Required: False
 Position: 0
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Exact
-{{Fill Exact Description}}
+### -RegularExpression
+{{Fill RegularExpression Description}}
 
 ```yaml
 Type: SwitchParameter
 Parameter Sets: Dislpay Name
-Aliases:
+Aliases: Regex
 
 Required: False
 Position: Named
@@ -76,8 +76,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ID
-{{Fill ID Description}}
+### -SiteIds
+{{Fill SiteIds Description}}
 
 ```yaml
 Type: Int32[]
@@ -111,8 +111,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
-
-### System.String
 
 ### CMS.Membership.UserInfo
 
