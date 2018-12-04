@@ -70,8 +70,9 @@ namespace PoshKentico.AssemblyBinding
         private static string GetModuleName()
         {
             var assembly = new FileInfo(typeof(PowerShellAssemblyBindingHelper).Assembly.Location);
+            var moduleDefinition = Directory.GetFiles(assembly.Directory.FullName, "*.psd1").Single();
 
-            return assembly.Directory.Name;
+            return moduleDefinition.Replace(".psd1", string.Empty);
         }
 
         private static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
