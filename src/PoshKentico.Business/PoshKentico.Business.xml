@@ -1919,6 +1919,22 @@
             </summary>
             <returns>The version of the CMS application.</returns>
         </member>
+        <member name="T:PoshKentico.Business.General.GetCMSDatabaseVersionBusiness">
+            <summary>
+            Business layer for the Get-CMSDatabaseVersion cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.General.GetCMSDatabaseVersionBusiness.CmsDatabaseService">
+            <summary>
+            Gets or sets the CmsDatabaseService.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.General.GetCMSDatabaseVersionBusiness.GetVersion">
+            <summary>
+            Gets the version of the CMS application.
+            </summary>
+            <returns>The version of the CMS application.</returns>
+        </member>
         <member name="T:PoshKentico.Business.General.InitializeCMSApplicationBusiness">
             <summary>
             Business layer for the Initialize-CMSApplication cmdlet.

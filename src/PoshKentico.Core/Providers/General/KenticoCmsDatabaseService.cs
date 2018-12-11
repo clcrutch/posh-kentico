@@ -138,12 +138,11 @@ namespace PoshKentico.Core.Providers.General
         }
 
         /// <summary>
-        /// Gets a value indicating if the database is installed and up to date.
+        /// Gets a value indicating if the database is installed.
         /// </summary>
-        /// <returns>A value indicating if the database is installed and up to date.</returns>
+        /// <returns>A value indicating if the database is installed.</returns>
         public bool IsDatabaseInstalled() =>
-            this.Version != null &&
-            this.Version == this.CmsApplicationService.Version;
+            this.Version != null;
 
         private void Log(string message, MessageTypeEnum type)
         {

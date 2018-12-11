@@ -434,9 +434,9 @@
         </member>
         <member name="M:PoshKentico.Core.Providers.General.KenticoCmsDatabaseService.IsDatabaseInstalled">
             <summary>
-            Gets a value indicating if the database is installed and up to date.
+            Gets a value indicating if the database is installed.
             </summary>
-            <returns>A value indicating if the database is installed and up to date.</returns>
+            <returns>A value indicating if the database is installed.</returns>
         </member>
         <member name="T:PoshKentico.Core.Providers.General.KenticoSiteLocationCache">
             <summary>
