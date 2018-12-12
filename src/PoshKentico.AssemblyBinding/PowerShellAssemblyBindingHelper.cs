@@ -51,7 +51,7 @@ namespace PoshKentico.AssemblyBinding
             var serializer = new XmlSerializer(typeof(Configuration));
             var configurationPath = GetConfigurationPath();
 
-            using (var stream = File.Open(configurationPath, FileMode.Open))
+            using (var stream = File.Open(configurationPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
                 return serializer.Deserialize(stream) as Configuration;
             }
