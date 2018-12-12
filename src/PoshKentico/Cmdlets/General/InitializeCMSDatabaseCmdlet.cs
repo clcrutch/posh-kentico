@@ -16,6 +16,7 @@
 // </copyright>
 
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 using PoshKentico.Business.General;
 
@@ -30,7 +31,9 @@ namespace PoshKentico.Cmdlets.General
     ///     <code>Initialize-CMSDatabase</code>
     /// </example>
     /// </summary>
+    [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsData.Initialize, "CMSDatabase")]
+    [Alias("initdb")]
     public class InitializeCMSDatabaseCmdlet : MefCmdlet
     {
         #region Properties
