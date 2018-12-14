@@ -30,28 +30,50 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
     /// <para type="synopsis">Remove the staging tasks that target the given server.</para>
     /// <para type="description">Removes the staging tasks that target the given server.</para>
     /// <example>
-    ///     <para>Given an existing server and synchronize all related staging tasks.</para>
+    ///     <para>Remove all related staging tasks for a given server.</para>
     ///     <code>Remove-CMSStagingTask -Server $server</code>
     /// </example>
     /// <example>
-    ///     <para>Given an existing server and synchronize all related staging tasks.</para>
+    ///     <para>Remove all related staging tasks for a given server.</para>
     ///     <code>$server | Remove-CMSStagingTask</code>
     /// </example>
     /// <example>
-    ///     <para>Get a server by ServerName and SiteID, and synchronize all related staging tasks.</para>
-    ///     <code>Remove-CMSStagingTask -ServerName "Server Name to Find" -SiteID "Site Id to Find"</code>
+    ///     <para>Remove all related staging tasks for servers with a display name "basic", or server name "basic".</para>
+    ///     <code>Remove-CMSServer basic </code>
+    /// </example>
+    /// <example>
+    ///     <para>Remove all related staging tasks for all servers with a display name "*basic*", or server name "*basic*"</para>
+    ///     <code>Remove-CMSServer *basic* -RegularExpression</code>
+    /// </example>
+    /// <example>
+    ///     <para>Remove all related staging tasks for all servers with a site id 5,  and a display name "basic" or server name "basic".</para>
+    ///     <code>Remove-CMSServer -SiteID 5 -ServerName "basic"</code>
+    /// </example>
+    /// <example>
+    ///     <para>Remove all related staging tasks for servers associalted with site $site with a display name "basic", or server name "basic"</para>
+    ///     <code>$site | Remove-CMSServer basic</code>
+    /// </example>
+    /// <example>
+    ///     <para>Remove all related staging tasks for all servers with a site id 5, and a display name "*basic*" or server name "*basic*"</para>
+    ///     <code>Remove-CMSServer 5 *basic* -RegularExpression</code>
+    /// </example>
+    /// <example>
+    ///     <para>Remove all related staging tasks for all servers associalted with site $site with a display name "*basic*", or server name "*basic*"</para>
+    ///     <code>$site | Remove-CMSServer *basic* -RegularExpression</code>
+    /// </example>
+    /// <example>
+    ///     <para>Remove all related staging tasks for all the servers with the specified IDs.</para>
+    ///     <code>Remove-CMSServer -ID 5,304,5</code>
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet("Remove", "CMSStagingTask", SupportsShouldProcess = true, ConfirmImpact = ConfirmImpact.High)]
-    [Alias("removestaging")]
-    public class RemoveCmsStagingTaskCmdlet : MefCmdlet
+    [Alias("rmstask", "removestaging")]
+    public class RemoveCmsStagingTaskCmdlet : GetCmsServerCmdlet
     {
         #region Constants
 
-        private const string NONE = "None";
-        private const string OBJECTSET = "Object";
-        private const string PROPERTYSET = "Property";
+        private const string SERVEROBJECTSET = "Server Object";
 
         #endregion
         #region Properties
@@ -59,27 +81,15 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
         /// <summary>
         /// <para type="description">A reference to the server to remove all related staging tasks.</para>
         /// </summary>
-        [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0, ParameterSetName = OBJECTSET)]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0, ParameterSetName = SERVEROBJECTSET)]
         [Alias("Server")]
         public ServerInfo ServerToRemove { get; set; }
-
-        /// <summary>
-        /// <para type="description">The server name for the server to remove all related staging tasks.</para>
-        /// </summary>
-        [Parameter(Mandatory = true, Position = 0, ParameterSetName = PROPERTYSET)]
-        public string ServerName { get; set; }
-
-        /// <summary>
-        /// <para type="description">The server site id for the server to remove all related staging tasks.</para>
-        /// </summary>
-        [Parameter(Mandatory = true, Position = 1, ParameterSetName = PROPERTYSET)]
-        public int SiteID { get; set; }
 
         /// <summary>
         ///  Gets or sets the Business Layer for this server.  Populated by MEF.
         /// </summary>
         [Import]
-        public RemoveCmsStagingTaskBusiness BusinessLayer { get; set; }
+        public RemoveCmsStagingTaskBusiness RemoveBusinessLayer { get; set; }
 
         #endregion
 
@@ -88,17 +98,26 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
-            switch (this.ParameterSetName)
+            if (this.ParameterSetName == SERVEROBJECTSET)
             {
-                case OBJECTSET:
-                    this.BusinessLayer.RemoveStaging(this.ServerToRemove.ActLike<IServer>());
-                    break;
-                case PROPERTYSET:
-                    this.BusinessLayer.RemoveStaging(this.ServerName, this.SiteID);
-                    break;
+                this.ActOnObject(this.ServerToRemove.ActLike<IServer>());
+            }
+            else
+            {
+                base.ProcessRecord();
             }
         }
 
+        /// <inheritdoc />
+        protected override void ActOnObject(IServer server)
+        {
+            if (server == null)
+            {
+                return;
+            }
+
+            this.RemoveBusinessLayer.RemoveStaging(server);
+        }
         #endregion
     }
 }

@@ -17,7 +17,7 @@ var configuration = Argument("configuration", "Release");
 // Define directories.
 var buildDir = Directory("./build") + Directory("posh-kentico");
 
-var version = GitVersioningGetVersion().SemVer1;
+var version = GitVersioningGetVersion();
 
 // Define Files
 var moduleFile = buildDir + File("posh-kentico.psd1");
@@ -48,9 +48,16 @@ Task("BuildPowerShellModule")
 	.IsDependentOn("BuildRootModule")
 	.Does(() =>
 {
-	Information("Setting module version number to " + version);
+	Information("Setting module version number to " + version.SimpleVersion.ToString());
 	// Update the Version Number
-	ReplaceRegexInFiles(moduleFile, "1\\.0", version);
+	ReplaceRegexInFiles(moduleFile, "1\\.0", version.SimpleVersion.ToString());
+
+    if (!version.PublicRelease)
+    {
+        Information("Test: " + version.PrereleaseVersion);
+
+        ReplaceRegexInFiles(moduleFile, "# Prerelease = ''", version.PrereleaseVersion);
+    }
 });
 
 Task("Build")

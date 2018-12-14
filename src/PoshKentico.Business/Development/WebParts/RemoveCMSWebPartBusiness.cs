@@ -34,7 +34,7 @@ namespace PoshKentico.Business.Development.WebParts
         /// <param name="webPart">The <see cref="IWebPart"/> to remove.</param>
         public void RemoveWebPart(IWebPart webPart)
         {
-            if (this.ShouldProcess(webPart.WebPartName, "Remove the web part from Kentico."))
+            if (this.OutputService.ShouldProcess(webPart.WebPartName, "Remove the web part from Kentico."))
             {
                 this.WebPartService.Delete(webPart);
             }

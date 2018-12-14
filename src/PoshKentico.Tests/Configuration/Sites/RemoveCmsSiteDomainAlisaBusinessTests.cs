@@ -16,192 +16,52 @@
 // </copyright>
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Configuration.Sites;
 using PoshKentico.Core.Services.Configuration.Sites;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests.Configuration.Sites
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     public class RemoveCmsSiteDomainAlisaBusinessTests
     {
         [TestCase]
-        public void RemoveSiteDomainAliasTest_Object()
-        {
-            var siteServiceMock = new Mock<ISiteService>();
-            string aliasName = "172.0.0.1";
-
-            var sites = new List<ISite>();
-            var siteMock1 = new Mock<ISite>();
-            siteMock1.SetupGet(x => x.DisplayName).Returns("My Site1");
-            siteMock1.SetupGet(x => x.SiteName).Returns("MySite1");
-            siteMock1.SetupGet(x => x.DomainName).Returns("localhost1");
-            sites.Add(siteMock1.Object);
-
-            var siteMock2 = new Mock<ISite>();
-            siteMock2.SetupGet(x => x.DisplayName).Returns("your site2");
-            siteMock2.SetupGet(x => x.SiteName).Returns("yoursite2");
-            siteMock2.SetupGet(x => x.DomainName).Returns("localhost2");
-            sites.Add(siteMock2.Object);
-
-            siteServiceMock.SetupGet(x => x.Sites).Returns(sites);
-
-            var getBusinessLayer = new GetCmsSiteBusiness()
-            {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-
-                SiteService = siteServiceMock.Object,
-            };
-
-            var businessLayer = new RemoveCmsSiteDomainAliasBusiness()
-            {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-
-                SiteService = siteServiceMock.Object,
-                GetCmsSiteBusiness = getBusinessLayer,
-            };
-
-            businessLayer.RemoveDomainAlias(siteMock1.Object, aliasName);
-
-            siteServiceMock.Verify(x => x.RemoveSiteDomainAlias(siteMock1.Object, aliasName));
-        }
-
-        [TestCase]
         public void RemoveSiteDomainAliasTest_MatchString_ExactFalse()
         {
             var siteServiceMock = new Mock<ISiteService>();
-            string aliasName = "172.0.0.1";
+            string[] aliasNames = new string[] { "172.0.0.1, localhost" };
 
-            var sites = new List<ISite>();
             var siteMock1 = new Mock<ISite>();
             siteMock1.SetupGet(x => x.DisplayName).Returns("My Site1");
             siteMock1.SetupGet(x => x.SiteName).Returns("MySite1");
             siteMock1.SetupGet(x => x.DomainName).Returns("localhost1");
-            sites.Add(siteMock1.Object);
 
             var siteMock2 = new Mock<ISite>();
             siteMock2.SetupGet(x => x.DisplayName).Returns("your site2");
             siteMock2.SetupGet(x => x.SiteName).Returns("yoursite2");
             siteMock2.SetupGet(x => x.DomainName).Returns("localhost2");
-            sites.Add(siteMock2.Object);
 
-            siteServiceMock.SetupGet(x => x.Sites).Returns(sites);
-
-            var getBusinessLayer = new GetCmsSiteBusiness()
-            {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-
-                SiteService = siteServiceMock.Object,
-            };
+            var outputService = OutputServiceHelper.GetPassThruOutputService();
 
             var businessLayer = new RemoveCmsSiteDomainAliasBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = outputService,
 
                 SiteService = siteServiceMock.Object,
-                GetCmsSiteBusiness = getBusinessLayer,
             };
 
-            businessLayer.RemoveDomainAlias("site", false, aliasName);
-
-            siteServiceMock.Verify(x => x.RemoveSiteDomainAlias(siteMock1.Object, aliasName));
-            siteServiceMock.Verify(x => x.RemoveSiteDomainAlias(siteMock2.Object, aliasName));
-        }
-
-        [TestCase]
-        public void RemoveSiteDomainAliasTest_MatchString_ExactTrue()
-        {
-            var siteServiceMock = new Mock<ISiteService>();
-            string aliasName = "172.0.0.1";
-
-            var sites = new List<ISite>();
-            var siteMock1 = new Mock<ISite>();
-            siteMock1.SetupGet(x => x.DisplayName).Returns("My Site1");
-            siteMock1.SetupGet(x => x.SiteName).Returns("MySite1");
-            siteMock1.SetupGet(x => x.DomainName).Returns("localhost1");
-            sites.Add(siteMock1.Object);
-
-            var siteMock2 = new Mock<ISite>();
-            siteMock2.SetupGet(x => x.DisplayName).Returns("your site2");
-            siteMock2.SetupGet(x => x.SiteName).Returns("yoursite2");
-            siteMock2.SetupGet(x => x.DomainName).Returns("localhost2");
-            sites.Add(siteMock2.Object);
-
-            siteServiceMock.SetupGet(x => x.Sites).Returns(sites);
-
-            var getBusinessLayer = new GetCmsSiteBusiness()
+            foreach (string alias in aliasNames)
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                businessLayer.RemoveDomainAlias(siteMock1.Object, alias);
+                businessLayer.RemoveDomainAlias(siteMock2.Object, alias);
 
-                SiteService = siteServiceMock.Object,
-            };
-
-            var businessLayer = new RemoveCmsSiteDomainAliasBusiness()
-            {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-
-                SiteService = siteServiceMock.Object,
-                GetCmsSiteBusiness = getBusinessLayer,
-            };
-
-            businessLayer.RemoveDomainAlias("yoursite2", true, aliasName);
-
-            siteServiceMock.Verify(x => x.RemoveSiteDomainAlias(siteMock2.Object, aliasName));
-        }
-
-        [TestCase]
-        public void RemoveSiteDomainAliasTest_Ids()
-        {
-            var siteServiceMock = new Mock<ISiteService>();
-            string aliasName = "172.0.0.1";
-
-            var sites = new List<ISite>();
-            var siteMock1 = new Mock<ISite>();
-            siteMock1.SetupGet(x => x.DisplayName).Returns("My Site1");
-            siteMock1.SetupGet(x => x.SiteName).Returns("MySite1");
-            siteMock1.SetupGet(x => x.DomainName).Returns("localhost1");
-            sites.Add(siteMock1.Object);
-
-            var siteMock2 = new Mock<ISite>();
-            siteMock2.SetupGet(x => x.DisplayName).Returns("your site2");
-            siteMock2.SetupGet(x => x.SiteName).Returns("yoursite2");
-            siteMock2.SetupGet(x => x.DomainName).Returns("localhost2");
-            sites.Add(siteMock2.Object);
-
-            siteServiceMock.Setup(x => x.GetSite(1)).Returns(siteMock1.Object);
-            siteServiceMock.Setup(x => x.GetSite(2)).Returns(siteMock2.Object);
-
-            siteServiceMock.SetupGet(x => x.Sites).Returns(sites);
-
-            var getBusinessLayer = new GetCmsSiteBusiness()
-            {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-
-                SiteService = siteServiceMock.Object,
-            };
-
-            var businessLayer = new RemoveCmsSiteDomainAliasBusiness()
-            {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-
-                SiteService = siteServiceMock.Object,
-                GetCmsSiteBusiness = getBusinessLayer,
-            };
-
-            int[] ids = new int[] { 2, 3 };
-
-            businessLayer.RemoveDomainAlias(ids, aliasName);
-
-            siteServiceMock.Verify(x => x.RemoveSiteDomainAlias(siteMock2.Object, aliasName));
+                siteServiceMock.Verify(x => x.RemoveSiteDomainAlias(siteMock1.Object, alias));
+                siteServiceMock.Verify(x => x.RemoveSiteDomainAlias(siteMock2.Object, alias));
+            }
         }
     }
 }

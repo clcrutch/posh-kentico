@@ -16,14 +16,17 @@
 // </copyright>
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using CMS.SiteProvider;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Configuration.Sites;
 using PoshKentico.Core.Services.Configuration.Sites;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests.Configuration.Sites
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     public class SetCmsSiteBusinessTests
     {
@@ -34,8 +37,7 @@ namespace PoshKentico.Tests.Configuration.Sites
 
             var businessLayer = new SetCmsSiteBusiness
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 SiteService = siteServiceMock.Object,
             };
@@ -73,8 +75,7 @@ namespace PoshKentico.Tests.Configuration.Sites
 
             var businessLayer = new SetCmsSiteBusiness
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 SiteService = siteServiceMock.Object,
             };

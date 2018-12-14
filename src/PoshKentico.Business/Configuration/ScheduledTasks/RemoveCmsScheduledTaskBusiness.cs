@@ -44,7 +44,7 @@ namespace PoshKentico.Business.Configuration.ScheduledTasks
         /// <param name="scheduledTask">The <see cref="IScheduledTask"/> to remove from Kentico.</param>
         public void Remove(IScheduledTask scheduledTask)
         {
-            if (this.ShouldProcess(scheduledTask.TaskName, "Remove the scheduled task from Kentico."))
+            if (this.OutputService.ShouldProcess(scheduledTask.TaskName, "Remove the scheduled task from Kentico."))
             {
                 this.ScheduledTaskService.Remove(scheduledTask);
             }

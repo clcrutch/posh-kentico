@@ -15,14 +15,17 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System.Diagnostics.CodeAnalysis;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Configuration.Settings;
 using PoshKentico.Core.Services.Configuration.Settings;
 using PoshKentico.Core.Services.Configuration.Sites;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests.Configuration.Settings
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     public class SetCmsSettingValueTests
     {
@@ -33,9 +36,7 @@ namespace PoshKentico.Tests.Configuration.Settings
 
             var businessLayer = new SetCmsSettingValueBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
                 SettingValueService = settingValueService.Object,
             };
 
@@ -53,9 +54,7 @@ namespace PoshKentico.Tests.Configuration.Settings
 
             var businessLayer = new SetCmsSettingValueBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
                 SettingValueService = settingValueService.Object,
             };
 
@@ -72,9 +71,7 @@ namespace PoshKentico.Tests.Configuration.Settings
 
             var businessLayer = new SetCmsSettingValueBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
-
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
                 SettingValueService = settingValueService.Object,
             };
 

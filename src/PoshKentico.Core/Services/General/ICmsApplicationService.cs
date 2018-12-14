@@ -37,6 +37,11 @@ namespace PoshKentico.Core.Services.General
         /// </summary>
         string SiteLocation { get; }
 
+        /// <summary>
+        /// Gets the version of the CMS application.
+        /// </summary>
+        Version Version { get; }
+
         #endregion
 
         #region Methods
@@ -44,27 +49,21 @@ namespace PoshKentico.Core.Services.General
         /// <summary>
         /// Locates the CMS Site.
         /// </summary>
-        /// <param name="writeDebug">A delegate for writing to the debug stream.</param>
-        /// <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
         /// <returns>The directory and the connection string for the CMS site.</returns>
-        (DirectoryInfo siteLocation, string connectionString) FindSite(Action<string> writeDebug = null, Action<string> writeVerbose = null);
+        (DirectoryInfo siteLocation, string connectionString) FindSite();
 
         /// <summary>
         /// Locates and performs the necessary initialization for the CMS site.
         /// </summary>
         /// <param name="useCached">Use the cached location for the CMS application.  When true and have already found Kentico in a previous run, this method does not require admin.</param>
-        /// <param name="writeDebug">A delegate for writing to the debug stream.</param>
-        /// <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
-        void Initialize(bool useCached, Action<string> writeDebug = null, Action<string> writeVerbose = null);
+        void Initialize(bool useCached);
 
         /// <summary>
         /// Performs the necessary initialization for the provided CMS site.
         /// </summary>
         /// <param name="siteLocation">The directory where the CMS site resides.</param>
         /// <param name="connectionString">The connection string to use for initializing the CMS Application.</param>
-        /// <param name="writeDebug">A delegate for writing to the debug stream.</param>
-        /// <param name="writeVerbose">A delegate for writing to the verbose stream.</param>
-        void Initialize(DirectoryInfo siteLocation, string connectionString, Action<string> writeDebug = null, Action<string> writeVerbose = null);
+        void Initialize(DirectoryInfo siteLocation, string connectionString);
 
         #endregion
 

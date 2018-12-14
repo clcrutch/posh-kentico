@@ -16,14 +16,17 @@
 // </copyright>
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Configuration.Staging;
 using PoshKentico.Core.Services.Configuration.Staging;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Tests.Configuration.Staging
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     public class GetCmsServerTests
     {
@@ -34,8 +37,7 @@ namespace PoshKentico.Tests.Configuration.Staging
 
             var businessLayer = new GetCmsServerBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 StagingService = stagingServiceMock.Object,
             };
@@ -65,8 +67,7 @@ namespace PoshKentico.Tests.Configuration.Staging
 
             var businessLayer = new GetCmsServerBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 StagingService = serverServiceMock.Object,
             };
@@ -104,8 +105,7 @@ namespace PoshKentico.Tests.Configuration.Staging
 
             var businessLayer = new GetCmsServerBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 StagingService = serverServiceMock.Object,
             };
@@ -147,8 +147,7 @@ namespace PoshKentico.Tests.Configuration.Staging
 
             var businessLayer = new GetCmsServerBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 StagingService = serverServiceMock.Object,
             };
@@ -190,8 +189,7 @@ namespace PoshKentico.Tests.Configuration.Staging
 
             var businessLayer = new GetCmsServerBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 StagingService = serverServiceMock.Object,
             };

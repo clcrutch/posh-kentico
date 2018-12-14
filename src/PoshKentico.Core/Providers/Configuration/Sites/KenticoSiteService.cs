@@ -15,17 +15,20 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using CMS.Localization;
+using CMS.Membership;
 using CMS.Scheduler;
 using CMS.SiteProvider;
 using ImpromptuInterface;
 using PoshKentico.Core.Services.Configuration.Localization;
 using PoshKentico.Core.Services.Configuration.ScheduledTasks;
 using PoshKentico.Core.Services.Configuration.Sites;
+using PoshKentico.Core.Services.Configuration.Users;
 
 namespace PoshKentico.Core.Providers.Configuration.Sites
 {
@@ -57,7 +60,17 @@ namespace PoshKentico.Core.Providers.Configuration.Sites
                 DomainName = site.DomainName,
             };
 
-            SiteInfoProvider.SetSiteInfo(siteInfo);
+            // Verifies that the site is unique
+            if (SiteInfoProvider.GetSiteInfo(site.SiteName) == null)
+            {
+                // Saves the site to the database
+                SiteInfoProvider.SetSiteInfo(siteInfo);
+            }
+            else
+            {
+                // A site with the same name already exists
+                throw new Exception("A site with the same name already exists!");
+            }
 
             return siteInfo.ActLike<ISite>();
         }
@@ -82,6 +95,28 @@ namespace PoshKentico.Core.Providers.Configuration.Sites
             return (taskInfo?.Site as SiteInfo)?.ActLike<ISite>();
         }
 
+        /// <inheritdoc />
+        public IEnumerable<ISite> GetSite(IUser user)
+        {
+            // Gets the user
+            UserInfo existingUser = UserInfoProvider.GetUserInfo(user.UserName);
+
+            if (existingUser != null)
+            {
+                // Gets the sites to which the user is assigned
+                var userSiteIDs = UserSiteInfoProvider.GetUserSites().Column("SiteID").WhereEquals("UserID", existingUser.UserID);
+                var sites = SiteInfoProvider.GetSites().WhereIn("SiteID", userSiteIDs);
+
+                // Loops through the sites
+                return (from c in sites select Impromptu.ActLike<ISite>(c as SiteInfo)).ToArray();
+            }
+            else
+            {
+                // A user with the specified name not exist on the site
+                throw new Exception(string.Format("A user with the user name {0} does not exist.", user.UserName));
+            }
+        }
+
         /// <inheritdoc/>
         public void Delete(ISite site)
         {
@@ -92,6 +127,11 @@ namespace PoshKentico.Core.Providers.Configuration.Sites
             {
                 // Deletes the site
                 SiteInfoProvider.DeleteSiteInfo(deleteSite);
+            }
+            else
+            {
+                // A site with the specified name not exists
+                throw new Exception(string.Format("A site with the site name {0} does not exist.", site.SiteName));
             }
         }
 
@@ -118,6 +158,11 @@ namespace PoshKentico.Core.Providers.Configuration.Sites
                 // Saves the modified site to the database
                 SiteInfoProvider.SetSiteInfo(updateSite);
             }
+            else
+            {
+                // A site with the specified name not exists
+                throw new Exception(string.Format("A site with the site name {0} does not exist.", site.SiteName));
+            }
 
             return updateSite.ActLike<ISite>();
         }
@@ -132,6 +177,11 @@ namespace PoshKentico.Core.Providers.Configuration.Sites
                 // Starts the site
                 SiteInfoProvider.RunSite(siteToStart.SiteName);
             }
+            else
+            {
+                // A site with the specified name not exists
+                throw new Exception(string.Format("A site with the site name {0} does not exist.", site.SiteName));
+            }
         }
 
         /// <inheritdoc/>
@@ -143,6 +193,11 @@ namespace PoshKentico.Core.Providers.Configuration.Sites
             {
                 // Stops the site
                 SiteInfoProvider.StopSite(siteToStop.SiteName);
+            }
+            else
+            {
+                // A site with the specified name not exists
+                throw new Exception(string.Format("A site with the site name {0} does not exist.", site.SiteName));
             }
         }
 
@@ -158,6 +213,11 @@ namespace PoshKentico.Core.Providers.Configuration.Sites
                 // Assigns the culture to the site
                 CultureSiteInfoProvider.AddCultureToSite(cultureToWork.CultureID, siteToWork.SiteID);
             }
+            else
+            {
+                // A site with the specified name not exists or the cultureCode not exists.
+                throw new Exception(string.Format("A site with the site name {0} does not exist or the culture code {1} not exists.", site.SiteName, cultureCode));
+            }
         }
 
         /// <inheritdoc/>
@@ -171,6 +231,11 @@ namespace PoshKentico.Core.Providers.Configuration.Sites
             {
                 // Removes the culture from the site
                 CultureSiteInfoProvider.RemoveCultureFromSite(cultureToWork.CultureID, siteToWork.SiteID);
+            }
+            else
+            {
+                // A site with the specified name not exists or the cultureCode not exists.
+                throw new Exception(string.Format("A site with the site name {0} does not exist or the culture code {1} not exists.", site.SiteName, cultureCode));
             }
         }
 
@@ -188,6 +253,11 @@ namespace PoshKentico.Core.Providers.Configuration.Sites
                 {
                     cultures.Add(item.ActLike<ICulture>());
                 }
+            }
+            else
+            {
+                // A site with the specified name not exists
+                throw new Exception(string.Format("A site with the site name {0} does not exist.", site.SiteName));
             }
 
             return cultures;
@@ -213,6 +283,11 @@ namespace PoshKentico.Core.Providers.Configuration.Sites
                 // Saves the site domain alias to the database
                 SiteDomainAliasInfoProvider.SetSiteDomainAliasInfo(newAlias);
             }
+            else
+            {
+                // A site with the specified name not exists
+                throw new Exception(string.Format("A site with the site name {0} does not exist.", site.SiteName));
+            }
         }
 
         /// <inheritdoc/>
@@ -228,6 +303,11 @@ namespace PoshKentico.Core.Providers.Configuration.Sites
 
                 // Deletes the site domain alias
                 SiteDomainAliasInfoProvider.DeleteSiteDomainAliasInfo(deleteAlias);
+            }
+            else
+            {
+                // A site with the specified name not exists
+                throw new Exception(string.Format("A site with the site name {0} does not exist.", site.SiteName));
             }
         }
 
@@ -248,6 +328,11 @@ namespace PoshKentico.Core.Providers.Configuration.Sites
                 {
                     aliases.Add(item.ActLike<ISiteDomainAlias>());
                 }
+            }
+            else
+            {
+                // A site with the specified name not exists
+                throw new Exception(string.Format("A site with the site name {0} does not exist.", site.SiteName));
             }
 
             return aliases;

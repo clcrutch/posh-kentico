@@ -19,12 +19,14 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
+using CMS.Membership;
 using CMS.Scheduler;
 using CMS.SiteProvider;
 using ImpromptuInterface;
 using PoshKentico.Business.Configuration.Sites;
 using PoshKentico.Core.Services.Configuration.ScheduledTasks;
 using PoshKentico.Core.Services.Configuration.Sites;
+using PoshKentico.Core.Services.Configuration.Users;
 using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.Configuration.Sites
@@ -40,16 +42,20 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     ///     <code>Get-CMSSite</code>
     /// </example>
     /// <example>
-    ///     <para>Get all sites with a display name "*bas*", site name "*bas*", or a domain name "bas*".</para>
-    ///     <code>Get-CMSSite bas</code>
+    ///     <para>Get all sites with a display name "basic", site name "basic", or a domain name "basic".</para>
+    ///     <code>Get-CMSSite basic</code>
     /// </example>
     /// <example>
     ///     <para>Get all sites with a display name "basic", site name "basic", or domain name "basic"</para>
-    ///     <code>Get-CMSSite basic -Exact</code>
+    ///     <code>Get-CMSSite *basic* -RegularExpression</code>
     /// </example>
     /// <example>
     ///     <para>Get all the sites with the specified IDs.</para>
-    ///     <code>Get-CMSSite -ID 5,304,5</code>
+    ///     <code>Get-CMSSite -SiteIds 5,304,5</code>
+    /// </example>
+    /// <example>
+    ///     <para>Get all the sites with the specified user.</para>
+    ///     <code>Get-CMSSite -User $user</code>
     /// </example>
     /// <example>
     ///     <para>Get the site for the specified task.</para>
@@ -64,10 +70,30 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     {
         #region Constants
 
-        private const string NONE = "None";
-        private const string DISPLAYNAME = "Dislpay Name";
-        private const string IDSETNAME = "ID";
-        private const string TASK = "Task";
+        /// <summary>
+        /// Represents no parameters.
+        /// </summary>
+        protected const string NONE = "None";
+
+        /// <summary>
+        /// Represents site name or display name is used in parameter.
+        /// </summary>
+        protected const string DISPLAYNAME = "Dislpay Name";
+
+        /// <summary>
+        /// Represents site id is used in parameter.
+        /// </summary>
+        protected const string IDSETNAME = "ID";
+
+        /// <summary>
+        /// Represents when the task parameter is used.
+        /// </summary>
+        protected const string TASK = "Task";
+
+        /// <summary>
+        /// Represents user object is used in parameter.
+        /// </summary>
+        protected const string USEROBJECT = "User";
 
         #endregion
 
@@ -81,16 +107,23 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         public string DisplayName { get; set; }
 
         /// <summary>
-        /// <para type="description">If set, the match is exact, else the match performs a contains for display name and category name and starts with for path.</para>
+        /// <para type="description">If set, do a regex match, else the exact match.</para>
         /// </summary>
         [Parameter(ParameterSetName = DISPLAYNAME)]
-        public SwitchParameter Exact { get; set; }
+        [Alias("Regex")]
+        public SwitchParameter RegularExpression { get; set; }
 
         /// <summary>
         /// <para type="description">The IDs of the site to retrieve.</para>
         /// </summary>
         [Parameter(Mandatory = true, Position = 0, ParameterSetName = IDSETNAME)]
         public int[] ID { get; set; }
+
+        /// <summary>
+        /// <para type="description">The user that the sites are assigned to.</para>
+        /// </summary>
+        [Parameter(Mandatory = false, ValueFromPipeline =true, Position = 0, ParameterSetName = USEROBJECT)]
+        public UserInfo User { get; set; }
 
         /// <summary>
         /// <para type="description">The task to get the site for.</para>
@@ -117,10 +150,13 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
             switch (this.ParameterSetName)
             {
                 case DISPLAYNAME:
-                    sites = this.BusinessLayer.GetSites(this.DisplayName, this.Exact.ToBool());
+                    sites = this.BusinessLayer.GetSites(this.DisplayName, this.RegularExpression.ToBool());
                     break;
                 case IDSETNAME:
                     sites = this.BusinessLayer.GetSites(this.ID);
+                    break;
+                case USEROBJECT:
+                    sites = this.BusinessLayer.GetSites(this.User.ActLike<IUser>());
                     break;
                 case TASK:
                     sites = new ISite[] { this.BusinessLayer.GetSite(this.ScheduledTask.ActLike<IScheduledTask>()).UndoActLike() };
@@ -133,8 +169,17 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
 
             foreach (var site in sites)
             {
-                this.WriteObject(site.UndoActLike());
+                this.ActOnObject(site);
             }
+        }
+
+        /// <summary>
+        /// When overridden in a child class, operates on the specified action.
+        /// </summary>
+        /// <param name="site">The site to operate on.</param>
+        protected virtual void ActOnObject(ISite site)
+        {
+            this.WriteObject(site.UndoActLike());
         }
 
         #endregion

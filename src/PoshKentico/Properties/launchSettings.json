@@ -3,7 +3,8 @@
     "PoshKentico": {
       "commandName": "Executable",
       "executablePath": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-      "commandLineArgs": "-NoExit -File ./TestScript.ps1"
+      "commandLineArgs": "-NoExit -File ./TestScript.ps1",
+      "workingDirectory": "..\\..\\build\\posh-kentico"
     }
   }
 }

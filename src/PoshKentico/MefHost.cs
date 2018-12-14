@@ -45,6 +45,7 @@ namespace PoshKentico
             if (Container == null)
             {
                 var catalog = new AggregateCatalog(
+                    new AssemblyCatalog(typeof(MefHost).Assembly),
                     new AssemblyCatalog(typeof(ICmsApplicationService).Assembly),
                     new AssemblyCatalog(typeof(CmdletBusinessBase).Assembly));
 

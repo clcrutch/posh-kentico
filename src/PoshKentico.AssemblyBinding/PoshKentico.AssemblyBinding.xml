@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PoshKentico.AssemblyBinding</name>
+    </assembly>
+    <members>
+        <member name="T:PoshKentico.AssemblyBinding.AssemblyBinding">
+            <summary>
+            Definition of an AssemblyBinding node.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.AssemblyBinding.AssemblyBinding.DependentAssemblies">
+            <summary>
+            Gets or sets a list of dependent assembly nodes.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.AssemblyBinding.AssemblyBinding.UpdateAssemblyName(System.String)">
+            <summary>
+            Converts the <paramref name="assemblyFullName"/> to one based off of the dependent assemblies.  Returns null if not found.
+            </summary>
+            <param name="assemblyFullName">The assembly name get a redirect for.</param>
+            <returns>The redirected assembly name.  Null if not defined.</returns>
+        </member>
+        <member name="T:PoshKentico.AssemblyBinding.AssemblyIdentity">
+            <summary>
+            Definition of the AssemblyIdentity node.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.AssemblyBinding.AssemblyIdentity.Culture">
+            <summary>
+            Gets or sets the culture attribute.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.AssemblyBinding.AssemblyIdentity.Name">
+            <summary>
+            Gets or sets the name attribute.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.AssemblyBinding.AssemblyIdentity.PublicKeyToken">
+            <summary>
+            Gets or sets the publickeytoken attribute.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.AssemblyBinding.AssemblyIdentity.Matches(System.String)">
+            <summary>
+            Checks to see if the <paramref name="assemblyFullName"/> matches the current <see cref="T:PoshKentico.AssemblyBinding.AssemblyIdentity"/>.
+            </summary>
+            <param name="assemblyFullName">The assembly full name to test.</param>
+            <returns>True if matches, false otherwise.</returns>
+        </member>
+        <member name="T:PoshKentico.AssemblyBinding.BindingRedirect">
+            <summary>
+            Definition of the BindingRedirect node.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.AssemblyBinding.BindingRedirect.NewVersion">
+            <summary>
+            Gets or sets the new version attribute.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.AssemblyBinding.BindingRedirect.OldVersion">
+            <summary>
+            Gets or sets the old version attribute.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.AssemblyBinding.BindingRedirect.MinVersion">
+            <summary>
+            Gets the minimum old version.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.AssemblyBinding.BindingRedirect.MaxVersion">
+            <summary>
+            Gets teh maximum old version.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.AssemblyBinding.BindingRedirect.Matches(System.String)">
+            <summary>
+            Checks to see if the <paramref name="assemblyFullName"/> matches the current <see cref="T:PoshKentico.AssemblyBinding.BindingRedirect"/>.
+            </summary>
+            <param name="assemblyFullName">The assembly full name to test.</param>
+            <returns>True if matches, false otherwise.</returns>
+        </member>
+        <member name="T:PoshKentico.AssemblyBinding.Configuration">
+            <summary>
+            Definition of the configuration node.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.AssemblyBinding.Configuration.Runtime">
+            <summary>
+            Gets or sets the runtime node.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.AssemblyBinding.DependentAssembly">
+            <summary>
+            Definition of the dependent assembly node.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.AssemblyBinding.DependentAssembly.AssemblyIdentity">
+            <summary>
+            Gets or sets the assembly identity node.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.AssemblyBinding.DependentAssembly.BindingRedirect">
+            <summary>
+            Gets or sets the binding redirect node.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.AssemblyBinding.DependentAssembly.UpdateAssemblyName(System.String)">
+            <summary>
+            Updates the assembly name using the binding redirect.
+            </summary>
+            <param name="assemblyFullName">The assembly name to update.</param>
+            <returns>The redirect assembly name if exists, else null.</returns>
+        </member>
+        <member name="T:PoshKentico.AssemblyBinding.PowerShellAssemblyBindingHelper">
+            <summary>
+            Reimplementation of assembly binding redirects for PowerShell modules.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.AssemblyBinding.PowerShellAssemblyBindingHelper.Initialize">
+            <summary>
+            Initializes PowerShell using the [module-name].config file in the module directory.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.AssemblyBinding.Runtime">
+            <summary>
+            Definition of the runtime node.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.AssemblyBinding.Runtime.AssemblyBinding">
+            <summary>
+            Gets or sets the assembly binding node.
+            </summary>
+        </member>
+    </members>
+</doc>

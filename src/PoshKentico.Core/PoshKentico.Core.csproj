@@ -5,14 +5,22 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\git\posh-kentico\src\PoshKentico.Core\PoshKentico.Core.xml</DocumentationFile>
+    <DocumentationFile>PoshKentico.Core.xml</DocumentationFile>
+    <OutputPath></OutputPath>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
-    <DocumentationFile>C:\git\posh-kentico\src\PoshKentico.Core\PoshKentico.Core.xml</DocumentationFile>
+    <DocumentationFile>..\PoshKentico.Core\PoshKentico.Core.xml</DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Services\Development\PageTemplates\IPageTemplateWebPartInstance.cs" />
+    <Compile Remove="Services\Development\PageTemplates\IPageTemplateWebPartZoneInstance.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Remove="stylecop.json" />
@@ -30,10 +38,17 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="PowerShellStandard.Library" Version="5.1.0-preview-06" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta009">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="System.Security.Principal.Windows" Version="4.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web" />
   </ItemGroup>
 
 </Project>

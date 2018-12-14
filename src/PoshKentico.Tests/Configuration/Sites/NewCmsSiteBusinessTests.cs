@@ -15,13 +15,16 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System.Diagnostics.CodeAnalysis;
 using CMS.SiteProvider;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
+using PoshKentico.Tests.Helpers;
 
 namespace PoshKentico.Business.Configuration.Sites
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     public class NewCmsSiteBusinessTests
     {
@@ -32,8 +35,7 @@ namespace PoshKentico.Business.Configuration.Sites
 
             var businessLayer = new NewCmsSiteBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 SiteService = siteServiceMock.Object,
             };
@@ -52,8 +54,7 @@ namespace PoshKentico.Business.Configuration.Sites
 
             var businessLayer = new NewCmsSiteBusiness()
             {
-                WriteDebug = Assert.NotNull,
-                WriteVerbose = Assert.NotNull,
+                OutputService = OutputServiceHelper.GetPassThruOutputService(),
 
                 SiteService = siteServiceMock.Object,
             };

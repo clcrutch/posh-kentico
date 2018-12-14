@@ -19,8 +19,11 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Text.RegularExpressions;
+using CMS.Membership;
 using PoshKentico.Core.Services.Configuration.ScheduledTasks;
 using PoshKentico.Core.Services.Configuration.Sites;
+using PoshKentico.Core.Services.Configuration.Users;
 
 namespace PoshKentico.Business.Configuration.Sites
 {
@@ -62,28 +65,26 @@ namespace PoshKentico.Business.Configuration.Sites
         /// Gets a list of all of the <see cref="ISite"/> which match the specified criteria.
         /// </summary>
         /// <param name="matchString">The string which to match the sites to.</param>
-        /// <param name="exact">A boolean which indicates if the match should be exact.</param>
+        /// <param name="isRegex">A boolean which indicates if the match should be exact.</param>
         /// <returns>A list of all of the <see cref="ISite"/> which match the specified criteria.</returns>
-        public IEnumerable<ISite> GetSites(string matchString, bool exact)
+        public IEnumerable<ISite> GetSites(string matchString, bool isRegex)
         {
-            if (exact)
+            Regex regex = null;
+
+            if (isRegex)
             {
-                return (from c in this.SiteService.Sites
-                        where c.DisplayName.ToLowerInvariant().Equals(matchString, StringComparison.InvariantCultureIgnoreCase) ||
-                            c.SiteName.ToLowerInvariant().Equals(matchString, StringComparison.InvariantCultureIgnoreCase) ||
-                            c.DomainName.ToLowerInvariant().Equals(matchString, StringComparison.InvariantCultureIgnoreCase)
-                        select c).ToArray();
+                regex = new Regex(matchString, RegexOptions.Compiled | RegexOptions.IgnoreCase);
             }
             else
             {
-                var lowerMatchString = matchString.ToLowerInvariant();
-
-                return (from c in this.SiteService.Sites
-                        where c.DisplayName.ToLowerInvariant().Contains(lowerMatchString) ||
-                           c.SiteName.ToLowerInvariant().Contains(lowerMatchString) ||
-                           c.DomainName.ToLowerInvariant().StartsWith(lowerMatchString)
-                        select c).ToArray();
+                regex = new Regex($"^{matchString.Replace("*", ".*")}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             }
+
+            var matched = from f in this.SiteService.Sites
+                          where regex.IsMatch(f.SiteName) || regex.IsMatch(f.DisplayName) || regex.IsMatch(f.DomainName)
+                          select f;
+
+            return matched.ToArray();
         }
 
         /// <summary>
@@ -98,6 +99,16 @@ namespace PoshKentico.Business.Configuration.Sites
             return (from site in sites
                     where site != null
                     select site).ToArray();
+        }
+
+        /// <summary>
+        /// Gets a list of the <see cref="ISite"/> which assigned to the supplied user.
+        /// </summary>
+        /// <param name="user">The user <see cref="IUser"/> which assigned to the site.</param>
+        /// <returns>A list of the <see cref="ISite"/> to which the user is assigned.</returns>
+        public IEnumerable<ISite> GetSites(IUser user)
+        {
+            return this.SiteService.GetSite(user);
         }
 
         #endregion

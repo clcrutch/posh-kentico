@@ -54,13 +54,20 @@ CLRVersion = '4.0'
 # RequiredAssemblies = @()
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
-# ScriptsToProcess = @()
+ScriptsToProcess = @("./init.ps1")
 
 # Type files (.ps1xml) to be loaded when importing this module
 # TypesToProcess = @()
 
 # Format files (.ps1xml) to be loaded when importing this module
 FormatsToProcess = @( `
+	# ContentManagement/MediaLibraries
+	"./FormattingFiles/ContentManagement/MediaLibraries/MediaLibraryInfo.format.ps1xml", `
+	"./FormattingFiles/ContentManagement/MediaLibraries/MediaFileInfo.format.ps1xml", `
+
+	# Configuration/Roles
+	"./FormattingFiles/Configuration/Roles/RoleInfo.format.ps1xml", `
+	
 	# Configuration/ScheduledTasks
 	"./FormattingFiles/Configuration/ScheduledTasks/TaskInfo.format.ps1xml", `
 
@@ -70,12 +77,19 @@ FormatsToProcess = @( `
     "./FormattingFiles/Configuration/Sites/SiteInfo.format.ps1xml", `
 
     # Configuration/Staging
-	"./FormattingFiles/Configuration/Staging/ServerInfo.format.ps1xml" `
+	"./FormattingFiles/Configuration/Staging/ServerInfo.format.ps1xml", `
+
+	# Configuration/Users
+	"./FormattingFiles/Configuration/Users/UserInfo.format.ps1xml", `
 
 	# Development/WebParts
 	"./FormattingFiles/Development/WebParts/FormFieldInfo.format.ps1xml", `
     "./FormattingFiles/Development/WebParts/WebPartCategoryInfo.format.ps1xml", `
-	"./FormattingFiles/Development/WebParts/WebPartInfo.format.ps1xml" `
+	"./FormattingFiles/Development/WebParts/WebPartInfo.format.ps1xml", `
+
+	# Development/PageTemplates
+	"./FormattingFiles/Development/PageTemplates/PageTemplateCategoryInfo.format.ps1xml", `	
+	"./FormattingFiles/Development/PageTemplates/PageTemplateInfo.format.ps1xml" `	
 )
 
 # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
@@ -110,6 +124,8 @@ AliasesToExport = '*'
 PrivateData = @{
 
     PSData = @{
+		# Prerelease tags have to be added here.
+		# Prerelease = ''
 
         # Tags applied to this module. These help with module discovery in online galleries.
         Tags = @("Kentico", "CMS")

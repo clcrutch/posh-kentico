@@ -20,25 +20,522 @@
             Gets or sets a reference to the CMS Application Service.  Populated by MEF.
             </summary>
         </member>
-        <member name="P:PoshKentico.Business.CmdletBusinessBase.WriteDebug">
+        <member name="P:PoshKentico.Business.CmdletBusinessBase.OutputService">
             <summary>
-            Gets or sets a delegate for writing to the debug stream.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Business.CmdletBusinessBase.WriteVerbose">
-            <summary>
-            Gets or sets a delegate for writing to the verbose stream.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Business.CmdletBusinessBase.ShouldProcess">
-            <summary>
-            Gets or sets a delegate for checking if the cmdlet should continue processing.
+            Gets or sets a reference to the <see cref="T:PoshKentico.Core.Services.General.IOutputService"/>.  Populated by MEF.
             </summary>
         </member>
         <member name="M:PoshKentico.Business.CmdletBusinessBase.Initialize">
             <summary>
             Initializes the current business layer.
             </summary>
+        </member>
+        <member name="T:PoshKentico.Business.CmdletProviderBusinessBase">
+            <summary>
+            Base class for cmdlet business providers.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.CmdletProviderBusinessBase.ResourceService">
+            <summary>
+            Gets or sets the resource service.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.Exists(System.String)">
+            <summary>
+            Determines if the resource exists.
+            </summary>
+            <param name="path">The absolute path of the resource..</param>
+            <returns>If the resource exists.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.CreateResource(System.String,System.String,System.Object)">
+            <summary>
+            Creates the resource.
+            </summary>
+            <param name="path">The resource path.</param>
+            <param name="itemTypeName">The type of resource.</param>
+            <param name="newItemValue">New resource property values.</param>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.Delete(System.String,System.Boolean)">
+            <summary>
+            Deletes a resource.
+            </summary>
+            <param name="path">The full path of the resource to be deleted.</param>
+            <param name="recurse">If true, will delete all resources in a container.</param>
+            <returns>If resource was deleted.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.GetResource(System.String,System.Boolean)">
+            <summary>
+            Gets the resource.
+            </summary>
+            <param name="path">The full path of the resource.</param>
+            <param name="recurse">If true, retrieves all containers. If false, will only retrieve immediate containers.</param>
+            <returns>Returns the resource item <see cref="T:PoshKentico.Core.Services.Resource.IResourceInfo"/>. </returns>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.GetChildren(System.String,System.Boolean)">
+            <summary>
+            Retrieves resource items and containers.
+            </summary>
+            <param name="path">The path to the resource.</param>
+            <param name="recurse">If true and resource is a container, will retrieve all of its children.</param>
+            <returns>Returns a list of <see cref="T:PoshKentico.Core.Services.Resource.IResourceInfo"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.GetProperty(System.String,System.Collections.ObjectModel.Collection{System.String})">
+            <summary>
+            Gets the specified properties from the resource.
+            </summary>
+            <param name="path">The path to the resource.</param>
+            <param name="providerSpecificPickList">List of properties to retrieve.</param>
+            <returns>A dictionary containing the requested properties.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.PurgeUnwantedProperties(System.Collections.ObjectModel.Collection{System.String},System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Removes properties not specified from the provided dictionary.
+            </summary>
+            <param name = "providerSpecificPickList" > List of properties to keep in the dictionary.</param>
+            <param name = "properties" > Dictionary which contains properties and values.</param>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.SetProperty(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Sets the specified properties on the resource.
+            </summary>
+            <param name="path">The path to the resource.</param>
+            <param name="propertyValue">A dictionary containing the properties and their respective values.</param>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.ExpandPath(System.String,System.String)">
+            <summary>
+            Resolves the wildcard characters in a path, and displays the path contents.
+            </summary>
+            <param name="path">The path with wildcard characters.</param>
+            <param name="currentLocation">The current directory.</param>
+            <returns>List of resource paths.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.NormalizeRelativePath(System.String,System.String)">
+            <summary>
+            Normalizes the path that was passed in and returns the normalized path as a relative path to the basePath that was passed.
+            </summary>
+            <param name="path">The full path of the resource.</param>
+            <param name="basePath">The path that the return value should be relative to.</param>
+            <returns>A normalized path that is relative to the basePath that was passed.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.IsContainer(System.String)">
+            <summary>
+            Is the resource a container.
+            </summary>
+            <param name="path">Full path of the rosource.</param>
+            <returns>If the requested path is a container.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.CopyItem(System.String,System.String,System.Boolean)">
+            <summary>
+            Copies either a resource or a resource item.
+            </summary>
+            <param name="sourcePath">The full path to the resource being copied.</param>
+            <param name="destinationPath">The destination where the resource will be copied to.</param>
+            <param name="recurse">If true, will copy all of a containers child resources.</param>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.GetReaderWriter(System.String)">
+            <summary>
+            Gets the reader writer.
+            </summary>
+            <param name="path">The path to the resource item.</param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.Resource.IResourceReaderWriter"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.CopyItem(System.String,System.String)">
+            <summary>
+            Copies a resource item.
+            </summary>
+            <param name="sourcePath">The full path to the resource being copied.</param>
+            <param name="destinationPath">The destination where the resource item will be copied to.</param>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.CopyContainer(PoshKentico.Core.Services.Resource.IResourceInfo,System.String,System.Boolean)">
+            <summary>
+            Copies a resource container.
+            </summary>
+            <param name="sourceResource">The full path to the resource being copied.</param>
+            <param name="destinationBasePath">The destination where the resource item will be copied to.</param>
+            <param name="recurse">If true, will copy all of a containers child resources.</param>
+        </member>
+        <member name="M:PoshKentico.Business.CmdletProviderBusinessBase.NormalizeDestinationPath(System.String,System.String)">
+            <summary>
+            Normalizes the path that was passed in and returns the normalized path as a relative path to the basePath that was passed.
+            </summary>
+            <param name="sourcePath">The full path of the resource.</param>
+            <param name="destinationPath">The path that the return value should be relative to.</param>
+            <returns>A normalized path that is relative to the basePath that was passed.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.Roles.AddCmsPermissionToRoleBusiness">
+            <summary>
+            Business Layer of Add-CmsPermissionToRole cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.Roles.AddCmsPermissionToRoleBusiness.RoleService">
+            <summary>
+            Gets or sets a reference to the Role Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Roles.AddCmsPermissionToRoleBusiness.AddPermissionToRole(PoshKentico.Core.Services.Configuration.Roles.IRole,System.String[],System.String,System.String)">
+            <summary>
+            Add a module permission to a role.
+            </summary>
+            <param name="role">The role to add a module permission to.</param>
+            <param name="permissionNames">The permission names of the module <see cref="T:PoshKentico.Core.Services.Development.Modules.IResource"/>.</param>
+            <param name="resourceName">The resource name of the module <see cref="T:PoshKentico.Core.Services.Development.Modules.IResource"/>.</param>
+            <param name="className">The class name of the module <see cref="T:PoshKentico.Core.Services.Development.Modules.IResource"/>.</param>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.Roles.AddCmsUIElementToRoleBusiness">
+            <summary>
+            Business Layer of Add-CmsUIElementToRole cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.Roles.AddCmsUIElementToRoleBusiness.RoleService">
+            <summary>
+            Gets or sets a reference to the Role Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Roles.AddCmsUIElementToRoleBusiness.AddUiElementToRole(PoshKentico.Core.Services.Configuration.Roles.IRole,System.String,System.String)">
+            <summary>
+            Add an UI element to a role.
+            </summary>
+            <param name="role">The role to add an UI element to.</param>
+            <param name="resourceName">The resource name related to the UI element <see cref="T:PoshKentico.Core.Services.Development.Modules.IUIElement"/>.</param>
+            <param name="elementName">The element name of the ui element <see cref="T:PoshKentico.Core.Services.Development.Modules.IUIElement"/>.</param>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.Roles.AddCmsUserToRoleBusiness">
+            <summary>
+            Business Layer for the Add-CMSUserToRole cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.Roles.AddCmsUserToRoleBusiness.RoleService">
+            <summary>
+            Gets or sets a reference to the Role Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Roles.AddCmsUserToRoleBusiness.AddUserToRole(System.String,PoshKentico.Core.Services.Configuration.Roles.IRole)">
+            <summary>
+            Add a user to a role.
+            </summary>
+            <param name="userName">The user name of the user to add to the specified role.</param>
+            <param name="role">The role to add a user to.</param>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.Roles.GetCmsRoleBusiness">
+            <summary>
+            Business Layer of Get-CMSRole cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.Roles.GetCmsRoleBusiness.RoleService">
+            <summary>
+            Gets or sets a reference to the Role Service. Populated by MEF.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.Roles.GetCmsRoleBusiness.SiteService">
+            <summary>
+            Gets or sets a reference to the Site Business.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Roles.GetCmsRoleBusiness.GetRoles">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> in the CMS System.
+            </summary>
+            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Roles.GetCmsRoleBusiness.GetRoles(System.Int32[])">
+            <summary>
+            Gets a list of the <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> which match the supplied IDs.
+            </summary>
+            <param name="ids">The IDs of the <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> to return.</param>
+            <returns>A list of the <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> which match the supplied IDs.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Roles.GetCmsRoleBusiness.GetRoles(System.String,System.String,System.Boolean)">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> which match the specified criteria.
+            </summary>
+            <param name="roleName">The role name which to match the roles to.</param>
+            <param name="siteName">The site name of the site which to match the roles to. If no site match, return roles that not assigne to any site.</param>
+            <param name="isRegex">A boolean which indicates if the match should be regex.</param>
+            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> which match the specified criteria.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Roles.GetCmsRoleBusiness.GetRoles(System.String,System.Boolean,System.Int32)">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> which match the specified criteria.
+            </summary>
+            <param name="roleName">The role name which to match the roles to.</param>
+            <param name="isRegex">A boolean which indicates if the match should be regex.</param>
+            <param name="siteID">The site id which to match the roles to. If no site match, return roles that not assigne to any site.</param>
+            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> which match the specified criteria.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Roles.GetCmsRoleBusiness.GetRolesFromUser(System.String)">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> from the specified user in the CMS System.
+            </summary>
+            <param name="userName">The user to retrive all users from.</param>
+            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> that belong to the user.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Roles.GetCmsRoleBusiness.GetRolesFromUser(PoshKentico.Core.Services.Configuration.Users.IUser)">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> from the specified user in the CMS System.
+            </summary>
+            <param name="user">The user to retrive all users from.</param>
+            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> that belong to the user.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.Roles.NewCmsRoleBusiness">
+            <summary>
+            Business Layer of New-CMSRole cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.Roles.NewCmsRoleBusiness.RoleService">
+            <summary>
+            Gets or sets a reference to the Role Service. Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Roles.NewCmsRoleBusiness.CreateRole(System.String,System.String,System.Int32)">
+            <summary>
+            Creates a new <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> in the CMS System.
+            </summary>
+            <param name="roleDisplayName">The Display Name for the new Role.</param>
+            <param name="roleName">The Role Name for the new Role.</param>
+            <param name="siteID">The Site ID for the new Role.</param>
+            <returns>The newly created <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/>.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.Roles.RemoveCmsPermissionFromRoleBusiness">
+            <summary>
+            Business Layer of Remove-CmsPermissionFromRole cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.Roles.RemoveCmsPermissionFromRoleBusiness.RoleService">
+            <summary>
+            Gets or sets a reference to the Role Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Roles.RemoveCmsPermissionFromRoleBusiness.RemovePermissionFromRole(PoshKentico.Core.Services.Configuration.Roles.IRole,System.String[],System.String,System.String)">
+            <summary>
+            Remove a module permission to a role.
+            </summary>
+            <param name="role">The role to remove a module permission from.</param>
+            <param name="permissionNames">The permission names of the module <see cref="T:PoshKentico.Core.Services.Development.Modules.IResource"/>.</param>
+            <param name="resourceName">The resource name of the module <see cref="T:PoshKentico.Core.Services.Development.Modules.IResource"/>.</param>
+            <param name="className">The class name of the module <see cref="T:PoshKentico.Core.Services.Development.Modules.IResource"/>.</param>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.Roles.RemoveCmsRoleBusiness">
+            <summary>
+            Business Layer for the Remove-CMSRole cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.Roles.RemoveCmsRoleBusiness.RoleService">
+            <summary>
+            Gets or sets a reference to the Role Service. Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Roles.RemoveCmsRoleBusiness.RemoveRole(PoshKentico.Core.Services.Configuration.Roles.IRole)">
+            <summary>
+            Removes a the specified role <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> in the CMS System.
+            </summary>
+            <param name="role">The <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> to remove.</param>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.Roles.RemoveCmsUIElementFromRoleBusiness">
+            <summary>
+            Business Layer of Remove-CmsUIElementFromRole cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.Roles.RemoveCmsUIElementFromRoleBusiness.RoleService">
+            <summary>
+            Gets or sets a reference to the Role Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Roles.RemoveCmsUIElementFromRoleBusiness.RemoveUiElementFromRole(PoshKentico.Core.Services.Configuration.Roles.IRole,System.String,System.String)">
+            <summary>
+            Remove an UI element from a role.
+            </summary>
+            <param name="role">The role to remove an UI element from.</param>
+            <param name="resourceName">The resource name related to the UI element <see cref="T:PoshKentico.Core.Services.Development.Modules.IUIElement"/>.</param>
+            <param name="elementName">The element name of the ui element <see cref="T:PoshKentico.Core.Services.Development.Modules.IUIElement"/>.</param>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.Roles.RemoveCmsUserFromRoleBusiness">
+            <summary>
+            Business Layer for the Remove-CMSUserFromRole cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.Roles.RemoveCmsUserFromRoleBusiness.RoleService">
+            <summary>
+            Gets or sets a reference to the Role Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Roles.RemoveCmsUserFromRoleBusiness.RemoveUserFromRole(System.String,PoshKentico.Core.Services.Configuration.Roles.IRole)">
+            <summary>
+            Add a user to a role.
+            </summary>
+            <param name="userName">The user name of the user to add to the specified role.</param>
+            <param name="role">The role to add a user to.</param>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.Roles.SetCmsRoleBusiness">
+            <summary>
+            Business Layer of Set-CMSRole cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.Roles.SetCmsRoleBusiness.RoleService">
+            <summary>
+            Gets or sets a reference to the Role Service. Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Roles.SetCmsRoleBusiness.Set(PoshKentico.Core.Services.Configuration.Roles.IRole)">
+            <summary>
+            Sets the role <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> in the CMS System.
+            </summary>
+            <param name="role">The <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> to set.</param>
+            <returns>The updated role.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Roles.SetCmsRoleBusiness.Set(System.String,System.String,System.Int32)">
+            <summary>
+            Sets the role <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/> in the CMS System.
+            </summary>
+            <param name="roleDisplayName">The Display Name for the new Role.</param>
+            <param name="roleName">The Role Name for the new Role.</param>
+            <param name="siteID">The Site ID for the new Role.</param>
+            <returns>The newly created <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/>.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.ScheduledTasks.GetCmsScheduledTaskBusiness">
+            <summary>
+            Business layer of the Get-CMSScheduledTask cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.ScheduledTasks.GetCmsScheduledTaskBusiness.ScheduledTaskService">
+            <summary>
+            Gets or sets the scheduled task service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.ScheduledTasks.GetCmsScheduledTaskBusiness.GetScheduledTasks">
+            <summary>
+            Gets a list of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> returned by Kentico.
+            </summary>
+            <returns>A list of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.ScheduledTasks.GetCmsScheduledTaskBusiness.GetScheduledTasks(PoshKentico.Core.Services.Configuration.Sites.ISite)">
+            <summary>
+            Gets a list of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> for a particular <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> return by Kentico.
+            </summary>
+            <param name="site">The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to get the list of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> for.</param>
+            <returns>A list of the <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> which are associated with a <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.ScheduledTasks.GetCmsScheduledTaskBusiness.GetScheduledTasksByAssemblyName(System.String,System.Boolean)">
+            <summary>
+            Gets a list of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> returned by Kentico whose assembly name matches the match string.
+            </summary>
+            <param name="matchString">The string which to match the <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> to.</param>
+            <param name="isRegex">Indicates whether <paramref name="matchString"/> is a regular expression.</param>
+            <returns>A list of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> matching the <paramref name="matchString"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.ScheduledTasks.GetCmsScheduledTaskBusiness.GetScheduledTasksByAssemblyName(System.String,System.Boolean,PoshKentico.Core.Services.Configuration.Sites.ISite)">
+            <summary>
+            Gets a list of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> for a particular <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> returned by Kentico whose assembly matches the match string.
+            </summary>
+            <param name="matchString">The string which to match the <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> to.</param>
+            <param name="isRegex">Indicates whether <paramref name="matchString"/> is a regular expression.</param>
+            <param name="site">The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to get the list of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> for.</param>
+            <returns>A list of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> matching the <paramref name="matchString"/> and the <paramref name="site"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.ScheduledTasks.GetCmsScheduledTaskBusiness.GetScheduledTasksByNameOrDisplayName(System.String,System.Boolean)">
+            <summary>
+            Gets a list of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> returned by Kentico whose name or display name matches the match string.
+            </summary>
+            <param name="matchString">The string which to match the scheduled task to.</param>
+            <param name="isRegex">Indicates whether <paramref name="matchString"/> is a regular expression.</param>
+            <returns>A list of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> matching the <paramref name="matchString"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.ScheduledTasks.GetCmsScheduledTaskBusiness.GetScheduledTasksByNameOrDisplayName(System.String,System.Boolean,PoshKentico.Core.Services.Configuration.Sites.ISite)">
+            <summary>
+            Gets a list of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> for a particular <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> returned by Kentico whose name or display name matches the match string.
+            </summary>
+            <param name="matchString">The string which to match the <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> to.</param>
+            <param name="isRegex">Indicates whether <paramref name="matchString"/> is a regular expression.</param>
+            <param name="site">The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to get the list of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> for.</param>
+            <returns>A list of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> matching the <paramref name="matchString"/> and the <paramref name="site"/>.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.ScheduledTasks.GetCmsScheduledTaskIntervalBusiness">
+            <summary>
+            Business layer of the Get-CMSScheduledTaskInterval cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.ScheduledTasks.GetCmsScheduledTaskIntervalBusiness.ScheduledTaskService">
+            <summary>
+            Gets or sets the scheduled task service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.ScheduledTasks.GetCmsScheduledTaskIntervalBusiness.GetScheduledTaskInterval(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval"/> for the specified <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.
+            </summary>
+            <param name="scheduledTask">The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> to get the <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval"/> for.</param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval"/> for the specified <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.ScheduledTasks.NewCmsScheduledTaskBusiness">
+            <summary>
+            Business layer of the New-CMSScheduledTask cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.ScheduledTasks.NewCmsScheduledTaskBusiness.ScheduledTaskService">
+            <summary>
+            Gets or sets the scheduled task service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.ScheduledTasks.NewCmsScheduledTaskBusiness.New(System.String,System.String,System.String,System.String,PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval,System.String,PoshKentico.Core.Services.Configuration.Sites.ISite)">
+            <summary>
+            Creates a new <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.
+            </summary>
+            <param name="assemblyName">The assembly name for the new <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.</param>
+            <param name="class">The class name for the new <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.</param>
+            <param name="data">The data for the new <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.</param>
+            <param name="displayName">The display name for the new <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.</param>
+            <param name="interval">The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval"/> for the new <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.</param>
+            <param name="name">The name for the new <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.</param>
+            <param name="site">The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to associate the <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> with.</param>
+            <returns>The newly created <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.ScheduledTasks.RemoveCmsScheduledTaskBusiness">
+            <summary>
+            Business layer of the Remove-CMSScheduledTask cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.ScheduledTasks.RemoveCmsScheduledTaskBusiness.ScheduledTaskService">
+            <summary>
+            Gets or sets the scheduled task service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.ScheduledTasks.RemoveCmsScheduledTaskBusiness.Remove(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask)">
+            <summary>
+            Remove the specified <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> from Kentico.
+            </summary>
+            <param name="scheduledTask">The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> to remove from Kentico.</param>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.ScheduledTasks.SetCmsScheduledTaskBusiness">
+            <summary>
+            Business layer of the Set-CMSScheduledTask.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.ScheduledTasks.SetCmsScheduledTaskBusiness.ScheduledTaskService">
+            <summary>
+            Gets or sets the scheduled task service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.ScheduledTasks.SetCmsScheduledTaskBusiness.Set(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask,PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval)">
+            <summary>
+            Sets the <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> in Kentico.
+            </summary>
+            <param name="scheduledTask">The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> to set in Kentico.</param>
+            <param name="scheduledTaskInterval">The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval"/> to set on the scheduled task.</param>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.ScheduledTasks.StartCmsScheduledTaskBusiness">
+            <summary>
+            Business layer of the Start-CMSScheduledTask.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.ScheduledTasks.StartCmsScheduledTaskBusiness.ScheduledTaskService">
+            <summary>
+            Gets or sets the scheduled task service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.ScheduledTasks.StartCmsScheduledTaskBusiness.ExecuteTask(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask)">
+            <summary>
+            Executes the specified <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> within the current process.
+            </summary>
+            <param name="scheduledTask">The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> to execute.</param>
         </member>
         <member name="T:PoshKentico.Business.Configuration.Settings.GetCmsSettingValueBusiness">
             <summary>
@@ -120,34 +617,7 @@
             Gets or sets a reference to the Site Service.  Populated by MEF.
             </summary>
         </member>
-        <member name="P:PoshKentico.Business.Configuration.Sites.AddCmsSiteCultureBusiness.GetCmsSiteBusiness">
-            <summary>
-            Gets or sets a reference to the <see cref="P:PoshKentico.Business.Configuration.Sites.AddCmsSiteCultureBusiness.GetCmsSiteBusiness"/> used to get the site to add culture to.  Populated by MEF.
-            </summary>
-        </member>
         <member name="M:PoshKentico.Business.Configuration.Sites.AddCmsSiteCultureBusiness.AddCulture(PoshKentico.Core.Services.Configuration.Sites.ISite,System.String)">
-            <summary>
-            Add a culture to a site.
-            </summary>
-            <param name="site">The site to add culture to.</param>
-            <param name="cultureCode">The culture code for the culture to add to the site.</param>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Sites.AddCmsSiteCultureBusiness.AddCulture(System.String,System.Boolean,System.String)">
-            <summary>
-            Adds the culture to a <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
-            </summary>
-            <param name="matchString">the string which to match the site to.</param>
-            <param name="exact">A boolean which indicates if the match should be exact.</param>
-            <param name="cultureCode">The culture code for the culture to add to the site.</param>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Sites.AddCmsSiteCultureBusiness.AddCulture(System.Int32[],System.String)">
-            <summary>
-            Adds the culture to a <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
-            </summary>
-            <param name="ids">The IDs of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to add culture to.</param>
-            <param name="cultureCode">The culture code for the culture to add to the site.</param>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Sites.AddCmsSiteCultureBusiness.AddSiteCulture(PoshKentico.Core.Services.Configuration.Sites.ISite,System.String)">
             <summary>
             Add a culture to a site.
             </summary>
@@ -164,34 +634,7 @@
             Gets or sets a reference to the Site Service.  Populated by MEF.
             </summary>
         </member>
-        <member name="P:PoshKentico.Business.Configuration.Sites.AddCmsSiteDomainAliasBusiness.GetCmsSiteBusiness">
-            <summary>
-            Gets or sets a reference to the <see cref="P:PoshKentico.Business.Configuration.Sites.AddCmsSiteDomainAliasBusiness.GetCmsSiteBusiness"/> used to get the site to add domain alias to.  Populated by MEF.
-            </summary>
-        </member>
         <member name="M:PoshKentico.Business.Configuration.Sites.AddCmsSiteDomainAliasBusiness.AddDomainAlias(PoshKentico.Core.Services.Configuration.Sites.ISite,System.String)">
-            <summary>
-            Add a domain alias to a site.
-            </summary>
-            <param name="site">The site to add domain alias to.</param>
-            <param name="aliasName">The domain alias code for the domain alias to add to the site.</param>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Sites.AddCmsSiteDomainAliasBusiness.AddDomainAlias(System.String,System.Boolean,System.String)">
-            <summary>
-            Adds the domain alias to a <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
-            </summary>
-            <param name="matchString">The string which to match the site to.</param>
-            <param name="exact">A boolean which indicates if the match should be exact.</param>
-            <param name="aliasName">The domain alias code for the domain alias to add to the site.</param>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Sites.AddCmsSiteDomainAliasBusiness.AddDomainAlias(System.Int32[],System.String)">
-            <summary>
-            Adds the domain alias to a <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
-            </summary>
-            <param name="ids">The IDs of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to add domain alias to.</param>
-            <param name="aliasName">The domain alias code for the domain alias to add to the site.</param>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Sites.AddCmsSiteDomainAliasBusiness.AddSiteDomainAlias(PoshKentico.Core.Services.Configuration.Sites.ISite,System.String)">
             <summary>
             Add a domain alias to a site.
             </summary>
@@ -208,6 +651,13 @@
             Gets or sets a reference to the Site Service.  Populated by MEF.
             </summary>
         </member>
+        <member name="M:PoshKentico.Business.Configuration.Sites.GetCmsSiteBusiness.GetSite(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask)">
+            <summary>
+            Returns the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> for the specified <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.
+            </summary>
+            <param name="scheduledTask">The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> to get the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> for.</param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> which is associated with the specified <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.</returns>
+        </member>
         <member name="M:PoshKentico.Business.Configuration.Sites.GetCmsSiteBusiness.GetSites">
             <summary>
             Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
@@ -219,7 +669,7 @@
             Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> which match the specified criteria.
             </summary>
             <param name="matchString">The string which to match the sites to.</param>
-            <param name="exact">A boolean which indicates if the match should be exact.</param>
+            <param name="isRegex">A boolean which indicates if the match should be exact.</param>
             <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> which match the specified criteria.</returns>
         </member>
         <member name="M:PoshKentico.Business.Configuration.Sites.GetCmsSiteBusiness.GetSites(System.Int32[])">
@@ -228,6 +678,13 @@
             </summary>
             <param name="ids">The IDs of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to return.</param>
             <returns>A list of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> which match the supplied IDs.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Sites.GetCmsSiteBusiness.GetSites(PoshKentico.Core.Services.Configuration.Users.IUser)">
+            <summary>
+            Gets a list of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> which assigned to the supplied user.
+            </summary>
+            <param name="user">The user <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which assigned to the site.</param>
+            <returns>A list of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to which the user is assigned.</returns>
         </member>
         <member name="T:PoshKentico.Business.Configuration.Sites.GetCmsSiteCultureBusiness">
             <summary>
@@ -321,33 +778,9 @@
             Gets or sets a reference to the Site Service.  Populated by MEF.
             </summary>
         </member>
-        <member name="P:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteBusiness.GetCmsSiteBusiness">
-            <summary>
-            Gets or sets a reference to the <see cref="P:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteBusiness.GetCmsSiteBusiness"/> used to get the site to delete.  Populated by MEF.
-            </summary>
-        </member>
         <member name="M:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteBusiness.Remove(PoshKentico.Core.Services.Configuration.Sites.ISite)">
             <summary>
             Deletes the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
-            </summary>
-            <param name="site">The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to set.</param>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteBusiness.Remove(System.Int32[])">
-            <summary>
-            Deletes the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
-            </summary>
-            <param name="ids">The IDs of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to delete.</param>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteBusiness.Remove(System.String,System.Boolean)">
-            <summary>
-            Deletes the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
-            </summary>
-            <param name="matchString">the string which to match the site to.</param>
-            <param name="exact">A boolean which indicates if the match should be exact.</param>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteBusiness.RemoveSite(PoshKentico.Core.Services.Configuration.Sites.ISite)">
-            <summary>
-            Deletes the specified <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
             </summary>
             <param name="site">The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to set.</param>
         </member>
@@ -361,39 +794,12 @@
             Gets or sets a reference to the Site Service.  Populated by MEF.
             </summary>
         </member>
-        <member name="P:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteCultureBusiness.GetCmsSiteBusiness">
-            <summary>
-            Gets or sets a reference to the <see cref="P:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteCultureBusiness.GetCmsSiteBusiness"/> used to get the site to remove culture from.  Populated by MEF.
-            </summary>
-        </member>
         <member name="M:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteCultureBusiness.RemoveCulture(PoshKentico.Core.Services.Configuration.Sites.ISite,System.String)">
             <summary>
             Remove a culture to a site.
             </summary>
             <param name="site">The site to remove culture to.</param>
             <param name="cultureCode">The culture code for the culture to remove to the site.</param>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteCultureBusiness.RemoveCulture(System.String,System.Boolean,System.String)">
-            <summary>
-            Remove the culture to a <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
-            </summary>
-            <param name="matchString">The string which to match the site to.</param>
-            <param name="exact">A boolean which indicates if the match should be exact.</param>
-            <param name="cultureCode">The culture code for the culture to remove to the site.</param>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteCultureBusiness.RemoveCulture(System.Int32[],System.String)">
-            <summary>
-            Remove the culture to a <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
-            </summary>
-            <param name="ids">The IDs of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to remove culture to.</param>
-            <param name="cultureCode">The culture code for the culture to remove from the site.</param>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteCultureBusiness.RemoveSiteCulture(PoshKentico.Core.Services.Configuration.Sites.ISite,System.String)">
-            <summary>
-            Remove a culture to a site.
-            </summary>
-            <param name="site">The site to remove culture to.</param>
-            <param name="cultureCode">The culture code for the culture to remove from the site.</param>
         </member>
         <member name="T:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteDomainAliasBusiness">
             <summary>
@@ -405,34 +811,7 @@
             Gets or sets a reference to the Site Service.  Populated by MEF.
             </summary>
         </member>
-        <member name="P:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteDomainAliasBusiness.GetCmsSiteBusiness">
-            <summary>
-            Gets or sets a reference to the <see cref="P:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteDomainAliasBusiness.GetCmsSiteBusiness"/> used to get the site to add domain alias to.  Populated by MEF.
-            </summary>
-        </member>
         <member name="M:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteDomainAliasBusiness.RemoveDomainAlias(PoshKentico.Core.Services.Configuration.Sites.ISite,System.String)">
-            <summary>
-            Remove a domain alias to a site.
-            </summary>
-            <param name="site">The site to add domain alias to.</param>
-            <param name="aliasName">The domain alias code for the domain alias to add to the site.</param>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteDomainAliasBusiness.RemoveDomainAlias(System.String,System.Boolean,System.String)">
-            <summary>
-            Removes the domain alias to a <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
-            </summary>
-            <param name="matchString">the string which to match the site to.</param>
-            <param name="exact">A boolean which indicates if the match should be exact.</param>
-            <param name="aliasName">The domain alias code for the domain alias to add to the site.</param>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteDomainAliasBusiness.RemoveDomainAlias(System.Int32[],System.String)">
-            <summary>
-            Removes the domain alias to a <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
-            </summary>
-            <param name="ids">The IDs of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to add domain alias to.</param>
-            <param name="aliasName">The domain alias code for the domain alias to add to the site.</param>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Sites.RemoveCmsSiteDomainAliasBusiness.RemoveSiteDomainAlias(PoshKentico.Core.Services.Configuration.Sites.ISite,System.String)">
             <summary>
             Remove a domain alias to a site.
             </summary>
@@ -476,31 +855,7 @@
             Gets or sets a reference to the Site Service.  Populated by MEF.
             </summary>
         </member>
-        <member name="P:PoshKentico.Business.Configuration.Sites.StartCmsSiteBusiness.GetCmsSiteBusiness">
-            <summary>
-            Gets or sets a reference to the <see cref="P:PoshKentico.Business.Configuration.Sites.StartCmsSiteBusiness.GetCmsSiteBusiness"/> used to get the site to start.  Populated by MEF.
-            </summary>
-        </member>
         <member name="M:PoshKentico.Business.Configuration.Sites.StartCmsSiteBusiness.Start(PoshKentico.Core.Services.Configuration.Sites.ISite)">
-            <summary>
-            Starts the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
-            </summary>
-            <param name="site">The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to set.</param>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Sites.StartCmsSiteBusiness.Start(System.Int32[])">
-            <summary>
-            Starts the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
-            </summary>
-            <param name="ids">The IDs of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to delete.</param>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Sites.StartCmsSiteBusiness.Start(System.String,System.Boolean)">
-            <summary>
-            Starts the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
-            </summary>
-            <param name="matchString">the string which to match the site to.</param>
-            <param name="exact">A boolean which indicates if the match should be exact.</param>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Sites.StartCmsSiteBusiness.StartSite(PoshKentico.Core.Services.Configuration.Sites.ISite)">
             <summary>
             Starts the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
             </summary>
@@ -516,31 +871,7 @@
             Gets or sets a reference to the Site Service.  Populated by MEF.
             </summary>
         </member>
-        <member name="P:PoshKentico.Business.Configuration.Sites.StopCmsSiteBusiness.GetCmsSiteBusiness">
-            <summary>
-            Gets or sets a reference to the <see cref="P:PoshKentico.Business.Configuration.Sites.StopCmsSiteBusiness.GetCmsSiteBusiness"/> used to get the site to stop.  Populated by MEF.
-            </summary>
-        </member>
         <member name="M:PoshKentico.Business.Configuration.Sites.StopCmsSiteBusiness.Stop(PoshKentico.Core.Services.Configuration.Sites.ISite)">
-            <summary>
-            Stops the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
-            </summary>
-            <param name="site">The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to set.</param>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Sites.StopCmsSiteBusiness.Stop(System.Int32[])">
-            <summary>
-            Stops the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
-            </summary>
-            <param name="ids">The IDs of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to delete.</param>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Sites.StopCmsSiteBusiness.Stop(System.String,System.Boolean)">
-            <summary>
-            Stops the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
-            </summary>
-            <param name="matchString">the string which to match the site to.</param>
-            <param name="exact">A boolean which indicates if the match should be exact.</param>
-        </member>
-        <member name="M:PoshKentico.Business.Configuration.Sites.StopCmsSiteBusiness.StopSite(PoshKentico.Core.Services.Configuration.Sites.ISite)">
             <summary>
             Stops the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
             </summary>
@@ -575,7 +906,7 @@
             </summary>
             <param name="site">The associated site of the servers.</param>
             /// <param name="matchString">The string which to match the servers to.</param>
-            <param name="exact">A boolean which indicates if the match should be exact.</param>
+            <param name="isRegex">A boolean which indicates if the match should be regex.</param>
             <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Staging.IServer"/> which match the specified criteria.</returns>
         </member>
         <member name="M:PoshKentico.Business.Configuration.Staging.GetCmsServerBusiness.GetServers(System.Int32,System.String,System.Boolean)">
@@ -584,7 +915,7 @@
             </summary>
             <param name="siteId">The associated site id of the servers.</param>
             /// <param name="matchString">The string which to match the servers to.</param>
-            <param name="exact">A boolean which indicates if the match should be exact.</param>
+            <param name="isRegex">A boolean which indicates if the match should be isRegex.</param>
             <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Staging.IServer"/> which match the specified criteria.</returns>
         </member>
         <member name="T:PoshKentico.Business.Configuration.Staging.NewCmsServerBusiness">
@@ -785,9 +1116,629 @@
             </summary>
             <param name="server">The <see cref="T:PoshKentico.Core.Services.Configuration.Staging.IServer"/> to sync.</param>
         </member>
+        <member name="T:PoshKentico.Business.Configuration.Users.AddCmsUserToSiteBusiness">
+            <summary>
+            Business Layer for Set-CMSUserToSite cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.Users.AddCmsUserToSiteBusiness.UserService">
+            <summary>
+            Gets or sets a reference to the User Service. Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Users.AddCmsUserToSiteBusiness.AddUserToSite(PoshKentico.Core.Services.Configuration.Users.IUser,System.String)">
+            <summary>
+            Adds a user <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to the specified site<see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
+            </summary>
+            <param name="user">The user to add to a site.</param>
+            <param name="siteName">The site name to add a user to.</param>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.Users.GetCmsUserBusiness">
+            <summary>
+            Business Layer of the Get-CMSUser cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.Users.GetCmsUserBusiness.UserService">
+            <summary>
+            Gets or sets a reference to the User Service. Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Users.GetCmsUserBusiness.GetUsers">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> in the CMS System.
+            </summary>
+            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Users.GetCmsUserBusiness.GetUsers(System.Int32[])">
+            <summary>
+            Gets a list of the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which match the supplied IDs.
+            </summary>
+            <param name="ids">The IDs of the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to return.</param>
+            <returns>A list of the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which match the supplied IDs.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Users.GetCmsUserBusiness.GetUsers(System.String,System.Boolean)">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which match the specified criteria.
+            </summary>
+            <param name="userName">The user name which to match the users to.</param>
+            <param name="isRegex">A boolean which indicates if the match should be exact.</param>
+            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> which match the specified criteria.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Users.GetCmsUserBusiness.GetUsersFromRole(System.String,System.Int32)">
+            <summary>
+            Gets all users <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> from a specified role which match the specified criteria.
+            </summary>
+            <param name="roleName">The role name of the role.</param>
+            <param name="siteID">The SiteID of the role.</param>
+            <returns>A list of users that belong to the specified role.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.Users.NewCmsUserBusiness">
+            <summary>
+            Business Layer for the New-CMSUser cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.Users.NewCmsUserBusiness.UserService">
+            <summary>
+            Gets or sets a reference to the User Service. Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Users.NewCmsUserBusiness.CreateUser(System.String,System.String,System.String,System.String,CMS.Base.UserPrivilegeLevelEnum)">
+            <summary>
+            Creates a new <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> in the CMS System.
+            </summary>
+            <param name="userName">The User Name for the new User.</param>
+            <param name="fullName">The Full Name for the new User.</param>
+            <param name="email">The Email for the new User.</param>
+            <param name="preferredCultureCode">The Preferred Culture Code for the new User.</param>
+            <param name="privilegeLevel">The User Privilege Level for the new User.</param>
+            <returns>The newly created <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/>.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.Users.RemoveCmsUserBusiness">
+            <summary>
+            Business Layer for the Remove-CMSUser cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.Users.RemoveCmsUserBusiness.UserService">
+            <summary>
+            Gets or sets a reference to the User Service. Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Users.RemoveCmsUserBusiness.RemoveUsers(PoshKentico.Core.Services.Configuration.Users.IUser)">
+            <summary>
+            Removes a the specified user <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> in the CMS System.
+            </summary>
+            <param name="user">The <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to remove.</param>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.Users.RemoveCmsUserFromSiteBusiness">
+            <summary>
+            Business Layer for Remove-CMSUserFromSite cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.Users.RemoveCmsUserFromSiteBusiness.UserService">
+            <summary>
+            Gets or sets a reference to the User Service. Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Users.RemoveCmsUserFromSiteBusiness.RemoveUserFromSite(PoshKentico.Core.Services.Configuration.Users.IUser,System.String)">
+            <summary>
+            Removes a user <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> frpm the specified site<see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> in the CMS System.
+            </summary>
+            <param name="user">The user to Remove from a site.</param>
+            <param name="siteName">The site name to Remove a user from.</param>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.Users.SetCmsUserBusiness">
+            <summary>
+            Business Layer for the Set-CMSUser cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.Users.SetCmsUserBusiness.UserService">
+            <summary>
+            Gets or sets a reference to the User Service. Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Users.SetCmsUserBusiness.Set(PoshKentico.Core.Services.Configuration.Users.IUser)">
+            <summary>
+            Sets the <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> in the CMS System.
+            </summary>
+            <param name="user">The <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> to set.</param>
+            <returns>The updated user.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Users.SetCmsUserBusiness.Set(System.String,System.String,System.String,System.String,CMS.Base.UserPrivilegeLevelEnum)">
+            <summary>
+            Creates a new <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/> in the CMS System.
+            </summary>
+            <param name="userName">The User Name for the new User.</param>
+            <param name="fullName">The Full Name for the new User.</param>
+            <param name="email">The Email for the new User.</param>
+            <param name="preferredCultureCode">The Preferred Culture Code for the new User.</param>
+            <param name="privilegeLevel">The User Privilege Level for the new User.</param>
+            <returns>The newly updated <see cref="T:PoshKentico.Core.Services.Configuration.Users.IUser"/>.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.ContentManagement.MediaLibraries.GetCmsMediaLibraryBusiness">
+            <summary>
+            Business Layer for Get-CMSMediaLibray cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.ContentManagement.MediaLibraries.GetCmsMediaLibraryBusiness.MediaLibraryService">
+            <summary>
+            Gets or sets a reference to the Media Library Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.GetCmsMediaLibraryBusiness.GetMediaLibraries">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> in the CMS System.
+            </summary>
+            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.GetCmsMediaLibraryBusiness.GetMediaLibraries(System.Int32,System.String,System.Boolean)">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> which match the specified criteria.
+            </summary>
+            <param name="siteID">The site id to match the libraries to.</param>
+            <param name="matchString">The string which to match the libraries to.</param>
+            <param name="exact">A boolean which indicates if the match should be exact.</param>
+            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> which match the specified criteria.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.GetCmsMediaLibraryBusiness.GetMediaLibraries(System.Int32[])">
+            <summary>
+            Gets a list of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> which match the supplied IDs.
+            </summary>
+            <param name="ids">The IDs of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to return.</param>
+            <returns>A list of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> which match the supplied IDs.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.ContentManagement.MediaLibraries.GetCmsMediaLibraryFileBusiness">
+            <summary>
+            Business Layer for Get-CMSMediaLibraryFile Cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.ContentManagement.MediaLibraries.GetCmsMediaLibraryFileBusiness.MediaLibraryService">
+            <summary>
+            Gets or sets a reference to the Media Library Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.GetCmsMediaLibraryFileBusiness.GetMediaFiles">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> in the CMS System.
+            </summary>
+            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.GetCmsMediaLibraryFileBusiness.GetMediaFiles(System.Int32,System.String,System.String,System.Boolean)">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> which match the specified criteria.
+            </summary>
+            <param name="libraryID">The library id to match the files to.</param>
+            <param name="extension">The file extension which to match the files to.</param>
+            <param name="filePath">The string which to match the files to.</param>
+            <param name="exact">A boolean which indicates if the match should be exact.</param>
+            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> which match the specified criteria.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.GetCmsMediaLibraryFileBusiness.GetMediaFiles(System.Int32[])">
+            <summary>
+            Gets a list of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> which match the supplied IDs.
+            </summary>
+            <param name="ids">The IDs of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> to return.</param>
+            <returns>A list of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> which match the supplied IDs.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.ContentManagement.MediaLibraries.NewCmsMediaLibraryBusiness">
+            <summary>
+            Business layer for the New-CMSMediaLibrary cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.ContentManagement.MediaLibraries.NewCmsMediaLibraryBusiness.MediaLibraryService">
+            <summary>
+            Gets or sets a reference to the Media Library Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.NewCmsMediaLibraryBusiness.CreateMediaLibrary(System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Creates a new Media Library in the CMS System.
+            </summary>
+            <param name="displayName">The display name of the media library.</param>
+            <param name="name">The name of the media library.</param>
+            <param name="description">the description of the media library.</param>
+            <param name="folder">the folder of the media library.</param>
+            <param name="siteID">the site id of the media library.</param>
+            <returns>The newly created Media Library.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.ContentManagement.MediaLibraries.NewCmsMediaLibraryFileBusiness">
+            <summary>
+            Business layer for the New-CMSMediaLibraryFile cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.ContentManagement.MediaLibraries.NewCmsMediaLibraryFileBusiness.MediaLibraryService">
+            <summary>
+            Gets or sets a reference to the Media Library Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.NewCmsMediaLibraryFileBusiness.CreateMediaLibraryFile(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates a media library file <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> within the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>.
+            </summary>
+            <param name="librarySiteID">The site id of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>to retrive for creating the new file.</param>
+            <param name="libraryName">The name of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to retrive for creating the new file.</param>
+            <param name = "localFilePath" >The local file path for the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.</param>
+            <param name="fileName">The file name for the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.</param>
+            <param name="fileTitle">The file title for the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.</param>
+            <param name="fileDesc">The file description for the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.</param>
+            <param name="filePath">The file path for the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.</param>
+            <returns>The newly created <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/>.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.ContentManagement.MediaLibraries.NewCmsMediaLibraryFolderBusiness">
+            <summary>
+            Business layer for the New-CMSMediaLibraryFolder cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.ContentManagement.MediaLibraries.NewCmsMediaLibraryFolderBusiness.MediaLibraryService">
+            <summary>
+            Gets or sets a reference to the Media Library Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.NewCmsMediaLibraryFolderBusiness.CreateMediaLibraryFolder(System.Int32,System.String,System.String)">
+            <summary>
+            Creates a new Media Library Folder in the CMS System.
+            </summary>
+            <param name="siteID">the site id of the media library.</param>
+            <param name="name">The name of the media library.</param>
+            <param name="folder">The name of the newly created folder.</param>
+            <returns>The newly created folder name.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.ContentManagement.MediaLibraries.RemoveCmsMediaLibraryBusiness">
+            <summary>
+            Business Layer for Remove-CMSMediaLibrary cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.ContentManagement.MediaLibraries.RemoveCmsMediaLibraryBusiness.MediaLibraryService">
+            <summary>
+            Gets or sets a reference to the Media Library Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.ContentManagement.MediaLibraries.RemoveCmsMediaLibraryBusiness.GetCmsMediaLibraryBusiness">
+            <summary>
+            Gets or sets a reference to the <see cref="P:PoshKentico.Business.ContentManagement.MediaLibraries.RemoveCmsMediaLibraryBusiness.GetCmsMediaLibraryBusiness"/> used to get the library to delete.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.RemoveCmsMediaLibraryBusiness.Remove(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary)">
+            <summary>
+            Deletes the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> in the CMS System.
+            </summary>
+            <param name="library">The <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to set.</param>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.RemoveCmsMediaLibraryBusiness.Remove(System.Int32[])">
+            <summary>
+            Deletes the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> in the CMS System.
+            </summary>
+            <param name="ids">The IDs of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to delete.</param>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.RemoveCmsMediaLibraryBusiness.Remove(System.Int32,System.String,System.Boolean)">
+            <summary>
+            Deletes the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> in the CMS System.
+            </summary>
+            <param name="siteID">The site id of the library to return.</param>
+            <param name="matchString">the string which to match the library to.</param>
+            <param name="exact">A boolean which indicates if the match should be exact.</param>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.RemoveCmsMediaLibraryBusiness.RemoveMediaLibrary(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary)">
+            <summary>
+            Deletes the specified <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> in the CMS System.
+            </summary>
+            <param name="library">The <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to set.</param>
+        </member>
+        <member name="T:PoshKentico.Business.ContentManagement.MediaLibraries.RemoveCmsMediaLibraryFileBusiness">
+            <summary>
+            Business Layer for Remove-CMSMediaLibraryFile cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.ContentManagement.MediaLibraries.RemoveCmsMediaLibraryFileBusiness.MediaLibraryService">
+            <summary>
+            Gets or sets a reference to the Media Library Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.RemoveCmsMediaLibraryFileBusiness.RemoveMediaFile(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile)">
+            <summary>
+            Deletes the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> in the CMS System.
+            </summary>
+            <param name="file">The <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> to set.</param>
+        </member>
+        <member name="T:PoshKentico.Business.ContentManagement.MediaLibraries.RemoveCmsMediaLibraryFolderBusiness">
+            <summary>
+            Business layer for the Remove-CMSMediaLibraryFolder cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.ContentManagement.MediaLibraries.RemoveCmsMediaLibraryFolderBusiness.MediaLibraryService">
+            <summary>
+            Gets or sets a reference to the Media Library Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.RemoveCmsMediaLibraryFolderBusiness.RemoveMediaLibraryFolder(System.Int32,System.String,System.String)">
+            <summary>
+            Removes a new Media Library Folder in the CMS System.
+            </summary>
+            <param name="siteID">the site id of the media library.</param>
+            <param name="name">The name of the media library.</param>
+            <param name="folder">The name of the newly created folder.</param>
+        </member>
+        <member name="T:PoshKentico.Business.ContentManagement.MediaLibraries.SetCmsMediaLibraryBusiness">
+            <summary>
+            Business Layer for Set-CMSMediaLibrary cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.ContentManagement.MediaLibraries.SetCmsMediaLibraryBusiness.MediaLibraryService">
+            <summary>
+            Gets or sets a reference to the Media Library Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.SetCmsMediaLibraryBusiness.Set(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary)">
+            <summary>
+            Sets the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> in the CMS System.
+            </summary>
+            <param name="library">The <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to set.</param>
+            <returns>The updated File.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.SetCmsMediaLibraryBusiness.Set(System.Int32,System.String,System.String,System.String,System.String)">
+            <summary>
+            Sets the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> in the CMS System.
+            </summary>
+            <param name="siteID">The site id of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/>to retrive for updating the file. </param>
+            <param name="libraryName">The name of the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to retrive for updating the file. </param>
+            <param name="displayName">the display name of the media file.</param>
+            <param name="description">the description of the media file.</param>
+            /// <param name="folder">the folder of the media file.</param>
+            <returns>The updated Media File.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.ContentManagement.MediaLibraries.SetCmsMediaLibraryFileBusiness">
+            <summary>
+            Business Layer of Set-CMSMediaLibraryFile Cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.ContentManagement.MediaLibraries.SetCmsMediaLibraryFileBusiness.MediaLibraryService">
+            <summary>
+            Gets or sets a reference to the Media Library Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.SetCmsMediaLibraryFileBusiness.Set(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile)">
+            <summary>
+            Sets the <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> in the CMS System.
+            </summary>
+            <param name="file">The <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaFile"/> to set.</param>
+            <returns>The updated File.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.ContentManagement.MediaLibraries.SetCmsMediaLibrarySecurityOptionBusiness">
+            <summary>
+            Business Layer of Set-CmsMediaLibrarySecurityOption cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.ContentManagement.MediaLibraries.SetCmsMediaLibrarySecurityOptionBusiness.MediaLibraryService">
+            <summary>
+            Gets or sets a reference to the Media Library Service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.ContentManagement.MediaLibraries.SetCmsMediaLibrarySecurityOptionBusiness.SetMediaLibrarySecurityOption(PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary,PoshKentico.Core.Services.ContentManagement.MediaLibraries.SecurityPropertyEnum,CMS.Helpers.SecurityAccessEnum)">
+            <summary>
+            Sets the security options for a media library.
+            </summary>
+            <param name="library">The specified <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.IMediaLibrary"/> to look for setting the security option.</param>
+            <param name="option">The security option <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.SecurityPropertyEnum"/>.</param>
+            <param name="securityAccess">The security acess enum <see cref="T:CMS.Helpers.SecurityAccessEnum"/>.</param>
+        </member>
+        <member name="T:PoshKentico.Business.Development.PageTemplates.GetCMSPageTemplateBusiness">
+            <summary>
+            Base class for all Cmdlet Business objects which depend on the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateService"/>.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Development.PageTemplates.GetCMSPageTemplateBusiness.GetCMSPageTemplateCategoryBusiness">
+            <summary>
+            Gets or sets a reference to <see cref="P:PoshKentico.Business.Development.PageTemplates.GetCMSPageTemplateBusiness.GetCMSPageTemplateCategoryBusiness"/>. Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Development.PageTemplates.GetCMSPageTemplateBusiness.GetPageTemplates">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/>.
+            </summary>
+            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Development.PageTemplates.GetCMSPageTemplateBusiness.GetPageTemplate(System.String)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/> at the specified path.
+            </summary>
+            <param name="path">The path to look at for the desired page template.</param>
+            <returns>The pagetemplate found at the desired path.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Development.PageTemplates.GetCMSPageTemplateBusiness.GetPageTemplates(System.String,System.Boolean)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/> that match the provided <paramref name="matchString"/>.
+            </summary>
+            <param name="matchString">The string which to match the pagetemplates to.</param>
+            <param name="isRegex">Indicates whether <paramref name="matchString"/> is a regular expression.</param>
+            <returns>A list of <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/> matching the <paramref name="matchString"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Development.PageTemplates.GetCMSPageTemplateBusiness.GetPageTemplatesByCategory(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory)">
+            <summary>
+            Gets a list of <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/> that are within the <paramref name="pageTemplateCategory"/>.
+            </summary>
+            <param name="pageTemplateCategory">The <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/> that contains the desired <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/>.</param>
+            <returns>A list of <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/> that are within the <paramref name="pageTemplateCategory"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Development.PageTemplates.GetCMSPageTemplateBusiness.GetPageTemplatesByCategories(System.String,System.Boolean)">
+            <summary>Gets a list of <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/> that are within the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/> matching the <paramref name="matchString"/>.</summary>
+            <param name="matchString">The string which to match the pagetemplate categories to.</param>
+            <param name="isRegex">Indicates whether <paramref name="matchString"/> is a regular expression.</param>
+            <returns>A list of <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/> which are contained by the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/> matching the <paramref name="matchString"/>.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.Development.PageTemplates.GetCMSPageTemplateCategoryBusiness">
+            <summary>
+            Business layer for the Get-CMSPageTemplateCategory cmdlet.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Development.PageTemplates.GetCMSPageTemplateCategoryBusiness.GetPageTemplateCategories">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/>.
+            </summary>
+            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Development.PageTemplates.GetCMSPageTemplateCategoryBusiness.GetPageTemplateCategories(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/> which match the specified criteria.
+            </summary>
+            <param name="matchString">The string which to match the pagetemplate categories to.</param>
+            <param name="isRegex">Indicates whether <paramref name="matchString"/> is a regular expression.</param>
+            <param name="recurse">Indicates whether pagetemplate categories should be returned recursively.</param>
+            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/> which match the specified criteria.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Development.PageTemplates.GetCMSPageTemplateCategoryBusiness.GetPageTemplateCategories(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory,System.Boolean)">
+            <summary>
+            Gets a list of the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/> which are children of the <paramref name="parentPageTemplateCategory"/>.
+            </summary>
+            <param name="parentPageTemplateCategory">The <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/> which is parent to the categories to find.</param>
+            <param name="recurse">Indicates whether pagetemplate categories should be returned recursively.</param>
+            <returns>A list of the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/> which are children to the supplied <paramref name="parentPageTemplateCategory"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Development.PageTemplates.GetCMSPageTemplateCategoryBusiness.GetPageTemplateCategories(System.Int32[],System.Boolean)">
+            <summary>
+            Gets a list of the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/> which match the supplied IDs.
+            </summary>
+            <param name="ids">The IDs of the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/> to return.</param>
+            <param name="recurse">Indicates whether pageTemplate categories should be returned recursively.</param>
+            <returns>A list of the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/> which match the supplied IDs.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Development.PageTemplates.GetCMSPageTemplateCategoryBusiness.GetPageTemplateCategories(System.String,System.Boolean)">
+            <summary>
+            Gets a list of page template categories by path.
+            </summary>
+            <param name="path">The path to get the list of page template categories.</param>
+            <param name="recurse">Indicates if the page template category children should be returned as well.</param>
+            <returns>A list of all of the page template categories found at the specified path.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Development.PageTemplates.GetCMSPageTemplateCategoryBusiness.GetPageTemplateCategory(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate)">
+            <summary>
+            Gets the page template category for the current page template.
+            </summary>
+            <param name="pageTemplate">The pageTemplate to get the category for.</param>
+            <returns>The page template category.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.Development.PageTemplates.NewCMSPageTemplateBusiness">
+            <summary>
+            Business layer fo the New-CMSPageTemplate cmdlet.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Development.PageTemplates.NewCMSPageTemplateBusiness.CreatePageTemplate(System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,CMS.DataEngine.LayoutTypeEnum,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Creates a <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/> at the specified path.
+            </summary>
+            <param name="path">The path to create the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/> at.</param>
+            <param name="fileName">The file name for the underlying class file.</param>
+            <param name="displayName">The display name for the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/>.</param>
+            <param name="description">The description name for the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/>.</param>
+            <param name="showAsMasterTemplate">Indicates whether to show page template as master template.</param>
+            <param name="pageTemplateForAllPages">Indicates whether page template is for all pages.</param>
+            <param name="layoutType">Page template layout type.</param>
+            <param name="layout">Page template layout.</param>
+            <param name="iconClass">Page template icon class defining the page template thumbnail.</param>
+            <param name="css">Page template CSS.</param>
+            <param name="isReusable">Gets or sets flag whether page template is reusable.</param>
+            <returns>The newly created <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Development.PageTemplates.NewCMSPageTemplateBusiness.CreatePageTemplate(System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,CMS.DataEngine.LayoutTypeEnum,System.String,System.String,System.String,System.Boolean,PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory)">
+            <summary>
+            Creates a <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/> with the specified name under the specified <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/>.
+            </summary>
+            <param name="name">The name for the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/>.</param>
+            <param name="fileName">The file name for the underlying class file.</param>
+            <param name="displayName">The display name for the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/>.</param>
+            <param name="description">The description name for the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/>.</param>
+            <param name="showAsMasterTemplate">Indicates whether to show page template as master template.</param>
+            <param name="pageTemplateForAllPages">Indicates whether page template is for all pages.</param>
+            <param name="layoutType">Page template layout type.</param>
+            <param name="layout">Page template layout.</param>
+            <param name="iconClass">Page template icon class defining the page template thumbnail.</param>
+            <param name="css">Page template CSS.</param>
+            <param name="isReusable">Gets or sets flag whether page template is reusable.</param>
+            <param name="pageTemplateCategory">The <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/> to create the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/> under.</param>
+            <returns>The newly created <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/>.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.Development.PageTemplates.NewCMSPageTemplateCategoryBusiness">
+            <summary>
+            Business layer for the New-CMSPageTemplateCategory cmdlet.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Development.PageTemplates.NewCMSPageTemplateCategoryBusiness.CreatePageTemplateCategory(System.String,System.String,System.String)">
+            <summary>
+            Creates a new PageTemplateCategory in the CMS System.
+            </summary>
+            <param name="path">The path for the new PageTemplateCategory.</param>
+            <param name="displayName">The display name for the PageTemplateCategory.</param>
+            <param name="imagePath">The image path for the new PageTemplateCategory.</param>
+            <returns>The newly created PageTemplateCategory.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.Development.PageTemplates.PageTemplateBusinessBase">
+            <summary>
+            Base class for all Cmdlet Business objects which depend on the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateService"/>.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Development.PageTemplates.PageTemplateBusinessBase.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PoshKentico.Business.Development.PageTemplates.PageTemplateBusinessBase"/> class.
+            </summary>
+            <param name="initCmsApplication">Indicates if the CMS Application should be initialized.</param>
+        </member>
+        <member name="P:PoshKentico.Business.Development.PageTemplates.PageTemplateBusinessBase.PageTemplateService">
+            <summary>
+            Gets or sets a reference to the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateService"/>.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Development.PageTemplates.PageTemplateBusinessBase.GetCategoryFromPath(System.String)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/> which represents the current path.
+            </summary>
+            <param name="path">The path to look for the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/>.</param>
+            <returns>Returns the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/> that reprsents the supplied path.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.Development.PageTemplates.RemoveCMSPageTemplateBusiness">
+            <summary>
+            Business layer fo the Remove-CMSPageTemplate cmdlet.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Development.PageTemplates.RemoveCMSPageTemplateBusiness.RemovePageTemplate(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate)">
+            <summary>
+            Removes the supplied <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/> from the system.
+            </summary>
+            <param name="pageTemplate">The <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/> to remove.</param>
+        </member>
+        <member name="T:PoshKentico.Business.Development.PageTemplates.RemoveCMSPageTemplateCategoryBusiness">
+            <summary>
+            Business layer for the Remove-CMSPageTemplateCategory cmdlet.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Development.PageTemplates.RemoveCMSPageTemplateCategoryBusiness.RemovePageTemplateCategory(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory)">
+            <summary>
+            Deletes the specified <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/>.  Throws exceptions if there are children.
+            </summary>
+            <param name="pageTemplateCategory">The PageTemplate category to delete.</param>
+        </member>
+        <member name="T:PoshKentico.Business.Development.PageTemplates.SetCMSPageTemplateBusiness">
+            <summary>
+            Business layer for the Set-CMSPageTemplate cmdlet.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Development.PageTemplates.SetCMSPageTemplateBusiness.Set(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate)">
+            <summary>
+            Updates the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/> in the system.
+            </summary>
+            <param name="pageTemplate">The <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplate"/> to update.</param>
+        </member>
+        <member name="T:PoshKentico.Business.Development.PageTemplates.SetCMSPageTemplateCategoryBusiness">
+            <summary>
+            Business layer for the Set-CMSPageTemplateCategory cmdlet.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Development.PageTemplates.SetCMSPageTemplateCategoryBusiness.Set(PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory)">
+            <summary>
+            Sets the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/> within Kentico.
+            </summary>
+            <param name="pageTemplateCategory">The <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateCategory"/> to set.</param>
+        </member>
         <member name="T:PoshKentico.Business.Development.WebParts.AddCMSWebPartFieldBusiness">
             <summary>
-            Business layer fo the Add-CMSWebPartField cmdlet.
+            Business layer of the Add-CMSWebPartField cmdlet.
             </summary>
         </member>
         <member name="M:PoshKentico.Business.Development.WebParts.AddCMSWebPartFieldBusiness.AddField(PoshKentico.Business.Development.WebParts.AddCMSWebPartFieldBusiness.AddFieldParameter,PoshKentico.Core.Services.Development.WebParts.IWebPart)">
@@ -845,7 +1796,7 @@
         </member>
         <member name="T:PoshKentico.Business.Development.WebParts.GetCMSWebPartBusiness">
             <summary>
-            Business layer fo the Get-CMSWebPart cmdlet.
+            Business layer of the Get-CMSWebPart cmdlet.
             </summary>
         </member>
         <member name="P:PoshKentico.Business.Development.WebParts.GetCMSWebPartBusiness.GetCMSWebPartCategoryBusiness">
@@ -968,7 +1919,7 @@
         </member>
         <member name="T:PoshKentico.Business.Development.WebParts.NewCMSWebPartBusiness">
             <summary>
-            Business layer fo the New-CMSWebPart cmdlet.
+            Business layer of the New-CMSWebPart cmdlet.
             </summary>
         </member>
         <member name="M:PoshKentico.Business.Development.WebParts.NewCMSWebPartBusiness.CreateWebPart(System.String,System.String,System.String)">
@@ -1006,7 +1957,7 @@
         </member>
         <member name="T:PoshKentico.Business.Development.WebParts.RemoveCMSWebPartBusiness">
             <summary>
-            Business layer fo the Remove-CMSWebPart cmdlet.
+            Business layer of the Remove-CMSWebPart cmdlet.
             </summary>
         </member>
         <member name="M:PoshKentico.Business.Development.WebParts.RemoveCMSWebPartBusiness.RemoveWebPart(PoshKentico.Core.Services.Development.WebParts.IWebPart)">
@@ -1071,22 +2022,6 @@
             </summary>
             <param name="field">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/> to update.</param>
         </member>
-        <member name="T:PoshKentico.Business.Development.WebParts.ValueAttribute">
-            <summary>
-            Attribute used for setting the string value of an enumeration.
-            </summary>
-        </member>
-        <member name="M:PoshKentico.Business.Development.WebParts.ValueAttribute.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:PoshKentico.Business.Development.WebParts.ValueAttribute"/> class.
-            </summary>
-            <param name="value">The value provided by this attribute.</param>
-        </member>
-        <member name="P:PoshKentico.Business.Development.WebParts.ValueAttribute.Value">
-            <summary>
-            Gets the value for provided by this attribute.
-            </summary>
-        </member>
         <member name="T:PoshKentico.Business.Development.WebParts.WebPartBusinessBase">
             <summary>
             Base class for all Cmdlet Business objects which depend on the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartService"/>.
@@ -1109,6 +2044,33 @@
             </summary>
             <param name="path">The path to look for the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/>.</param>
             <returns>Returns the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> that reprsents the supplied path.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.General.GetCMSApplicationVersionBusiness">
+            <summary>
+            Business layer for the Get-CMSApplicationVersion cmdlet.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.General.GetCMSApplicationVersionBusiness.GetVersion">
+            <summary>
+            Gets the version of the CMS application.
+            </summary>
+            <returns>The version of the CMS application.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.General.GetCMSDatabaseVersionBusiness">
+            <summary>
+            Business layer for the Get-CMSDatabaseVersion cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.General.GetCMSDatabaseVersionBusiness.CmsDatabaseService">
+            <summary>
+            Gets or sets the CmsDatabaseService.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.General.GetCMSDatabaseVersionBusiness.GetVersion">
+            <summary>
+            Gets the version of the CMS application.
+            </summary>
+            <returns>The version of the CMS application.</returns>
         </member>
         <member name="T:PoshKentico.Business.General.InitializeCMSApplicationBusiness">
             <summary>
@@ -1142,6 +2104,45 @@
             <param name="database">The name of the Kentico database.</param>
             <param name="timeout">The timeout for connecting to the Kentico database.</param>
             <param name="webRoot">The root directory for the Kentico site.</param>
+        </member>
+        <member name="T:PoshKentico.Business.General.InitializeCMSDatabaseBusiness">
+            <summary>
+            Business layer for the Initialize-CMSDatabase cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.General.InitializeCMSDatabaseBusiness.CmsDatabaseService">
+            <summary>
+            Gets or sets the <see cref="T:PoshKentico.Core.Services.General.ICmsDatabaseService"/>.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.General.InitializeCMSDatabaseBusiness.InstallSqlDatabase">
+            <summary>
+            Checks if the database exists and is configured.  Installs it if it does not.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Business.Resource.KenticoFileSystemBusiness">
+            <summary>
+            Business layer for NavigationCmdletProvider.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Resource.KenticoFileSystemBusiness.ResourceService">
+            <inheritdoc />
+        </member>
+        <member name="T:PoshKentico.Business.ValueAttribute">
+            <summary>
+            Attribute used for setting the string value of an enumeration.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.ValueAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PoshKentico.Business.ValueAttribute"/> class.
+            </summary>
+            <param name="value">The value provided by this attribute.</param>
+        </member>
+        <member name="P:PoshKentico.Business.ValueAttribute.Value">
+            <summary>
+            Gets the value for provided by this attribute.
+            </summary>
         </member>
     </members>
 </doc>

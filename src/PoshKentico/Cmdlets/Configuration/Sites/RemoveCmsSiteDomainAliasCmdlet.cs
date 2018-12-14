@@ -27,75 +27,60 @@ using AliasAttribute = System.Management.Automation.AliasAttribute;
 namespace PoshKentico.Cmdlets.Configuration.Sites
 {
     /// <summary>
-    /// <para type="synopsis">Removes a domain alias to a specified site.</para>
-    /// <para type="description">Removes a domain alias to a specified site based off of the provided input.</para>
+    /// <para type="synopsis">Removes domain aliases from a specified site.</para>
+    /// <para type="description">Removes domain aliases from a specified site based off of the provided input.</para>
     /// <example>
-    ///     <para>Remove a domain alias with alias name "alias" to a specified site specifying the site name "*bas*", display name "*bas*", or a domain name "*bas*".</para>
-    ///     <code>Remove-CMSSiteDomainAlias -SiteName "*bas*" -AliasName "alias"</code>
+    ///     <para>Remove domain aliases with alias name "alias" from a specified site specifying the site name "*bas*", display name "*bas*", or a domain name "*bas*".</para>
+    ///     <code>Remove-CMSSiteDomainAlias -SiteName "*bas*" -AliasNames "alias"</code>
     /// </example>
     /// <example>
-    ///     <para>Remove a domain alias with alias name "alias" to a specified site specifying the site name "basic", display name "basic", or a domain name "basic".</para>
-    ///     <code>Remove-CMSSiteDomainAlias -SiteName "basic" -EXACT -AliasName "alias"</code>
+    ///     <para>Remove domain aliases with alias name "alias" from a specified site specifying the site name "basic", display name "basic", or a domain name "basic".</para>
+    ///     <code>Remove-CMSSiteDomainAlias -SiteName "basic" -AliasNames "alias" -RegularExpression </code>
     /// </example>
     /// <example>
-    ///     <para>Remove a domain alias with alias name "alias" to a site.</para>
-    ///     <code>$site | Remove-CMSSiteDomainAlias -AliasName "alias"</code>
+    ///     <para>Remove domain aliases with alias name "alias" from a site.</para>
+    ///     <code>$site | Remove-CMSSiteDomainAlias -AliasNames "alias"</code>
     /// </example>
     /// <example>
-    ///     <para>Remove a domain alias with alias name "alias" with the specified site IDs.</para>
-    ///     <code>Remove-CMSSiteDomainAlias -ID 1,2,3 -AliasName "alias"</code>
+    ///     <para>Remove domain aliases with alias name "alias" with the specified site IDs.</para>
+    ///     <code>Remove-CMSSiteDomainAlias -SiteIds 1,2,3 -AliasNames "alias"</code>
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Remove, "CMSSiteDomainAlias", SupportsShouldProcess = true, ConfirmImpact = ConfirmImpact.High)]
-    public class RemoveCmsSiteDomainAliasCmdlet : MefCmdlet
+    [Alias("rsda")]
+    public class RemoveCmsSiteDomainAliasCmdlet : GetCmsSiteCmdlet
     {
         #region Constants
 
-        private const string OBJECTSET = "Object";
-        private const string SITENAMESET = "Property";
-        private const string IDSETNAME = "ID";
+        private const string SITEOBJECTSET = "Object";
 
         #endregion
 
         #region Properties
 
         /// <summary>
-        /// <para type="description">A reference to the site.</para>
+        /// <para type="description">A reference from the site.</para>
         /// </summary>
-        [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0, ParameterSetName = OBJECTSET)]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0, ParameterSetName = SITEOBJECTSET)]
         [Alias("Site")]
         public SiteInfo SiteToRemove { get; set; }
 
         /// <summary>
-        /// <para type="description">The site name for the site.</para>
-        /// </summary>
-        [Parameter(Mandatory = true, Position = 0, ParameterSetName = SITENAMESET)]
-        public string SiteName { get; set; }
-
-        /// <summary>
-        /// <para type="description">If set, the match is exact, else the match performs a contains for site name.</para>
-        /// </summary>
-        [Parameter(ParameterSetName = SITENAMESET)]
-        public SwitchParameter Exact { get; set; }
-
-        /// <summary>
         /// <para type="description">The IDs of the site.</para>
         /// </summary>
-        [Parameter(Mandatory = true, Position = 0, ParameterSetName = IDSETNAME)]
-        public int[] ID { get; set; }
+        [Parameter(Mandatory = true, Position = 1, ParameterSetName = NONE)]
+        [Parameter(Mandatory = true, Position = 1, ParameterSetName = DISPLAYNAME)]
+        [Parameter(Mandatory = true, Position = 1, ParameterSetName = IDSETNAME)]
+        [Parameter(Mandatory = true, Position = 1, ParameterSetName = USEROBJECT)]
+        [Parameter(Mandatory = true, Position = 1, ParameterSetName = SITEOBJECTSET)]
+        public string[] AliasNames { get; set; }
 
         /// <summary>
-        /// <para type="description">The IDs of the site.</para>
-        /// </summary>
-        [Parameter(Mandatory = true, Position = 1)]
-        public string AliasName { get; set; }
-
-        /// <summary>
-        ///  Gets or sets the Business Layer for removing domain alias to this site.  Populated by MEF.
+        ///  Gets or sets the Business Layer for removing domain alias from this site.  Populated by MEF.
         /// </summary>
         [Import]
-        public RemoveCmsSiteDomainAliasBusiness BusinessLayer { get; set; }
+        public RemoveCmsSiteDomainAliasBusiness RemoveBusinessLayer { get; set; }
 
         #endregion
 
@@ -104,20 +89,29 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
-            switch (this.ParameterSetName)
+            if (this.ParameterSetName == SITEOBJECTSET)
             {
-                case OBJECTSET:
-                    this.BusinessLayer.RemoveDomainAlias(this.SiteToRemove.ActLike<ISite>(), this.AliasName);
-                    break;
-                case SITENAMESET:
-                    this.BusinessLayer.RemoveDomainAlias(this.SiteName, this.Exact.ToBool(), this.AliasName);
-                    break;
-                case IDSETNAME:
-                    this.BusinessLayer.RemoveDomainAlias(this.ID, this.AliasName);
-                    break;
+                this.ActOnObject(this.SiteToRemove.ActLike<ISite>());
+            }
+            else
+            {
+                base.ProcessRecord();
             }
         }
 
+        /// <inheritdoc />
+        protected override void ActOnObject(ISite site)
+        {
+            if (site == null)
+            {
+                return;
+            }
+
+            foreach (string name in this.AliasNames)
+            {
+                this.RemoveBusinessLayer.RemoveDomainAlias(site, name);
+            }
+        }
         #endregion
 
     }
