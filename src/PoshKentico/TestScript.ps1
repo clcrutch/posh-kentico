@@ -3,6 +3,8 @@
 $VerbosePreference = "Continue"
 $DebugPreference = "Continue"
 
+Write-Output "My output"
+
 Import-Module ./PSCmdlets.psm1
 
 Configuration KenticoTest
@@ -23,7 +25,7 @@ Configuration KenticoTest
 			DomainName = "localhost:743"
 			DisplayName = "KenticoTest"
 			Status = "Running"
-			DomainAlias = "127.0.0.1"
+			DomainAliases = 127.0.0.1, localhost
 			Ensure = "Present"
 		}
 
