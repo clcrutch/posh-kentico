@@ -47,9 +47,9 @@ namespace PoshKentico.Core.Services.Configuration.ScheduledTasks
         string TaskDisplayName { get; }
 
         /// <summary>
-        /// Gets a value indicating whether the task is enabled.
+        /// Gets or sets a value indicating whether the task is enabled.
         /// </summary>
-        bool TaskEnabled { get; }
+        bool TaskEnabled { get; set; }
 
         /// <summary>
         /// Gets the interval for the task.

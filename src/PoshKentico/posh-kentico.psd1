@@ -93,11 +93,7 @@ FormatsToProcess = @( `
 )
 
 # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
-NestedModules = @( `
-	# Configuration/ScheduledTasks
-	"./Cmdlets/Configuration/ScheduledTasks/Disable-CMSScheduledTask.psm1", `
-	"./Cmdlets/Configuration/ScheduledTasks/Enable-CMSScheduledTask.psm1" `
-)
+# NestedModules = @()
 
 # Functions to export from this module
 FunctionsToExport = '*'

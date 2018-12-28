@@ -391,6 +391,38 @@
             <param name="siteID">The Site ID for the new Role.</param>
             <returns>The newly created <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/>.</returns>
         </member>
+        <member name="T:PoshKentico.Business.Configuration.ScheduledTasks.DisableCmsScheduledTaskBusiness">
+            <summary>
+            Business layer of the Disable-CMSScheduledTask cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.ScheduledTasks.DisableCmsScheduledTaskBusiness.ScheduledTaskService">
+            <summary>
+            Gets or sets the scheduled task service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.ScheduledTasks.DisableCmsScheduledTaskBusiness.DisableScheduledTask(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask)">
+            <summary>
+            Disables the specified <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.
+            </summary>
+            <param name="scheduledTask">The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> to disable.</param>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.ScheduledTasks.EnableCmsScheduledTaskBusiness">
+            <summary>
+            Business layer of the Enable-CMSScheduledTask cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.ScheduledTasks.EnableCmsScheduledTaskBusiness.ScheduledTaskService">
+            <summary>
+            Gets or sets the scheduled task service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.ScheduledTasks.EnableCmsScheduledTaskBusiness.EnableScheduledTask(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask)">
+            <summary>
+            Enables the specified <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.
+            </summary>
+            <param name="scheduledTask">The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> to enable.</param>
+        </member>
         <member name="T:PoshKentico.Business.Configuration.ScheduledTasks.GetCmsScheduledTaskBusiness">
             <summary>
             Business layer of the Get-CMSScheduledTask cmdlet.

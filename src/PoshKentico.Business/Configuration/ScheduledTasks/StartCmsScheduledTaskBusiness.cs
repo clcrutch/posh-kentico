@@ -16,6 +16,7 @@
 // </copyright>
 
 using System.ComponentModel.Composition;
+using System.Management.Automation;
 using PoshKentico.Core.Services.Configuration.ScheduledTasks;
 
 namespace PoshKentico.Business.Configuration.ScheduledTasks
@@ -42,8 +43,25 @@ namespace PoshKentico.Business.Configuration.ScheduledTasks
         /// Executes the specified <see cref="IScheduledTask"/> within the current process.
         /// </summary>
         /// <param name="scheduledTask">The <see cref="IScheduledTask"/> to execute.</param>
-        public void ExecuteTask(IScheduledTask scheduledTask) =>
+        public void ExecuteTask(IScheduledTask scheduledTask)
+        {
+            var progressRecord = new ProgressRecord(scheduledTask.TaskID, scheduledTask.TaskDisplayName, "Running...")
+            {
+                RecordType = ProgressRecordType.Processing,
+                PercentComplete = -1,
+            };
+
+            this.OutputService.WriteProgress(progressRecord);
+
             this.ScheduledTaskService.ExecuteScheduledTaskInNewAppDomain(scheduledTask);
+
+            progressRecord = new ProgressRecord(scheduledTask.TaskID, scheduledTask.TaskDisplayName, "Finished")
+            {
+                PercentComplete = 100,
+                RecordType = ProgressRecordType.Completed,
+            };
+            this.OutputService.WriteProgress(progressRecord);
+        }
 
         #endregion
 

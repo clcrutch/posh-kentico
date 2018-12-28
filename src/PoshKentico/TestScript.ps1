@@ -56,7 +56,7 @@ Configuration KenticoTest
 			LibraryDescription = "This media library was created through the DSC."
 			Ensure = "Present"
 		}
-	}
+	#}
 }
 
 #KenticoTest -OutputPath .\Temp

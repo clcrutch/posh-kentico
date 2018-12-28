@@ -25,13 +25,31 @@ namespace PoshKentico.Core.AppDomainProxies
     /// <summary>
     /// The base class for all app domain proxies.
     /// </summary>
-    internal abstract class ProxyBase : MarshalByRefObject
+    internal abstract class ProxyBase : MarshalByRefObject, IDisposable
     {
+        #region Fields
+
+        private CompositionContainer container;
+        private bool disposed;
+
+        #endregion
+
         #region Constructors
 
-        static ProxyBase()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProxyBase"/> class.
+        /// </summary>
+        public ProxyBase()
         {
-            Container = new CompositionContainer(new AssemblyCatalog(typeof(ProxyBase).Assembly));
+            this.container = new CompositionContainer(new AssemblyCatalog(typeof(ProxyBase).Assembly));
+        }
+
+        /// <summary>
+        /// Finalizes an instance of the <see cref="ProxyBase"/> class.
+        /// </summary>
+        ~ProxyBase()
+        {
+            this.Dispose(false);
         }
 
         #endregion
@@ -44,11 +62,6 @@ namespace PoshKentico.Core.AppDomainProxies
         [Import]
         public ICmsApplicationService CmsApplicationService { get; set; }
 
-        /// <summary>
-        /// Gets or sets the MEF container used for DI.
-        /// </summary>
-        internal static CompositionContainer Container { get; set; }
-
         #endregion
 
         #region Methods
@@ -58,9 +71,33 @@ namespace PoshKentico.Core.AppDomainProxies
         /// </summary>
         public void Initialize()
         {
-            Container.ComposeParts(this);
+            this.container.ComposeParts(this);
 
             this.CmsApplicationService.Initialize(true);
+        }
+
+        /// <summary>
+        /// Disposes the <see cref="ProxyBase"/>.
+        /// </summary>
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+            this.Dispose(true);
+        }
+
+        /// <summary>
+        /// Disposes the <see cref="ProxyBase"/>.
+        /// </summary>
+        /// <param name="disposing">Inidicates if we are disposing or finalizing.</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (this.disposed)
+            {
+                return;
+            }
+
+            this.container.Dispose();
+            this.disposed = true;
         }
 
         #endregion

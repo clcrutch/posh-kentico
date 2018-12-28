@@ -39,6 +39,7 @@ namespace PoshKentico.Core.Providers.Configuration.ScheduledTasks
     {
         #region Fields
 
+        private static AppDomain prevAppDomain;
         private readonly ProxyGenerator proxyGenerator = new ProxyGenerator();
 
         #endregion
@@ -50,6 +51,12 @@ namespace PoshKentico.Core.Providers.Configuration.ScheduledTasks
         /// </summary>
         [Import]
         public ICmsApplicationService CmsApplicationService { get; set; }
+
+        /// <summary>
+        /// Gets or sets the output service.  Populated by MEF.
+        /// </summary>
+        [Import]
+        public IOutputService OutputService { get; set; }
 
         #endregion
 
@@ -74,6 +81,19 @@ namespace PoshKentico.Core.Providers.Configuration.ScheduledTasks
         /// <inheritdoc />
         public void ExecuteScheduledTaskInNewAppDomain(IScheduledTask scheduledTask)
         {
+            if (prevAppDomain != null)
+            {
+                try
+                {
+                    AppDomain.Unload(prevAppDomain);
+                    prevAppDomain = null;
+                }
+                catch (Exception)
+                {
+                    this.OutputService.WriteWarning("Cannot unload previous app domain");
+                }
+            }
+
             var domainInfo = new AppDomainSetup
             {
                 ApplicationBase = Path.Combine(this.CmsApplicationService.SiteLocation, "bin"),
@@ -85,7 +105,17 @@ namespace PoshKentico.Core.Providers.Configuration.ScheduledTasks
 
             proxy.ExecuteScheduledTask(scheduledTask.TaskID);
 
-            AppDomain.Unload(appDomain);
+            proxy.Dispose();
+
+            try
+            {
+                AppDomain.Unload(appDomain);
+            }
+            catch (Exception)
+            {
+                this.OutputService.WriteWarning("Cannot unload app domain");
+                prevAppDomain = appDomain;
+            }
         }
 
         /// <inheritdoc />

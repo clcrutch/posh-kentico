@@ -9,20 +9,36 @@
             The base class for all app domain proxies.
             </summary>
         </member>
+        <member name="M:PoshKentico.Core.AppDomainProxies.ProxyBase.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PoshKentico.Core.AppDomainProxies.ProxyBase"/> class.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.AppDomainProxies.ProxyBase.Finalize">
+            <summary>
+            Finalizes an instance of the <see cref="T:PoshKentico.Core.AppDomainProxies.ProxyBase"/> class.
+            </summary>
+        </member>
         <member name="P:PoshKentico.Core.AppDomainProxies.ProxyBase.CmsApplicationService">
             <summary>
             Gets or sets the <see cref="T:PoshKentico.Core.Services.General.ICmsApplicationService"/>.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Core.AppDomainProxies.ProxyBase.Container">
-            <summary>
-            Gets or sets the MEF container used for DI.
             </summary>
         </member>
         <member name="M:PoshKentico.Core.AppDomainProxies.ProxyBase.Initialize">
             <summary>
             Initailizes the MEF container, the object, and the CMSApplicationService.
             </summary>
+        </member>
+        <member name="M:PoshKentico.Core.AppDomainProxies.ProxyBase.Dispose">
+            <summary>
+            Disposes the <see cref="T:PoshKentico.Core.AppDomainProxies.ProxyBase"/>.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.AppDomainProxies.ProxyBase.Dispose(System.Boolean)">
+            <summary>
+            Disposes the <see cref="T:PoshKentico.Core.AppDomainProxies.ProxyBase"/>.
+            </summary>
+            <param name="disposing">Inidicates if we are disposing or finalizing.</param>
         </member>
         <member name="T:PoshKentico.Core.AppDomainProxies.ScheduledTaskProxy">
             <summary>
@@ -148,6 +164,11 @@
         <member name="P:PoshKentico.Core.Providers.Configuration.ScheduledTasks.KenticoScheduledTaskService.CmsApplicationService">
             <summary>
             Gets or sets the CMS Application services.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Configuration.ScheduledTasks.KenticoScheduledTaskService.OutputService">
+            <summary>
+            Gets or sets the output service.  Populated by MEF.
             </summary>
         </member>
         <member name="P:PoshKentico.Core.Providers.Configuration.ScheduledTasks.KenticoScheduledTaskService.ScheduledTasks">
@@ -993,7 +1014,7 @@
         </member>
         <member name="P:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask.TaskEnabled">
             <summary>
-            Gets a value indicating whether the task is enabled.
+            Gets or sets a value indicating whether the task is enabled.
             </summary>
         </member>
         <member name="P:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask.TaskInterval">
