@@ -22,7 +22,7 @@
     <PackageReference Include="FluentAssertions" Version="5.5.3" />
     <PackageReference Include="Kentico.Libraries" Version="11.0.37" />
     <PackageReference Include="Moq" Version="4.10.1" />
-    <PackageReference Include="Nerdbank.GitVersioning" Version="2.3.38">
+    <PackageReference Include="Nerdbank.GitVersioning" Version="2.2.13">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
