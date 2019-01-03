@@ -39,7 +39,7 @@ PowerShellVersion = '5.0'
 # PowerShellHostVersion = ''
 
 # Minimum version of Microsoft .NET Framework required by this module
-DotNetFrameworkVersion = '4.5'
+DotNetFrameworkVersion = '4.6'
 
 # Minimum version of the common language runtime (CLR) required by this module
 CLRVersion = '4.0'
@@ -67,6 +67,9 @@ FormatsToProcess = @( `
 
 	# Configuration/Roles
 	"./FormattingFiles/Configuration/Roles/RoleInfo.format.ps1xml", `
+	
+	# Configuration/ScheduledTasks
+	"./FormattingFiles/Configuration/ScheduledTasks/TaskInfo.format.ps1xml", `
 
 	# Configuration/Sites
     "./FormattingFiles/Configuration/Sites/CultureInfo.format.ps1xml", `
@@ -82,7 +85,7 @@ FormatsToProcess = @( `
 	# Development/WebParts
 	"./FormattingFiles/Development/WebParts/FormFieldInfo.format.ps1xml", `
     "./FormattingFiles/Development/WebParts/WebPartCategoryInfo.format.ps1xml", `
-	"./FormattingFiles/Development/WebParts/WebPartInfo.format.ps1xml" `
+	"./FormattingFiles/Development/WebParts/WebPartInfo.format.ps1xml", `
 
 	# Development/PageTemplates
 	"./FormattingFiles/Development/PageTemplates/PageTemplateCategoryInfo.format.ps1xml", `	

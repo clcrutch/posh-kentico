@@ -92,6 +92,9 @@
     <None Update="FormattingFiles\Configuration\Roles\RoleInfo.format.ps1xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="FormattingFiles\Configuration\ScheduledTasks\TaskInfo.format.ps1xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="FormattingFiles\Configuration\Sites\CultureInfo.format.ps1xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

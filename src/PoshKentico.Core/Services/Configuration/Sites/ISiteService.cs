@@ -17,6 +17,7 @@
 
 using System.Collections.Generic;
 using PoshKentico.Core.Services.Configuration.Localization;
+using PoshKentico.Core.Services.Configuration.ScheduledTasks;
 using PoshKentico.Core.Services.Configuration.Users;
 
 namespace PoshKentico.Core.Services.Configuration.Sites
@@ -63,6 +64,13 @@ namespace PoshKentico.Core.Services.Configuration.Sites
         /// <param name="siteName">The Site Name of the <see cref="ISite"/> to return.</param>
         /// <returns>The <see cref="ISite"/> which matches the site name, else null.</returns>
         ISite GetSite(string siteName);
+
+        /// <summary>
+        /// Gets the <see cref="ISite"/> from the <see cref="IScheduledTask"/>.
+        /// </summary>
+        /// <param name="scheduledTask">The <see cref="IScheduledTask"/> to get the <see cref="ISite"/> for.</param>
+        /// <returns>The <see cref="ISite"/> which is associated with the <see cref="IScheduledTask"/>.</returns>
+        ISite GetSite(IScheduledTask scheduledTask);
 
         /// <summary>
         /// Gets the <see cref="ISite"/> which matches the supplied user name.

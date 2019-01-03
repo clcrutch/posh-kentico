@@ -24,18 +24,23 @@ Add-CMSSiteDomainAlias [-SiteToAdd] <SiteInfo> [-AliasNames] <String[]> [<Common
 
 ### Dislpay Name
 ```
-Add-CMSSiteDomainAlias [-AliasNames] <String[]> [[-DisplayName] <String>] [-RegularExpression]
+Add-CMSSiteDomainAlias [-AliasNames] <String[]> [-DisplayName] <String> [-RegularExpression]
  [<CommonParameters>]
 ```
 
 ### ID
 ```
-Add-CMSSiteDomainAlias [-AliasNames] <String[]> [[-SiteIds] <Int32[]>] [<CommonParameters>]
+Add-CMSSiteDomainAlias [-AliasNames] <String[]> [-ID] <Int32[]> [<CommonParameters>]
 ```
 
 ### User
 ```
 Add-CMSSiteDomainAlias [-AliasNames] <String[]> [[-User] <UserInfo>] [<CommonParameters>]
+```
+
+### Task
+```
+Add-CMSSiteDomainAlias -ScheduledTask <TaskInfo> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -57,7 +62,7 @@ PS C:\> {{ Add example code here }}
 
 ```yaml
 Type: String[]
-Parameter Sets: (All)
+Parameter Sets: None, Object, Dislpay Name, ID, User
 Aliases:
 
 Required: True
@@ -75,7 +80,22 @@ Type: String
 Parameter Sets: Dislpay Name
 Aliases: SiteName, DomainName
 
-Required: False
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -ID
+{{Fill ID Description}}
+
+```yaml
+Type: Int32[]
+Parameter Sets: ID
+Aliases:
+
+Required: True
 Position: 0
 Default value: None
 Accept pipeline input: False
@@ -97,18 +117,18 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SiteIds
-{{Fill SiteIds Description}}
+### -ScheduledTask
+{{Fill ScheduledTask Description}}
 
 ```yaml
-Type: Int32[]
-Parameter Sets: ID
-Aliases:
+Type: TaskInfo
+Parameter Sets: Task
+Aliases: Task, TaskInfo
 
-Required: False
-Position: 0
+Required: True
+Position: Named
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -150,7 +170,11 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ### CMS.SiteProvider.SiteInfo
 
+### System.String
+
 ### CMS.Membership.UserInfo
+
+### CMS.Scheduler.TaskInfo
 
 ## OUTPUTS
 

@@ -4,6 +4,58 @@
         <name>PoshKentico.Core</name>
     </assembly>
     <members>
+        <member name="T:PoshKentico.Core.AppDomainProxies.ProxyBase">
+            <summary>
+            The base class for all app domain proxies.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.AppDomainProxies.ProxyBase.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PoshKentico.Core.AppDomainProxies.ProxyBase"/> class.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.AppDomainProxies.ProxyBase.Finalize">
+            <summary>
+            Finalizes an instance of the <see cref="T:PoshKentico.Core.AppDomainProxies.ProxyBase"/> class.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.AppDomainProxies.ProxyBase.CmsApplicationService">
+            <summary>
+            Gets or sets the <see cref="T:PoshKentico.Core.Services.General.ICmsApplicationService"/>.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.AppDomainProxies.ProxyBase.Initialize">
+            <summary>
+            Initailizes the MEF container, the object, and the CMSApplicationService.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.AppDomainProxies.ProxyBase.Dispose">
+            <summary>
+            Disposes the <see cref="T:PoshKentico.Core.AppDomainProxies.ProxyBase"/>.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.AppDomainProxies.ProxyBase.Dispose(System.Boolean)">
+            <summary>
+            Disposes the <see cref="T:PoshKentico.Core.AppDomainProxies.ProxyBase"/>.
+            </summary>
+            <param name="disposing">Inidicates if we are disposing or finalizing.</param>
+        </member>
+        <member name="T:PoshKentico.Core.AppDomainProxies.ScheduledTaskProxy">
+            <summary>
+            The proxy for scheduled tasks.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.AppDomainProxies.ScheduledTaskProxy.ScheduledTaskService">
+            <summary>
+            Gets or sets the scheduled task service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.AppDomainProxies.ScheduledTaskProxy.ExecuteScheduledTask(System.Int32)">
+            <summary>
+            Executes the scheduled task within the current app domain.
+            </summary>
+            <param name="id">The ID to execute.</param>
+        </member>
         <member name="T:PoshKentico.Core.Extensions.EnumerableExtensions">
             <summary>
             Resource extensions.
@@ -68,6 +120,89 @@
         <member name="M:PoshKentico.Core.Providers.Configuration.Roles.KenticoRoleService.GetUiElement(System.String,System.String)">
             <inheritdoc/>
         </member>
+        <member name="T:PoshKentico.Core.Providers.Configuration.ScheduledTasks.IScheduledTaskHelper">
+            <summary>
+            Used by Dynamic Proxy to add a place to set a <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Configuration.ScheduledTasks.IScheduledTaskHelper.ScheduledTask">
+            <summary>
+            Gets or sets the <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Providers.Configuration.ScheduledTasks.IScheduledTaskIntervalExtensions">
+            <summary>
+            Extensions for scheduled task interval.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.ScheduledTasks.IScheduledTaskIntervalExtensions.Encode(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval)">
+            <summary>
+            Encodes the scheduled task interval into a string.
+            </summary>
+            <param name="interval">The interval to encode into a string.</param>
+            <returns>A <see cref="T:System.String"/> representation of the interval.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.ScheduledTasks.IScheduledTaskIntervalExtensions.GetFirstRun(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval)">
+            <summary>
+            Gets the first run for the interval.
+            </summary>
+            <param name="interval">The interval to get the first run time for.</param>
+            <returns>The <see cref="T:System.DateTime"/> for the first run of the interval.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.ScheduledTasks.IScheduledTaskIntervalExtensions.ToTaskInterval(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval)">
+            <summary>
+            Converts the <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> to a <see cref="T:CMS.Scheduler.TaskInterval"/>.
+            </summary>
+            <param name="interval">The interval to convert to <see cref="T:CMS.Scheduler.TaskInterval"/>.</param>
+            <returns><see cref="T:CMS.Scheduler.TaskInterval"/> representation of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval"/>.</returns>
+        </member>
+        <member name="T:PoshKentico.Core.Providers.Configuration.ScheduledTasks.KenticoScheduledTaskService">
+            <summary>
+            Implementation of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskService"/> for Kentico.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Configuration.ScheduledTasks.KenticoScheduledTaskService.CmsApplicationService">
+            <summary>
+            Gets or sets the CMS Application services.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Configuration.ScheduledTasks.KenticoScheduledTaskService.OutputService">
+            <summary>
+            Gets or sets the output service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Configuration.ScheduledTasks.KenticoScheduledTaskService.ScheduledTasks">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.ScheduledTasks.KenticoScheduledTaskService.ExecuteScheduledTask(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.ScheduledTasks.KenticoScheduledTaskService.ExecuteScheduledTaskInNewAppDomain(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.ScheduledTasks.KenticoScheduledTaskService.GetScheduledTask(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.ScheduledTasks.KenticoScheduledTaskService.GetScheduledTaskInterval(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.ScheduledTasks.KenticoScheduledTaskService.NewScheduledTask(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask,PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.ScheduledTasks.KenticoScheduledTaskService.Remove(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.ScheduledTasks.KenticoScheduledTaskService.Set(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask,PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval)">
+            <inheritdoc />
+        </member>
+        <member name="T:PoshKentico.Core.Providers.Configuration.ScheduledTasks.ScheduledTaskHelper">
+            <summary>
+            Used by Dynamic Proxy to add a place to set a <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Configuration.ScheduledTasks.ScheduledTaskHelper.ScheduledTask">
+            <inheritdoc />
+        </member>
         <member name="T:PoshKentico.Core.Providers.Configuration.Settings.KenticoSettingValueService">
             <summary>
             Implementation of <see cref="T:PoshKentico.Core.Services.Configuration.Settings.ISettingValueService"/> that uses Kentico.
@@ -99,8 +234,11 @@
         <member name="M:PoshKentico.Core.Providers.Configuration.Sites.KenticoSiteService.GetSite(System.String)">
             <inheritdoc/>
         </member>
-        <member name="M:PoshKentico.Core.Providers.Configuration.Sites.KenticoSiteService.GetSite(PoshKentico.Core.Services.Configuration.Users.IUser)">
+        <member name="M:PoshKentico.Core.Providers.Configuration.Sites.KenticoSiteService.GetSite(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask)">
             <inheritdoc/>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.Sites.KenticoSiteService.GetSite(PoshKentico.Core.Services.Configuration.Users.IUser)">
+            <inheritdoc />
         </member>
         <member name="M:PoshKentico.Core.Providers.Configuration.Sites.KenticoSiteService.Delete(PoshKentico.Core.Services.Configuration.Sites.ISite)">
             <inheritdoc/>
@@ -347,6 +485,9 @@
             <summary>
             Gets the initialization state of the CMS Application.
             </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.General.KenticoCmsApplicationService.SiteLocation">
+            <inheritdoc />
         </member>
         <member name="P:PoshKentico.Core.Providers.General.KenticoCmsApplicationService.CmsDatabaseService">
             <summary>
@@ -846,6 +987,143 @@
             Gets the User ID for the UserRole.
             </summary>
         </member>
+        <member name="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask">
+            <summary>
+            Represents a scheduled task.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask.TaskAssemblyName">
+            <summary>
+            Gets the assembly name for the task.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask.TaskClass">
+            <summary>
+            Gets the class for the task.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask.TaskData">
+            <summary>
+            Gets the data for the task.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask.TaskDisplayName">
+            <summary>
+            Gets the display name for the task.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask.TaskEnabled">
+            <summary>
+            Gets or sets a value indicating whether the task is enabled.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask.TaskInterval">
+            <summary>
+            Gets the interval for the task.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask.TaskID">
+            <summary>
+            Gets the ID for the task.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask.TaskName">
+            <summary>
+            Gets the name for the task.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask.TaskNextRunTime">
+            <summary>
+            Gets the next run time for the task.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask.TaskSiteID">
+            <summary>
+            Gets the site for the task.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval">
+            <summary>
+            Represents a scheduled task interval.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval.Every">
+            <summary>
+            Gets an indication of how often the task is set to occur.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval.Days">
+            <summary>
+            Gets which days the task should execute on.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval.Period">
+            <summary>
+            Gets the period which the task should be executed on.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval.StartTime">
+            <summary>
+            Gets the start time for the interval.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskService">
+            <summary>
+            Service for interacting with scheduled tasks.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskService.ScheduledTasks">
+            <summary>
+            Gets a list of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> setup in the CMS system.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskService.ExecuteScheduledTask(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask)">
+            <summary>
+            Executes the specified <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> within the current App Domain.
+            </summary>
+            <param name="scheduledTask">The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> to execute.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskService.ExecuteScheduledTaskInNewAppDomain(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask)">
+            <summary>
+            Executes the specified <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> within a new App Domain.
+            </summary>
+            <param name="scheduledTask">The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> to execute.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskService.GetScheduledTask(System.Int32)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> that matches the current ID.
+            </summary>
+            <param name="id">The ID of the <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> to return.</param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> which matches the ID.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskService.GetScheduledTaskInterval(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval"/> from the <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.
+            </summary>
+            <param name="scheduledTask">The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> to get the <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval"/> for.</param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval"/> for the specified <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskService.NewScheduledTask(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask,PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval)">
+            <summary>
+            Creates new <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> given the specified <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval"/>.
+            </summary>
+            <param name="scheduledTask">The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> to create in the system.</param>
+            <param name="scheduledTaskInterval">The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval"/> for the new <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.</param>
+            <returns>The newly created <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskService.Remove(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask)">
+            <summary>
+            Removes a <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> from the CMS system.
+            </summary>
+            <param name="scheduledTask">The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> to remove from the system.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskService.Set(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask,PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval)">
+            <summary>
+            Sets the <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> in the CMS system.
+            </summary>
+            <param name="scheduledTask">The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> to set in the system.</param>
+            <param name="scheduledTaskInterval">The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval"/> for the scheduled task.</param>
+        </member>
         <member name="T:PoshKentico.Core.Services.Configuration.Settings.ISettingValueService">
             <summary>
             Service for providing values for the given setting key.
@@ -961,6 +1239,13 @@
             </summary>
             <param name="siteName">The Site Name of the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to return.</param>
             <returns>The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> which matches the site name, else null.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.Sites.ISiteService.GetSite(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> from the <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.
+            </summary>
+            <param name="scheduledTask">The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> to get the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> for.</param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> which is associated with the <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.</returns>
         </member>
         <member name="M:PoshKentico.Core.Services.Configuration.Sites.ISiteService.GetSite(PoshKentico.Core.Services.Configuration.Users.IUser)">
             <summary>
@@ -2083,6 +2368,11 @@
         <member name="P:PoshKentico.Core.Services.General.ICmsApplicationService.InitializationState">
             <summary>
             Gets the initialization state of the CMS Application.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.General.ICmsApplicationService.SiteLocation">
+            <summary>
+            Gets the location of the Kentico site.
             </summary>
         </member>
         <member name="P:PoshKentico.Core.Services.General.ICmsApplicationService.Version">

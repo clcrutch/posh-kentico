@@ -21,7 +21,7 @@ using PoshKentico.Core.Services.Development.WebParts;
 namespace PoshKentico.Business.Development.WebParts
 {
     /// <summary>
-    /// Business layer fo the Remove-CMSWebPart cmdlet.
+    /// Business layer of the Remove-CMSWebPart cmdlet.
     /// </summary>
     [Export(typeof(RemoveCMSWebPartBusiness))]
     public class RemoveCMSWebPartBusiness : WebPartBusinessBase

@@ -14,28 +14,34 @@ schema: 2.0.0
 
 ### Object
 ```
-Remove-CMSSiteCulture [-SiteToRemove] <SiteInfo> [-CultureCodes] <String[]> [<CommonParameters>]
+Remove-CMSSiteCulture [-SiteToRemove] <SiteInfo> [-CultureCodes] <String[]> [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ### None
 ```
-Remove-CMSSiteCulture [-CultureCodes] <String[]> [<CommonParameters>]
+Remove-CMSSiteCulture [-CultureCodes] <String[]> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### Dislpay Name
 ```
-Remove-CMSSiteCulture [-CultureCodes] <String[]> [[-DisplayName] <String>] [-RegularExpression]
- [<CommonParameters>]
+Remove-CMSSiteCulture [-CultureCodes] <String[]> [-DisplayName] <String> [-RegularExpression] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ### ID
 ```
-Remove-CMSSiteCulture [-CultureCodes] <String[]> [[-SiteIds] <Int32[]>] [<CommonParameters>]
+Remove-CMSSiteCulture [-CultureCodes] <String[]> [-ID] <Int32[]> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### User
 ```
-Remove-CMSSiteCulture [-CultureCodes] <String[]> [[-User] <UserInfo>] [<CommonParameters>]
+Remove-CMSSiteCulture [-CultureCodes] <String[]> [[-User] <UserInfo>] [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+
+### Task
+```
+Remove-CMSSiteCulture -ScheduledTask <TaskInfo> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -52,12 +58,27 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -CultureCodes
 {{Fill CultureCodes Description}}
 
 ```yaml
 Type: String[]
-Parameter Sets: (All)
+Parameter Sets: Object, None, Dislpay Name, ID, User
 Aliases:
 
 Required: True
@@ -75,7 +96,22 @@ Type: String
 Parameter Sets: Dislpay Name
 Aliases: SiteName, DomainName
 
-Required: False
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -ID
+{{Fill ID Description}}
+
+```yaml
+Type: Int32[]
+Parameter Sets: ID
+Aliases:
+
+Required: True
 Position: 0
 Default value: None
 Accept pipeline input: False
@@ -97,18 +133,18 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SiteIds
-{{Fill SiteIds Description}}
+### -ScheduledTask
+{{Fill ScheduledTask Description}}
 
 ```yaml
-Type: Int32[]
-Parameter Sets: ID
-Aliases:
+Type: TaskInfo
+Parameter Sets: Task
+Aliases: Task, TaskInfo
 
-Required: False
-Position: 0
+Required: True
+Position: Named
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -142,6 +178,22 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
+### -WhatIf
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
 For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -150,7 +202,11 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ### CMS.SiteProvider.SiteInfo
 
+### System.String
+
 ### CMS.Membership.UserInfo
+
+### CMS.Scheduler.TaskInfo
 
 ## OUTPUTS
 

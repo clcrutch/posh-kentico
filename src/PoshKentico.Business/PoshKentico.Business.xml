@@ -391,6 +391,184 @@
             <param name="siteID">The Site ID for the new Role.</param>
             <returns>The newly created <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/>.</returns>
         </member>
+        <member name="T:PoshKentico.Business.Configuration.ScheduledTasks.DisableCmsScheduledTaskBusiness">
+            <summary>
+            Business layer of the Disable-CMSScheduledTask cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.ScheduledTasks.DisableCmsScheduledTaskBusiness.ScheduledTaskService">
+            <summary>
+            Gets or sets the scheduled task service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.ScheduledTasks.DisableCmsScheduledTaskBusiness.DisableScheduledTask(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask)">
+            <summary>
+            Disables the specified <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.
+            </summary>
+            <param name="scheduledTask">The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> to disable.</param>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.ScheduledTasks.EnableCmsScheduledTaskBusiness">
+            <summary>
+            Business layer of the Enable-CMSScheduledTask cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.ScheduledTasks.EnableCmsScheduledTaskBusiness.ScheduledTaskService">
+            <summary>
+            Gets or sets the scheduled task service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.ScheduledTasks.EnableCmsScheduledTaskBusiness.EnableScheduledTask(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask)">
+            <summary>
+            Enables the specified <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.
+            </summary>
+            <param name="scheduledTask">The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> to enable.</param>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.ScheduledTasks.GetCmsScheduledTaskBusiness">
+            <summary>
+            Business layer of the Get-CMSScheduledTask cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.ScheduledTasks.GetCmsScheduledTaskBusiness.ScheduledTaskService">
+            <summary>
+            Gets or sets the scheduled task service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.ScheduledTasks.GetCmsScheduledTaskBusiness.GetScheduledTasks">
+            <summary>
+            Gets a list of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> returned by Kentico.
+            </summary>
+            <returns>A list of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.ScheduledTasks.GetCmsScheduledTaskBusiness.GetScheduledTasks(PoshKentico.Core.Services.Configuration.Sites.ISite)">
+            <summary>
+            Gets a list of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> for a particular <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> return by Kentico.
+            </summary>
+            <param name="site">The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to get the list of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> for.</param>
+            <returns>A list of the <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> which are associated with a <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.ScheduledTasks.GetCmsScheduledTaskBusiness.GetScheduledTasksByAssemblyName(System.String,System.Boolean)">
+            <summary>
+            Gets a list of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> returned by Kentico whose assembly name matches the match string.
+            </summary>
+            <param name="matchString">The string which to match the <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> to.</param>
+            <param name="isRegex">Indicates whether <paramref name="matchString"/> is a regular expression.</param>
+            <returns>A list of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> matching the <paramref name="matchString"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.ScheduledTasks.GetCmsScheduledTaskBusiness.GetScheduledTasksByAssemblyName(System.String,System.Boolean,PoshKentico.Core.Services.Configuration.Sites.ISite)">
+            <summary>
+            Gets a list of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> for a particular <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> returned by Kentico whose assembly matches the match string.
+            </summary>
+            <param name="matchString">The string which to match the <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> to.</param>
+            <param name="isRegex">Indicates whether <paramref name="matchString"/> is a regular expression.</param>
+            <param name="site">The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to get the list of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> for.</param>
+            <returns>A list of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> matching the <paramref name="matchString"/> and the <paramref name="site"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.ScheduledTasks.GetCmsScheduledTaskBusiness.GetScheduledTasksByNameOrDisplayName(System.String,System.Boolean)">
+            <summary>
+            Gets a list of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> returned by Kentico whose name or display name matches the match string.
+            </summary>
+            <param name="matchString">The string which to match the scheduled task to.</param>
+            <param name="isRegex">Indicates whether <paramref name="matchString"/> is a regular expression.</param>
+            <returns>A list of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> matching the <paramref name="matchString"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.ScheduledTasks.GetCmsScheduledTaskBusiness.GetScheduledTasksByNameOrDisplayName(System.String,System.Boolean,PoshKentico.Core.Services.Configuration.Sites.ISite)">
+            <summary>
+            Gets a list of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> for a particular <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> returned by Kentico whose name or display name matches the match string.
+            </summary>
+            <param name="matchString">The string which to match the <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> to.</param>
+            <param name="isRegex">Indicates whether <paramref name="matchString"/> is a regular expression.</param>
+            <param name="site">The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to get the list of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> for.</param>
+            <returns>A list of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> matching the <paramref name="matchString"/> and the <paramref name="site"/>.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.ScheduledTasks.GetCmsScheduledTaskIntervalBusiness">
+            <summary>
+            Business layer of the Get-CMSScheduledTaskInterval cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.ScheduledTasks.GetCmsScheduledTaskIntervalBusiness.ScheduledTaskService">
+            <summary>
+            Gets or sets the scheduled task service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.ScheduledTasks.GetCmsScheduledTaskIntervalBusiness.GetScheduledTaskInterval(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval"/> for the specified <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.
+            </summary>
+            <param name="scheduledTask">The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> to get the <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval"/> for.</param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval"/> for the specified <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.ScheduledTasks.NewCmsScheduledTaskBusiness">
+            <summary>
+            Business layer of the New-CMSScheduledTask cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.ScheduledTasks.NewCmsScheduledTaskBusiness.ScheduledTaskService">
+            <summary>
+            Gets or sets the scheduled task service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.ScheduledTasks.NewCmsScheduledTaskBusiness.New(System.String,System.String,System.String,System.String,PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval,System.String,PoshKentico.Core.Services.Configuration.Sites.ISite)">
+            <summary>
+            Creates a new <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.
+            </summary>
+            <param name="assemblyName">The assembly name for the new <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.</param>
+            <param name="class">The class name for the new <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.</param>
+            <param name="data">The data for the new <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.</param>
+            <param name="displayName">The display name for the new <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.</param>
+            <param name="interval">The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval"/> for the new <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.</param>
+            <param name="name">The name for the new <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.</param>
+            <param name="site">The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to associate the <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> with.</param>
+            <returns>The newly created <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.ScheduledTasks.RemoveCmsScheduledTaskBusiness">
+            <summary>
+            Business layer of the Remove-CMSScheduledTask cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.ScheduledTasks.RemoveCmsScheduledTaskBusiness.ScheduledTaskService">
+            <summary>
+            Gets or sets the scheduled task service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.ScheduledTasks.RemoveCmsScheduledTaskBusiness.Remove(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask)">
+            <summary>
+            Remove the specified <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> from Kentico.
+            </summary>
+            <param name="scheduledTask">The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> to remove from Kentico.</param>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.ScheduledTasks.SetCmsScheduledTaskBusiness">
+            <summary>
+            Business layer of the Set-CMSScheduledTask.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.ScheduledTasks.SetCmsScheduledTaskBusiness.ScheduledTaskService">
+            <summary>
+            Gets or sets the scheduled task service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.ScheduledTasks.SetCmsScheduledTaskBusiness.Set(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask,PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval)">
+            <summary>
+            Sets the <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> in Kentico.
+            </summary>
+            <param name="scheduledTask">The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> to set in Kentico.</param>
+            <param name="scheduledTaskInterval">The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval"/> to set on the scheduled task.</param>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.ScheduledTasks.StartCmsScheduledTaskBusiness">
+            <summary>
+            Business layer of the Start-CMSScheduledTask.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.ScheduledTasks.StartCmsScheduledTaskBusiness.ScheduledTaskService">
+            <summary>
+            Gets or sets the scheduled task service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.ScheduledTasks.StartCmsScheduledTaskBusiness.ExecuteTask(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask)">
+            <summary>
+            Executes the specified <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> within the current process.
+            </summary>
+            <param name="scheduledTask">The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> to execute.</param>
+        </member>
         <member name="T:PoshKentico.Business.Configuration.Settings.GetCmsSettingValueBusiness">
             <summary>
             Business layer for the Set-CMSSettingValue cmdlet.
@@ -504,6 +682,13 @@
             <summary>
             Gets or sets a reference to the Site Service.  Populated by MEF.
             </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.Sites.GetCmsSiteBusiness.GetSite(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask)">
+            <summary>
+            Returns the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> for the specified <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.
+            </summary>
+            <param name="scheduledTask">The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> to get the <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> for.</param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> which is associated with the specified <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.</returns>
         </member>
         <member name="M:PoshKentico.Business.Configuration.Sites.GetCmsSiteBusiness.GetSites">
             <summary>
@@ -1585,7 +1770,7 @@
         </member>
         <member name="T:PoshKentico.Business.Development.WebParts.AddCMSWebPartFieldBusiness">
             <summary>
-            Business layer fo the Add-CMSWebPartField cmdlet.
+            Business layer of the Add-CMSWebPartField cmdlet.
             </summary>
         </member>
         <member name="M:PoshKentico.Business.Development.WebParts.AddCMSWebPartFieldBusiness.AddField(PoshKentico.Business.Development.WebParts.AddCMSWebPartFieldBusiness.AddFieldParameter,PoshKentico.Core.Services.Development.WebParts.IWebPart)">
@@ -1643,7 +1828,7 @@
         </member>
         <member name="T:PoshKentico.Business.Development.WebParts.GetCMSWebPartBusiness">
             <summary>
-            Business layer fo the Get-CMSWebPart cmdlet.
+            Business layer of the Get-CMSWebPart cmdlet.
             </summary>
         </member>
         <member name="P:PoshKentico.Business.Development.WebParts.GetCMSWebPartBusiness.GetCMSWebPartCategoryBusiness">
@@ -1766,7 +1951,7 @@
         </member>
         <member name="T:PoshKentico.Business.Development.WebParts.NewCMSWebPartBusiness">
             <summary>
-            Business layer fo the New-CMSWebPart cmdlet.
+            Business layer of the New-CMSWebPart cmdlet.
             </summary>
         </member>
         <member name="M:PoshKentico.Business.Development.WebParts.NewCMSWebPartBusiness.CreateWebPart(System.String,System.String,System.String)">
@@ -1804,7 +1989,7 @@
         </member>
         <member name="T:PoshKentico.Business.Development.WebParts.RemoveCMSWebPartBusiness">
             <summary>
-            Business layer fo the Remove-CMSWebPart cmdlet.
+            Business layer of the Remove-CMSWebPart cmdlet.
             </summary>
         </member>
         <member name="M:PoshKentico.Business.Development.WebParts.RemoveCMSWebPartBusiness.RemoveWebPart(PoshKentico.Core.Services.Development.WebParts.IWebPart)">
@@ -1868,22 +2053,6 @@
             Sets an <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/> in Kentico associated with an <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.
             </summary>
             <param name="field">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/> to update.</param>
-        </member>
-        <member name="T:PoshKentico.Business.Development.WebParts.ValueAttribute">
-            <summary>
-            Attribute used for setting the string value of an enumeration.
-            </summary>
-        </member>
-        <member name="M:PoshKentico.Business.Development.WebParts.ValueAttribute.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:PoshKentico.Business.Development.WebParts.ValueAttribute"/> class.
-            </summary>
-            <param name="value">The value provided by this attribute.</param>
-        </member>
-        <member name="P:PoshKentico.Business.Development.WebParts.ValueAttribute.Value">
-            <summary>
-            Gets the value for provided by this attribute.
-            </summary>
         </member>
         <member name="T:PoshKentico.Business.Development.WebParts.WebPartBusinessBase">
             <summary>
@@ -1990,6 +2159,22 @@
         </member>
         <member name="P:PoshKentico.Business.Resource.KenticoFileSystemBusiness.ResourceService">
             <inheritdoc />
+        </member>
+        <member name="T:PoshKentico.Business.ValueAttribute">
+            <summary>
+            Attribute used for setting the string value of an enumeration.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.ValueAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PoshKentico.Business.ValueAttribute"/> class.
+            </summary>
+            <param name="value">The value provided by this attribute.</param>
+        </member>
+        <member name="P:PoshKentico.Business.ValueAttribute.Value">
+            <summary>
+            Gets the value for provided by this attribute.
+            </summary>
         </member>
     </members>
 </doc>

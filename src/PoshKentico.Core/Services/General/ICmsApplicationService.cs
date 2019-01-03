@@ -33,6 +33,11 @@ namespace PoshKentico.Core.Services.General
         InitializationState InitializationState { get; }
 
         /// <summary>
+        /// Gets the location of the Kentico site.
+        /// </summary>
+        string SiteLocation { get; }
+
+        /// <summary>
         /// Gets the version of the CMS application.
         /// </summary>
         Version Version { get; }

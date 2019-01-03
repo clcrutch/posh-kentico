@@ -29,7 +29,7 @@ namespace PoshKentico
         #region Properties
 
         /// <summary>
-        /// The MEF container used for DI.
+        /// Gets or sets the MEF container used for DI.
         /// </summary>
         internal static CompositionContainer Container { get; set; }
 

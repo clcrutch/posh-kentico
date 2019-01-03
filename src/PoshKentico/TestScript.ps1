@@ -14,8 +14,8 @@ Configuration KenticoTest
 	Import-DscResource -Name xSettingValue
 	Import-DscResource -Name xMediaLibrary
 
-	Node localhost
-	{
+#	Node localhost
+#	{
 		
 		xSite TestSite
 		{
@@ -27,18 +27,18 @@ Configuration KenticoTest
 			Ensure = "Present"
 		}
 
-		xServer TestServer
-		{
-			ServerName = "Kenticotest"
-			ServerSiteName = "Kenticotest"
-			ServerURL = "http://dappcluster:743"
-			ServerDisplayName = "KenticoTest"
-			ServerAuthentication = "UserName"
-			ServerEnabled = $true
-			ServerUsername = "admin"
-			ServerPassword = "pass"
-			Ensure = "Present"
-		}
+#		xServer TestServer
+#		{
+#			ServerName = "Kenticotest"
+#			ServerSiteName = "Kenticotest"
+#			ServerURL = "http://dappcluster:743"
+#			ServerDisplayName = "KenticoTest"
+#			ServerAuthentication = "UserName"
+#			ServerEnabled = $true
+#			ServerUsername = "admin"
+#			ServerPassword = "pass"
+#			Ensure = "Present"
+#		}
 
 		xSettingValue TestSettingValue
 		{
@@ -56,9 +56,9 @@ Configuration KenticoTest
 			LibraryDescription = "This media library was created through the DSC."
 			Ensure = "Present"
 		}
-	}
+	#}
 }
 
-KenticoTest -OutputPath .\Temp
+#KenticoTest -OutputPath .\Temp
 
 Start-DscConfiguration -Wait -Force -Path .\Temp

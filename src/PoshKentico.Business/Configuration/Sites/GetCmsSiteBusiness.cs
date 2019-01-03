@@ -21,6 +21,7 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text.RegularExpressions;
 using CMS.Membership;
+using PoshKentico.Core.Services.Configuration.ScheduledTasks;
 using PoshKentico.Core.Services.Configuration.Sites;
 using PoshKentico.Core.Services.Configuration.Users;
 
@@ -42,6 +43,14 @@ namespace PoshKentico.Business.Configuration.Sites
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Returns the <see cref="ISite"/> for the specified <see cref="IScheduledTask"/>.
+        /// </summary>
+        /// <param name="scheduledTask">The <see cref="IScheduledTask"/> to get the <see cref="ISite"/> for.</param>
+        /// <returns>The <see cref="ISite"/> which is associated with the specified <see cref="IScheduledTask"/>.</returns>
+        public ISite GetSite(IScheduledTask scheduledTask) =>
+            this.SiteService.GetSite(scheduledTask);
 
         /// <summary>
         /// Gets a list of all of the <see cref="ISite"/> in the CMS System.

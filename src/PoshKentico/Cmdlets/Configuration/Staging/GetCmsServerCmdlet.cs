@@ -97,6 +97,7 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
         protected const string IDSETNAME = "ID";
 
         #endregion
+
         #region Properties
 
         /// <summary>

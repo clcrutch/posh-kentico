@@ -21,9 +21,11 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Web.Configuration;
 using System.Xml.Linq;
 using CMS.Base;
 using CMS.DataEngine;
+using CMS.Scheduler;
 using Microsoft.Web.Administration;
 using Mono.Cecil;
 using Newtonsoft.Json;
@@ -44,6 +46,7 @@ namespace PoshKentico.Core.Providers.General
 
         private DirectoryInfo siteLocation;
         private Version version;
+        private System.Configuration.Configuration webConfig;
 
         #endregion
 
@@ -64,6 +67,9 @@ namespace PoshKentico.Core.Providers.General
                 return InitializationState.Uninitialized;
             }
         }
+
+        /// <inheritdoc />
+        public string SiteLocation { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="ICmsDatabaseService"/>.  Set by MEF.
@@ -237,6 +243,12 @@ namespace PoshKentico.Core.Providers.General
 #pragma warning restore CS0618 // Type or member is obsolete
 
                 SystemContext.WebApplicationPhysicalPath = siteLocation.FullName;
+                this.SiteLocation = siteLocation.FullName;
+
+                // SettingsHelper will fire this event and return its value if it returns something.
+                CMSAppSettings.GetApplicationSettings += this.CMSAppSettings_GetApplicationSettings;
+
+                SystemContext.WebApplicationPhysicalPath = siteLocation.FullName;
                 this.siteLocation = siteLocation;
 
                 locallyInitialized = true;
@@ -279,6 +291,11 @@ namespace PoshKentico.Core.Providers.General
             }
         }
 
+        private string CMSAppSettings_GetApplicationSettings(string key)
+        {
+            return this.GetWebConfig().AppSettings.Settings[key]?.Value;
+        }
+
         private KenticoSiteLocationCache GetCache()
         {
             var cachePath = this.GetCachePath();
@@ -299,6 +316,22 @@ namespace PoshKentico.Core.Providers.General
         private string GetCachePath()
         {
             return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "PoshKentico", "cache.json");
+        }
+
+        private System.Configuration.Configuration GetWebConfig()
+        {
+            if (this.webConfig != null)
+            {
+                return this.webConfig;
+            }
+
+            var configFile = new FileInfo(Path.Combine(this.SiteLocation, "Web.config"));
+            var vdm = new VirtualDirectoryMapping(configFile.DirectoryName, true, configFile.Name);
+            var wcfm = new WebConfigurationFileMap();
+            wcfm.VirtualDirectories.Add("/", vdm);
+            this.webConfig = System.Web.Configuration.WebConfigurationManager.OpenMappedWebConfiguration(wcfm, "/");
+
+            return this.webConfig;
         }
 
         private bool HasCachedSiteLocation()

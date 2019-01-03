@@ -47,7 +47,7 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
-    [Cmdlet(VerbsCommon.Remove, "CMSSiteCulture")]
+    [Cmdlet(VerbsCommon.Remove, "CMSSiteCulture", SupportsShouldProcess = true, ConfirmImpact = ConfirmImpact.High)]
     [Alias("rscul")]
     public class RemoveCmsSiteCultureCmdlet : GetCmsSiteCmdlet
     {

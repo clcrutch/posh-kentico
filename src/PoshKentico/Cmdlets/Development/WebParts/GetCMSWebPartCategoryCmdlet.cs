@@ -82,7 +82,9 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         [Alias("Parent", "ParentCategory")]
         public WebPartCategoryInfo ParentWebPartCategory { get; set; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// <para type="description">Indiciates if the cmdlet should look recursively for web part categories.</para>
+        /// </summary>
         [Parameter(ParameterSetName = PARENTCATEGORY)]
         public override SwitchParameter Recurse
         {

@@ -1,4 +1,4 @@
-﻿// <copyright file="ValueAttribute.cs" company="Chris Crutchfield">
+﻿// <copyright file="IScheduledTaskInterval.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -16,33 +16,36 @@
 // </copyright>
 
 using System;
+using System.Collections.Generic;
 
-namespace PoshKentico.Business.Development.WebParts
+namespace PoshKentico.Core.Services.Configuration.ScheduledTasks
 {
     /// <summary>
-    /// Attribute used for setting the string value of an enumeration.
+    /// Represents a scheduled task interval.
     /// </summary>
-    public class ValueAttribute : Attribute
+    public interface IScheduledTaskInterval
     {
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ValueAttribute"/> class.
-        /// </summary>
-        /// <param name="value">The value provided by this attribute.</param>
-        public ValueAttribute(string value)
-        {
-            this.Value = value;
-        }
-
-        #endregion
-
         #region Properties
 
         /// <summary>
-        /// Gets the value for provided by this attribute.
+        /// Gets an indication of how often the task is set to occur.
         /// </summary>
-        public string Value { get; }
+        int Every { get; }
+
+        /// <summary>
+        /// Gets which days the task should execute on.
+        /// </summary>
+        IEnumerable<DayOfWeek> Days { get; }
+
+        /// <summary>
+        /// Gets the period which the task should be executed on.
+        /// </summary>
+        string Period { get; }
+
+        /// <summary>
+        /// Gets the start time for the interval.
+        /// </summary>
+        DateTime StartTime { get; }
 
         #endregion
 

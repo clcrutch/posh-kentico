@@ -20,9 +20,11 @@ using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 using CMS.Membership;
+using CMS.Scheduler;
 using CMS.SiteProvider;
 using ImpromptuInterface;
 using PoshKentico.Business.Configuration.Sites;
+using PoshKentico.Core.Services.Configuration.ScheduledTasks;
 using PoshKentico.Core.Services.Configuration.Sites;
 using PoshKentico.Core.Services.Configuration.Users;
 using AliasAttribute = System.Management.Automation.AliasAttribute;
@@ -55,6 +57,10 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     ///     <para>Get all the sites with the specified user.</para>
     ///     <code>Get-CMSSite -User $user</code>
     /// </example>
+    /// <example>
+    ///     <para>Get the site for the specified task.</para>
+    ///     <code>$scheduledTask | Get-CMSSite</code>
+    /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSSite", DefaultParameterSetName = NONE)]
@@ -80,17 +86,23 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         protected const string IDSETNAME = "ID";
 
         /// <summary>
+        /// Represents when the task parameter is used.
+        /// </summary>
+        protected const string TASK = "Task";
+
+        /// <summary>
         /// Represents user object is used in parameter.
         /// </summary>
         protected const string USEROBJECT = "User";
 
         #endregion
+
         #region Properties
 
         /// <summary>
         /// <para type="description">The display name of the site to retrive.</para>
         /// </summary>
-        [Parameter(Mandatory = false, Position = 0, ParameterSetName = DISPLAYNAME)]
+        [Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true, ParameterSetName = DISPLAYNAME)]
         [Alias("SiteName", "DomainName")]
         public string DisplayName { get; set; }
 
@@ -104,14 +116,21 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         /// <summary>
         /// <para type="description">The IDs of the site to retrieve.</para>
         /// </summary>
-        [Parameter(Mandatory = false, Position = 0, ParameterSetName = IDSETNAME)]
-        public int[] SiteIds { get; set; }
+        [Parameter(Mandatory = true, Position = 0, ParameterSetName = IDSETNAME)]
+        public int[] ID { get; set; }
 
         /// <summary>
         /// <para type="description">The user that the sites are assigned to.</para>
         /// </summary>
         [Parameter(Mandatory = false, ValueFromPipeline =true, Position = 0, ParameterSetName = USEROBJECT)]
         public UserInfo User { get; set; }
+
+        /// <summary>
+        /// <para type="description">The task to get the site for.</para>
+        /// </summary>
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = TASK)]
+        [Alias("Task", "TaskInfo")]
+        public TaskInfo ScheduledTask { get; set; }
 
         /// <summary>
         /// Gets or sets the Business layer for this site. Populated by MEF.
@@ -134,11 +153,15 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
                     sites = this.BusinessLayer.GetSites(this.DisplayName, this.RegularExpression.ToBool());
                     break;
                 case IDSETNAME:
-                    sites = this.BusinessLayer.GetSites(this.SiteIds);
+                    sites = this.BusinessLayer.GetSites(this.ID);
                     break;
                 case USEROBJECT:
                     sites = this.BusinessLayer.GetSites(this.User.ActLike<IUser>());
                     break;
+                case TASK:
+                    sites = new ISite[] { this.BusinessLayer.GetSite(this.ScheduledTask.ActLike<IScheduledTask>()).UndoActLike() };
+                    break;
+
                 case NONE:
                     sites = this.BusinessLayer.GetSites();
                     break;

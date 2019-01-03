@@ -1,5 +1,7 @@
 ﻿Import-Module posh-kentico
 
-Remove-Item (Join-Path $PSScriptRoot ..\docs) -Recurse
+$docs = (Join-Path $PSScriptRoot ..\docs)
 
-New-MarkdownHelp -Module "posh-kentico" -OutputFolder ..\docs -Force
+Remove-Item $docs -Recurse
+
+New-MarkdownHelp -Module "posh-kentico" -OutputFolder $docs -Force

@@ -35,9 +35,15 @@ namespace PoshKentico.Core.Providers.Configuration.Staging
     [Export(typeof(IStagingService))]
     public class KenticoStagingService : IStagingService
     {
+        #region Properties
+
         /// <inheritdoc/>
         public IEnumerable<IServer> Servers => (from c in ServerInfoProvider.GetServers()
                                                 select Impromptu.ActLike<IServer>(c as ServerInfo)).ToArray();
+
+        #endregion
+
+        #region Methods
 
         /// <inheritdoc/>
         public IServer Create(IServer server)
@@ -212,5 +218,7 @@ namespace PoshKentico.Core.Providers.Configuration.Staging
                 RoleInfoProvider.SetRoleInfo(newRole);
             }
         }
+
+        #endregion
     }
 }
