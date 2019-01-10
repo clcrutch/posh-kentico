@@ -191,6 +191,7 @@ namespace PoshKentico.Core.Providers.Development.PageTemplates
             pageTemplateInfo.FileName = pageTemplate.FileName;
             pageTemplateInfo.CodeName = pageTemplate.CodeName;
             pageTemplateInfo.PageTemplateProperties = pageTemplate.PageTemplateProperties;
+            pageTemplateInfo.WebParts = pageTemplate.UndoActLike().WebParts;
 
             PageTemplateInfoProvider.SetPageTemplateInfo(pageTemplateInfo);
         }
