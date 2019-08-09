@@ -53,10 +53,10 @@
     <None Update="DSCResources\xMediaLibrary\xMediaLibrary.schema.mof">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="DSCResources\xServer\xScheduledTask.psm1">
+    <None Update="DSCResources\xScheduledTask\xScheduledTask.psm1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="DSCResources\xServer\xScheduledTask.schema.mof">
+    <None Update="DSCResources\xScheduledTask\xScheduledTask.schema.mof">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="DSCResources\xServer\xServer.psm1">
