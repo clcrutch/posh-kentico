@@ -26,7 +26,7 @@ function Get-TargetResource
 	$returnValue = @{
 		Name = $Name
 		AssemblyName = $scheduledTask.TaskAssemblyName
-		Class = $scheduledTask.ClassName
+		ClassName = $scheduledTask.ClassName
 		Data = $scheduledTask.TaskData
 		DisplayName = $scheduledTask.TaskDisplayName
 		Ensure = $Ensure
@@ -53,7 +53,7 @@ function Set-TargetResource
 
 		[parameter(Mandatory = $true)]
 		[System.String]
-		$Class,
+		$ClassName,
 
 		[parameter(Mandatory = $true)]
 		[System.String]
@@ -85,7 +85,7 @@ function Set-TargetResource
 	if ($Ensure -eq "Present") {
 		if ($null -ne $scheduledTask) {
 			$scheduledTask.TaskAssemblyName = $AssemblyName
-			$scheduledTask.TaskClass = $Class
+			$scheduledTask.TaskClass = $ClassName
 			$scheduledTask.TaskData = $Data
 			$scheduledTask.TaskDisplayName = $DisplayName
 			
@@ -97,9 +97,9 @@ function Set-TargetResource
 		}
 		else {
 			if ($null -ne $Site) {
-				New-CMSScheduledTask -AssemblyName $AssemblyName -Class $Class -Data $Data -DisplayName $DisplayName -Interval $Interval -Site $Site
+				New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -Data $Data -DisplayName $DisplayName -Interval $Interval -Site $Site
 			} else  {
-				New-CMSScheduledTask -AssemblyName $AssemblyName -Class $Class -Data $Data -DisplayName $DisplayName -Interval $Interval
+				New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -Data $Data -DisplayName $DisplayName -Interval $Interval
 			}
 		}
 	}
@@ -127,7 +127,7 @@ function Test-TargetResource
 
 		[parameter(Mandatory = $true)]
 		[System.String]
-		$Class,
+		$ClassName,
 
 		[parameter(Mandatory = $true)]
 		[System.String]
@@ -157,7 +157,7 @@ function Test-TargetResource
 	if ($null -ne $scheduledTask) {
 		$Ensure -eq "Present" -and
 		$AssemblyName -eq $scheduledTask.TaskAssemblyName -and
-		$Class -eq $scheduledTask.TaskClass -and
+		$ClassName -eq $scheduledTask.TaskClass -and
 		$Data -eq $scheduledTask.TaskData -and
 		$DisplayName -eq $scheduledTask.TaskDisplayName -and
 		$intervalString -eq $scheduledTask.TaskInterval -and
