@@ -22,6 +22,11 @@ function Get-TargetResource
 
 	$interval = $scheduledTask | Get-CMSScheduledTaskInterval
 	$site = $scheduledTask | Get-CMSSite
+	$siteName = $null
+
+	if ($null -ne $site) {
+		$siteName = $site.SiteName
+	}
 
 	$returnValue = @{
 		Name = $Name
@@ -31,7 +36,7 @@ function Get-TargetResource
 		DisplayName = $scheduledTask.TaskDisplayName
 		Ensure = $Ensure
 		Interval = $interval
-		Site = $site
+		SiteName = $siteName
 	}
 
     $returnValue
@@ -72,17 +77,18 @@ function Set-TargetResource
 		$Interval,
 
 		[parameter(Mandatory = $false)]
-		[CMS.SiteProvider.SiteInfo]
-		$Site
+		[System.String]
+		$SiteName
     )
 
 	if ([string]::IsNullOrEmpty($Ensure)) {
 		$Ensure = "Present"
 	}
 
-	$scheduledTask = Get-CMSScheduledTask -Name $Name
+	$scheduledTask = Get-CMSScheduledTask -Name $Name 
 
 	if ($Ensure -eq "Present") {
+
 		if ($null -ne $scheduledTask) {
 			$scheduledTask.TaskAssemblyName = $AssemblyName
 			$scheduledTask.TaskClass = $ClassName
