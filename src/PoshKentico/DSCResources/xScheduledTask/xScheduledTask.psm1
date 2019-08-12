@@ -85,7 +85,7 @@ function Set-TargetResource
 		$Ensure = "Present"
 	}
 
-	$scheduledTask = Get-CMSScheduledTask -Name $Name
+	$scheduledTask = Get-CMSScheduledTask -Name $Name 
 
 	if ($Ensure -eq "Present") {
 
