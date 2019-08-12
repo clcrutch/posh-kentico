@@ -27,7 +27,7 @@ function Get-TargetResource
 		Name = $Name
 		AssemblyName = $scheduledTask.TaskAssemblyName
 		ClassName = $scheduledTask.ClassName
-		Data = $scheduledTask.TaskData
+		TaskData = $scheduledTask.TaskData
 		DisplayName = $scheduledTask.TaskDisplayName
 		Ensure = $Ensure
 		Interval = $interval
@@ -57,7 +57,7 @@ function Set-TargetResource
 
 		[parameter(Mandatory = $true)]
 		[System.String]
-		$Data,
+		$TaskData,
 
 		[parameter(Mandatory = $true)]
 		[System.String]
@@ -86,7 +86,7 @@ function Set-TargetResource
 		if ($null -ne $scheduledTask) {
 			$scheduledTask.TaskAssemblyName = $AssemblyName
 			$scheduledTask.TaskClass = $ClassName
-			$scheduledTask.TaskData = $Data
+			$scheduledTask.TaskData = $TaskData
 			$scheduledTask.TaskDisplayName = $DisplayName
 			
 			if ($null -ne $Site) {
@@ -97,9 +97,9 @@ function Set-TargetResource
 		}
 		else {
 			if ($null -ne $Site) {
-				New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -Data $Data -DisplayName $DisplayName -Interval $Interval -Site $Site
+				New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -Data $TaskData -DisplayName $DisplayName -Interval $Interval -Site $Site
 			} else  {
-				New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -Data $Data -DisplayName $DisplayName -Interval $Interval
+				New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -Data $TaskData -DisplayName $DisplayName -Interval $Interval
 			}
 		}
 	}
@@ -131,7 +131,7 @@ function Test-TargetResource
 
 		[parameter(Mandatory = $true)]
 		[System.String]
-		$Data,
+		$TaskData,
 
 		[parameter(Mandatory = $true)]
 		[System.String]
@@ -158,7 +158,7 @@ function Test-TargetResource
 		$Ensure -eq "Present" -and
 		$AssemblyName -eq $scheduledTask.TaskAssemblyName -and
 		$ClassName -eq $scheduledTask.TaskClass -and
-		$Data -eq $scheduledTask.TaskData -and
+		$TaskData -eq $scheduledTask.TaskData -and
 		$DisplayName -eq $scheduledTask.TaskDisplayName -and
 		$intervalString -eq $scheduledTask.TaskInterval -and
 		$Site.SiteID -eq $scheduledTask.TaskSiteID
