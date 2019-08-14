@@ -174,6 +174,12 @@
         <member name="P:PoshKentico.Core.Providers.Configuration.ScheduledTasks.KenticoScheduledTaskService.ScheduledTasks">
             <inheritdoc />
         </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.ScheduledTasks.KenticoScheduledTaskService.DecodeScheduledTaskInterval(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Configuration.ScheduledTasks.KenticoScheduledTaskService.EncodeScheduledTaskInterval(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval)">
+            <inheritdoc />
+        </member>
         <member name="M:PoshKentico.Core.Providers.Configuration.ScheduledTasks.KenticoScheduledTaskService.ExecuteScheduledTask(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask)">
             <inheritdoc />
         </member>
@@ -1076,6 +1082,20 @@
             <summary>
             Gets a list of <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> setup in the CMS system.
             </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskService.DecodeScheduledTaskInterval(System.String)">
+            <summary>
+            Takes a string and converts it to a <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval"/>.
+            </summary>
+            <param name="encodedScheduledTaskInterval">The encoded string.</param>
+            <returns><paramref name="encodedScheduledTaskInterval"/> decoded into a <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskService.EncodeScheduledTaskInterval(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval)">
+            <summary>
+            Takes a <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval"/> and encodes it to a string.
+            </summary>
+            <param name="scheduledTaskInterval">The scheduled task interval to encode.</param>
+            <returns>A string representation of the <paramref name="scheduledTaskInterval"/>.</returns>
         </member>
         <member name="M:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskService.ExecuteScheduledTask(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask)">
             <summary>

@@ -391,6 +391,40 @@
             <param name="siteID">The Site ID for the new Role.</param>
             <returns>The newly created <see cref="T:PoshKentico.Core.Services.Configuration.Roles.IRole"/>.</returns>
         </member>
+        <member name="T:PoshKentico.Business.Configuration.ScheduledTasks.ConvertFromCmsScheduledTaskIntervalBusiness">
+            <summary>
+            Business layer of the ConvertFrom-CMSScheduledTaskInterval cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.ScheduledTasks.ConvertFromCmsScheduledTaskIntervalBusiness.ScheduledTaskService">
+            <summary>
+            Gets or sets the scheduled task service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.ScheduledTasks.ConvertFromCmsScheduledTaskIntervalBusiness.EncodeScheduledTaskInterval(PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval)">
+            <summary>
+            Takes a <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval"/> and encodes it to a string.
+            </summary>
+            <param name="scheduledTaskInterval">The scheduled task interval to encode.</param>
+            <returns>A string representation of the <paramref name="scheduledTaskInterval"/>.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.Configuration.ScheduledTasks.ConvertToCmsScheduledTaskIntervalBusiness">
+            <summary>
+            Business layer of the ConvertTo-CMSScheduledTaskInterval cmdlet.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Business.Configuration.ScheduledTasks.ConvertToCmsScheduledTaskIntervalBusiness.ScheduledTaskService">
+            <summary>
+            Gets or sets the scheduled task service.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Configuration.ScheduledTasks.ConvertToCmsScheduledTaskIntervalBusiness.DecodeScheduledTaskInterval(System.String)">
+            <summary>
+            Takes a string and converts it to a <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval"/>.
+            </summary>
+            <param name="encodedScheduledTaskInterval">The encoded string.</param>
+            <returns><paramref name="encodedScheduledTaskInterval"/> decoded into a <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval"/>.</returns>
+        </member>
         <member name="T:PoshKentico.Business.Configuration.ScheduledTasks.DisableCmsScheduledTaskBusiness">
             <summary>
             Business layer of the Disable-CMSScheduledTask cmdlet.
