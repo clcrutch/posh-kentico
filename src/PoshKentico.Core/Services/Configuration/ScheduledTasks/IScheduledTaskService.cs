@@ -36,6 +36,20 @@ namespace PoshKentico.Core.Services.Configuration.ScheduledTasks
         #region Methods
 
         /// <summary>
+        /// Takes a string and converts it to a <see cref="IScheduledTaskInterval"/>.
+        /// </summary>
+        /// <param name="encodedScheduledTaskInterval">The encoded string.</param>
+        /// <returns><paramref name="encodedScheduledTaskInterval"/> decoded into a <see cref="IScheduledTaskInterval"/>.</returns>
+        IScheduledTaskInterval DecodeScheduledTaskInterval(string encodedScheduledTaskInterval);
+
+        /// <summary>
+        /// Takes a <see cref="IScheduledTaskInterval"/> and encodes it to a string.
+        /// </summary>
+        /// <param name="scheduledTaskInterval">The scheduled task interval to encode.</param>
+        /// <returns>A string representation of the <paramref name="scheduledTaskInterval"/>.</returns>
+        string EncodeScheduledTaskInterval(IScheduledTaskInterval scheduledTaskInterval);
+
+        /// <summary>
         /// Executes the specified <see cref="IScheduledTask"/> within the current App Domain.
         /// </summary>
         /// <param name="scheduledTask">The <see cref="IScheduledTask"/> to execute.</param>

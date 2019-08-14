@@ -68,6 +68,14 @@ namespace PoshKentico.Core.Providers.Configuration.ScheduledTasks
              select t.ActLike<IScheduledTask>()).ToArray();
 
         /// <inheritdoc />
+        public IScheduledTaskInterval DecodeScheduledTaskInterval(string encodedScheduledTaskInterval) =>
+            SchedulingHelper.DecodeInterval(encodedScheduledTaskInterval).ActLike<IScheduledTaskInterval>();
+
+        /// <inheritdoc />
+        public string EncodeScheduledTaskInterval(IScheduledTask scheduledTask) =>
+            SchedulingHelper.EncodeInterval(scheduledTask.UndoActLike() as TaskInterval);
+
+        /// <inheritdoc />
         public void ExecuteScheduledTask(IScheduledTask scheduledTask)
         {
             var originalDirectory = Environment.CurrentDirectory;

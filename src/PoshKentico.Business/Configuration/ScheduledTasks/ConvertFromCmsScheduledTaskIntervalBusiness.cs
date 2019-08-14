@@ -1,4 +1,4 @@
-﻿// <copyright file="DisableCmsScheduledTaskBusiness.cs" company="Chris Crutchfield">
+﻿// <copyright file="ConvertFromCmsScheduledTaskIntervalBusiness.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -21,10 +21,9 @@ using PoshKentico.Core.Services.Configuration.ScheduledTasks;
 namespace PoshKentico.Business.Configuration.ScheduledTasks
 {
     /// <summary>
-    /// Business layer of the Disable-CMSScheduledTask cmdlet.
+    /// Business layer of the ConvertFrom-CMSScheduledTaskInterval cmdlet.
     /// </summary>
-    [Export(typeof(DisableCmsScheduledTaskBusiness))]
-    public class DisableCmsScheduledTaskBusiness : CmdletBusinessBase
+    public class ConvertFromCmsScheduledTaskIntervalBusiness : CmdletBusinessBase
     {
         #region Properties
 
@@ -39,15 +38,12 @@ namespace PoshKentico.Business.Configuration.ScheduledTasks
         #region Methods
 
         /// <summary>
-        /// Disables the specified <see cref="IScheduledTask"/>.
+        /// Takes a <see cref="IScheduledTaskInterval"/> and encodes it to a string.
         /// </summary>
-        /// <param name="scheduledTask">The <see cref="IScheduledTask"/> to disable.</param>
-        public void DisableScheduledTask(IScheduledTask scheduledTask)
-        {
-            scheduledTask.TaskEnabled = false;
-
-            this.ScheduledTaskService.Set(scheduledTask, null);
-        }
+        /// <param name="scheduledTaskInterval">The scheduled task interval to encode.</param>
+        /// <returns>A string representation of the <paramref name="scheduledTaskInterval"/>.</returns>
+        public string EncodeScheduledTaskInterval(IScheduledTaskInterval scheduledTaskInterval) =>
+            this.ScheduledTaskService.EncodeScheduledTaskInterval(scheduledTaskInterval);
 
         #endregion
 

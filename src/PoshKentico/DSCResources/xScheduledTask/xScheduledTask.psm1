@@ -20,7 +20,7 @@ function Get-TargetResource
 		$Ensure = "Absent"
 	}
 
-	$interval = $scheduledTask | Get-CMSScheduledTaskInterval
+	$encodedInterval = $scheduledTask | Get-CMSScheduledTaskInterval | ConvertFrom-CMSScheduledTaskInterval
 	$site = $scheduledTask | Get-CMSSite
 	$siteName = $null
 
@@ -35,7 +35,7 @@ function Get-TargetResource
 		TaskData = $scheduledTask.TaskData
 		DisplayName = $scheduledTask.TaskDisplayName
 		Ensure = $Ensure
-		Interval = $interval
+		EncodedInterval = $encodedInterval
 		SiteName = $siteName
 	}
 
@@ -73,8 +73,8 @@ function Set-TargetResource
         $Ensure,
 
 		[parameter(Mandatory = $true)]
-		[CMS.Scheduler.TaskInterval]
-		$Interval,
+		[System.String]
+		$EncodedInterval,
 
 		[parameter(Mandatory = $false)]
 		[System.String]
@@ -85,7 +85,12 @@ function Set-TargetResource
 		$Ensure = "Present"
 	}
 
-	$scheduledTask = Get-CMSScheduledTask -Name $Name 
+	if (-not [string]::IsNullOrEmpty($SiteName)) {
+		$site = Get-CMSSite -SiteName $SiteName
+	}
+
+	$scheduledTask = Get-CMSScheduledTask -Name $Name
+	$interval = $EncodedInterval | ConvertTo-CMSScheduledTaskInterval
 
 	if ($Ensure -eq "Present") {
 
@@ -95,17 +100,17 @@ function Set-TargetResource
 			$scheduledTask.TaskData = $TaskData
 			$scheduledTask.TaskDisplayName = $DisplayName
 			
-			if ($null -ne $Site) {
-				$scheduledTask.TaskSiteID = $Site.SiteID
+			if ($null -ne $site) {
+				$scheduledTask.TaskSiteID = $site.SiteID
 			}
 
-			$scheduledTask | Set-CMSScheduledTask -Interval $Interval
+			$scheduledTask | Set-CMSScheduledTask -Interval $interval
 		}
 		else {
-			if ($null -ne $Site) {
-				New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -Data $TaskData -DisplayName $DisplayName -Interval $Interval -Site $Site
+			if ($null -ne $site) {
+				New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -Data $TaskData -DisplayName $DisplayName -Interval $interval -Site $site
 			} else  {
-				New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -Data $TaskData -DisplayName $DisplayName -Interval $Interval
+				New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -Data $TaskData -DisplayName $DisplayName -Interval $interval
 			}
 		}
 	}
@@ -148,8 +153,8 @@ function Test-TargetResource
         $Ensure,
 
 		[parameter(Mandatory = $true)]
-		[CMS.Scheduler.TaskInterval]
-		$Interval,
+		[System.String]
+		$EncodedInterval,
 
 		[parameter(Mandatory = $false)]
 		[CMS.SiteProvider.SiteInfo]
@@ -157,7 +162,6 @@ function Test-TargetResource
     )
 
 	$scheduledTask = Get-CMSScheduledTask -Name $Name
-	$intervalString = [CMS.Scheduler.SchedulingHelper]::EncodeInterval($Interval)
 	$site = $scheduledTask | Get-CMSSite
 
 	if ($null -ne $scheduledTask) {
@@ -166,7 +170,7 @@ function Test-TargetResource
 		$ClassName -eq $scheduledTask.TaskClass -and
 		$TaskData -eq $scheduledTask.TaskData -and
 		$DisplayName -eq $scheduledTask.TaskDisplayName -and
-		$intervalString -eq $scheduledTask.TaskInterval -and
+		$EncodedInterval -eq $scheduledTask.TaskInterval -and
 		$Site.SiteID -eq $scheduledTask.TaskSiteID
 	}
 	else {
