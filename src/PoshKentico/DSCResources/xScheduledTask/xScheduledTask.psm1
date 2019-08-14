@@ -157,12 +157,12 @@ function Test-TargetResource
 		$EncodedInterval,
 
 		[parameter(Mandatory = $false)]
-		[CMS.SiteProvider.SiteInfo]
-		$Site
+		[System.String]
+		$SiteName
     )
 
 	$scheduledTask = Get-CMSScheduledTask -Name $Name
-	$site = $scheduledTask | Get-CMSSite
+	$site = Get-CMSSite -SiteName $SiteName
 
 	if ($null -ne $scheduledTask) {
 		$Ensure -eq "Present" -and
