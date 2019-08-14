@@ -23,6 +23,7 @@ namespace PoshKentico.Business.Configuration.ScheduledTasks
     /// <summary>
     /// Business layer of the ConvertFrom-CMSScheduledTaskInterval cmdlet.
     /// </summary>
+    [Export(typeof(ConvertFromCmsScheduledTaskIntervalBusiness))]
     public class ConvertFromCmsScheduledTaskIntervalBusiness : CmdletBusinessBase
     {
         #region Properties
