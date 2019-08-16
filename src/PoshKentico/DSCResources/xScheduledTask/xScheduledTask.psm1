@@ -162,16 +162,24 @@ function Test-TargetResource
     )
 
 	$scheduledTask = Get-CMSScheduledTask -Name $Name
-	$site = Get-CMSSite -SiteName $SiteName
+
+	if ($null -ne $SiteName) {
+		$site = Get-CMSSite -SiteName $SiteName
+	}
 
 	if ($null -ne $scheduledTask) {
-		$Ensure -eq "Present" -and
+		$result = $Ensure -eq "Present" -and
 		$AssemblyName -eq $scheduledTask.TaskAssemblyName -and
 		$ClassName -eq $scheduledTask.TaskClass -and
 		$TaskData -eq $scheduledTask.TaskData -and
 		$DisplayName -eq $scheduledTask.TaskDisplayName -and
-		$EncodedInterval -eq $scheduledTask.TaskInterval -and
-		$Site.SiteID -eq $scheduledTask.TaskSiteID
+		$EncodedInterval -eq $scheduledTask.TaskInterval
+		
+		if ($null -ne $site ) {
+			$result = $result -and $site.SiteID -eq $scheduledTask.TaskSiteID
+		}
+
+		$result
 	}
 	else {
 		$Ensure -eq "Absent"
