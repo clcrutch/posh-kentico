@@ -163,7 +163,7 @@ function Test-TargetResource
 
 	$scheduledTask = Get-CMSScheduledTask -Name $Name
 
-	if ($null -ne $SiteName) {
+	if (-not [string]::IsNullOrEmpty($SiteName)) {
 		$site = Get-CMSSite -SiteName $SiteName
 	}
 
