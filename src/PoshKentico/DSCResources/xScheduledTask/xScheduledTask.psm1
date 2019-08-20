@@ -108,9 +108,9 @@ function Set-TargetResource
 		}
 		else {
 			if ($null -ne $site) {
-				New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -Data $TaskData -DisplayName $DisplayName -Interval $interval -Site $site
+				New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -Data $TaskData -DisplayName $DisplayName -Name $Name -Interval $interval -Site $site
 			} else  {
-				New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -Data $TaskData -DisplayName $DisplayName -Interval $interval
+				New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -Data $TaskData -DisplayName $DisplayName -Name $Name -Interval $interval
 			}
 		}
 	}
