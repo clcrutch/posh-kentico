@@ -36,6 +36,7 @@ function Get-TargetResource
 		DisplayName = $scheduledTask.TaskDisplayName
 		Ensure = $Ensure
 		EncodedInterval = $encodedInterval
+		ServerName = $scheduledTask.TaskServerName
 		SiteName = $siteName
 	}
 
@@ -78,6 +79,10 @@ function Set-TargetResource
 
 		[parameter(Mandatory = $false)]
 		[System.String]
+		$ServerName,
+
+		[parameter(Mandatory = $false)]
+		[System.String]
 		$SiteName
     )
 
@@ -99,6 +104,7 @@ function Set-TargetResource
 			$scheduledTask.TaskClass = $ClassName
 			$scheduledTask.TaskData = $TaskData
 			$scheduledTask.TaskDisplayName = $DisplayName
+			$scheduledTask.TaskServerName = $ServerName
 			
 			if ($null -ne $site) {
 				$scheduledTask.TaskSiteID = $site.SiteID
@@ -158,6 +164,10 @@ function Test-TargetResource
 
 		[parameter(Mandatory = $false)]
 		[System.String]
+		$ServerName,
+
+		[parameter(Mandatory = $false)]
+		[System.String]
 		$SiteName
     )
 
@@ -173,7 +183,8 @@ function Test-TargetResource
 		$ClassName -eq $scheduledTask.TaskClass -and
 		$TaskData -eq $scheduledTask.TaskData -and
 		$DisplayName -eq $scheduledTask.TaskDisplayName -and
-		$EncodedInterval -eq $scheduledTask.TaskInterval
+		$EncodedInterval -eq $scheduledTask.TaskInterval -and
+		$ServerName -eq $scheduledTask.TaskServerName
 		
 		if ($null -ne $site ) {
 			$result = $result -and $site.SiteID -eq $scheduledTask.TaskSiteID
