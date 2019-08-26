@@ -22,9 +22,9 @@ function Get-TargetResource
 
 	$encodedInterval = $scheduledTask | Get-CMSScheduledTaskInterval | ConvertFrom-CMSScheduledTaskInterval
 
-	$ServerName = $scheduledTask.TaskServerName
-	if ($ServerName -eq '') {
-		$ServerName = $null
+	$taskData = $scheduledTask.TaskData
+	if ($taskData -eq '') {
+		$taskData = $null
 	}
 
 	$site = $scheduledTask | Get-CMSSite
@@ -37,7 +37,7 @@ function Get-TargetResource
 		Name = $Name
 		AssemblyName = $scheduledTask.TaskAssemblyName
 		ClassName = $scheduledTask.ClassName
-		TaskData = $scheduledTask.TaskData
+		TaskData = $taskData
 		DisplayName = $scheduledTask.TaskDisplayName
 		Ensure = $Ensure
 		EncodedInterval = $encodedInterval
@@ -95,8 +95,8 @@ function Set-TargetResource
 		$Ensure = "Present"
 	}
 
-	if ($null -eq $ServerName) {
-		$ServerName = ''
+	if ($null -eq $TaskData) {
+		$TaskData = ''
 	}
 
 	if (-not [string]::IsNullOrEmpty($SiteName)) {
@@ -185,8 +185,8 @@ function Test-TargetResource
 		$site = Get-CMSSite -SiteName $SiteName
 	}
 
-	if ($null -eq $ServerName) {
-		$ServerName = ''
+	if ($null -eq $TaskData) {
+		$TaskData = ''
 	}
 
 	if ($null -ne $scheduledTask) {
