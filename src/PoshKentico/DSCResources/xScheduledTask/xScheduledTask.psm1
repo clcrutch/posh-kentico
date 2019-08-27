@@ -122,10 +122,22 @@ function Set-TargetResource
 			$scheduledTask | Set-CMSScheduledTask -Interval $interval
 		}
 		else {
+			$dataEmpty = [string]::IsNullOrEmpty($TaskData)
+
 			if ($null -ne $site) {
-				New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -Data $TaskData -DisplayName $DisplayName -Name $Name -Interval $interval -Site $site
+				if ($dataEmpty) {
+					New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -DisplayName $DisplayName -Name $Name -Interval $interval -Site $site
+				}
+				else {
+					New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -Data $TaskData -DisplayName $DisplayName -Name $Name -Interval $interval -Site $site
+				}
 			} else  {
-				New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -Data $TaskData -DisplayName $DisplayName -Name $Name -Interval $interval
+				if ($dataEmpty) {
+					New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -DisplayName $DisplayName -Name $Name -Interval $interval
+				}
+				else {
+					New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -Data $TaskData -DisplayName $DisplayName -Name $Name -Interval $interval
+				}
 			}
 		}
 	}

@@ -58,7 +58,7 @@ namespace PoshKentico.Business.Configuration.ScheduledTasks
             {
                 TaskAssemblyName = assemblyName,
                 TaskClass = @class,
-                TaskData = data,
+                TaskData = data ?? string.Empty,
                 TaskDisplayName = displayName,
                 TaskName = name,
             };

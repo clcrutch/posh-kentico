@@ -71,7 +71,8 @@ namespace PoshKentico.Cmdlets.Configuration.ScheduledTasks
         /// <summary>
         /// <para type="description">The data for the scheduled task.</para>
         /// </summary>
-        [Parameter(Mandatory = true, Position = 4)]
+        [Parameter(Position = 4)]
+        [Alias("TaskData")]
         public string Data { get; set; }
 
         /// <summary>
