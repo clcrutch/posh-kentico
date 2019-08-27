@@ -66,7 +66,7 @@ function Set-TargetResource
 		[System.String]
 		$ClassName,
 
-		[parameter(Mandatory = $true)]
+		[parameter(Mandatory = $false)]
 		[System.String]
 		$TaskData,
 
@@ -154,7 +154,7 @@ function Test-TargetResource
 		[System.String]
 		$ClassName,
 
-		[parameter(Mandatory = $true)]
+		[parameter(Mandatory = $false)]
 		[System.String]
 		$TaskData,
 
@@ -185,7 +185,7 @@ function Test-TargetResource
 		$site = Get-CMSSite -SiteName $SiteName
 	}
 
-	if ($null -eq $TaskData) {
+	if ($null -eq $TaskData) {`
 		$TaskData = ''
 	}
 
