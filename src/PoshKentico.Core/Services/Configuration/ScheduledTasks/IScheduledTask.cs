@@ -72,6 +72,11 @@ namespace PoshKentico.Core.Services.Configuration.ScheduledTasks
         DateTime TaskNextRunTime { get; }
 
         /// <summary>
+        /// Gets or sets the server name for the task.
+        /// </summary>
+        string TaskServerName { get; set; }
+
+        /// <summary>
         /// Gets the site for the task.
         /// </summary>
         int TaskSiteID { get; }
