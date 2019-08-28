@@ -123,20 +123,41 @@ function Set-TargetResource
 		}
 		else {
 			$dataEmpty = [string]::IsNullOrEmpty($TaskData)
+			$serverEmpty = [string]::IsNullOrEmpty($ServerName)
 
 			if ($null -ne $site) {
 				if ($dataEmpty) {
-					New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -DisplayName $DisplayName -Name $Name -Interval $interval -Site $site
+					if ($serverEmpty) {
+						New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -DisplayName $DisplayName -Name $Name -Interval $interval -Site $site
+					}
+					else {
+						New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -DisplayName $DisplayName -Name $Name -Interval $interval -Site $site -ServerName $ServerName
+					}
 				}
 				else {
-					New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -Data $TaskData -DisplayName $DisplayName -Name $Name -Interval $interval -Site $site
+					if ($serverEmpty) {
+						New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -Data $TaskData -DisplayName $DisplayName -Name $Name -Interval $interval -Site $site
+					}
+					else {
+						New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -Data $TaskData -DisplayName $DisplayName -Name $Name -Interval $interval -Site $site -ServerName $ServerName
+					}
 				}
 			} else  {
 				if ($dataEmpty) {
-					New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -DisplayName $DisplayName -Name $Name -Interval $interval
+					if ($serverEmpty) {
+						New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -DisplayName $DisplayName -Name $Name -Interval $interval
+					}
+					else {
+						New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -DisplayName $DisplayName -Name $Name -Interval $interval -ServerName $ServerName
+					}
 				}
 				else {
-					New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -Data $TaskData -DisplayName $DisplayName -Name $Name -Interval $interval
+					if ($serverEmpty) {
+						New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -Data $TaskData -DisplayName $DisplayName -Name $Name -Interval $interval
+					}
+					else {
+						New-CMSScheduledTask -AssemblyName $AssemblyName -Class $ClassName -Data $TaskData -DisplayName $DisplayName -Name $Name -Interval $interval -ServerName $ServerName
+					}
 				}
 			}
 		}

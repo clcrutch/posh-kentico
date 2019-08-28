@@ -541,7 +541,7 @@
             Gets or sets the scheduled task service.  Populated by MEF.
             </summary>
         </member>
-        <member name="M:PoshKentico.Business.Configuration.ScheduledTasks.NewCmsScheduledTaskBusiness.New(System.String,System.String,System.String,System.String,PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval,System.String,PoshKentico.Core.Services.Configuration.Sites.ISite)">
+        <member name="M:PoshKentico.Business.Configuration.ScheduledTasks.NewCmsScheduledTaskBusiness.New(System.String,System.String,System.String,System.String,PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval,System.String,System.String,PoshKentico.Core.Services.Configuration.Sites.ISite)">
             <summary>
             Creates a new <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.
             </summary>
@@ -551,6 +551,7 @@
             <param name="displayName">The display name for the new <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.</param>
             <param name="interval">The <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTaskInterval"/> for the new <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.</param>
             <param name="name">The name for the new <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.</param>
+            <param name="serverName">The name of the server to execute the new <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> on.</param>
             <param name="site">The <see cref="T:PoshKentico.Core.Services.Configuration.Sites.ISite"/> to associate the <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/> with.</param>
             <returns>The newly created <see cref="T:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask"/>.</returns>
         </member>

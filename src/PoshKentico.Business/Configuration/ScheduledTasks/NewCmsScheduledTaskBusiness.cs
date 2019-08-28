@@ -50,9 +50,10 @@ namespace PoshKentico.Business.Configuration.ScheduledTasks
         /// <param name="displayName">The display name for the new <see cref="IScheduledTask"/>.</param>
         /// <param name="interval">The <see cref="IScheduledTaskInterval"/> for the new <see cref="IScheduledTask"/>.</param>
         /// <param name="name">The name for the new <see cref="IScheduledTask"/>.</param>
+        /// <param name="serverName">The name of the server to execute the new <see cref="IScheduledTask"/> on.</param>
         /// <param name="site">The <see cref="ISite"/> to associate the <see cref="IScheduledTask"/> with.</param>
         /// <returns>The newly created <see cref="IScheduledTask"/>.</returns>
-        public IScheduledTask New(string assemblyName, string @class, string data, string displayName, IScheduledTaskInterval interval, string name, ISite site)
+        public IScheduledTask New(string assemblyName, string @class, string data, string displayName, IScheduledTaskInterval interval, string name, string serverName, ISite site)
         {
             var scheduledTask = new ScheduledTask
             {
@@ -61,7 +62,13 @@ namespace PoshKentico.Business.Configuration.ScheduledTasks
                 TaskData = data ?? string.Empty,
                 TaskDisplayName = displayName,
                 TaskName = name,
+                TaskServerName = serverName,
             };
+
+            if (site != null)
+            {
+                scheduledTask.TaskSiteID = site.SiteID;
+            }
 
             return this.ScheduledTaskService.NewScheduledTask(scheduledTask, interval);
         }
@@ -89,6 +96,8 @@ namespace PoshKentico.Business.Configuration.ScheduledTasks
             public string TaskName { get; set; }
 
             public DateTime TaskNextRunTime { get; set; }
+
+            public string TaskServerName { get; set; }
 
             public int TaskSiteID { get; set; }
         }

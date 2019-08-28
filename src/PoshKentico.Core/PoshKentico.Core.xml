@@ -1043,6 +1043,11 @@
             Gets the next run time for the task.
             </summary>
         </member>
+        <member name="P:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask.TaskServerName">
+            <summary>
+            Gets or sets the server name for the task.
+            </summary>
+        </member>
         <member name="P:PoshKentico.Core.Services.Configuration.ScheduledTasks.IScheduledTask.TaskSiteID">
             <summary>
             Gets the site for the task.

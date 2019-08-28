@@ -94,6 +94,12 @@ namespace PoshKentico.Cmdlets.Configuration.ScheduledTasks
         public string Name { get; set; }
 
         /// <summary>
+        /// <para type="description">The server to execute the scheduled task on.</para>
+        /// </summary>
+        [Parameter]
+        public string ServerName { get; set; }
+
+        /// <summary>
         /// <para type="description">The site for the scheduled task.</para>
         /// </summary>
         [Parameter]
@@ -119,6 +125,7 @@ namespace PoshKentico.Cmdlets.Configuration.ScheduledTasks
                 this.DisplayName,
                 this.Interval?.ActLike<IScheduledTaskInterval>(),
                 this.Name,
+                this.ServerName,
                 this.Site?.ActLike<ISite>());
 
             this.WriteObject(scheduledTask.UndoActLike());
