@@ -188,7 +188,7 @@ namespace PoshKentico.Core.Providers.Configuration.ScheduledTasks
                 TaskInterval = scheduledTask.TaskInterval ?? scheduledTaskInterval.Encode(),
                 TaskName = scheduledTask.TaskName,
                 TaskNextRunTime = scheduledTaskInterval?.GetFirstRun() ?? scheduledTask.TaskNextRunTime,
-                TaskServerName = scheduledTask.TaskServerName;
+                TaskServerName = scheduledTask.TaskServerName,
                 TaskSiteID = scheduledTask.TaskSiteID,
             };
 
