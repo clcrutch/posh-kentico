@@ -21,6 +21,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security.Principal;
 using System.Web.Configuration;
 using System.Xml.Linq;
 using CMS.Base;
@@ -199,7 +200,8 @@ namespace PoshKentico.Core.Providers.General
 
                 this.Initialize(
                     new DirectoryInfo(cache.SiteLocation),
-                    cache.ConnectionString);
+                    cache.ConnectionString,
+                    cache.ComputerAccountHasPermissions);
             }
             else
             {
@@ -211,12 +213,13 @@ namespace PoshKentico.Core.Providers.General
                     throw new Exception("Could not find Kentico site.");
                 }
 
-                var cache = this.GetCache();
+                _ = this.GetCache();
                 this.CacheSiteLocation(siteLocation, connectionString);
 
                 this.Initialize(
                     siteLocation,
-                    connectionString);
+                    connectionString,
+                    this.CmsDatabaseService.DoesComputerAccountHaveLogin(connectionString));
             }
         }
 
@@ -225,10 +228,17 @@ namespace PoshKentico.Core.Providers.General
         /// </summary>
         /// <param name="siteLocation">The directory where the Kentico site resides.</param>
         /// <param name="connectionString">The connection string to use for initializing the CMS Application.</param>
-        public void Initialize(DirectoryInfo siteLocation, string connectionString)
+        /// <param name="allowComputerAccount">Determines if the computer account should be disallowed from connecting.</param>
+        public void Initialize(DirectoryInfo siteLocation, string connectionString, bool allowComputerAccount)
         {
             // We don't need to do anything if the application is already initialized.
             if (this.InitializationState != InitializationState.Uninitialized)
+            {
+                return;
+            }
+
+            // We may not want to initialize as LocalSystem
+            if (allowComputerAccount && WindowsIdentity.GetCurrent().User.IsWellKnown(WellKnownSidType.LocalSystemSid))
             {
                 return;
             }
