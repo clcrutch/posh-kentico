@@ -17,6 +17,7 @@
 
 using System;
 using System.ComponentModel.Composition;
+using System.Data.SqlClient;
 using System.Management.Automation;
 using CMS.DataEngine;
 using PoshKentico.Core.Services.General;
@@ -101,11 +102,45 @@ namespace PoshKentico.Core.Providers.General
         #region Methods
 
         /// <summary>
+        /// Gets a value indicating if the computer account has a login.
+        /// </summary>
+        /// <param name="connectionString">The connection string of the database to connect to.</param>
+        /// <returns>A value indicating if the computer account has a login.</returns>
+        public bool DoesComputerAccountHaveLogin(string connectionString)
+        {
+            var ipProperties = System.Net.NetworkInformation.IPGlobalProperties.GetIPGlobalProperties();
+            var computerAccount = $"{ipProperties.DomainName}\\{ipProperties.HostName}$";
+
+            return this.DoesUserHaveLogin(computerAccount, connectionString);
+        }
+
+        /// <summary>
+        /// Gets a value indicating if <paramref name="loginName"/> has a login.
+        /// </summary>
+        /// <param name="loginName">The login name to check for.</param>
+        /// <param name="connectionString">The connection string of the database to connect to.</param>
+        /// <returns>A value indicating if <paramref name="loginName"/> has a login.</returns>
+        public bool DoesUserHaveLogin(string loginName, string connectionString)
+        {
+            var query = "SELECT COUNT(name) FROM sys.server_principals WHERE name = @LoginName";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@LoginName", loginName);
+
+                connection.Open();
+
+                return (command.ExecuteScalar() as int?).GetValueOrDefault(0) > 1;
+            }
+        }
+
+        /// <summary>
         /// Executes a query against the Kentico database.
         /// </summary>
         /// <param name="queryText">The text of the query to execute.</param>
         /// <param name="parameters">The parameters to use when executing the query.</param>
-        public void ExecuteQuery(string queryText, QueryDataParameters parameters) =>
+        public void ExecuteNonQuery(string queryText, QueryDataParameters parameters) =>
             ConnectionHelper.ExecuteNonQuery(queryText, parameters, QueryTypeEnum.SQLQuery);
 
         /// <summary>
