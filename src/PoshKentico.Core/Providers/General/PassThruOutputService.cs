@@ -119,7 +119,7 @@ namespace PoshKentico.Core.Providers.General
             WriteWarningAction?.Invoke(this.FormatOutput(text, memberName, sourceFilePath, sourceLineNumber));
 
         private string FormatOutput(string text, string memberName, string sourceFilePath, int sourceLineNumber) =>
-            $"{sourceFilePath}:{sourceLineNumber}:{memberName} {text}";
+            $"\"{sourceFilePath}\":{sourceLineNumber}:{memberName}() [MESSAGE:] {text}";
 
         #endregion
 

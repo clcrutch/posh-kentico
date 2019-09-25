@@ -240,7 +240,7 @@ namespace PoshKentico.Core.Providers.General
                 return;
             }
 
-            this.OutputService.WriteVerbose($"Login user = {Environment.UserName}");
+            this.OutputService.WriteDebug($"Login user = {Environment.UserName}");
 
             if (!locallyInitialized)
             {
