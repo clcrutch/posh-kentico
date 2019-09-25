@@ -16,6 +16,7 @@
 // </copyright>
 
 using System.Management.Automation;
+using System.Runtime.CompilerServices;
 
 namespace PoshKentico.Core.Services.General
 {
@@ -42,7 +43,10 @@ namespace PoshKentico.Core.Services.General
         /// Display debug information.
         /// </summary>
         /// <param name="text">The entry to log.</param>
-        void WriteDebug(string text);
+        /// <param name="memberName">The member name calling this method.</param>
+        /// <param name="sourceFilePath">The source file calling this method.</param>
+        /// <param name="sourceLineNumber">The line number calling this method.</param>
+        void WriteDebug(string text, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0);
 
         /// <summary>
         /// Display progress information.
@@ -54,12 +58,18 @@ namespace PoshKentico.Core.Services.General
         /// Writes a verbose log entry.
         /// </summary>
         /// <param name="text">The entry to log.</param>
-        void WriteVerbose(string text);
+        /// <param name="memberName">The member name calling this method.</param>
+        /// <param name="sourceFilePath">The source file calling this method.</param>
+        /// <param name="sourceLineNumber">The line number calling this method.</param>
+        void WriteVerbose(string text, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0);
 
         /// <summary>
         /// Display warning information.
         /// </summary>
         /// <param name="text">warning output.</param>
-        void WriteWarning(string text);
+        /// <param name="memberName">The member name calling this method.</param>
+        /// <param name="sourceFilePath">The source file calling this method.</param>
+        /// <param name="sourceLineNumber">The line number calling this method.</param>
+        void WriteWarning(string text, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0);
     }
 }

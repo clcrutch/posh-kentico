@@ -271,6 +271,7 @@ namespace PoshKentico.Core.Providers.General
                 return;
             }
 
+            this.OutputService.WriteDebug("Initializing CMSApplication...");
             if (!CMSApplication.Init())
             {
                 throw new Exception("CMS Application initialization failed.");

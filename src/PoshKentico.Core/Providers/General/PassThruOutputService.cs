@@ -18,6 +18,7 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Management.Automation;
+using System.Runtime.CompilerServices;
 using PoshKentico.Core.Services.General;
 
 namespace PoshKentico.Core.Providers.General
@@ -77,8 +78,11 @@ namespace PoshKentico.Core.Providers.General
         /// Display debug information.
         /// </summary>
         /// <param name="text">The entry to log.</param>
-        public void WriteDebug(string text) =>
-            WriteDebugAction?.Invoke(text);
+        /// <param name="memberName">The member name calling this method.</param>
+        /// <param name="sourceFilePath">The source file calling this method.</param>
+        /// <param name="sourceLineNumber">The line number calling this method.</param>
+        public void WriteDebug(string text, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0) =>
+        WriteDebugAction?.Invoke(this.FormatOutput(text, memberName, sourceFilePath, sourceLineNumber));
 
         /// <summary>
         /// Writes the specified error to the error pipe.
@@ -98,15 +102,24 @@ namespace PoshKentico.Core.Providers.General
         /// Writes a verbose log entry.
         /// </summary>
         /// <param name="text">The entry to log.</param>
-        public void WriteVerbose(string text) =>
-            WriteVerboseAction?.Invoke(text);
+        /// <param name="memberName">The member name calling this method.</param>
+        /// <param name="sourceFilePath">The source file calling this method.</param>
+        /// <param name="sourceLineNumber">The line number calling this method.</param>
+        public void WriteVerbose(string text, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0) =>
+            WriteVerboseAction?.Invoke(this.FormatOutput(text, memberName, sourceFilePath, sourceLineNumber));
 
         /// <summary>
         /// Display warning information.
         /// </summary>
         /// <param name="text">warning output.</param>
-        public void WriteWarning(string text) =>
-            WriteWarningAction?.Invoke(text);
+        /// <param name="memberName">The member name calling this method.</param>
+        /// <param name="sourceFilePath">The source file calling this method.</param>
+        /// <param name="sourceLineNumber">The line number calling this method.</param>
+        public void WriteWarning(string text, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0) =>
+            WriteWarningAction?.Invoke(this.FormatOutput(text, memberName, sourceFilePath, sourceLineNumber));
+
+        private string FormatOutput(string text, string memberName, string sourceFilePath, int sourceLineNumber) =>
+            $"{sourceFilePath}:{sourceLineNumber}:{memberName} {text}";
 
         #endregion
 
