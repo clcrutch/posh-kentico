@@ -190,11 +190,15 @@ namespace PoshKentico.Core.Providers.General
             // We don't need to do anything if the application is already initialized.
             if (this.InitializationState != InitializationState.Uninitialized)
             {
+                this.OutputService.WriteDebug("Kentico is already initialized, skipping.");
+
                 return;
             }
 
             if (useCached && this.HasCachedSiteLocation())
             {
+                this.OutputService.WriteDebug("Using cached version.");
+
                 var cache = this.GetCache();
 
                 this.Initialize(
@@ -203,6 +207,8 @@ namespace PoshKentico.Core.Providers.General
             }
             else
             {
+                this.OutputService.WriteDebug("Looking for Kentico using IIS.");
+
                 // Search for the Kentico site in IIS.
                 var (siteLocation, connectionString) = this.FindSite();
 
@@ -211,7 +217,6 @@ namespace PoshKentico.Core.Providers.General
                     throw new Exception("Could not find Kentico site.");
                 }
 
-                var cache = this.GetCache();
                 this.CacheSiteLocation(siteLocation, connectionString);
 
                 this.Initialize(
@@ -230,8 +235,12 @@ namespace PoshKentico.Core.Providers.General
             // We don't need to do anything if the application is already initialized.
             if (this.InitializationState != InitializationState.Uninitialized)
             {
+                this.OutputService.WriteDebug("Kentico is already initialized, skipping.");
+
                 return;
             }
+
+            this.OutputService.WriteVerbose($"Login user = {Environment.UserName}");
 
             if (!locallyInitialized)
             {
@@ -257,6 +266,8 @@ namespace PoshKentico.Core.Providers.General
             // We cannot setup the application unless the database is setup.
             if (!this.CmsDatabaseService.IsDatabaseInstalled())
             {
+                this.OutputService.WriteDebug("CMS database is not insalled, exiting...");
+
                 return;
             }
 
@@ -271,9 +282,14 @@ namespace PoshKentico.Core.Providers.General
             var cachePath = this.GetCachePath();
             var cacheFileInfo = new FileInfo(cachePath);
 
+            this.OutputService.WriteDebug($"Cache Path = {cachePath}");
+
             KenticoSiteLocationCache cache = this.GetCache();
             cache.SiteLocation = siteLocation.FullName;
             cache.ConnectionString = connectionString;
+
+            this.OutputService.WriteDebug($"Site Location = {siteLocation}");
+            this.OutputService.WriteDebug($"Connection String = {connectionString}");
 
             if (this.HasCachedSiteLocation())
             {
@@ -299,6 +315,8 @@ namespace PoshKentico.Core.Providers.General
         private KenticoSiteLocationCache GetCache()
         {
             var cachePath = this.GetCachePath();
+
+            this.OutputService.WriteDebug($"Cache Path = {cachePath}");
 
             if (this.HasCachedSiteLocation())
             {

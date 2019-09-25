@@ -22,14 +22,20 @@ function Get-TargetResource
 
 	$encodedInterval = $scheduledTask | Get-CMSScheduledTaskInterval | ConvertFrom-CMSScheduledTaskInterval
 
+	Write-Debug "Encoded Interval = $encodedInterval"
+
 	$taskData = $scheduledTask.TaskData
 	if ($taskData -eq '') {
+		Write-Debug 'Setting $taskData to $null'
+
 		$taskData = $null
 	}
 
 	$site = $scheduledTask | Get-CMSSite
 	$siteName = $null
 	if ($null -ne $site) {
+		Write-Debug "Site Name = $siteName"
+
 		$siteName = $site.SiteName
 	}
 
@@ -92,14 +98,20 @@ function Set-TargetResource
     )
 
 	if ([string]::IsNullOrEmpty($Ensure)) {
+		Write-Debug 'Defaulting $Ensure to "Present"'
+
 		$Ensure = "Present"
 	}
 
 	if ($null -eq $TaskData) {
+		Write-Debug 'Setting $taskData to $null'
+
 		$TaskData = ''
 	}
 
 	if (-not [string]::IsNullOrEmpty($SiteName)) {
+		Write-Debug "Site Name = $siteName"
+		
 		$site = Get-CMSSite -SiteName $SiteName
 	}
 
