@@ -1,5 +1,3 @@
-Import-Module posh-kentico
-
 function Get-TargetResource
 {
     [CmdletBinding()]
@@ -9,7 +7,9 @@ function Get-TargetResource
         [parameter(Mandatory = $true)]
         [System.String]
         $Name
-    )
+	)
+	
+	Import-Module posh-kentico
 
 	$scheduledTask = Get-CMSScheduledTask -Name $Name
 
@@ -95,7 +95,9 @@ function Set-TargetResource
 		[parameter(Mandatory = $false)]
 		[System.String]
 		$SiteName
-    )
+	)
+	
+	Import-Module posh-kentico
 
 	if ([string]::IsNullOrEmpty($Ensure)) {
 		Write-Debug 'Defaulting $Ensure to "Present"'
@@ -222,7 +224,9 @@ function Test-TargetResource
 		[parameter(Mandatory = $false)]
 		[System.String]
 		$SiteName
-    )
+	)
+	
+	Import-Module posh-kentico
 
 	$scheduledTask = Get-CMSScheduledTask -Name $Name
 

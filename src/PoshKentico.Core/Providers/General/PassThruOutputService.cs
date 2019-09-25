@@ -17,6 +17,7 @@
 
 using System;
 using System.ComponentModel.Composition;
+using System.IO;
 using System.Management.Automation;
 using System.Runtime.CompilerServices;
 using PoshKentico.Core.Services.General;
@@ -119,7 +120,7 @@ namespace PoshKentico.Core.Providers.General
             WriteWarningAction?.Invoke(this.FormatOutput(text, memberName, sourceFilePath, sourceLineNumber));
 
         private string FormatOutput(string text, string memberName, string sourceFilePath, int sourceLineNumber) =>
-            $"\"{sourceFilePath}\":{sourceLineNumber}:{memberName}() [MESSAGE:] {text}";
+            $"{Path.GetFileName(sourceFilePath)}:{sourceLineNumber}:{memberName}() [MESSAGE:] {text}";
 
         #endregion
 
