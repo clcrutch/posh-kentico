@@ -530,13 +530,12 @@
             </summary>
             <param name="useCached">Use the cached location for the Kentico Site.  When true and have already found Kentico in a previous run, this method does not require admin.</param>
         </member>
-        <member name="M:PoshKentico.Core.Providers.General.KenticoCmsApplicationService.Initialize(System.IO.DirectoryInfo,System.String,System.Boolean)">
+        <member name="M:PoshKentico.Core.Providers.General.KenticoCmsApplicationService.Initialize(System.IO.DirectoryInfo,System.String)">
             <summary>
             Initialize Kentico CMS Application using the supplied parameters.
             </summary>
             <param name="siteLocation">The directory where the Kentico site resides.</param>
             <param name="connectionString">The connection string to use for initializing the CMS Application.</param>
-            <param name="allowComputerAccount">Determines if the computer account should be disallowed from connecting.</param>
         </member>
         <member name="T:PoshKentico.Core.Providers.General.KenticoCmsDatabaseService">
             <summary>
@@ -568,22 +567,7 @@
             Gets a value indicating whether the database exists.
             </summary>
         </member>
-        <member name="M:PoshKentico.Core.Providers.General.KenticoCmsDatabaseService.DoesComputerAccountHaveLogin(System.String)">
-            <summary>
-            Gets a value indicating if the computer account has a login.
-            </summary>
-            <param name="connectionString">The connection string of the database to connect to.</param>
-            <returns>A value indicating if the computer account has a login.</returns>
-        </member>
-        <member name="M:PoshKentico.Core.Providers.General.KenticoCmsDatabaseService.DoesUserHaveLogin(System.String,System.String)">
-            <summary>
-            Gets a value indicating if <paramref name="loginName"/> has a login.
-            </summary>
-            <param name="loginName">The login name to check for.</param>
-            <param name="connectionString">The connection string of the database to connect to.</param>
-            <returns>A value indicating if <paramref name="loginName"/> has a login.</returns>
-        </member>
-        <member name="M:PoshKentico.Core.Providers.General.KenticoCmsDatabaseService.ExecuteNonQuery(System.String,CMS.DataEngine.QueryDataParameters)">
+        <member name="M:PoshKentico.Core.Providers.General.KenticoCmsDatabaseService.ExecuteQuery(System.String,CMS.DataEngine.QueryDataParameters)">
             <summary>
             Executes a query against the Kentico database.
             </summary>
@@ -614,11 +598,6 @@
         <member name="P:PoshKentico.Core.Providers.General.KenticoSiteLocationCache.ConnectionString">
             <summary>
             Gets or sets the connection string for the Kentico database.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Core.Providers.General.KenticoSiteLocationCache.ComputerAccountHasPermissions">
-            <summary>
-            Gets or sets a value indicating whether the computer account has permissions.
             </summary>
         </member>
         <member name="T:PoshKentico.Core.Providers.General.PassThruOutputService">
@@ -2438,13 +2417,12 @@
             </summary>
             <param name="useCached">Use the cached location for the CMS application.  When true and have already found Kentico in a previous run, this method does not require admin.</param>
         </member>
-        <member name="M:PoshKentico.Core.Services.General.ICmsApplicationService.Initialize(System.IO.DirectoryInfo,System.String,System.Boolean)">
+        <member name="M:PoshKentico.Core.Services.General.ICmsApplicationService.Initialize(System.IO.DirectoryInfo,System.String)">
             <summary>
             Performs the necessary initialization for the provided CMS site.
             </summary>
             <param name="siteLocation">The directory where the CMS site resides.</param>
             <param name="connectionString">The connection string to use for initializing the CMS Application.</param>
-            <param name="allowComputerAccount">Determines if the computer account should be disallowed from connecting.</param>
         </member>
         <member name="T:PoshKentico.Core.Services.General.ICmsDatabaseService">
             <summary>
@@ -2466,22 +2444,7 @@
             Gets a value indicating whether the database exists.
             </summary>
         </member>
-        <member name="M:PoshKentico.Core.Services.General.ICmsDatabaseService.DoesComputerAccountHaveLogin(System.String)">
-            <summary>
-            Gets a value indicating if the computer account has a login.
-            </summary>
-            <param name="connectionString">The connection string of the database to connect to.</param>
-            <returns>A value indicating if the computer account has a login.</returns>
-        </member>
-        <member name="M:PoshKentico.Core.Services.General.ICmsDatabaseService.DoesUserHaveLogin(System.String,System.String)">
-            <summary>
-            Gets a value indicating if <paramref name="loginName"/> has a login.
-            </summary>
-            <param name="loginName">The login name to check for.</param>
-            <param name="connectionString">The connection string of the database to connect to.</param>
-            <returns>A value indicating if <paramref name="loginName"/> has a login.</returns>
-        </member>
-        <member name="M:PoshKentico.Core.Services.General.ICmsDatabaseService.ExecuteNonQuery(System.String,CMS.DataEngine.QueryDataParameters)">
+        <member name="M:PoshKentico.Core.Services.General.ICmsDatabaseService.ExecuteQuery(System.String,CMS.DataEngine.QueryDataParameters)">
             <summary>
             Executes a query against the CMS database.
             </summary>
