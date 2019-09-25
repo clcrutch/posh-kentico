@@ -93,7 +93,6 @@ namespace PoshKentico.Tests.General
                 .Returns(InitializationState.Initialized);
 
             var outputService = OutputServiceHelper.GetPassThruOutputService();
-            PassThruOutputService.WriteVerboseAction = x => x.Should().Be("Kentico is already initialized.  Skipping...");
 
             var businessLayer = new InitializeCMSApplicationBusiness
             {
@@ -113,7 +112,6 @@ namespace PoshKentico.Tests.General
                 .Returns(InitializationState.Initialized);
 
             var outputService = OutputServiceHelper.GetPassThruOutputService();
-            PassThruOutputService.WriteVerboseAction = x => x.Should().Be("Kentico is already initialized.  Skipping...");
 
             var businessLayer = new InitializeCMSApplicationBusiness
             {
