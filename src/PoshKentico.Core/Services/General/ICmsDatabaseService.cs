@@ -47,26 +47,11 @@ namespace PoshKentico.Core.Services.General
         #region Methods
 
         /// <summary>
-        /// Gets a value indicating if the computer account has a login.
-        /// </summary>
-        /// <param name="connectionString">The connection string of the database to connect to.</param>
-        /// <returns>A value indicating if the computer account has a login.</returns>
-        bool DoesComputerAccountHaveLogin(string connectionString);
-
-        /// <summary>
-        /// Gets a value indicating if <paramref name="loginName"/> has a login.
-        /// </summary>
-        /// <param name="loginName">The login name to check for.</param>
-        /// <param name="connectionString">The connection string of the database to connect to.</param>
-        /// <returns>A value indicating if <paramref name="loginName"/> has a login.</returns>
-        bool DoesUserHaveLogin(string loginName, string connectionString);
-
-        /// <summary>
         /// Executes a query against the CMS database.
         /// </summary>
         /// <param name="queryText">The text of the query to execute.</param>
         /// <param name="parameters">The parameters to use when executing the query.</param>
-        void ExecuteNonQuery(string queryText, QueryDataParameters parameters);
+        void ExecuteQuery(string queryText, QueryDataParameters parameters);
 
         /// <summary>
         /// Installs the CMS SQL database.

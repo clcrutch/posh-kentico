@@ -56,7 +56,7 @@ namespace PoshKentico.Business.General
                 return;
             }
 
-            this.CmsApplicationService.Initialize(webRoot, connectionString, true);
+            this.CmsApplicationService.Initialize(webRoot, connectionString);
         }
 
         /// <summary>

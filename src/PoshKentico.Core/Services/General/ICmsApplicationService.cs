@@ -63,8 +63,7 @@ namespace PoshKentico.Core.Services.General
         /// </summary>
         /// <param name="siteLocation">The directory where the CMS site resides.</param>
         /// <param name="connectionString">The connection string to use for initializing the CMS Application.</param>
-        /// <param name="allowComputerAccount">Determines if the computer account should be disallowed from connecting.</param>
-        void Initialize(DirectoryInfo siteLocation, string connectionString, bool allowComputerAccount);
+        void Initialize(DirectoryInfo siteLocation, string connectionString);
 
         #endregion
 

@@ -46,7 +46,7 @@ namespace PoshKentico.Tests.General
 
             businessLayer.Initialize("myConnectionString", webRoot);
 
-            applicationServiceMock.Verify(x => x.Initialize(webRoot, "myConnectionString", true));
+            applicationServiceMock.Verify(x => x.Initialize(webRoot, "myConnectionString"));
         }
 
         [TestCase(false)]
@@ -81,7 +81,7 @@ namespace PoshKentico.Tests.General
 
             businessLayer.Initialize("databaseServer", "database", 103, webRoot);
 
-            applicationServiceMock.Verify(x => x.Initialize(webRoot, $"Data Source=databaseServer;Initial Catalog=database;Integrated Security=True;Persist Security Info=False;Connect Timeout=103;Encrypt=False;Current Language=English", true));
+            applicationServiceMock.Verify(x => x.Initialize(webRoot, $"Data Source=databaseServer;Initial Catalog=database;Integrated Security=True;Persist Security Info=False;Connect Timeout=103;Encrypt=False;Current Language=English"));
         }
 
         [TestCase]

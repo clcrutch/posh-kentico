@@ -37,11 +37,6 @@ namespace PoshKentico.Core.Providers.General
         /// </summary>
         public string ConnectionString { get; set; }
 
-        /// <summary>
-        /// Gets or sets a value indicating whether the computer account has permissions.
-        /// </summary>
-        public bool ComputerAccountHasPermissions { get; set; }
-
         #endregion
 
     }
