@@ -54,7 +54,7 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
     [Cmdlet(VerbsCommon.New, "CMSServer")]
     [OutputType(typeof(ServerInfo))]
     [Alias("nserver")]
-    public class NewCmsServerCmdlet : MefCmdlet
+    public class NewCmsServerCmdlet : MefCmdlet<NewCmsServerBusiness>
     {
         #region Constants
 
@@ -134,12 +134,6 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
         [Parameter(Mandatory = false, ParameterSetName = OBJECTSET)]
         [Parameter(Mandatory = false, ParameterSetName = PROPERTYSET)]
         public SwitchParameter PassThru { get; set; }
-
-        /// <summary>
-        ///  Gets or sets the Business Layer for this server.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public NewCmsServerBusiness BusinessLayer { get; set; }
 
         #endregion
 

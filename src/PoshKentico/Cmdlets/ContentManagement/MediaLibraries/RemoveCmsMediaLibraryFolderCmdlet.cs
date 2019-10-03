@@ -39,7 +39,7 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Remove, "CMSMediaLibraryFolder")]
     [Alias("rmlfol")]
-    public class RemoveCmsMediaLibraryFolderCmdlet : MefCmdlet
+    public class RemoveCmsMediaLibraryFolderCmdlet : MefCmdlet<RemoveCmsMediaLibraryFolderBusiness>
     {
         #region Constants
 
@@ -74,12 +74,6 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
         [Parameter(Mandatory = true, Position = 2, ParameterSetName = PROPERTYSET)]
         [Parameter(Mandatory = true, Position = 1, ParameterSetName = OBJECTSET)]
         public string Folder { get; set; }
-
-        /// <summary>
-        ///  Gets or sets the Business Layer for this library.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public RemoveCmsMediaLibraryFolderBusiness BusinessLayer { get; set; }
 
         #endregion
 

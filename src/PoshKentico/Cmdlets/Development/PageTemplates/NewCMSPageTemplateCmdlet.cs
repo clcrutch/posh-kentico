@@ -54,7 +54,7 @@ namespace PoshKentico.Cmdlets.Development.PageTemplates
     [Cmdlet(VerbsCommon.New, "CMSPageTemplate", DefaultParameterSetName = PATH)]
     [OutputType(typeof(PageTemplateInfo[]))]
     [Alias("nwpt")]
-    public class NewCMSPageTemplateCmdlet : MefCmdlet
+    public class NewCMSPageTemplateCmdlet : MefCmdlet<NewCMSPageTemplateBusiness>
     {
         #region Constants
         private const string PATH = "Path";
@@ -150,12 +150,6 @@ namespace PoshKentico.Cmdlets.Development.PageTemplates
         [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = CATEGORY)]
         [Alias("Category", "Parent")]
         public PageTemplateCategoryInfo PageTemplateCategory { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Business layer for this page template. Populated by MEF.
-        /// </summary>
-        [Import]
-        public NewCMSPageTemplateBusiness BusinessLayer { get; set; }
 
         #endregion
 

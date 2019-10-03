@@ -43,7 +43,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     [Cmdlet(VerbsCommon.Set, "CMSWebPartField")]
     [OutputType(typeof(FormFieldInfo), ParameterSetName = new string[] { PASSTHRU })]
     [Alias("swpf")]
-    public class SetCMSWebPartFieldCmdlet : MefCmdlet
+    public class SetCMSWebPartFieldCmdlet : MefCmdlet<SetCMSWebPartFieldBusiness>
     {
         #region Constants
 
@@ -65,12 +65,6 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         /// </summary>
         [Parameter(Mandatory = false, ParameterSetName = PASSTHRU)]
         public SwitchParameter PassThru { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Business layer for this web part. Populated by MEF.
-        /// </summary>
-        [Import]
-        public SetCMSWebPartFieldBusiness BusinessLayer { get; set; }
 
         #endregion
 

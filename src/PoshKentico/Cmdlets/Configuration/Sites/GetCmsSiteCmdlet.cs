@@ -66,7 +66,7 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     [Cmdlet(VerbsCommon.Get, "CMSSite", DefaultParameterSetName = NONE)]
     [OutputType(typeof(SiteInfo[]))]
     [Alias("gsite")]
-    public class GetCmsSiteCmdlet : MefCmdlet
+    public class GetCmsSiteCmdlet : MefCmdlet<GetCmsSiteBusiness>
     {
         #region Constants
 
@@ -131,12 +131,6 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = TASK)]
         [Alias("Task", "TaskInfo")]
         public TaskInfo ScheduledTask { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Business layer for this site. Populated by MEF.
-        /// </summary>
-        [Import]
-        public GetCmsSiteBusiness BusinessLayer { get; set; }
 
         #endregion
 

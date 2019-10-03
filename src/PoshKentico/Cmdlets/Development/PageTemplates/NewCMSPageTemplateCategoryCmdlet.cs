@@ -43,7 +43,7 @@ namespace PoshKentico.Cmdlets.Development.PageTemplate
     [Cmdlet(VerbsCommon.New, "CMSPageTemplateCategory")]
     [OutputType(typeof(PageTemplateCategoryInfo[]), ParameterSetName = new string[] { PASSTHRU })]
     [Alias("nwptc")]
-    public class NewCMSPageTemplateCategoryCmdlet : MefCmdlet
+    public class NewCMSPageTemplateCategoryCmdlet : MefCmdlet<NewCMSPageTemplateCategoryBusiness>
     {
         #region Constants
 
@@ -84,12 +84,6 @@ namespace PoshKentico.Cmdlets.Development.PageTemplate
         /// </summary>
         [Parameter(Mandatory = false, ParameterSetName = PASSTHRU)]
         public SwitchParameter PassThru { get; set; }
-
-        /// <summary>
-        ///  Gets or sets the Business Layer for this page template.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public NewCMSPageTemplateCategoryBusiness BusinessLayer { get; set; }
 
         #endregion
 

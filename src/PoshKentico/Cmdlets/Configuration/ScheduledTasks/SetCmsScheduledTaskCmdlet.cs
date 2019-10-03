@@ -43,7 +43,7 @@ namespace PoshKentico.Cmdlets.Configuration.ScheduledTasks
     [OutputType(typeof(TaskInfo[]), ParameterSetName = new string[] { PASSTHRU })]
     [ExcludeFromCodeCoverage]
     [Alias("sst")]
-    public class SetCmsScheduledTaskCmdlet : MefCmdlet
+    public class SetCmsScheduledTaskCmdlet : MefCmdlet<SetCmsScheduledTaskBusiness>
     {
         #region Constants
 
@@ -71,12 +71,6 @@ namespace PoshKentico.Cmdlets.Configuration.ScheduledTasks
         [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0)]
         [Alias("Task", "TaskInfo")]
         public TaskInfo ScheduledTask { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Business layer for this cmdlet. Populated by MEF.
-        /// </summary>
-        [Import]
-        public SetCmsScheduledTaskBusiness BusinessLayer { get; set; }
 
         #endregion
 

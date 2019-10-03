@@ -46,7 +46,7 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
     [Cmdlet(VerbsCommon.Set, "CMSRoleLog")]
     [OutputType(typeof(RoleInfo), ParameterSetName = new string[] { PASSTHRU })]
     [Alias("srlog")]
-    public class SetCmsRoleLogCmdlet : MefCmdlet
+    public class SetCmsRoleLogCmdlet : MefCmdlet<SetCmsRoleLogBusiness>
     {
         #region Constants
 
@@ -95,12 +95,6 @@ namespace PoshKentico.Cmdlets.Configuration.Staging
         [Parameter(Mandatory = false, ParameterSetName = OBJECTSET)]
         [Parameter(Mandatory = false, ParameterSetName = PROPERTYSET)]
         public SwitchParameter PassThru { get; set; }
-
-        /// <summary>
-        ///  Gets or sets the Business Layer for this role.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public SetCmsRoleLogBusiness BusinessLayer { get; set; }
 
         #endregion
 

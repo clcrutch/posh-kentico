@@ -41,7 +41,7 @@ namespace PoshKentico.Cmdlets.Configuration.Settings
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSSettingValue", DefaultParameterSetName = NONE)]
     [Alias("gsval")]
-    public class GetCmsSettingValueCmdlet : MefCmdlet
+    public class GetCmsSettingValueCmdlet : MefCmdlet<GetCmsSettingValueBusiness>
     {
         #region Constants
 
@@ -50,6 +50,7 @@ namespace PoshKentico.Cmdlets.Configuration.Settings
         private const string PROPERTYSET = "Property";
 
         #endregion
+
         #region Properties
 
         /// <summary>
@@ -71,12 +72,6 @@ namespace PoshKentico.Cmdlets.Configuration.Settings
         [Parameter(Mandatory = true, Position = 1, ParameterSetName = PROPERTYSET)]
         [Parameter(Mandatory = true, Position = 1, ParameterSetName = NONE)]
         public string Key { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Business layer for this setting service. Populated by MEF.
-        /// </summary>
-        [Import]
-        public GetCmsSettingValueBusiness BusinessLayer { get; set; }
 
         #endregion
 

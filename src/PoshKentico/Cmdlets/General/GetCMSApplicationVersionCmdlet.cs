@@ -38,18 +38,8 @@ namespace PoshKentico.Cmdlets.General
     [Cmdlet(VerbsCommon.Get, "CMSApplicationVersion")]
     [OutputType(typeof(Version))]
     [Alias("gav")]
-    public class GetCMSApplicationVersionCmdlet : MefCmdlet
+    public class GetCMSApplicationVersionCmdlet : MefCmdlet<GetCMSApplicationVersionBusiness>
     {
-        #region Properties
-
-        /// <summary>
-        /// Gets or sets the Business layer for this web part. Populated by MEF.
-        /// </summary>
-        [Import]
-        public GetCMSApplicationVersionBusiness BusinessLayer { get; set; }
-
-        #endregion
-
         #region Methods
 
         /// <inheritdoc />

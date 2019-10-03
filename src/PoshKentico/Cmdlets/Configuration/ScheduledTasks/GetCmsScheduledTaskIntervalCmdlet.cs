@@ -39,7 +39,7 @@ namespace PoshKentico.Cmdlets.Configuration.ScheduledTasks
     [OutputType(typeof(TaskInterval[]))]
     [ExcludeFromCodeCoverage]
     [Alias("gsti")]
-    public class GetCmsScheduledTaskIntervalCmdlet : MefCmdlet
+    public class GetCmsScheduledTaskIntervalCmdlet : MefCmdlet<GetCmsScheduledTaskIntervalBusiness>
     {
         #region Properties
 
@@ -49,12 +49,6 @@ namespace PoshKentico.Cmdlets.Configuration.ScheduledTasks
         [Parameter(ValueFromPipeline = true, Mandatory = true)]
         [Alias("Task", "TaskInfo")]
         public TaskInfo ScheduledTask { get; set; }
-
-        /// <summary>
-        ///  Gets or sets the Business Layer for adding culture to this site.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public GetCmsScheduledTaskIntervalBusiness BusinessLayer { get; set; }
 
         #endregion
 

@@ -38,18 +38,8 @@ namespace PoshKentico.Cmdlets.General
     [Cmdlet(VerbsCommon.Get, "CMSDatabaseVersion")]
     [OutputType(typeof(Version))]
     [Alias("gdbv")]
-    public class GetCMSDatabaseVersionCmdlet : MefCmdlet
+    public class GetCMSDatabaseVersionCmdlet : MefCmdlet<GetCMSDatabaseVersionBusiness>
     {
-        #region Properties
-
-        /// <summary>
-        /// Gets or sets the Business layer for this web part. Populated by MEF.
-        /// </summary>
-        [Import]
-        public GetCMSDatabaseVersionBusiness BusinessLayer { get; set; }
-
-        #endregion
-
         #region Methods
 
         /// <inheritdoc />

@@ -39,7 +39,7 @@ namespace PoshKentico.Cmdlets.Configuration.ScheduledTasks
     [Cmdlet(VerbsData.ConvertTo, "CMSScheduledTaskInterval")]
     [OutputType(typeof(TaskInterval[]))]
     [ExcludeFromCodeCoverage]
-    public class ConvertToCmsScheduledTaskIntervalCmdlet : MefCmdlet
+    public class ConvertToCmsScheduledTaskIntervalCmdlet : MefCmdlet<ConvertToCmsScheduledTaskIntervalBusiness>
     {
         #region Properties
 
@@ -49,12 +49,6 @@ namespace PoshKentico.Cmdlets.Configuration.ScheduledTasks
         [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0)]
         [Alias("Interval")]
         public string EncodedInterval { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Business layer for this web part. Populated by MEF.
-        /// </summary>
-        [Import]
-        public ConvertToCmsScheduledTaskIntervalBusiness BusinessLayer { get; set; }
 
         #endregion
 

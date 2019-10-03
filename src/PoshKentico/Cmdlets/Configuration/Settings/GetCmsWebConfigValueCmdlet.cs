@@ -38,7 +38,7 @@ namespace PoshKentico.Cmdlets.Configuration.Settings
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSWebConfigValue")]
     [Alias("gwcval")]
-    public class GetCmsWebConfigValueCmdlet : MefCmdlet
+    public class GetCmsWebConfigValueCmdlet : MefCmdlet<GetCmsWebConfigValueBusiness>
     {
         #region Properties
 
@@ -53,12 +53,6 @@ namespace PoshKentico.Cmdlets.Configuration.Settings
         /// </summary>
         [Parameter(Mandatory = false, Position = 1)]
         public string Default { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Business layer for this setting service. Populated by MEF.
-        /// </summary>
-        [Import]
-        public GetCmsWebConfigValueBusiness BusinessLayer { get; set; }
 
         #endregion
 

@@ -51,7 +51,7 @@ namespace PoshKentico.Cmdlets.Configuration.Users
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Add, "CMSUserToSite")]
     [Alias("autsit")]
-    public class AddUserToSiteCmdlet : MefCmdlet
+    public class AddUserToSiteCmdlet : MefCmdlet<AddCmsUserToSiteBusiness>
     {
         #region Constants
 
@@ -83,12 +83,6 @@ namespace PoshKentico.Cmdlets.Configuration.Users
         /// </summary>
         [Parameter(Mandatory = true, Position = 1, ParameterSetName =SITEOBJECT)]
         public SiteInfo Site { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Business layer for this user. Populated by MEF.
-        /// </summary>
-        [Import]
-        public AddCmsUserToSiteBusiness BusinessLayer { get; set; }
 
         #endregion
 

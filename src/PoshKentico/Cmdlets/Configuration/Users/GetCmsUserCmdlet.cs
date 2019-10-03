@@ -58,7 +58,7 @@ namespace PoshKentico.Cmdlets.Configuration.Users
     [Cmdlet(VerbsCommon.Get, "CMSUser", DefaultParameterSetName = NONE)]
     [OutputType(typeof(UserInfo[]))]
     [Alias("guser")]
-    public class GetCmsUserCmdlet : MefCmdlet
+    public class GetCmsUserCmdlet : MefCmdlet<GetCmsUserBusiness>
     {
         #region Constants
 
@@ -111,12 +111,6 @@ namespace PoshKentico.Cmdlets.Configuration.Users
         [Parameter(Mandatory = false)]
         [Alias("Regex")]
         public SwitchParameter RegularExpression { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Business layer for this user. Populated by MEF.
-        /// </summary>
-        [Import]
-        public GetCmsUserBusiness BusinessLayer { get; set; }
 
         #endregion
 

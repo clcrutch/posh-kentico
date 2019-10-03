@@ -52,7 +52,7 @@ namespace PoshKentico.Cmdlets.Configuration.ScheduledTasks
     [OutputType(typeof(TaskInfo[]))]
     [ExcludeFromCodeCoverage]
     [Alias("nst")]
-    public class NewCmsScheduledTaskCmdlet : MefCmdlet
+    public class NewCmsScheduledTaskCmdlet : MefCmdlet<NewCmsScheduledTaskBusiness>
     {
         #region Properties
 
@@ -104,12 +104,6 @@ namespace PoshKentico.Cmdlets.Configuration.ScheduledTasks
         /// </summary>
         [Parameter]
         public SiteInfo Site { get; set; }
-
-        /// <summary>
-        ///  Gets or sets the Business Layer for adding culture to this site.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public NewCmsScheduledTaskBusiness BusinessLayer { get; set; }
 
         #endregion
 

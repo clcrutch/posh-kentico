@@ -266,7 +266,7 @@ namespace PoshKentico.Core.Providers.General
             // We cannot setup the application unless the database is setup.
             if (!this.CmsDatabaseService.IsDatabaseInstalled())
             {
-                this.OutputService.WriteDebug("CMS database is not insalled, exiting...");
+                this.OutputService.WriteDebug("CMS database is not installed, exiting...");
 
                 return;
             }

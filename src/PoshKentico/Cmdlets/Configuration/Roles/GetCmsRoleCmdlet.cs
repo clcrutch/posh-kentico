@@ -69,7 +69,7 @@ namespace PoshKentico.Cmdlets.Configuration.Roles
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Get, "CMSRole", DefaultParameterSetName = NONE)]
     [OutputType(typeof(RoleInfo[]))]
-    public class GetCmsRoleCmdlet : MefCmdlet
+    public class GetCmsRoleCmdlet : MefCmdlet<GetCmsRoleBusiness>
     {
         #region Constants
 
@@ -137,12 +137,6 @@ namespace PoshKentico.Cmdlets.Configuration.Roles
         [Parameter(Mandatory = false)]
         [Alias("Regex")]
         public SwitchParameter RegularExpression { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Business layer for this role. Populated by MEF.
-        /// </summary>
-        [Import]
-        public GetCmsRoleBusiness BusinessLayer { get; set; }
 
         #endregion
 

@@ -40,7 +40,7 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
     [Cmdlet(VerbsCommon.New, "CMSMediaLibraryFolder")]
     [OutputType(typeof(string))]
     [Alias("nmlfol")]
-    public class NewCmsMediaLibraryFolderCmdlet : MefCmdlet
+    public class NewCmsMediaLibraryFolderCmdlet : MefCmdlet<NewCmsMediaLibraryFolderBusiness>
     {
         #region Constants
 
@@ -75,12 +75,6 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
         [Parameter(Mandatory = true, Position = 2, ParameterSetName = PROPERTYSET)]
         [Parameter(Mandatory = true, Position = 1, ParameterSetName = OBJECTSET)]
         public string Folder { get; set; }
-
-        /// <summary>
-        ///  Gets or sets the Business Layer for this library.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public NewCmsMediaLibraryFolderBusiness BusinessLayer { get; set; }
 
         #endregion
 

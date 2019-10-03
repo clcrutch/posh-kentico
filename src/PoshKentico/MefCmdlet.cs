@@ -27,8 +27,19 @@ namespace PoshKentico
     /// <summary>
     /// Base class for MEF cmdlets which automatically fullfill their own dependencies.
     /// </summary>
-    public abstract class MefCmdlet : PSCmdlet, ICmdlet
+    /// <typeparam name="TBusinessLayer">The type for the business layer.</typeparam>
+    public abstract class MefCmdlet<TBusinessLayer> : PSCmdlet, ICmdlet
     {
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the Business layer for this cmdlet. Populated by MEF.
+        /// </summary>
+        [Import]
+        public TBusinessLayer BusinessLayer { get; set; }
+
+        #endregion
+
         #region Methods
 
         /// <inheritdoc />

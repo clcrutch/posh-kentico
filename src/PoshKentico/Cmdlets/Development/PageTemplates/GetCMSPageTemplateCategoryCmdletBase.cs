@@ -33,7 +33,7 @@ namespace PoshKentico.Cmdlets.Development.PageTemplates
     /// Base class for cmdlets that need to Get a list of <see cref="PageTemplateCategoryInfo"/>.
     /// </summary>
     [ExcludeFromCodeCoverage]
-    public class GetCMSPageTemplateCategoryCmdletBase : MefCmdlet
+    public class GetCMSPageTemplateCategoryCmdletBase : MefCmdlet<GetCMSPageTemplateCategoryBusiness>
     {
         #region Constants
 
@@ -91,12 +91,6 @@ namespace PoshKentico.Cmdlets.Development.PageTemplates
         /// </summary>
         [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = PAGETEMPLATE)]
         public PageTemplateInfo PageTemplate { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Business layer for this page template. Populated by MEF.
-        /// </summary>
-        [Import]
-        public GetCMSPageTemplateCategoryBusiness BusinessLayer { get; set; }
 
         #endregion
 

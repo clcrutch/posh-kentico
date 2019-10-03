@@ -53,7 +53,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     [Cmdlet(VerbsCommon.New, "CMSWebPart", DefaultParameterSetName = PATH)]
     [OutputType(typeof(WebPartInfo[]))]
     [Alias("nwp")]
-    public class NewCMSWebPartCmdlet : MefCmdlet
+    public class NewCMSWebPartCmdlet : MefCmdlet<NewCMSWebPartBusiness>
     {
         #region Constants
         private const string PATH = "Path";
@@ -101,12 +101,6 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = CATEGORY)]
         [Alias("Category", "Parent")]
         public WebPartCategoryInfo WebPartCategory { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Business layer for this web part. Populated by MEF.
-        /// </summary>
-        [Import]
-        public NewCMSWebPartBusiness BusinessLayer { get; set; }
 
         #endregion
 

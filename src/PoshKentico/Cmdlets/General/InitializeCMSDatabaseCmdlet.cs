@@ -34,18 +34,8 @@ namespace PoshKentico.Cmdlets.General
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsData.Initialize, "CMSDatabase")]
     [Alias("initdb")]
-    public class InitializeCMSDatabaseCmdlet : MefCmdlet
+    public class InitializeCMSDatabaseCmdlet : MefCmdlet<InitializeCMSDatabaseBusiness>
     {
-        #region Properties
-
-        /// <summary>
-        /// Gets or sets the Business layer for this web part. Populated by MEF.
-        /// </summary>
-        [Import]
-        public InitializeCMSDatabaseBusiness BusinessLayer { get; set; }
-
-        #endregion
-
         #region Methods
 
         /// <inheritdoc />

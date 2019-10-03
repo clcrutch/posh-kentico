@@ -49,7 +49,7 @@ namespace PoshKentico.Cmdlets.General
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsData.Initialize, "CMSApplication", DefaultParameterSetName = NONE)]
     [Alias("inapp")]
-    public class InitializeCMSApplicationCmdlet : MefCmdlet
+    public class InitializeCMSApplicationCmdlet : MefCmdlet<InitializeCMSApplicationBusiness>
     {
         #region Constants
 
@@ -101,12 +101,6 @@ namespace PoshKentico.Cmdlets.General
         [Parameter(Mandatory = true, Position = 1, ParameterSetName = CONNECTIONSTRING)]
         [Alias("KenticoRoot")]
         public string WebRoot { get; set; }
-
-        /// <summary>
-        /// Gets or sets a reference to the business layer for this cmdlet.  Sett by MEF.
-        /// </summary>
-        [Import]
-        public InitializeCMSApplicationBusiness BusinessLayer { get; set; }
 
         #endregion
 

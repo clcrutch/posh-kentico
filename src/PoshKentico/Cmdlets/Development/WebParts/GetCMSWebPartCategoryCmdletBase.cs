@@ -32,7 +32,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     /// Base class for cmdlets that need to Get a list of <see cref="WebPartCategoryInfo"/>.
     /// </summary>
     [ExcludeFromCodeCoverage]
-    public class GetCMSWebPartCategoryCmdletBase : MefCmdlet
+    public class GetCMSWebPartCategoryCmdletBase : MefCmdlet<GetCMSWebPartCategoryBusiness>
     {
         #region Constants
 
@@ -90,12 +90,6 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         /// </summary>
         [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = WEBPART)]
         public WebPartInfo WebPart { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Business layer for this web part. Populated by MEF.
-        /// </summary>
-        [Import]
-        public GetCMSWebPartCategoryBusiness BusinessLayer { get; set; }
 
         #endregion
 

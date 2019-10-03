@@ -43,7 +43,7 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
     [Cmdlet(VerbsCommon.Set, "CMSMediaLibraryFile")]
     [OutputType(typeof(MediaFileInfo))]
     [Alias("smlfil")]
-    public class SetCmsMediaLibraryFileCmdlet : MefCmdlet
+    public class SetCmsMediaLibraryFileCmdlet : MefCmdlet<SetCmsMediaLibraryFileBusiness>
     {
         #region Constants
 
@@ -64,12 +64,6 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
         /// </summary>
         [Parameter(Mandatory = true, ValueFromPipeline = true)]
         public MediaFileInfo MediaFile { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Business layer for this media library file. Populated by MEF.
-        /// </summary>
-        [Import]
-        public SetCmsMediaLibraryFileBusiness BusinessLayer { get; set; }
 
         #endregion
 

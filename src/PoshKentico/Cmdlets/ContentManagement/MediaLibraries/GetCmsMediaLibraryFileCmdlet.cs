@@ -64,7 +64,7 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
     [Cmdlet(VerbsCommon.Get, "CMSMediaLibraryFile", DefaultParameterSetName = NONE)]
     [OutputType(typeof(MediaFileInfo[]))]
     [Alias("gmlfil")]
-    public class GetCmsMediaLibraryFileCmdlet : MefCmdlet
+    public class GetCmsMediaLibraryFileCmdlet : MefCmdlet<GetCmsMediaLibraryFileBusiness>
     {
         #region Constants
 
@@ -74,6 +74,7 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
         private const string IDSETNAME = "ID";
 
         #endregion
+
         #region Properties
 
         /// <summary>
@@ -112,12 +113,6 @@ namespace PoshKentico.Cmdlets.ContentManagement.MediaLibraries
         /// </summary>
         [Parameter(Mandatory = true, Position = 0, ParameterSetName = IDSETNAME)]
         public int[] ID { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Business layer for this media library service. Populated by MEF.
-        /// </summary>
-        [Import]
-        public GetCmsMediaLibraryFileBusiness BusinessLayer { get; set; }
 
         #endregion
 

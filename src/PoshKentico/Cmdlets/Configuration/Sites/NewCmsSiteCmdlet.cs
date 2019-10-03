@@ -42,7 +42,7 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
     [Cmdlet(VerbsCommon.New, "CMSSite")]
     [OutputType(typeof(SiteInfo[]), ParameterSetName = new string[] { PASSTHRU })]
     [Alias("nsite")]
-    public class NewCmsSiteCmdlet : MefCmdlet
+    public class NewCmsSiteCmdlet : MefCmdlet<NewCmsSiteBusiness>
     {
         #region Constants
 
@@ -83,12 +83,6 @@ namespace PoshKentico.Cmdlets.Configuration.Sites
         /// </summary>
         [Parameter(Mandatory = false, ParameterSetName = PASSTHRU)]
         public SwitchParameter PassThru { get; set; }
-
-        /// <summary>
-        ///  Gets or sets the Business Layer for this site.  Populated by MEF.
-        /// </summary>
-        [Import]
-        public NewCmsSiteBusiness BusinessLayer { get; set; }
 
         #endregion
 

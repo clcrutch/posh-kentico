@@ -44,7 +44,7 @@ namespace PoshKentico.Cmdlets.Development.PageTemplates
     [Cmdlet(VerbsCommon.Set, "CMSPageTemplate")]
     [OutputType(typeof(PageTemplateInfo[]), ParameterSetName = new string[] { PASSTHRU })]
     [Alias("swp")]
-    public class SetCMSPageTemplateCmdlet : MefCmdlet
+    public class SetCMSPageTemplateCmdlet : MefCmdlet<SetCMSPageTemplateBusiness>
     {
         #region Constants
 
@@ -66,12 +66,6 @@ namespace PoshKentico.Cmdlets.Development.PageTemplates
         [Parameter(Mandatory = true, ValueFromPipeline = true, Position = 0)]
         [Alias("Template")]
         public PageTemplateInfo PageTemplate { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Business layer for this page template. Populated by MEF.
-        /// </summary>
-        [Import]
-        public SetCMSPageTemplateBusiness BusinessLayer { get; set; }
 
         #endregion
 

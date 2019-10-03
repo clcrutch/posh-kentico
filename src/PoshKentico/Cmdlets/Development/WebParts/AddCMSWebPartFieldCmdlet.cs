@@ -42,7 +42,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     [Cmdlet(VerbsCommon.Add, "CMSWebPartField")]
     [OutputType(typeof(FormInfo))]
     [Alias("awpf")]
-    public class AddCMSWebPartFieldCmdlet : MefCmdlet
+    public class AddCMSWebPartFieldCmdlet : MefCmdlet<AddCMSWebPartFieldBusiness>
     {
         #region Properties
 
@@ -94,12 +94,6 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         /// </summary>
         [Parameter(ValueFromPipeline = true, Mandatory = true)]
         public WebPartInfo WebPart { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Business layer for this web part. Populated by MEF.
-        /// </summary>
-        [Import]
-        public AddCMSWebPartFieldBusiness BusinessLayer { get; set; }
 
         #endregion
 

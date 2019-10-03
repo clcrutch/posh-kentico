@@ -45,7 +45,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     [Cmdlet(VerbsCommon.Get, "CMSWebPartField", DefaultParameterSetName = NONAME)]
     [OutputType(typeof(FormFieldInfo[]))]
     [Alias("gwp")]
-    public class GetCMSWebPartFieldCmdlet : MefCmdlet
+    public class GetCMSWebPartFieldCmdlet : MefCmdlet<GetCMSWebPartFieldBusiness>
     {
         #region Constants
 
@@ -76,12 +76,6 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         [Parameter(ValueFromPipeline = true, Mandatory = true, ParameterSetName = NONAME)]
         [Parameter(ValueFromPipeline = true, Mandatory = true, ParameterSetName = NAME)]
         public WebPartInfo WebPart { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Business layer for this web part. Populated by MEF.
-        /// </summary>
-        [Import]
-        public GetCMSWebPartFieldBusiness BusinessLayer { get; set; }
 
         #endregion
 
