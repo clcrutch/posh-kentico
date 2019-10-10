@@ -23,6 +23,7 @@ using Castle.DynamicProxy;
 using CMS.FormEngine;
 using CMS.PortalEngine;
 using ImpromptuInterface;
+using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.Development.WebParts;
 
 namespace PoshKentico.Core.Providers.Development.WebParts
@@ -43,12 +44,12 @@ namespace PoshKentico.Core.Providers.Development.WebParts
         #region Properties
 
         /// <inheritdoc />
-        public IEnumerable<IWebPart> WebParts => (from wp in WebPartInfoProvider.GetWebParts()
-                                                  select Impromptu.ActLike<IWebPart>(wp as WebPartInfo)).ToArray();
+        public IEnumerable<IControl<WebPartInfo>> Controls => (from wp in WebPartInfoProvider.GetWebParts()
+                                                               select new WebPart(wp)).ToArray();
 
         /// <inheritdoc />
-        public IEnumerable<IWebPartCategory> WebPartCategories => (from c in WebPartCategoryInfoProvider.GetCategories()
-                                                                   select Impromptu.ActLike<IWebPartCategory>(c as WebPartCategoryInfo)).ToArray();
+        public IEnumerable<IControlCategory<WebPartCategoryInfo>> WebPartCategories => (from c in WebPartCategoryInfoProvider.GetCategories()
+                                                                                        select new WebPartCategory(c)).ToArray();
 
         #endregion
 
@@ -57,7 +58,7 @@ namespace PoshKentico.Core.Providers.Development.WebParts
         /// <inheritdoc />
         public IWebPartField AddField(IWebPartField field, IWebPart webPart)
         {
-            var formInfo = new FormInfo(webPart.WebPartProperties);
+            var formInfo = new FormInfo(webPart.Properties);
             var fieldInfo = new FormFieldInfo
             {
                 AllowEmpty = field.AllowEmpty,
@@ -69,7 +70,7 @@ namespace PoshKentico.Core.Providers.Development.WebParts
             };
             formInfo.AddFormItem(fieldInfo);
 
-            webPart.WebPartProperties = formInfo.GetXmlDefinition();
+            webPart.Properties = formInfo.GetXmlDefinition();
 
             this.SaveFormUpdates(webPart);
 
@@ -77,19 +78,19 @@ namespace PoshKentico.Core.Providers.Development.WebParts
         }
 
         /// <inheritdoc />
-        public IWebPartCategory Create(IWebPartCategory webPartCategory)
+        public IControlCategory<WebPartCategoryInfo> Create(IControlCategory<WebPartCategoryInfo> webPartCategory)
         {
             var category = new WebPartCategoryInfo
             {
-                CategoryDisplayName = webPartCategory.CategoryDisplayName,
-                CategoryName = webPartCategory.CategoryName,
-                CategoryImagePath = webPartCategory.CategoryImagePath,
-                CategoryParentID = webPartCategory.CategoryParentID,
+                CategoryDisplayName = webPartCategory.DisplayName,
+                CategoryName = webPartCategory.Name,
+                CategoryImagePath = webPartCategory.ImagePath,
+                CategoryParentID = webPartCategory.ParentID,
             };
 
             WebPartCategoryInfoProvider.SetWebPartCategoryInfo(category);
 
-            return category.ActLike<IWebPartCategory>();
+            return new WebPartCategory(category);
         }
 
         /// <inheritdoc />
@@ -97,10 +98,10 @@ namespace PoshKentico.Core.Providers.Development.WebParts
         {
             var webPartInfo = new WebPartInfo
             {
-                WebPartCategoryID = webPart.WebPartCategoryID,
-                WebPartFileName = webPart.WebPartFileName,
-                WebPartDisplayName = webPart.WebPartDisplayName,
-                WebPartName = webPart.WebPartName,
+                WebPartCategoryID = webPart.CategoryID,
+                WebPartFileName = webPart.FileName,
+                WebPartDisplayName = webPart.DisplayName,
+                WebPartName = webPart.Name,
                 WebPartProperties = FormInfo.GetEmptyFormDocument().OuterXml,
             };
 
@@ -110,59 +111,59 @@ namespace PoshKentico.Core.Providers.Development.WebParts
         }
 
         /// <inheritdoc />
-        public void Delete(IWebPartCategory webPartCategory) =>
-            WebPartCategoryInfoProvider.DeleteCategoryInfo(webPartCategory.CategoryID);
+        public void Delete(IControlCategory<WebPartCategoryInfo> webPartCategory) =>
+            WebPartCategoryInfoProvider.DeleteCategoryInfo(webPartCategory.ID);
 
         /// <inheritdoc />
-        public void Delete(IWebPart webPart) =>
-            WebPartInfoProvider.DeleteWebPartInfo(webPart.WebPartID);
+        public void Delete(IControl<WebPartInfo> control) =>
+            WebPartInfoProvider.DeleteWebPartInfo(control.ID);
 
         /// <inheritdoc />
-        public IEnumerable<IWebPartCategory> GetWebPartCategories(IWebPartCategory parentWebPartCategory) =>
+        public IEnumerable<IControlCategory<WebPartCategoryInfo>> GetWebPartCategories(IControlCategory<WebPartCategoryInfo> parentWebPartCategory) =>
             (from c in this.WebPartCategories
-             where c.CategoryParentID == parentWebPartCategory.CategoryID
+             where c.ParentID == parentWebPartCategory.ID
              select c).ToArray();
 
         /// <inheritdoc />
-        public IWebPartCategory GetWebPartCategory(int id) =>
-            (WebPartCategoryInfoProvider.GetWebPartCategoryInfoById(id) as WebPartCategoryInfo)?.ActLike<IWebPartCategory>();
+        public IControlCategory<WebPartCategoryInfo> GetWebPartCategory(int id) =>
+            new WebPartCategory(WebPartCategoryInfoProvider.GetWebPartCategoryInfoById(id));
 
         /// <inheritdoc />
-        public IEnumerable<IWebPartField> GetWebPartFields(IWebPart webPart)
-            => (from f in new FormInfo(webPart.WebPartProperties).GetFields<FormFieldInfo>()
+        public IEnumerable<IWebPartField> GetWebPartFields(IWebPart webPart) =>
+               (from f in new FormInfo(webPart.Properties).GetFields<FormFieldInfo>()
                 select this.AppendWebPart(f, webPart).ActLike<IWebPartField>()).ToArray();
 
         /// <inheritdoc />
-        public IEnumerable<IWebPart> GetWebParts(IWebPartCategory webPartCategory) =>
-            (from wp in this.WebParts
-             where wp.WebPartCategoryID == webPartCategory.CategoryID
+        public IEnumerable<IControl<WebPartInfo>> GetWebParts(IControlCategory<WebPartCategoryInfo> webPartCategory) =>
+            (from wp in this.Controls
+             where wp.CategoryID == webPartCategory.ID
              select wp).ToArray();
 
         /// <inheritdoc />
         public void RemoveField(IWebPartField field)
         {
-            var formInfo = new FormInfo(field.WebPart.WebPartProperties);
+            var formInfo = new FormInfo(field.WebPart.Properties);
             formInfo.RemoveFields(x => x.Name == field.Name);
 
-            field.WebPart.WebPartProperties = formInfo.GetXmlDefinition();
+            field.WebPart.Properties = formInfo.GetXmlDefinition();
 
             this.SaveFormUpdates(field.WebPart);
         }
 
         /// <inheritdoc />
-        public void Update(IWebPartCategory webPartCategory)
+        public void Update(IControlCategory<WebPartCategoryInfo> webPartCategory)
         {
-            var category = WebPartCategoryInfoProvider.GetWebPartCategoryInfoById(webPartCategory.CategoryID);
+            var category = WebPartCategoryInfoProvider.GetWebPartCategoryInfoById(webPartCategory.ID);
 
             if (category == null)
             {
                 return;
             }
 
-            category.CategoryDisplayName = webPartCategory.CategoryDisplayName;
-            category.CategoryName = webPartCategory.CategoryName;
-            category.CategoryImagePath = webPartCategory.CategoryImagePath;
-            category.CategoryParentID = webPartCategory.CategoryParentID;
+            category.CategoryDisplayName = webPartCategory.DisplayName;
+            category.CategoryName = webPartCategory.Name;
+            category.CategoryImagePath = webPartCategory.ImagePath;
+            category.CategoryParentID = webPartCategory.ParentID;
 
             WebPartCategoryInfoProvider.SetWebPartCategoryInfo(category);
         }
@@ -170,18 +171,18 @@ namespace PoshKentico.Core.Providers.Development.WebParts
         /// <inheritdoc />
         public void Update(IWebPart webPart)
         {
-            var webPartInfo = WebPartInfoProvider.GetWebPartInfo(webPart.WebPartID);
+            var webPartInfo = WebPartInfoProvider.GetWebPartInfo(webPart.ID);
 
             if (webPartInfo == null)
             {
                 return;
             }
 
-            webPartInfo.WebPartCategoryID = webPart.WebPartCategoryID;
-            webPartInfo.WebPartDisplayName = webPart.WebPartDisplayName;
-            webPartInfo.WebPartFileName = webPart.WebPartFileName;
-            webPartInfo.WebPartName = webPart.WebPartName;
-            webPartInfo.WebPartProperties = webPart.WebPartProperties;
+            webPartInfo.WebPartCategoryID = webPart.ID;
+            webPartInfo.WebPartDisplayName = webPart.DisplayName;
+            webPartInfo.WebPartFileName = webPart.FileName;
+            webPartInfo.WebPartName = webPart.Name;
+            webPartInfo.WebPartProperties = webPart.Properties;
 
             WebPartInfoProvider.SetWebPartInfo(webPartInfo);
         }
@@ -189,7 +190,7 @@ namespace PoshKentico.Core.Providers.Development.WebParts
         /// <inheritdoc />
         public void Update(IWebPartField field)
         {
-            var formInfo = new FormInfo(field.WebPart.WebPartProperties);
+            var formInfo = new FormInfo(field.WebPart.Properties);
             var fieldInfo = formInfo.GetFormField(field.Name);
 
             fieldInfo.AllowEmpty = field.AllowEmpty;
@@ -200,7 +201,7 @@ namespace PoshKentico.Core.Providers.Development.WebParts
 
             formInfo.UpdateFormField(field.Name, fieldInfo);
 
-            field.WebPart.WebPartProperties = formInfo.GetXmlDefinition();
+            field.WebPart.Properties = formInfo.GetXmlDefinition();
 
             this.SaveFormUpdates(field.WebPart);
         }
@@ -220,14 +221,14 @@ namespace PoshKentico.Core.Providers.Development.WebParts
 
         private void SaveFormUpdates(IWebPart webPart)
         {
-            var webPartInfo = WebPartInfoProvider.GetWebPartInfo(webPart.WebPartID);
+            var webPartInfo = WebPartInfoProvider.GetWebPartInfo(webPart.ID);
 
             if (webPartInfo == null)
             {
                 return;
             }
 
-            webPartInfo.WebPartProperties = webPart.WebPartProperties;
+            webPartInfo.WebPartProperties = webPart.Properties;
 
             WebPartInfoProvider.SetWebPartInfo(webPartInfo);
         }

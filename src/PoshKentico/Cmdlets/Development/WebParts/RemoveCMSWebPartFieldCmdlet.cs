@@ -21,6 +21,7 @@ using System.Management.Automation;
 using CMS.FormEngine;
 using ImpromptuInterface;
 using PoshKentico.Business.Development.WebParts;
+using PoshKentico.Core.Providers.Development.WebParts;
 using PoshKentico.Core.Services.Development.WebParts;
 
 using AliasAttribute = System.Management.Automation.AliasAttribute;
@@ -92,7 +93,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         {
             if (this.WebPart != null)
             {
-                field.WebPart = this.WebPart.ActLike<IWebPart>();
+                field.WebPart = new WebPart(this.WebPart);
             }
 
             this.RemoveBusinessLayer.RemoveField(field);

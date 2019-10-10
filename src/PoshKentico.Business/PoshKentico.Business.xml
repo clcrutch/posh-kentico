@@ -1873,7 +1873,7 @@
         </member>
         <member name="M:PoshKentico.Business.Development.WebParts.GetCMSWebPartBusiness.GetWebPart(System.String)">
             <summary>
-            Gets the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> at the specified path.
+            Gets the <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/> at the specified path.
             </summary>
             <param name="path">The path to look at for the desired web part.</param>
             <returns>The webpart found at the desired path.</returns>
@@ -1887,30 +1887,30 @@
         </member>
         <member name="M:PoshKentico.Business.Development.WebParts.GetCMSWebPartBusiness.GetWebParts">
             <summary>
-            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/>.
             </summary>
-            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.</returns>
+            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/>.</returns>
         </member>
         <member name="M:PoshKentico.Business.Development.WebParts.GetCMSWebPartBusiness.GetWebParts(System.String,System.Boolean)">
             <summary>
-            Gets the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> that match the provided <paramref name="matchString"/>.
+            Gets the <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/> that match the provided <paramref name="matchString"/>.
             </summary>
             <param name="matchString">The string which to match the webparts to.</param>
             <param name="isRegex">Indicates whether <paramref name="matchString"/> is a regular expression.</param>
-            <returns>A list of <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> matching the <paramref name="matchString"/>.</returns>
+            <returns>A list of <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/> matching the <paramref name="matchString"/>.</returns>
         </member>
         <member name="M:PoshKentico.Business.Development.WebParts.GetCMSWebPartBusiness.GetWebPartsByCategories(System.String,System.Boolean)">
-            <summary>Gets a list of <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> that are within the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> matching the <paramref name="matchString"/>.</summary>
+            <summary>Gets a list of <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/> that are within the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> matching the <paramref name="matchString"/>.</summary>
             <param name="matchString">The string which to match the webpart categories to.</param>
             <param name="isRegex">Indicates whether <paramref name="matchString"/> is a regular expression.</param>
-            <returns>A list of <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> which are contained by the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> matching the <paramref name="matchString"/>.</returns>
+            <returns>A list of <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/> which are contained by the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> matching the <paramref name="matchString"/>.</returns>
         </member>
-        <member name="M:PoshKentico.Business.Development.WebParts.GetCMSWebPartBusiness.GetWebPartsByCategory(PoshKentico.Core.Services.Development.WebParts.IWebPartCategory)">
+        <member name="M:PoshKentico.Business.Development.WebParts.GetCMSWebPartBusiness.GetWebPartsByCategory(PoshKentico.Core.Services.Development.IControlCategory{CMS.PortalEngine.WebPartCategoryInfo})">
             <summary>
-            Gets a list of <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> that are within the <paramref name="webPartCategory"/>.
+            Gets a list of <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/> that are within the <paramref name="controlCategory"/>.
             </summary>
-            <param name="webPartCategory">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> that contains the desired <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.</param>
-            <returns>A list of <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> that are within the <paramref name="webPartCategory"/>.</returns>
+            <param name="controlCategory">The <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> that contains the desired <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/>.</param>
+            <returns>A list of <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/> that are within the <paramref name="controlCategory"/>.</returns>
         </member>
         <member name="T:PoshKentico.Business.Development.WebParts.GetCMSWebPartCategoryBusiness">
             <summary>
@@ -1919,34 +1919,34 @@
         </member>
         <member name="M:PoshKentico.Business.Development.WebParts.GetCMSWebPartCategoryBusiness.GetWebPartCategories">
             <summary>
-            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/>.
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/>.
             </summary>
-            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/>.</returns>
+            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/>.</returns>
         </member>
         <member name="M:PoshKentico.Business.Development.WebParts.GetCMSWebPartCategoryBusiness.GetWebPartCategories(System.String,System.Boolean,System.Boolean)">
             <summary>
-            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> which match the specified criteria.
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> which match the specified criteria.
             </summary>
             <param name="matchString">The string which to match the webpart categories to.</param>
             <param name="isRegex">Indicates whether <paramref name="matchString"/> is a regular expression.</param>
             <param name="recurse">Indicates whether webpart categories should be returned recursively.</param>
-            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> which match the specified criteria.</returns>
+            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> which match the specified criteria.</returns>
         </member>
         <member name="M:PoshKentico.Business.Development.WebParts.GetCMSWebPartCategoryBusiness.GetWebPartCategories(System.Int32[],System.Boolean)">
             <summary>
-            Gets a list of the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> which match the supplied IDs.
+            Gets a list of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> which match the supplied IDs.
             </summary>
-            <param name="ids">The IDs of the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> to return.</param>
+            <param name="ids">The IDs of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> to return.</param>
             <param name="recurse">Indicates whether webpart categories should be returned recursively.</param>
-            <returns>A list of the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> which match the supplied IDs.</returns>
+            <returns>A list of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> which match the supplied IDs.</returns>
         </member>
-        <member name="M:PoshKentico.Business.Development.WebParts.GetCMSWebPartCategoryBusiness.GetWebPartCategories(PoshKentico.Core.Services.Development.WebParts.IWebPartCategory,System.Boolean)">
+        <member name="M:PoshKentico.Business.Development.WebParts.GetCMSWebPartCategoryBusiness.GetWebPartCategories(PoshKentico.Core.Services.Development.IControlCategory{CMS.PortalEngine.WebPartCategoryInfo},System.Boolean)">
             <summary>
-            Gets a list of the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> which are children of the <paramref name="parentWebPartCategory"/>.
+            Gets a list of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> which are children of the <paramref name="parentWebPartCategory"/>.
             </summary>
-            <param name="parentWebPartCategory">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> which is parent to the categories to find.</param>
+            <param name="parentWebPartCategory">The <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> which is parent to the categories to find.</param>
             <param name="recurse">Indicates whether webpart categories should be returned recursively.</param>
-            <returns>A list of the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> which are children to the supplied <paramref name="parentWebPartCategory"/>.</returns>
+            <returns>A list of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> which are children to the supplied <paramref name="parentWebPartCategory"/>.</returns>
         </member>
         <member name="M:PoshKentico.Business.Development.WebParts.GetCMSWebPartCategoryBusiness.GetWebPartCategories(System.String,System.Boolean)">
             <summary>
@@ -1956,11 +1956,11 @@
             <param name="recurse">Indicates if the web part category children should be returned as well.</param>
             <returns>A list of all of the web part categories found at the specified path.</returns>
         </member>
-        <member name="M:PoshKentico.Business.Development.WebParts.GetCMSWebPartCategoryBusiness.GetWebPartCategory(PoshKentico.Core.Services.Development.WebParts.IWebPart)">
+        <member name="M:PoshKentico.Business.Development.WebParts.GetCMSWebPartCategoryBusiness.GetWebPartCategory(PoshKentico.Core.Services.Development.IControl{CMS.PortalEngine.WebPartInfo})">
             <summary>
             Gets the web part category for the current web part.
             </summary>
-            <param name="webpart">The webpart to get the category for.</param>
+            <param name="control">The webpart to get the category for.</param>
             <returns>The web part category.</returns>
         </member>
         <member name="T:PoshKentico.Business.Development.WebParts.GetCMSWebPartFieldBusiness">
@@ -1998,14 +1998,14 @@
             <param name="displayName">The display name for the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.</param>
             <returns>The newly created <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.</returns>
         </member>
-        <member name="M:PoshKentico.Business.Development.WebParts.NewCMSWebPartBusiness.CreateWebPart(System.String,System.String,System.String,PoshKentico.Core.Services.Development.WebParts.IWebPartCategory)">
+        <member name="M:PoshKentico.Business.Development.WebParts.NewCMSWebPartBusiness.CreateWebPart(System.String,System.String,System.String,PoshKentico.Core.Services.Development.IControlCategory{CMS.PortalEngine.WebPartCategoryInfo})">
             <summary>
-            Creates a <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> with the specified name under the specified <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/>.
+            Creates a <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> with the specified name under the specified <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/>.
             </summary>
             <param name="name">The name for the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.</param>
             <param name="fileName">The file name for the underlying class file.</param>
             <param name="displayName">The display name for the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.</param>
-            <param name="webPartCategory">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> to create the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> under.</param>
+            <param name="webPartCategory">The <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> to create the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> under.</param>
             <returns>The newly created <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.</returns>
         </member>
         <member name="T:PoshKentico.Business.Development.WebParts.NewCMSWebPartCategoryBusiness">
@@ -2027,20 +2027,20 @@
             Business layer of the Remove-CMSWebPart cmdlet.
             </summary>
         </member>
-        <member name="M:PoshKentico.Business.Development.WebParts.RemoveCMSWebPartBusiness.RemoveWebPart(PoshKentico.Core.Services.Development.WebParts.IWebPart)">
+        <member name="M:PoshKentico.Business.Development.WebParts.RemoveCMSWebPartBusiness.RemoveWebPart(PoshKentico.Core.Services.Development.IControl{CMS.PortalEngine.WebPartInfo})">
             <summary>
-            Removes the supplied <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> from the system.
+            Removes the supplied <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/> from the system.
             </summary>
-            <param name="webPart">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> to remove.</param>
+            <param name="control">The <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/> to remove.</param>
         </member>
         <member name="T:PoshKentico.Business.Development.WebParts.RemoveCMSWebPartCategoryBusiness">
             <summary>
             Business layer for the Remove-CMSWebPartCategory cmdlet.
             </summary>
         </member>
-        <member name="M:PoshKentico.Business.Development.WebParts.RemoveCMSWebPartCategoryBusiness.RemoveWebPartCategory(PoshKentico.Core.Services.Development.WebParts.IWebPartCategory,System.Boolean)">
+        <member name="M:PoshKentico.Business.Development.WebParts.RemoveCMSWebPartCategoryBusiness.RemoveWebPartCategory(PoshKentico.Core.Services.Development.IControlCategory{CMS.PortalEngine.WebPartCategoryInfo},System.Boolean)">
             <summary>
-            Deletes the specified <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/>.  Throws exceptions if there are children.
+            Deletes the specified <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/>.  Throws exceptions if there are children.
             </summary>
             <param name="webPartCategory">The webpart category to delete.</param>
             <param name="recurse">Indicates whether webpart categories and web parts should be removed recursively.</param>
@@ -2072,11 +2072,11 @@
             Business layer for the Set-CMSWebPartCategory cmdlet.
             </summary>
         </member>
-        <member name="M:PoshKentico.Business.Development.WebParts.SetCMSWebPartCategoryBusiness.Set(PoshKentico.Core.Services.Development.WebParts.IWebPartCategory)">
+        <member name="M:PoshKentico.Business.Development.WebParts.SetCMSWebPartCategoryBusiness.Set(PoshKentico.Core.Services.Development.IControlCategory{CMS.PortalEngine.WebPartCategoryInfo})">
             <summary>
-            Sets the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> within Kentico.
+            Sets the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> within Kentico.
             </summary>
-            <param name="webPartCategory">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> to set.</param>
+            <param name="webPartCategory">The <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> to set.</param>
         </member>
         <member name="T:PoshKentico.Business.Development.WebParts.SetCMSWebPartFieldBusiness">
             <summary>
@@ -2107,10 +2107,10 @@
         </member>
         <member name="M:PoshKentico.Business.Development.WebParts.WebPartBusinessBase.GetCategoryFromPath(System.String)">
             <summary>
-            Gets the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> which represents the current path.
+            Gets the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> which represents the current path.
             </summary>
-            <param name="path">The path to look for the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/>.</param>
-            <returns>Returns the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> that reprsents the supplied path.</returns>
+            <param name="path">The path to look for the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/>.</param>
+            <returns>Returns the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> that reprsents the supplied path.</returns>
         </member>
         <member name="T:PoshKentico.Business.General.GetCMSApplicationVersionBusiness">
             <summary>

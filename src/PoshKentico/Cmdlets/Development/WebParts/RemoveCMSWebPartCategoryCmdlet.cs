@@ -21,6 +21,8 @@ using System.Management.Automation;
 using CMS.PortalEngine;
 using ImpromptuInterface;
 using PoshKentico.Business.Development.WebParts;
+using PoshKentico.Core.Providers.Development.WebParts;
+using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.Development.WebParts;
 using AliasAttribute = System.Management.Automation.AliasAttribute;
 
@@ -95,7 +97,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         {
             if (this.ParameterSetName == WEBPARTCATEGORY)
             {
-                this.ActOnObject(this.WebPartCategory.ActLike<IWebPartCategory>());
+                this.ActOnObject(new WebPartCategory(this.WebPartCategory));
             }
             else
             {
@@ -104,7 +106,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         }
 
         /// <inheritdoc />
-        protected override void ActOnObject(IWebPartCategory webPartCategory)
+        protected override void ActOnObject(IControlCategory<WebPartCategoryInfo> webPartCategory)
         {
             if (webPartCategory == null)
             {

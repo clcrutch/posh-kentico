@@ -34,7 +34,7 @@ namespace PoshKentico.Business.Development.WebParts
         /// <param name="field">The <see cref="IWebPartField"/> to remove.</param>
         public void RemoveField(IWebPartField field)
         {
-            if (this.OutputService.ShouldProcess(field.Name, $"Remove the field from web part named '{field.WebPart.WebPartName}'."))
+            if (this.OutputService.ShouldProcess(field.Name, $"Remove the field from web part named '{field.WebPart.Name}'."))
             {
                 this.WebPartService.RemoveField(field);
             }

@@ -15,8 +15,11 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System;
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
+using CMS.PortalEngine;
+using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.Development.WebParts;
 
 namespace PoshKentico.Business.Development.WebParts
@@ -52,14 +55,14 @@ namespace PoshKentico.Business.Development.WebParts
         }
 
         /// <summary>
-        /// Creates a <see cref="IWebPart"/> with the specified name under the specified <see cref="IWebPartCategory"/>.
+        /// Creates a <see cref="IWebPart"/> with the specified name under the specified <see cref="IControlCategory{T}"/>.
         /// </summary>
         /// <param name="name">The name for the <see cref="IWebPart"/>.</param>
         /// <param name="fileName">The file name for the underlying class file.</param>
         /// <param name="displayName">The display name for the <see cref="IWebPart"/>.</param>
-        /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> to create the <see cref="IWebPart"/> under.</param>
+        /// <param name="webPartCategory">The <see cref="IControlCategory{T}"/> to create the <see cref="IWebPart"/> under.</param>
         /// <returns>The newly created <see cref="IWebPart"/>.</returns>
-        public virtual IWebPart CreateWebPart(string name, string fileName, string displayName, IWebPartCategory webPartCategory)
+        public virtual IWebPart CreateWebPart(string name, string fileName, string displayName, IControlCategory<WebPartCategoryInfo> webPartCategory)
         {
             if (string.IsNullOrEmpty(displayName))
             {
@@ -68,11 +71,11 @@ namespace PoshKentico.Business.Development.WebParts
 
             var data = new WebPart
             {
-                WebPartDisplayName = displayName,
-                WebPartFileName = fileName,
-                WebPartName = name,
+                DisplayName = displayName,
+                FileName = fileName,
+                Name = name,
 
-                WebPartCategoryID = webPartCategory.CategoryID,
+                CategoryID = webPartCategory.ID,
             };
 
             return this.WebPartService.Create(data);
@@ -85,17 +88,19 @@ namespace PoshKentico.Business.Development.WebParts
         [ExcludeFromCodeCoverage]
         private class WebPart : IWebPart
         {
-            public int WebPartCategoryID { get; set; }
+            public string FileName { get; set; }
 
-            public string WebPartDisplayName { get; set; }
+            public string Properties { get; set; }
 
-            public string WebPartFileName { get; set; }
+            public WebPartInfo BackingControl => throw new NotImplementedException();
 
-            public int WebPartID { get; set; }
+            public int CategoryID { get; set; }
 
-            public string WebPartName { get; set; }
+            public string DisplayName { get; set; }
 
-            public string WebPartProperties { get; set; }
+            public int ID { get; set; }
+
+            public string Name { get; set; }
         }
 
         #endregion

@@ -21,6 +21,7 @@ using System.Management.Automation;
 using CMS.PortalEngine;
 using ImpromptuInterface;
 using PoshKentico.Business.Development.WebParts;
+using PoshKentico.Core.Providers.Development.WebParts;
 using PoshKentico.Core.Services.Development.WebParts;
 
 using AliasAttribute = System.Management.Automation.AliasAttribute;
@@ -116,7 +117,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
                     webPart = this.BusinessLayer.CreateWebPart(this.Path, this.FileName, this.DisplayName);
                     break;
                 case CATEGORY:
-                    webPart = this.BusinessLayer.CreateWebPart(this.Name, this.FileName, this.DisplayName, this.WebPartCategory.ActLike<IWebPartCategory>());
+                    webPart = this.BusinessLayer.CreateWebPart(this.Name, this.FileName, this.DisplayName, new WebPartCategory(this.WebPartCategory));
                     break;
             }
 

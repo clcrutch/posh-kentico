@@ -17,6 +17,8 @@
 
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
+using CMS.PortalEngine;
+using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.Development.WebParts;
 
 namespace PoshKentico.Business.Development.WebParts
@@ -36,7 +38,7 @@ namespace PoshKentico.Business.Development.WebParts
         /// <param name="displayName">The display name for the WebPartCategory.</param>
         /// <param name="imagePath">The image path for the new WebPartCategory.</param>
         /// <returns>The newly created WebPartCategory.</returns>
-        public IWebPartCategory CreateWebPartCategory(string path, string displayName, string imagePath)
+        public IControlCategory<WebPartCategoryInfo> CreateWebPartCategory(string path, string displayName, string imagePath)
         {
             var name = path.Substring(path.LastIndexOf('/') + 1);
             var basePath = path.Substring(0, path.LastIndexOf('/'));
@@ -55,13 +57,13 @@ namespace PoshKentico.Business.Development.WebParts
 
             var data = new WebPartCategory
             {
-                CategoryName = name,
-                CategoryPath = path,
-                CategoryDisplayName = displayName,
-                CategoryImagePath = imagePath,
-                CategoryParentID = parent.CategoryID,
+                Name = name,
+                Path = path,
+                DisplayName = displayName,
+                ImagePath = imagePath,
+                ParentID = parent.ID,
 
-                CategoryID = -1,
+                ID = -1,
             };
 
             return this.WebPartService.Create(data);
@@ -72,19 +74,21 @@ namespace PoshKentico.Business.Development.WebParts
         #region Classes
 
         [ExcludeFromCodeCoverage]
-        private class WebPartCategory : IWebPartCategory
+        private class WebPartCategory : IControlCategory<WebPartCategoryInfo>
         {
-            public string CategoryDisplayName { get; set; }
+            public WebPartCategoryInfo BackingControlCategory => throw new System.NotImplementedException();
 
-            public int CategoryID { get; set; }
+            public string DisplayName { get; set; }
 
-            public string CategoryImagePath { get; set; }
+            public int ID { get; set; }
 
-            public string CategoryName { get; set; }
+            public string ImagePath { get; set; }
 
-            public int CategoryParentID { get; set; }
+            public string Name { get; set; }
 
-            public string CategoryPath { get; set; }
+            public int ParentID { get; set; }
+
+            public string Path { get; set; }
         }
 
         #endregion

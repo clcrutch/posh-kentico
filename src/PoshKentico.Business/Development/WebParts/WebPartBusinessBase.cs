@@ -18,6 +18,8 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Linq;
+using CMS.PortalEngine;
+using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.Development.WebParts;
 
 namespace PoshKentico.Business.Development.WebParts
@@ -53,13 +55,13 @@ namespace PoshKentico.Business.Development.WebParts
         #region Methods
 
         /// <summary>
-        /// Gets the <see cref="IWebPartCategory"/> which represents the current path.
+        /// Gets the <see cref="IControlCategory{T}"/> which represents the current path.
         /// </summary>
-        /// <param name="path">The path to look for the <see cref="IWebPartCategory"/>.</param>
-        /// <returns>Returns the <see cref="IWebPartCategory"/> that reprsents the supplied path.</returns>
-        protected IWebPartCategory GetCategoryFromPath(string path) =>
+        /// <param name="path">The path to look for the <see cref="IControlCategory{T}"/>.</param>
+        /// <returns>Returns the <see cref="IControlCategory{T}"/> that reprsents the supplied path.</returns>
+        protected IControlCategory<WebPartCategoryInfo> GetCategoryFromPath(string path) =>
             (from c in this.WebPartService.WebPartCategories
-             where c.CategoryPath.Equals(path, StringComparison.InvariantCultureIgnoreCase)
+             where c.Path.Equals(path, StringComparison.InvariantCultureIgnoreCase)
              select c).Single();
 
         #endregion

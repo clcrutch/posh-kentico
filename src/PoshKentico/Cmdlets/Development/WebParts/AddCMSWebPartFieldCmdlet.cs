@@ -22,6 +22,7 @@ using CMS.FormEngine;
 using CMS.PortalEngine;
 using ImpromptuInterface;
 using PoshKentico.Business.Development.WebParts;
+using PoshKentico.Core.Providers.Development.WebParts;
 using PoshKentico.Core.Services.Development.WebParts;
 
 using AliasAttribute = System.Management.Automation.AliasAttribute;
@@ -110,7 +111,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
             addFieldParameter.Required = this.Required.ToBool();
             addFieldParameter.Size = this.Size;
 
-            var field = this.BusinessLayer.AddField(addFieldParameter, this.WebPart.ActLike<IWebPart>());
+            var field = this.BusinessLayer.AddField(addFieldParameter, new WebPart(this.WebPart));
 
             if (this.PassThru.ToBool())
             {

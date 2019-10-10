@@ -16,13 +16,14 @@
 // </copyright>
 
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 using CMS.FormEngine;
 using CMS.PortalEngine;
 using ImpromptuInterface;
 using PoshKentico.Business.Development.WebParts;
+using PoshKentico.Core.Providers.Development.WebParts;
+using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.Development.WebParts;
 
 using AliasAttribute = System.Management.Automation.AliasAttribute;
@@ -129,27 +130,27 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
-            IEnumerable<IWebPart> webparts = null;
+            IEnumerable<IControl<WebPartInfo>> webparts = null;
 
             switch (this.ParameterSetName)
             {
                 case CATEGORY:
-                    webparts = this.BusinessLayer.GetWebPartsByCategory(this.WebPartCategory.ActLike<IWebPartCategory>());
+                    webparts = this.BusinessLayer.GetWebPartsByCategory(new WebPartCategory(this.WebPartCategory));
                     break;
                 case CATEGORYNAME:
                     webparts = this.BusinessLayer.GetWebPartsByCategories(this.CategoryName, this.RegularExpression.ToBool());
                     break;
                 case FIELD:
-                    webparts = new IWebPart[]
-                    {
-                        this.BusinessLayer.GetWebPart(this.Field.ActLike<IWebPartField>()),
-                    };
+                    //webparts = new IWebPart[]
+                    //{
+                    //    this.BusinessLayer.GetWebPart(this.Field.ActLike<IWebPartField>()),
+                    //};
                     break;
                 case NAME:
                     webparts = this.BusinessLayer.GetWebParts(this.WebPartName, this.RegularExpression.ToBool());
                     break;
                 case PATH:
-                    webparts = new IWebPart[]
+                    webparts = new IControl<WebPartInfo>[]
                     {
                         this.BusinessLayer.GetWebPart(this.WebPartPath),
                     };
@@ -169,10 +170,10 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         /// <summary>
         /// When overridden in a child class, operates on the specified web part.
         /// </summary>
-        /// <param name="webPart">The web part to operate on.</param>
-        protected virtual void ActOnObject(IWebPart webPart)
+        /// <param name="control">The web part to operate on.</param>
+        protected virtual void ActOnObject(IControl<WebPartInfo> control)
         {
-            this.WriteObject(webPart?.UndoActLike());
+            this.WriteObject(control?.BackingControl);
         }
 
         #endregion

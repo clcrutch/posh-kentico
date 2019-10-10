@@ -19,9 +19,9 @@ using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 using CMS.PortalEngine;
-using ImpromptuInterface;
 using PoshKentico.Business.Development.WebParts;
-using PoshKentico.Core.Services.Development.WebParts;
+using PoshKentico.Core.Providers.Development.WebParts;
+using PoshKentico.Core.Services.Development;
 using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.Development.WebParts
@@ -92,7 +92,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         {
             if (this.ParameterSetName == WEBPART)
             {
-                this.ActOnObject(this.WebPart.ActLike<IWebPart>());
+                this.ActOnObject(new WebPart(this.WebPart));
             }
             else
             {
@@ -101,14 +101,14 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         }
 
         /// <inheritdoc />
-        protected override void ActOnObject(IWebPart webPart)
+        protected override void ActOnObject(IControl<WebPartInfo> control)
         {
-            if (webPart == null)
+            if (control == null)
             {
                 return;
             }
 
-            this.RemoveBusinessLayer.RemoveWebPart(webPart);
+            this.RemoveBusinessLayer.RemoveWebPart(control);
         }
 
         #endregion

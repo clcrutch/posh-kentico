@@ -16,6 +16,7 @@
 // </copyright>
 
 using System.Collections.Generic;
+using CMS.PortalEngine;
 
 namespace PoshKentico.Core.Services.Development.WebParts
 {
@@ -27,14 +28,14 @@ namespace PoshKentico.Core.Services.Development.WebParts
         #region Properties
 
         /// <summary>
-        /// Gets a list of all of the <see cref="IWebPart"/> provided by the CMS System.
+        /// Gets a list of all of the <see cref="IControl{T}"/> provided by the CMS System.
         /// </summary>
-        IEnumerable<IWebPart> WebParts { get; }
+        IEnumerable<IControl<WebPartInfo>> Controls { get; }
 
         /// <summary>
-        /// Gets a list of all of the <see cref="IWebPartCategory"/> provided by the CMS System.
+        /// Gets a list of all of the <see cref="IControlCategory{T}"/> provided by the CMS System.
         /// </summary>
-        IEnumerable<IWebPartCategory> WebPartCategories { get; }
+        IEnumerable<IControlCategory<WebPartCategoryInfo>> WebPartCategories { get; }
 
         #endregion
 
@@ -49,11 +50,11 @@ namespace PoshKentico.Core.Services.Development.WebParts
         IWebPartField AddField(IWebPartField field, IWebPart webPart);
 
         /// <summary>
-        /// Creates the <see cref="IWebPartCategory"/>.
+        /// Creates the <see cref="IControlCategory{T}"/>.
         /// </summary>
-        /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> to create.</param>
-        /// <returns>The newly created <see cref="IWebPartCategory"/>.</returns>
-        IWebPartCategory Create(IWebPartCategory webPartCategory);
+        /// <param name="controlCategory">The <see cref="IControlCategory{T}"/> to create.</param>
+        /// <returns>The newly created <see cref="IControlCategory{T}"/>.</returns>
+        IControlCategory<WebPartCategoryInfo> Create(IControlCategory<WebPartCategoryInfo> controlCategory);
 
         /// <summary>
         /// Creates the <see cref="IWebPart"/>.
@@ -63,30 +64,30 @@ namespace PoshKentico.Core.Services.Development.WebParts
         IWebPart Create(IWebPart webPart);
 
         /// <summary>
-        /// Deletes the specified <see cref="IWebPartCategory"/>.
+        /// Deletes the specified <see cref="IControlCategory{T}"/>.
         /// </summary>
-        /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> to delete.</param>
-        void Delete(IWebPartCategory webPartCategory);
+        /// <param name="controlCategory">The <see cref="IControlCategory{T}"/> to delete.</param>
+        void Delete(IControlCategory<WebPartCategoryInfo> controlCategory);
 
         /// <summary>
-        /// Deletes the specified <see cref="IWebPart"/>.
+        /// Deletes the specified <see cref="IControl{T}"/>.
         /// </summary>
-        /// <param name="webPart">The <see cref="IWebPart"/> to delete.</param>
-        void Delete(IWebPart webPart);
+        /// <param name="control">The <see cref="IControl{T}"/> to delete.</param>
+        void Delete(IControl<WebPartInfo> control);
 
         /// <summary>
-        /// Gets a list of <see cref="IWebPartCategory"/> that have <paramref name="parentWebPartCategory"/> as the parent.
+        /// Gets a list of <see cref="IControlCategory{T}"/> that have <paramref name="parentControlCategory"/> as the parent.
         /// </summary>
-        /// <param name="parentWebPartCategory">The parent <see cref="IWebPartCategory"/> to the desired web part categories.</param>
-        /// <returns>A list of <see cref="IWebPartCategory"/> that have <paramref name="parentWebPartCategory"/> as the parent.</returns>
-        IEnumerable<IWebPartCategory> GetWebPartCategories(IWebPartCategory parentWebPartCategory);
+        /// <param name="parentControlCategory">The parent <see cref="IControlCategory{T}"/> to the desired web part categories.</param>
+        /// <returns>A list of <see cref="IControlCategory{T}"/> that have <paramref name="parentControlCategory"/> as the parent.</returns>
+        IEnumerable<IControlCategory<WebPartCategoryInfo>> GetWebPartCategories(IControlCategory<WebPartCategoryInfo> parentControlCategory);
 
         /// <summary>
-        /// Gets the <see cref="IWebPartCategory"/> which matches the supplied ID.
+        /// Gets the <see cref="IControlCategory{T}"/> which matches the supplied ID.
         /// </summary>
-        /// <param name="id">The ID of the <see cref="IWebPartCategory"/> to return.</param>
-        /// <returns>The <see cref="IWebPartCategory"/> which matches the ID, else null.</returns>
-        IWebPartCategory GetWebPartCategory(int id);
+        /// <param name="id">The ID of the <see cref="IControlCategory{T}"/> to return.</param>
+        /// <returns>The <see cref="IControlCategory{T}"/> which matches the ID, else null.</returns>
+        IControlCategory<WebPartCategoryInfo> GetWebPartCategory(int id);
 
         /// <summary>
         /// Gets the <see cref="IWebPartField"/> associated with the supplied <see cref="IWebPart"/>.
@@ -96,11 +97,11 @@ namespace PoshKentico.Core.Services.Development.WebParts
         IEnumerable<IWebPartField> GetWebPartFields(IWebPart webPart);
 
         /// <summary>
-        /// Gets a list of <see cref="IWebPart"/> which have <paramref name="webPartCategory"/> as their parent category.
+        /// Gets a list of <see cref="IControl{T}"/> which have <paramref name="controlCategory"/> as their parent category.
         /// </summary>
-        /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> which is the category for the desired list of <see cref="IWebPartCategory"/>.</param>
-        /// <returns>A list of <see cref="IWebPart"/> which are related to <paramref name="webPartCategory"/>.</returns>
-        IEnumerable<IWebPart> GetWebParts(IWebPartCategory webPartCategory);
+        /// <param name="controlCategory">The <see cref="IControlCategory{T}"/> which is the category for the desired list of <see cref="IControlCategory{T}"/>.</param>
+        /// <returns>A list of <see cref="IControl{T}"/> which are related to <paramref name="controlCategory"/>.</returns>
+        IEnumerable<IControl<WebPartInfo>> GetWebParts(IControlCategory<WebPartCategoryInfo> controlCategory);
 
         /// <summary>
         /// Removes a <see cref="IWebPartField"/> from a <see cref="IWebPart"/>.
@@ -109,10 +110,10 @@ namespace PoshKentico.Core.Services.Development.WebParts
         void RemoveField(IWebPartField field);
 
         /// <summary>
-        /// Updates the <see cref="IWebPartCategory"/>.
+        /// Updates the <see cref="IControlCategory{T}"/>.
         /// </summary>
-        /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> to update.</param>
-        void Update(IWebPartCategory webPartCategory);
+        /// <param name="controlCategory">The <see cref="IControlCategory{T}"/> to update.</param>
+        void Update(IControlCategory<WebPartCategoryInfo> controlCategory);
 
         /// <summary>
         /// Updates the <see cref="IWebPart"/>.

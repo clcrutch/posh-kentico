@@ -22,6 +22,8 @@ using System.Management.Automation;
 using CMS.PortalEngine;
 using ImpromptuInterface;
 using PoshKentico.Business.Development.WebParts;
+using PoshKentico.Core.Providers.Development.WebParts;
+using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.Development.WebParts;
 
 using AliasAttribute = System.Management.Automation.AliasAttribute;
@@ -98,7 +100,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
-            IEnumerable<IWebPartCategory> categories = null;
+            IEnumerable<IControlCategory<WebPartCategoryInfo>> categories = null;
 
             switch (this.ParameterSetName)
             {
@@ -112,9 +114,9 @@ namespace PoshKentico.Cmdlets.Development.WebParts
                     categories = this.BusinessLayer.GetWebPartCategories(this.CategoryPath, this.Recurse.ToBool());
                     break;
                 case WEBPART:
-                    categories = new IWebPartCategory[]
+                    categories = new IControlCategory<WebPartCategoryInfo>[]
                     {
-                        this.BusinessLayer.GetWebPartCategory(this.WebPart.ActLike<IWebPart>()),
+                        this.BusinessLayer.GetWebPartCategory(new WebPart(this.WebPart)),
                     };
                     break;
 
@@ -133,9 +135,9 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         /// When overridden in a child class, operates on the specified web part category.
         /// </summary>
         /// <param name="webPartCategory">The web part category to operate on.</param>
-        protected virtual void ActOnObject(IWebPartCategory webPartCategory)
+        protected virtual void ActOnObject(IControlCategory<WebPartCategoryInfo> webPartCategory)
         {
-            this.WriteObject(webPartCategory?.UndoActLike());
+            this.WriteObject(webPartCategory.BackingControlCategory);
         }
 
         #endregion

@@ -23,6 +23,7 @@ using CMS.FormEngine;
 using CMS.PortalEngine;
 using ImpromptuInterface;
 using PoshKentico.Business.Development.WebParts;
+using PoshKentico.Core.Providers.Development.WebParts;
 using PoshKentico.Core.Services.Development.WebParts;
 using AliasAttribute = System.Management.Automation.AliasAttribute;
 
@@ -89,10 +90,10 @@ namespace PoshKentico.Cmdlets.Development.WebParts
             switch (this.ParameterSetName)
             {
                 case NAME:
-                    fields = this.BusinessLayer.GetWebPartFields(this.Name, this.RegularExpression.ToBool(), this.WebPart.ActLike<IWebPart>());
+                    fields = this.BusinessLayer.GetWebPartFields(this.Name, this.RegularExpression.ToBool(), new WebPart(this.WebPart));
                     break;
                 case NONAME:
-                    fields = this.BusinessLayer.GetWebPartFields(this.WebPart.ActLike<IWebPart>());
+                    fields = this.BusinessLayer.GetWebPartFields(new WebPart(this.WebPart));
                     break;
             }
 

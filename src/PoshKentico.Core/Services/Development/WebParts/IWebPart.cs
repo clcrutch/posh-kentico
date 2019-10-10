@@ -15,44 +15,26 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using CMS.PortalEngine;
+
 namespace PoshKentico.Core.Services.Development.WebParts
 {
     /// <summary>
     /// Represents a Web Part.
     /// </summary>
-    public interface IWebPart
+    public interface IWebPart : IControl<WebPartInfo>
     {
         #region Properties
 
         /// <summary>
-        /// Gets the ID for the web part category this web part belongs to.
-        /// </summary>
-        int WebPartCategoryID { get; }
-
-        /// <summary>
-        /// Gets the display name for the current web part.
-        /// </summary>
-        string WebPartDisplayName { get; }
-
-        /// <summary>
         /// Gets the file name for the current web part.
         /// </summary>
-        string WebPartFileName { get; }
-
-        /// <summary>
-        /// Gets the ID for the current web part.
-        /// </summary>
-        int WebPartID { get; }
-
-        /// <summary>
-        /// Gets the code name for the current web part.
-        /// </summary>
-        string WebPartName { get; }
+        string FileName { get; }
 
         /// <summary>
         /// Gets or sets the properties for the current web part.
         /// </summary>
-        string WebPartProperties { get; set; }
+        string Properties { get; set; }
 
         #endregion
 

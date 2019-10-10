@@ -20,7 +20,8 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text.RegularExpressions;
-using PoshKentico.Core.Services.Development.WebParts;
+using CMS.PortalEngine;
+using PoshKentico.Core.Services.Development;
 
 namespace PoshKentico.Business.Development.WebParts
 {
@@ -33,19 +34,19 @@ namespace PoshKentico.Business.Development.WebParts
         #region Methods
 
         /// <summary>
-        /// Gets a list of all of the <see cref="IWebPartCategory"/>.
+        /// Gets a list of all of the <see cref="IControlCategory{T}"/>.
         /// </summary>
-        /// <returns>A list of all of the <see cref="IWebPartCategory"/>.</returns>
-        public IEnumerable<IWebPartCategory> GetWebPartCategories() => this.WebPartService.WebPartCategories;
+        /// <returns>A list of all of the <see cref="IControlCategory{T}"/>.</returns>
+        public IEnumerable<IControlCategory<WebPartCategoryInfo>> GetWebPartCategories() => this.WebPartService.WebPartCategories;
 
         /// <summary>
-        /// Gets a list of all of the <see cref="IWebPartCategory"/> which match the specified criteria.
+        /// Gets a list of all of the <see cref="IControlCategory{T}"/> which match the specified criteria.
         /// </summary>
         /// <param name="matchString">The string which to match the webpart categories to.</param>
         /// <param name="isRegex">Indicates whether <paramref name="matchString"/> is a regular expression.</param>
         /// <param name="recurse">Indicates whether webpart categories should be returned recursively.</param>
-        /// <returns>A list of all of the <see cref="IWebPartCategory"/> which match the specified criteria.</returns>
-        public virtual IEnumerable<IWebPartCategory> GetWebPartCategories(string matchString, bool isRegex, bool recurse)
+        /// <returns>A list of all of the <see cref="IControlCategory{T}"/> which match the specified criteria.</returns>
+        public virtual IEnumerable<IControlCategory<WebPartCategoryInfo>> GetWebPartCategories(string matchString, bool isRegex, bool recurse)
         {
             Regex regex = null;
 
@@ -59,8 +60,8 @@ namespace PoshKentico.Business.Development.WebParts
             }
 
             var matched = from c in this.WebPartService.WebPartCategories
-                          where regex.IsMatch(c.CategoryName) ||
-                              regex.IsMatch(c.CategoryDisplayName)
+                          where regex.IsMatch(c.Name) ||
+                              regex.IsMatch(c.DisplayName)
                           select c;
 
             if (recurse)
@@ -74,12 +75,12 @@ namespace PoshKentico.Business.Development.WebParts
         }
 
         /// <summary>
-        /// Gets a list of the <see cref="IWebPartCategory"/> which match the supplied IDs.
+        /// Gets a list of the <see cref="IControlCategory{T}"/> which match the supplied IDs.
         /// </summary>
-        /// <param name="ids">The IDs of the <see cref="IWebPartCategory"/> to return.</param>
+        /// <param name="ids">The IDs of the <see cref="IControlCategory{T}"/> to return.</param>
         /// <param name="recurse">Indicates whether webpart categories should be returned recursively.</param>
-        /// <returns>A list of the <see cref="IWebPartCategory"/> which match the supplied IDs.</returns>
-        public IEnumerable<IWebPartCategory> GetWebPartCategories(int[] ids, bool recurse)
+        /// <returns>A list of the <see cref="IControlCategory{T}"/> which match the supplied IDs.</returns>
+        public IEnumerable<IControlCategory<WebPartCategoryInfo>> GetWebPartCategories(int[] ids, bool recurse)
         {
             var webPartCategories = from id in ids
                                     select this.WebPartService.GetWebPartCategory(id);
@@ -99,12 +100,12 @@ namespace PoshKentico.Business.Development.WebParts
         }
 
         /// <summary>
-        /// Gets a list of the <see cref="IWebPartCategory"/> which are children of the <paramref name="parentWebPartCategory"/>.
+        /// Gets a list of the <see cref="IControlCategory{T}"/> which are children of the <paramref name="parentWebPartCategory"/>.
         /// </summary>
-        /// <param name="parentWebPartCategory">The <see cref="IWebPartCategory"/> which is parent to the categories to find.</param>
+        /// <param name="parentWebPartCategory">The <see cref="IControlCategory{T}"/> which is parent to the categories to find.</param>
         /// <param name="recurse">Indicates whether webpart categories should be returned recursively.</param>
-        /// <returns>A list of the <see cref="IWebPartCategory"/> which are children to the supplied <paramref name="parentWebPartCategory"/>.</returns>
-        public IEnumerable<IWebPartCategory> GetWebPartCategories(IWebPartCategory parentWebPartCategory, bool recurse)
+        /// <returns>A list of the <see cref="IControlCategory{T}"/> which are children to the supplied <paramref name="parentWebPartCategory"/>.</returns>
+        public IEnumerable<IControlCategory<WebPartCategoryInfo>> GetWebPartCategories(IControlCategory<WebPartCategoryInfo> parentWebPartCategory, bool recurse)
         {
             var categories = this.WebPartService.GetWebPartCategories(parentWebPartCategory);
 
@@ -124,10 +125,10 @@ namespace PoshKentico.Business.Development.WebParts
         /// <param name="path">The path to get the list of web part categories.</param>
         /// <param name="recurse">Indicates if the web part category children should be returned as well.</param>
         /// <returns>A list of all of the web part categories found at the specified path.</returns>
-        public IEnumerable<IWebPartCategory> GetWebPartCategories(string path, bool recurse)
+        public IEnumerable<IControlCategory<WebPartCategoryInfo>> GetWebPartCategories(string path, bool recurse)
         {
             var categories = from c in this.WebPartService.WebPartCategories
-                             where c.CategoryPath.Equals(path, StringComparison.InvariantCultureIgnoreCase)
+                             where c.Path.Equals(path, StringComparison.InvariantCultureIgnoreCase)
                              select c;
 
             if (recurse)
@@ -143,14 +144,14 @@ namespace PoshKentico.Business.Development.WebParts
         /// <summary>
         /// Gets the web part category for the current web part.
         /// </summary>
-        /// <param name="webpart">The webpart to get the category for.</param>
+        /// <param name="control">The webpart to get the category for.</param>
         /// <returns>The web part category.</returns>
-        public IWebPartCategory GetWebPartCategory(IWebPart webpart) =>
+        public IControlCategory<WebPartCategoryInfo> GetWebPartCategory(IControl<WebPartInfo> control) =>
             (from c in this.WebPartService.WebPartCategories
-             where c.CategoryID == webpart.WebPartCategoryID
+             where c.ID == control.CategoryID
              select c).SingleOrDefault();
 
-        private IEnumerable<IWebPartCategory> GetRecurseWebPartCategories(IEnumerable<IWebPartCategory> webPartCategories)
+        private IEnumerable<IControlCategory<WebPartCategoryInfo>> GetRecurseWebPartCategories(IEnumerable<IControlCategory<WebPartCategoryInfo>> webPartCategories)
         {
             return webPartCategories
                 .Select(wp => this.GetWebPartCategories(wp, true))

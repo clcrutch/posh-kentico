@@ -16,6 +16,8 @@
 // </copyright>
 
 using System.ComponentModel.Composition;
+using CMS.PortalEngine;
+using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.Development.WebParts;
 
 namespace PoshKentico.Business.Development.WebParts
@@ -29,14 +31,14 @@ namespace PoshKentico.Business.Development.WebParts
         #region Methods
 
         /// <summary>
-        /// Removes the supplied <see cref="IWebPart"/> from the system.
+        /// Removes the supplied <see cref="IControl{T}"/> from the system.
         /// </summary>
-        /// <param name="webPart">The <see cref="IWebPart"/> to remove.</param>
-        public void RemoveWebPart(IWebPart webPart)
+        /// <param name="control">The <see cref="IControl{T}"/> to remove.</param>
+        public void RemoveWebPart(IControl<WebPartInfo> control)
         {
-            if (this.OutputService.ShouldProcess(webPart.WebPartName, "Remove the web part from Kentico."))
+            if (this.OutputService.ShouldProcess(control.Name, "Remove the web part from Kentico."))
             {
-                this.WebPartService.Delete(webPart);
+                this.WebPartService.Delete(control);
             }
         }
 

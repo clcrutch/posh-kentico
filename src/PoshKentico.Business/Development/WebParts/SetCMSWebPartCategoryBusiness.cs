@@ -16,6 +16,8 @@
 // </copyright>
 
 using System.ComponentModel.Composition;
+using CMS.PortalEngine;
+using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.Development.WebParts;
 
 namespace PoshKentico.Business.Development.WebParts
@@ -29,10 +31,10 @@ namespace PoshKentico.Business.Development.WebParts
         #region Methods
 
         /// <summary>
-        /// Sets the <see cref="IWebPartCategory"/> within Kentico.
+        /// Sets the <see cref="IControlCategory{T}"/> within Kentico.
         /// </summary>
-        /// <param name="webPartCategory">The <see cref="IWebPartCategory"/> to set.</param>
-        public void Set(IWebPartCategory webPartCategory)
+        /// <param name="webPartCategory">The <see cref="IControlCategory{T}"/> to set.</param>
+        public void Set(IControlCategory<WebPartCategoryInfo> webPartCategory)
         {
             this.WebPartService.Update(webPartCategory);
         }

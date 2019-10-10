@@ -15,7 +15,6 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 using CMS.PortalEngine;
@@ -24,7 +23,7 @@ using PoshKentico.Business.Development.WebParts;
 
 using AliasAttribute = System.Management.Automation.AliasAttribute;
 
-namespace PoshKentico.Cmdlets.Development.WebPart
+namespace PoshKentico.Cmdlets.Development.WebParts
 {
     /// <summary>
     /// <para type="synopsis">Creates a new web part category.</para>

@@ -1,4 +1,4 @@
-﻿// <copyright file="IWebPartCategory.cs" company="Chris Crutchfield">
+﻿// <copyright file="IControlCategory.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -15,44 +15,46 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-namespace PoshKentico.Core.Services.Development.WebParts
+namespace PoshKentico.Core.Services.Development
 {
     /// <summary>
-    /// Represents a WebPart Category.
+    /// Represents a Control Category.
     /// </summary>
-    public interface IWebPartCategory
+    public interface IControlCategory<T>
     {
         #region Properties
 
-        /// <summary>
-        /// Gets the display name for the WebPart category.
-        /// </summary>
-        string CategoryDisplayName { get; }
+        T BackingControlCategory { get; }
 
         /// <summary>
-        /// Gets the ID for the WebPart category.
+        /// Gets the display name for the category.
         /// </summary>
-        int CategoryID { get; }
+        string DisplayName { get; }
 
         /// <summary>
-        /// Gets the image path for the WebPart category.
+        /// Gets the ID for the category.
         /// </summary>
-        string CategoryImagePath { get; }
+        int ID { get; }
 
         /// <summary>
-        /// Gets the name for the WebPart category.
+        /// Gets the image path for the category.
         /// </summary>
-        string CategoryName { get; }
+        string ImagePath { get; }
 
         /// <summary>
-        /// Gets the parent ID for the WebPart category.
+        /// Gets the name for the category.
         /// </summary>
-        int CategoryParentID { get; }
+        string Name { get; }
 
         /// <summary>
-        /// Gets the path for the WebPart category.
+        /// Gets the parent ID for the category.
         /// </summary>
-        string CategoryPath { get; }
+        int ParentID { get; }
+
+        /// <summary>
+        /// Gets the path for the category.
+        /// </summary>
+        string Path { get; }
 
         #endregion
 

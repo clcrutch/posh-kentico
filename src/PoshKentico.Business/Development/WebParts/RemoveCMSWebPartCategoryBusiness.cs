@@ -18,6 +18,8 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Linq;
+using CMS.PortalEngine;
+using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.Development.WebParts;
 
 namespace PoshKentico.Business.Development.WebParts
@@ -31,11 +33,11 @@ namespace PoshKentico.Business.Development.WebParts
         #region Methods
 
         /// <summary>
-        /// Deletes the specified <see cref="IWebPartCategory"/>.  Throws exceptions if there are children.
+        /// Deletes the specified <see cref="IControlCategory{T}"/>.  Throws exceptions if there are children.
         /// </summary>
         /// <param name="webPartCategory">The webpart category to delete.</param>
         /// <param name="recurse">Indicates whether webpart categories and web parts should be removed recursively.</param>
-        public void RemoveWebPartCategory(IWebPartCategory webPartCategory, bool recurse)
+        public void RemoveWebPartCategory(IControlCategory<WebPartCategoryInfo> webPartCategory, bool recurse)
         {
             var webParts = this.WebPartService.GetWebParts(webPartCategory);
             if (webParts.Any())
@@ -44,7 +46,7 @@ namespace PoshKentico.Business.Development.WebParts
                 {
                     foreach (var webpart in webParts)
                     {
-                        if (this.OutputService.ShouldProcess(webpart.WebPartDisplayName, "Remove the web part from Kentico."))
+                        if (this.OutputService.ShouldProcess(webpart.DisplayName, "Remove the web part from Kentico."))
                         {
                             this.WebPartService.Delete(webpart);
                         }
@@ -52,7 +54,7 @@ namespace PoshKentico.Business.Development.WebParts
                 }
                 else
                 {
-                    throw new Exception($"Web Part Category {webPartCategory.CategoryDisplayName} has Web Parts associated.  Failed to delete.");
+                    throw new Exception($"Web Part Category {webPartCategory.DisplayName} has Web Parts associated.  Failed to delete.");
                 }
             }
 
@@ -68,11 +70,11 @@ namespace PoshKentico.Business.Development.WebParts
                 }
                 else
                 {
-                    throw new Exception($"Web Part Category {webPartCategory.CategoryDisplayName} has Web Parts Categories associated.  Failed to delete.");
+                    throw new Exception($"Web Part Category {webPartCategory.DisplayName} has Web Parts Categories associated.  Failed to delete.");
                 }
             }
 
-            if (this.OutputService.ShouldProcess(webPartCategory.CategoryDisplayName, "Remove the web part category from Kentico."))
+            if (this.OutputService.ShouldProcess(webPartCategory.DisplayName, "Remove the web part category from Kentico."))
             {
                 this.WebPartService.Delete(webPartCategory);
             }

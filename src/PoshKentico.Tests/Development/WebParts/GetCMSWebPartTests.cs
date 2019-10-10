@@ -161,7 +161,7 @@ namespace PoshKentico.Tests.Development.WebParts
             // Setup web part service mock
             var webPartServiceMock = new Mock<IWebPartService>();
             webPartServiceMock
-                .Setup(x => x.WebParts)
+                .Setup(x => x.Controls)
                 .Returns(new IWebPart[] { webPartObj });
 
             // Setup business layer
@@ -198,7 +198,7 @@ namespace PoshKentico.Tests.Development.WebParts
             // Setup web part service mock
             var webPartServiceMock = new Mock<IWebPartService>();
             webPartServiceMock
-                .Setup(x => x.WebParts)
+                .Setup(x => x.Controls)
                 .Returns(new IWebPart[] { webPartObj });
 
             // Setup business layer
@@ -249,7 +249,7 @@ namespace PoshKentico.Tests.Development.WebParts
             // Setup web part service mock
             var webPartServiceMock = new Mock<IWebPartService>();
             webPartServiceMock
-                .Setup(x => x.WebParts)
+                .Setup(x => x.Controls)
                 .Returns(new IWebPart[] { webPartObj });
 
             // Setup business layer
@@ -343,7 +343,7 @@ namespace PoshKentico.Tests.Development.WebParts
             // Setup web part service mock
             var webPartServiceMock = new Mock<IWebPartService>();
             webPartServiceMock
-                .Setup(x => x.WebParts)
+                .Setup(x => x.Controls)
                 .Returns(new IWebPart[] { webPartObj });
 
             // Setup category business layer

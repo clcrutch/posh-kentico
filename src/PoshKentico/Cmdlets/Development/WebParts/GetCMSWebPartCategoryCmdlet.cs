@@ -20,6 +20,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 using CMS.PortalEngine;
 using ImpromptuInterface;
+using PoshKentico.Core.Providers.Development.WebParts;
+using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.Development.WebParts;
 
 using AliasAttribute = System.Management.Automation.AliasAttribute;
@@ -99,11 +101,9 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
-            IEnumerable<IWebPartCategory> categories = null;
-
             if (this.ParameterSetName == PARENTCATEGORY)
             {
-                categories = this.BusinessLayer.GetWebPartCategories(this.ParentWebPartCategory.ActLike<IWebPartCategory>(), this.Recurse.ToBool());
+                IEnumerable<IControlCategory<WebPartCategoryInfo>> categories = this.BusinessLayer.GetWebPartCategories(new WebPartCategory(this.ParentWebPartCategory), this.Recurse.ToBool());
 
                 foreach (var category in categories)
                 {

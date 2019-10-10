@@ -429,7 +429,7 @@
             Implementation of <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartService"/> that uses Kentico.
             </summary>
         </member>
-        <member name="P:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.WebParts">
+        <member name="P:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.Controls">
             <inheritdoc />
         </member>
         <member name="P:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.WebPartCategories">
@@ -438,19 +438,19 @@
         <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.AddField(PoshKentico.Core.Services.Development.WebParts.IWebPartField,PoshKentico.Core.Services.Development.WebParts.IWebPart)">
             <inheritdoc />
         </member>
-        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.Create(PoshKentico.Core.Services.Development.WebParts.IWebPartCategory)">
+        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.Create(PoshKentico.Core.Services.Development.IControlCategory{CMS.PortalEngine.WebPartCategoryInfo})">
             <inheritdoc />
         </member>
         <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.Create(PoshKentico.Core.Services.Development.WebParts.IWebPart)">
             <inheritdoc />
         </member>
-        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.Delete(PoshKentico.Core.Services.Development.WebParts.IWebPartCategory)">
+        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.Delete(PoshKentico.Core.Services.Development.IControlCategory{CMS.PortalEngine.WebPartCategoryInfo})">
             <inheritdoc />
         </member>
-        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.Delete(PoshKentico.Core.Services.Development.WebParts.IWebPart)">
+        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.Delete(PoshKentico.Core.Services.Development.IControl{CMS.PortalEngine.WebPartInfo})">
             <inheritdoc />
         </member>
-        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.GetWebPartCategories(PoshKentico.Core.Services.Development.WebParts.IWebPartCategory)">
+        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.GetWebPartCategories(PoshKentico.Core.Services.Development.IControlCategory{CMS.PortalEngine.WebPartCategoryInfo})">
             <inheritdoc />
         </member>
         <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.GetWebPartCategory(System.Int32)">
@@ -459,13 +459,13 @@
         <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.GetWebPartFields(PoshKentico.Core.Services.Development.WebParts.IWebPart)">
             <inheritdoc />
         </member>
-        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.GetWebParts(PoshKentico.Core.Services.Development.WebParts.IWebPartCategory)">
+        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.GetWebParts(PoshKentico.Core.Services.Development.IControlCategory{CMS.PortalEngine.WebPartCategoryInfo})">
             <inheritdoc />
         </member>
         <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.RemoveField(PoshKentico.Core.Services.Development.WebParts.IWebPartField)">
             <inheritdoc />
         </member>
-        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.Update(PoshKentico.Core.Services.Development.WebParts.IWebPartCategory)">
+        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.Update(PoshKentico.Core.Services.Development.IControlCategory{CMS.PortalEngine.WebPartCategoryInfo})">
             <inheritdoc />
         </member>
         <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.Update(PoshKentico.Core.Services.Development.WebParts.IWebPart)">
@@ -1832,6 +1832,41 @@
             Represents FolderModify Property
             </summary>
         </member>
+        <member name="T:PoshKentico.Core.Services.Development.IControlCategory`1">
+            <summary>
+            Represents a Control Category.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.IControlCategory`1.DisplayName">
+            <summary>
+            Gets the display name for the category.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.IControlCategory`1.ID">
+            <summary>
+            Gets the ID for the category.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.IControlCategory`1.ImagePath">
+            <summary>
+            Gets the image path for the category.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.IControlCategory`1.Name">
+            <summary>
+            Gets the name for the category.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.IControlCategory`1.ParentID">
+            <summary>
+            Gets the parent ID for the category.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.IControlCategory`1.Path">
+            <summary>
+            Gets the path for the category.
+            </summary>
+        </member>
         <member name="T:PoshKentico.Core.Services.Development.Modules.IResource">
             <summary>
             Represents a ResourceInfo Object.
@@ -2143,69 +2178,14 @@
             Represents a Web Part.
             </summary>
         </member>
-        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPart.WebPartCategoryID">
-            <summary>
-            Gets the ID for the web part category this web part belongs to.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPart.WebPartDisplayName">
-            <summary>
-            Gets the display name for the current web part.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPart.WebPartFileName">
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPart.FileName">
             <summary>
             Gets the file name for the current web part.
             </summary>
         </member>
-        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPart.WebPartID">
-            <summary>
-            Gets the ID for the current web part.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPart.WebPartName">
-            <summary>
-            Gets the code name for the current web part.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPart.WebPartProperties">
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPart.Properties">
             <summary>
             Gets or sets the properties for the current web part.
-            </summary>
-        </member>
-        <member name="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory">
-            <summary>
-            Represents a WebPart Category.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory.CategoryDisplayName">
-            <summary>
-            Gets the display name for the WebPart category.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory.CategoryID">
-            <summary>
-            Gets the ID for the WebPart category.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory.CategoryImagePath">
-            <summary>
-            Gets the image path for the WebPart category.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory.CategoryName">
-            <summary>
-            Gets the name for the WebPart category.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory.CategoryParentID">
-            <summary>
-            Gets the parent ID for the WebPart category.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory.CategoryPath">
-            <summary>
-            Gets the path for the WebPart category.
             </summary>
         </member>
         <member name="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField">
@@ -2278,14 +2258,14 @@
             Service for providing access to a CMS webparts.
             </summary>
         </member>
-        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartService.WebParts">
+        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartService.Controls">
             <summary>
-            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> provided by the CMS System.
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/> provided by the CMS System.
             </summary>
         </member>
         <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartService.WebPartCategories">
             <summary>
-            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> provided by the CMS System.
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> provided by the CMS System.
             </summary>
         </member>
         <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.AddField(PoshKentico.Core.Services.Development.WebParts.IWebPartField,PoshKentico.Core.Services.Development.WebParts.IWebPart)">
@@ -2296,12 +2276,12 @@
             <param name="webPart">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> to attach the field to.</param>
             <returns>The newly created <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/>.</returns>
         </member>
-        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.Create(PoshKentico.Core.Services.Development.WebParts.IWebPartCategory)">
+        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.Create(PoshKentico.Core.Services.Development.IControlCategory{CMS.PortalEngine.WebPartCategoryInfo})">
             <summary>
-            Creates the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/>.
+            Creates the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/>.
             </summary>
-            <param name="webPartCategory">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> to create.</param>
-            <returns>The newly created <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/>.</returns>
+            <param name="controlCategory">The <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> to create.</param>
+            <returns>The newly created <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/>.</returns>
         </member>
         <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.Create(PoshKentico.Core.Services.Development.WebParts.IWebPart)">
             <summary>
@@ -2310,31 +2290,31 @@
             <param name="webPart">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> to create.</param>
             <returns>The newly created <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.</returns>
         </member>
-        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.Delete(PoshKentico.Core.Services.Development.WebParts.IWebPartCategory)">
+        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.Delete(PoshKentico.Core.Services.Development.IControlCategory{CMS.PortalEngine.WebPartCategoryInfo})">
             <summary>
-            Deletes the specified <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/>.
+            Deletes the specified <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/>.
             </summary>
-            <param name="webPartCategory">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> to delete.</param>
+            <param name="controlCategory">The <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> to delete.</param>
         </member>
-        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.Delete(PoshKentico.Core.Services.Development.WebParts.IWebPart)">
+        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.Delete(PoshKentico.Core.Services.Development.IControl{CMS.PortalEngine.WebPartInfo})">
             <summary>
-            Deletes the specified <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.
+            Deletes the specified <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/>.
             </summary>
-            <param name="webPart">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> to delete.</param>
+            <param name="control">The <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/> to delete.</param>
         </member>
-        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.GetWebPartCategories(PoshKentico.Core.Services.Development.WebParts.IWebPartCategory)">
+        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.GetWebPartCategories(PoshKentico.Core.Services.Development.IControlCategory{CMS.PortalEngine.WebPartCategoryInfo})">
             <summary>
-            Gets a list of <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> that have <paramref name="parentWebPartCategory"/> as the parent.
+            Gets a list of <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> that have <paramref name="parentControlCategory"/> as the parent.
             </summary>
-            <param name="parentWebPartCategory">The parent <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> to the desired web part categories.</param>
-            <returns>A list of <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> that have <paramref name="parentWebPartCategory"/> as the parent.</returns>
+            <param name="parentControlCategory">The parent <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> to the desired web part categories.</param>
+            <returns>A list of <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> that have <paramref name="parentControlCategory"/> as the parent.</returns>
         </member>
         <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.GetWebPartCategory(System.Int32)">
             <summary>
-            Gets the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> which matches the supplied ID.
+            Gets the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> which matches the supplied ID.
             </summary>
-            <param name="id">The ID of the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> to return.</param>
-            <returns>The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> which matches the ID, else null.</returns>
+            <param name="id">The ID of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> to return.</param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> which matches the ID, else null.</returns>
         </member>
         <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.GetWebPartFields(PoshKentico.Core.Services.Development.WebParts.IWebPart)">
             <summary>
@@ -2343,12 +2323,12 @@
             <param name="webPart">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> to get the list of fields for.</param>
             <returns>A list of the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/> that is associated with the supplied <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.</returns>
         </member>
-        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.GetWebParts(PoshKentico.Core.Services.Development.WebParts.IWebPartCategory)">
+        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.GetWebParts(PoshKentico.Core.Services.Development.IControlCategory{CMS.PortalEngine.WebPartCategoryInfo})">
             <summary>
-            Gets a list of <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> which have <paramref name="webPartCategory"/> as their parent category.
+            Gets a list of <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/> which have <paramref name="controlCategory"/> as their parent category.
             </summary>
-            <param name="webPartCategory">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> which is the category for the desired list of <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/>.</param>
-            <returns>A list of <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> which are related to <paramref name="webPartCategory"/>.</returns>
+            <param name="controlCategory">The <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> which is the category for the desired list of <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/>.</param>
+            <returns>A list of <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/> which are related to <paramref name="controlCategory"/>.</returns>
         </member>
         <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.RemoveField(PoshKentico.Core.Services.Development.WebParts.IWebPartField)">
             <summary>
@@ -2356,11 +2336,11 @@
             </summary>
             <param name="field">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/> to remove.</param>
         </member>
-        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.Update(PoshKentico.Core.Services.Development.WebParts.IWebPartCategory)">
+        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.Update(PoshKentico.Core.Services.Development.IControlCategory{CMS.PortalEngine.WebPartCategoryInfo})">
             <summary>
-            Updates the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/>.
+            Updates the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/>.
             </summary>
-            <param name="webPartCategory">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartCategory"/> to update.</param>
+            <param name="controlCategory">The <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> to update.</param>
         </member>
         <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.Update(PoshKentico.Core.Services.Development.WebParts.IWebPart)">
             <summary>
