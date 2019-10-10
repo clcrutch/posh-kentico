@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text.RegularExpressions;
+using CMS.PortalEngine;
 using PoshKentico.Core.Services.Development.WebParts;
 
 namespace PoshKentico.Business.Development.WebParts
@@ -27,7 +28,7 @@ namespace PoshKentico.Business.Development.WebParts
     /// Business layer for the Get-CMSWebPartField cmdlet.
     /// </summary>
     [Export(typeof(GetCMSWebPartFieldBusiness))]
-    public class GetCMSWebPartFieldBusiness : WebPartBusinessBase
+    public class GetCMSWebPartFieldBusiness : ControlBusinessBase<IWebPartService, WebPartInfo, WebPartCategoryInfo>
     {
         #region Methods
 
@@ -37,7 +38,7 @@ namespace PoshKentico.Business.Development.WebParts
         /// <param name="webPart">The <see cref="IWebPart"/> to get the list <see cref="IWebPartField"/> for.</param>
         /// <returns>A list of <see cref="IWebPartField"/> associated with the <see cref="IWebPart"/>.</returns>
         public IEnumerable<IWebPartField> GetWebPartFields(IWebPart webPart) =>
-            this.WebPartService.GetWebPartFields(webPart);
+            this.ControlService.GetWebPartFields(webPart);
 
         /// <summary>
         /// Gets a list of the <see cref="IWebPartField"/> associated with a <see cref="IWebPart"/> which match the supplied criteria.

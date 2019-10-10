@@ -18,13 +18,12 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 using CMS.PortalEngine;
-using PoshKentico.Business.Development.WebParts;
-using PoshKentico.Core.Providers.Development.WebParts;
-using PoshKentico.Core.Services.Development.WebParts;
-
+using PoshKentico.Business.Development.Widgets;
+using PoshKentico.Core.Providers.Development.Widgets;
+using PoshKentico.Core.Services.Development.Widgets;
 using AliasAttribute = System.Management.Automation.AliasAttribute;
 
-namespace PoshKentico.Cmdlets.Development.WebParts
+namespace PoshKentico.Cmdlets.Development.Widgets
 {
     /// <summary>
     /// <para type="synopsis">Gets the web part categories selected by the provided input.</para>
@@ -33,7 +32,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     /// <para type="description">Without parameters, this command returns all webpart categories.</para>
     /// <para type="description">With parameters, this command returns the webpart categories that match the criteria.</para>
     /// <example>
-    ///     <para>Get all the webpart categories.</para>
+    ///     <para>Get all the widget categories.</para>
     ///     <code>Get-CMSWebPartCategory</code>
     /// </example>
     /// <example>
@@ -58,14 +57,14 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     /// </example>
     /// <example>
     ///     <para>Get the web part categories under a parent category.</para>
-    ///     <code>$webPartCategory | Get-WebPartCategory</code>
+    ///     <code>$widgetCategory | Get-WidgetCategory</code>
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
-    [Cmdlet(VerbsCommon.Get, "CMSWebPartCategory", DefaultParameterSetName = NONE)]
-    [OutputType(typeof(WebPartCategoryInfo[]))]
-    [Alias("gwpc")]
-    public class GetCMSWebPartCategoryCmdlet : GetCMSControlCategoryCmdlet<GetCMSWebPartCategoryBusiness, IWebPartService, WebPartInfo, WebPartCategoryInfo, WebPart, WebPartCategory>
+    [Cmdlet(VerbsCommon.Get, "CMSWidgetCategory", DefaultParameterSetName = NONE)]
+    [OutputType(typeof(WidgetCategoryInfo[]))]
+    [Alias("gwc")]
+    public class GetCMSWidgetCategoryCmdlet : GetCMSControlCategoryCmdlet<GetCMSWidgetCategoryBusiness, IWidgetService, WidgetInfo, WidgetCategoryInfo, Widget, WidgetCategory>
     {
     }
 }

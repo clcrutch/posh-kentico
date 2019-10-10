@@ -10,12 +10,12 @@ namespace PoshKentico.Core.Services.Development
     {
         T BackingControl { get; }
 
-        int CategoryID { get; }
+        int CategoryID { get; set; }
 
-        string DisplayName { get; }
+        string DisplayName { get; set; }
 
-        int ID { get; }
+        int ID { get; set; }
 
-        string Name { get; }
+        string Name { get; set; }
     }
 }

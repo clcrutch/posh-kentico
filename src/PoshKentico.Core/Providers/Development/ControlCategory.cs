@@ -9,6 +9,11 @@ namespace PoshKentico.Core.Providers.Development
 {
     public abstract class ControlCategory<T> : IControlCategory<T>
     {
+        public ControlCategory()
+        {
+            this.BackingControlCategory = Activator.CreateInstance<T>();
+        }
+
         public ControlCategory(T backingControlCategory)
         {
             this.BackingControlCategory = backingControlCategory;
@@ -16,16 +21,16 @@ namespace PoshKentico.Core.Providers.Development
 
         public T BackingControlCategory { get; private set; }
 
-        public abstract string DisplayName { get; }
+        public abstract string DisplayName { get; set; }
 
-        public abstract int ID { get; }
+        public abstract int ID { get; set; }
 
-        public abstract string ImagePath { get; }
+        public abstract string ImagePath { get; set; }
 
-        public abstract string Name { get; }
+        public abstract string Name { get; set; }
 
-        public abstract int ParentID { get; }
+        public abstract int ParentID { get; set; }
 
-        public abstract string Path { get; }
+        public abstract string Path { get; set; }
     }
 }

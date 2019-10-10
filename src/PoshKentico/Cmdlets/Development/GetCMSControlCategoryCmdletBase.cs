@@ -1,4 +1,4 @@
-﻿// <copyright file="GetCMSWebPartCategoryCmdletBase.cs" company="Chris Crutchfield">
+﻿// <GetCMSControlCategoryCmdletBase file="GetCMSWebPartCategoryCmdletBase.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -15,26 +15,25 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
-using CMS.PortalEngine;
-using ImpromptuInterface;
-using PoshKentico.Business.Development.WebParts;
-using PoshKentico.Core.Providers.Development.WebParts;
+using PoshKentico.Business.Development;
 using PoshKentico.Core.Services.Development;
-using PoshKentico.Core.Services.Development.WebParts;
 
 using AliasAttribute = System.Management.Automation.AliasAttribute;
 
-namespace PoshKentico.Cmdlets.Development.WebParts
+namespace PoshKentico.Cmdlets.Development
 {
     /// <summary>
-    /// Base class for cmdlets that need to Get a list of <see cref="WebPartCategoryInfo"/>.
+    /// Base class for cmdlets that need to Get a list of TControlCategory.
     /// </summary>
     [ExcludeFromCodeCoverage]
-    public class GetCMSWebPartCategoryCmdletBase : MefCmdlet<GetCMSWebPartCategoryBusiness>
+    public class GetCMSControlCategoryCmdletBase<TBusinessLayer, TControlService, TControl, TControlCategory, TControlHolder> : MefCmdlet<TBusinessLayer>
+        where TBusinessLayer : GetCMSControlCategoryBusiness<TControlService, TControl, TControlCategory>
+        where TControlService : IControlService<TControl, TControlCategory>
+        where TControlHolder : IControl<TControl>
     {
         #region Constants
 
@@ -46,7 +45,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         private const string CATEGORYNAME = "Category Name";
         private const string IDSETNAME = "ID";
         private const string PATH = "Path";
-        private const string WEBPART = "Web Part";
+        private const string CONTROL = "Control";
 
         #endregion
 
@@ -90,8 +89,9 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         /// <summary>
         /// <para type="description">The webpart to get the web part category for.</para>
         /// </summary>
-        [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = WEBPART)]
-        public WebPartInfo WebPart { get; set; }
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = CONTROL)]
+        [Alias("WebPart", "Widget")]
+        public TControl Control { get; set; }
 
         #endregion
 
@@ -100,28 +100,28 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
-            IEnumerable<IControlCategory<WebPartCategoryInfo>> categories = null;
+            IEnumerable<IControlCategory<TControlCategory>> categories = null;
 
             switch (this.ParameterSetName)
             {
                 case CATEGORYNAME:
-                    categories = this.BusinessLayer.GetWebPartCategories(this.CategoryName, this.RegularExpression.ToBool(), this.Recurse.ToBool());
+                    categories = this.BusinessLayer.GetControlCategories(this.CategoryName, this.RegularExpression.ToBool(), this.Recurse.ToBool());
                     break;
                 case IDSETNAME:
-                    categories = this.BusinessLayer.GetWebPartCategories(this.ID, this.Recurse.ToBool());
+                    categories = this.BusinessLayer.GetControlCategories(this.ID, this.Recurse.ToBool());
                     break;
                 case PATH:
-                    categories = this.BusinessLayer.GetWebPartCategories(this.CategoryPath, this.Recurse.ToBool());
+                    categories = this.BusinessLayer.GetControlCategories(this.CategoryPath, this.Recurse.ToBool());
                     break;
-                case WEBPART:
-                    categories = new IControlCategory<WebPartCategoryInfo>[]
+                case CONTROL:
+                    categories = new IControlCategory<TControlCategory>[]
                     {
-                        this.BusinessLayer.GetWebPartCategory(new WebPart(this.WebPart)),
+                        this.BusinessLayer.GetControlCategory((TControlHolder)Activator.CreateInstance(typeof(TControlHolder), this.Control)),
                     };
                     break;
 
                 case NONE:
-                    categories = this.BusinessLayer.GetWebPartCategories();
+                    categories = this.BusinessLayer.GetControlCategories();
                     break;
             }
 
@@ -134,10 +134,10 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         /// <summary>
         /// When overridden in a child class, operates on the specified web part category.
         /// </summary>
-        /// <param name="webPartCategory">The web part category to operate on.</param>
-        protected virtual void ActOnObject(IControlCategory<WebPartCategoryInfo> webPartCategory)
+        /// <param name="category">The web part category to operate on.</param>
+        protected virtual void ActOnObject(IControlCategory<TControlCategory> category)
         {
-            this.WriteObject(webPartCategory.BackingControlCategory);
+            this.WriteObject(category.BackingControlCategory);
         }
 
         #endregion

@@ -33,7 +33,7 @@ namespace PoshKentico.Core.Providers.Development.WebParts
     /// </summary>
     [ExcludeFromCodeCoverage]
     [Export(typeof(IWebPartService))]
-    public class KenticoWebPartService : IWebPartService
+    public class KenticoWebPartService : ControlService<WebPartInfo, WebPartCategoryInfo>, IWebPartService
     {
         #region Fields
 
@@ -44,12 +44,12 @@ namespace PoshKentico.Core.Providers.Development.WebParts
         #region Properties
 
         /// <inheritdoc />
-        public IEnumerable<IControl<WebPartInfo>> Controls => (from wp in WebPartInfoProvider.GetWebParts()
-                                                               select new WebPart(wp)).ToArray();
+        public override IEnumerable<IControl<WebPartInfo>> Controls => (from wp in WebPartInfoProvider.GetWebParts()
+                                                                        select new WebPart(wp)).ToArray();
 
         /// <inheritdoc />
-        public IEnumerable<IControlCategory<WebPartCategoryInfo>> WebPartCategories => (from c in WebPartCategoryInfoProvider.GetCategories()
-                                                                                        select new WebPartCategory(c)).ToArray();
+        public override IEnumerable<IControlCategory<WebPartCategoryInfo>> Categories => (from c in WebPartCategoryInfoProvider.GetCategories()
+                                                                                          select new WebPartCategory(c)).ToArray();
 
         #endregion
 
@@ -78,22 +78,6 @@ namespace PoshKentico.Core.Providers.Development.WebParts
         }
 
         /// <inheritdoc />
-        public IControlCategory<WebPartCategoryInfo> Create(IControlCategory<WebPartCategoryInfo> webPartCategory)
-        {
-            var category = new WebPartCategoryInfo
-            {
-                CategoryDisplayName = webPartCategory.DisplayName,
-                CategoryName = webPartCategory.Name,
-                CategoryImagePath = webPartCategory.ImagePath,
-                CategoryParentID = webPartCategory.ParentID,
-            };
-
-            WebPartCategoryInfoProvider.SetWebPartCategoryInfo(category);
-
-            return new WebPartCategory(category);
-        }
-
-        /// <inheritdoc />
         public IWebPart Create(IWebPart webPart)
         {
             var webPartInfo = new WebPartInfo
@@ -111,33 +95,17 @@ namespace PoshKentico.Core.Providers.Development.WebParts
         }
 
         /// <inheritdoc />
-        public void Delete(IControlCategory<WebPartCategoryInfo> webPartCategory) =>
+        public override void Delete(IControlCategory<WebPartCategoryInfo> webPartCategory) =>
             WebPartCategoryInfoProvider.DeleteCategoryInfo(webPartCategory.ID);
 
         /// <inheritdoc />
-        public void Delete(IControl<WebPartInfo> control) =>
+        public override void Delete(IControl<WebPartInfo> control) =>
             WebPartInfoProvider.DeleteWebPartInfo(control.ID);
-
-        /// <inheritdoc />
-        public IEnumerable<IControlCategory<WebPartCategoryInfo>> GetWebPartCategories(IControlCategory<WebPartCategoryInfo> parentWebPartCategory) =>
-            (from c in this.WebPartCategories
-             where c.ParentID == parentWebPartCategory.ID
-             select c).ToArray();
-
-        /// <inheritdoc />
-        public IControlCategory<WebPartCategoryInfo> GetWebPartCategory(int id) =>
-            new WebPartCategory(WebPartCategoryInfoProvider.GetWebPartCategoryInfoById(id));
 
         /// <inheritdoc />
         public IEnumerable<IWebPartField> GetWebPartFields(IWebPart webPart) =>
                (from f in new FormInfo(webPart.Properties).GetFields<FormFieldInfo>()
                 select this.AppendWebPart(f, webPart).ActLike<IWebPartField>()).ToArray();
-
-        /// <inheritdoc />
-        public IEnumerable<IControl<WebPartInfo>> GetWebParts(IControlCategory<WebPartCategoryInfo> webPartCategory) =>
-            (from wp in this.Controls
-             where wp.CategoryID == webPartCategory.ID
-             select wp).ToArray();
 
         /// <inheritdoc />
         public void RemoveField(IWebPartField field)
@@ -148,24 +116,6 @@ namespace PoshKentico.Core.Providers.Development.WebParts
             field.WebPart.Properties = formInfo.GetXmlDefinition();
 
             this.SaveFormUpdates(field.WebPart);
-        }
-
-        /// <inheritdoc />
-        public void Update(IControlCategory<WebPartCategoryInfo> webPartCategory)
-        {
-            var category = WebPartCategoryInfoProvider.GetWebPartCategoryInfoById(webPartCategory.ID);
-
-            if (category == null)
-            {
-                return;
-            }
-
-            category.CategoryDisplayName = webPartCategory.DisplayName;
-            category.CategoryName = webPartCategory.Name;
-            category.CategoryImagePath = webPartCategory.ImagePath;
-            category.CategoryParentID = webPartCategory.ParentID;
-
-            WebPartCategoryInfoProvider.SetWebPartCategoryInfo(category);
         }
 
         /// <inheritdoc />
@@ -205,6 +155,9 @@ namespace PoshKentico.Core.Providers.Development.WebParts
 
             this.SaveFormUpdates(field.WebPart);
         }
+
+        protected override void SetControlCategoryInfo(WebPartCategoryInfo controlCategory) =>
+            WebPartCategoryInfoProvider.SetWebPartCategoryInfo(controlCategory);
 
         private FormFieldInfo AppendWebPart(FormFieldInfo formFieldInfo, IWebPart webPart)
         {

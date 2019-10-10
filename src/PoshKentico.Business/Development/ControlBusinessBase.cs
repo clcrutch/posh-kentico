@@ -1,4 +1,4 @@
-﻿// <copyright file="WebPartBusinessBase.cs" company="Chris Crutchfield">
+﻿// <copyright file="ControlBusinessBase.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -18,24 +18,23 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Linq;
-using CMS.PortalEngine;
 using PoshKentico.Core.Services.Development;
-using PoshKentico.Core.Services.Development.WebParts;
 
-namespace PoshKentico.Business.Development.WebParts
+namespace PoshKentico.Business.Development
 {
     /// <summary>
-    /// Base class for all Cmdlet Business objects which depend on the <see cref="IWebPartService"/>.
+    /// Base class for all Cmdlet Business objects which depend on the <see cref="IControlService{TControl, TControlCategory}"/>.
     /// </summary>
-    public abstract class WebPartBusinessBase : CmdletBusinessBase
+    public abstract class ControlBusinessBase<TControlService, TControl, TControlCategory> : CmdletBusinessBase
+        where TControlService : IControlService<TControl, TControlCategory>
     {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WebPartBusinessBase"/> class.
+        /// Initializes a new instance of the <see cref="ControlBusinessBase{TControlService, TControl, TControlCategory}"/> class.
         /// </summary>
         /// <param name="initCmsApplication">Indicates if the CMS Application should be initialized.</param>
-        public WebPartBusinessBase(bool initCmsApplication = true)
+        public ControlBusinessBase(bool initCmsApplication = true)
             : base(initCmsApplication)
         {
         }
@@ -45,10 +44,10 @@ namespace PoshKentico.Business.Development.WebParts
         #region Properties
 
         /// <summary>
-        /// Gets or sets a reference to the <see cref="IWebPartService"/>.  Populated by MEF.
+        /// Gets or sets a reference to the <see cref="IControlService{TControl, TControlCategory}"/>.  Populated by MEF.
         /// </summary>
         [Import]
-        public virtual IWebPartService WebPartService { get; set; }
+        public virtual TControlService ControlService { get; set; }
 
         #endregion
 
@@ -59,8 +58,8 @@ namespace PoshKentico.Business.Development.WebParts
         /// </summary>
         /// <param name="path">The path to look for the <see cref="IControlCategory{T}"/>.</param>
         /// <returns>Returns the <see cref="IControlCategory{T}"/> that reprsents the supplied path.</returns>
-        protected IControlCategory<WebPartCategoryInfo> GetCategoryFromPath(string path) =>
-            (from c in this.WebPartService.WebPartCategories
+        protected IControlCategory<TControlCategory> GetCategoryFromPath(string path) =>
+            (from c in this.ControlService.Categories
              where c.Path.Equals(path, StringComparison.InvariantCultureIgnoreCase)
              select c).Single();
 

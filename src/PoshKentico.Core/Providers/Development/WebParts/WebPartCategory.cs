@@ -9,21 +9,25 @@ namespace PoshKentico.Core.Providers.Development.WebParts
 {
     public class WebPartCategory : ControlCategory<WebPartCategoryInfo>
     {
+        public WebPartCategory()
+        {
+        }
+
         public WebPartCategory(WebPartCategoryInfo backingControlCategory)
             : base(backingControlCategory)
         {
         }
 
-        public override string DisplayName => this.BackingControlCategory.CategoryDisplayName;
+        public override string DisplayName { get => this.BackingControlCategory.CategoryDisplayName; set => this.BackingControlCategory.CategoryDisplayName = value; }
 
-        public override int ID => this.BackingControlCategory.CategoryID;
+        public override int ID { get => this.BackingControlCategory.CategoryID; set => this.BackingControlCategory.CategoryID = value; }
 
-        public override string ImagePath => this.BackingControlCategory.CategoryImagePath;
+        public override string ImagePath { get => this.BackingControlCategory.CategoryImagePath; set => this.BackingControlCategory.CategoryImagePath = value; }
 
-        public override string Name => this.BackingControlCategory.CategoryName;
+        public override string Name { get => this.BackingControlCategory.CategoryName; set => this.BackingControlCategory.CategoryName = value; }
 
-        public override int ParentID => this.BackingControlCategory.CategoryParentID;
+        public override int ParentID { get => this.BackingControlCategory.CategoryParentID; set => this.BackingControlCategory.CategoryParentID = value; }
 
-        public override string Path => this.BackingControlCategory.CategoryPath;
+        public override string Path { get => this.BackingControlCategory.CategoryPath; set => this.BackingControlCategory.CategoryPath = value; }
     }
 }

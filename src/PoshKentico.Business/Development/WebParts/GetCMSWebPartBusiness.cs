@@ -29,7 +29,7 @@ namespace PoshKentico.Business.Development.WebParts
     /// Business layer of the Get-CMSWebPart cmdlet.
     /// </summary>
     [Export(typeof(GetCMSWebPartBusiness))]
-    public class GetCMSWebPartBusiness : WebPartBusinessBase
+    public class GetCMSWebPartBusiness : ControlBusinessBase<IWebPartService, WebPartInfo, WebPartCategoryInfo>
     {
         #region Properties
 
@@ -79,7 +79,7 @@ namespace PoshKentico.Business.Development.WebParts
         /// Gets a list of all of the <see cref="IControl{T}"/>.
         /// </summary>
         /// <returns>A list of all of the <see cref="IControl{T}"/>.</returns>
-        public IEnumerable<IControl<WebPartInfo>> GetWebParts() => this.WebPartService.Controls;
+        public IEnumerable<IControl<WebPartInfo>> GetWebParts() => this.ControlService.Controls;
 
         /// <summary>
         /// Gets the <see cref="IControl{T}"/> that match the provided <paramref name="matchString"/>.
@@ -100,7 +100,7 @@ namespace PoshKentico.Business.Development.WebParts
                 regex = new Regex($"^{matchString.Replace("*", ".*")}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             }
 
-            return (from wp in this.WebPartService.Controls
+            return (from wp in this.ControlService.Controls
                     where regex.IsMatch(wp.DisplayName) ||
                         regex.IsMatch(wp.Name)
                     select wp).ToArray();
@@ -112,12 +112,12 @@ namespace PoshKentico.Business.Development.WebParts
         /// <returns>A list of <see cref="IControl{T}"/> which are contained by the <see cref="IControlCategory{T}"/> matching the <paramref name="matchString"/>.</returns>
         public IEnumerable<IControl<WebPartInfo>> GetWebPartsByCategories(string matchString, bool isRegex)
         {
-            var categories = this.GetCMSWebPartCategoryBusiness.GetWebPartCategories(matchString, isRegex, false);
+            var categories = this.GetCMSWebPartCategoryBusiness.GetControlCategories(matchString, isRegex, false);
 
             var ids = new HashSet<int>(from c in categories
                                        select c.ID);
 
-            return (from wp in this.WebPartService.Controls
+            return (from wp in this.ControlService.Controls
                     where ids.Contains(wp.CategoryID)
                     select wp).ToArray();
         }
@@ -128,7 +128,7 @@ namespace PoshKentico.Business.Development.WebParts
         /// <param name="controlCategory">The <see cref="IControlCategory{T}"/> that contains the desired <see cref="IControl{T}"/>.</param>
         /// <returns>A list of <see cref="IControl{T}"/> that are within the <paramref name="controlCategory"/>.</returns>
         public IEnumerable<IControl<WebPartInfo>> GetWebPartsByCategory(IControlCategory<WebPartCategoryInfo> controlCategory) =>
-            this.WebPartService.GetWebParts(controlCategory);
+            this.ControlService.GetControls(controlCategory);
 
         #endregion
 

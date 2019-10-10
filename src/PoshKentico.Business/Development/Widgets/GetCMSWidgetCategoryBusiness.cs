@@ -1,4 +1,4 @@
-﻿// <copyright file="SetCMSWebPartBusiness.cs" company="Chris Crutchfield">
+﻿// <copyright file="GetCMSWidgetCategoryBusiness.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -17,28 +17,15 @@
 
 using System.ComponentModel.Composition;
 using CMS.PortalEngine;
-using PoshKentico.Core.Services.Development.WebParts;
+using PoshKentico.Core.Services.Development.Widgets;
 
-namespace PoshKentico.Business.Development.WebParts
+namespace PoshKentico.Business.Development.Widgets
 {
     /// <summary>
-    /// Business layer for the Set-CMSWebPart cmdlet.
+    /// Business layer for the Get-CMSWebPartCategory cmdlet.
     /// </summary>
-    [Export(typeof(SetCMSWebPartBusiness))]
-    public class SetCMSWebPartBusiness : ControlBusinessBase<IWebPartService, WebPartInfo, WebPartCategoryInfo>
+    [Export(typeof(GetCMSWidgetCategoryBusiness))]
+    public class GetCMSWidgetCategoryBusiness : GetCMSControlCategoryBusiness<IWidgetService, WidgetInfo, WidgetCategoryInfo>
     {
-        #region Methods
-
-        /// <summary>
-        /// Updates the <see cref="IWebPart"/> in the system.
-        /// </summary>
-        /// <param name="webPart">The <see cref="IWebPart"/> to update.</param>
-        public void Set(IWebPart webPart)
-        {
-            this.ControlService.Update(webPart);
-        }
-
-        #endregion
-
     }
 }

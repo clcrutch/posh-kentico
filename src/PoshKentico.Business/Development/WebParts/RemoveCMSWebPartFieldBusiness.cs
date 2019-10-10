@@ -16,6 +16,7 @@
 // </copyright>
 
 using System.ComponentModel.Composition;
+using CMS.PortalEngine;
 using PoshKentico.Core.Services.Development.WebParts;
 
 namespace PoshKentico.Business.Development.WebParts
@@ -24,7 +25,7 @@ namespace PoshKentico.Business.Development.WebParts
     /// Business layer for the Remove-CMSWebPartField cmdlet.
     /// </summary>
     [Export(typeof(RemoveCMSWebPartFieldBusiness))]
-    public class RemoveCMSWebPartFieldBusiness : WebPartBusinessBase
+    public class RemoveCMSWebPartFieldBusiness : ControlBusinessBase<IWebPartService, WebPartInfo, WebPartCategoryInfo>
     {
         #region Methods
 
@@ -36,7 +37,7 @@ namespace PoshKentico.Business.Development.WebParts
         {
             if (this.OutputService.ShouldProcess(field.Name, $"Remove the field from web part named '{field.WebPart.Name}'."))
             {
-                this.WebPartService.RemoveField(field);
+                this.ControlService.RemoveField(field);
             }
         }
 

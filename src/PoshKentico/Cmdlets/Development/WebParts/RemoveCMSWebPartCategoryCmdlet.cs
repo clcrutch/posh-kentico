@@ -66,7 +66,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     [ExcludeFromCodeCoverage]
     [Cmdlet(VerbsCommon.Remove, "CMSWebPartCategory", SupportsShouldProcess = true, ConfirmImpact = ConfirmImpact.High, DefaultParameterSetName = NONE)]
     [Alias("rmwpc")]
-    public class RemoveCMSWebPartCategoryCmdlet : GetCMSWebPartCategoryCmdletBase
+    public class RemoveCMSWebPartCategoryCmdlet : GetCMSControlCategoryCmdletBase<GetCMSWebPartCategoryBusiness, IWebPartService, WebPartInfo, WebPartCategoryInfo, WebPart>
     {
         #region Constants
 

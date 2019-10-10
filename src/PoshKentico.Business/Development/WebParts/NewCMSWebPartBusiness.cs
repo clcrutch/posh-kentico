@@ -28,7 +28,7 @@ namespace PoshKentico.Business.Development.WebParts
     /// Business layer of the New-CMSWebPart cmdlet.
     /// </summary>
     [Export(typeof(NewCMSWebPartBusiness))]
-    public class NewCMSWebPartBusiness : WebPartBusinessBase
+    public class NewCMSWebPartBusiness : ControlBusinessBase<IWebPartService, WebPartInfo, WebPartCategoryInfo>
     {
         #region Methods
 
@@ -78,7 +78,7 @@ namespace PoshKentico.Business.Development.WebParts
                 CategoryID = webPartCategory.ID,
             };
 
-            return this.WebPartService.Create(data);
+            return this.ControlService.Create(data);
         }
 
         #endregion

@@ -10,20 +10,24 @@ namespace PoshKentico.Core.Providers.Development.WebParts
 {
     public class WebPart : Control<WebPartInfo>, IWebPart
     {
+        public WebPart()
+        {
+        }
+
         public WebPart(WebPartInfo backingControl)
             : base(backingControl)
         {
         }
 
-        public override int CategoryID => this.BackingControl.WebPartCategoryID;
+        public override int CategoryID { get => this.BackingControl.WebPartCategoryID; set => this.BackingControl.WebPartCategoryID = value; }
 
-        public override string DisplayName => this.BackingControl.WebPartDisplayName;
+        public override string DisplayName { get => this.BackingControl.WebPartDisplayName; set => this.BackingControl.WebPartDisplayName = value; }
 
-        public override int ID => this.BackingControl.WebPartID;
+        public override int ID { get => this.BackingControl.WebPartID; set => this.BackingControl.WebPartID = value; }
 
-        public override string Name => this.BackingControl.WebPartName;
+        public override string Name { get => this.BackingControl.WebPartName; set => this.BackingControl.WebPartName = value; }
 
-        public string FileName => this.BackingControl.WebPartFileName;
+        public string FileName { get => this.BackingControl.WebPartFileName; set => this.BackingControl.WebPartFileName = value; }
 
         public string Properties { get => this.BackingControl.WebPartProperties; set => this.BackingControl.WebPartProperties = value; }
     }

@@ -18,6 +18,7 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Linq;
+using CMS.PortalEngine;
 using PoshKentico.Core.Services.Development.WebParts;
 
 namespace PoshKentico.Business.Development.WebParts
@@ -26,7 +27,7 @@ namespace PoshKentico.Business.Development.WebParts
     /// Business layer of the Add-CMSWebPartField cmdlet.
     /// </summary>
     [Export(typeof(AddCMSWebPartFieldBusiness))]
-    public class AddCMSWebPartFieldBusiness : WebPartBusinessBase
+    public class AddCMSWebPartFieldBusiness : ControlBusinessBase<IWebPartService, WebPartInfo, WebPartCategoryInfo>
     {
         #region Methods
 
@@ -55,7 +56,7 @@ namespace PoshKentico.Business.Development.WebParts
                 Size = addFieldParameter.Size,
             };
 
-            return this.WebPartService.AddField(field, webPart);
+            return this.ControlService.AddField(field, webPart);
         }
 
         #endregion

@@ -26,7 +26,7 @@ namespace PoshKentico.Business.Development.WebParts
     /// Business layer for the Set-CMSWebPartCategory cmdlet.
     /// </summary>
     [Export(typeof(SetCMSWebPartCategoryBusiness))]
-    public class SetCMSWebPartCategoryBusiness : WebPartBusinessBase
+    public class SetCMSWebPartCategoryBusiness : ControlBusinessBase<IWebPartService, WebPartInfo, WebPartCategoryInfo>
     {
         #region Methods
 
@@ -36,7 +36,7 @@ namespace PoshKentico.Business.Development.WebParts
         /// <param name="webPartCategory">The <see cref="IControlCategory{T}"/> to set.</param>
         public void Set(IControlCategory<WebPartCategoryInfo> webPartCategory)
         {
-            this.WebPartService.Update(webPartCategory);
+            this.ControlService.Update(webPartCategory);
         }
 
         #endregion

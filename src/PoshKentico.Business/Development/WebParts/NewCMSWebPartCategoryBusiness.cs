@@ -18,6 +18,7 @@
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using CMS.PortalEngine;
+using PoshKentico.Core.Providers.Development.WebParts;
 using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.Development.WebParts;
 
@@ -27,7 +28,7 @@ namespace PoshKentico.Business.Development.WebParts
     /// Business layer for the New-CMSWebPartCategory cmdlet.
     /// </summary>
     [Export(typeof(NewCMSWebPartCategoryBusiness))]
-    public class NewCMSWebPartCategoryBusiness : WebPartBusinessBase
+    public class NewCMSWebPartCategoryBusiness : ControlBusinessBase<IWebPartService, WebPartInfo, WebPartCategoryInfo>
     {
         #region Methods
 
@@ -62,33 +63,9 @@ namespace PoshKentico.Business.Development.WebParts
                 DisplayName = displayName,
                 ImagePath = imagePath,
                 ParentID = parent.ID,
-
-                ID = -1,
             };
 
-            return this.WebPartService.Create(data);
-        }
-
-        #endregion
-
-        #region Classes
-
-        [ExcludeFromCodeCoverage]
-        private class WebPartCategory : IControlCategory<WebPartCategoryInfo>
-        {
-            public WebPartCategoryInfo BackingControlCategory => throw new System.NotImplementedException();
-
-            public string DisplayName { get; set; }
-
-            public int ID { get; set; }
-
-            public string ImagePath { get; set; }
-
-            public string Name { get; set; }
-
-            public int ParentID { get; set; }
-
-            public string Path { get; set; }
+            return this.ControlService.Create(data);
         }
 
         #endregion

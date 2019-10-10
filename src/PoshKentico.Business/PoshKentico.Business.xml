@@ -1587,6 +1587,80 @@
             <param name="option">The security option <see cref="T:PoshKentico.Core.Services.ContentManagement.MediaLibraries.SecurityPropertyEnum"/>.</param>
             <param name="securityAccess">The security acess enum <see cref="T:CMS.Helpers.SecurityAccessEnum"/>.</param>
         </member>
+        <member name="T:PoshKentico.Business.Development.ControlBusinessBase`3">
+            <summary>
+            Base class for all Cmdlet Business objects which depend on the <see cref="T:PoshKentico.Core.Services.Development.IControlService`2"/>.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Development.ControlBusinessBase`3.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PoshKentico.Business.Development.ControlBusinessBase`3"/> class.
+            </summary>
+            <param name="initCmsApplication">Indicates if the CMS Application should be initialized.</param>
+        </member>
+        <member name="P:PoshKentico.Business.Development.ControlBusinessBase`3.ControlService">
+            <summary>
+            Gets or sets a reference to the <see cref="T:PoshKentico.Core.Services.Development.IControlService`2"/>.  Populated by MEF.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Development.ControlBusinessBase`3.GetCategoryFromPath(System.String)">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> which represents the current path.
+            </summary>
+            <param name="path">The path to look for the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/>.</param>
+            <returns>Returns the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> that reprsents the supplied path.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.Development.GetCMSControlCategoryBusiness`3">
+            <summary>
+            Base Business layer for the Get-CMSControlCategory cmdlet.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.Development.GetCMSControlCategoryBusiness`3.GetControlCategories">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/>.
+            </summary>
+            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Development.GetCMSControlCategoryBusiness`3.GetControlCategories(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> which match the specified criteria.
+            </summary>
+            <param name="matchString">The string which to match the control categories to.</param>
+            <param name="isRegex">Indicates whether <paramref name="matchString"/> is a regular expression.</param>
+            <param name="recurse">Indicates whether control categories should be returned recursively.</param>
+            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> which match the specified criteria.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Development.GetCMSControlCategoryBusiness`3.GetControlCategories(System.Int32[],System.Boolean)">
+            <summary>
+            Gets a list of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> which match the supplied IDs.
+            </summary>
+            <param name="ids">The IDs of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> to return.</param>
+            <param name="recurse">Indicates whether control categories should be returned recursively.</param>
+            <returns>A list of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> which match the supplied IDs.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Development.GetCMSControlCategoryBusiness`3.GetControlCategories(PoshKentico.Core.Services.Development.IControlCategory{`2},System.Boolean)">
+            <summary>
+            Gets a list of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> which are children of the <paramref name="parentControlCategory"/>.
+            </summary>
+            <param name="parentControlCategory">The <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> which is parent to the categories to find.</param>
+            <param name="recurse">Indicates whether control categories should be returned recursively.</param>
+            <returns>A list of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> which are children to the supplied <paramref name="parentControlCategory"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Development.GetCMSControlCategoryBusiness`3.GetControlCategories(System.String,System.Boolean)">
+            <summary>
+            Gets a list of control categories by path.
+            </summary>
+            <param name="path">The path to get the list of control categories.</param>
+            <param name="recurse">Indicates if the control category children should be returned as well.</param>
+            <returns>A list of all of the control categories found at the specified path.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Development.GetCMSControlCategoryBusiness`3.GetControlCategory(PoshKentico.Core.Services.Development.IControl{`1})">
+            <summary>
+            Gets the control category for the current control.
+            </summary>
+            <param name="control">The control to get the category for.</param>
+            <returns>The control category.</returns>
+        </member>
         <member name="T:PoshKentico.Business.Development.PageTemplates.GetCMSPageTemplateBusiness">
             <summary>
             Base class for all Cmdlet Business objects which depend on the <see cref="T:PoshKentico.Core.Services.Development.PageTemplates.IPageTemplateService"/>.
@@ -1917,52 +1991,6 @@
             Business layer for the Get-CMSWebPartCategory cmdlet.
             </summary>
         </member>
-        <member name="M:PoshKentico.Business.Development.WebParts.GetCMSWebPartCategoryBusiness.GetWebPartCategories">
-            <summary>
-            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/>.
-            </summary>
-            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/>.</returns>
-        </member>
-        <member name="M:PoshKentico.Business.Development.WebParts.GetCMSWebPartCategoryBusiness.GetWebPartCategories(System.String,System.Boolean,System.Boolean)">
-            <summary>
-            Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> which match the specified criteria.
-            </summary>
-            <param name="matchString">The string which to match the webpart categories to.</param>
-            <param name="isRegex">Indicates whether <paramref name="matchString"/> is a regular expression.</param>
-            <param name="recurse">Indicates whether webpart categories should be returned recursively.</param>
-            <returns>A list of all of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> which match the specified criteria.</returns>
-        </member>
-        <member name="M:PoshKentico.Business.Development.WebParts.GetCMSWebPartCategoryBusiness.GetWebPartCategories(System.Int32[],System.Boolean)">
-            <summary>
-            Gets a list of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> which match the supplied IDs.
-            </summary>
-            <param name="ids">The IDs of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> to return.</param>
-            <param name="recurse">Indicates whether webpart categories should be returned recursively.</param>
-            <returns>A list of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> which match the supplied IDs.</returns>
-        </member>
-        <member name="M:PoshKentico.Business.Development.WebParts.GetCMSWebPartCategoryBusiness.GetWebPartCategories(PoshKentico.Core.Services.Development.IControlCategory{CMS.PortalEngine.WebPartCategoryInfo},System.Boolean)">
-            <summary>
-            Gets a list of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> which are children of the <paramref name="parentWebPartCategory"/>.
-            </summary>
-            <param name="parentWebPartCategory">The <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> which is parent to the categories to find.</param>
-            <param name="recurse">Indicates whether webpart categories should be returned recursively.</param>
-            <returns>A list of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> which are children to the supplied <paramref name="parentWebPartCategory"/>.</returns>
-        </member>
-        <member name="M:PoshKentico.Business.Development.WebParts.GetCMSWebPartCategoryBusiness.GetWebPartCategories(System.String,System.Boolean)">
-            <summary>
-            Gets a list of web part categories by path.
-            </summary>
-            <param name="path">The path to get the list of web part categories.</param>
-            <param name="recurse">Indicates if the web part category children should be returned as well.</param>
-            <returns>A list of all of the web part categories found at the specified path.</returns>
-        </member>
-        <member name="M:PoshKentico.Business.Development.WebParts.GetCMSWebPartCategoryBusiness.GetWebPartCategory(PoshKentico.Core.Services.Development.IControl{CMS.PortalEngine.WebPartInfo})">
-            <summary>
-            Gets the web part category for the current web part.
-            </summary>
-            <param name="control">The webpart to get the category for.</param>
-            <returns>The web part category.</returns>
-        </member>
         <member name="T:PoshKentico.Business.Development.WebParts.GetCMSWebPartFieldBusiness">
             <summary>
             Business layer for the Get-CMSWebPartField cmdlet.
@@ -2089,28 +2117,10 @@
             </summary>
             <param name="field">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/> to update.</param>
         </member>
-        <member name="T:PoshKentico.Business.Development.WebParts.WebPartBusinessBase">
+        <member name="T:PoshKentico.Business.Development.Widgets.GetCMSWidgetCategoryBusiness">
             <summary>
-            Base class for all Cmdlet Business objects which depend on the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartService"/>.
+            Business layer for the Get-CMSWebPartCategory cmdlet.
             </summary>
-        </member>
-        <member name="M:PoshKentico.Business.Development.WebParts.WebPartBusinessBase.#ctor(System.Boolean)">
-            <summary>
-            Initializes a new instance of the <see cref="T:PoshKentico.Business.Development.WebParts.WebPartBusinessBase"/> class.
-            </summary>
-            <param name="initCmsApplication">Indicates if the CMS Application should be initialized.</param>
-        </member>
-        <member name="P:PoshKentico.Business.Development.WebParts.WebPartBusinessBase.WebPartService">
-            <summary>
-            Gets or sets a reference to the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartService"/>.  Populated by MEF.
-            </summary>
-        </member>
-        <member name="M:PoshKentico.Business.Development.WebParts.WebPartBusinessBase.GetCategoryFromPath(System.String)">
-            <summary>
-            Gets the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> which represents the current path.
-            </summary>
-            <param name="path">The path to look for the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/>.</param>
-            <returns>Returns the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> that reprsents the supplied path.</returns>
         </member>
         <member name="T:PoshKentico.Business.General.GetCMSApplicationVersionBusiness">
             <summary>

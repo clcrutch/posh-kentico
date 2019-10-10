@@ -87,6 +87,9 @@ FormatsToProcess = @( `
     "./FormattingFiles/Development/WebParts/WebPartCategoryInfo.format.ps1xml", `
 	"./FormattingFiles/Development/WebParts/WebPartInfo.format.ps1xml", `
 
+	# Development/Widgets
+	"./FormattingFiles/Development/Widgets/WidgetCategoryInfo.format.ps1xml", `
+
 	# Development/PageTemplates
 	"./FormattingFiles/Development/PageTemplates/PageTemplateCategoryInfo.format.ps1xml", `	
 	"./FormattingFiles/Development/PageTemplates/PageTemplateInfo.format.ps1xml" `	

@@ -29,32 +29,32 @@ namespace PoshKentico.Core.Services.Development
         /// <summary>
         /// Gets the display name for the category.
         /// </summary>
-        string DisplayName { get; }
+        string DisplayName { get; set; }
 
         /// <summary>
         /// Gets the ID for the category.
         /// </summary>
-        int ID { get; }
+        int ID { get; set; }
 
         /// <summary>
         /// Gets the image path for the category.
         /// </summary>
-        string ImagePath { get; }
+        string ImagePath { get; set; }
 
         /// <summary>
         /// Gets the name for the category.
         /// </summary>
-        string Name { get; }
+        string Name { get; set; }
 
         /// <summary>
         /// Gets the parent ID for the category.
         /// </summary>
-        int ParentID { get; }
+        int ParentID { get; set; }
 
         /// <summary>
         /// Gets the path for the category.
         /// </summary>
-        string Path { get; }
+        string Path { get; set; }
 
         #endregion
 

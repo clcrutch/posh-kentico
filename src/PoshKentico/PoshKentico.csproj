@@ -137,6 +137,9 @@
     <None Update="FormattingFiles\Development\WebParts\WebPartInfo.format.ps1xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="FormattingFiles\Development\Widgets\WidgetCategoryInfo.format.ps1xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="init.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

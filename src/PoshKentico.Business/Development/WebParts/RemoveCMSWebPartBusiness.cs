@@ -26,7 +26,7 @@ namespace PoshKentico.Business.Development.WebParts
     /// Business layer of the Remove-CMSWebPart cmdlet.
     /// </summary>
     [Export(typeof(RemoveCMSWebPartBusiness))]
-    public class RemoveCMSWebPartBusiness : WebPartBusinessBase
+    public class RemoveCMSWebPartBusiness : ControlBusinessBase<IWebPartService, WebPartInfo, WebPartCategoryInfo>
     {
         #region Methods
 
@@ -38,7 +38,7 @@ namespace PoshKentico.Business.Development.WebParts
         {
             if (this.OutputService.ShouldProcess(control.Name, "Remove the web part from Kentico."))
             {
-                this.WebPartService.Delete(control);
+                this.ControlService.Delete(control);
             }
         }
 

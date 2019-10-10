@@ -28,7 +28,7 @@ namespace PoshKentico.Business.Development.WebParts
     /// Business layer for the Remove-CMSWebPartCategory cmdlet.
     /// </summary>
     [Export(typeof(RemoveCMSWebPartCategoryBusiness))]
-    public class RemoveCMSWebPartCategoryBusiness : WebPartBusinessBase
+    public class RemoveCMSWebPartCategoryBusiness : ControlBusinessBase<IWebPartService, WebPartInfo, WebPartCategoryInfo>
     {
         #region Methods
 
@@ -39,7 +39,7 @@ namespace PoshKentico.Business.Development.WebParts
         /// <param name="recurse">Indicates whether webpart categories and web parts should be removed recursively.</param>
         public void RemoveWebPartCategory(IControlCategory<WebPartCategoryInfo> webPartCategory, bool recurse)
         {
-            var webParts = this.WebPartService.GetWebParts(webPartCategory);
+            var webParts = this.ControlService.GetControls(webPartCategory);
             if (webParts.Any())
             {
                 if (recurse)
@@ -48,7 +48,7 @@ namespace PoshKentico.Business.Development.WebParts
                     {
                         if (this.OutputService.ShouldProcess(webpart.DisplayName, "Remove the web part from Kentico."))
                         {
-                            this.WebPartService.Delete(webpart);
+                            this.ControlService.Delete(webpart);
                         }
                     }
                 }
@@ -58,7 +58,7 @@ namespace PoshKentico.Business.Development.WebParts
                 }
             }
 
-            var webPartCategories = this.WebPartService.GetWebPartCategories(webPartCategory);
+            var webPartCategories = this.ControlService.GetControlCategories(webPartCategory);
             if (webPartCategories.Any())
             {
                 if (recurse)
@@ -76,7 +76,7 @@ namespace PoshKentico.Business.Development.WebParts
 
             if (this.OutputService.ShouldProcess(webPartCategory.DisplayName, "Remove the web part category from Kentico."))
             {
-                this.WebPartService.Delete(webPartCategory);
+                this.ControlService.Delete(webPartCategory);
             }
         }
 

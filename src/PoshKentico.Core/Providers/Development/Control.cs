@@ -9,6 +9,11 @@ namespace PoshKentico.Core.Providers.Development
 {
     public abstract class Control<T> : IControl<T>
     {
+        public Control()
+        {
+            this.BackingControl = Activator.CreateInstance<T>();
+        }
+
         public Control(T backingControl)
         {
             this.BackingControl = backingControl;
@@ -16,12 +21,12 @@ namespace PoshKentico.Core.Providers.Development
 
         public T BackingControl { get; private set; }
 
-        public abstract int CategoryID { get; }
+        public abstract int CategoryID { get; set; }
 
-        public abstract string DisplayName { get; }
+        public abstract string DisplayName { get; set; }
 
-        public abstract int ID { get; }
+        public abstract int ID { get; set; }
 
-        public abstract string Name { get; }
+        public abstract string Name { get; set; }
     }
 }
