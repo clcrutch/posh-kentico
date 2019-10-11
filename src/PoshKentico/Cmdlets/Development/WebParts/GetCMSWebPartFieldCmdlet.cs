@@ -24,6 +24,7 @@ using CMS.PortalEngine;
 using ImpromptuInterface;
 using PoshKentico.Business.Development.WebParts;
 using PoshKentico.Core.Providers.Development.WebParts;
+using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.Development.WebParts;
 using AliasAttribute = System.Management.Automation.AliasAttribute;
 
@@ -85,7 +86,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
-            IEnumerable<IWebPartField> fields = null;
+            IEnumerable<IControlField<WebPartInfo>> fields = null;
 
             switch (this.ParameterSetName)
             {
@@ -107,7 +108,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         /// When overridden in a child class, operates on the specified field.
         /// </summary>
         /// <param name="field">The field to operate on.</param>
-        protected virtual void ActOnObject(IWebPartField field)
+        protected virtual void ActOnObject(IControlField<WebPartInfo> field)
         {
             this.WriteObject(field?.UndoActLike());
         }

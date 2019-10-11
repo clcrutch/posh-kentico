@@ -19,6 +19,7 @@ using System;
 using System.ComponentModel.Composition;
 using System.Linq;
 using CMS.PortalEngine;
+using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.Development.WebParts;
 
 namespace PoshKentico.Business.Development.WebParts
@@ -36,8 +37,8 @@ namespace PoshKentico.Business.Development.WebParts
         /// </summary>
         /// <param name="addFieldParameter">Holds the parameters used to create the field.</param>
         /// <param name="webPart">The <see cref="IWebPart"/> to add the field to.</param>
-        /// <returns>The <see cref="IWebPartField"/> that was added to the <see cref="IWebPart"/>.</returns>
-        public IWebPartField AddField(AddFieldParameter addFieldParameter, IWebPart webPart)
+        /// <returns>The <see cref="IControlField{T}"/> that was added to the <see cref="IWebPart"/>.</returns>
+        public IControlField<WebPartInfo> AddField(AddFieldParameter addFieldParameter, IWebPart webPart)
         {
             var dataType = typeof(FieldDataType).GetMember(addFieldParameter.ColumnType.ToString())
                             .Single()
@@ -99,7 +100,7 @@ namespace PoshKentico.Business.Development.WebParts
             public int Size { get; set; }
         }
 
-        private class Field : IWebPartField
+        private class Field : IControlField<WebPartInfo>
         {
             public bool AllowEmpty { get; set; }
 
@@ -113,7 +114,7 @@ namespace PoshKentico.Business.Development.WebParts
 
             public int Size { get; set; }
 
-            public IWebPart WebPart { get; set; }
+            public IControl<WebPartInfo> Control { get; set; }
         }
 
         #endregion

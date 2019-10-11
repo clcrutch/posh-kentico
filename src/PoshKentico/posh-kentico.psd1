@@ -89,6 +89,7 @@ FormatsToProcess = @( `
 
 	# Development/Widgets
 	"./FormattingFiles/Development/Widgets/WidgetCategoryInfo.format.ps1xml", `
+	"./FormattingFiles/Development/Widgets/WidgetInfo.format.ps1xml", `
 
 	# Development/PageTemplates
 	"./FormattingFiles/Development/PageTemplates/PageTemplateCategoryInfo.format.ps1xml", `	

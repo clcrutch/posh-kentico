@@ -17,6 +17,7 @@
 
 using System.ComponentModel.Composition;
 using CMS.PortalEngine;
+using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.Development.WebParts;
 
 namespace PoshKentico.Business.Development.WebParts
@@ -28,10 +29,10 @@ namespace PoshKentico.Business.Development.WebParts
     public class SetCMSWebPartFieldBusiness : ControlBusinessBase<IWebPartService, WebPartInfo, WebPartCategoryInfo>
     {
         /// <summary>
-        /// Sets an <see cref="IWebPartField"/> in Kentico associated with an <see cref="IWebPart"/>.
+        /// Sets an <see cref="IControlField{T}"/> in Kentico associated with an <see cref="IWebPart"/>.
         /// </summary>
-        /// <param name="field">The <see cref="IWebPartField"/> to update.</param>
-        public void Set(IWebPartField field)
+        /// <param name="field">The <see cref="IControlField{T}"/> to update.</param>
+        public void Set(IControlField<WebPartInfo> field)
         {
             this.ControlService.Update(field);
         }

@@ -1,4 +1,4 @@
-﻿// <copyright file="GetCMSWebPartCategoryCmdlet.cs" company="Chris Crutchfield">
+﻿// <copyright file="GetCMSWidgetCategoryCmdlet.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -26,37 +26,37 @@ using AliasAttribute = System.Management.Automation.AliasAttribute;
 namespace PoshKentico.Cmdlets.Development.Widgets
 {
     /// <summary>
-    /// <para type="synopsis">Gets the web part categories selected by the provided input.</para>
-    /// <para type="description">Gets the web part categories selected by the provided input.  This command automatically initializes the connection to Kentico if not already initialized.</para>
+    /// <para type="synopsis">Gets the widget categories selected by the provided input.</para>
+    /// <para type="description">Gets the widget categories selected by the provided input.  This command automatically initializes the connection to Kentico if not already initialized.</para>
     /// <para type="description"></para>
-    /// <para type="description">Without parameters, this command returns all webpart categories.</para>
-    /// <para type="description">With parameters, this command returns the webpart categories that match the criteria.</para>
+    /// <para type="description">Without parameters, this command returns all widget categories.</para>
+    /// <para type="description">With parameters, this command returns the widget categories that match the criteria.</para>
     /// <example>
     ///     <para>Get all the widget categories.</para>
-    ///     <code>Get-CMSWebPartCategory</code>
+    ///     <code>Get-CMSWidgetCategory</code>
     /// </example>
     /// <example>
-    ///     <para>Get all web part categories with a category name "*bas*", display name "*bas*".</para>
-    ///     <code>Get-CMSWebPartCategory *bas*</code>
+    ///     <para>Get all widget categories with a category name "*bas*", display name "*bas*".</para>
+    ///     <code>Get-CMSWidgetCategory *bas*</code>
     /// </example>
     /// <example>
-    ///     <para>Get all web part categories with a category name "basic", display name "basic"</para>
-    ///     <code>Get-CMSWebPartCategory basic</code>
+    ///     <para>Get all widget categories with a category name "basic", display name "basic"</para>
+    ///     <code>Get-CMSWidgetCategory basic</code>
     /// </example>
     /// <example>
-    ///     <para>Get all the web part categories with the specified IDs.</para>
-    ///     <code>Get-CMSWebPartCategory -ID 5,304,5</code>
+    ///     <para>Get all the widget categories with the specified IDs.</para>
+    ///     <code>Get-CMSWidgetCategory -ID 5,304,5</code>
     /// </example>
     /// <example>
-    ///     <para>Get all the web part categories under the basic category.</para>
-    ///     <code>Get-CMSWebPartCategory basic -Recurse</code>
+    ///     <para>Get all the widget categories under the basic category.</para>
+    ///     <code>Get-CMSWidgetCategory basic -Recurse</code>
     /// </example>
     /// <example>
-    ///     <para>Get the web part category associated with the web part.</para>
-    ///     <code>$webPart | Get-WebPartCategory</code>
+    ///     <para>Get the widget category associated with the widget.</para>
+    ///     <code>$webPart | Get-WidgetCategory</code>
     /// </example>
     /// <example>
-    ///     <para>Get the web part categories under a parent category.</para>
+    ///     <para>Get the widget categories under a parent category.</para>
     ///     <code>$widgetCategory | Get-WidgetCategory</code>
     /// </example>
     /// </summary>

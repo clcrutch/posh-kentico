@@ -28,14 +28,6 @@ namespace PoshKentico.Core.Services.Development.WebParts
         #region Methods
 
         /// <summary>
-        /// Adds a field to a <see cref="IWebPart"/>.
-        /// </summary>
-        /// <param name="field">The <see cref="IWebPartField"/> to add.</param>
-        /// <param name="webPart">The <see cref="IWebPart"/> to attach the field to.</param>
-        /// <returns>The newly created <see cref="IWebPartField"/>.</returns>
-        IWebPartField AddField(IWebPartField field, IWebPart webPart);
-
-        /// <summary>
         /// Creates the <see cref="IWebPart"/>.
         /// </summary>
         /// <param name="webPart">The <see cref="IWebPart"/> to create.</param>
@@ -43,17 +35,10 @@ namespace PoshKentico.Core.Services.Development.WebParts
         IWebPart Create(IWebPart webPart);
 
         /// <summary>
-        /// Gets the <see cref="IWebPartField"/> associated with the supplied <see cref="IWebPart"/>.
+        /// Removes a <see cref="IControlField{T}"/> from a <see cref="IWebPart"/>.
         /// </summary>
-        /// <param name="webPart">The <see cref="IWebPart"/> to get the list of fields for.</param>
-        /// <returns>A list of the <see cref="IWebPartField"/> that is associated with the supplied <see cref="IWebPart"/>.</returns>
-        IEnumerable<IWebPartField> GetWebPartFields(IWebPart webPart);
-
-        /// <summary>
-        /// Removes a <see cref="IWebPartField"/> from a <see cref="IWebPart"/>.
-        /// </summary>
-        /// <param name="field">The <see cref="IWebPartField"/> to remove.</param>
-        void RemoveField(IWebPartField field);
+        /// <param name="field">The <see cref="IControlField{T}"/> to remove.</param>
+        void RemoveField(IControlField<WebPartInfo> field);
 
         /// <summary>
         /// Updates the <see cref="IWebPart"/>.
@@ -62,10 +47,10 @@ namespace PoshKentico.Core.Services.Development.WebParts
         void Update(IWebPart webPart);
 
         /// <summary>
-        /// Updates the <see cref="IWebPartField"/>.
+        /// Updates the <see cref="IControlField{T}"/>.
         /// </summary>
-        /// <param name="field">The <see cref="IWebPartField"/> to update.</param>
-        void Update(IWebPartField field);
+        /// <param name="field">The <see cref="IControlField{T}"/> to update.</param>
+        void Update(IControlField<WebPartInfo> field);
 
         #endregion
 

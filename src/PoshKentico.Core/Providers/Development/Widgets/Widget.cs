@@ -21,5 +21,7 @@ namespace PoshKentico.Core.Providers.Development.Widgets
         public override int ID { get => this.BackingControl.WidgetID; set => this.BackingControl.WidgetID = value; }
 
         public override string Name { get => this.BackingControl.WidgetName; set => this.BackingControl.WidgetName = value; }
+
+        public override string Properties { get => this.BackingControl.WidgetProperties; set => this.BackingControl.WidgetProperties = value; }
     }
 }

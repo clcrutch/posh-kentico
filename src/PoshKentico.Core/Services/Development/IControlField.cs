@@ -1,4 +1,4 @@
-﻿// <copyright file="IWebPartField.cs" company="Chris Crutchfield">
+﻿// <copyright file="IControlField.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -15,12 +15,12 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-namespace PoshKentico.Core.Services.Development.WebParts
+namespace PoshKentico.Core.Services.Development
 {
     /// <summary>
-    /// Represents a Web Part field.
+    /// Represents a control field.
     /// </summary>
-    public interface IWebPartField
+    public interface IControlField<T>
     {
         /// <summary>
         /// Gets a value indicating whether the current field is allowed to be empty.
@@ -53,8 +53,8 @@ namespace PoshKentico.Core.Services.Development.WebParts
         int Size { get; }
 
         /// <summary>
-        /// Gets or sets the <see cref="IWebPart"/> associated with the <see cref="IWebPartField"/>.
+        /// Gets or sets the <see cref="IControl{T}"/> associated with the <see cref="IControlField{T}"/>.
         /// </summary>
-        IWebPart WebPart { get; set; }
+        IControl<T> Control { get; set; }
     }
 }

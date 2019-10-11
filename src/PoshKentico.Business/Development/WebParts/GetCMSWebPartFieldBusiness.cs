@@ -20,6 +20,7 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text.RegularExpressions;
 using CMS.PortalEngine;
+using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.Development.WebParts;
 
 namespace PoshKentico.Business.Development.WebParts
@@ -33,21 +34,21 @@ namespace PoshKentico.Business.Development.WebParts
         #region Methods
 
         /// <summary>
-        /// Gets a list of the <see cref="IWebPartField"/> associated with a <see cref="IWebPart"/>.
+        /// Gets a list of the <see cref="IControlField{T}"/> associated with a <see cref="IControl{T}"/>.
         /// </summary>
-        /// <param name="webPart">The <see cref="IWebPart"/> to get the list <see cref="IWebPartField"/> for.</param>
-        /// <returns>A list of <see cref="IWebPartField"/> associated with the <see cref="IWebPart"/>.</returns>
-        public IEnumerable<IWebPartField> GetWebPartFields(IWebPart webPart) =>
-            this.ControlService.GetWebPartFields(webPart);
+        /// <param name="webPart">The <see cref="IWebPart"/> to get the list <see cref="IControlField{T}"/> for.</param>
+        /// <returns>A list of <see cref="IControlField{T}"/> associated with the <see cref="IControl{T}"/>.</returns>
+        public IEnumerable<IControlField<WebPartInfo>> GetWebPartFields(IWebPart webPart) =>
+            this.ControlService.GetControlFields(webPart);
 
         /// <summary>
-        /// Gets a list of the <see cref="IWebPartField"/> associated with a <see cref="IWebPart"/> which match the supplied criteria.
+        /// Gets a list of the <see cref="IControlField{T}"/> associated with a <see cref="IControl{T}"/> which match the supplied criteria.
         /// </summary>
         /// <param name="matchString">The string which to match the webpart fields to.</param>
         /// <param name="isRegex">Indicates whether <paramref name="matchString"/> is a regular expression.</param>
-        /// <param name="webPart">The <see cref="IWebPart"/> to get the list <see cref="IWebPartField"/> for.</param>
-        /// <returns>A list of <see cref="IWebPartField"/> associated with the <see cref="IWebPart"/> which match the supplied criteria.</returns>
-        public IEnumerable<IWebPartField> GetWebPartFields(string matchString, bool isRegex, IWebPart webPart)
+        /// <param name="webPart">The <see cref="IControl{T}"/> to get the list <see cref="IControlField{T}"/> for.</param>
+        /// <returns>A list of <see cref="IControlField{T}"/> associated with the <see cref="IControl{T}"/> which match the supplied criteria.</returns>
+        public IEnumerable<IControlField<WebPartInfo>> GetWebPartFields(string matchString, bool isRegex, IWebPart webPart)
         {
             Regex regex = null;
 

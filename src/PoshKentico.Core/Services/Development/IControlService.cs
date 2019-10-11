@@ -25,6 +25,14 @@ namespace PoshKentico.Core.Services.Development
         #region Methods
 
         /// <summary>
+        /// Adds a field to a <see cref="IControl{T}"/>.
+        /// </summary>
+        /// <param name="field">The <see cref="IControlField{T}"/> to add.</param>
+        /// <param name="control">The <see cref="IControl{T}"/> to attach the field to.</param>
+        /// <returns>The newly created <see cref="IControlField{T}"/>.</returns>
+        IControlField<TControl> AddField(IControlField<TControl> field, IControl<TControl> control);
+
+        /// <summary>
         /// Creates the <see cref="IControlCategory{T}"/>.
         /// </summary>
         /// <param name="controlCategory">The <see cref="IControlCategory{T}"/> to create.</param>
@@ -57,6 +65,15 @@ namespace PoshKentico.Core.Services.Development
         /// <returns>The <see cref="IControlCategory{T}"/> which matches the ID, else null.</returns>
         IControlCategory<TControlCategory> GetControlCategory(int id);
 
+        IControl<TControl> GetControl(int id);
+
+        /// <summary>
+        /// Gets the <see cref="IControlField{T}"/> associated with the supplied <see cref="IControl{T}"/>.
+        /// </summary>
+        /// <param name="control">The <see cref="IControl{T}"/> to get the list of fields for.</param>
+        /// <returns>A list of the <see cref="IControlField{T}"/> that is associated with the supplied <see cref="IControl{T}"/>.</returns>
+        IEnumerable<IControlField<TControl>> GetControlFields(IControl<TControl> control);
+
         /// <summary>
         /// Gets a list of <see cref="IControl{T}"/> which have <paramref name="controlCategory"/> as their parent category.
         /// </summary>
@@ -71,5 +88,6 @@ namespace PoshKentico.Core.Services.Development
         void Update(IControlCategory<TControlCategory> controlCategory);
 
         #endregion
+
     }
 }

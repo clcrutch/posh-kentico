@@ -31,11 +31,6 @@ namespace PoshKentico.Core.Services.Development.WebParts
         /// </summary>
         string FileName { get; }
 
-        /// <summary>
-        /// Gets or sets the properties for the current web part.
-        /// </summary>
-        string Properties { get; set; }
-
         #endregion
 
     }

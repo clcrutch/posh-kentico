@@ -35,12 +35,6 @@ namespace PoshKentico.Core.Providers.Development.WebParts
     [Export(typeof(IWebPartService))]
     public class KenticoWebPartService : ControlService<WebPartInfo, WebPartCategoryInfo>, IWebPartService
     {
-        #region Fields
-
-        private readonly ProxyGenerator proxyGenerator = new ProxyGenerator();
-
-        #endregion
-
         #region Properties
 
         /// <inheritdoc />
@@ -54,28 +48,6 @@ namespace PoshKentico.Core.Providers.Development.WebParts
         #endregion
 
         #region Methods
-
-        /// <inheritdoc />
-        public IWebPartField AddField(IWebPartField field, IWebPart webPart)
-        {
-            var formInfo = new FormInfo(webPart.Properties);
-            var fieldInfo = new FormFieldInfo
-            {
-                AllowEmpty = field.AllowEmpty,
-                Caption = field.Caption,
-                DataType = field.DataType,
-                DefaultValue = field.DefaultValue,
-                Name = field.Name,
-                Size = field.Size,
-            };
-            formInfo.AddFormItem(fieldInfo);
-
-            webPart.Properties = formInfo.GetXmlDefinition();
-
-            this.SaveFormUpdates(webPart);
-
-            return this.AppendWebPart(fieldInfo, webPart).ActLike<IWebPartField>();
-        }
 
         /// <inheritdoc />
         public IWebPart Create(IWebPart webPart)
@@ -103,19 +75,14 @@ namespace PoshKentico.Core.Providers.Development.WebParts
             WebPartInfoProvider.DeleteWebPartInfo(control.ID);
 
         /// <inheritdoc />
-        public IEnumerable<IWebPartField> GetWebPartFields(IWebPart webPart) =>
-               (from f in new FormInfo(webPart.Properties).GetFields<FormFieldInfo>()
-                select this.AppendWebPart(f, webPart).ActLike<IWebPartField>()).ToArray();
-
-        /// <inheritdoc />
-        public void RemoveField(IWebPartField field)
+        public void RemoveField(IControlField<WebPartInfo> field)
         {
-            var formInfo = new FormInfo(field.WebPart.Properties);
+            var formInfo = new FormInfo(field.Control.Properties);
             formInfo.RemoveFields(x => x.Name == field.Name);
 
-            field.WebPart.Properties = formInfo.GetXmlDefinition();
+            field.Control.Properties = formInfo.GetXmlDefinition();
 
-            this.SaveFormUpdates(field.WebPart);
+            this.SetControlInfo(field.Control.BackingControl);
         }
 
         /// <inheritdoc />
@@ -138,9 +105,9 @@ namespace PoshKentico.Core.Providers.Development.WebParts
         }
 
         /// <inheritdoc />
-        public void Update(IWebPartField field)
+        public void Update(IControlField<WebPartInfo> field)
         {
-            var formInfo = new FormInfo(field.WebPart.Properties);
+            var formInfo = new FormInfo(field.Control.Properties);
             var fieldInfo = formInfo.GetFormField(field.Name);
 
             fieldInfo.AllowEmpty = field.AllowEmpty;
@@ -151,40 +118,16 @@ namespace PoshKentico.Core.Providers.Development.WebParts
 
             formInfo.UpdateFormField(field.Name, fieldInfo);
 
-            field.WebPart.Properties = formInfo.GetXmlDefinition();
+            field.Control.Properties = formInfo.GetXmlDefinition();
 
-            this.SaveFormUpdates(field.WebPart);
+            this.SetControlInfo(field.Control.BackingControl);
         }
 
         protected override void SetControlCategoryInfo(WebPartCategoryInfo controlCategory) =>
             WebPartCategoryInfoProvider.SetWebPartCategoryInfo(controlCategory);
 
-        private FormFieldInfo AppendWebPart(FormFieldInfo formFieldInfo, IWebPart webPart)
-        {
-            var options = new ProxyGenerationOptions();
-            options.AddMixinInstance(new WebPartHolder
-            {
-                WebPart = webPart,
-            });
-
-            var result = this.proxyGenerator.CreateClassProxyWithTarget(formFieldInfo, options);
-
-            return result as FormFieldInfo;
-        }
-
-        private void SaveFormUpdates(IWebPart webPart)
-        {
-            var webPartInfo = WebPartInfoProvider.GetWebPartInfo(webPart.ID);
-
-            if (webPartInfo == null)
-            {
-                return;
-            }
-
-            webPartInfo.WebPartProperties = webPart.Properties;
-
-            WebPartInfoProvider.SetWebPartInfo(webPartInfo);
-        }
+        protected override void SetControlInfo(WebPartInfo control) =>
+            WebPartInfoProvider.SetWebPartInfo(control);
 
         #endregion
 

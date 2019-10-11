@@ -28,5 +28,7 @@ namespace PoshKentico.Core.Providers.Development
         public abstract int ID { get; set; }
 
         public abstract string Name { get; set; }
+
+        public abstract string Properties { get; set; }
     }
 }

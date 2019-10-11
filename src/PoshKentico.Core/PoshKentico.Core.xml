@@ -346,6 +346,17 @@
         <member name="M:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.RemoveUserFromSite(PoshKentico.Core.Services.Configuration.Users.IUser,System.String)">
             <inheritdoc/>
         </member>
+        <member name="T:PoshKentico.Core.Providers.Development.ControlHolder`1">
+            <summary>
+            Used by Dynamic Proxy to add a place to set a <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/>.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.ControlHolder`1.Control">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.ControlService`2.AddField(PoshKentico.Core.Services.Development.IControlField{`0},PoshKentico.Core.Services.Development.IControl{`0})">
+            <inheritdoc />
+        </member>
         <member name="M:PoshKentico.Core.Providers.Development.ControlService`2.Create(PoshKentico.Core.Services.Development.IControlCategory{`1})">
             <inheritdoc />
         </member>
@@ -355,11 +366,24 @@
         <member name="M:PoshKentico.Core.Providers.Development.ControlService`2.GetControlCategory(System.Int32)">
             <inheritdoc />
         </member>
+        <member name="M:PoshKentico.Core.Providers.Development.ControlService`2.GetControlFields(PoshKentico.Core.Services.Development.IControl{`0})">
+            <inheritdoc />
+        </member>
         <member name="M:PoshKentico.Core.Providers.Development.ControlService`2.GetControls(PoshKentico.Core.Services.Development.IControlCategory{`1})">
             <inheritdoc />
         </member>
         <member name="M:PoshKentico.Core.Providers.Development.ControlService`2.Update(PoshKentico.Core.Services.Development.IControlCategory{`1})">
             <inheritdoc />
+        </member>
+        <member name="T:PoshKentico.Core.Providers.Development.IControlHolder`1">
+            <summary>
+            Used by Dynamic Proxy to add a place to set a <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/>.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.IControlHolder`1.Control">
+            <summary>
+            Gets or sets a <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/> associated with the current object.
+            </summary>
         </member>
         <member name="T:PoshKentico.Core.Providers.Development.PageTemplates.IPageTemplateHolder">
             <summary>
@@ -429,16 +453,6 @@
         <member name="P:PoshKentico.Core.Providers.Development.PageTemplates.PageTemplateHolder.PageTemplate">
             <inheritdoc />
         </member>
-        <member name="T:PoshKentico.Core.Providers.Development.WebParts.IWebPartHolder">
-            <summary>
-            Used by Dynamic Proxy to add a place to set a <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Core.Providers.Development.WebParts.IWebPartHolder.WebPart">
-            <summary>
-            Gets or sets a <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> associated with the current object.
-            </summary>
-        </member>
         <member name="T:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService">
             <summary>
             Implementation of <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartService"/> that uses Kentico.
@@ -450,9 +464,6 @@
         <member name="P:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.Categories">
             <inheritdoc />
         </member>
-        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.AddField(PoshKentico.Core.Services.Development.WebParts.IWebPartField,PoshKentico.Core.Services.Development.WebParts.IWebPart)">
-            <inheritdoc />
-        </member>
         <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.Create(PoshKentico.Core.Services.Development.WebParts.IWebPart)">
             <inheritdoc />
         </member>
@@ -462,24 +473,13 @@
         <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.Delete(PoshKentico.Core.Services.Development.IControl{CMS.PortalEngine.WebPartInfo})">
             <inheritdoc />
         </member>
-        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.GetWebPartFields(PoshKentico.Core.Services.Development.WebParts.IWebPart)">
-            <inheritdoc />
-        </member>
-        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.RemoveField(PoshKentico.Core.Services.Development.WebParts.IWebPartField)">
+        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.RemoveField(PoshKentico.Core.Services.Development.IControlField{CMS.PortalEngine.WebPartInfo})">
             <inheritdoc />
         </member>
         <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.Update(PoshKentico.Core.Services.Development.WebParts.IWebPart)">
             <inheritdoc />
         </member>
-        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.Update(PoshKentico.Core.Services.Development.WebParts.IWebPartField)">
-            <inheritdoc />
-        </member>
-        <member name="T:PoshKentico.Core.Providers.Development.WebParts.WebPartHolder">
-            <summary>
-            Used by Dynamic Proxy to add a place to set a <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Core.Providers.Development.WebParts.WebPartHolder.WebPart">
+        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.Update(PoshKentico.Core.Services.Development.IControlField{CMS.PortalEngine.WebPartInfo})">
             <inheritdoc />
         </member>
         <member name="T:PoshKentico.Core.Providers.General.KenticoCmsApplicationService">
@@ -1867,6 +1867,46 @@
             Gets the path for the category.
             </summary>
         </member>
+        <member name="T:PoshKentico.Core.Services.Development.IControlField`1">
+            <summary>
+            Represents a control field.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.IControlField`1.AllowEmpty">
+            <summary>
+            Gets a value indicating whether the current field is allowed to be empty.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.IControlField`1.Caption">
+            <summary>
+            Gets the caption for the current field.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.IControlField`1.DataType">
+            <summary>
+            Gets the data type for the current field.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.IControlField`1.DefaultValue">
+            <summary>
+            Gets the default value for the current field.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.IControlField`1.Name">
+            <summary>
+            Gets the name for the current field.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.IControlField`1.Size">
+            <summary>
+            Gets the size for the current field.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.IControlField`1.Control">
+            <summary>
+            Gets or sets the <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/> associated with the <see cref="T:PoshKentico.Core.Services.Development.IControlField`1"/>.
+            </summary>
+        </member>
         <member name="P:PoshKentico.Core.Services.Development.IControlService`2.Controls">
             <summary>
             Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/> provided by the CMS System.
@@ -1876,6 +1916,14 @@
             <summary>
             Gets a list of all of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> provided by the CMS System.
             </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Development.IControlService`2.AddField(PoshKentico.Core.Services.Development.IControlField{`0},PoshKentico.Core.Services.Development.IControl{`0})">
+            <summary>
+            Adds a field to a <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/>.
+            </summary>
+            <param name="field">The <see cref="T:PoshKentico.Core.Services.Development.IControlField`1"/> to add.</param>
+            <param name="control">The <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/> to attach the field to.</param>
+            <returns>The newly created <see cref="T:PoshKentico.Core.Services.Development.IControlField`1"/>.</returns>
         </member>
         <member name="M:PoshKentico.Core.Services.Development.IControlService`2.Create(PoshKentico.Core.Services.Development.IControlCategory{`1})">
             <summary>
@@ -1909,6 +1957,13 @@
             </summary>
             <param name="id">The ID of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> to return.</param>
             <returns>The <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> which matches the ID, else null.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Development.IControlService`2.GetControlFields(PoshKentico.Core.Services.Development.IControl{`0})">
+            <summary>
+            Gets the <see cref="T:PoshKentico.Core.Services.Development.IControlField`1"/> associated with the supplied <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/>.
+            </summary>
+            <param name="control">The <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/> to get the list of fields for.</param>
+            <returns>A list of the <see cref="T:PoshKentico.Core.Services.Development.IControlField`1"/> that is associated with the supplied <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/>.</returns>
         </member>
         <member name="M:PoshKentico.Core.Services.Development.IControlService`2.GetControls(PoshKentico.Core.Services.Development.IControlCategory{`1})">
             <summary>
@@ -2239,51 +2294,6 @@
             Gets the file name for the current web part.
             </summary>
         </member>
-        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPart.Properties">
-            <summary>
-            Gets or sets the properties for the current web part.
-            </summary>
-        </member>
-        <member name="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField">
-            <summary>
-            Represents a Web Part field.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartField.AllowEmpty">
-            <summary>
-            Gets a value indicating whether the current field is allowed to be empty.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartField.Caption">
-            <summary>
-            Gets the caption for the current field.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartField.DataType">
-            <summary>
-            Gets the data type for the current field.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartField.DefaultValue">
-            <summary>
-            Gets the default value for the current field.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartField.Name">
-            <summary>
-            Gets the name for the current field.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartField.Size">
-            <summary>
-            Gets the size for the current field.
-            </summary>
-        </member>
-        <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartField.WebPart">
-            <summary>
-            Gets or sets the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> associated with the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/>.
-            </summary>
-        </member>
         <member name="T:PoshKentico.Core.Services.Development.WebParts.IWebPartInstance">
             <summary>
             Represents a Web Part Instance.
@@ -2314,14 +2324,6 @@
             Service for providing access to a CMS webparts.
             </summary>
         </member>
-        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.AddField(PoshKentico.Core.Services.Development.WebParts.IWebPartField,PoshKentico.Core.Services.Development.WebParts.IWebPart)">
-            <summary>
-            Adds a field to a <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.
-            </summary>
-            <param name="field">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/> to add.</param>
-            <param name="webPart">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> to attach the field to.</param>
-            <returns>The newly created <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/>.</returns>
-        </member>
         <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.Create(PoshKentico.Core.Services.Development.WebParts.IWebPart)">
             <summary>
             Creates the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.
@@ -2329,18 +2331,11 @@
             <param name="webPart">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> to create.</param>
             <returns>The newly created <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.</returns>
         </member>
-        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.GetWebPartFields(PoshKentico.Core.Services.Development.WebParts.IWebPart)">
+        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.RemoveField(PoshKentico.Core.Services.Development.IControlField{CMS.PortalEngine.WebPartInfo})">
             <summary>
-            Gets the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/> associated with the supplied <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.
+            Removes a <see cref="T:PoshKentico.Core.Services.Development.IControlField`1"/> from a <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.
             </summary>
-            <param name="webPart">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> to get the list of fields for.</param>
-            <returns>A list of the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/> that is associated with the supplied <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.</returns>
-        </member>
-        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.RemoveField(PoshKentico.Core.Services.Development.WebParts.IWebPartField)">
-            <summary>
-            Removes a <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/> from a <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.
-            </summary>
-            <param name="field">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/> to remove.</param>
+            <param name="field">The <see cref="T:PoshKentico.Core.Services.Development.IControlField`1"/> to remove.</param>
         </member>
         <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.Update(PoshKentico.Core.Services.Development.WebParts.IWebPart)">
             <summary>
@@ -2348,11 +2343,11 @@
             </summary>
             <param name="webPart">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> to update.</param>
         </member>
-        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.Update(PoshKentico.Core.Services.Development.WebParts.IWebPartField)">
+        <member name="M:PoshKentico.Core.Services.Development.WebParts.IWebPartService.Update(PoshKentico.Core.Services.Development.IControlField{CMS.PortalEngine.WebPartInfo})">
             <summary>
-            Updates the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/>.
+            Updates the <see cref="T:PoshKentico.Core.Services.Development.IControlField`1"/>.
             </summary>
-            <param name="field">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartField"/> to update.</param>
+            <param name="field">The <see cref="T:PoshKentico.Core.Services.Development.IControlField`1"/> to update.</param>
         </member>
         <member name="T:PoshKentico.Core.Services.Development.WebParts.IWebPartZoneInstance">
             <summary>

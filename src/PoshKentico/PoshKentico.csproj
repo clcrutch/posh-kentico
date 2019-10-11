@@ -137,6 +137,9 @@
     <None Update="FormattingFiles\Development\WebParts\WebPartInfo.format.ps1xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="FormattingFiles\Development\Widgets\WidgetInfo.format.ps1xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="FormattingFiles\Development\Widgets\WidgetCategoryInfo.format.ps1xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -157,10 +160,10 @@
     </None>
   </ItemGroup>
 
-  <Target Name="MakeCMSMethodsVirtual" AfterTargets="CoreCompile">
+  <Target Name="MakeCMSMethodsVirtual" AfterTargets="Build">
     <Exec Command="..\PoshKentico.CodeWeaving\bin\$(Configuration)\net461\PoshKentico.CodeWeaving.exe $(TargetDir)" ConsoleToMSBuild="true">
       <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
     </Exec>
   </Target>
-
+  
 </Project>

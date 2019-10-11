@@ -18,8 +18,10 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 using CMS.FormEngine;
+using CMS.PortalEngine;
 using ImpromptuInterface;
 using PoshKentico.Business.Development.WebParts;
+using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.Development.WebParts;
 using AliasAttribute = System.Management.Automation.AliasAttribute;
 
@@ -72,7 +74,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         /// <inheritdoc />
         protected override void ProcessRecord()
         {
-            this.BusinessLayer.Set(this.Field.ActLike<IWebPartField>());
+            this.BusinessLayer.Set(this.Field.ActLike<IControlField<WebPartInfo>>());
 
             if (this.PassThru.ToBool())
             {

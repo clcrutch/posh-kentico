@@ -19,9 +19,11 @@ using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 using CMS.FormEngine;
+using CMS.PortalEngine;
 using ImpromptuInterface;
 using PoshKentico.Business.Development.WebParts;
 using PoshKentico.Core.Providers.Development.WebParts;
+using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.Development.WebParts;
 
 using AliasAttribute = System.Management.Automation.AliasAttribute;
@@ -80,7 +82,7 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         {
             if (this.ParameterSetName == FIELD)
             {
-                this.ActOnObject(this.Field.ActLike<IWebPartField>());
+                this.ActOnObject(this.Field.ActLike<IControlField<WebPartInfo>>());
             }
             else
             {
@@ -89,11 +91,11 @@ namespace PoshKentico.Cmdlets.Development.WebParts
         }
 
         /// <inheritdoc/>
-        protected override void ActOnObject(IWebPartField field)
+        protected override void ActOnObject(IControlField<WebPartInfo> field)
         {
             if (this.WebPart != null)
             {
-                field.WebPart = new WebPart(this.WebPart);
+                field.Control = new WebPart(this.WebPart);
             }
 
             this.RemoveBusinessLayer.RemoveField(field);

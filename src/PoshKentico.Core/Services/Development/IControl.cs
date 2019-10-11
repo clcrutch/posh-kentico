@@ -17,5 +17,7 @@ namespace PoshKentico.Core.Services.Development
         int ID { get; set; }
 
         string Name { get; set; }
+
+        string Properties { get; set; }
     }
 }

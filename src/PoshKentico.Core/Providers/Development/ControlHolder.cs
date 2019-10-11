@@ -1,4 +1,4 @@
-﻿// <copyright file="GetCMSWebPartBusiness.cs" company="Chris Crutchfield">
+﻿// <copyright file="WebPartHolder.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -15,17 +15,18 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using System.ComponentModel.Composition;
-using CMS.PortalEngine;
-using PoshKentico.Core.Services.Development.WebParts;
+using System.Diagnostics.CodeAnalysis;
+using PoshKentico.Core.Services.Development;
 
-namespace PoshKentico.Business.Development.WebParts
+namespace PoshKentico.Core.Providers.Development
 {
     /// <summary>
-    /// Business layer of the Get-CMSWebPart cmdlet.
+    /// Used by Dynamic Proxy to add a place to set a <see cref="IControl{T}"/>.
     /// </summary>
-    [Export(typeof(GetCMSWebPartBusiness))]
-    public class GetCMSWebPartBusiness : GetCMSControlBusiness<GetCMSWebPartCategoryBusiness, IWebPartService, WebPartInfo, WebPartCategoryInfo>
+    [ExcludeFromCodeCoverage]
+    internal class ControlHolder<T> : IControlHolder<T>
     {
+        /// <inheritdoc />
+        public IControl<T> Control { get; set; }
     }
 }

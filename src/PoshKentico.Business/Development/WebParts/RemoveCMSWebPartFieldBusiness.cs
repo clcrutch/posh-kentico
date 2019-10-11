@@ -17,6 +17,7 @@
 
 using System.ComponentModel.Composition;
 using CMS.PortalEngine;
+using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.Development.WebParts;
 
 namespace PoshKentico.Business.Development.WebParts
@@ -30,12 +31,12 @@ namespace PoshKentico.Business.Development.WebParts
         #region Methods
 
         /// <summary>
-        /// Removes an <see cref="IWebPartField"/> from Kentico.
+        /// Removes an <see cref="IControlField{T}"/> from Kentico.
         /// </summary>
-        /// <param name="field">The <see cref="IWebPartField"/> to remove.</param>
-        public void RemoveField(IWebPartField field)
+        /// <param name="field">The <see cref="IControlField{T}"/> to remove.</param>
+        public void RemoveField(IControlField<WebPartInfo> field)
         {
-            if (this.OutputService.ShouldProcess(field.Name, $"Remove the field from web part named '{field.WebPart.Name}'."))
+            if (this.OutputService.ShouldProcess(field.Name, $"Remove the field from web part named '{field.Control.Name}'."))
             {
                 this.ControlService.RemoveField(field);
             }

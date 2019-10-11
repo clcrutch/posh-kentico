@@ -29,6 +29,6 @@ namespace PoshKentico.Core.Providers.Development.WebParts
 
         public string FileName { get => this.BackingControl.WebPartFileName; set => this.BackingControl.WebPartFileName = value; }
 
-        public string Properties { get => this.BackingControl.WebPartProperties; set => this.BackingControl.WebPartProperties = value; }
+        public override string Properties { get => this.BackingControl.WebPartProperties; set => this.BackingControl.WebPartProperties = value; }
     }
 }
