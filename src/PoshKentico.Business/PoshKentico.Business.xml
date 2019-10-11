@@ -1729,22 +1729,6 @@
             Business layer for the Get-CMSWebPartField cmdlet.
             </summary>
         </member>
-        <member name="M:PoshKentico.Business.Development.WebParts.GetCMSWebPartFieldBusiness.GetWebPartFields(PoshKentico.Core.Services.Development.WebParts.IWebPart)">
-            <summary>
-            Gets a list of the <see cref="T:PoshKentico.Core.Services.Development.IControlField`1"/> associated with a <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/>.
-            </summary>
-            <param name="webPart">The <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> to get the list <see cref="T:PoshKentico.Core.Services.Development.IControlField`1"/> for.</param>
-            <returns>A list of <see cref="T:PoshKentico.Core.Services.Development.IControlField`1"/> associated with the <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/>.</returns>
-        </member>
-        <member name="M:PoshKentico.Business.Development.WebParts.GetCMSWebPartFieldBusiness.GetWebPartFields(System.String,System.Boolean,PoshKentico.Core.Services.Development.WebParts.IWebPart)">
-            <summary>
-            Gets a list of the <see cref="T:PoshKentico.Core.Services.Development.IControlField`1"/> associated with a <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/> which match the supplied criteria.
-            </summary>
-            <param name="matchString">The string which to match the webpart fields to.</param>
-            <param name="isRegex">Indicates whether <paramref name="matchString"/> is a regular expression.</param>
-            <param name="webPart">The <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/> to get the list <see cref="T:PoshKentico.Core.Services.Development.IControlField`1"/> for.</param>
-            <returns>A list of <see cref="T:PoshKentico.Core.Services.Development.IControlField`1"/> associated with the <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/> which match the supplied criteria.</returns>
-        </member>
         <member name="T:PoshKentico.Business.Development.WebParts.NewCMSWebPartBusiness">
             <summary>
             Business layer of the New-CMSWebPart cmdlet.
@@ -1905,6 +1889,22 @@
             </summary>
             <param name="control">The control to get the category for.</param>
             <returns>The control category.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Development.GetCMSControlFieldBusiness`3.GetControlFields(PoshKentico.Core.Services.Development.IControl{`1})">
+            <summary>
+            Gets a list of the <see cref="T:PoshKentico.Core.Services.Development.IControlField`1"/> associated with a <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/>.
+            </summary>
+            <param name="control">The <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/> to get the list <see cref="T:PoshKentico.Core.Services.Development.IControlField`1"/> for.</param>
+            <returns>A list of <see cref="T:PoshKentico.Core.Services.Development.IControlField`1"/> associated with the <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/>.</returns>
+        </member>
+        <member name="M:PoshKentico.Business.Development.GetCMSControlFieldBusiness`3.GetControlFields(System.String,System.Boolean,PoshKentico.Core.Services.Development.IControl{`1})">
+            <summary>
+            Gets a list of the <see cref="T:PoshKentico.Core.Services.Development.IControlField`1"/> associated with a <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/> which match the supplied criteria.
+            </summary>
+            <param name="matchString">The string which to match the control fields to.</param>
+            <param name="isRegex">Indicates whether <paramref name="matchString"/> is a regular expression.</param>
+            <param name="control">The <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/> to get the list <see cref="T:PoshKentico.Core.Services.Development.IControlField`1"/> for.</param>
+            <returns>A list of <see cref="T:PoshKentico.Core.Services.Development.IControlField`1"/> associated with the <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/> which match the supplied criteria.</returns>
         </member>
         <member name="T:PoshKentico.Business.Development.PageTemplates.GetCMSPageTemplateBusiness">
             <summary>
@@ -2125,6 +2125,11 @@
         <member name="T:PoshKentico.Business.Development.Widgets.GetCMSWidgetCategoryBusiness">
             <summary>
             Business layer for the Get-CMSWebPartCategory cmdlet.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Business.Development.Widgets.GetCMSWidgetFieldBusiness">
+            <summary>
+            Business layer for the Get-CMSWebPartField cmdlet.
             </summary>
         </member>
         <member name="T:PoshKentico.Business.General.GetCMSApplicationVersionBusiness">

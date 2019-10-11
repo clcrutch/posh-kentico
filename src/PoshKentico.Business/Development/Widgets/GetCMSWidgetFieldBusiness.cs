@@ -17,15 +17,15 @@
 
 using System.ComponentModel.Composition;
 using CMS.PortalEngine;
-using PoshKentico.Core.Services.Development.WebParts;
+using PoshKentico.Core.Services.Development.Widgets;
 
-namespace PoshKentico.Business.Development.WebParts
+namespace PoshKentico.Business.Development.Widgets
 {
     /// <summary>
     /// Business layer for the Get-CMSWebPartField cmdlet.
     /// </summary>
-    [Export(typeof(GetCMSWebPartFieldBusiness))]
-    public class GetCMSWebPartFieldBusiness : GetCMSControlFieldBusiness<IWebPartService, WebPartInfo, WebPartCategoryInfo>
+    [Export(typeof(GetCMSWidgetFieldBusiness))]
+    public class GetCMSWidgetFieldBusiness : GetCMSControlFieldBusiness<IWidgetService, WidgetInfo, WidgetCategoryInfo>
     {
     }
 }

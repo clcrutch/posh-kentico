@@ -15,20 +15,16 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 using CMS.FormEngine;
 using CMS.PortalEngine;
-using ImpromptuInterface;
-using PoshKentico.Business.Development.WebParts;
-using PoshKentico.Core.Providers.Development.WebParts;
-using PoshKentico.Core.Services.Development;
-using PoshKentico.Core.Services.Development.WebParts;
+using PoshKentico.Business.Development.Widgets;
+using PoshKentico.Core.Providers.Development.Widgets;
+using PoshKentico.Core.Services.Development.Widgets;
 using AliasAttribute = System.Management.Automation.AliasAttribute;
 
-namespace PoshKentico.Cmdlets.Development.WebParts
+namespace PoshKentico.Cmdlets.Development.Widgets
 {
     /// <summary>
     /// <para type="synopsis">Gets the web part fields selected by the provided input.</para>
@@ -44,10 +40,10 @@ namespace PoshKentico.Cmdlets.Development.WebParts
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
-    [Cmdlet(VerbsCommon.Get, "CMSWebPartField", DefaultParameterSetName = NONAME)]
+    [Cmdlet(VerbsCommon.Get, "CMSWidgetField", DefaultParameterSetName = NONAME)]
     [OutputType(typeof(FormFieldInfo[]))]
-    [Alias("gwpf")]
-    public class GetCMSWebPartFieldCmdlet : GetCMSControlFieldCmdlet<GetCMSWebPartFieldBusiness, WebPart, IWebPartService, WebPartInfo, WebPartCategoryInfo>
+    [Alias("gwf")]
+    public class GetCMSWidgetFieldCmdlet : GetCMSControlFieldCmdlet<GetCMSWidgetFieldBusiness, Widget, IWidgetService, WidgetInfo, WidgetCategoryInfo>
     {
     }
 }
