@@ -2132,6 +2132,39 @@
             Business layer for the Get-CMSWebPartField cmdlet.
             </summary>
         </member>
+        <member name="T:PoshKentico.Business.General.ConnectCMSApplicationBusiness">
+            <summary>
+            Business layer for the Connect-CMSApplication cmdlet.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.General.ConnectCMSApplicationBusiness.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PoshKentico.Business.General.ConnectCMSApplicationBusiness"/> class.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Business.General.ConnectCMSApplicationBusiness.Connect(System.String,System.IO.DirectoryInfo)">
+            <summary>
+            Connects Kentico with the specified connection string and web root.
+            Matches with the "ConnectionString" parameter set name.
+            </summary>
+            <param name="connectionString">The connection string for the database connection.</param>
+            <param name="webRoot">The root directory for the Kentico site.</param>
+        </member>
+        <member name="M:PoshKentico.Business.General.ConnectCMSApplicationBusiness.Connect(System.Boolean)">
+            <summary>
+            Connects Kentico by searching for a Kentico site.
+            </summary>
+            <param name="useCached">A boolean which indicates if initialization should use a previously cahced value if available.</param>
+        </member>
+        <member name="M:PoshKentico.Business.General.ConnectCMSApplicationBusiness.Connect(System.String,System.String,System.Int32,System.IO.DirectoryInfo)">
+            <summary>
+            Connects Kentico by using the provided information to generate a connection string.
+            </summary>
+            <param name="databaseServer">The server the Kentico database is located on.</param>
+            <param name="database">The name of the Kentico database.</param>
+            <param name="timeout">The timeout for connecting to the Kentico database.</param>
+            <param name="webRoot">The root directory for the Kentico site.</param>
+        </member>
         <member name="T:PoshKentico.Business.General.GetCMSApplicationVersionBusiness">
             <summary>
             Business layer for the Get-CMSApplicationVersion cmdlet.
@@ -2158,39 +2191,6 @@
             Gets the version of the CMS application.
             </summary>
             <returns>The version of the CMS application.</returns>
-        </member>
-        <member name="T:PoshKentico.Business.General.InitializeCMSApplicationBusiness">
-            <summary>
-            Business layer for the Initialize-CMSApplication cmdlet.
-            </summary>
-        </member>
-        <member name="M:PoshKentico.Business.General.InitializeCMSApplicationBusiness.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:PoshKentico.Business.General.InitializeCMSApplicationBusiness"/> class.
-            </summary>
-        </member>
-        <member name="M:PoshKentico.Business.General.InitializeCMSApplicationBusiness.Initialize(System.String,System.IO.DirectoryInfo)">
-            <summary>
-            Initializes Kentico with the specified connection string and web root.
-            Matches with the "ConnectionString" parameter set name.
-            </summary>
-            <param name="connectionString">The connection string for the database connection.</param>
-            <param name="webRoot">The root directory for the Kentico site.</param>
-        </member>
-        <member name="M:PoshKentico.Business.General.InitializeCMSApplicationBusiness.Initialize(System.Boolean)">
-            <summary>
-            Initializes Kentico by searching for a Kentico site.
-            </summary>
-            <param name="useCached">A boolean which indicates if initialization should use a previously cahced value if available.</param>
-        </member>
-        <member name="M:PoshKentico.Business.General.InitializeCMSApplicationBusiness.Initialize(System.String,System.String,System.Int32,System.IO.DirectoryInfo)">
-            <summary>
-            Initializes Kentico by using the provided information to generate a connection string.
-            </summary>
-            <param name="databaseServer">The server the Kentico database is located on.</param>
-            <param name="database">The name of the Kentico database.</param>
-            <param name="timeout">The timeout for connecting to the Kentico database.</param>
-            <param name="webRoot">The root directory for the Kentico site.</param>
         </member>
         <member name="T:PoshKentico.Business.General.InitializeCMSDatabaseBusiness">
             <summary>

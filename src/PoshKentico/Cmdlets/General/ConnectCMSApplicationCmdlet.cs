@@ -1,4 +1,4 @@
-﻿// <copyright file="InitializeCMSApplicationCmdlet.cs" company="Chris Crutchfield">
+﻿// <copyright file="ConnectCMSApplicationCmdlet.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -15,7 +15,6 @@
 // along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 // </copyright>
 
-using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Management.Automation;
@@ -24,8 +23,8 @@ using PoshKentico.Business.General;
 namespace PoshKentico.Cmdlets.General
 {
     /// <summary>
-    /// <para type="synopsis">Initializes a connection to the Kentico CMS Server.</para>
-    /// <para type="description">The Initialize-CMSApplication cmdlet initializes a connection to the Kentico CMS server.</para>
+    /// <para type="synopsis">Connects a connection to the Kentico CMS Server.</para>
+    /// <para type="description">The Connect-CMSApplication cmdlet connects a connection to the Kentico CMS server.</para>
     /// <para type="description"></para>
     /// <para type="description">If this cmdlet is run without parameters, then it requires administrator permissions to find the Kentico site.</para>
     /// <para type="description">It does so by performing the following steps:</para>
@@ -36,20 +35,20 @@ namespace PoshKentico.Cmdlets.General
     /// <para type="description">5. Parse the document and find an "add" node with name="CMSConnectionString".</para>
     /// <para type="description">6. If the connection string is valid, then stop processing.</para>
     /// <example>
-    ///     <para>Initialize the Kentico CMS Application by searching for the Kentico site.</para>
+    ///     <para>Connect to Kentico CMS Application by searching for the Kentico site.</para>
     ///     <para>This option requires administrator rights.</para>
-    ///     <code>Initialize-CMSApplication</code>
+    ///     <code>Connect-CMSApplication</code>
     /// </example>
     /// <example>
-    ///     <para>Initialize the Kentico CMS Application by using the specified connection string.</para>
+    ///     <para>Connect to Kentico CMS Application by using the specified connection string.</para>
     ///     <para>This option does not require administrator rights.</para>
-    ///     <code>Initialize-CMSApplication -DatabaseServer KenticoServer -Database Kentico -WebRoot C:\kentico</code>
+    ///     <code>Connect-CMSApplication -DatabaseServer KenticoServer -Database Kentico -WebRoot C:\kentico</code>
     /// </example>
     /// </summary>
     [ExcludeFromCodeCoverage]
-    [Cmdlet(VerbsData.Initialize, "CMSApplication", DefaultParameterSetName = NONE)]
-    [Alias("inapp")]
-    public class InitializeCMSApplicationCmdlet : MefCmdlet<InitializeCMSApplicationBusiness>
+    [Cmdlet(VerbsCommunications.Connect, "CMSApplication", DefaultParameterSetName = NONE)]
+    [Alias("inapp", "Initialize-CMSApplication", "ccapp")]
+    public class ConnectCMSApplicationCmdlet : MefCmdlet<ConnectCMSApplicationBusiness>
     {
         #region Constants
 
@@ -112,13 +111,13 @@ namespace PoshKentico.Cmdlets.General
             switch (this.ParameterSetName)
             {
                 case CONNECTIONSTRING:
-                    this.BusinessLayer.Initialize(this.ConnectionString, new DirectoryInfo(this.WebRoot));
+                    this.BusinessLayer.Connect(this.ConnectionString, new DirectoryInfo(this.WebRoot));
                     return;
                 case NONE:
-                    this.BusinessLayer.Initialize(this.Cached.ToBool());
+                    this.BusinessLayer.Connect(this.Cached.ToBool());
                     return;
                 case SERVERANDDATABASE:
-                    this.BusinessLayer.Initialize(this.DatabaseServer, this.Database, this.Timeout, new DirectoryInfo(this.WebRoot));
+                    this.BusinessLayer.Connect(this.DatabaseServer, this.Database, this.Timeout, new DirectoryInfo(this.WebRoot));
                     return;
             }
         }

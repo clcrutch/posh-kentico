@@ -20,11 +20,9 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 using CMS.FormEngine;
-using CMS.PortalEngine;
 using ImpromptuInterface;
 using PoshKentico.Business.Development;
 using PoshKentico.Business.Development.WebParts;
-using PoshKentico.Core.Providers.Development.WebParts;
 using PoshKentico.Core.Services.Development;
 
 using AliasAttribute = System.Management.Automation.AliasAttribute;
