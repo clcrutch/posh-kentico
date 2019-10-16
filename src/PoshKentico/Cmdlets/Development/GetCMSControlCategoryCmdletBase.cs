@@ -42,10 +42,10 @@ namespace PoshKentico.Cmdlets.Development
         /// </summary>
         protected const string NONE = "None";
 
-        private const string CATEGORYNAME = "Category Name";
-        private const string IDSETNAME = "ID";
-        private const string PATH = "Path";
-        private const string CONTROL = "Control";
+        protected const string CATEGORYNAME = "Category Name";
+        protected const string IDSETNAME = "ID";
+        protected const string PATH = "Path";
+        protected const string CONTROL = "Control";
 
         #endregion
 

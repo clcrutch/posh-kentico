@@ -52,6 +52,9 @@ namespace PoshKentico.Cmdlets.Development
         /// <para type="description">Indiciates if the cmdlet should look recursively for web part categories.</para>
         /// </summary>
         [Parameter(ParameterSetName = PARENTCATEGORY)]
+        [Parameter(ParameterSetName = CATEGORYNAME)]
+        [Parameter(ParameterSetName = IDSETNAME)]
+        [Parameter(ParameterSetName = PATH)]
         public override SwitchParameter Recurse
         {
             get => base.Recurse;

@@ -1,9 +1,11 @@
-﻿using CMS.PortalEngine;
+﻿using CMS.FormEngine;
+using CMS.PortalEngine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace PoshKentico.Core.Providers.Development.Widgets
 {
@@ -22,6 +24,21 @@ namespace PoshKentico.Core.Providers.Development.Widgets
 
         public override string Name { get => this.BackingControl.WidgetName; set => this.BackingControl.WidgetName = value; }
 
-        public override string Properties { get => this.BackingControl.WidgetProperties; set => this.BackingControl.WidgetProperties = value; }
+        public override string Properties { get => this.MergeProperites(); set => this.BackingControl.WidgetProperties = value; }
+
+        private string CoalesceEmptyString(string value, string @default) =>
+            string.IsNullOrWhiteSpace(value) ? @default : value;
+
+        private string MergeProperites()
+        {
+            var webPart = WebPartInfoProvider.GetWebPartInfo(this.BackingControl.WidgetWebPartID);
+
+            var webPartForm = new FormInfo(webPart.WebPartProperties);
+            var widgetForm = new FormInfo(this.BackingControl.WidgetProperties);
+
+            widgetForm.CombineWithForm(webPartForm, true);
+
+            return widgetForm.GetXmlDefinition();
+        }
     }
 }
