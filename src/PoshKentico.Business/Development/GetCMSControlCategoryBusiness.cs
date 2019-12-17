@@ -26,6 +26,9 @@ namespace PoshKentico.Business.Development
     /// <summary>
     /// Base Business layer for the Get-CMSControlCategory cmdlet.
     /// </summary>
+    /// <typeparam name="TControlService">The type for the control service used to get control and control categories.</typeparam>
+    /// <typeparam name="TControl">The type of control returned by the control service.</typeparam>
+    /// <typeparam name="TControlCategory">The type of control category returned by the control service.</typeparam>
     public abstract class GetCMSControlCategoryBusiness<TControlService, TControl, TControlCategory> : ControlBusinessBase<TControlService, TControl, TControlCategory>
         where TControlService : IControlService<TControl, TControlCategory>
     {

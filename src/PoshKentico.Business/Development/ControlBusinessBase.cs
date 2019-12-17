@@ -25,6 +25,9 @@ namespace PoshKentico.Business.Development
     /// <summary>
     /// Base class for all Cmdlet Business objects which depend on the <see cref="IControlService{TControl, TControlCategory}"/>.
     /// </summary>
+    /// <typeparam name="TControlService">The type for the control service used to return controls and control categories.</typeparam>
+    /// <typeparam name="TControl">The type of control returned by the control service.</typeparam>
+    /// <typeparam name="TControlCategory">The type of control category returned by the control service.</typeparam>
     public abstract class ControlBusinessBase<TControlService, TControl, TControlCategory> : CmdletBusinessBase
         where TControlService : IControlService<TControl, TControlCategory>
     {

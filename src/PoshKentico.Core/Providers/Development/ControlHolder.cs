@@ -1,4 +1,4 @@
-﻿// <copyright file="WebPartHolder.cs" company="Chris Crutchfield">
+﻿// <copyright file="ControlHolder.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -23,6 +23,7 @@ namespace PoshKentico.Core.Providers.Development
     /// <summary>
     /// Used by Dynamic Proxy to add a place to set a <see cref="IControl{T}"/>.
     /// </summary>
+    /// <typeparam name="T">The type of the control to "hold".</typeparam>
     [ExcludeFromCodeCoverage]
     internal class ControlHolder<T> : IControlHolder<T>
     {

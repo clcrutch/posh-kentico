@@ -13,8 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-New-CMSScheduledTask [-AssemblyName] <String> [-Class] <String> [-Data] <String> [-DisplayName] <String>
- [-Interval] <TaskInterval> [-Name] <String> [-Site <SiteInfo>] [<CommonParameters>]
+New-CMSScheduledTask [-AssemblyName] <String> [-Class] <String> [[-Data] <String>] [-DisplayName] <String>
+ [-Interval] <TaskInterval> [-Name] <String> [-ServerName <String>] [-Site <SiteInfo>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -67,9 +67,9 @@ Accept wildcard characters: False
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: TaskData
 
-Required: True
+Required: False
 Position: 4
 Default value: None
 Accept pipeline input: False
@@ -116,6 +116,21 @@ Aliases:
 
 Required: True
 Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ServerName
+{{Fill ServerName Description}}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

@@ -123,9 +123,11 @@ namespace PoshKentico.Core.Providers.Development.WebParts
             this.SetControlInfo(field.Control.BackingControl);
         }
 
+        /// <inheritdoc />
         protected override void SetControlCategoryInfo(WebPartCategoryInfo controlCategory) =>
             WebPartCategoryInfoProvider.SetWebPartCategoryInfo(controlCategory);
 
+        /// <inheritdoc />
         protected override void SetControlInfo(WebPartInfo control) =>
             WebPartInfoProvider.SetWebPartInfo(control);
 

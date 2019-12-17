@@ -1,4 +1,4 @@
-﻿// <GetCMSControlCategoryCmdletBase file="GetCMSWebPartCategoryCmdletBase.cs" company="Chris Crutchfield">
+﻿// <copyright file="GetCMSControlCategoryCmdletBase.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -29,6 +29,11 @@ namespace PoshKentico.Cmdlets.Development
     /// <summary>
     /// Base class for cmdlets that need to Get a list of TControlCategory.
     /// </summary>
+    /// <typeparam name="TBusinessLayer">The type of the business layer that should be used.</typeparam>
+    /// <typeparam name="TControlService">The type of the service used to interact with controls.</typeparam>
+    /// <typeparam name="TControl">The type of the control the cmdlet interacts with.</typeparam>
+    /// <typeparam name="TControlCategory">The type of the control category the cmdlet interacts with.</typeparam>
+    /// <typeparam name="TControlHolder">The type that is used for "holding" controls.</typeparam>
     [ExcludeFromCodeCoverage]
     public class GetCMSControlCategoryCmdletBase<TBusinessLayer, TControlService, TControl, TControlCategory, TControlHolder> : MefCmdlet<TBusinessLayer>
         where TBusinessLayer : GetCMSControlCategoryBusiness<TControlService, TControl, TControlCategory>
@@ -38,13 +43,28 @@ namespace PoshKentico.Cmdlets.Development
         #region Constants
 
         /// <summary>
+        /// Represents parameters which include the category name.
+        /// </summary>
+        protected const string CATEGORYNAME = "Category Name";
+
+        /// <summary>
+        /// Represents parameters which include the ID.
+        /// </summary>
+        protected const string IDSETNAME = "ID";
+
+        /// <summary>
         /// Represents no parameters.
         /// </summary>
         protected const string NONE = "None";
 
-        protected const string CATEGORYNAME = "Category Name";
-        protected const string IDSETNAME = "ID";
+        /// <summary>
+        /// Represents parameters which include the path.
+        /// </summary>
         protected const string PATH = "Path";
+
+        /// <summary>
+        /// Represents parameters which include the control itself.
+        /// </summary>
         protected const string CONTROL = "Control";
 
         #endregion

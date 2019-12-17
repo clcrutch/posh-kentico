@@ -5,27 +5,41 @@ online version:
 schema: 2.0.0
 ---
 
-# Remove-CMSWebPartField
+# Get-CMSWidget
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
 
 ## SYNTAX
 
+### None (Default)
+```
+Get-CMSWidget [<CommonParameters>]
+```
+
+### Category Name
+```
+Get-CMSWidget -CategoryName <String> [-RegularExpression] [<CommonParameters>]
+```
+
 ### Field
 ```
-Remove-CMSWebPartField -Field <FormFieldInfo> [-WhatIf] [-Confirm] [<CommonParameters>]
+Get-CMSWidget -Field <FormFieldInfo> [<CommonParameters>]
 ```
 
 ### Name
 ```
-Remove-CMSWebPartField [-Name] <String> [-RegularExpression] -Control <WebPartInfo> [-WhatIf] [-Confirm]
- [<CommonParameters>]
+Get-CMSWidget [-RegularExpression] [-WebPartName] <String> [<CommonParameters>]
 ```
 
-### No Name
+### Path
 ```
-Remove-CMSWebPartField -Control <WebPartInfo> [-WhatIf] [-Confirm] [<CommonParameters>]
+Get-CMSWidget -WebPartPath <String> [<CommonParameters>]
+```
+
+### Category
+```
+Get-CMSWidget [-WebPartCategory] <WidgetCategoryInfo> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -42,33 +56,18 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -CategoryName
+{{Fill CategoryName Description}}
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Control
-{{Fill Control Description}}
-
-```yaml
-Type: WebPartInfo
-Parameter Sets: Name, No Name
-Aliases: WebPart, Widget
+Type: String
+Parameter Sets: Category Name
+Aliases: Category
 
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -87,27 +86,12 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Name
-{{Fill Name Description}}
-
-```yaml
-Type: String
-Parameter Sets: Name
-Aliases: Caption
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -RegularExpression
 {{Fill RegularExpression Description}}
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: Name
+Parameter Sets: Category Name, Name
 Aliases: Regex
 
 Required: False
@@ -117,16 +101,45 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -WhatIf
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
+### -WebPartCategory
+{{Fill WebPartCategory Description}}
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: wi
+Type: WidgetCategoryInfo
+Parameter Sets: Category
+Aliases:
 
-Required: False
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -WebPartName
+{{Fill WebPartName Description}}
+
+```yaml
+Type: String
+Parameter Sets: Name
+Aliases: Name
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -WebPartPath
+{{Fill WebPartPath Description}}
+
+```yaml
+Type: String
+Parameter Sets: Path
+Aliases: Path
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -141,11 +154,14 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ### CMS.FormEngine.FormFieldInfo
 
-### CMS.PortalEngine.WebPartInfo
+### System.String
+
+### CMS.PortalEngine.WidgetCategoryInfo
 
 ## OUTPUTS
 
-### System.Object
+### CMS.PortalEngine.WidgetInfo[]
+
 ## NOTES
 
 ## RELATED LINKS

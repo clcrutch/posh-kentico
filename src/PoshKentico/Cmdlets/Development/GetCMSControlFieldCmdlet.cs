@@ -1,4 +1,4 @@
-﻿// <copyright file="GetCMSWebPartFieldCmdlet.cs" company="Chris Crutchfield">
+﻿// <copyright file="GetCMSControlFieldCmdlet.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -26,6 +26,14 @@ using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.Development
 {
+    /// <summary>
+    /// Base class for all Get-CMSControlField cmdlets.
+    /// </summary>
+    /// <typeparam name="TBusinessLayer">The business layer type used by the cmdlet.</typeparam>
+    /// <typeparam name="TControlHolder">The type of control holder used to fields.</typeparam>
+    /// <typeparam name="TControlService">The type of the control service used to get the controls and control categories.</typeparam>
+    /// <typeparam name="TControl">The type of control return by the control service.</typeparam>
+    /// <typeparam name="TControlCategory">The type of control category returned by the control service.</typeparam>
     [ExcludeFromCodeCoverage]
     public class GetCMSControlFieldCmdlet<TBusinessLayer, TControlHolder, TControlService, TControl, TControlCategory> : MefCmdlet<TBusinessLayer>
         where TBusinessLayer : GetCMSControlFieldBusiness<TControlService, TControl, TControlCategory>
@@ -34,7 +42,14 @@ namespace PoshKentico.Cmdlets.Development
     {
         #region Constants
 
+        /// <summary>
+        /// Represents parameter sets that include the name parameter.
+        /// </summary>
         protected const string NAME = "Name";
+
+        /// <summary>
+        /// Represents parameter sets that do not include the name parameter.
+        /// </summary>
         protected const string NONAME = "No Name";
 
         #endregion

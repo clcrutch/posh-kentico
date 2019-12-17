@@ -25,6 +25,13 @@ using PoshKentico.Core.Services.Development.WebParts;
 
 namespace PoshKentico.Business.Development.WebParts
 {
+    /// <summary>
+    /// Business layer for Get-CMSControl cmdlets.
+    /// </summary>
+    /// <typeparam name="TGetCMSControlCategoryBusiness">The type for the GetCMSControlCategory business layer.</typeparam>
+    /// <typeparam name="TControlService">The type for the control service to get controls from.</typeparam>
+    /// <typeparam name="TControl">The type of controls returned by the control service.</typeparam>
+    /// <typeparam name="TControlCategory">The type of control categories returned by the control service.</typeparam>
     public abstract class GetCMSControlBusiness<TGetCMSControlCategoryBusiness, TControlService, TControl, TControlCategory> : ControlBusinessBase<TControlService, TControl, TControlCategory>
         where TGetCMSControlCategoryBusiness : GetCMSControlCategoryBusiness<TControlService, TControl, TControlCategory>
         where TControlService : IControlService<TControl, TControlCategory>
@@ -64,7 +71,7 @@ namespace PoshKentico.Business.Development.WebParts
         }
 
         /// <summary>
-        /// Gets the <see cref="TControl"/> associated with <see cref="IControlField{T}"/>.
+        /// Gets the control associated with <see cref="IControlField{T}"/>.
         /// </summary>
         /// <param name="field">The <see cref="IControlField{T}"/> associated with the desired <see cref="IWebPart"/>.</param>
         /// <returns>Returns the <see cref="IWebPart"/> associated with the <see cref="IControlField{T}"/>.</returns>

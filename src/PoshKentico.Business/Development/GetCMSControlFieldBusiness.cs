@@ -1,4 +1,4 @@
-﻿// <copyright file="GetCMSWebPartFieldBusiness.cs" company="Chris Crutchfield">
+﻿// <copyright file="GetCMSControlFieldBusiness.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -22,6 +22,12 @@ using PoshKentico.Core.Services.Development;
 
 namespace PoshKentico.Business.Development
 {
+    /// <summary>
+    /// The business layer for Get-CMSControlField cmdlets.
+    /// </summary>
+    /// <typeparam name="TControlService">The type for the control service to get controls and control categories.</typeparam>
+    /// <typeparam name="TControl">The type of control returned from the control service.</typeparam>
+    /// <typeparam name="TControlCategory">The type of control category returned from the control service.</typeparam>
     public abstract class GetCMSControlFieldBusiness<TControlService, TControl, TControlCategory> : ControlBusinessBase<TControlService, TControl, TControlCategory>
         where TControlService : IControlService<TControl, TControlCategory>
     {

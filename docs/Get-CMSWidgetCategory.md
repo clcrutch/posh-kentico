@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-CMSWebPartCategory
+# Get-CMSWidgetCategory
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -14,32 +14,32 @@ schema: 2.0.0
 
 ### None (Default)
 ```
-Get-CMSWebPartCategory [<CommonParameters>]
+Get-CMSWidgetCategory [<CommonParameters>]
 ```
 
 ### Parent Category
 ```
-Get-CMSWebPartCategory [-ParentControlCategory] <WebPartCategoryInfo> [-Recurse] [<CommonParameters>]
+Get-CMSWidgetCategory [-ParentControlCategory] <WidgetCategoryInfo> [-Recurse] [<CommonParameters>]
 ```
 
 ### Category Name
 ```
-Get-CMSWebPartCategory [-Recurse] [-CategoryName] <String> [-RegularExpression] [<CommonParameters>]
+Get-CMSWidgetCategory [-Recurse] [-CategoryName] <String> [-RegularExpression] [<CommonParameters>]
 ```
 
 ### ID
 ```
-Get-CMSWebPartCategory [-Recurse] [-ID] <Int32[]> [<CommonParameters>]
+Get-CMSWidgetCategory [-Recurse] [-ID] <Int32[]> [<CommonParameters>]
 ```
 
 ### Path
 ```
-Get-CMSWebPartCategory [-Recurse] -CategoryPath <String> [<CommonParameters>]
+Get-CMSWidgetCategory [-Recurse] -CategoryPath <String> [<CommonParameters>]
 ```
 
 ### Control
 ```
-Get-CMSWebPartCategory -Control <WebPartInfo> [<CommonParameters>]
+Get-CMSWidgetCategory -Control <WidgetInfo> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -90,7 +90,7 @@ Accept wildcard characters: False
 {{Fill Control Description}}
 
 ```yaml
-Type: WebPartInfo
+Type: WidgetInfo
 Parameter Sets: Control
 Aliases: WebPart, Widget
 
@@ -120,7 +120,7 @@ Accept wildcard characters: False
 {{Fill ParentControlCategory Description}}
 
 ```yaml
-Type: WebPartCategoryInfo
+Type: WidgetCategoryInfo
 Parameter Sets: Parent Category
 Aliases: Parent, ParentCategory, ParentWebPartCategory, ParentWidgetCategory
 
@@ -167,13 +167,13 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## INPUTS
 
-### CMS.PortalEngine.WebPartCategoryInfo
+### CMS.PortalEngine.WidgetCategoryInfo
 
-### CMS.PortalEngine.WebPartInfo
+### CMS.PortalEngine.WidgetInfo
 
 ## OUTPUTS
 
-### CMS.PortalEngine.WebPartCategoryInfo[]
+### CMS.PortalEngine.WidgetCategoryInfo[]
 
 ## NOTES
 

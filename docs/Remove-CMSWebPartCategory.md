@@ -38,9 +38,9 @@ Remove-CMSWebPartCategory -CategoryPath <String> [-Recurse] [-WhatIf] [-Confirm]
 Remove-CMSWebPartCategory [-ID] <Int32[]> [-Recurse] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
-### Web Part
+### Control
 ```
-Remove-CMSWebPartCategory -WebPart <WebPartInfo> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-CMSWebPartCategory -Control <WebPartInfo> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -102,6 +102,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Control
+{{Fill Control Description}}
+
+```yaml
+Type: WebPartInfo
+Parameter Sets: Control
+Aliases: WebPart, Widget
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
 ### -ID
 {{Fill ID Description}}
 
@@ -144,21 +159,6 @@ Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -WebPart
-{{Fill WebPart Description}}
-
-```yaml
-Type: WebPartInfo
-Parameter Sets: Web Part
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 

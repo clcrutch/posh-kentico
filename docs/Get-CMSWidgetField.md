@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-CMSWebPartField
+# Get-CMSWidgetField
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -14,12 +14,12 @@ schema: 2.0.0
 
 ### No Name (Default)
 ```
-Get-CMSWebPartField -Control <WebPartInfo> [<CommonParameters>]
+Get-CMSWidgetField -Control <WidgetInfo> [<CommonParameters>]
 ```
 
 ### Name
 ```
-Get-CMSWebPartField [-Name] <String> [-RegularExpression] -Control <WebPartInfo> [<CommonParameters>]
+Get-CMSWidgetField [-Name] <String> [-RegularExpression] -Control <WidgetInfo> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -40,7 +40,7 @@ PS C:\> {{ Add example code here }}
 {{Fill Control Description}}
 
 ```yaml
-Type: WebPartInfo
+Type: WidgetInfo
 Parameter Sets: (All)
 Aliases: WebPart, Widget
 
@@ -87,7 +87,7 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## INPUTS
 
-### CMS.PortalEngine.WebPartInfo
+### CMS.PortalEngine.WidgetInfo
 
 ## OUTPUTS
 

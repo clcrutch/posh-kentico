@@ -1,4 +1,4 @@
-﻿// <copyright file="GetCMSWebPartCmdlet.cs" company="Chris Crutchfield">
+﻿// <copyright file="GetCMSControlCmdlet.cs" company="Chris Crutchfield">
 // Copyright (C) 2017  Chris Crutchfield
 //
 // This program is free software: you can redistribute it and/or modify
@@ -29,8 +29,17 @@ using AliasAttribute = System.Management.Automation.AliasAttribute;
 
 namespace PoshKentico.Cmdlets.Development
 {
+    /// <summary>
+    /// Base class for all Get-CMSControl cmdlets.
+    /// </summary>
+    /// <typeparam name="TBusinessLayer">The business layer type used by the cmdlet.</typeparam>
+    /// <typeparam name="TGetCMSControlCategoryBusiness">The type for the GetCMSControlCategory business layer.</typeparam>
+    /// <typeparam name="TControlService">The type of the control service used to get the controls and control categories.</typeparam>
+    /// <typeparam name="TControl">The type of control return by the control service.</typeparam>
+    /// <typeparam name="TControlCategory">The type of control category returned by the control service.</typeparam>
+    /// <typeparam name="TControlCategoryHolder">The type of control category holder used to fields.</typeparam>
     [ExcludeFromCodeCoverage]
-    public class GetCMSControlCmdlet<TBusinessLayer, TGetCMSControlCategoryBusiness, TControlService, TControl, TControlCategory, TControlCategoryHolder> : MefCmdlet<TBusinessLayer>
+    public abstract class GetCMSControlCmdlet<TBusinessLayer, TGetCMSControlCategoryBusiness, TControlService, TControl, TControlCategory, TControlCategoryHolder> : MefCmdlet<TBusinessLayer>
         where TBusinessLayer : GetCMSControlBusiness<TGetCMSControlCategoryBusiness, TControlService, TControl, TControlCategory>
         where TGetCMSControlCategoryBusiness : GetCMSControlCategoryBusiness<TControlService, TControl, TControlCategory>
         where TControlService : IControlService<TControl, TControlCategory>

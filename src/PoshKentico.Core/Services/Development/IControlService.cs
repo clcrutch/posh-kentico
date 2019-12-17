@@ -1,11 +1,29 @@
-﻿using System;
+﻿// <copyright file="IControlService.cs" company="Chris Crutchfield">
+// Copyright (C) 2017  Chris Crutchfield
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+// </copyright>
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PoshKentico.Core.Services.Development
 {
+    /// <summary>
+    /// Represents a service for interacting with controls in the CMS.
+    /// </summary>
+    /// <typeparam name="TControl">The type of the control to return.</typeparam>
+    /// <typeparam name="TControlCategory">The type of the control category to return.</typeparam>
     public interface IControlService<TControl, TControlCategory>
     {
         #region Properties
@@ -65,6 +83,11 @@ namespace PoshKentico.Core.Services.Development
         /// <returns>The <see cref="IControlCategory{T}"/> which matches the ID, else null.</returns>
         IControlCategory<TControlCategory> GetControlCategory(int id);
 
+        /// <summary>
+        /// Gets a control based off of the ID.
+        /// </summary>
+        /// <param name="id">The ID of the control to return.</param>
+        /// <returns>The control that matches <paramref name="id"/>.</returns>
         IControl<TControl> GetControl(int id);
 
         /// <summary>

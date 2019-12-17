@@ -1591,6 +1591,9 @@
             <summary>
             Base class for all Cmdlet Business objects which depend on the <see cref="T:PoshKentico.Core.Services.Development.IControlService`2"/>.
             </summary>
+            <typeparam name="TControlService">The type for the control service used to return controls and control categories.</typeparam>
+            <typeparam name="TControl">The type of control returned by the control service.</typeparam>
+            <typeparam name="TControlCategory">The type of control category returned by the control service.</typeparam>
         </member>
         <member name="M:PoshKentico.Business.Development.ControlBusinessBase`3.#ctor(System.Boolean)">
             <summary>
@@ -1610,6 +1613,15 @@
             <param name="path">The path to look for the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/>.</param>
             <returns>Returns the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> that reprsents the supplied path.</returns>
         </member>
+        <member name="T:PoshKentico.Business.Development.WebParts.GetCMSControlBusiness`4">
+            <summary>
+            Business layer for Get-CMSControl cmdlets.
+            </summary>
+            <typeparam name="TGetCMSControlCategoryBusiness">The type for the GetCMSControlCategory business layer.</typeparam>
+            <typeparam name="TControlService">The type for the control service to get controls from.</typeparam>
+            <typeparam name="TControl">The type of controls returned by the control service.</typeparam>
+            <typeparam name="TControlCategory">The type of control categories returned by the control service.</typeparam>
+        </member>
         <member name="P:PoshKentico.Business.Development.WebParts.GetCMSControlBusiness`4.GetCMSControlCategoryBusiness">
             <summary>
             Gets or sets a reference to TGetCMSControlCategoryBusiness. Populated by MEF.
@@ -1624,7 +1636,7 @@
         </member>
         <member name="M:PoshKentico.Business.Development.WebParts.GetCMSControlBusiness`4.GetControl(PoshKentico.Core.Services.Development.IControlField{`2})">
             <summary>
-            Gets the <see cref="!:TControl"/> associated with <see cref="T:PoshKentico.Core.Services.Development.IControlField`1"/>.
+            Gets the control associated with <see cref="T:PoshKentico.Core.Services.Development.IControlField`1"/>.
             </summary>
             <param name="field">The <see cref="T:PoshKentico.Core.Services.Development.IControlField`1"/> associated with the desired <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/>.</param>
             <returns>Returns the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPart"/> associated with the <see cref="T:PoshKentico.Core.Services.Development.IControlField`1"/>.</returns>
@@ -1843,6 +1855,9 @@
             <summary>
             Base Business layer for the Get-CMSControlCategory cmdlet.
             </summary>
+            <typeparam name="TControlService">The type for the control service used to get control and control categories.</typeparam>
+            <typeparam name="TControl">The type of control returned by the control service.</typeparam>
+            <typeparam name="TControlCategory">The type of control category returned by the control service.</typeparam>
         </member>
         <member name="M:PoshKentico.Business.Development.GetCMSControlCategoryBusiness`3.GetControlCategories">
             <summary>
@@ -1889,6 +1904,14 @@
             </summary>
             <param name="control">The control to get the category for.</param>
             <returns>The control category.</returns>
+        </member>
+        <member name="T:PoshKentico.Business.Development.GetCMSControlFieldBusiness`3">
+            <summary>
+            The business layer for Get-CMSControlField cmdlets.
+            </summary>
+            <typeparam name="TControlService">The type for the control service to get controls and control categories.</typeparam>
+            <typeparam name="TControl">The type of control returned from the control service.</typeparam>
+            <typeparam name="TControlCategory">The type of control category returned from the control service.</typeparam>
         </member>
         <member name="M:PoshKentico.Business.Development.GetCMSControlFieldBusiness`3.GetControlFields(PoshKentico.Core.Services.Development.IControl{`1})">
             <summary>

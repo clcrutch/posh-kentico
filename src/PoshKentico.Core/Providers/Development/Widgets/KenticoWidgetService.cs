@@ -24,24 +24,33 @@ using PoshKentico.Core.Services.Development.Widgets;
 
 namespace PoshKentico.Core.Providers.Development.Widgets
 {
+    /// <summary>
+    /// A <see cref="ControlService{TControl, TControlCategory}"/> which returns widgets.
+    /// </summary>
     [Export(typeof(IWidgetService))]
     public class KenticoWidgetService : ControlService<WidgetInfo, WidgetCategoryInfo>, IWidgetService
     {
+        /// <inheritdoc />
         public override IEnumerable<IControl<WidgetInfo>> Controls => (from w in WidgetInfoProvider.GetWidgets()
                                                                        select new Widget(w)).ToArray();
 
+        /// <inheritdoc />
         public override IEnumerable<IControlCategory<WidgetCategoryInfo>> Categories => (from c in WidgetCategoryInfoProvider.GetWidgetCategories()
                                                                                          select new WidgetCategory(c)).ToArray();
 
+        /// <inheritdoc />
         public override void Delete(IControlCategory<WidgetCategoryInfo> controlCategory) =>
             WidgetCategoryInfoProvider.DeleteWidgetCategoryInfo(controlCategory.ID);
 
+        /// <inheritdoc />
         public override void Delete(IControl<WidgetInfo> control) =>
             WidgetInfoProvider.DeleteWidgetInfo(control.ID);
 
+        /// <inheritdoc />
         protected override void SetControlCategoryInfo(WidgetCategoryInfo controlCategory) =>
             WidgetCategoryInfoProvider.SetWidgetCategoryInfo(controlCategory);
 
+        /// <inheritdoc />
         protected override void SetControlInfo(WidgetInfo control) =>
             WidgetInfoProvider.SetWidgetInfo(control);
     }

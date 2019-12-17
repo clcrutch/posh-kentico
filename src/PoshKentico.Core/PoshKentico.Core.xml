@@ -346,13 +346,130 @@
         <member name="M:PoshKentico.Core.Providers.Configuration.Users.KenticoUserService.RemoveUserFromSite(PoshKentico.Core.Services.Configuration.Users.IUser,System.String)">
             <inheritdoc/>
         </member>
+        <member name="T:PoshKentico.Core.Providers.Development.Control`1">
+            <summary>
+            Wraps a control.
+            </summary>
+            <typeparam name="T">The control type to wrap.</typeparam>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.Control`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PoshKentico.Core.Providers.Development.Control`1"/> class.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.Control`1.#ctor(`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PoshKentico.Core.Providers.Development.Control`1"/> class.
+            </summary>
+            <param name="backingControl">The underlying control to wrap.</param>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.Control`1.BackingControl">
+            <summary>
+            Gets the underlying control.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.Control`1.CategoryID">
+            <summary>
+            Gets or sets the category ID of the underlying control.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.Control`1.DisplayName">
+            <summary>
+            Gets or sets the display name of the underlying control.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.Control`1.ID">
+            <summary>
+            Gets or sets the ID of the underlying control.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.Control`1.Name">
+            <summary>
+            Gets or sets the name of the underlying control.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.Control`1.Properties">
+            <summary>
+            Gets or sets the properties of the underlying control.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Providers.Development.ControlCategory`1">
+            <summary>
+            Wraps a control category.
+            </summary>
+            <typeparam name="T">The control category type to wrap.</typeparam>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.ControlCategory`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PoshKentico.Core.Providers.Development.ControlCategory`1"/> class.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.ControlCategory`1.#ctor(`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PoshKentico.Core.Providers.Development.ControlCategory`1"/> class.
+            </summary>
+            <param name="backingControlCategory">The underlying control category to wrap.</param>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.ControlCategory`1.BackingControlCategory">
+            <summary>
+            Gets the category of the control.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.ControlCategory`1.DisplayName">
+            <summary>
+            Gets or sets the display name of the control.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.ControlCategory`1.ID">
+            <summary>
+            Gets or sets the ID of the control.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.ControlCategory`1.ImagePath">
+            <summary>
+            Gets or sets the image path of the control.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.ControlCategory`1.Name">
+            <summary>
+            Gets or sets the name of the control.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.ControlCategory`1.ParentID">
+            <summary>
+            Gets or sets the parent ID of the control.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.ControlCategory`1.Path">
+            <summary>
+            Gets or sets the path of the control.
+            </summary>
+        </member>
         <member name="T:PoshKentico.Core.Providers.Development.ControlHolder`1">
             <summary>
             Used by Dynamic Proxy to add a place to set a <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/>.
             </summary>
+            <typeparam name="T">The type of the control to "hold".</typeparam>
         </member>
         <member name="P:PoshKentico.Core.Providers.Development.ControlHolder`1.Control">
             <inheritdoc />
+        </member>
+        <member name="T:PoshKentico.Core.Providers.Development.ControlService`2">
+            <summary>
+            A generic service for getting controls from the CMS.
+            </summary>
+            <typeparam name="TControl">The type of control to return from the service.</typeparam>
+            <typeparam name="TControlCategory">The type of control category to return from the service.</typeparam>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.ControlService`2.Controls">
+            <summary>
+            Gets a list of controls.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.ControlService`2.Categories">
+            <summary>
+            Gets a list of control categories.
+            </summary>
         </member>
         <member name="M:PoshKentico.Core.Providers.Development.ControlService`2.AddField(PoshKentico.Core.Services.Development.IControlField{`0},PoshKentico.Core.Services.Development.IControl{`0})">
             <inheritdoc />
@@ -360,11 +477,30 @@
         <member name="M:PoshKentico.Core.Providers.Development.ControlService`2.Create(PoshKentico.Core.Services.Development.IControlCategory{`1})">
             <inheritdoc />
         </member>
+        <member name="M:PoshKentico.Core.Providers.Development.ControlService`2.Delete(PoshKentico.Core.Services.Development.IControlCategory{`1})">
+            <summary>
+            When implemented by a child class, deletes the specified <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/>.
+            </summary>
+            <param name="controlCategory">The <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> to delete.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.ControlService`2.Delete(PoshKentico.Core.Services.Development.IControl{`0})">
+            <summary>
+            When implemented by a child class, deletes teh specified <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/>.
+            </summary>
+            <param name="control">The <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/> to delete.</param>
+        </member>
         <member name="M:PoshKentico.Core.Providers.Development.ControlService`2.GetControlCategories(PoshKentico.Core.Services.Development.IControlCategory{`1})">
             <inheritdoc />
         </member>
         <member name="M:PoshKentico.Core.Providers.Development.ControlService`2.GetControlCategory(System.Int32)">
             <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.ControlService`2.GetControl(System.Int32)">
+            <summary>
+            Gets a <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/> for <paramref name="id"/>.
+            </summary>
+            <param name="id">The ID to get the <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/> for.</param>
+            <returns>The <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/> which matches <paramref name="id"/>.</returns>
         </member>
         <member name="M:PoshKentico.Core.Providers.Development.ControlService`2.GetControlFields(PoshKentico.Core.Services.Development.IControl{`0})">
             <inheritdoc />
@@ -375,10 +511,23 @@
         <member name="M:PoshKentico.Core.Providers.Development.ControlService`2.Update(PoshKentico.Core.Services.Development.IControlCategory{`1})">
             <inheritdoc />
         </member>
+        <member name="M:PoshKentico.Core.Providers.Development.ControlService`2.SetControlCategoryInfo(`1)">
+            <summary>
+            Creates or updates a control category.
+            </summary>
+            <param name="controlCategory">The control category to create or update.</param>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.ControlService`2.SetControlInfo(`0)">
+            <summary>
+            Creates or update a control.
+            </summary>
+            <param name="control">The control to create or update.</param>
+        </member>
         <member name="T:PoshKentico.Core.Providers.Development.IControlHolder`1">
             <summary>
             Used by Dynamic Proxy to add a place to set a <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/>.
             </summary>
+            <typeparam name="T">The type of the control to "hold".</typeparam>
         </member>
         <member name="P:PoshKentico.Core.Providers.Development.IControlHolder`1.Control">
             <summary>
@@ -480,6 +629,165 @@
             <inheritdoc />
         </member>
         <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.Update(PoshKentico.Core.Services.Development.IControlField{CMS.PortalEngine.WebPartInfo})">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.SetControlCategoryInfo(CMS.PortalEngine.WebPartCategoryInfo)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.WebParts.KenticoWebPartService.SetControlInfo(CMS.PortalEngine.WebPartInfo)">
+            <inheritdoc />
+        </member>
+        <member name="T:PoshKentico.Core.Providers.Development.WebParts.WebPart">
+            <summary>
+            Wrapper around Kentico's <see cref="T:PoshKentico.Core.Providers.Development.WebParts.WebPart"/>.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.WebParts.WebPart.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PoshKentico.Core.Providers.Development.WebParts.WebPart"/> class.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.WebParts.WebPart.#ctor(CMS.PortalEngine.WebPartInfo)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PoshKentico.Core.Providers.Development.WebParts.WebPart"/> class.
+            </summary>
+            <param name="backingControl">The underlying <see cref="T:CMS.PortalEngine.WebPartInfo"/> that will be wrapped.</param>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.WebParts.WebPart.CategoryID">
+            <inheritdoc />
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.WebParts.WebPart.DisplayName">
+            <inheritdoc />
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.WebParts.WebPart.ID">
+            <inheritdoc />
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.WebParts.WebPart.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.WebParts.WebPart.FileName">
+            <summary>
+            Gets or sets the file name of the underlying web part.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.WebParts.WebPart.Properties">
+            <inheritdoc />
+        </member>
+        <member name="T:PoshKentico.Core.Providers.Development.WebParts.WebPartCategory">
+            <summary>
+            Wrapper around Kentico's <see cref="T:PoshKentico.Core.Providers.Development.WebParts.WebPartCategory"/>.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.WebParts.WebPartCategory.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PoshKentico.Core.Providers.Development.WebParts.WebPartCategory"/> class.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.WebParts.WebPartCategory.#ctor(CMS.PortalEngine.WebPartCategoryInfo)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PoshKentico.Core.Providers.Development.WebParts.WebPartCategory"/> class.
+            </summary>
+            <param name="backingControlCategory">The underlying <see cref="T:CMS.PortalEngine.WebPartCategoryInfo"/> that will be wrapped.</param>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.WebParts.WebPartCategory.DisplayName">
+            <inheritdoc />
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.WebParts.WebPartCategory.ID">
+            <inheritdoc />
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.WebParts.WebPartCategory.ImagePath">
+            <inheritdoc />
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.WebParts.WebPartCategory.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.WebParts.WebPartCategory.ParentID">
+            <inheritdoc />
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.WebParts.WebPartCategory.Path">
+            <inheritdoc />
+        </member>
+        <member name="T:PoshKentico.Core.Providers.Development.Widgets.KenticoWidgetService">
+            <summary>
+            A <see cref="T:PoshKentico.Core.Providers.Development.ControlService`2"/> which returns widgets.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.Widgets.KenticoWidgetService.Controls">
+            <inheritdoc />
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.Widgets.KenticoWidgetService.Categories">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.Widgets.KenticoWidgetService.Delete(PoshKentico.Core.Services.Development.IControlCategory{CMS.PortalEngine.WidgetCategoryInfo})">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.Widgets.KenticoWidgetService.Delete(PoshKentico.Core.Services.Development.IControl{CMS.PortalEngine.WidgetInfo})">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.Widgets.KenticoWidgetService.SetControlCategoryInfo(CMS.PortalEngine.WidgetCategoryInfo)">
+            <inheritdoc />
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.Widgets.KenticoWidgetService.SetControlInfo(CMS.PortalEngine.WidgetInfo)">
+            <inheritdoc />
+        </member>
+        <member name="T:PoshKentico.Core.Providers.Development.Widgets.Widget">
+            <summary>
+            Wrapper around Kentico's <see cref="T:CMS.PortalEngine.WidgetInfo"/>.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.Widgets.Widget.#ctor(CMS.PortalEngine.WidgetInfo)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PoshKentico.Core.Providers.Development.Widgets.Widget"/> class.
+            </summary>
+            <param name="backingControl">The underlying <see cref="T:CMS.PortalEngine.WidgetInfo"/> that will be wrapped.</param>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.Widgets.Widget.CategoryID">
+            <inheritdoc />
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.Widgets.Widget.DisplayName">
+            <inheritdoc />
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.Widgets.Widget.ID">
+            <inheritdoc />
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.Widgets.Widget.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.Widgets.Widget.Properties">
+            <inheritdoc />
+        </member>
+        <member name="T:PoshKentico.Core.Providers.Development.Widgets.WidgetCategory">
+            <summary>
+            Wrapper around Kentico's <see cref="T:CMS.PortalEngine.WidgetCategoryInfo"/>.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.Widgets.WidgetCategory.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:PoshKentico.Core.Providers.Development.Widgets.WidgetCategory"/> class.
+            </summary>
+        </member>
+        <member name="M:PoshKentico.Core.Providers.Development.Widgets.WidgetCategory.#ctor(CMS.PortalEngine.WidgetCategoryInfo)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PoshKentico.Core.Providers.Development.Widgets.WidgetCategory"/> class.
+            </summary>
+            <param name="backingControlCategory">The underlying <see cref="T:CMS.PortalEngine.WidgetCategoryInfo"/> that will be wrapped.</param>
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.Widgets.WidgetCategory.DisplayName">
+            <inheritdoc />
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.Widgets.WidgetCategory.ID">
+            <inheritdoc />
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.Widgets.WidgetCategory.ImagePath">
+            <inheritdoc />
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.Widgets.WidgetCategory.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.Widgets.WidgetCategory.ParentID">
+            <inheritdoc />
+        </member>
+        <member name="P:PoshKentico.Core.Providers.Development.Widgets.WidgetCategory.Path">
             <inheritdoc />
         </member>
         <member name="T:PoshKentico.Core.Providers.General.KenticoCmsApplicationService">
@@ -1832,45 +2140,88 @@
             Represents FolderModify Property
             </summary>
         </member>
+        <member name="T:PoshKentico.Core.Services.Development.IControl`1">
+            <summary>
+            Represents a control wrapper.
+            </summary>
+            <typeparam name="T">The control type to wrap.</typeparam>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.IControl`1.BackingControl">
+            <summary>
+            Gets the underlying control.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.IControl`1.CategoryID">
+            <summary>
+            Gets or sets the category ID of the underlying control.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.IControl`1.DisplayName">
+            <summary>
+            Gets or sets the display name of the underlying control.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.IControl`1.ID">
+            <summary>
+            Gets or sets the ID of the underlying control.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.IControl`1.Name">
+            <summary>
+            Gets or sets the name of the underlying control.
+            </summary>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.IControl`1.Properties">
+            <summary>
+            Gets or sets the properties of the underlying control.
+            </summary>
+        </member>
         <member name="T:PoshKentico.Core.Services.Development.IControlCategory`1">
             <summary>
             Represents a Control Category.
             </summary>
+            <typeparam name="T">The type of the underlying control category.</typeparam>
+        </member>
+        <member name="P:PoshKentico.Core.Services.Development.IControlCategory`1.BackingControlCategory">
+            <summary>
+            Gets the backing control category.
+            </summary>
         </member>
         <member name="P:PoshKentico.Core.Services.Development.IControlCategory`1.DisplayName">
             <summary>
-            Gets the display name for the category.
+            Gets or sets the display name for the category.
             </summary>
         </member>
         <member name="P:PoshKentico.Core.Services.Development.IControlCategory`1.ID">
             <summary>
-            Gets the ID for the category.
+            Gets or sets the ID for the category.
             </summary>
         </member>
         <member name="P:PoshKentico.Core.Services.Development.IControlCategory`1.ImagePath">
             <summary>
-            Gets the image path for the category.
+            Gets or sets the image path for the category.
             </summary>
         </member>
         <member name="P:PoshKentico.Core.Services.Development.IControlCategory`1.Name">
             <summary>
-            Gets the name for the category.
+            Gets or sets the name for the category.
             </summary>
         </member>
         <member name="P:PoshKentico.Core.Services.Development.IControlCategory`1.ParentID">
             <summary>
-            Gets the parent ID for the category.
+            Gets or sets the parent ID for the category.
             </summary>
         </member>
         <member name="P:PoshKentico.Core.Services.Development.IControlCategory`1.Path">
             <summary>
-            Gets the path for the category.
+            Gets or sets the path for the category.
             </summary>
         </member>
         <member name="T:PoshKentico.Core.Services.Development.IControlField`1">
             <summary>
             Represents a control field.
             </summary>
+            <typeparam name="T">The type of the underlying control the field is associated with.</typeparam>
         </member>
         <member name="P:PoshKentico.Core.Services.Development.IControlField`1.AllowEmpty">
             <summary>
@@ -1906,6 +2257,13 @@
             <summary>
             Gets or sets the <see cref="T:PoshKentico.Core.Services.Development.IControl`1"/> associated with the <see cref="T:PoshKentico.Core.Services.Development.IControlField`1"/>.
             </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Development.IControlService`2">
+            <summary>
+            Represents a service for interacting with controls in the CMS.
+            </summary>
+            <typeparam name="TControl">The type of the control to return.</typeparam>
+            <typeparam name="TControlCategory">The type of the control category to return.</typeparam>
         </member>
         <member name="P:PoshKentico.Core.Services.Development.IControlService`2.Controls">
             <summary>
@@ -1957,6 +2315,13 @@
             </summary>
             <param name="id">The ID of the <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> to return.</param>
             <returns>The <see cref="T:PoshKentico.Core.Services.Development.IControlCategory`1"/> which matches the ID, else null.</returns>
+        </member>
+        <member name="M:PoshKentico.Core.Services.Development.IControlService`2.GetControl(System.Int32)">
+            <summary>
+            Gets a control based off of the ID.
+            </summary>
+            <param name="id">The ID of the control to return.</param>
+            <returns>The control that matches <paramref name="id"/>.</returns>
         </member>
         <member name="M:PoshKentico.Core.Services.Development.IControlService`2.GetControlFields(PoshKentico.Core.Services.Development.IControl{`0})">
             <summary>
@@ -2367,6 +2732,11 @@
         <member name="P:PoshKentico.Core.Services.Development.WebParts.IWebPartZoneInstance.WebParts">
             <summary>
             Gets or sets the Web parts collection within the <see cref="T:PoshKentico.Core.Services.Development.WebParts.IWebPartZoneInstance"/>.
+            </summary>
+        </member>
+        <member name="T:PoshKentico.Core.Services.Development.Widgets.IWidgetService">
+            <summary>
+            An <see cref="T:PoshKentico.Core.Services.Development.IControlService`2"/> which returns Kentico Widgets.
             </summary>
         </member>
         <member name="T:PoshKentico.Core.Services.General.ICmsApplicationService">

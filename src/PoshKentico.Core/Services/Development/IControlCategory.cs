@@ -20,39 +20,43 @@ namespace PoshKentico.Core.Services.Development
     /// <summary>
     /// Represents a Control Category.
     /// </summary>
+    /// <typeparam name="T">The type of the underlying control category.</typeparam>
     public interface IControlCategory<T>
     {
         #region Properties
 
+        /// <summary>
+        /// Gets the backing control category.
+        /// </summary>
         T BackingControlCategory { get; }
 
         /// <summary>
-        /// Gets the display name for the category.
+        /// Gets or sets the display name for the category.
         /// </summary>
         string DisplayName { get; set; }
 
         /// <summary>
-        /// Gets the ID for the category.
+        /// Gets or sets the ID for the category.
         /// </summary>
         int ID { get; set; }
 
         /// <summary>
-        /// Gets the image path for the category.
+        /// Gets or sets the image path for the category.
         /// </summary>
         string ImagePath { get; set; }
 
         /// <summary>
-        /// Gets the name for the category.
+        /// Gets or sets the name for the category.
         /// </summary>
         string Name { get; set; }
 
         /// <summary>
-        /// Gets the parent ID for the category.
+        /// Gets or sets the parent ID for the category.
         /// </summary>
         int ParentID { get; set; }
 
         /// <summary>
-        /// Gets the path for the category.
+        /// Gets or sets the path for the category.
         /// </summary>
         string Path { get; set; }
 

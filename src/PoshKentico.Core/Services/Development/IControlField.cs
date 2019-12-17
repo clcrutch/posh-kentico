@@ -20,6 +20,7 @@ namespace PoshKentico.Core.Services.Development
     /// <summary>
     /// Represents a control field.
     /// </summary>
+    /// <typeparam name="T">The type of the underlying control the field is associated with.</typeparam>
     public interface IControlField<T>
     {
         /// <summary>

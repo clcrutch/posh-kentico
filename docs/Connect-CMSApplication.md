@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Initialize-CMSApplication
+# Connect-CMSApplication
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -14,18 +14,18 @@ schema: 2.0.0
 
 ### None (Default)
 ```
-Initialize-CMSApplication [-Cached] [<CommonParameters>]
+Connect-CMSApplication [-Cached] [<CommonParameters>]
 ```
 
 ### ConnectionString
 ```
-Initialize-CMSApplication [-ConnectionString] <String> [-WebRoot] <String> [<CommonParameters>]
+Connect-CMSApplication [-ConnectionString] <String> [-WebRoot] <String> [<CommonParameters>]
 ```
 
 ### ServerAndDatabase
 ```
-Initialize-CMSApplication [-DatabaseServer] <String> [-Database] <String> [-Timeout <Int32>]
- [-WebRoot] <String> [<CommonParameters>]
+Connect-CMSApplication [-DatabaseServer] <String> [-Database] <String> [-Timeout <Int32>] [-WebRoot] <String>
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
