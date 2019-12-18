@@ -16,10 +16,12 @@
 // </copyright>
 
 using System.Diagnostics.CodeAnalysis;
+using CMS.PortalEngine;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Development.WebParts;
+using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.Development.WebParts;
 using PoshKentico.Tests.Helpers;
 
@@ -32,44 +34,44 @@ namespace PoshKentico.Tests.Development.WebParts
         [TestCase]
         public void ShouldCreateWebPartCategory()
         {
-            IWebPartCategory passedCategory = null;
+            IControlCategory<WebPartCategoryInfo> passedCategory = null;
 
             var name = "Category";
             var path = "/Category";
             var displayName = "Display Name";
             var imagePath = "/image/path";
 
-            var webPartCategoryMock1 = new Mock<IWebPartCategory>();
+            var webPartCategoryMock1 = new Mock<IControlCategory<WebPartCategoryInfo>>();
             webPartCategoryMock1
-                .Setup(x => x.CategoryPath)
+                .Setup(x => x.Path)
                 .Returns(path);
             webPartCategoryMock1
-                .Setup(x => x.CategoryDisplayName)
+                .Setup(x => x.DisplayName)
                 .Returns(displayName);
             webPartCategoryMock1
-                .Setup(x => x.CategoryImagePath)
+                .Setup(x => x.ImagePath)
                 .Returns(imagePath);
-            var webPartCategoryMock2 = new Mock<IWebPartCategory>();
+            var webPartCategoryMock2 = new Mock<IControlCategory<WebPartCategoryInfo>>();
             webPartCategoryMock2
-                .Setup(x => x.CategoryID)
+                .Setup(x => x.ID)
                 .Returns(20);
             webPartCategoryMock2
-                .Setup(x => x.CategoryPath)
+                .Setup(x => x.Path)
                 .Returns("/");
 
             var webPartServiceMock = new Mock<IWebPartService>();
             webPartServiceMock
-                .Setup(x => x.WebPartCategories)
-                .Returns(new IWebPartCategory[] { webPartCategoryMock1.Object, webPartCategoryMock2.Object });
+                .Setup(x => x.Categories)
+                .Returns(new IControlCategory<WebPartCategoryInfo>[] { webPartCategoryMock1.Object, webPartCategoryMock2.Object });
             webPartServiceMock
-                .Setup(x => x.Create(It.IsAny<IWebPartCategory>()))
-                .Callback<IWebPartCategory>(x => passedCategory = x)
+                .Setup(x => x.Create(It.IsAny<IControlCategory<WebPartCategoryInfo>>()))
+                .Callback<IControlCategory<WebPartCategoryInfo>>(x => passedCategory = x)
                 .Returns(webPartCategoryMock1.Object);
 
             var businessLayer = new NewCMSWebPartCategoryBusiness
             {
                 OutputService = OutputServiceHelper.GetPassThruOutputService(),
-                WebPartService = webPartServiceMock.Object,
+                ControlService = webPartServiceMock.Object,
             };
 
             var results = businessLayer.CreateWebPartCategory(path, displayName, imagePath);
@@ -79,53 +81,53 @@ namespace PoshKentico.Tests.Development.WebParts
             results
                 .Should().BeEquivalentTo(webPartCategoryMock1.Object);
 
-            passedCategory.CategoryName.Should().Be(name);
-            passedCategory.CategoryPath.Should().Be(path);
-            passedCategory.CategoryDisplayName.Should().Be(displayName);
-            passedCategory.CategoryImagePath.Should().Be(imagePath);
-            passedCategory.CategoryParentID.Should().Be(20);
+            passedCategory.Name.Should().Be(name);
+            passedCategory.Path.Should().Be(path);
+            passedCategory.DisplayName.Should().Be(displayName);
+            passedCategory.ImagePath.Should().Be(imagePath);
+            passedCategory.ParentID.Should().Be(20);
         }
 
         [TestCase]
         public void ShouldCreateWebPartCategoryDisplayNameNull()
         {
-            IWebPartCategory passedCategory = null;
+            IControlCategory<WebPartCategoryInfo> passedCategory = null;
 
             var name = "Category";
             var path = "/Category";
             var imagePath = "/image/path";
 
-            var webPartCategoryMock1 = new Mock<IWebPartCategory>();
+            var webPartCategoryMock1 = new Mock<IControlCategory<WebPartCategoryInfo>>();
             webPartCategoryMock1
-                .Setup(x => x.CategoryPath)
+                .Setup(x => x.Path)
                 .Returns(path);
             webPartCategoryMock1
-                .Setup(x => x.CategoryDisplayName)
+                .Setup(x => x.DisplayName)
                 .Returns("Category");
             webPartCategoryMock1
-                .Setup(x => x.CategoryImagePath)
+                .Setup(x => x.ImagePath)
                 .Returns(imagePath);
-            var webPartCategoryMock2 = new Mock<IWebPartCategory>();
+            var webPartCategoryMock2 = new Mock<IControlCategory<WebPartCategoryInfo>>();
             webPartCategoryMock2
-                .Setup(x => x.CategoryID)
+                .Setup(x => x.ID)
                 .Returns(20);
             webPartCategoryMock2
-                .Setup(x => x.CategoryPath)
+                .Setup(x => x.Path)
                 .Returns("/");
 
             var webPartServiceMock = new Mock<IWebPartService>();
             webPartServiceMock
-                .Setup(x => x.WebPartCategories)
-                .Returns(new IWebPartCategory[] { webPartCategoryMock1.Object, webPartCategoryMock2.Object });
+                .Setup(x => x.Categories)
+                .Returns(new IControlCategory<WebPartCategoryInfo>[] { webPartCategoryMock1.Object, webPartCategoryMock2.Object });
             webPartServiceMock
-                .Setup(x => x.Create(It.IsAny<IWebPartCategory>()))
-                .Callback<IWebPartCategory>(x => passedCategory = x)
+                .Setup(x => x.Create(It.IsAny<IControlCategory<WebPartCategoryInfo>>()))
+                .Callback<IControlCategory<WebPartCategoryInfo>>(x => passedCategory = x)
                 .Returns(webPartCategoryMock1.Object);
 
             var businessLayer = new NewCMSWebPartCategoryBusiness
             {
                 OutputService = OutputServiceHelper.GetPassThruOutputService(),
-                WebPartService = webPartServiceMock.Object,
+                ControlService = webPartServiceMock.Object,
             };
 
             var results = businessLayer.CreateWebPartCategory(path, null, imagePath);
@@ -135,11 +137,11 @@ namespace PoshKentico.Tests.Development.WebParts
             results
                 .Should().BeEquivalentTo(webPartCategoryMock1.Object);
 
-            passedCategory.CategoryName.Should().Be(name);
-            passedCategory.CategoryPath.Should().Be(path);
-            passedCategory.CategoryDisplayName.Should().Be(name);
-            passedCategory.CategoryImagePath.Should().Be(imagePath);
-            passedCategory.CategoryParentID.Should().Be(20);
+            passedCategory.Name.Should().Be(name);
+            passedCategory.Path.Should().Be(path);
+            passedCategory.DisplayName.Should().Be(name);
+            passedCategory.ImagePath.Should().Be(imagePath);
+            passedCategory.ParentID.Should().Be(20);
         }
     }
 }

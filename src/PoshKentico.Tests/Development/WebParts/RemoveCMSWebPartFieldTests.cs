@@ -16,11 +16,13 @@
 // </copyright>
 
 using System.Diagnostics.CodeAnalysis;
+using CMS.PortalEngine;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Development.WebParts;
 using PoshKentico.Core.Providers.General;
+using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.Development.WebParts;
 using PoshKentico.Tests.Helpers;
 
@@ -37,9 +39,9 @@ namespace PoshKentico.Tests.Development.WebParts
 
             var webPartMock = new Mock<IWebPart>();
 
-            var webPartFieldMock = new Mock<IWebPartField>();
+            var webPartFieldMock = new Mock<IControlField<WebPartInfo>>();
             webPartFieldMock
-                .Setup(x => x.WebPart)
+                .Setup(x => x.Control)
                 .Returns(webPartMock.Object);
 
             var webPartServiceMock = new Mock<IWebPartService>();
@@ -55,7 +57,7 @@ namespace PoshKentico.Tests.Development.WebParts
             var businessLayer = new RemoveCMSWebPartFieldBusiness
             {
                 OutputService = outputService,
-                WebPartService = webPartServiceMock.Object,
+                ControlService = webPartServiceMock.Object,
             };
 
             businessLayer.RemoveField(webPartFieldMock.Object);

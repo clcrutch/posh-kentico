@@ -16,10 +16,12 @@
 // </copyright>
 
 using System.Diagnostics.CodeAnalysis;
+using CMS.PortalEngine;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Development.WebParts;
+using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.Development.WebParts;
 using PoshKentico.Tests.Helpers;
 
@@ -39,25 +41,25 @@ namespace PoshKentico.Tests.Development.WebParts
             // Setup business layer
             var businessLayer = new GetCMSWebPartFieldBusiness
             {
-                WebPartService = webPartServiceMock.Object,
+                ControlService = webPartServiceMock.Object,
                 OutputService = OutputServiceHelper.GetPassThruOutputService(),
             };
 
-            businessLayer.GetWebPartFields(webPartMock.Object);
+            businessLayer.GetControlFields(webPartMock.Object);
 
             // Verify the execution
-            webPartServiceMock.Verify(x => x.GetWebPartFields(webPartMock.Object));
+            webPartServiceMock.Verify(x => x.GetControlFields(webPartMock.Object));
         }
 
         [TestCase]
         public void ShouldGetWebPartFieldsByMatchString()
         {
             // Setup the web part fields
-            var webPartFieldMock1 = new Mock<IWebPartField>();
+            var webPartFieldMock1 = new Mock<IControlField<WebPartInfo>>();
             webPartFieldMock1
                 .Setup(x => x.Name)
                 .Returns("Field1");
-            var webPartFieldMock2 = new Mock<IWebPartField>();
+            var webPartFieldMock2 = new Mock<IControlField<WebPartInfo>>();
             webPartFieldMock2
                 .Setup(x => x.Name)
                 .Returns("Other");
@@ -68,8 +70,8 @@ namespace PoshKentico.Tests.Development.WebParts
             // Setup the web part service
             var webPartServiceMock = new Mock<IWebPartService>();
             webPartServiceMock
-                .Setup(x => x.GetWebPartFields(webPartMock.Object))
-                .Returns(new IWebPartField[]
+                .Setup(x => x.GetControlFields(webPartMock.Object))
+                .Returns(new IControlField<WebPartInfo>[]
                 {
                     webPartFieldMock1.Object,
                     webPartFieldMock2.Object,
@@ -78,13 +80,13 @@ namespace PoshKentico.Tests.Development.WebParts
             // Setup the business layer
             var businessLayer = new GetCMSWebPartFieldBusiness
             {
-                WebPartService = webPartServiceMock.Object,
+                ControlService = webPartServiceMock.Object,
                 OutputService = OutputServiceHelper.GetPassThruOutputService(),
             };
 
             // Get the results
             // Should return results
-            var results = businessLayer.GetWebPartFields("*field*", false, webPartMock.Object);
+            var results = businessLayer.GetControlFields("*field*", false, webPartMock.Object);
             results
                 .Should()
                 .NotBeNullOrEmpty();
@@ -100,7 +102,7 @@ namespace PoshKentico.Tests.Development.WebParts
 
             // Get the results
             // Should not return results
-            results = businessLayer.GetWebPartFields("notfields", false, webPartMock.Object);
+            results = businessLayer.GetControlFields("notfields", false, webPartMock.Object);
             results
                 .Should()
                 .BeEmpty();
@@ -110,11 +112,11 @@ namespace PoshKentico.Tests.Development.WebParts
         public void ShouldGetWebPartFieldsByRegex()
         {
             // Setup the web part fields
-            var webPartFieldMock1 = new Mock<IWebPartField>();
+            var webPartFieldMock1 = new Mock<IControlField<WebPartInfo>>();
             webPartFieldMock1
                 .Setup(x => x.Name)
                 .Returns("Field1");
-            var webPartFieldMock2 = new Mock<IWebPartField>();
+            var webPartFieldMock2 = new Mock<IControlField<WebPartInfo>>();
             webPartFieldMock2
                 .Setup(x => x.Name)
                 .Returns("Other");
@@ -125,8 +127,8 @@ namespace PoshKentico.Tests.Development.WebParts
             // Setup the service mock
             var webPartServiceMock = new Mock<IWebPartService>();
             webPartServiceMock
-                .Setup(x => x.GetWebPartFields(webPartMock.Object))
-                .Returns(new IWebPartField[]
+                .Setup(x => x.GetControlFields(webPartMock.Object))
+                .Returns(new IControlField<WebPartInfo>[]
                 {
                     webPartFieldMock1.Object,
                     webPartFieldMock2.Object,
@@ -135,13 +137,13 @@ namespace PoshKentico.Tests.Development.WebParts
             // Setup the business layer
             var businessLayer = new GetCMSWebPartFieldBusiness
             {
-                WebPartService = webPartServiceMock.Object,
+                ControlService = webPartServiceMock.Object,
                 OutputService = OutputServiceHelper.GetPassThruOutputService(),
             };
 
             // Get the results
             // There should be results
-            var results = businessLayer.GetWebPartFields("1", true, webPartMock.Object);
+            var results = businessLayer.GetControlFields("1", true, webPartMock.Object);
             results
                 .Should()
                 .NotBeNullOrEmpty();
@@ -157,7 +159,7 @@ namespace PoshKentico.Tests.Development.WebParts
 
             // Get the results
             // There should not be any results
-            results = businessLayer.GetWebPartFields("notfields", true, webPartMock.Object);
+            results = businessLayer.GetControlFields("notfields", true, webPartMock.Object);
             results
                 .Should()
                 .BeEmpty();

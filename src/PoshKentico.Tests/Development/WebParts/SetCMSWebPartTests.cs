@@ -36,7 +36,7 @@ namespace PoshKentico.Tests.Development.WebParts
 
             var businessLayer = new SetCMSWebPartBusiness
             {
-                WebPartService = webPartServiceMock.Object,
+                ControlService = webPartServiceMock.Object,
             };
 
             businessLayer.Set(webPartMock.Object);

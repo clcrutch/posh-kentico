@@ -16,10 +16,12 @@
 // </copyright>
 
 using System.Diagnostics.CodeAnalysis;
+using CMS.PortalEngine;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Development.WebParts;
+using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.Development.WebParts;
 using PoshKentico.Tests.Helpers;
 
@@ -35,22 +37,22 @@ namespace PoshKentico.Tests.Development.WebParts
             var fileName = "filename.acsx";
             var displayName = "Display Name";
 
-            var webPartCategoryMock = new Mock<IWebPartCategory>();
+            var webPartCategoryMock = new Mock<IControlCategory<WebPartCategoryInfo>>();
             webPartCategoryMock
-                .Setup(x => x.CategoryPath)
+                .Setup(x => x.Path)
                 .Returns("/Category");
 
             var webPartServiceMock = new Mock<IWebPartService>();
             webPartServiceMock
-                .Setup(x => x.WebPartCategories)
-                .Returns(new IWebPartCategory[]
+                .Setup(x => x.Categories)
+                .Returns(new IControlCategory<WebPartCategoryInfo>[]
                 {
                     webPartCategoryMock.Object,
                 });
 
             var businessLayerMock = new Mock<NewCMSWebPartBusiness>();
             businessLayerMock
-                .Setup(x => x.WebPartService)
+                .Setup(x => x.ControlService)
                 .Returns(webPartServiceMock.Object);
 
             businessLayerMock
@@ -66,24 +68,24 @@ namespace PoshKentico.Tests.Development.WebParts
             var fileName = "filename.acsx";
             var displayName = "Display Name";
 
-            var webPartCategoryMock = new Mock<IWebPartCategory>();
+            var webPartCategoryMock = new Mock<IControlCategory<WebPartCategoryInfo>>();
             webPartCategoryMock
-                .Setup(x => x.CategoryPath)
+                .Setup(x => x.Path)
                 .Returns("/");
 
             var webPartMock = new Mock<IWebPart>();
 
             var webPartServiceMock = new Mock<IWebPartService>();
             webPartServiceMock
-                .Setup(x => x.WebPartCategories)
-                .Returns(new IWebPartCategory[]
+                .Setup(x => x.Categories)
+                .Returns(new IControlCategory<WebPartCategoryInfo>[]
                 {
                     webPartCategoryMock.Object,
                 });
 
             var businessLayerMock = new Mock<NewCMSWebPartBusiness>();
             businessLayerMock
-                .Setup(x => x.WebPartService)
+                .Setup(x => x.ControlService)
                 .Returns(webPartServiceMock.Object);
 
             businessLayerMock
@@ -112,20 +114,20 @@ namespace PoshKentico.Tests.Development.WebParts
             var displayName = "Display Name";
             var name = "WebPart";
 
-            var webPartCategoryMock = new Mock<IWebPartCategory>();
+            var webPartCategoryMock = new Mock<IControlCategory<WebPartCategoryInfo>>();
             webPartCategoryMock
-                .Setup(x => x.CategoryID)
+                .Setup(x => x.ID)
                 .Returns(66);
 
             var webPartMock = new Mock<IWebPart>();
             webPartMock
-                .Setup(x => x.WebPartDisplayName)
+                .Setup(x => x.DisplayName)
                 .Returns(displayName);
             webPartMock
-                .Setup(x => x.WebPartFileName)
+                .Setup(x => x.FileName)
                 .Returns(fileName);
             webPartMock
-                .Setup(x => x.WebPartName)
+                .Setup(x => x.Name)
                 .Returns(name);
 
             var webPartServiceMock = new Mock<IWebPartService>();
@@ -137,7 +139,7 @@ namespace PoshKentico.Tests.Development.WebParts
             var businessLayer = new NewCMSWebPartBusiness
             {
                 OutputService = OutputServiceHelper.GetPassThruOutputService(),
-                WebPartService = webPartServiceMock.Object,
+                ControlService = webPartServiceMock.Object,
             };
 
             var results = businessLayer.CreateWebPart(name, fileName, displayName, webPartCategoryMock.Object);
@@ -149,10 +151,10 @@ namespace PoshKentico.Tests.Development.WebParts
             results
                 .Should().BeEquivalentTo(webPartMock.Object);
 
-            passedWebPart.WebPartDisplayName.Should().Be(displayName);
-            passedWebPart.WebPartFileName.Should().Be(fileName);
-            passedWebPart.WebPartName.Should().Be(name);
-            passedWebPart.WebPartCategoryID.Should().Be(66);
+            passedWebPart.DisplayName.Should().Be(displayName);
+            passedWebPart.FileName.Should().Be(fileName);
+            passedWebPart.Name.Should().Be(name);
+            passedWebPart.CategoryID.Should().Be(66);
         }
 
         [TestCase]
@@ -163,20 +165,20 @@ namespace PoshKentico.Tests.Development.WebParts
             var fileName = "filename.acsx";
             var name = "WebPart";
 
-            var webPartCategoryMock = new Mock<IWebPartCategory>();
+            var webPartCategoryMock = new Mock<IControlCategory<WebPartCategoryInfo>>();
             webPartCategoryMock
-                .Setup(x => x.CategoryID)
+                .Setup(x => x.ID)
                 .Returns(66);
 
             var webPartMock = new Mock<IWebPart>();
             webPartMock
-                .Setup(x => x.WebPartDisplayName)
+                .Setup(x => x.DisplayName)
                 .Returns(name);
             webPartMock
-                .Setup(x => x.WebPartFileName)
+                .Setup(x => x.FileName)
                 .Returns(fileName);
             webPartMock
-                .Setup(x => x.WebPartName)
+                .Setup(x => x.Name)
                 .Returns(name);
 
             var webPartServiceMock = new Mock<IWebPartService>();
@@ -188,7 +190,7 @@ namespace PoshKentico.Tests.Development.WebParts
             var businessLayer = new NewCMSWebPartBusiness
             {
                 OutputService = OutputServiceHelper.GetPassThruOutputService(),
-                WebPartService = webPartServiceMock.Object,
+                ControlService = webPartServiceMock.Object,
             };
 
             var results = businessLayer.CreateWebPart(name, fileName, null, webPartCategoryMock.Object);
@@ -200,10 +202,10 @@ namespace PoshKentico.Tests.Development.WebParts
             results
                 .Should().BeEquivalentTo(webPartMock.Object);
 
-            passedWebPart.WebPartDisplayName.Should().Be(name);
-            passedWebPart.WebPartFileName.Should().Be(fileName);
-            passedWebPart.WebPartName.Should().Be(name);
-            passedWebPart.WebPartCategoryID.Should().Be(66);
+            passedWebPart.DisplayName.Should().Be(name);
+            passedWebPart.FileName.Should().Be(fileName);
+            passedWebPart.Name.Should().Be(name);
+            passedWebPart.CategoryID.Should().Be(66);
         }
     }
 }

@@ -16,10 +16,12 @@
 // </copyright>
 
 using System.Diagnostics.CodeAnalysis;
+using CMS.PortalEngine;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Development.WebParts;
+using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.Development.WebParts;
 using PoshKentico.Tests.Helpers;
 
@@ -33,7 +35,7 @@ namespace PoshKentico.Tests.Development.WebParts
         [TestCase(false)]
         public void ShouldAddFieldWithDefaultValue(bool required)
         {
-            IWebPartField webPartField = null;
+            IControlField<WebPartInfo> webPartField = null;
 
             // Create a web part.
             var webPartMock = new Mock<IWebPart>();
@@ -42,8 +44,8 @@ namespace PoshKentico.Tests.Development.WebParts
             // Setup the web part service.
             var webPartServiceMock = new Mock<IWebPartService>();
             webPartServiceMock
-                .Setup(x => x.AddField(It.IsAny<IWebPartField>(), webPartObj))
-                .Callback<IWebPartField, IWebPart>((x, y) => webPartField = x);
+                .Setup(x => x.AddField(It.IsAny<IControlField<WebPartInfo>>(), webPartObj))
+                .Callback<IControlField<WebPartInfo>, IWebPart>((x, y) => webPartField = x);
 
             var addFieldParameter = new AddCMSWebPartFieldBusiness.AddFieldParameter
             {
@@ -58,7 +60,7 @@ namespace PoshKentico.Tests.Development.WebParts
             // Create the business layer.
             var businessLayer = new AddCMSWebPartFieldBusiness
             {
-                WebPartService = webPartServiceMock.Object,
+                ControlService = webPartServiceMock.Object,
                 OutputService = OutputServiceHelper.GetPassThruOutputService(),
             };
 
@@ -73,20 +75,20 @@ namespace PoshKentico.Tests.Development.WebParts
             webPartField.DefaultValue.Should().Be("TestDefaultValue");
             webPartField.Name.Should().Be("TestName");
             webPartField.Size.Should().Be(6789);
-            webPartField.WebPart.Should().BeNull();
+            webPartField.Control.Should().BeNull();
 
             // Test that the the necessary methods were called.
-            webPartServiceMock.Verify(x => x.AddField(It.IsAny<IWebPartField>(), webPartObj));
+            webPartServiceMock.Verify(x => x.AddField(It.IsAny<IControlField<WebPartInfo>>(), webPartObj));
 
-            webPartField.WebPart = webPartObj;
-            webPartField.WebPart.Should().Be(webPartObj);
+            webPartField.Control = webPartObj;
+            webPartField.Control.Should().Be(webPartObj);
         }
 
         [TestCase(true)]
         [TestCase(false)]
         public void ShouldAddFieldWithoutDefaultValue(bool required)
         {
-            IWebPartField webPartField = null;
+            IControlField<WebPartInfo> webPartField = null;
 
             // Setup the web part.
             var webPartMock = new Mock<IWebPart>();
@@ -95,8 +97,8 @@ namespace PoshKentico.Tests.Development.WebParts
             // Setup the web part service mock.
             var webPartServiceMock = new Mock<IWebPartService>();
             webPartServiceMock
-                .Setup(x => x.AddField(It.IsAny<IWebPartField>(), webPartObj))
-                .Callback<IWebPartField, IWebPart>((x, y) => webPartField = x);
+                .Setup(x => x.AddField(It.IsAny<IControlField<WebPartInfo>>(), webPartObj))
+                .Callback<IControlField<WebPartInfo>, IWebPart>((x, y) => webPartField = x);
 
             var addFieldParameter = new AddCMSWebPartFieldBusiness.AddFieldParameter
             {
@@ -111,7 +113,7 @@ namespace PoshKentico.Tests.Development.WebParts
             // Setup the business layer.
             var businessLayer = new AddCMSWebPartFieldBusiness
             {
-                WebPartService = webPartServiceMock.Object,
+                ControlService = webPartServiceMock.Object,
                 OutputService = OutputServiceHelper.GetPassThruOutputService(),
             };
 
@@ -126,13 +128,13 @@ namespace PoshKentico.Tests.Development.WebParts
             webPartField.DefaultValue.Should().BeNull();
             webPartField.Name.Should().Be("TestName");
             webPartField.Size.Should().Be(6789);
-            webPartField.WebPart.Should().BeNull();
+            webPartField.Control.Should().BeNull();
 
             // Ensure the service methods were called.
-            webPartServiceMock.Verify(x => x.AddField(It.IsAny<IWebPartField>(), webPartObj));
+            webPartServiceMock.Verify(x => x.AddField(It.IsAny<IControlField<WebPartInfo>>(), webPartObj));
 
-            webPartField.WebPart = webPartObj;
-            webPartField.WebPart.Should().Be(webPartObj);
+            webPartField.Control = webPartObj;
+            webPartField.Control.Should().Be(webPartObj);
         }
     }
 }

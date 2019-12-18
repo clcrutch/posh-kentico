@@ -50,7 +50,7 @@ namespace PoshKentico.Tests.Development.WebParts
             var businessLayer = new RemoveCMSWebPartBusiness
             {
                 OutputService = outputService,
-                WebPartService = webPartServiceMock.Object,
+                ControlService = webPartServiceMock.Object,
             };
 
             businessLayer.RemoveWebPart(webPartMock.Object);

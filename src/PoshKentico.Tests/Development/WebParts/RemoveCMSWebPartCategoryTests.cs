@@ -17,11 +17,13 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+using CMS.PortalEngine;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Development.WebParts;
 using PoshKentico.Core.Providers.General;
+using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.Development.WebParts;
 using PoshKentico.Tests.Helpers;
 
@@ -36,7 +38,7 @@ namespace PoshKentico.Tests.Development.WebParts
         {
             bool shouldProcessCalled = false;
 
-            var webPartCategoryMock = new Mock<IWebPartCategory>();
+            var webPartCategoryMock = new Mock<IControlCategory<WebPartCategoryInfo>>();
 
             var webPartServiceMock = new Mock<IWebPartService>();
 
@@ -51,17 +53,17 @@ namespace PoshKentico.Tests.Development.WebParts
             var businessLayer = new RemoveCMSWebPartCategoryBusiness
             {
                 OutputService = OutputServiceHelper.GetPassThruOutputService(),
-                WebPartService = webPartServiceMock.Object,
+                ControlService = webPartServiceMock.Object,
             };
 
             businessLayer.RemoveWebPartCategory(webPartCategoryMock.Object, false);
             shouldProcessCalled.Should().BeTrue();
 
             webPartServiceMock
-                .Verify(x => x.GetWebParts(webPartCategoryMock.Object));
+                .Verify(x => x.GetControls(webPartCategoryMock.Object));
 
             webPartServiceMock
-                .Verify(x => x.GetWebPartCategories(webPartCategoryMock.Object));
+                .Verify(x => x.GetControlCategories(webPartCategoryMock.Object));
 
             webPartServiceMock
                 .Verify(x => x.Delete(webPartCategoryMock.Object));
@@ -75,24 +77,24 @@ namespace PoshKentico.Tests.Development.WebParts
         {
             var webPartMock = new Mock<IWebPart>();
 
-            var webPartCategoryMock = new Mock<IWebPartCategory>();
+            var webPartCategoryMock = new Mock<IControlCategory<WebPartCategoryInfo>>();
 
             var webPartServiceMock = new Mock<IWebPartService>();
             webPartServiceMock
-                .Setup(x => x.GetWebParts(webPartCategoryMock.Object))
+                .Setup(x => x.GetControls(webPartCategoryMock.Object))
                 .Returns(new IWebPart[] { webPartMock.Object });
 
             var businessLayer = new RemoveCMSWebPartCategoryBusiness
             {
                 OutputService = OutputServiceHelper.GetPassThruOutputService(),
-                WebPartService = webPartServiceMock.Object,
+                ControlService = webPartServiceMock.Object,
             };
 
             Action action = () => businessLayer.RemoveWebPartCategory(webPartCategoryMock.Object, false);
             action.Should().Throw<Exception>();
 
             webPartServiceMock
-                .Verify(x => x.GetWebParts(webPartCategoryMock.Object));
+                .Verify(x => x.GetControls(webPartCategoryMock.Object));
 
             webPartServiceMock
                 .VerifyNoOtherCalls();
@@ -105,11 +107,11 @@ namespace PoshKentico.Tests.Development.WebParts
 
             var webPartMock = new Mock<IWebPart>();
 
-            var webPartCategoryMock = new Mock<IWebPartCategory>();
+            var webPartCategoryMock = new Mock<IControlCategory<WebPartCategoryInfo>>();
 
             var webPartServiceMock = new Mock<IWebPartService>();
             webPartServiceMock
-                .Setup(x => x.GetWebParts(webPartCategoryMock.Object))
+                .Setup(x => x.GetControls(webPartCategoryMock.Object))
                 .Returns(new IWebPart[] { webPartMock.Object });
 
             var outputService = OutputServiceHelper.GetPassThruOutputService();
@@ -123,7 +125,7 @@ namespace PoshKentico.Tests.Development.WebParts
             var businessLayer = new RemoveCMSWebPartCategoryBusiness
             {
                 OutputService = outputService,
-                WebPartService = webPartServiceMock.Object,
+                ControlService = webPartServiceMock.Object,
             };
 
             Action action = () => businessLayer.RemoveWebPartCategory(webPartCategoryMock.Object, true);
@@ -131,13 +133,13 @@ namespace PoshKentico.Tests.Development.WebParts
             shouldProcessCalled.Should().BeTrue();
 
             webPartServiceMock
-                .Verify(x => x.GetWebParts(webPartCategoryMock.Object));
+                .Verify(x => x.GetControls(webPartCategoryMock.Object));
 
             webPartServiceMock
                 .Verify(x => x.Delete(webPartMock.Object));
 
             webPartServiceMock
-                .Verify(x => x.GetWebPartCategories(webPartCategoryMock.Object));
+                .Verify(x => x.GetControlCategories(webPartCategoryMock.Object));
 
             webPartServiceMock
                 .Verify(x => x.Delete(webPartCategoryMock.Object));
@@ -149,29 +151,29 @@ namespace PoshKentico.Tests.Development.WebParts
         [TestCase]
         public void ShouldRemoveWebPartCategoryWithoutWebPartsWithChildrenWithoutRecurse()
         {
-            var webPartCategoryMock = new Mock<IWebPartCategory>();
+            var webPartCategoryMock = new Mock<IControlCategory<WebPartCategoryInfo>>();
 
-            var webPartCategoryChildMock = new Mock<IWebPartCategory>();
+            var webPartCategoryChildMock = new Mock<IControlCategory<WebPartCategoryInfo>>();
 
             var webPartServiceMock = new Mock<IWebPartService>();
             webPartServiceMock
-                .Setup(x => x.GetWebPartCategories(webPartCategoryMock.Object))
-                .Returns(new IWebPartCategory[] { webPartCategoryChildMock.Object });
+                .Setup(x => x.GetControlCategories(webPartCategoryMock.Object))
+                .Returns(new IControlCategory<WebPartCategoryInfo>[] { webPartCategoryChildMock.Object });
 
             var businessLayer = new RemoveCMSWebPartCategoryBusiness
             {
                 OutputService = OutputServiceHelper.GetPassThruOutputService(),
-                WebPartService = webPartServiceMock.Object,
+                ControlService = webPartServiceMock.Object,
             };
 
             Action action = () => businessLayer.RemoveWebPartCategory(webPartCategoryMock.Object, false);
             action.Should().Throw<Exception>();
 
             webPartServiceMock
-                .Verify(x => x.GetWebParts(webPartCategoryMock.Object));
+                .Verify(x => x.GetControls(webPartCategoryMock.Object));
 
             webPartServiceMock
-                .Verify(x => x.GetWebPartCategories(webPartCategoryMock.Object));
+                .Verify(x => x.GetControlCategories(webPartCategoryMock.Object));
 
             webPartServiceMock
                 .VerifyNoOtherCalls();
@@ -182,14 +184,14 @@ namespace PoshKentico.Tests.Development.WebParts
         {
             bool shouldProcessCalled = false;
 
-            var webPartCategoryMock = new Mock<IWebPartCategory>();
+            var webPartCategoryMock = new Mock<IControlCategory<WebPartCategoryInfo>>();
 
-            var webPartCategoryChildMock = new Mock<IWebPartCategory>();
+            var webPartCategoryChildMock = new Mock<IControlCategory<WebPartCategoryInfo>>();
 
             var webPartServiceMock = new Mock<IWebPartService>();
             webPartServiceMock
-                .Setup(x => x.GetWebPartCategories(webPartCategoryMock.Object))
-                .Returns(new IWebPartCategory[] { webPartCategoryChildMock.Object });
+                .Setup(x => x.GetControlCategories(webPartCategoryMock.Object))
+                .Returns(new IControlCategory<WebPartCategoryInfo>[] { webPartCategoryChildMock.Object });
 
             var outputService = OutputServiceHelper.GetPassThruOutputService();
             PassThruOutputService.ShouldProcessFunction = (x, y) =>
@@ -202,7 +204,7 @@ namespace PoshKentico.Tests.Development.WebParts
             var businessLayer = new RemoveCMSWebPartCategoryBusiness
             {
                 OutputService = outputService,
-                WebPartService = webPartServiceMock.Object,
+                ControlService = webPartServiceMock.Object,
             };
 
             Action action = () => businessLayer.RemoveWebPartCategory(webPartCategoryMock.Object, true);
@@ -210,19 +212,19 @@ namespace PoshKentico.Tests.Development.WebParts
             shouldProcessCalled.Should().BeTrue();
 
             webPartServiceMock
-                .Verify(x => x.GetWebParts(webPartCategoryMock.Object));
+                .Verify(x => x.GetControls(webPartCategoryMock.Object));
 
             webPartServiceMock
-                .Verify(x => x.GetWebPartCategories(webPartCategoryMock.Object));
+                .Verify(x => x.GetControlCategories(webPartCategoryMock.Object));
 
             webPartServiceMock
                 .Verify(x => x.Delete(webPartCategoryChildMock.Object));
 
             webPartServiceMock
-                .Verify(x => x.GetWebParts(webPartCategoryChildMock.Object));
+                .Verify(x => x.GetControls(webPartCategoryChildMock.Object));
 
             webPartServiceMock
-                .Verify(x => x.GetWebPartCategories(webPartCategoryChildMock.Object));
+                .Verify(x => x.GetControlCategories(webPartCategoryChildMock.Object));
 
             webPartServiceMock
                 .Verify(x => x.Delete(webPartCategoryMock.Object));

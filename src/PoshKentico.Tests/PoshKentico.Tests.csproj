@@ -41,4 +41,8 @@
     <ProjectReference Include="..\PoshKentico.Core\PoshKentico.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="General\" />
+  </ItemGroup>
+
 </Project>

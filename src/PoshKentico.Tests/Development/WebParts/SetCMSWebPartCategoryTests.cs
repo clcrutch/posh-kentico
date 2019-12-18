@@ -16,9 +16,11 @@
 // </copyright>
 
 using System.Diagnostics.CodeAnalysis;
+using CMS.PortalEngine;
 using Moq;
 using NUnit.Framework;
 using PoshKentico.Business.Development.WebParts;
+using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.Development.WebParts;
 
 namespace PoshKentico.Tests.Development.WebParts
@@ -30,13 +32,13 @@ namespace PoshKentico.Tests.Development.WebParts
         [TestCase]
         public void ShouldSetWebPart()
         {
-            var webPartCategoryMock = new Mock<IWebPartCategory>();
+            var webPartCategoryMock = new Mock<IControlCategory<WebPartCategoryInfo>>();
 
             var webPartServiceMock = new Mock<IWebPartService>();
 
             var businessLayer = new SetCMSWebPartCategoryBusiness
             {
-                WebPartService = webPartServiceMock.Object,
+                ControlService = webPartServiceMock.Object,
             };
 
             businessLayer.Set(webPartCategoryMock.Object);

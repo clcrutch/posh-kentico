@@ -17,10 +17,14 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using CMS.PortalEngine;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
+using PoshKentico.Business.Development;
 using PoshKentico.Business.Development.WebParts;
+using PoshKentico.Core.Providers.Development.WebParts;
+using PoshKentico.Core.Services.Development;
 using PoshKentico.Core.Services.Development.WebParts;
 using PoshKentico.Tests.Helpers;
 
@@ -34,34 +38,34 @@ namespace PoshKentico.Tests.Development.WebParts
         public void ShouldGetCategoryFromPath()
         {
             // Setup the web part category
-            var webPartCategoryMock = new Mock<IWebPartCategory>();
+            var webPartCategoryMock = new Mock<IControlCategory<WebPartCategoryInfo>>();
             webPartCategoryMock
-                .Setup(x => x.CategoryPath)
+                .Setup(x => x.Path)
                 .Returns("/Category");
 
             // Setup the web part service mock
             var webPartServiceMock = new Mock<IWebPartService>();
             webPartServiceMock
-                .Setup(x => x.WebPartCategories)
-                .Returns(new IWebPartCategory[]
+                .Setup(x => x.Categories)
+                .Returns(new IControlCategory<WebPartCategoryInfo>[]
                 {
                     webPartCategoryMock.Object,
                 });
 
             // Setup the business layer.
-            var businessMock = new Mock<WebPartBusinessBase>(true)
+            var businessMock = new Mock<ControlBusinessBase<IWebPartService, WebPartInfo, WebPartCategoryInfo>>(true)
             {
                 CallBase = true,
             };
             businessMock
-                .Setup(x => x.WebPartService)
+                .Setup(x => x.ControlService)
                 .Returns(webPartServiceMock.Object);
 
             businessMock.Object.OutputService = OutputServiceHelper.GetPassThruOutputService();
 
             // We need to use reflection b/c the method is protected.
-            var getCategoryFromPathMethod = typeof(WebPartBusinessBase).GetMethod("GetCategoryFromPath", BindingFlags.NonPublic | BindingFlags.Instance);
-            var result = getCategoryFromPathMethod.Invoke(businessMock.Object, new object[] { "/Category" }) as IWebPartCategory;
+            var getCategoryFromPathMethod = typeof(ControlBusinessBase<IWebPartService, WebPartInfo, WebPartCategoryInfo>).GetMethod("GetCategoryFromPath", BindingFlags.NonPublic | BindingFlags.Instance);
+            var result = getCategoryFromPathMethod.Invoke(businessMock.Object, new object[] { "/Category" }) as IControlCategory<WebPartCategoryInfo>;
 
             result
                 .Should()
