@@ -122,12 +122,16 @@ namespace PoshKentico.Core.Providers.General
             };
             this.OutputService.WriteProgress(progressRecord);
 
-            bool success = SqlInstallationHelper.InstallDatabase(
-                this.ConnectionString,
-                SqlInstallationHelper.GetSQLInstallPath(),
-                "An error occurred inserting the objects into the database.",
-                "An error occurred.",
-                this.Log);
+            var settings = new DatabaseInstallationSettings()
+            {
+                ConnectionString = this.ConnectionString,
+                ScriptsFolder = SqlInstallationHelper.GetSQLInstallPath(),
+                DatabaseObjectInstallationErrorMessage = "An error occurred inserting the objects into the database.",
+                DataInstallationErrorMessage = "An error occurred.",
+                Logger = this.Log,
+            };
+
+            bool success = SqlInstallationHelper.InstallDatabase(settings);
 
             progressRecord = new ProgressRecord(Math.Abs(ACTIVITY.GetHashCode()), ACTIVITY, "Finished")
             {

@@ -26,6 +26,8 @@ using ImpromptuInterface;
 using PoshKentico.Core.Services.Configuration.Roles;
 using PoshKentico.Core.Services.Configuration.Staging;
 
+using IServer = PoshKentico.Core.Services.Configuration.Staging.IServer;
+
 namespace PoshKentico.Core.Providers.Configuration.Staging
 {
     /// <summary>
