@@ -338,7 +338,7 @@ namespace PoshKentico.Tests.Development.WebParts
             // Setup web part
             var webPartMock = new Mock<IWebPart>();
             webPartMock
-                .Setup(x => x.ID)
+                .Setup(x => x.CategoryID)
                 .Returns(15);
             var webPartObj = webPartMock.Object;
 
@@ -676,7 +676,7 @@ namespace PoshKentico.Tests.Development.WebParts
             // Setup web part
             var webPartMock = new Mock<IWebPart>();
             webPartMock
-                .Setup(x => x.ID)
+                .Setup(x => x.CategoryID)
                 .Returns(15);
 
             // Setup web part category

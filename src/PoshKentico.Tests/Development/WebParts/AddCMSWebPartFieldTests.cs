@@ -45,7 +45,7 @@ namespace PoshKentico.Tests.Development.WebParts
             var webPartServiceMock = new Mock<IWebPartService>();
             webPartServiceMock
                 .Setup(x => x.AddField(It.IsAny<IControlField<WebPartInfo>>(), webPartObj))
-                .Callback<IControlField<WebPartInfo>, IWebPart>((x, y) => webPartField = x);
+                .Callback<IControlField<WebPartInfo>, IControl<WebPartInfo>>((x, y) => webPartField = x);
 
             var addFieldParameter = new AddCMSWebPartFieldBusiness.AddFieldParameter
             {
@@ -98,7 +98,7 @@ namespace PoshKentico.Tests.Development.WebParts
             var webPartServiceMock = new Mock<IWebPartService>();
             webPartServiceMock
                 .Setup(x => x.AddField(It.IsAny<IControlField<WebPartInfo>>(), webPartObj))
-                .Callback<IControlField<WebPartInfo>, IWebPart>((x, y) => webPartField = x);
+                .Callback<IControlField<WebPartInfo>, IControl<WebPartInfo>>((x, y) => webPartField = x);
 
             var addFieldParameter = new AddCMSWebPartFieldBusiness.AddFieldParameter
             {
