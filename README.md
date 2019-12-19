@@ -13,3 +13,4 @@ See our [contributing guidelines](CONTRIBUTING.md).
 
 # License
 PoSH Kentico uses the [LGPL 3.0](LICENSE.txt) license.
+ 
